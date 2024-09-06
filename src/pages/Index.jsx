@@ -29,7 +29,12 @@ const Index = () => {
               Me
             </button>
           </div>
-          <Button size="icon" variant="ghost" onClick={() => setIsInviteOpen(true)}>
+          <Button 
+            size="icon" 
+            variant="ghost" 
+            onClick={() => setIsInviteOpen(true)}
+            className="hover:bg-transparent"
+          >
             <Plus className="h-5 w-5 text-white" />
           </Button>
         </div>
