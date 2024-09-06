@@ -53,12 +53,13 @@ const InviteFriends = ({ isOpen, onClose }) => {
 
   const handleShareLink = async () => {
     const shareUrl = 'https://preview--daily-move-and-minds-06.gptengineer.run/';
+    const shareText = "I solved today's quiz, and I'm curious to hear what you think of it! Want to join the daily quiz challenge with me?";
     
     if (navigator.share) {
       try {
         await navigator.share({
           title: 'Join Daily Move & Minds',
-          text: 'Check out this app for daily walks and quizzes!',
+          text: shareText,
           url: shareUrl,
         });
         console.log('Content shared successfully');
@@ -67,8 +68,8 @@ const InviteFriends = ({ isOpen, onClose }) => {
       }
     } else {
       try {
-        await navigator.clipboard.writeText(shareUrl);
-        alert('Link copied to clipboard!');
+        await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+        alert('Invitation text and link copied to clipboard!');
       } catch (err) {
         console.error('Failed to copy link:', err);
       }
