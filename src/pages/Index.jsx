@@ -33,9 +33,9 @@ const Index = () => {
             size="icon" 
             variant="ghost" 
             onClick={() => setIsInviteOpen(true)}
-            className="hover:bg-transparent"
+            className="hover:bg-transparent p-1.5"
           >
-            <Plus className="h-5 w-5 text-white" />
+            <Plus className="h-6 w-6 text-white" />
           </Button>
         </div>
 
