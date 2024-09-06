@@ -33,6 +33,11 @@ const DailyWalkChallenge = () => {
     { id: 5, name: "Mike" },
   ];
 
+  const handleLeaderboardClick = () => {
+    // Navigate to the leaderboard page
+    navigate('/leaderboard');
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
@@ -73,11 +78,11 @@ const DailyWalkChallenge = () => {
 
           <div className="h-px bg-gray-700 my-4"></div>
 
-          <p className="text-sm text-gray-400 mb-4">
+          <p className="text-sm text-gray-400 mb-4 pr-8">
             Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. If you miss a day, just make up for it the next time. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
           </p>
 
-          <div className="flex items-center mb-4">
+          <div className="flex items-center mb-4 cursor-pointer" onClick={handleLeaderboardClick}>
             <div className="flex flex-shrink-0">
               {participants.map((participant) => (
                 <Avatar key={participant.id} className="w-8 h-8 -ml-2 first:ml-0 border-2 border-black">
@@ -87,7 +92,7 @@ const DailyWalkChallenge = () => {
               ))}
             </div>
             <div className="ml-2 text-sm text-gray-400">
-              +{challengeData.activeParticipants}
+              {challengeData.activeParticipants} active
             </div>
           </div>
 
