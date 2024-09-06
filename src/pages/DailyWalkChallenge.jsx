@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Flame, Wind, Heart } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -19,9 +19,9 @@ const DailyWalkChallenge = () => {
     highestStreak: "7",
     activeParticipants: "16.5k",
     achievements: [
-      { id: 1, name: "Badge 1" },
-      { id: 2, name: "Badge 2" },
-      { id: 3, name: "Badge 3" },
+      { id: 1, name: "5-day streak", icon: Flame },
+      { id: 2, name: "Breezy walker-10km", icon: Wind },
+      { id: 3, name: "100 likes", icon: Heart },
     ],
   };
 
@@ -99,13 +99,13 @@ const DailyWalkChallenge = () => {
 
           <div className="mb-6">
             <h2 className="text-lg font-bold mb-2">ACHIEVEMENTS</h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               {challengeData.achievements.map((achievement) => (
                 <div key={achievement.id} className="flex flex-col items-center">
-                  <div className="bg-gray-800 w-full aspect-square rounded-lg flex items-center justify-center mb-2">
-                    {/* Badge image placeholder */}
+                  <div className="bg-gray-800 w-16 h-16 rounded-full flex items-center justify-center mb-2">
+                    <achievement.icon className="h-8 w-8 text-white" />
                   </div>
-                  <span className="text-sm text-center">{achievement.name}</span>
+                  <span className="text-xs text-center">{achievement.name}</span>
                 </div>
               ))}
             </div>
