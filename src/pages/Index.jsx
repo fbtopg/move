@@ -12,18 +12,18 @@ const Index = () => {
   const [currentView, setCurrentView] = useState('friends');
 
   return (
-    <div className="min-h-screen bg-black overflow-y-auto scrollbar-hide">
+    <div className="min-h-screen bg-light-background overflow-y-auto scrollbar-hide">
       <div className="max-w-md mx-auto p-2">
         <div className="flex justify-between items-center mb-4">
           <div className="flex space-x-4">
             <button
-              className={`text-lg font-bold ${currentView === 'friends' ? 'text-white' : 'text-gray-400'}`}
+              className={`text-lg font-bold ${currentView === 'friends' ? 'text-light-text' : 'text-light-secondary'}`}
               onClick={() => setCurrentView('friends')}
             >
               Friends
             </button>
             <button
-              className={`text-lg font-bold ${currentView === 'me' ? 'text-white' : 'text-gray-400'}`}
+              className={`text-lg font-bold ${currentView === 'me' ? 'text-light-text' : 'text-light-secondary'}`}
               onClick={() => setCurrentView('me')}
             >
               Me
@@ -33,9 +33,9 @@ const Index = () => {
             size="icon" 
             variant="ghost" 
             onClick={() => setIsInviteOpen(true)}
-            className="hover:bg-transparent p-1.5"
+            className="hover:bg-light-accent/10 p-1.5"
           >
-            <Plus className="h-6 w-6 text-white" />
+            <Plus className="h-6 w-6 text-light-primary" />
           </Button>
         </div>
 
