@@ -12,36 +12,34 @@ const Index = () => {
   const [currentView, setCurrentView] = useState('friends');
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-grow overflow-auto">
-        <div className="max-w-md mx-auto p-4">
-          <div className="flex justify-between items-center mb-4">
-            <div className="flex space-x-4">
-              <button
-                className={`text-lg font-bold ${currentView === 'friends' ? 'text-white' : 'text-gray-400'}`}
-                onClick={() => setCurrentView('friends')}
-              >
-                Friends
-              </button>
-              <button
-                className={`text-lg font-bold ${currentView === 'me' ? 'text-white' : 'text-gray-400'}`}
-                onClick={() => setCurrentView('me')}
-              >
-                Me
-              </button>
-            </div>
-            <Button 
-              size="icon" 
-              variant="ghost" 
-              onClick={() => setIsInviteOpen(true)}
-              className="hover:bg-transparent p-1.5"
+    <div className="min-h-screen bg-black p-2">
+      <div className="max-w-md mx-auto">
+        <div className="flex justify-between items-center mb-4">
+          <div className="flex space-x-4">
+            <button
+              className={`text-lg font-bold ${currentView === 'friends' ? 'text-white' : 'text-gray-400'}`}
+              onClick={() => setCurrentView('friends')}
             >
-              <Plus className="h-6 w-6 text-white" />
-            </Button>
+              Friends
+            </button>
+            <button
+              className={`text-lg font-bold ${currentView === 'me' ? 'text-white' : 'text-gray-400'}`}
+              onClick={() => setCurrentView('me')}
+            >
+              Me
+            </button>
           </div>
-
-          {currentView === 'friends' ? <Friends /> : <Me />}
+          <Button 
+            size="icon" 
+            variant="ghost" 
+            onClick={() => setIsInviteOpen(true)}
+            className="hover:bg-transparent p-1.5"
+          >
+            <Plus className="h-6 w-6 text-white" />
+          </Button>
         </div>
+
+        {currentView === 'friends' ? <Friends /> : <Me />}
       </div>
       <InviteFriends isOpen={isInviteOpen} onClose={() => setIsInviteOpen(false)} />
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
