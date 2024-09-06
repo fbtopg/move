@@ -50,7 +50,7 @@ const DailyWalkChallenge = () => {
             <h1 className="text-2xl font-bold">{challengeData.title}</h1>
           </div>
 
-          <div className="bg-blue-500 w-full h-40 rounded-lg mb-4"></div>
+          <div className="w-full h-40 rounded-lg mb-4 bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512420853944352/Rectangle_6.png?ex=66dbfcf2&is=66daab72&hm=54d3401d917b1176c5ed2054a7f648320c1bd12575272801f6c8fdd986bdaee7&')"}}></div>
 
           <div className="mb-6">
             <div className="text-4xl font-bold">

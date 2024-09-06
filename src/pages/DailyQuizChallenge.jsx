@@ -49,7 +49,7 @@ const DailyQuizChallenge = () => {
             <h1 className="text-2xl font-bold">{challengeData.title}</h1>
           </div>
 
-          <div className="bg-green-500 w-full h-40 rounded-lg mb-4"></div>
+          <div className="w-full h-40 rounded-lg mb-4 bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512421546262661/Rectangle_7.png?ex=66dbfcf2&is=66daab72&hm=e66dc0b2dc8ee7f23307913a1662f7c1cb2fbc4c4f71899f9d0be4b42f4b63f0&')"}}></div>
 
           <div className="mb-6">
             <div className="text-4xl font-bold">
