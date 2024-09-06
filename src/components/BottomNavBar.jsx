@@ -23,7 +23,9 @@ const BottomNavBar = ({ activeTab, setActiveTab }) => {
               )}
             >
               <item.icon className="h-6 w-6 mb-1" />
-              <span className="text-xs">{item.label}</span>
+              {activeTab === item.id && (
+                <span className="text-xs">{item.label}</span>
+              )}
             </button>
           </li>
         ))}
