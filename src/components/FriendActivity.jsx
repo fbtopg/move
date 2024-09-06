@@ -13,7 +13,7 @@ const FriendActivity = ({ name, activity, type }) => {
 
   const parseActivity = (activity) => {
     const [activityText, activityTime] = activity.split('•');
-    let parsedText = activityText.trim();
+    let parsedText = activityText.trim().replace('daily walks', 'daily walk');
 
     if (parsedText.includes('solved the quiz')) {
       const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
@@ -27,7 +27,7 @@ const FriendActivity = ({ name, activity, type }) => {
     return text
       .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
       .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>')
-      .replace(/(\s\w+)$/, '<span class="text-gray-500">$1</span>');
+      .replace(/(\s\w+)$/, '<span class="text-gray-600">$1</span>');
   };
 
   const parsedActivity = parseActivity(activity);
