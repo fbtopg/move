@@ -12,25 +12,30 @@ const FriendActivity = ({ name, activity, type }) => {
   };
 
   const parseActivity = (activity) => {
-    const [activityText, activityTime] = activity.split('•');
-    let parsedText = activityText.trim().replace('daily walks', 'daily walk');
+    if (!activity) return { activityText: '', activityTime: '' };
 
-    if (parsedText.includes('solved the quiz')) {
+    const parts = activity.split('•');
+    let activityText = parts[0] ? parts[0].trim().replace('daily walk', 'daily walk') : '';
+    let activityTime = parts[1] ? parts[1].trim() : '';
+
+    if (activityText.includes('solved the quiz')) {
       const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
-      parsedText = parsedText.replace('solved the quiz', `solved the quiz${quizNumber}`);
+      activityText = activityText.replace('solved the quiz', `solved the quiz${quizNumber}`);
     }
 
-    return `${parsedText} ${activityTime.trim()}`;
+    return { activityText, activityTime };
   };
 
-  const highlightText = (text) => {
-    return text
+  const highlightText = (text, time) => {
+    const highlightedText = text
       .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
-      .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>')
-      .replace(/(\s\w+)$/, '<span class="text-gray-600">$1</span>');
+      .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>');
+    
+    return `${highlightedText} <span class="text-gray-500">${time}</span>`;
   };
 
-  const parsedActivity = parseActivity(activity);
+  const { activityText, activityTime } = parseActivity(activity);
+  const parsedActivity = highlightText(activityText, activityTime);
 
   return (
     <div className="flex items-start space-x-3">
@@ -45,7 +50,7 @@ const FriendActivity = ({ name, activity, type }) => {
               <span className="font-semibold">{name}</span>{' '}
               <span 
                 className="text-gray-400 break-words"
-                dangerouslySetInnerHTML={{ __html: highlightText(parsedActivity) }}
+                dangerouslySetInnerHTML={{ __html: parsedActivity }}
               />
             </p>
           </div>
