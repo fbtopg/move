@@ -1,15 +1,16 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const ChallengeCard = ({ type, date, active, progress, gradientColor }) => {
+const ChallengeCard = ({ type, date, active, progress }) => {
   const isWalk = type === 'Daily Walks';
+  const imageUrl = `https://source.unsplash.com/random/300x300?abstract`;
 
   return (
     <div className="w-full max-w-md mx-auto text-white flex items-center h-32">
       <div 
-        className="w-32 h-32 mr-6 rounded-lg flex-shrink-0"
+        className="w-32 h-32 mr-6 rounded-lg flex-shrink-0 bg-cover bg-center"
         style={{
-          background: `linear-gradient(45deg, ${gradientColor[0]}, ${gradientColor[1]})`,
+          backgroundImage: `url(${imageUrl})`,
         }}
       ></div>
       <div className="flex-grow">

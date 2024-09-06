@@ -55,7 +55,6 @@ const Index = () => {
                 date="SEPTEMBER 2024"
                 active="16.5k"
                 progress="501/16.5K"
-                gradientColor={['#4CAF50', '#81C784']}
               />
             </div>
           </div>
@@ -66,7 +65,6 @@ const Index = () => {
                 date="SEPTEMBER 2024"
                 active="16.5k"
                 progress="11/30"
-                gradientColor={['#2196F3', '#64B5F6']}
               />
             </div>
           </div>
