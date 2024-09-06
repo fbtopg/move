@@ -13,7 +13,7 @@ const FriendActivity = ({ name, activity, time, type, liked }) => {
       <div className="flex-grow">
         <div className="flex items-center justify-between">
           <div className="flex-grow">
-            <p className="text-sm font-semibold inline-block mr-1">{name}</p>
+            <p className="text-sm font-semibold inline-block mr-1 dark:text-white">{name}</p>
             <p className="text-sm text-gray-600 dark:text-gray-400 inline-block">{activity}</p>
           </div>
           <div className="flex items-center space-x-2">
