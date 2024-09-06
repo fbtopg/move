@@ -11,6 +11,16 @@ const FriendActivity = ({ name, activity, type }) => {
     return type === 'walk' ? 'bg-blue-500' : 'bg-green-500';
   };
 
+  const getActivityTextColor = (type) => {
+    return type === 'walk' ? 'text-blue-300' : 'text-green-300';
+  };
+
+  const getTimeColor = (type) => {
+    return type === 'walk' ? 'text-blue-700' : 'text-green-700';
+  };
+
+  const [activityText, activityTime] = activity.split('•');
+
   return (
     <div className="flex items-start space-x-3">
       <Avatar className="w-10 h-10 mt-1">
@@ -21,7 +31,9 @@ const FriendActivity = ({ name, activity, type }) => {
         <div className="flex items-center justify-between">
           <div className="flex-grow">
             <p className="text-sm text-white">
-              <span className="font-semibold">{name}</span> {activity}
+              <span className="font-semibold">{name}</span>{' '}
+              <span className={getActivityTextColor(type)}>{activityText.trim()}</span>{' '}
+              <span className={getTimeColor(type)}>• {activityTime.trim()}</span>
             </p>
           </div>
           <div className="flex items-center space-x-2">
