@@ -7,6 +7,10 @@ const FriendActivity = ({ name, activity, type }) => {
   const [liked, setLiked] = useState(false);
   const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
 
+  const getActivityColor = (type) => {
+    return type === 'walk' ? 'bg-blue-500' : 'bg-green-500';
+  };
+
   return (
     <div className="flex items-start space-x-3">
       <Avatar className="w-10 h-10 mt-1">
@@ -22,7 +26,7 @@ const FriendActivity = ({ name, activity, type }) => {
           </div>
           <div className="flex items-center space-x-2">
             <div 
-              className="w-10 h-10 rounded-lg bg-cover bg-center"
+              className={`w-10 h-10 rounded-lg bg-cover bg-center ${getActivityColor(type)}`}
               style={{
                 backgroundImage: `url(${imageUrl})`,
               }}
