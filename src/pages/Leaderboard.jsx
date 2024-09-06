@@ -13,12 +13,18 @@ const Leaderboard = () => {
     distance: "56.7km",
   };
 
-  const leaderboardData = Array.from({ length: 50 }, (_, i) => ({
-    rank: i + 1,
-    name: `User${i + 1}`,
-    likes: Math.floor(Math.random() * 1000),
-    distance: `${(Math.random() * 100).toFixed(1)}km`,
-  }));
+  const leaderboardData = [
+    { rank: 1, name: "John", likes: 987, distance: "98.5km" },
+    { rank: 2, name: "Emma", likes: 856, distance: "92.3km" },
+    { rank: 3, name: "Alex", likes: 789, distance: "87.1km" },
+    { rank: 4, name: "Sarah", likes: 654, distance: "79.8km" },
+    { rank: 5, name: "Mike", likes: 543, distance: "72.4km" },
+    { rank: 6, name: "Lisa", likes: 432, distance: "68.9km" },
+    currentUser,
+    { rank: 8, name: "Tom", likes: 98, distance: "45.2km" },
+    { rank: 9, name: "Anna", likes: 76, distance: "39.6km" },
+    { rank: 10, name: "Chris", likes: 54, distance: "32.1km" },
+  ];
 
   const UserRow = ({ rank, name, likes, distance, isCurrentUser }) => (
     <div className={`flex items-center justify-between py-3 ${isCurrentUser ? 'bg-blue-900 rounded-lg px-2' : ''}`}>
@@ -44,15 +50,11 @@ const Leaderboard = () => {
           <ArrowLeft className="h-6 w-6" />
         </button>
 
-        <div className="bg-blue-900 rounded-lg p-4 mb-6">
-          <UserRow {...currentUser} isCurrentUser={true} />
-        </div>
-
         <h2 className="text-xl font-bold mb-4">Leaderboard</h2>
 
         <div className="space-y-2">
           {leaderboardData.map((user) => (
-            <UserRow key={user.rank} {...user} />
+            <UserRow key={user.rank} {...user} isCurrentUser={user.name === "You"} />
           ))}
         </div>
       </div>
