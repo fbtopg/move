@@ -30,16 +30,16 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-md mx-auto">
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex space-x-4">
+        <div className="flex justify-between items-start mb-4">
+          <div className="flex flex-col space-y-2">
             <button
-              className={`text-lg ${activeTab === 'friends' ? 'font-bold' : 'font-normal'}`}
+              className={`text-left ${activeTab === 'friends' ? 'font-bold' : 'font-normal'}`}
               onClick={() => setActiveTab('friends')}
             >
               Friends
             </button>
             <button
-              className={`text-lg ${activeTab === 'me' ? 'font-bold' : 'font-normal'}`}
+              className={`text-left ${activeTab === 'me' ? 'font-bold' : 'font-normal'}`}
               onClick={() => setActiveTab('me')}
             >
               Me
@@ -71,26 +71,28 @@ const Index = () => {
                   }
                 }}
               >
-                {currentChallenge === 'walks' ? (
-                  <ChallengeCard
-                    type="Daily Walks"
-                    date="SEPTEMBER 2024"
-                    active="16.5k"
-                    progress="501/16.5K"
-                  />
-                ) : (
-                  <ChallengeCard
-                    type="Daily Quiz"
-                    date="SEPTEMBER 2024"
-                    active="16.5k"
-                    progress="11/30"
-                  />
-                )}
+                <div className="bg-transparent">
+                  {currentChallenge === 'walks' ? (
+                    <ChallengeCard
+                      type="Daily Walks"
+                      date="SEPTEMBER 2024"
+                      active="16.5k"
+                      progress="501/16.5K"
+                    />
+                  ) : (
+                    <ChallengeCard
+                      type="Daily Quiz"
+                      date="SEPTEMBER 2024"
+                      active="16.5k"
+                      progress="11/30"
+                    />
+                  )}
+                </div>
               </motion.div>
             </AnimatePresence>
 
-            <section className="mt-8">
-              <h2 className="text-xl font-semibold mb-4">TODAY</h2>
+            <section className="mt-6">
+              <h2 className="text-lg font-semibold mb-3">TODAY</h2>
               {activities.map((activity, index) => (
                 <FriendActivity
                   key={index}
@@ -105,7 +107,7 @@ const Index = () => {
           </>
         ) : (
           <div className="text-center py-8">
-            <h2 className="text-2xl font-bold">Your Activity</h2>
+            <h2 className="text-xl font-bold">Your Activity</h2>
             <p className="mt-4">Your personal activity will be displayed here.</p>
           </div>
         )}
