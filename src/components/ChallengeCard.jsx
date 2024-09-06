@@ -9,7 +9,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
   return (
     <div className={cn(
       "w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[180px] flex flex-col",
-      isWalk ? "bg-blue-500" : "bg-green-500"
+      isWalk ? "bg-vibrant-blue" : "bg-vibrant-green"
     )}>
       <div 
         className="h-24 bg-cover bg-center"
