@@ -24,8 +24,8 @@ const FriendActivity = ({ name, activity, type, liked, gradientColor }) => {
                 background: `linear-gradient(45deg, ${gradientColor[0]}, ${gradientColor[1]})`,
               }}
             ></div>
-            <Button variant="ghost" size="sm" className={liked ? "text-red-500" : "text-gray-500"}>
-              <Heart className="h-4 w-4" />
+            <Button variant="ghost" size="icon" className={`w-10 h-10 ${liked ? "text-red-500" : "text-gray-500"}`}>
+              <Heart className="h-6 w-6" />
             </Button>
           </div>
         </div>

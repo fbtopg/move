@@ -45,7 +45,7 @@ const Index = () => {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
           <div className="flex-shrink-0 w-full">
-            <div className="p-4 mb-4 h-40">
+            <div className="p-4 mb-4">
               <ChallengeCard
                 type="Daily Walks"
                 date="SEPTEMBER 2024"
@@ -56,7 +56,7 @@ const Index = () => {
             </div>
           </div>
           <div className="flex-shrink-0 w-full">
-            <div className="p-4 mb-4 h-40">
+            <div className="p-4 mb-4">
               <ChallengeCard
                 type="Daily Quiz"
                 date="SEPTEMBER 2024"
