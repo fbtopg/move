@@ -49,7 +49,7 @@ const FriendActivity = ({ name, activity, type }) => {
             </p>
             <p className="text-xs text-gray-600">{activityTime}</p>
           </div>
-          <div className="flex flex-col items-end space-y-2 flex-shrink-0">
+          <div className="flex items-center space-x-2 flex-shrink-0">
             <div 
               className={`w-10 h-10 rounded-lg bg-cover bg-center ${getActivityColor()}`}
               style={{
