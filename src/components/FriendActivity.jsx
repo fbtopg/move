@@ -31,16 +31,14 @@ const FriendActivity = ({ name, activity, type }) => {
     return { activityText, activityTime };
   };
 
-  const highlightText = (text, time) => {
-    const highlightedText = text
+  const highlightText = (text) => {
+    return text
       .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
       .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>');
-    
-    return `${highlightedText} <span class="text-gray-600">${time}</span>`;
   };
 
   const { activityText, activityTime } = parseActivity(activity);
-  const parsedActivity = highlightText(activityText, activityTime);
+  const parsedActivity = highlightText(activityText);
 
   return (
     <div className="flex items-start space-x-3">
@@ -57,6 +55,9 @@ const FriendActivity = ({ name, activity, type }) => {
                 className="text-gray-400 break-words"
                 dangerouslySetInnerHTML={{ __html: parsedActivity }}
               />
+              {activityTime && (
+                <span className="text-gray-600 ml-1">{activityTime}</span>
+              )}
             </p>
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
