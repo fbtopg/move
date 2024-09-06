@@ -34,7 +34,6 @@ const DailyWalkChallenge = () => {
   ];
 
   const handleLeaderboardClick = () => {
-    // Navigate to the leaderboard page
     navigate('/leaderboard');
   };
 
