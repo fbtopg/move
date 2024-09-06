@@ -9,7 +9,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
     : "https://cdn.midjourney.com/b5b40151-9594-4005-a904-0701c493896b/0_1.png";
 
   return (
-    <div className="w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[120px] flex bg-transparent">
+    <div className="w-full max-w-md mx-auto overflow-hidden shadow-lg h-[120px] flex bg-transparent">
       <div 
         className="w-[120px] h-[120px] bg-cover bg-center flex-shrink-0"
         style={{
