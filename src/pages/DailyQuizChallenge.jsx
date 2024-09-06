@@ -73,9 +73,11 @@ const DailyQuizChallenge = () => {
             </div>
           </div>
 
-          <Button className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-6">
-            Solve today's quiz
-            <ArrowRight className="ml-2 h-4 w-4" />
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
+          >
+            <span>Check today's quiz</span>
+            <ArrowRight className="h-6 w-6" />
           </Button>
 
           <div className="h-px bg-gray-700 my-4"></div>
