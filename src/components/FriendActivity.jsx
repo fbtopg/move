@@ -38,18 +38,18 @@ const FriendActivity = ({ name, activity, type }) => {
         <AvatarFallback>{name[0]}</AvatarFallback>
       </Avatar>
       <div className="flex-grow min-w-0">
-        <div className="flex items-center justify-between">
-          <div className="flex-grow min-w-0">
-            <p className="text-sm text-white truncate">
+        <div className="flex items-start justify-between">
+          <div className="flex-grow min-w-0 pr-2">
+            <p className="text-sm text-white">
               <span className="font-semibold">{name}</span>{' '}
               <span 
-                className="text-gray-400"
+                className="text-gray-400 break-words"
                 dangerouslySetInnerHTML={{ __html: highlightText(parsedText) }}
               />
             </p>
             <p className="text-xs text-gray-600">{activityTime}</p>
           </div>
-          <div className="flex items-center space-x-2 flex-shrink-0">
+          <div className="flex flex-col items-end space-y-2 flex-shrink-0">
             <div 
               className={`w-10 h-10 rounded-lg bg-cover bg-center ${getActivityColor()}`}
               style={{
@@ -59,10 +59,10 @@ const FriendActivity = ({ name, activity, type }) => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent`}
+              className={`w-8 h-8 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent`}
               onClick={() => setLiked(!liked)}
             >
-              <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
+              <Heart className={`h-5 w-5 ${liked ? "fill-current" : ""}`} />
             </Button>
           </div>
         </div>
