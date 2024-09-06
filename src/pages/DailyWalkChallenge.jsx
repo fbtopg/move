@@ -12,7 +12,8 @@ const DailyWalkChallenge = () => {
   const challengeData = {
     month: "SEPTEMBER 2024",
     title: "Daily Walk",
-    rank: "501/16.5K",
+    rank: "501",
+    totalParticipants: "16.5K",
     distance: "56.7km",
     likes: "124",
     highestStreak: "7",
@@ -48,22 +49,25 @@ const DailyWalkChallenge = () => {
           <div className="bg-blue-500 w-full h-40 rounded-lg mb-4"></div>
 
           <div className="mb-6">
-            <div className="text-4xl font-bold">{challengeData.rank}</div>
+            <div className="text-4xl font-bold">
+              {challengeData.rank}
+              <span className="text-gray-400">/{challengeData.totalParticipants}</span>
+            </div>
             <div className="text-sm text-gray-400">RANK</div>
           </div>
 
           <div className="flex justify-between mb-6">
             <div>
-              <div className="text-sm text-gray-400">DISTANCE</div>
-              <div className="text-xl font-bold">{challengeData.distance}</div>
+              <div className="text-xs text-gray-400">DISTANCE</div>
+              <div className="text-lg font-bold">{challengeData.distance}</div>
             </div>
             <div>
-              <div className="text-sm text-gray-400">LIKES</div>
-              <div className="text-xl font-bold">{challengeData.likes}</div>
+              <div className="text-xs text-gray-400">LIKES</div>
+              <div className="text-lg font-bold">{challengeData.likes}</div>
             </div>
             <div>
-              <div className="text-sm text-gray-400">HIGHEST STREAK</div>
-              <div className="text-xl font-bold">{challengeData.highestStreak}</div>
+              <div className="text-xs text-gray-400">HIGHEST STREAK</div>
+              <div className="text-lg font-bold">{challengeData.highestStreak}</div>
             </div>
           </div>
 
@@ -85,9 +89,11 @@ const DailyWalkChallenge = () => {
             </div>
           </div>
 
+          <div className="h-px bg-gray-700 my-4"></div>
+
           <div className="mb-6">
             <h2 className="text-lg font-bold mb-2">ACHIEVEMENTS</h2>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {challengeData.achievements.map((achievement) => (
                 <div key={achievement.id} className="bg-gray-800 aspect-square rounded-lg flex items-center justify-center">
                   <span className="text-sm">{achievement.name}</span>
