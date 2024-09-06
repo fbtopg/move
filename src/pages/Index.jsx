@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 
 const Index = () => {
   const [currentChallenge, setCurrentChallenge] = useState('walks');
@@ -29,12 +30,28 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-md mx-auto">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="friends">Friends</TabsTrigger>
-            <TabsTrigger value="me">Me</TabsTrigger>
-          </TabsList>
-          <TabsContent value="friends">
+        <div className="flex justify-between items-center mb-4">
+          <div className="flex space-x-4">
+            <button
+              className={`text-lg ${activeTab === 'friends' ? 'font-bold' : 'font-normal'}`}
+              onClick={() => setActiveTab('friends')}
+            >
+              Friends
+            </button>
+            <button
+              className={`text-lg ${activeTab === 'me' ? 'font-bold' : 'font-normal'}`}
+              onClick={() => setActiveTab('me')}
+            >
+              Me
+            </button>
+          </div>
+          <Button size="icon" variant="ghost">
+            <Plus className="h-6 w-6" />
+          </Button>
+        </div>
+
+        {activeTab === 'friends' ? (
+          <>
             <AnimatePresence initial={false}>
               <motion.div
                 key={currentChallenge}
@@ -85,14 +102,13 @@ const Index = () => {
                 />
               ))}
             </section>
-          </TabsContent>
-          <TabsContent value="me">
-            <div className="text-center py-8">
-              <h2 className="text-2xl font-bold">Your Activity</h2>
-              <p className="mt-4">Your personal activity will be displayed here.</p>
-            </div>
-          </TabsContent>
-        </Tabs>
+          </>
+        ) : (
+          <div className="text-center py-8">
+            <h2 className="text-2xl font-bold">Your Activity</h2>
+            <p className="mt-4">Your personal activity will be displayed here.</p>
+          </div>
+        )}
       </div>
     </div>
   );
