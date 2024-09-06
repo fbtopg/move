@@ -3,8 +3,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 
-const FriendActivity = ({ name, activity, type, gradientColor }) => {
+const FriendActivity = ({ name, activity, type }) => {
   const [liked, setLiked] = useState(false);
+  const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
 
   return (
     <div className="flex items-start space-x-3">
@@ -21,9 +22,9 @@ const FriendActivity = ({ name, activity, type, gradientColor }) => {
           </div>
           <div className="flex items-center space-x-2">
             <div 
-              className="w-10 h-10 rounded-lg"
+              className="w-10 h-10 rounded-lg bg-cover bg-center"
               style={{
-                background: `linear-gradient(45deg, ${gradientColor[0]}, ${gradientColor[1]})`,
+                backgroundImage: `url(${imageUrl})`,
               }}
             ></div>
             <Button 

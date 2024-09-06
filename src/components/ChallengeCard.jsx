@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const ChallengeCard = ({ type, date, active, progress }) => {
   const isWalk = type === 'Daily Walks';
-  const imageUrl = `https://source.unsplash.com/random/300x300?abstract`;
+  const imageUrl = `https://source.unsplash.com/collection/3678981/300x300`;
 
   return (
     <div className="w-full max-w-md mx-auto text-white flex items-center h-32">

@@ -22,13 +22,13 @@ const Index = () => {
   };
 
   const activities = [
-    { name: "John", activity: "finished walking 1km and completed daily walks challenge • 3m", type: "walk", gradientColor: ['#4CAF50', '#81C784'] },
-    { name: "Tate", activity: "finished walking 500m and completed daily walks challenge • 4m", type: "walk", gradientColor: ['#4CAF50', '#81C784'] },
-    { name: "Aquafina", activity: "finished walking 1km and completed daily walks challenge • 59m", type: "walk", gradientColor: ['#4CAF50', '#81C784'] },
-    { name: "Geonu", activity: "finished walking 750m and completed daily walks challenge • 4h", type: "walk", gradientColor: ['#4CAF50', '#81C784'] },
-    { name: "Astrid", activity: "finished walking 2km and completed daily walks challenge • 5h", type: "walk", gradientColor: ['#4CAF50', '#81C784'] },
-    { name: "Fitra", activity: "solved the quiz today and completed daily quiz challenge • 10h", type: "quiz", gradientColor: ['#2196F3', '#64B5F6'] },
-    { name: "Rissa", activity: "solved the quiz today and completed daily quiz challenge • 15h", type: "quiz", gradientColor: ['#2196F3', '#64B5F6'] },
+    { name: "John", activity: "finished walking 1km and completed daily walks challenge • 3m", type: "walk" },
+    { name: "Tate", activity: "finished walking 500m and completed daily walks challenge • 4m", type: "walk" },
+    { name: "Aquafina", activity: "finished walking 1km and completed daily walks challenge • 59m", type: "walk" },
+    { name: "Geonu", activity: "finished walking 750m and completed daily walks challenge • 4h", type: "walk" },
+    { name: "Astrid", activity: "finished walking 2km and completed daily walks challenge • 5h", type: "walk" },
+    { name: "Fitra", activity: "solved the quiz today and completed daily quiz challenge • 10h", type: "quiz" },
+    { name: "Rissa", activity: "solved the quiz today and completed daily quiz challenge • 15h", type: "quiz" },
   ];
 
   const renderContent = () => (
@@ -82,7 +82,6 @@ const Index = () => {
               name={activity.name}
               activity={activity.activity}
               type={activity.type}
-              gradientColor={activity.gradientColor}
             />
           ))}
         </div>
