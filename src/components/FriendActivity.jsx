@@ -18,11 +18,6 @@ const FriendActivity = ({ name, activity, type }) => {
     let activityText = parts[0] ? parts[0].trim() : '';
     let activityTime = parts[1] ? parts[1].trim() : '';
 
-    // Add a full stop at the end of the activity text if it doesn't already have one
-    if (activityText && !activityText.endsWith('.')) {
-      activityText += '.';
-    }
-
     if (activityText.includes('solved the quiz')) {
       const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
       activityText = activityText.replace('solved the quiz', `solved the quiz${quizNumber}`);
