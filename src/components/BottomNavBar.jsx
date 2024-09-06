@@ -11,7 +11,7 @@ const BottomNavBar = ({ activeTab, setActiveTab }) => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-[#111111] text-white">
+    <nav className="sticky bottom-0 left-0 right-0 bg-[#111111] text-white pb-safe">
       <ul className="flex justify-around items-center h-16">
         {navItems.map((item) => (
           <li key={item.id} className="flex-1">
