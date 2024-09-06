@@ -74,7 +74,7 @@ const Index = () => {
       <div className="h-px bg-gray-700 my-6"></div>
 
       <section className="mt-6 pb-20">
-        <h2 className="text-lg font-semibold mb-3 text-white">TODAY</h2>
+        <h2 className="text-xs font-semibold mb-3 text-gray-400">TODAY</h2>
         <div className="space-y-4">
           {activities.map((activity, index) => (
             <FriendActivity
