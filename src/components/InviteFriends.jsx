@@ -52,7 +52,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
   }, [searchTerm]);
 
   const handleShareLink = async () => {
-    const shareUrl = 'https://preview--daily-move-and-minds-06.gptengineer.run/';
+    const shareUrl = 'https://move.gptengineer.run/';
     const shareText = "I solved today's quiz, and I'm curious to hear what you think of it! Want to join the daily quiz challenge with me?";
     
     if (navigator.share) {
