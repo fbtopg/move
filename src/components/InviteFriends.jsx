@@ -35,10 +35,14 @@ const InviteFriends = ({ isOpen, onClose }) => {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    const filteredUsers = users.filter(user =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(filteredUsers);
+    if (searchTerm.trim() !== '') {
+      const filteredUsers = users.filter(user =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(filteredUsers);
+    } else {
+      setSearchResults([]);
+    }
   }, [searchTerm]);
 
   const handleShareLink = () => {
@@ -73,7 +77,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
           />
         </div>
         <div className="flex-grow overflow-y-auto">
-          {searchResults.map(user => (
+          {searchTerm.trim() !== '' && searchResults.map(user => (
             <UserSearchResult key={user.id} user={user} onInvite={handleInvite} />
           ))}
         </div>
