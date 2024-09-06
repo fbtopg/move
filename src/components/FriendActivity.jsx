@@ -15,8 +15,13 @@ const FriendActivity = ({ name, activity, type }) => {
     if (!activity) return { activityText: '', activityTime: '' };
 
     const parts = activity.split('•');
-    let activityText = parts[0] ? parts[0].trim().replace('daily walk', 'daily walk') : '';
+    let activityText = parts[0] ? parts[0].trim() : '';
     let activityTime = parts[1] ? parts[1].trim() : '';
+
+    // Add a full stop at the end of the activity text if it doesn't already have one
+    if (activityText && !activityText.endsWith('.')) {
+      activityText += '.';
+    }
 
     if (activityText.includes('solved the quiz')) {
       const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
@@ -31,7 +36,7 @@ const FriendActivity = ({ name, activity, type }) => {
       .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
       .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>');
     
-    return `${highlightedText} <span class="text-gray-500">${time}</span>`;
+    return `${highlightedText} <span class="text-gray-600">${time}</span>`;
   };
 
   const { activityText, activityTime } = parseActivity(activity);
