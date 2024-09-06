@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   const [currentChallenge, setCurrentChallenge] = useState('walks');
+  const [activeTab, setActiveTab] = useState('friends');
 
   const handleSwipe = (direction) => {
     if (direction === 'left' && currentChallenge === 'quiz') {
@@ -27,62 +29,71 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-md mx-auto">
-        <header className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Friends</h1>
-          <span className="text-gray-500">Me</span>
-          <button className="text-2xl">+</button>
-        </header>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="friends">Friends</TabsTrigger>
+            <TabsTrigger value="me">Me</TabsTrigger>
+          </TabsList>
+          <TabsContent value="friends">
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={currentChallenge}
+                initial={{ opacity: 0, x: currentChallenge === 'walks' ? -300 : 300 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: currentChallenge === 'walks' ? 300 : -300 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={1}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = swipePower(offset.x, velocity.x);
+                  if (swipe < -swipeConfidenceThreshold) {
+                    handleSwipe('right');
+                  } else if (swipe > swipeConfidenceThreshold) {
+                    handleSwipe('left');
+                  }
+                }}
+                className="h-64" // Fixed height for challenge cards
+              >
+                {currentChallenge === 'walks' ? (
+                  <ChallengeCard
+                    type="Daily Walks"
+                    date="SEPTEMBER 2024"
+                    active="16.5k"
+                    progress="501/16.5K"
+                  />
+                ) : (
+                  <ChallengeCard
+                    type="Daily Quiz"
+                    date="SEPTEMBER 2024"
+                    active="16.5k"
+                    progress="11/30"
+                  />
+                )}
+              </motion.div>
+            </AnimatePresence>
 
-        <AnimatePresence initial={false}>
-          <motion.div
-            key={currentChallenge}
-            initial={{ opacity: 0, x: currentChallenge === 'walks' ? -300 : 300 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: currentChallenge === 'walks' ? 300 : -300 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = swipePower(offset.x, velocity.x);
-              if (swipe < -swipeConfidenceThreshold) {
-                handleSwipe('right');
-              } else if (swipe > swipeConfidenceThreshold) {
-                handleSwipe('left');
-              }
-            }}
-          >
-            {currentChallenge === 'walks' ? (
-              <ChallengeCard
-                type="Daily Walks"
-                date="SEPTEMBER 2024"
-                active="16.5k"
-                progress="501/16.5K"
-              />
-            ) : (
-              <ChallengeCard
-                type="Daily Quiz"
-                date="SEPTEMBER 2024"
-                active="16.5k"
-                progress="11/30"
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
-
-        <section className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">TODAY</h2>
-          {activities.map((activity, index) => (
-            <FriendActivity
-              key={index}
-              name={activity.name}
-              activity={activity.activity}
-              time={activity.time}
-              type={activity.type}
-              liked={index === 0}
-            />
-          ))}
-        </section>
+            <section className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">TODAY</h2>
+              {activities.map((activity, index) => (
+                <FriendActivity
+                  key={index}
+                  name={activity.name}
+                  activity={activity.activity}
+                  time={activity.time}
+                  type={activity.type}
+                  liked={index === 0}
+                />
+              ))}
+            </section>
+          </TabsContent>
+          <TabsContent value="me">
+            <div className="text-center py-8">
+              <h2 className="text-2xl font-bold">Your Activity</h2>
+              <p className="mt-4">Your personal activity will be displayed here.</p>
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
