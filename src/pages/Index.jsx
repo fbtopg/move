@@ -12,12 +12,27 @@ const Index = () => {
   const [currentView, setCurrentView] = useState('friends');
 
   useEffect(() => {
-    // Attempt to enter full-screen mode
-    if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen().catch(err => {
+    const enterFullScreen = async () => {
+      try {
+        if (document.documentElement.requestFullscreen) {
+          await document.documentElement.requestFullscreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { // iOS Safari
+          await document.documentElement.webkitRequestFullscreen();
+        }
+      } catch (err) {
         console.error("Error attempting to enable full-screen mode:", err);
-      });
-    }
+      }
+    };
+
+    enterFullScreen();
+
+    // Add event listener for orientation changes
+    window.addEventListener('orientationchange', enterFullScreen);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('orientationchange', enterFullScreen);
+    };
   }, []);
 
   return (
@@ -25,10 +40,16 @@ const Index = () => {
       <div 
         className="flex-grow overflow-y-auto pb-20 px-4"
         style={{
-          paddingTop: 'calc(env(safe-area-inset-top) + 1.5rem)',
+          paddingTop: 'env(safe-area-inset-top)',
+          height: '100vh',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
         }}
       >
-        <div className="max-w-md mx-auto">
+        <div className="max-w-md mx-auto pt-6">
           <div className="flex justify-between items-center mb-4">
             <div className="flex space-x-4">
               <button
