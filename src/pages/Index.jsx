@@ -30,23 +30,23 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-md mx-auto">
-        <div className="flex justify-between items-start mb-4">
-          <div className="flex flex-col space-y-2">
+        <div className="flex justify-between items-center mb-4">
+          <div className="flex space-x-4">
             <button
-              className={`text-left ${activeTab === 'friends' ? 'font-bold' : 'font-normal'}`}
+              className={`text-sm ${activeTab === 'friends' ? 'font-bold' : 'font-normal'}`}
               onClick={() => setActiveTab('friends')}
             >
               Friends
             </button>
             <button
-              className={`text-left ${activeTab === 'me' ? 'font-bold' : 'font-normal'}`}
+              className={`text-sm ${activeTab === 'me' ? 'font-bold' : 'font-normal'}`}
               onClick={() => setActiveTab('me')}
             >
               Me
             </button>
           </div>
           <Button size="icon" variant="ghost">
-            <Plus className="h-6 w-6" />
+            <Plus className="h-5 w-5" />
           </Button>
         </div>
 

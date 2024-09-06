@@ -12,10 +12,10 @@ const FriendActivity = ({ name, activity, time, type, liked }) => {
           <AvatarFallback>{name[0]}</AvatarFallback>
         </Avatar>
         <div className="flex-grow">
-          <p className="text-sm">
-            <span className="font-semibold">{name}</span>{' '}
-            <span className="text-gray-600">{activity}</span>
-          </p>
+          <div className="flex items-center space-x-1">
+            <p className="text-sm font-semibold">{name}</p>
+            <p className="text-sm text-gray-600">{activity}</p>
+          </div>
           <p className="text-xs text-gray-400">{time}</p>
         </div>
       </div>
