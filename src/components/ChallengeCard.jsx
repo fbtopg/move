@@ -7,7 +7,7 @@ const ChallengeCard = ({ type, date, active, progress, gradientColor }) => {
   return (
     <div className="w-full max-w-md mx-auto text-white flex items-center h-32">
       <div 
-        className="w-48 h-32 mr-6 rounded-lg flex-shrink-0"
+        className="w-32 h-32 mr-6 rounded-lg flex-shrink-0"
         style={{
           background: `linear-gradient(45deg, ${gradientColor[0]}, ${gradientColor[1]})`,
         }}
