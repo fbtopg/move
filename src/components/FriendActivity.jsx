@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 
-const FriendActivity = ({ name, activity, type, liked, gradientColor }) => {
+const FriendActivity = ({ name, activity, type, gradientColor }) => {
+  const [liked, setLiked] = useState(false);
+
   return (
     <div className="flex items-start space-x-3">
       <Avatar className="w-10 h-10 mt-1">
@@ -24,7 +26,12 @@ const FriendActivity = ({ name, activity, type, liked, gradientColor }) => {
                 background: `linear-gradient(45deg, ${gradientColor[0]}, ${gradientColor[1]})`,
               }}
             ></div>
-            <Button variant="ghost" size="icon" className={`w-10 h-10 ${liked ? "text-red-500" : "text-gray-500"}`}>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"}`}
+              onClick={() => setLiked(!liked)}
+            >
               <Heart className="h-6 w-6" />
             </Button>
           </div>

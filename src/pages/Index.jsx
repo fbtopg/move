@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
+import InviteFriendsModal from '../components/InviteFriendsModal';
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
 const Index = () => {
   const [currentChallenge, setCurrentChallenge] = useState('walks');
   const [activeTab, setActiveTab] = useState('friends');
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
 
   const handleSwipe = (direction) => {
     if (direction === 'left' && currentChallenge === 'walks') {
@@ -80,7 +82,6 @@ const Index = () => {
               name={activeTab === 'friends' ? activity.name : "You"}
               activity={activity.activity}
               type={activity.type}
-              liked={index === 0}
               gradientColor={activity.gradientColor}
             />
           ))}
@@ -107,13 +108,14 @@ const Index = () => {
               Me
             </button>
           </div>
-          <Button size="icon" variant="ghost">
+          <Button size="icon" variant="ghost" onClick={() => setIsInviteModalOpen(true)}>
             <Plus className="h-5 w-5 text-white" />
           </Button>
         </div>
 
         {renderContent()}
       </div>
+      <InviteFriendsModal isOpen={isInviteModalOpen} onClose={() => setIsInviteModalOpen(false)} />
     </div>
   );
 };
