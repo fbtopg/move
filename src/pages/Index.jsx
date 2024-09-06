@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import { Button } from "@/components/ui/button";
@@ -45,7 +45,7 @@ const Index = () => {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
           <div className="flex-shrink-0 w-full">
-            <div className="bg-gray-800 rounded-lg shadow-md p-4 mb-4 h-40">
+            <div className="p-4 mb-4 h-40">
               <ChallengeCard
                 type="Daily Walks"
                 date="SEPTEMBER 2024"
@@ -56,7 +56,7 @@ const Index = () => {
             </div>
           </div>
           <div className="flex-shrink-0 w-full">
-            <div className="bg-gray-800 rounded-lg shadow-md p-4 mb-4 h-40">
+            <div className="p-4 mb-4 h-40">
               <ChallengeCard
                 type="Daily Quiz"
                 date="SEPTEMBER 2024"
@@ -69,7 +69,9 @@ const Index = () => {
         </motion.div>
       </motion.div>
 
-      <section className="mt-6 bg-gray-800 rounded-lg shadow-md p-4">
+      <div className="h-px bg-gray-700 my-6"></div>
+
+      <section className="mt-6 p-4">
         <h2 className="text-lg font-semibold mb-3 text-white">TODAY</h2>
         <div className="space-y-4">
           {activities.map((activity, index) => (
