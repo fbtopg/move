@@ -7,22 +7,23 @@ const FriendActivity = ({ name, activity, type }) => {
   const [liked, setLiked] = useState(false);
   const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
 
-  const getActivityColor = () => 'bg-gray-700';
+  const getActivityColor = () => {
+    return type === 'walk' ? 'bg-blue-500' : 'bg-green-500';
+  };
 
   const parseActivity = (activity) => {
     const [activityText, activityTime] = activity.split('•');
     let parsedText = activityText.trim();
-    let quizNumber = '';
 
     if (parsedText.includes('solved the quiz')) {
-      quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
+      const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
       parsedText = parsedText.replace('solved the quiz', `solved the quiz${quizNumber}`);
     }
 
-    return { parsedText, activityTime: activityTime.trim(), quizNumber };
+    return { parsedText, activityTime: activityTime.trim() };
   };
 
-  const { parsedText, activityTime, quizNumber } = parseActivity(activity);
+  const { parsedText, activityTime } = parseActivity(activity);
 
   const highlightText = (text) => {
     return text
