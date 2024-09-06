@@ -51,8 +51,28 @@ const InviteFriends = ({ isOpen, onClose }) => {
     }
   }, [searchTerm]);
 
-  const handleShareLink = () => {
-    console.log("Sharing invite link...");
+  const handleShareLink = async () => {
+    const shareUrl = 'https://preview--daily-move-and-minds-06.gptengineer.run/';
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Join Daily Move & Minds',
+          text: 'Check out this app for daily walks and quizzes!',
+          url: shareUrl,
+        });
+        console.log('Content shared successfully');
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        alert('Link copied to clipboard!');
+      } catch (err) {
+        console.error('Failed to copy link:', err);
+      }
+    }
   };
 
   const handleInvite = (userId) => {
