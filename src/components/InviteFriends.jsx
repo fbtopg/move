@@ -28,7 +28,7 @@ const UserSearchResult = ({ user, onInvite, isInvited }) => (
       variant="ghost" 
       size="icon" 
       onClick={() => onInvite(user.id)}
-      className={isInvited ? "text-green-500" : "text-white"}
+      className={`transition-colors duration-200 ${isInvited ? "text-green-500" : "text-white"}`}
     >
       {isInvited ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
     </Button>
