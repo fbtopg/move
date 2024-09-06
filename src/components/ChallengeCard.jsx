@@ -18,29 +18,29 @@ const ChallengeCard = ({ type, date, active, progress }) => {
       ></div>
       <div className="flex-grow p-3 flex flex-col justify-between">
         <div>
-          <p className="text-xs text-white/80">{date}</p>
-          <h2 className="text-base font-bold mb-1 text-white">{type}</h2>
-          <div className="flex items-center space-x-2 mb-1">
+          <p className="text-sm text-white/80">{date}</p>
+          <h2 className="text-xl font-bold mb-2 text-white">{type}</h2>
+          <div className="flex items-center space-x-2 mb-2">
             <div className="flex -space-x-1">
-              <Avatar className="w-4 h-4 border-2 border-gray-800">
+              <Avatar className="w-6 h-6 border-2 border-gray-800">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=John" />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
-              <Avatar className="w-4 h-4 border-2 border-gray-800">
+              <Avatar className="w-6 h-6 border-2 border-gray-800">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Jane" />
                 <AvatarFallback>JS</AvatarFallback>
               </Avatar>
-              <Avatar className="w-4 h-4 border-2 border-gray-800">
+              <Avatar className="w-6 h-6 border-2 border-gray-800">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Bob" />
                 <AvatarFallback>BS</AvatarFallback>
               </Avatar>
             </div>
-            <span className="text-xs text-white/80">{active} active</span>
+            <span className="text-sm text-white/80">{active} active</span>
           </div>
         </div>
         <div>
-          {isWalk && <p className="text-xs text-white/80 mb-0.5">RANK</p>}
-          <p className="text-sm font-bold text-white">{progress}</p>
+          {isWalk && <p className="text-sm text-white/80 mb-0.5">RANK</p>}
+          <p className="text-lg font-bold text-white">{progress}</p>
         </div>
       </div>
     </div>
