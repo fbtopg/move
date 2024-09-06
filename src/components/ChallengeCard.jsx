@@ -18,19 +18,19 @@ const ChallengeCard = ({ type, date, active, progress }) => {
       ></div>
       <div className="flex-grow p-3 flex flex-col justify-between">
         <div>
-          <p className="text-sm text-white/80">{date}</p>
-          <h2 className="text-xl font-bold mb-2 text-white">{type}</h2>
-          <div className="flex items-center space-x-2 mb-2">
+          <p className="text-sm text-white/80 mb-1">{date}</p>
+          <h2 className="text-2xl font-bold mb-2 text-white">{type}</h2>
+          <div className="flex items-center space-x-2">
             <div className="flex -space-x-1">
-              <Avatar className="w-6 h-6 border-2 border-gray-800">
+              <Avatar className="w-7 h-7 border-2 border-gray-800">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=John" />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
-              <Avatar className="w-6 h-6 border-2 border-gray-800">
+              <Avatar className="w-7 h-7 border-2 border-gray-800">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Jane" />
                 <AvatarFallback>JS</AvatarFallback>
               </Avatar>
-              <Avatar className="w-6 h-6 border-2 border-gray-800">
+              <Avatar className="w-7 h-7 border-2 border-gray-800">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Bob" />
                 <AvatarFallback>BS</AvatarFallback>
               </Avatar>
@@ -40,7 +40,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
         </div>
         <div>
           {isWalk && <p className="text-sm text-white/80 mb-0.5">RANK</p>}
-          <p className="text-lg font-bold text-white">{progress}</p>
+          <p className="text-xl font-bold text-white">{progress}</p>
         </div>
       </div>
     </div>
