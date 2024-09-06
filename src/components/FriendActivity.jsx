@@ -9,7 +9,24 @@ const FriendActivity = ({ name, activity, type }) => {
 
   const getActivityColor = () => 'bg-gray-700';
 
-  const [activityText, activityTime] = activity.split('•');
+  const parseActivity = (activity) => {
+    const [activityText, activityTime] = activity.split('•');
+    let parsedText = activityText.trim();
+    let quizNumber = '';
+
+    if (parsedText.includes('solved the quiz')) {
+      quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
+      parsedText = parsedText.replace('solved the quiz', `solved the quiz${quizNumber}`);
+    }
+
+    return { parsedText, activityTime: activityTime.trim(), quizNumber };
+  };
+
+  const { parsedText, activityTime, quizNumber } = parseActivity(activity);
+
+  const highlightDistance = (text) => {
+    return text.replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>');
+  };
 
   return (
     <div className="flex items-start space-x-3">
@@ -22,8 +39,12 @@ const FriendActivity = ({ name, activity, type }) => {
           <div className="flex-grow">
             <p className="text-sm text-white">
               <span className="font-semibold">{name}</span>{' '}
-              <span className="text-gray-400">{activityText.trim()}</span>{' '}
-              <span className="text-gray-600">• {activityTime.trim()}</span>
+              <span 
+                className="text-gray-400"
+                dangerouslySetInnerHTML={{ __html: highlightDistance(parsedText) }}
+              />
+              {quizNumber && <span className="text-white">{quizNumber}</span>}{' '}
+              <span className="text-gray-600">• {activityTime}</span>
             </p>
           </div>
           <div className="flex items-center space-x-2">
