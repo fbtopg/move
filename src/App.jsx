@@ -12,7 +12,7 @@ const App = () => (
       <Toaster />
       <BrowserRouter>
         <div className="min-h-screen h-[100dvh] flex flex-col bg-black">
-          <div className="flex-grow overflow-auto">
+          <div className="flex-grow overflow-auto pt-safe">
             <Routes>
               {navItems.map(({ to, page }) => (
                 <Route key={to} path={to} element={page} />
