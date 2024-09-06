@@ -9,28 +9,28 @@ const ChallengeCard = ({ type, date, active, progress }) => {
     : "https://cdn.midjourney.com/b5b40151-9594-4005-a904-0701c493896b/0_1.png";
 
   return (
-    <div className="w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[180px] flex bg-transparent">
+    <div className="w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[120px] flex bg-transparent">
       <div 
-        className="w-[180px] h-[180px] bg-cover bg-center flex-shrink-0"
+        className="w-[120px] h-[120px] bg-cover bg-center flex-shrink-0"
         style={{
           backgroundImage: `url(${imageUrl})`,
         }}
       ></div>
-      <div className="flex-grow p-4 flex flex-col justify-between">
+      <div className="flex-grow p-3 flex flex-col justify-between">
         <div>
           <p className="text-xs text-white/80">{date}</p>
-          <h2 className="text-lg font-bold mb-1 text-white">{type}</h2>
+          <h2 className="text-base font-bold mb-1 text-white">{type}</h2>
           <div className="flex items-center space-x-2 mb-1">
-            <div className="flex -space-x-2">
-              <Avatar className="w-5 h-5 border-2 border-gray-800">
+            <div className="flex -space-x-1">
+              <Avatar className="w-4 h-4 border-2 border-gray-800">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=John" />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
-              <Avatar className="w-5 h-5 border-2 border-gray-800">
+              <Avatar className="w-4 h-4 border-2 border-gray-800">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Jane" />
                 <AvatarFallback>JS</AvatarFallback>
               </Avatar>
-              <Avatar className="w-5 h-5 border-2 border-gray-800">
+              <Avatar className="w-4 h-4 border-2 border-gray-800">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Bob" />
                 <AvatarFallback>BS</AvatarFallback>
               </Avatar>
@@ -40,7 +40,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
         </div>
         <div>
           {isWalk && <p className="text-xs text-white/80 mb-0.5">RANK</p>}
-          <p className="text-base font-bold text-white">{progress}</p>
+          <p className="text-sm font-bold text-white">{progress}</p>
         </div>
       </div>
     </div>
