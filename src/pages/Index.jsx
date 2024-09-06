@@ -11,6 +11,7 @@ const Index = () => {
   const [currentChallenge, setCurrentChallenge] = useState('walks');
   const [activeTab, setActiveTab] = useState('community');
   const [isInviteOpen, setIsInviteOpen] = useState(false);
+  const [currentView, setCurrentView] = useState('friends');
 
   const handleSwipe = (direction) => {
     if (direction === 'left' && currentChallenge === 'walks') {
@@ -95,7 +96,20 @@ const Index = () => {
     <div className="min-h-screen bg-black p-4">
       <div className="max-w-md mx-auto">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl font-bold text-white">Daily Move & Minds</h1>
+          <div className="flex space-x-4">
+            <button
+              className={`text-lg font-bold ${currentView === 'friends' ? 'text-white' : 'text-gray-400'}`}
+              onClick={() => setCurrentView('friends')}
+            >
+              Friends
+            </button>
+            <button
+              className={`text-lg font-bold ${currentView === 'me' ? 'text-white' : 'text-gray-400'}`}
+              onClick={() => setCurrentView('me')}
+            >
+              Me
+            </button>
+          </div>
           <Button size="icon" variant="ghost" onClick={() => setIsInviteOpen(true)}>
             <Plus className="h-5 w-5 text-white" />
           </Button>
