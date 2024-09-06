@@ -3,12 +3,13 @@ import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import InviteFriends from '../components/InviteFriends';
+import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
 const Index = () => {
   const [currentChallenge, setCurrentChallenge] = useState('walks');
-  const [activeTab, setActiveTab] = useState('friends');
+  const [activeTab, setActiveTab] = useState('community');
   const [isInviteOpen, setIsInviteOpen] = useState(false);
 
   const handleSwipe = (direction) => {
@@ -73,13 +74,13 @@ const Index = () => {
 
       <div className="h-px bg-gray-700 my-6"></div>
 
-      <section className="mt-6 p-4">
+      <section className="mt-6 p-4 pb-20">
         <h2 className="text-lg font-semibold mb-3 text-white">TODAY</h2>
         <div className="space-y-4">
           {activities.map((activity, index) => (
             <FriendActivity
               key={index}
-              name={activeTab === 'friends' ? activity.name : "You"}
+              name={activity.name}
               activity={activity.activity}
               type={activity.type}
               gradientColor={activity.gradientColor}
@@ -94,20 +95,7 @@ const Index = () => {
     <div className="min-h-screen bg-black p-4">
       <div className="max-w-md mx-auto">
         <div className="flex justify-between items-center mb-4">
-          <div className="flex space-x-4">
-            <button
-              className={`text-sm ${activeTab === 'friends' ? 'font-bold' : 'font-normal'} text-white`}
-              onClick={() => setActiveTab('friends')}
-            >
-              Friends
-            </button>
-            <button
-              className={`text-sm ${activeTab === 'me' ? 'font-bold' : 'font-normal'} text-white`}
-              onClick={() => setActiveTab('me')}
-            >
-              Me
-            </button>
-          </div>
+          <h1 className="text-xl font-bold text-white">Daily Move & Minds</h1>
           <Button size="icon" variant="ghost" onClick={() => setIsInviteOpen(true)}>
             <Plus className="h-5 w-5 text-white" />
           </Button>
@@ -116,6 +104,7 @@ const Index = () => {
         {renderContent()}
       </div>
       <InviteFriends isOpen={isInviteOpen} onClose={() => setIsInviteOpen(false)} />
+      <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 };
