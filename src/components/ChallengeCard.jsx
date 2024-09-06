@@ -14,10 +14,10 @@ const ChallengeCard = ({ type, date, active, progress, gradientColor }) => {
       ></div>
       <div className="flex-grow">
         <div className="pb-2">
+          <p className="text-xs text-gray-400">{date}</p>
           <h2 className="text-2xl font-bold">
             {type}
           </h2>
-          <p className="text-xs text-gray-400">{date}</p>
         </div>
         <div>
           <div className="flex items-center space-x-2">

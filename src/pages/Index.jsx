@@ -29,23 +29,23 @@ const Index = () => {
 
   const renderContent = () => (
     <>
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={false} custom={currentChallenge}>
         <motion.div
           key={currentChallenge}
-          initial={{ opacity: 0, x: currentChallenge === 'walks' ? -300 : 300 }}
+          custom={currentChallenge}
+          initial={(custom) => ({
+            opacity: 0,
+            x: custom === 'walks' ? -300 : 300
+          })}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: currentChallenge === 'walks' ? 300 : -300 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
-            const swipe = swipePower(offset.x, velocity.x);
-            if (swipe < -swipeConfidenceThreshold) {
-              handleSwipe('right');
-            } else if (swipe > swipeConfidenceThreshold) {
-              handleSwipe('left');
-            }
+          exit={(custom) => ({
+            opacity: 0,
+            x: custom === 'walks' ? 300 : -300
+          })}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 30
           }}
         >
           <div className="bg-gray-800 rounded-lg shadow-md p-4 mb-4">
@@ -116,11 +116,6 @@ const Index = () => {
       </div>
     </div>
   );
-};
-
-const swipeConfidenceThreshold = 10000;
-const swipePower = (offset, velocity) => {
-  return Math.abs(offset) * velocity;
 };
 
 export default Index;

@@ -14,12 +14,12 @@ const FriendActivity = ({ name, activity, time, type, liked, gradientColor }) =>
         <div className="flex items-center justify-between">
           <div className="flex-grow">
             <p className="text-sm text-white">
-              <span className="font-semibold">{name}</span> {activity} • <span className="text-gray-500">{time}</span>
+              <span className="font-semibold">{name}</span> {activity} • {time}
             </p>
           </div>
           <div className="flex items-center space-x-2">
             <div 
-              className="w-10 h-10 rounded-full"
+              className="w-10 h-10 rounded-lg"
               style={{
                 background: `linear-gradient(45deg, ${gradientColor[0]}, ${gradientColor[1]})`,
               }}
