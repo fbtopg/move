@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import { Button } from "@/components/ui/button";
@@ -10,10 +10,10 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState('friends');
 
   const handleSwipe = (direction) => {
-    if (direction === 'left' && currentChallenge === 'walks') {
-      setCurrentChallenge('quiz');
-    } else if (direction === 'right' && currentChallenge === 'quiz') {
+    if (direction === 'left' && currentChallenge === 'quiz') {
       setCurrentChallenge('walks');
+    } else if (direction === 'right' && currentChallenge === 'walks') {
+      setCurrentChallenge('quiz');
     }
   };
 
@@ -41,7 +41,7 @@ const Index = () => {
       >
         <motion.div
           className="flex"
-          animate={{ x: currentChallenge === 'walks' ? 0 : '100%' }}
+          animate={{ x: currentChallenge === 'walks' ? 0 : '-100%' }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
           <div className="flex-shrink-0 w-full">
