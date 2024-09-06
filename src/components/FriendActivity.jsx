@@ -9,8 +9,8 @@ const FriendActivity = ({ name, activity, type }) => {
 
   const getActivityImage = () => {
     return type === 'walk' 
-      ? "https://cdn.discordapp.com/attachments/1057996608261869689/1281512422162567191/Rectangle_8.png?ex=66dbfcf2&is=66daab72&hm=b01c1e98a4bc863609753a7707f62e731f19cb0bcd2226b2488c6f3fce80a1ca&"
-      : "https://cdn.discordapp.com/attachments/1057996608261869689/1281512422447906816/Rectangle_9.png?ex=66dbfcf2&is=66daab72&hm=e239ba258966fc38c5516304f67284662d1905276b91bfe254c8bac2e0e34b40&";
+      ? "https://cdn.midjourney.com/d7e39227-437f-4589-ad3e-612659a54916/0_1.png"
+      : "https://cdn.midjourney.com/b5b40151-9594-4005-a904-0701c493896b/0_1.png";
   };
 
   const parseActivity = (activity) => {
