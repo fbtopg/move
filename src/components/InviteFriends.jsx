@@ -7,6 +7,13 @@ import { Search, Share, X } from "lucide-react";
 const InviteFriends = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
+  const handleShareLink = () => {
+    // Implement the share functionality here
+    // For now, we'll just log a message
+    console.log("Sharing invite link...");
+    // In a real implementation, you might use the Web Share API or a custom sharing mechanism
+  };
+
   return (
     <motion.div
       initial={{ y: "100%" }}
@@ -16,7 +23,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
     >
       <div className="p-4 flex flex-col h-full">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">Invite Friends</h2>
+          <h2 className="text-2xl font-bold">Search Community</h2>
           <Button variant="ghost" size="icon" onClick={onClose}>
             <X className="h-6 w-6" />
           </Button>
@@ -33,7 +40,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
         <div className="flex-grow">
           {/* Add search results here */}
         </div>
-        <Button className="w-full mt-4" onClick={onClose}>
+        <Button className="w-full mt-4" onClick={handleShareLink}>
           <Share className="mr-2 h-5 w-5" /> Invite Friends
         </Button>
       </div>
