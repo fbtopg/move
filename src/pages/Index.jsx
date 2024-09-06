@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
-import InviteFriendsModal from '../components/InviteFriendsModal';
+import InviteFriends from '../components/InviteFriends';
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
 const Index = () => {
   const [currentChallenge, setCurrentChallenge] = useState('walks');
   const [activeTab, setActiveTab] = useState('friends');
-  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+  const [isInviteOpen, setIsInviteOpen] = useState(false);
 
   const handleSwipe = (direction) => {
     if (direction === 'left' && currentChallenge === 'walks') {
@@ -108,14 +108,14 @@ const Index = () => {
               Me
             </button>
           </div>
-          <Button size="icon" variant="ghost" onClick={() => setIsInviteModalOpen(true)}>
+          <Button size="icon" variant="ghost" onClick={() => setIsInviteOpen(true)}>
             <Plus className="h-5 w-5 text-white" />
           </Button>
         </div>
 
         {renderContent()}
       </div>
-      <InviteFriendsModal isOpen={isInviteModalOpen} onClose={() => setIsInviteModalOpen(false)} />
+      <InviteFriends isOpen={isInviteOpen} onClose={() => setIsInviteOpen(false)} />
     </div>
   );
 };
