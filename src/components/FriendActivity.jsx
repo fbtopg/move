@@ -32,7 +32,7 @@ const FriendActivity = ({ name, activity, type, gradientColor }) => {
               className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"}`}
               onClick={() => setLiked(!liked)}
             >
-              <Heart className="h-6 w-6" />
+              <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
             </Button>
           </div>
         </div>
