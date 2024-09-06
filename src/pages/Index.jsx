@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InviteFriends from '../components/InviteFriends';
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
@@ -11,9 +11,23 @@ const Index = () => {
   const [isInviteOpen, setIsInviteOpen] = useState(false);
   const [currentView, setCurrentView] = useState('friends');
 
+  useEffect(() => {
+    // Attempt to enter full-screen mode
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(err => {
+        console.error("Error attempting to enable full-screen mode:", err);
+      });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-black flex flex-col">
-      <div className="flex-grow overflow-y-auto pt-6 pb-20 px-4">
+      <div 
+        className="flex-grow overflow-y-auto pb-20 px-4"
+        style={{
+          paddingTop: 'calc(env(safe-area-inset-top) + 1.5rem)',
+        }}
+      >
         <div className="max-w-md mx-auto">
           <div className="flex justify-between items-center mb-4">
             <div className="flex space-x-4">
