@@ -27,6 +27,65 @@ const Index = () => {
     { name: "Rissa", activity: "solved the quiz today and completed daily quiz challenge", time: "15h", type: "quiz" },
   ];
 
+  const renderContent = () => (
+    <>
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={currentChallenge}
+          initial={{ opacity: 0, x: currentChallenge === 'walks' ? -300 : 300 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: currentChallenge === 'walks' ? 300 : -300 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={1}
+          onDragEnd={(e, { offset, velocity }) => {
+            const swipe = swipePower(offset.x, velocity.x);
+            if (swipe < -swipeConfidenceThreshold) {
+              handleSwipe('right');
+            } else if (swipe > swipeConfidenceThreshold) {
+              handleSwipe('left');
+            }
+          }}
+        >
+          <div className="bg-white rounded-lg shadow-md p-4 mb-4">
+            {currentChallenge === 'walks' ? (
+              <ChallengeCard
+                type="Daily Walks"
+                date="SEPTEMBER 2024"
+                active="16.5k"
+                progress="501/16.5K"
+              />
+            ) : (
+              <ChallengeCard
+                type="Daily Quiz"
+                date="SEPTEMBER 2024"
+                active="16.5k"
+                progress="11/30"
+              />
+            )}
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      <section className="mt-6 bg-white rounded-lg shadow-md p-4">
+        <h2 className="text-lg font-semibold mb-3">TODAY</h2>
+        <div className="space-y-4">
+          {activities.map((activity, index) => (
+            <FriendActivity
+              key={index}
+              name={activeTab === 'friends' ? activity.name : "You"}
+              activity={activity.activity}
+              time={activity.time}
+              type={activity.type}
+              liked={index === 0}
+            />
+          ))}
+        </div>
+      </section>
+    </>
+  );
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-md mx-auto">
@@ -50,69 +109,7 @@ const Index = () => {
           </Button>
         </div>
 
-        {activeTab === 'friends' ? (
-          <>
-            <AnimatePresence initial={false}>
-              <motion.div
-                key={currentChallenge}
-                initial={{ opacity: 0, x: currentChallenge === 'walks' ? -300 : 300 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: currentChallenge === 'walks' ? 300 : -300 }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={1}
-                onDragEnd={(e, { offset, velocity }) => {
-                  const swipe = swipePower(offset.x, velocity.x);
-                  if (swipe < -swipeConfidenceThreshold) {
-                    handleSwipe('right');
-                  } else if (swipe > swipeConfidenceThreshold) {
-                    handleSwipe('left');
-                  }
-                }}
-              >
-                <div className="bg-white rounded-lg shadow-md p-4 mb-4">
-                  {currentChallenge === 'walks' ? (
-                    <ChallengeCard
-                      type="Daily Walks"
-                      date="SEPTEMBER 2024"
-                      active="16.5k"
-                      progress="501/16.5K"
-                    />
-                  ) : (
-                    <ChallengeCard
-                      type="Daily Quiz"
-                      date="SEPTEMBER 2024"
-                      active="16.5k"
-                      progress="11/30"
-                    />
-                  )}
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            <section className="mt-6 bg-white rounded-lg shadow-md p-4">
-              <h2 className="text-lg font-semibold mb-3">TODAY</h2>
-              <div className="space-y-4">
-                {activities.map((activity, index) => (
-                  <FriendActivity
-                    key={index}
-                    name={activity.name}
-                    activity={activity.activity}
-                    time={activity.time}
-                    type={activity.type}
-                    liked={index === 0}
-                  />
-                ))}
-              </div>
-            </section>
-          </>
-        ) : (
-          <div className="text-center py-8 bg-white rounded-lg shadow-md">
-            <h2 className="text-xl font-bold">Your Activity</h2>
-            <p className="mt-4">Your personal activity will be displayed here.</p>
-          </div>
-        )}
+        {renderContent()}
       </div>
     </div>
   );
