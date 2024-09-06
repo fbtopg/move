@@ -47,12 +47,9 @@ const DailyWalkChallenge = () => {
 
           <div className="bg-blue-500 w-full h-40 rounded-lg mb-4"></div>
 
-          <div className="flex justify-between items-end mb-6">
-            <div className="text-4xl font-bold">{challengeData.rank.split('/')[0]}</div>
-            <div className="text-right">
-              <div className="text-sm text-gray-400">RANK</div>
-              <div>{challengeData.rank}</div>
-            </div>
+          <div className="mb-6">
+            <div className="text-4xl font-bold">{challengeData.rank}</div>
+            <div className="text-sm text-gray-400">RANK</div>
           </div>
 
           <div className="flex justify-between mb-6">
@@ -69,6 +66,8 @@ const DailyWalkChallenge = () => {
               <div className="text-xl font-bold">{challengeData.highestStreak}</div>
             </div>
           </div>
+
+          <div className="h-px bg-gray-700 my-4"></div>
 
           <p className="text-sm text-gray-400 mb-4">
             Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. If you miss a day, just make up for it the next time. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
