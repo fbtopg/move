@@ -3,8 +3,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 
-const FriendActivity = ({ name, activity, type }) => {
+const FriendActivity = ({ name, activity, type, initialLikes = 0 }) => {
   const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(initialLikes);
   const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
 
   const getActivityColor = () => {
@@ -29,6 +30,15 @@ const FriendActivity = ({ name, activity, type }) => {
     return text
       .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
       .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>');
+  };
+
+  const formatLikeCount = (count) => {
+    return count >= 1000 ? (count / 1000).toFixed(1) + 'k' : count.toString();
+  };
+
+  const handleLike = () => {
+    setLiked(!liked);
+    setLikeCount(prevCount => liked ? prevCount - 1 : prevCount + 1);
   };
 
   return (
@@ -59,10 +69,11 @@ const FriendActivity = ({ name, activity, type }) => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent`}
-              onClick={() => setLiked(!liked)}
+              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent flex flex-col items-center justify-center`}
+              onClick={handleLike}
             >
               <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
+              <span className="text-xs mt-1">{formatLikeCount(likeCount)}</span>
             </Button>
           </div>
         </div>
