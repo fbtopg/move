@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 
-const FriendActivity = ({ name, activity, time, type, liked, gradientColor }) => {
+const FriendActivity = ({ name, activity, type, liked, gradientColor }) => {
   return (
     <div className="flex items-start space-x-3">
       <Avatar className="w-10 h-10 mt-1">
@@ -14,7 +14,7 @@ const FriendActivity = ({ name, activity, time, type, liked, gradientColor }) =>
         <div className="flex items-center justify-between">
           <div className="flex-grow">
             <p className="text-sm text-white">
-              <span className="font-semibold">{name}</span> {activity} • {time}
+              <span className="font-semibold">{name}</span> {activity}
             </p>
           </div>
           <div className="flex items-center space-x-2">
