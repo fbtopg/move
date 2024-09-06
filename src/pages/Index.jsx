@@ -71,7 +71,7 @@ const Index = () => {
                   }
                 }}
               >
-                <div className="bg-transparent">
+                <div className="bg-white rounded-lg shadow-md p-4 mb-4">
                   {currentChallenge === 'walks' ? (
                     <ChallengeCard
                       type="Daily Walks"
@@ -91,22 +91,24 @@ const Index = () => {
               </motion.div>
             </AnimatePresence>
 
-            <section className="mt-6">
+            <section className="mt-6 bg-white rounded-lg shadow-md p-4">
               <h2 className="text-lg font-semibold mb-3">TODAY</h2>
-              {activities.map((activity, index) => (
-                <FriendActivity
-                  key={index}
-                  name={activity.name}
-                  activity={activity.activity}
-                  time={activity.time}
-                  type={activity.type}
-                  liked={index === 0}
-                />
-              ))}
+              <div className="space-y-4">
+                {activities.map((activity, index) => (
+                  <FriendActivity
+                    key={index}
+                    name={activity.name}
+                    activity={activity.activity}
+                    time={activity.time}
+                    type={activity.type}
+                    liked={index === 0}
+                  />
+                ))}
+              </div>
             </section>
           </>
         ) : (
-          <div className="text-center py-8">
+          <div className="text-center py-8 bg-white rounded-lg shadow-md">
             <h2 className="text-xl font-bold">Your Activity</h2>
             <p className="mt-4">Your personal activity will be displayed here.</p>
           </div>
