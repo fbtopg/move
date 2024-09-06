@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Share, X, Plus } from "lucide-react";
+import { Search, Share, X, Plus, Check } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const users = [
@@ -15,7 +15,7 @@ const users = [
   { id: 7, name: "Rissa" },
 ];
 
-const UserSearchResult = ({ user, onInvite }) => (
+const UserSearchResult = ({ user, onInvite, isInvited }) => (
   <div className="flex items-center justify-between py-2">
     <div className="flex items-center">
       <Avatar className="w-10 h-10 mr-3">
@@ -24,8 +24,13 @@ const UserSearchResult = ({ user, onInvite }) => (
       </Avatar>
       <span className="text-white">{user.name}</span>
     </div>
-    <Button variant="ghost" size="icon" onClick={() => onInvite(user.id)}>
-      <Plus className="h-5 w-5" />
+    <Button 
+      variant="ghost" 
+      size="icon" 
+      onClick={() => onInvite(user.id)}
+      className={isInvited ? "text-green-500" : "text-white"}
+    >
+      {isInvited ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
     </Button>
   </div>
 );
@@ -33,6 +38,7 @@ const UserSearchResult = ({ user, onInvite }) => (
 const InviteFriends = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [invitedUsers, setInvitedUsers] = useState(new Set());
 
   useEffect(() => {
     if (searchTerm.trim() !== '') {
@@ -50,7 +56,15 @@ const InviteFriends = ({ isOpen, onClose }) => {
   };
 
   const handleInvite = (userId) => {
-    console.log(`Inviting user with ID: ${userId}`);
+    setInvitedUsers(prevInvited => {
+      const newInvited = new Set(prevInvited);
+      if (newInvited.has(userId)) {
+        newInvited.delete(userId);
+      } else {
+        newInvited.add(userId);
+      }
+      return newInvited;
+    });
   };
 
   return (
@@ -78,7 +92,12 @@ const InviteFriends = ({ isOpen, onClose }) => {
         </div>
         <div className="flex-grow overflow-y-auto">
           {searchTerm.trim() !== '' && searchResults.map(user => (
-            <UserSearchResult key={user.id} user={user} onInvite={handleInvite} />
+            <UserSearchResult 
+              key={user.id} 
+              user={user} 
+              onInvite={handleInvite}
+              isInvited={invitedUsers.has(user.id)}
+            />
           ))}
         </div>
         <Button 
