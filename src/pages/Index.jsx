@@ -3,13 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import { Button } from "@/components/ui/button";
-import { Plus, Moon, Sun } from "lucide-react";
-import { useTheme } from 'next-themes';
+import { Plus } from "lucide-react";
 
 const Index = () => {
   const [currentChallenge, setCurrentChallenge] = useState('walks');
   const [activeTab, setActiveTab] = useState('friends');
-  const { theme, setTheme } = useTheme();
 
   const handleSwipe = (direction) => {
     if (direction === 'left' && currentChallenge === 'quiz') {
@@ -50,7 +48,7 @@ const Index = () => {
             }
           }}
         >
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-4">
+          <div className="bg-gray-800 rounded-lg shadow-md p-4 mb-4">
             {currentChallenge === 'walks' ? (
               <ChallengeCard
                 type="Daily Walks"
@@ -70,8 +68,8 @@ const Index = () => {
         </motion.div>
       </AnimatePresence>
 
-      <section className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <h2 className="text-lg font-semibold mb-3 dark:text-white">TODAY</h2>
+      <section className="mt-6 bg-gray-800 rounded-lg shadow-md p-4">
+        <h2 className="text-lg font-semibold mb-3 text-white">TODAY</h2>
         <div className="space-y-4">
           {activities.map((activity, index) => (
             <FriendActivity
@@ -89,25 +87,25 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-4">
+    <div className="min-h-screen bg-gray-900 p-4">
       <div className="max-w-md mx-auto">
         <div className="flex justify-between items-center mb-4">
           <div className="flex space-x-4">
             <button
-              className={`text-sm ${activeTab === 'friends' ? 'font-bold' : 'font-normal'} dark:text-white`}
+              className={`text-sm ${activeTab === 'friends' ? 'font-bold' : 'font-normal'} text-white`}
               onClick={() => setActiveTab('friends')}
             >
               Friends
             </button>
             <button
-              className={`text-sm ${activeTab === 'me' ? 'font-bold' : 'font-normal'} dark:text-white`}
+              className={`text-sm ${activeTab === 'me' ? 'font-bold' : 'font-normal'} text-white`}
               onClick={() => setActiveTab('me')}
             >
               Me
             </button>
           </div>
-          <Button size="icon" variant="ghost" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-            {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          <Button size="icon" variant="ghost">
+            <Plus className="h-5 w-5 text-white" />
           </Button>
         </div>
 
