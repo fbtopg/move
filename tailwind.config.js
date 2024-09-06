@@ -73,8 +73,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("tailwindcss-safe-area"),
-  ],
+  plugins: [require("tailwindcss-animate")],
 };
