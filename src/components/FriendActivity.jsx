@@ -20,14 +20,14 @@ const FriendActivity = ({ name, activity, type }) => {
       parsedText = parsedText.replace('solved the quiz', `solved the quiz${quizNumber}`);
     }
 
-    return `${parsedText} • ${activityTime.trim()}`;
+    return `${parsedText} ${activityTime.trim()}`;
   };
 
   const highlightText = (text) => {
     return text
       .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
       .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>')
-      .replace(/(\s•\s\w+)$/, '<span class="text-gray-400">$1</span>');
+      .replace(/(\s\w+)$/, '<span class="text-gray-500">$1</span>');
   };
 
   const parsedActivity = parseActivity(activity);
