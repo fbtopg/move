@@ -53,7 +53,6 @@ const Index = () => {
                     handleSwipe('left');
                   }
                 }}
-                className="h-64" // Fixed height for challenge cards
               >
                 {currentChallenge === 'walks' ? (
                   <ChallengeCard

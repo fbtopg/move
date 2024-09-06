@@ -3,13 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const ChallengeCard = ({ type, date, active, progress }) => {
   const isWalk = type === 'Daily Walks';
-  const bgImage = isWalk ? '/daily-walks-bg.jpg' : '/daily-quiz-bg.jpg';
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader className="relative h-48 overflow-hidden">
-        <img src={bgImage} alt={type} className="absolute inset-0 w-full h-full object-cover" />
-        <CardTitle className="relative z-10 text-white text-2xl font-bold">
+    <Card className="w-full max-w-md mx-auto bg-transparent shadow-none">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-2xl font-bold">
           {date}
           <br />
           {type}
