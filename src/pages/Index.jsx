@@ -12,9 +12,9 @@ const Index = () => {
   const [currentView, setCurrentView] = useState('friends');
 
   return (
-    <div className="flex flex-col h-full bg-black">
+    <div className="flex flex-col h-full">
       <div className="flex-grow overflow-auto">
-        <div className="max-w-md mx-auto p-2">
+        <div className="max-w-md mx-auto p-4">
           <div className="flex justify-between items-center mb-4">
             <div className="flex space-x-4">
               <button

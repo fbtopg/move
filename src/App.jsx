@@ -11,8 +11,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <BrowserRouter>
-        <div className="min-h-screen h-[100dvh] flex flex-col bg-black">
-          <div className="flex-grow overflow-auto pt-safe">
+        <div className="flex flex-col min-h-screen h-[100dvh] bg-black">
+          <div className="flex-grow overflow-auto">
             <Routes>
               {navItems.map(({ to, page }) => (
                 <Route key={to} path={to} element={page} />
