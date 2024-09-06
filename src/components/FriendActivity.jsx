@@ -61,7 +61,7 @@ const FriendActivity = ({ name, activity, type, initialLikes = 0 }) => {
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
             <div 
-              className={`w-10 h-10 rounded-lg bg-cover bg-center ${getActivityColor()}`}
+              className={`w-12 h-12 rounded-lg bg-cover bg-center ${getActivityColor()}`}
               style={{
                 backgroundImage: `url(${imageUrl})`,
               }}
@@ -69,11 +69,11 @@ const FriendActivity = ({ name, activity, type, initialLikes = 0 }) => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent flex flex-col items-center justify-center`}
+              className={`w-12 h-12 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent flex flex-col items-center justify-center`}
               onClick={handleLike}
             >
-              <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
-              <span className="text-xs mt-1">{formatLikeCount(likeCount)}</span>
+              <Heart className={`h-7 w-7 ${liked ? "fill-current" : ""}`} />
+              <span className="text-[10px] mt-0.5">{formatLikeCount(likeCount)}</span>
             </Button>
           </div>
         </div>
