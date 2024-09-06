@@ -24,8 +24,10 @@ const FriendActivity = ({ name, activity, type }) => {
 
   const { parsedText, activityTime, quizNumber } = parseActivity(activity);
 
-  const highlightDistance = (text) => {
-    return text.replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>');
+  const highlightText = (text) => {
+    return text
+      .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
+      .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>');
   };
 
   return (
@@ -41,9 +43,8 @@ const FriendActivity = ({ name, activity, type }) => {
               <span className="font-semibold">{name}</span>{' '}
               <span 
                 className="text-gray-400"
-                dangerouslySetInnerHTML={{ __html: highlightDistance(parsedText) }}
-              />
-              {quizNumber && <span className="text-white">{quizNumber}</span>}{' '}
+                dangerouslySetInnerHTML={{ __html: highlightText(parsedText) }}
+              />{' '}
               <span className="text-gray-600">• {activityTime}</span>
             </p>
           </div>
