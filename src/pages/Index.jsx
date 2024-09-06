@@ -49,7 +49,7 @@ const Index = () => {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
           <div className="flex-shrink-0 w-full">
-            <div className="p-4 mb-4">
+            <div className="mb-4">
               <ChallengeCard
                 type="Daily Walks"
                 date="SEPTEMBER 2024"
@@ -60,7 +60,7 @@ const Index = () => {
             </div>
           </div>
           <div className="flex-shrink-0 w-full">
-            <div className="p-4 mb-4">
+            <div className="mb-4">
               <ChallengeCard
                 type="Daily Quiz"
                 date="SEPTEMBER 2024"
@@ -75,7 +75,7 @@ const Index = () => {
 
       <div className="h-px bg-gray-700 my-6"></div>
 
-      <section className="mt-6 p-4 pb-20">
+      <section className="mt-6 pb-20">
         <h2 className="text-lg font-semibold mb-3 text-white">TODAY</h2>
         <div className="space-y-4">
           {activities.map((activity, index) => (
@@ -93,7 +93,7 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-black p-4">
+    <div className="min-h-screen bg-black p-2">
       <div className="max-w-md mx-auto">
         <div className="flex justify-between items-center mb-4">
           <div className="flex space-x-4">
