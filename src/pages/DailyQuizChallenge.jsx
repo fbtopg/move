@@ -4,10 +4,28 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 import BottomNavBar from '../components/BottomNavBar';
+import { supabase } from '../integrations/supabase';
 
 const DailyQuizChallenge = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('walk');
+  const [imageUrl, setImageUrl] = useState(null);
+
+  React.useEffect(() => {
+    const fetchImage = async () => {
+      const { data, error } = await supabase.storage
+        .from('dailychallenge')
+        .getPublicUrl('dailyquizimage5');
+      
+      if (error) {
+        console.error('Error fetching image:', error);
+      } else {
+        setImageUrl(data.publicUrl);
+      }
+    };
+
+    fetchImage();
+  }, []);
 
   const challengeData = {
     month: "SEPTEMBER 2024",
@@ -58,7 +76,29 @@ const DailyQuizChallenge = () => {
             </button>
           </div>
 
-          <div className="w-full h-40 rounded-lg bg-gradient-to-b from-green-500 to-green-600 mb-6"></div>
+          <Button 
+            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
+          >
+            <span>Check today's quiz</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
+          >
+            <span>Check reward</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          {imageUrl && (
+            <div className="w-full h-40 rounded-lg mb-6 overflow-hidden">
+              <img src={imageUrl} alt="Daily Quiz Challenge" className="w-full h-full object-cover" />
+            </div>
+          )}
+
+          <p className="text-sm text-gray-400 mb-4 pr-8">
+            Engage your mind with the daily quiz challenge, designed to make you think more consciously about everyday topics. Each quiz encourages deeper reflection and awareness. Miss a day? No problem—just take two quizzes next time to stay on track. By the end of the challenge, you'll have developed a habit of mindful thinking and earned rewards to celebrate your journey!
+          </p>
 
           <div className="mb-6">
             <div className="text-4xl font-bold">
@@ -81,26 +121,6 @@ const DailyQuizChallenge = () => {
               <div className="text-base font-bold">{challengeData.highestStreak}</div>
             </div>
           </div>
-
-          <Button 
-            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
-          >
-            <span>Check today's quiz</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
-
-          <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
-          >
-            <span>Check reward</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
-
-          <div className="h-px bg-gray-700 my-6"></div>
-
-          <p className="text-sm text-gray-400 mb-4 pr-8">
-            Engage your mind with the daily quiz challenge, designed to make you think more consciously about everyday topics. Each quiz encourages deeper reflection and awareness. Miss a day? No problem—just take two quizzes next time to stay on track. By the end of the challenge, you'll have developed a habit of mindful thinking and earned rewards to celebrate your journey!
-          </p>
 
           <div className="flex items-center mb-4 cursor-pointer" onClick={handleLeaderboardClick}>
             <div className="flex flex-shrink-0">
