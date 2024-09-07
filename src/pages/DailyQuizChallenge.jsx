@@ -74,9 +74,16 @@ const DailyQuizChallenge = () => {
           </div>
 
           <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-4 h-16 flex justify-between items-center px-6"
           >
             <span>Check today's quiz</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
+          >
+            <span>Check reward</span>
             <ArrowRight className="h-6 w-6" />
           </Button>
 
