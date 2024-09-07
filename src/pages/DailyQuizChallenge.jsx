@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Flame, Brain, Heart, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Flame, Brain, Heart, ArrowRight, Share } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -74,7 +74,7 @@ const DailyQuizChallenge = () => {
           </div>
 
           <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-4 h-16 flex justify-between items-center px-6"
+            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
           >
             <span>Check today's quiz</span>
             <ArrowRight className="h-6 w-6" />
@@ -122,6 +122,7 @@ const DailyQuizChallenge = () => {
           </div>
 
           <Button className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full">
+            <Share className="mr-2 h-5 w-5" />
             Invite Friends
           </Button>
         </div>

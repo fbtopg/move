@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Flame, Wind, Heart, ArrowRight, History } from 'lucide-react';
+import { ArrowLeft, Flame, Wind, Heart, ArrowRight, History, Share } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -45,21 +45,21 @@ const DailyWalkChallenge = () => {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          <div className="flex justify-between items-center mb-4">
-            <button onClick={() => navigate(-1)}>
-              <ArrowLeft className="h-6 w-6" />
-            </button>
-            <button onClick={handleHistoryClick}>
-              <History className="h-6 w-6" />
-            </button>
-          </div>
+          <button onClick={() => navigate(-1)} className="mb-4">
+            <ArrowLeft className="h-6 w-6" />
+          </button>
 
           <div className="mb-4">
             <p className="text-sm text-gray-400">{challengeData.month}</p>
             <h1 className="text-2xl font-bold">{challengeData.title}</h1>
           </div>
 
-          <div className="w-full h-40 rounded-lg mb-4 bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512420853944352/Rectangle_6.png?ex=66dbfcf2&is=66daab72&hm=54d3401d917b1176c5ed2054a7f648320c1bd12575272801f6c8fdd986bdaee7&')"}}></div>
+          <div className="relative">
+            <button onClick={handleHistoryClick} className="absolute top-2 right-2 z-10">
+              <History className="h-6 w-6 text-white" />
+            </button>
+            <div className="w-full h-40 rounded-lg mb-4 bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512420853944352/Rectangle_6.png?ex=66dbfcf2&is=66daab72&hm=54d3401d917b1176c5ed2054a7f648320c1bd12575272801f6c8fdd986bdaee7&')"}}></div>
+          </div>
 
           <div className="mb-6">
             <div className="text-4xl font-bold">
@@ -133,6 +133,7 @@ const DailyWalkChallenge = () => {
           </div>
 
           <Button className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full">
+            <Share className="mr-2 h-5 w-5" />
             Invite Friends
           </Button>
         </div>
