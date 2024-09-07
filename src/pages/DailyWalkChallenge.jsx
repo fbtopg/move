@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Flame, Wind, Heart, ArrowRight, Share, Clock, Menu } from 'lucide-react';
+import { ArrowLeft, Flame, Wind, Heart, ArrowRight, Share, History } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -55,8 +55,7 @@ const DailyWalkChallenge = () => {
               <h1 className="text-2xl font-bold">{challengeData.title}</h1>
             </div>
             <button onClick={handleHistoryClick} className="flex items-center">
-              <Clock className="h-5 w-5 text-white mr-1" />
-              <Menu className="h-5 w-5 text-white" />
+              <History className="h-7 w-7 text-white" />
             </button>
           </div>
 
