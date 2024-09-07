@@ -15,14 +15,19 @@ const ChallengeCard = ({ type, date, active, progress }) => {
     }
   };
 
-  const gradientColor = isWalk ? 'from-blue-500 to-blue-600' : 'from-green-500 to-green-600';
+  const squareImageUrl = isWalk
+    ? "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZS5wbmciLCJpYXQiOjE3MjU2ODk4NzcsImV4cCI6MTc1NzIyNTg3N30.nzNH06-Xz9MOJRbXK57YDU031uh7la7_QnXAITE5j8w&t=2024-09-07T06%3A17%3A57.421Z"
+    : "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailyquizimage5_square.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHlxdWl6aW1hZ2U1X3NxdWFyZS5wbmciLCJpYXQiOjE3MjU2ODk5MjMsImV4cCI6MTc1NzIyNTkyM30.ELyrp7TizCJbErr5wkfzeDEOQGtdd5KMDiCyR_oNmIk&t=2024-09-07T06%3A18%3A43.653Z";
 
   return (
     <div 
       className="w-full max-w-md mx-auto overflow-hidden h-[180px] flex cursor-pointer"
       onClick={handleClick}
     >
-      <div className={`w-[180px] h-[180px] bg-gradient-to-b ${gradientColor} flex-shrink-0`}></div>
+      <div 
+        className="w-[180px] h-[180px] flex-shrink-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${squareImageUrl})` }}
+      ></div>
       <div className="flex-grow p-5 text-white flex flex-col justify-between">
         <div>
           <p className="text-xs text-white/80">{date}</p>

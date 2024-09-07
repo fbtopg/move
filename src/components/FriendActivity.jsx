@@ -5,10 +5,11 @@ import { Heart } from "lucide-react";
 
 const FriendActivity = ({ name, activity, type }) => {
   const [liked, setLiked] = useState(false);
-  const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
 
-  const getActivityColor = () => {
-    return type === 'walk' ? 'bg-blue-500' : 'bg-green-500';
+  const getActivityImage = () => {
+    return type === 'walk'
+      ? "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square_small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZV9zbWFsbC5wbmciLCJpYXQiOjE3MjU2OTAwNDEsImV4cCI6MTc1NzIyNjA0MX0.em4pNRKKqzuyVl5EvlK2ipc0iaFzFBFIY0fpjcbhqU8&t=2024-09-07T06%3A20%3A41.451Z"
+      : "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailyquizimage5_square_small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHlxdWl6aW1hZ2U1X3NxdWFyZV9zbWFsbC5wbmciLCJpYXQiOjE3MjU2OTAwODIsImV4cCI6MTc1NzIyNjA4Mn0.Pd1SiAgUnY8OeTe7CrOYIzgibXJ2SOPxKPw4SKcKEwU&t=2024-09-07T06%3A21%3A22.177Z";
   };
 
   const parseActivity = (activity) => {
@@ -18,10 +19,8 @@ const FriendActivity = ({ name, activity, type }) => {
     let activityText = parts[0] ? parts[0].trim() : '';
     let activityTime = parts[1] ? parts[1].trim() : '';
 
-    // Add full stop after 'walk' and 'quiz', ensuring only one full stop
     activityText = activityText.replace(/\b(walk|quiz)\.*/g, '$1.');
 
-    // Extract time from activityText
     const timeMatch = activityText.match(/(\d+[mhdw])$/);
     if (timeMatch) {
       activityTime = timeMatch[1];
@@ -67,9 +66,9 @@ const FriendActivity = ({ name, activity, type }) => {
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
             <div 
-              className={`w-10 h-10 rounded-lg bg-cover bg-center ${getActivityColor()}`}
+              className="w-10 h-10 rounded-lg bg-cover bg-center"
               style={{
-                backgroundImage: `url(${imageUrl})`,
+                backgroundImage: `url(${getActivityImage()})`,
               }}
             ></div>
             <Button 
