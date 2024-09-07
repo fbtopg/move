@@ -141,11 +141,11 @@ const DailyQuizChallenge = () => {
 
           <div className="mb-6">
             <h2 className="text-lg font-bold mb-4">ACHIEVEMENTS</h2>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-4">
               {challengeData.achievements.map((achievement) => (
-                <div key={achievement.id} className="flex flex-col items-center justify-center w-32 h-32 border border-white rounded-lg">
-                  <achievement.icon className="h-16 w-16 text-white mb-2" />
-                  <span className="text-sm text-center">{achievement.name}</span>
+                <div key={achievement.id} className="flex flex-col items-center justify-center w-full aspect-square border border-white rounded-lg">
+                  <achievement.icon className="h-20 w-20 text-white mb-2" />
+                  <span className="text-sm text-center px-2">{achievement.name}</span>
                 </div>
               ))}
             </div>
