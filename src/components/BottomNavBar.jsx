@@ -8,14 +8,16 @@ const BottomNavBar = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
   const navItems = [
     { id: 'community', icon: Globe, label: 'Community', route: '/' },
-    { id: 'walk', icon: Zap, label: 'Walk', route: '/daily-walk-challenge' },
-    { id: 'board', icon: LayoutGrid, label: 'Board', route: '/leaderboard' },
+    { id: 'walk', icon: Zap, label: 'Walk', route: null },
+    { id: 'board', icon: LayoutGrid, label: 'Board', route: null },
     { id: 'profile', icon: Avatar, label: 'Profile', route: '/profile' },
   ];
 
   const handleNavigation = (item) => {
     setActiveTab(item.id);
-    navigate(item.route);
+    if (item.route) {
+      navigate(item.route);
+    }
   };
 
   return (
