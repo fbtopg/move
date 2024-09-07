@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InviteFriends from '../components/InviteFriends';
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Friends from './Friends';
 import Me from './Me';
+import RefreshEyeIcon from '../components/RefreshEyeIcon';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('community');
   const [isInviteOpen, setIsInviteOpen] = useState(false);
   const [currentView, setCurrentView] = useState('friends');
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-black flex flex-col">
@@ -44,6 +58,7 @@ const Index = () => {
           {currentView === 'friends' ? <Friends /> : <Me />}
         </div>
       </div>
+      <RefreshEyeIcon scrollY={scrollY} />
       <InviteFriends isOpen={isInviteOpen} onClose={() => setIsInviteOpen(false)} />
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
