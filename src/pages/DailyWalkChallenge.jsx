@@ -108,6 +108,8 @@ const DailyWalkChallenge = () => {
             </div>
           </div>
 
+          <div className="h-px bg-gray-700 my-4"></div>
+
           <div className="flex items-center mb-4 cursor-pointer" onClick={handleLeaderboardClick}>
             <div className="flex flex-shrink-0">
               {participants.map((participant) => (
@@ -121,6 +123,8 @@ const DailyWalkChallenge = () => {
               {challengeData.activeParticipants} active
             </div>
           </div>
+
+          <div className="h-px bg-gray-700 my-4"></div>
 
           <div className="mb-6">
             <h2 className="text-lg font-bold mb-4">ACHIEVEMENTS</h2>
