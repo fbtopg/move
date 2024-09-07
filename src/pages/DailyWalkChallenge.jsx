@@ -145,7 +145,7 @@ const DailyWalkChallenge = () => {
             <h2 className="text-lg font-bold mb-4">ACHIEVEMENTS</h2>
             <div className="grid grid-cols-2 gap-6">
               {challengeData.achievements.map((achievement) => (
-                <div key={achievement.id} className="flex flex-col items-center">
+                <div key={achievement.id} className="flex flex-col items-center bg-gray-800 rounded-lg p-4">
                   <achievement.icon className="h-16 w-16 text-white mb-2" />
                   <span className="text-sm text-center">{achievement.name}</span>
                 </div>
