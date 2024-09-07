@@ -14,7 +14,12 @@ const Me = () => {
     setCurrentChallenge(index);
   };
 
+  const userProfilePicture = "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z";
+
   const todayActivities = [
+    { name: "You", activity: "finished walking 2km and completed daily walk • just now", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz • just now", type: "quiz" },
+    { name: "You", activity: "finished walking 1.5km and completed daily walk • just now", type: "walk" },
     { name: "You", activity: "finished walking 1.2km and completed daily walk • just now", type: "walk" },
     { name: "You", activity: "solved the quiz today and completed daily quiz • just now", type: "quiz" },
     { name: "You", activity: "finished walking 800m and completed daily walk • just now", type: "walk" },
@@ -57,6 +62,7 @@ const Me = () => {
             name={activity.name}
             activity={activity.activity}
             type={activity.type}
+            profilePicture={userProfilePicture}
           />
         ))}
       </div>

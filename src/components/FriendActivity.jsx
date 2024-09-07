@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 
-const FriendActivity = ({ name, activity, type }) => {
+const FriendActivity = ({ name, activity, type, profilePicture }) => {
   const [liked, setLiked] = useState(false);
 
   const getActivityImage = () => {
@@ -43,7 +43,7 @@ const FriendActivity = ({ name, activity, type }) => {
   return (
     <div className="flex items-start space-x-3">
       <Avatar className="w-10 h-10 mt-1 flex-shrink-0">
-        <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${name}`} alt={name} />
+        <AvatarImage src={profilePicture || `https://api.dicebear.com/6.x/initials/svg?seed=${name}`} alt={name} />
         <AvatarFallback>{name[0]}</AvatarFallback>
       </Avatar>
       <div className="flex-grow min-w-0">
