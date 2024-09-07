@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
+import { Loader2 } from 'lucide-react';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [activities, setActivities] = useState({
+    today: [],
+    thisMonth: [],
+    earlier: [],
+  });
+
   const challenges = [
     { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
     { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
@@ -14,38 +22,49 @@ const Friends = () => {
     setCurrentChallenge(index);
   };
 
-  const todayActivities = [
-    { name: "John", activity: "finished walking 1km and completed daily walk. 3m", type: "walk" },
-    { name: "Tate", activity: "finished walking 500m and completed daily walk. 4m", type: "walk" },
-    { name: "Aquafina", activity: "finished walking 1km and completed daily walk. 59m", type: "walk" },
-    { name: "Geonu", activity: "solved the quiz today and completed daily quiz. 1h", type: "quiz" },
-    { name: "Astrid", activity: "finished walking 1.5km and completed daily walk. 2h", type: "walk" },
-    { name: "Fitra", activity: "solved the quiz today and completed daily quiz. 3h", type: "quiz" },
-    { name: "Rissa", activity: "finished walking 800m and completed daily walk. 4h", type: "walk" },
-    { name: "Emma", activity: "solved the quiz today and completed daily quiz. 5h", type: "quiz" },
-  ];
+  const loadMoreActivities = () => {
+    setIsLoading(true);
+    // Simulating an API call
+    setTimeout(() => {
+      const newActivities = {
+        today: [
+          { name: "John", activity: "finished walking 1km and completed daily walk. 3m", type: "walk" },
+          { name: "Tate", activity: "solved the quiz today and completed daily quiz. 4m", type: "quiz" },
+          ...activities.today,
+        ],
+        thisMonth: [
+          { name: "Geonu", activity: "finished walking 750m and completed daily walk. 2d", type: "walk" },
+          { name: "Astrid", activity: "solved the quiz today and completed daily quiz. 5d", type: "quiz" },
+          ...activities.thisMonth,
+        ],
+        earlier: [
+          { name: "Rissa", activity: "solved the quiz today and completed daily quiz. 2w", type: "quiz" },
+          { name: "John", activity: "finished walking 1.5km and completed daily walk. 3w", type: "walk" },
+          ...activities.earlier,
+        ],
+      };
+      setActivities(newActivities);
+      setIsLoading(false);
+    }, 1000);
+  };
 
-  const thisMonthActivities = [
-    { name: "Geonu", activity: "finished walking 750m and completed daily walk. 2d", type: "walk" },
-    { name: "Astrid", activity: "finished walking 2km and completed daily walk. 5d", type: "walk" },
-    { name: "Fitra", activity: "solved the quiz today and completed daily quiz. 1w", type: "quiz" },
-    { name: "Rissa", activity: "finished walking 1.2km and completed daily walk. 1w", type: "walk" },
-    { name: "John", activity: "solved the quiz today and completed daily quiz. 2w", type: "quiz" },
-    { name: "Tate", activity: "finished walking 900m and completed daily walk. 3w", type: "walk" },
-    { name: "Emma", activity: "finished walking 1.3km and completed daily walk. 3w", type: "walk" },
-    { name: "Aquafina", activity: "solved the quiz today and completed daily quiz. 4w", type: "quiz" },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        loadMoreActivities();
+      }
+    };
 
-  const earlierActivities = [
-    { name: "Rissa", activity: "solved the quiz today and completed daily quiz. 2w", type: "quiz" },
-    { name: "John", activity: "finished walking 1.5km and completed daily walk. 3w", type: "walk" },
-    { name: "Tate", activity: "solved the quiz today and completed daily quiz. 1m", type: "quiz" },
-    { name: "Aquafina", activity: "finished walking 2km and completed daily walk. 1m", type: "walk" },
-    { name: "Geonu", activity: "solved the quiz today and completed daily quiz. 2m", type: "quiz" },
-    { name: "Astrid", activity: "finished walking 1.8km and completed daily walk. 2m", type: "walk" },
-    { name: "Emma", activity: "solved the quiz today and completed daily quiz. 3m", type: "quiz" },
-    { name: "Fitra", activity: "finished walking 1.7km and completed daily walk. 3m", type: "walk" },
-  ];
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [activities]);
+
+  useEffect(() => {
+    loadMoreActivities();
+  }, []);
 
   const renderActivitySection = (title, activities) => (
     <>
@@ -65,6 +84,11 @@ const Friends = () => {
 
   return (
     <>
+      {isLoading && (
+        <div className="fixed top-0 left-0 right-0 flex justify-center items-center h-16 bg-black z-50">
+          <Loader2 className="h-6 w-6 animate-spin text-white" />
+        </div>
+      )}
       <motion.div
         className="overflow-hidden"
         onPanEnd={(e, { offset, velocity }) => {
@@ -105,11 +129,11 @@ const Friends = () => {
       <div className="h-px bg-gray-700 my-4"></div>
 
       <section className="mt-4 pb-20 space-y-6">
-        {renderActivitySection("TODAY", todayActivities)}
+        {renderActivitySection("TODAY", activities.today)}
         <div className="h-px bg-gray-700"></div>
-        {renderActivitySection("THIS MONTH", thisMonthActivities)}
+        {renderActivitySection("THIS MONTH", activities.thisMonth)}
         <div className="h-px bg-gray-700"></div>
-        {renderActivitySection("EARLIER", earlierActivities)}
+        {renderActivitySection("EARLIER", activities.earlier)}
       </section>
     </>
   );
