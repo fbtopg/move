@@ -93,10 +93,9 @@ const InviteFriends = ({ isOpen, onClose }) => {
   return (
     <motion.div
       initial={{ y: "100%" }}
-      animate={{ y: isOpen ? "15%" : "100%" }}
+      animate={{ y: isOpen ? 0 : "100%" }}
       transition={{ type: "spring", damping: 30, stiffness: 300 }}
-      className="fixed inset-x-0 bottom-0 bg-black text-white z-50 overflow-y-auto rounded-t-3xl"
-      style={{ height: "85%" }}
+      className="fixed inset-0 bg-black text-white z-50 overflow-y-auto"
     >
       <div className="p-4 flex flex-col h-full">
         <div className="flex justify-between items-center mb-6">
