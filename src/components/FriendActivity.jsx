@@ -19,7 +19,7 @@ const FriendActivity = ({ name, activity, type }) => {
     let activityText = parts[0] ? parts[0].trim() : '';
     let activityTime = parts[1] ? parts[1].trim() : '';
 
-    activityText = activityText.replace(/\b(walk|quiz)\.*/g, '$1.');
+    activityText = activityText.replace(/\b(walk|quiz)/g, '$1');
 
     const timeMatch = activityText.match(/(\d+[mhdw])$/);
     if (timeMatch) {
@@ -27,22 +27,18 @@ const FriendActivity = ({ name, activity, type }) => {
       activityText = activityText.replace(/\s+\d+[mhdw]$/, '');
     }
 
-    if (activityText.includes('solved the quiz.')) {
+    if (activityText.includes('solved the quiz')) {
       const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
-      activityText = activityText.replace('solved the quiz.', `solved the quiz.${quizNumber}`);
+      activityText = activityText.replace('solved the quiz', `solved the quiz${quizNumber}`);
     }
+
+    // Remove full stops except at the end of the sentence
+    activityText = activityText.replace(/\./g, '').trim() + '.';
 
     return { activityText, activityTime };
   };
 
-  const highlightText = (text) => {
-    return text
-      .replace(/(\d+(?:\.\d+)?(?:km|m))/, '$1')
-      .replace(/(quiz. #\d{3})/, '$1');
-  };
-
   const { activityText, activityTime } = parseActivity(activity);
-  const parsedActivity = highlightText(activityText);
 
   return (
     <div className="flex items-start space-x-3">
@@ -55,10 +51,7 @@ const FriendActivity = ({ name, activity, type }) => {
           <div className="flex-grow min-w-0 pr-2">
             <p className="text-sm text-gray-400">
               <span className="font-semibold text-white">{name}</span>{' '}
-              <span 
-                className="break-words"
-                dangerouslySetInnerHTML={{ __html: parsedActivity }}
-              />
+              <span className="break-words">{activityText}</span>
               {activityTime && (
                 <span className="text-[#73777F] ml-1">{activityTime}</span>
               )}
