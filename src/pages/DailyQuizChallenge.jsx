@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Flame, Brain, Heart, ArrowRight, Share } from 'lucide-react';
+import { ArrowLeft, Flame, Brain, Heart, ArrowRight, Share, Clock, Menu } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -36,6 +36,10 @@ const DailyQuizChallenge = () => {
     navigate('/leaderboard');
   };
 
+  const handleHistoryClick = () => {
+    navigate('/daily-quiz-history');
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
@@ -44,9 +48,15 @@ const DailyQuizChallenge = () => {
             <ArrowLeft className="h-6 w-6" />
           </button>
 
-          <div className="mb-4">
-            <p className="text-sm text-gray-400">{challengeData.month}</p>
-            <h1 className="text-2xl font-bold">{challengeData.title}</h1>
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <p className="text-sm text-gray-400">{challengeData.month}</p>
+              <h1 className="text-2xl font-bold">{challengeData.title}</h1>
+            </div>
+            <button onClick={handleHistoryClick} className="flex items-center">
+              <Clock className="h-5 w-5 text-white mr-1" />
+              <Menu className="h-5 w-5 text-white" />
+            </button>
           </div>
 
           <div className="w-full h-40 rounded-lg mb-4 bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512421546262661/Rectangle_7.png?ex=66dbfcf2&is=66daab72&hm=e66dc0b2dc8ee7f23307913a1662f7c1cb2fbc4c4f71899f9d0be4b42f4b63f0&')"}}></div>
