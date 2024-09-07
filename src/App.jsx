@@ -7,6 +7,8 @@ import DailyWalkChallenge from "./pages/DailyWalkChallenge";
 import DailyQuizChallenge from "./pages/DailyQuizChallenge";
 import DailyWalkHistory from "./pages/DailyWalkHistory";
 import DailyQuizHistory from "./pages/DailyQuizHistory";
+import Profile from "./pages/Profile";
+import Leaderboard from "./pages/Leaderboard";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/daily-quiz-challenge" element={<DailyQuizChallenge />} />
           <Route path="/daily-walk-history" element={<DailyWalkHistory />} />
           <Route path="/daily-quiz-history" element={<DailyQuizHistory />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
