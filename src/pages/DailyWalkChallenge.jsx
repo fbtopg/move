@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 import BottomNavBar from '../components/BottomNavBar';
+import { shareInvite } from '../utils/shareUtils';
 
 const DailyWalkChallenge = () => {
   const navigate = useNavigate();
@@ -134,7 +135,10 @@ const DailyWalkChallenge = () => {
             </div>
           </div>
 
-          <Button className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full">
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full"
+            onClick={shareInvite}
+          >
             <Share className="mr-2 h-5 w-5" />
             Invite Friends
           </Button>
