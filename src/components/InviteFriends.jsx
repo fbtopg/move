@@ -125,7 +125,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
         </div>
         <div className="mt-auto pb-6">
           <Button 
-            className="w-full bg-transparent hover:bg-transparent text-white border border-white"
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full flex items-center justify-center"
             onClick={handleShareLink}
           >
             <Share className="mr-2 h-5 w-5" /> Invite Friends
