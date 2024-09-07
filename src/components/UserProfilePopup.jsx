@@ -25,10 +25,10 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
       onDragStart={() => setIsDragging(true)}
       onDragEnd={handleDragEnd}
       className={`fixed inset-0 bg-black text-white z-50 ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
-      style={{ touchAction: 'none', width: '100%' }}
+      style={{ touchAction: 'none', width: '100%', left: 0, right: 0 }}
     >
       <div className="h-full overflow-y-auto" style={{ pointerEvents: isDragging ? 'none' : 'auto' }}>
-        <div className="p-4 flex flex-col h-full w-full mx-auto">
+        <div className="p-4 flex flex-col h-full w-full">
           <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-8" />
           
           <div className="flex justify-between items-center mb-8">
@@ -58,7 +58,6 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
             <Plus className="h-4 w-4 mr-2" /> Follow
           </Button>
           
-          {/* Add more profile content here */}
           <p className="text-gray-400">User bio and additional information can be added here.</p>
         </div>
       </div>
