@@ -36,7 +36,7 @@ const Profile = () => {
           </div>
           
           <div className="flex mb-12">
-            <div className="mr-16">
+            <div className="mr-24">
               <p className="text-sm text-gray-400 uppercase mb-1">Followers</p>
               <p className="text-sm">{followers}</p>
             </div>
