@@ -12,8 +12,7 @@ const DailyWalkChallenge = () => {
   const challengeData = {
     month: "SEPTEMBER 2024",
     title: "Daily Walk",
-    rank: "501",
-    totalParticipants: "16.5K",
+    progress: "501/16.5K",
     distance: "56.7km",
     likes: "124",
     highestStreak: "7",
@@ -63,10 +62,9 @@ const DailyWalkChallenge = () => {
 
           <div className="mb-6">
             <div className="text-4xl font-bold">
-              {challengeData.rank}
-              <span className="text-gray-400 text-2xl">/{challengeData.totalParticipants}</span>
+              {challengeData.progress}
             </div>
-            <div className="text-sm text-gray-400">RANK</div>
+            <div className="text-sm text-gray-400">PROGRESS</div>
           </div>
 
           <div className="flex mb-6 space-x-8">
