@@ -3,6 +3,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 
+const getGradient = (name) => {
+  const charCode = name.charCodeAt(0);
+  const hue1 = (charCode * 7) % 360;
+  const hue2 = (hue1 + 60) % 360;
+  return `linear-gradient(135deg, hsl(${hue1}, 70%, 60%), hsl(${hue2}, 70%, 60%))`;
+};
+
 const FriendActivity = ({ name, activity, type, profilePicture }) => {
   const [liked, setLiked] = useState(false);
 
@@ -45,7 +52,9 @@ const FriendActivity = ({ name, activity, type, profilePicture }) => {
         {profilePicture ? (
           <AvatarImage src={profilePicture} alt={name} />
         ) : (
-          <AvatarFallback>{name.slice(0, 2).toUpperCase()}</AvatarFallback>
+          <AvatarFallback style={{ background: getGradient(name) }} className="text-white font-semibold">
+            {name.slice(0, 2).toUpperCase()}
+          </AvatarFallback>
         )}
       </Avatar>
       <div className="flex-grow min-w-0">
