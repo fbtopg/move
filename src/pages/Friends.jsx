@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
+import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
@@ -60,6 +61,7 @@ const Friends = () => {
             name={activity.name}
             activity={activity.activity}
             type={activity.type}
+            profilePicture={getRandomProfilePicture()}
           />
         ))}
       </div>
