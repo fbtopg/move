@@ -28,7 +28,7 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
       style={{ touchAction: 'none' }}
     >
       <div className="h-full overflow-y-auto" style={{ pointerEvents: isDragging ? 'none' : 'auto' }}>
-        <div className="p-4 flex flex-col h-full max-w-md mx-auto">
+        <div className="p-4 flex flex-col h-full w-full">
           <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-8" />
           
           <div className="flex flex-col items-center mb-6">
