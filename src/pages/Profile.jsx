@@ -28,9 +28,9 @@ const Profile = () => {
           </div>
           
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-4xl font-light">{username}</h1>
-            <Avatar className="w-20 h-20">
-              <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${username}`} />
+            <h1 className="text-3xl font-light">{username}</h1>
+            <Avatar className="w-20 h-20 rounded-full">
+              <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" />
               <AvatarFallback>PFP</AvatarFallback>
             </Avatar>
           </div>
