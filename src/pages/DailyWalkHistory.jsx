@@ -39,6 +39,8 @@ const DailyWalkHistory = () => {
               }
             </div>
 
+            <div className="h-px bg-gray-700 my-6"></div>
+
             <div>
               <h3 className="text-xs font-semibold mb-3 text-gray-400">FINISHED</h3>
               {challenges
