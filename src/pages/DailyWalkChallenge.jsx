@@ -123,7 +123,7 @@ const DailyWalkChallenge = () => {
             </div>
           </div>
 
-          <Button className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors">
+          <Button className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full">
             Invite Friends
           </Button>
         </div>
