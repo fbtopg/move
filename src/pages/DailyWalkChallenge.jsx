@@ -67,26 +67,6 @@ const DailyWalkChallenge = () => {
             <div className="text-sm text-gray-400">RANK</div>
           </div>
 
-          <Button 
-            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
-          >
-            <span>Start walking</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
-
-          <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
-          >
-            <span>Check reward</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
-
-          <div className="w-full h-40 rounded-lg bg-gradient-to-b from-blue-500 to-blue-600 mb-6"></div>
-
-          <p className="text-sm text-gray-400 mb-4 pr-8">
-            Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. If you miss a day, just make up for it the next time. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
-          </p>
-
           <div className="flex mb-6 space-x-8">
             <div>
               <div className="text-xs text-gray-400">DISTANCE</div>
@@ -102,7 +82,27 @@ const DailyWalkChallenge = () => {
             </div>
           </div>
 
-          <div className="h-px bg-gray-700 my-4"></div>
+          <Button 
+            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
+          >
+            <span>Start walking</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
+          >
+            <span>Check reward</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          <div className="h-px bg-gray-700 my-6"></div>
+
+          <div className="w-full h-40 rounded-lg bg-gradient-to-b from-blue-500 to-blue-600 mb-6"></div>
+
+          <p className="text-sm text-gray-400 mb-4 pr-8">
+            Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. If you miss a day, just make up for it the next time. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
+          </p>
 
           <div className="flex items-center mb-4 cursor-pointer" onClick={handleLeaderboardClick}>
             <div className="flex flex-shrink-0">
