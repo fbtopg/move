@@ -19,25 +19,25 @@ const ChallengeCard = ({ type, date, active, progress }) => {
 
   return (
     <div 
-      className="w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[180px] flex cursor-pointer bg-gray-800"
+      className="w-full max-w-md mx-auto overflow-hidden shadow-lg h-[180px] flex cursor-pointer"
       onClick={handleClick}
     >
       <div className={`w-[180px] h-[180px] bg-gradient-to-b ${gradientColor} flex-shrink-0`}></div>
       <div className="flex-grow p-3 text-white flex flex-col justify-between">
         <div>
           <p className="text-xs text-white/80">{date}</p>
-          <h2 className="text-lg font-bold mb-1">{type}</h2>
+          <h2 className="text-2xl font-bold mb-1">{type}</h2>
           <div className="flex items-center space-x-2 mb-1">
             <div className="flex -space-x-2">
-              <Avatar className="w-5 h-5 border-2 border-gray-800">
+              <Avatar className="w-5 h-5 border-2 border-black">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=John" />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
-              <Avatar className="w-5 h-5 border-2 border-gray-800">
+              <Avatar className="w-5 h-5 border-2 border-black">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Jane" />
                 <AvatarFallback>JS</AvatarFallback>
               </Avatar>
-              <Avatar className="w-5 h-5 border-2 border-gray-800">
+              <Avatar className="w-5 h-5 border-2 border-black">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Bob" />
                 <AvatarFallback>BS</AvatarFallback>
               </Avatar>
