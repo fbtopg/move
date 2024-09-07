@@ -19,10 +19,10 @@ const ChallengeCard = ({ type, date, active, progress }) => {
 
   return (
     <div 
-      className="w-full max-w-md mx-auto overflow-hidden h-[180px] flex cursor-pointer bg-[#111111] rounded-lg"
+      className="w-full max-w-md mx-auto overflow-hidden h-[180px] flex cursor-pointer rounded-lg"
       onClick={handleClick}
     >
-      <div className={`w-[140px] h-[140px] bg-gradient-to-b ${gradientColor} flex-shrink-0 m-5 rounded-lg`}></div>
+      <div className={`w-[140px] h-[180px] bg-gradient-to-b ${gradientColor} flex-shrink-0`}></div>
       <div className="flex-grow p-5 text-white flex flex-col justify-between">
         <div>
           <p className="text-xs text-white/80">{date}</p>
