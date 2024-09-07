@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Flame, Wind, Heart, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Flame, Wind, Heart, ArrowRight, History } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -37,13 +37,22 @@ const DailyWalkChallenge = () => {
     navigate('/leaderboard');
   };
 
+  const handleHistoryClick = () => {
+    navigate('/daily-walk-history');
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          <button onClick={() => navigate(-1)} className="mb-4">
-            <ArrowLeft className="h-6 w-6" />
-          </button>
+          <div className="flex justify-between items-center mb-4">
+            <button onClick={() => navigate(-1)}>
+              <ArrowLeft className="h-6 w-6" />
+            </button>
+            <button onClick={handleHistoryClick}>
+              <History className="h-6 w-6" />
+            </button>
+          </div>
 
           <div className="mb-4">
             <p className="text-sm text-gray-400">{challengeData.month}</p>
