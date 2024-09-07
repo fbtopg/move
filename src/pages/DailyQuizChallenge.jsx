@@ -58,7 +58,23 @@ const DailyQuizChallenge = () => {
             </button>
           </div>
 
-          <div className="w-full h-40 rounded-lg mb-4 bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512421546262661/Rectangle_7.png?ex=66dbfcf2&is=66daab72&hm=e66dc0b2dc8ee7f23307913a1662f7c1cb2fbc4c4f71899f9d0be4b42f4b63f0&')"}}></div>
+          <Button 
+            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
+          >
+            <span>Check today's quiz</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
+          >
+            <span>Check reward</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          <div className="relative mb-6">
+            <div className="w-full h-40 rounded-lg bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512421546262661/Rectangle_7.png?ex=66dbfcf2&is=66daab72&hm=e66dc0b2dc8ee7f23307913a1662f7c1cb2fbc4c4f71899f9d0be4b42f4b63f0&')"}}></div>
+          </div>
 
           <div className="mb-6">
             <div className="text-4xl font-bold">
@@ -81,20 +97,6 @@ const DailyQuizChallenge = () => {
               <div className="text-base font-bold">{challengeData.highestStreak}</div>
             </div>
           </div>
-
-          <Button 
-            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
-          >
-            <span>Check today's quiz</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
-
-          <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
-          >
-            <span>Check reward</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
 
           <div className="h-px bg-gray-700 my-4"></div>
 

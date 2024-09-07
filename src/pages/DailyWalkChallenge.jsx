@@ -59,8 +59,22 @@ const DailyWalkChallenge = () => {
             </button>
           </div>
 
-          <div className="relative">
-            <div className="w-full h-40 rounded-lg mb-4 bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512420853944352/Rectangle_6.png?ex=66dbfcf2&is=66daab72&hm=54d3401d917b1176c5ed2054a7f648320c1bd12575272801f6c8fdd986bdaee7&')"}}></div>
+          <Button 
+            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
+          >
+            <span>Start walking</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
+          >
+            <span>Check reward</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          <div className="relative mb-6">
+            <div className="w-full h-40 rounded-lg bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512420853944352/Rectangle_6.png?ex=66dbfcf2&is=66daab72&hm=54d3401d917b1176c5ed2054a7f648320c1bd12575272801f6c8fdd986bdaee7&')"}}></div>
           </div>
 
           <div className="mb-6">
@@ -85,20 +99,6 @@ const DailyWalkChallenge = () => {
               <div className="text-base font-bold">{challengeData.highestStreak}</div>
             </div>
           </div>
-
-          <Button 
-            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
-          >
-            <span>Start walking</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
-
-          <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
-          >
-            <span>Check reward</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
 
           <div className="h-px bg-gray-700 my-4"></div>
 
