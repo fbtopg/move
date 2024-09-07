@@ -12,7 +12,7 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
       transition={{ type: "spring", damping: 30, stiffness: 300 }}
       className="fixed inset-x-0 bottom-0 bg-black text-white z-50 overflow-y-auto w-full h-[85%] rounded-t-[30px]"
     >
-      <div className="p-4 flex flex-col h-full">
+      <div className="p-4 flex flex-col h-full max-w-md mx-auto">
         <div className="flex justify-end mb-6">
           <Button variant="ghost" size="icon" onClick={onClose}>
             <X className="h-6 w-6" />
