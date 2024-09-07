@@ -28,7 +28,7 @@ const DailyWalkHistory = () => {
 
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Ongoing</h3>
+              <h3 className="text-xs font-semibold mb-3 text-gray-400">ONGOING</h3>
               {challenges
                 .filter(challenge => challenge.status === "ongoing")
                 .map((challenge, index) => (
@@ -40,7 +40,7 @@ const DailyWalkHistory = () => {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Finished</h3>
+              <h3 className="text-xs font-semibold mb-3 text-gray-400">FINISHED</h3>
               {challenges
                 .filter(challenge => challenge.status === "finished")
                 .map((challenge, index) => (
