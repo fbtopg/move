@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
+import UserProfilePopup from './UserProfilePopup';
 
 const FriendActivity = ({ name, activity, type }) => {
   const [liked, setLiked] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const getActivityImage = () => {
     return type === 'walk'
@@ -44,9 +46,13 @@ const FriendActivity = ({ name, activity, type }) => {
   const { activityText, activityTime } = parseActivity(activity);
   const parsedActivity = highlightText(activityText);
 
+  const handleAvatarClick = () => {
+    setIsProfileOpen(true);
+  };
+
   return (
     <div className="flex items-start space-x-3">
-      <Avatar className="w-10 h-10 mt-1 flex-shrink-0">
+      <Avatar className="w-10 h-10 mt-1 flex-shrink-0 cursor-pointer" onClick={handleAvatarClick}>
         <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${name}`} alt={name} />
         <AvatarFallback>{name[0]}</AvatarFallback>
       </Avatar>
@@ -82,6 +88,16 @@ const FriendActivity = ({ name, activity, type }) => {
           </div>
         </div>
       </div>
+      <UserProfilePopup
+        isOpen={isProfileOpen}
+        onClose={() => setIsProfileOpen(false)}
+        user={{
+          username: name,
+          avatarUrl: `https://api.dicebear.com/6.x/initials/svg?seed=${name}`,
+          followers: 100,
+          following: 200,
+        }}
+      />
     </div>
   );
 };
