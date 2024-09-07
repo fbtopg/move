@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { Settings } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
@@ -23,7 +23,7 @@ const Profile = () => {
               onClick={() => navigate('/settings')}
               className="text-white hover:bg-transparent"
             >
-              <Settings className="h-6 w-6" />
+              <MoreHorizontal className="h-6 w-6" />
             </Button>
           </div>
           
@@ -36,13 +36,13 @@ const Profile = () => {
           </div>
           
           <div className="flex mb-12">
-            <div className="mr-8">
+            <div className="mr-16">
               <p className="text-sm text-gray-400 uppercase mb-1">Followers</p>
-              <p className="text-sm font-bold">{followers}</p>
+              <p className="text-sm">{followers}</p>
             </div>
             <div>
               <p className="text-sm text-gray-400 uppercase mb-1">Following</p>
-              <p className="text-sm font-bold">{following}</p>
+              <p className="text-sm">{following}</p>
             </div>
           </div>
           
