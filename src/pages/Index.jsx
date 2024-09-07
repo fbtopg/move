@@ -17,13 +17,13 @@ const Index = () => {
         <div className="max-w-md mx-auto flex justify-between items-center">
           <div className="flex space-x-4">
             <button
-              className={`text-lg font-bold ${currentView === 'friends' ? 'text-white' : 'text-gray-400'}`}
+              className={`text-[1.125rem] font-bold ${currentView === 'friends' ? 'text-white' : 'text-gray-400'}`}
               onClick={() => setCurrentView('friends')}
             >
               Friends
             </button>
             <button
-              className={`text-lg font-bold ${currentView === 'me' ? 'text-white' : 'text-gray-400'}`}
+              className={`text-[1.125rem] font-bold ${currentView === 'me' ? 'text-white' : 'text-gray-400'}`}
               onClick={() => setCurrentView('me')}
             >
               Me
