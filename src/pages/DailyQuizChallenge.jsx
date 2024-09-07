@@ -1,31 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft, Flame, Brain, Heart, ArrowRight, Share, History } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 import BottomNavBar from '../components/BottomNavBar';
-import { supabase } from '../integrations/supabase';
 
 const DailyQuizChallenge = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('walk');
-  const [imageUrl, setImageUrl] = useState(null);
-
-  useEffect(() => {
-    const fetchImage = async () => {
-      const { data, error } = await supabase.storage
-        .from('dailychallenge')
-        .getPublicUrl('dailyquizimage5.png');
-      
-      if (error) {
-        console.error('Error fetching image:', error);
-      } else {
-        setImageUrl(data.publicUrl);
-      }
-    };
-
-    fetchImage();
-  }, []);
 
   const challengeData = {
     month: "SEPTEMBER 2024",
@@ -90,11 +72,13 @@ const DailyQuizChallenge = () => {
             <ArrowRight className="h-6 w-6" />
           </Button>
 
-          {imageUrl && (
-            <div className="w-full h-40 rounded-lg mb-6 overflow-hidden">
-              <img src={imageUrl} alt="Daily Quiz Challenge" className="w-full h-full object-cover" />
-            </div>
-          )}
+          <div className="w-full h-40 rounded-lg mb-6 overflow-hidden">
+            <img 
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailyquizimage5.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHlxdWl6aW1hZ2U1LnBuZyIsImlhdCI6MTcyNTY4OTMxOSwiZXhwIjoxNzU3MjI1MzE5fQ.9EInspWLkGg7g5fBzJgbJM6tZt8b-XC3pq3TTh9vIZs&t=2024-09-07T06%3A08%3A39.441Z" 
+              alt="Daily Quiz Challenge" 
+              className="w-full h-full object-cover"
+            />
+          </div>
 
           <p className="text-sm text-gray-400 mb-4 pr-8">
             Engage your mind with the daily quiz challenge, designed to make you think more consciously about everyday topics. Each quiz encourages deeper reflection and awareness. Miss a day? No problem—just take two quizzes next time to stay on track. By the end of the challenge, you'll have developed a habit of mindful thinking and earned rewards to celebrate your journey!

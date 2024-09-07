@@ -1,31 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft, Flame, Wind, Heart, ArrowRight, Share, History } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 import BottomNavBar from '../components/BottomNavBar';
-import { supabase } from '../integrations/supabase';
 
 const DailyWalkChallenge = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('walk');
-  const [imageUrl, setImageUrl] = useState(null);
-
-  useEffect(() => {
-    const fetchImage = async () => {
-      const { data, error } = await supabase.storage
-        .from('dailychallenge')
-        .getPublicUrl('dailywalkimage5.png');
-      
-      if (error) {
-        console.error('Error fetching image:', error);
-      } else {
-        setImageUrl(data.publicUrl);
-      }
-    };
-
-    fetchImage();
-  }, []);
 
   const challengeData = {
     month: "SEPTEMBER 2024",
@@ -91,11 +73,13 @@ const DailyWalkChallenge = () => {
             <ArrowRight className="h-6 w-6" />
           </Button>
 
-          {imageUrl && (
-            <div className="w-full h-40 rounded-lg mb-6 overflow-hidden">
-              <img src={imageUrl} alt="Daily Walk Challenge" className="w-full h-full object-cover" />
-            </div>
-          )}
+          <div className="w-full h-40 rounded-lg mb-6 overflow-hidden">
+            <img 
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1LnBuZyIsImlhdCI6MTcyNTY4OTI5NSwiZXhwIjoxNzU3MjI1Mjk1fQ.VLJ5uIe_BPwe5qBlif5UPOoUEFAbxZo2kDsEbuYUle8&t=2024-09-07T06%3A08%3A14.950Z" 
+              alt="Daily Walk Challenge" 
+              className="w-full h-full object-cover"
+            />
+          </div>
 
           <p className="text-sm text-gray-400 mb-4 pr-8">
             Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. If you miss a day, just make up for it the next time. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
