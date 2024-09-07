@@ -51,34 +51,14 @@ const DailyQuizChallenge = () => {
           <div className="flex justify-between items-center mb-4">
             <div>
               <p className="text-sm text-gray-400">{challengeData.month}</p>
-              <h1 className="text-2xl font-bold">{challengeData.title}</h1>
+              <h1 className="text-3xl font-bold">{challengeData.title}</h1>
             </div>
             <button onClick={handleHistoryClick} className="flex items-center">
               <History className="h-7 w-7 text-white stroke-[1.5]" />
             </button>
           </div>
 
-          <Button 
-            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
-          >
-            <span>Check today's quiz</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
-
-          <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
-          >
-            <span>Check reward</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
-
-          <div className="relative mb-6">
-            <div className="w-full h-40 rounded-lg bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512421546262661/Rectangle_7.png?ex=66dbfcf2&is=66daab72&hm=e66dc0b2dc8ee7f23307913a1662f7c1cb2fbc4c4f71899f9d0be4b42f4b63f0&')"}}></div>
-          </div>
-
-          <p className="text-sm text-gray-400 mb-4 pr-8">
-            Engage your mind with the daily quiz challenge, designed to make you think more consciously about everyday topics. Each quiz encourages deeper reflection and awareness. Miss a day? No problem—just take two quizzes next time to stay on track. By the end of the challenge, you'll have developed a habit of mindful thinking and earned rewards to celebrate your journey!
-          </p>
+          <div className="w-full h-40 rounded-lg bg-gradient-to-b from-green-500 to-green-600 mb-6"></div>
 
           <div className="mb-6">
             <div className="text-4xl font-bold">
@@ -102,7 +82,25 @@ const DailyQuizChallenge = () => {
             </div>
           </div>
 
-          <div className="h-px bg-gray-700 my-4"></div>
+          <Button 
+            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
+          >
+            <span>Check today's quiz</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
+          >
+            <span>Check reward</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          <div className="h-px bg-gray-700 my-6"></div>
+
+          <p className="text-sm text-gray-400 mb-4 pr-8">
+            Engage your mind with the daily quiz challenge, designed to make you think more consciously about everyday topics. Each quiz encourages deeper reflection and awareness. Miss a day? No problem—just take two quizzes next time to stay on track. By the end of the challenge, you'll have developed a habit of mindful thinking and earned rewards to celebrate your journey!
+          </p>
 
           <div className="flex items-center mb-4 cursor-pointer" onClick={handleLeaderboardClick}>
             <div className="flex flex-shrink-0">
@@ -117,8 +115,6 @@ const DailyQuizChallenge = () => {
               {challengeData.activeParticipants} active
             </div>
           </div>
-
-          <div className="h-px bg-gray-700 my-4"></div>
 
           <div className="mb-6">
             <h2 className="text-lg font-bold mb-4">ACHIEVEMENTS</h2>

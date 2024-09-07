@@ -52,12 +52,14 @@ const DailyWalkChallenge = () => {
           <div className="flex justify-between items-center mb-4">
             <div>
               <p className="text-sm text-gray-400">{challengeData.month}</p>
-              <h1 className="text-2xl font-bold">{challengeData.title}</h1>
+              <h1 className="text-3xl font-bold">{challengeData.title}</h1>
             </div>
             <button onClick={handleHistoryClick} className="flex items-center">
               <History className="h-7 w-7 text-white stroke-[1.5]" />
             </button>
           </div>
+
+          <div className="w-full h-40 rounded-lg bg-gradient-to-b from-blue-500 to-blue-600 mb-6"></div>
 
           <div className="mb-6">
             <div className="text-4xl font-bold">
@@ -98,8 +100,6 @@ const DailyWalkChallenge = () => {
 
           <div className="h-px bg-gray-700 my-6"></div>
 
-          <div className="w-full h-40 rounded-lg bg-gradient-to-b from-blue-500 to-blue-600 mb-6"></div>
-
           <p className="text-sm text-gray-400 mb-4 pr-8">
             Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. If you miss a day, just make up for it the next time. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
           </p>
@@ -117,8 +117,6 @@ const DailyWalkChallenge = () => {
               {challengeData.activeParticipants} active
             </div>
           </div>
-
-          <div className="h-px bg-gray-700 my-4"></div>
 
           <div className="mb-6">
             <h2 className="text-lg font-bold mb-4">ACHIEVEMENTS</h2>
