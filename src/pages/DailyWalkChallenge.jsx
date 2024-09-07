@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Flame, Wind, Heart } from 'lucide-react';
+import { ArrowLeft, Flame, Wind, Heart, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -75,6 +75,20 @@ const DailyWalkChallenge = () => {
             </div>
           </div>
 
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-4 h-16 flex justify-between items-center px-6"
+          >
+            <span>Start walking</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
+          >
+            <span>Check today's reward</span>
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+
           <div className="h-px bg-gray-700 my-4"></div>
 
           <p className="text-sm text-gray-400 mb-4 pr-8">
@@ -110,7 +124,7 @@ const DailyWalkChallenge = () => {
           </div>
 
           <Button className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors">
-            Check Rewards
+            Invite Friends
           </Button>
         </div>
       </div>
