@@ -13,9 +13,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black flex flex-col">
-      <div className="flex-grow overflow-y-auto scrollbar-hide">
+      <div className="fixed top-0 left-0 right-0 bg-black z-20">
+        <div className="h-[env(safe-area-inset-top)] bg-black" />
         <div className="max-w-md mx-auto p-2">
-          <div className="flex justify-between items-center mb-4 sticky top-0 bg-black z-10 py-2">
+          <div className="flex justify-between items-center py-2">
             <div className="flex space-x-4">
               <button
                 className={`text-lg font-bold ${currentView === 'friends' ? 'text-white' : 'text-gray-400'}`}
@@ -39,7 +40,10 @@ const Index = () => {
               <Plus className="h-6 w-6 text-white" />
             </Button>
           </div>
-
+        </div>
+      </div>
+      <div className="flex-grow overflow-y-auto scrollbar-hide pt-[calc(env(safe-area-inset-top)+56px)]">
+        <div className="max-w-md mx-auto p-2">
           {currentView === 'friends' ? <Friends /> : <Me />}
         </div>
       </div>
