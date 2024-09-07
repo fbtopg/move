@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Share, X, Plus, Check } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getRandomProfilePicture } from '../utils/profilePictures';
+import { cn } from "@/lib/utils";
 
 const users = [
   { id: 1, name: "John" },
@@ -13,27 +15,49 @@ const users = [
   { id: 5, name: "Astrid" },
   { id: 6, name: "Fitra" },
   { id: 7, name: "Rissa" },
+  { id: 8, name: "Emma" },
+  { id: 9, name: "Sarah" },
+  { id: 10, name: "Mike" },
 ];
 
-const UserSearchResult = ({ user, onInvite, isInvited }) => (
-  <div className="flex items-center justify-between py-2">
-    <div className="flex items-center">
-      <Avatar className="w-10 h-10 mr-3">
-        <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${user.name}`} alt={user.name} />
-        <AvatarFallback>{user.name[0]}</AvatarFallback>
-      </Avatar>
-      <span className="text-white">{user.name}</span>
+const getGradient = (name) => {
+  const charCode = name.charCodeAt(0);
+  const hue1 = (charCode * 7) % 360;
+  const hue2 = (hue1 + 60) % 360;
+  return `linear-gradient(135deg, hsl(${hue1}, 70%, 60%), hsl(${hue2}, 70%, 60%))`;
+};
+
+const UserSearchResult = ({ user, onInvite, isInvited }) => {
+  const profilePicture = Math.random() > 0.3 ? getRandomProfilePicture() : null;
+
+  return (
+    <div className="flex items-center justify-between py-2">
+      <div className="flex items-center">
+        <Avatar className="w-10 h-10 mr-3">
+          {profilePicture ? (
+            <AvatarImage src={profilePicture} alt={user.name} />
+          ) : (
+            <AvatarFallback style={{ background: getGradient(user.name) }} className="text-white font-semibold">
+              {user.name.slice(0, 2).toUpperCase()}
+            </AvatarFallback>
+          )}
+        </Avatar>
+        <span className="text-white">{user.name}</span>
+      </div>
+      <Button 
+        variant="ghost" 
+        size="icon" 
+        onClick={() => onInvite(user.id)}
+        className={cn(
+          "transition-colors duration-200",
+          isInvited ? "text-green-500" : "text-white"
+        )}
+      >
+        {isInvited ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+      </Button>
     </div>
-    <Button 
-      variant="ghost" 
-      size="icon" 
-      onClick={() => onInvite(user.id)}
-      className={`transition-colors duration-200 ${isInvited ? "text-green-500" : "text-white"}`}
-    >
-      {isInvited ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-    </Button>
-  </div>
-);
+  );
+};
 
 const InviteFriends = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -47,7 +71,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
       );
       setSearchResults(filteredUsers);
     } else {
-      setSearchResults([]);
+      setSearchResults(users);
     }
   }, [searchTerm]);
 
@@ -114,7 +138,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
           />
         </div>
         <div className="flex-grow overflow-y-auto mb-6">
-          {searchTerm.trim() !== '' && searchResults.map(user => (
+          {searchResults.map(user => (
             <UserSearchResult 
               key={user.id} 
               user={user} 
