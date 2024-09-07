@@ -58,7 +58,7 @@ const DailyQuizChallenge = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 text-xs mb-6">
+          <div className="flex text-xs mb-6 space-x-4">
             <div>
               <p className="text-gray-400">START</p>
               <p>{challengeData.startDate}</p>
