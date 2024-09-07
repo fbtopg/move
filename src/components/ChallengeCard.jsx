@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 const ChallengeCard = ({ type, date, active, progress }) => {
   const isWalk = type === 'Daily Walk';
-  const imageUrl = `https://source.unsplash.com/collection/3678981/300x300`;
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -23,7 +22,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
       className="w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[180px] flex cursor-pointer bg-gray-800"
       onClick={handleClick}
     >
-      <div className={`w-16 h-full bg-gradient-to-b ${gradientColor}`}></div>
+      <div className={`w-[180px] h-[180px] bg-gradient-to-b ${gradientColor} flex-shrink-0`}></div>
       <div className="flex-grow p-3 text-white flex flex-col justify-between">
         <div>
           <p className="text-xs text-white/80">{date}</p>
