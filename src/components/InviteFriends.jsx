@@ -71,7 +71,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
       );
       setSearchResults(filteredUsers);
     } else {
-      setSearchResults(users);
+      setSearchResults([]);
     }
   }, [searchTerm]);
 
@@ -138,14 +138,18 @@ const InviteFriends = ({ isOpen, onClose }) => {
           />
         </div>
         <div className="flex-grow overflow-y-auto mb-6">
-          {searchResults.map(user => (
-            <UserSearchResult 
-              key={user.id} 
-              user={user} 
-              onInvite={handleInvite}
-              isInvited={invitedUsers.has(user.id)}
-            />
-          ))}
+          {searchResults.length > 0 ? (
+            searchResults.map(user => (
+              <UserSearchResult 
+                key={user.id} 
+                user={user} 
+                onInvite={handleInvite}
+                isInvited={invitedUsers.has(user.id)}
+              />
+            ))
+          ) : searchTerm.trim() !== '' && (
+            <p className="text-gray-400">No results found</p>
+          )}
         </div>
         <div className="mt-auto pb-6">
           <Button 
