@@ -33,10 +33,6 @@ const DailyWalkChallenge = () => {
     { id: 5, name: "Mike" },
   ];
 
-  const handleLeaderboardClick = () => {
-    navigate('/leaderboard');
-  };
-
   const handleHistoryClick = () => {
     navigate('/daily-walk-history');
   };
@@ -110,7 +106,7 @@ const DailyWalkChallenge = () => {
 
           <div className="h-px bg-gray-700 my-4"></div>
 
-          <div className="flex items-center mb-4 cursor-pointer" onClick={handleLeaderboardClick}>
+          <div className="flex items-center mb-4">
             <div className="flex flex-shrink-0">
               {participants.map((participant) => (
                 <Avatar key={participant.id} className="w-8 h-8 -ml-2 first:ml-0 border-2 border-black">
