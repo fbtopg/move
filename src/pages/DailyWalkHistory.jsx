@@ -17,37 +17,39 @@ const DailyWalkHistory = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="max-w-md mx-auto p-4">
-        <button onClick={() => navigate(-1)} className="mb-6">
-          <ArrowLeft className="h-6 w-6" />
-        </button>
+    <div className="min-h-screen bg-black text-white flex flex-col">
+      <div className="flex-grow overflow-y-auto">
+        <div className="max-w-md mx-auto p-2">
+          <button onClick={() => navigate(-1)} className="mb-6">
+            <ArrowLeft className="h-6 w-6" />
+          </button>
 
-        <h2 className="text-2xl font-bold mb-6">Daily Walk History</h2>
+          <h2 className="text-2xl font-bold mb-6">Daily Walk History</h2>
 
-        <div className="space-y-6">
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Ongoing</h3>
-            {challenges
-              .filter(challenge => challenge.status === "ongoing")
-              .map((challenge, index) => (
-                <div key={index} className="mb-4" onClick={() => handleChallengeClick(challenge.date)}>
-                  <ChallengeCard {...challenge} />
-                </div>
-              ))
-            }
-          </div>
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Ongoing</h3>
+              {challenges
+                .filter(challenge => challenge.status === "ongoing")
+                .map((challenge, index) => (
+                  <div key={index} className="mb-4" onClick={() => handleChallengeClick(challenge.date)}>
+                    <ChallengeCard {...challenge} />
+                  </div>
+                ))
+              }
+            </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Finished</h3>
-            {challenges
-              .filter(challenge => challenge.status === "finished")
-              .map((challenge, index) => (
-                <div key={index} className="mb-4" onClick={() => handleChallengeClick(challenge.date)}>
-                  <ChallengeCard {...challenge} />
-                </div>
-              ))
-            }
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Finished</h3>
+              {challenges
+                .filter(challenge => challenge.status === "finished")
+                .map((challenge, index) => (
+                  <div key={index} className="mb-4" onClick={() => handleChallengeClick(challenge.date)}>
+                    <ChallengeCard {...challenge} />
+                  </div>
+                ))
+              }
+            </div>
           </div>
         </div>
       </div>
