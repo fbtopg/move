@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { Settings } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
@@ -23,11 +23,11 @@ const Profile = () => {
               onClick={() => navigate('/settings')}
               className="text-white hover:bg-transparent"
             >
-              <MoreHorizontal className="h-6 w-6" />
+              <Settings className="h-6 w-6" />
             </Button>
           </div>
           
-          <div className="flex justify-between items-center mb-12">
+          <div className="flex justify-between items-center mb-8">
             <h1 className="text-4xl font-light">{username}</h1>
             <Avatar className="w-20 h-20">
               <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${username}`} />
@@ -35,14 +35,14 @@ const Profile = () => {
             </Avatar>
           </div>
           
-          <div className="flex justify-between mb-12">
-            <div className="text-center">
-              <p className="text-3xl font-bold mb-1">{followers}</p>
-              <p className="text-sm text-gray-400 uppercase">Followers</p>
+          <div className="flex mb-12">
+            <div className="mr-8">
+              <p className="text-sm text-gray-400 uppercase mb-1">Followers</p>
+              <p className="text-sm font-bold">{followers}</p>
             </div>
-            <div className="text-center">
-              <p className="text-3xl font-bold mb-1">{following}</p>
-              <p className="text-sm text-gray-400 uppercase">Following</p>
+            <div>
+              <p className="text-sm text-gray-400 uppercase mb-1">Following</p>
+              <p className="text-sm font-bold">{following}</p>
             </div>
           </div>
           
