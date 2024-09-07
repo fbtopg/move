@@ -37,8 +37,8 @@ const FriendActivity = ({ name, activity, type }) => {
 
   const highlightText = (text) => {
     return text
-      .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
-      .replace(/(quiz. #\d{3})/, '<span class="text-white">$1</span>');
+      .replace(/(\d+(?:\.\d+)?(?:km|m))/, '$1')
+      .replace(/(quiz. #\d{3})/, '$1');
   };
 
   const { activityText, activityTime } = parseActivity(activity);
@@ -53,10 +53,10 @@ const FriendActivity = ({ name, activity, type }) => {
       <div className="flex-grow min-w-0">
         <div className="flex items-start justify-between">
           <div className="flex-grow min-w-0 pr-2">
-            <p className="text-sm text-white">
-              <span className="font-semibold">{name}</span>{' '}
+            <p className="text-sm text-gray-400">
+              <span className="font-semibold text-white">{name}</span>{' '}
               <span 
-                className="text-gray-400 break-words"
+                className="break-words"
                 dangerouslySetInnerHTML={{ __html: parsedActivity }}
               />
               {activityTime && (
