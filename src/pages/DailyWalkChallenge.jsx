@@ -76,7 +76,7 @@ const DailyWalkChallenge = () => {
           </div>
 
           <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-4 h-16 flex justify-between items-center px-6"
+            className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
           >
             <span>Start walking</span>
             <ArrowRight className="h-6 w-6" />
