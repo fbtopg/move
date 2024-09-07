@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 import BottomNavBar from '../components/BottomNavBar';
 import { shareInvite } from '../utils/shareUtils';
+import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const DailyWalkChallenge = () => {
   const navigate = useNavigate();
@@ -129,7 +130,7 @@ const DailyWalkChallenge = () => {
             <div className="flex flex-shrink-0">
               {participants.map((participant) => (
                 <Avatar key={participant.id} className="w-8 h-8 -ml-2 first:ml-0 border-2 border-black">
-                  <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${participant.name}`} />
+                  <AvatarImage src={getRandomProfilePicture()} />
                   <AvatarFallback>{participant.name[0]}</AvatarFallback>
                 </Avatar>
               ))}

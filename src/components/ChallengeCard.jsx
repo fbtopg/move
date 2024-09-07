@@ -2,6 +2,7 @@ import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { useNavigate } from 'react-router-dom';
+import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const ChallengeCard = ({ type, date, active, progress }) => {
   const isWalk = type === 'Daily Walk';
@@ -34,18 +35,12 @@ const ChallengeCard = ({ type, date, active, progress }) => {
           <h2 className="text-2xl font-bold mb-2">{type}</h2>
           <div className="flex items-center space-x-2 mb-1">
             <div className="flex -space-x-2">
-              <Avatar className="w-5 h-5 border-2 border-black">
-                <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=John" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
-              <Avatar className="w-5 h-5 border-2 border-black">
-                <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Jane" />
-                <AvatarFallback>JS</AvatarFallback>
-              </Avatar>
-              <Avatar className="w-5 h-5 border-2 border-black">
-                <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Bob" />
-                <AvatarFallback>BS</AvatarFallback>
-              </Avatar>
+              {[...Array(3)].map((_, index) => (
+                <Avatar key={index} className="w-5 h-5 border-2 border-black">
+                  <AvatarImage src={getRandomProfilePicture()} />
+                  <AvatarFallback>U</AvatarFallback>
+                </Avatar>
+              ))}
             </div>
             <span className="text-xs text-white/80">{active} active</span>
           </div>
