@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Flame, Wind, Heart, ArrowRight, Share, History } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,11 +11,11 @@ const DailyWalkChallenge = () => {
   const [activeTab, setActiveTab] = useState('walk');
   const [imageUrl, setImageUrl] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchImage = async () => {
       const { data, error } = await supabase.storage
         .from('dailychallenge')
-        .getPublicUrl('dailywalkimage5');
+        .getPublicUrl('dailywalkimage5.png');
       
       if (error) {
         console.error('Error fetching image:', error);
