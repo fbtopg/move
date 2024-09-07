@@ -59,7 +59,7 @@ const DailyWalkChallenge = () => {
             </button>
           </div>
 
-          <div className="flex justify-between text-sm mb-6">
+          <div className="grid grid-cols-3 gap-4 text-xs mb-6">
             <div>
               <p className="text-gray-400">START</p>
               <p>{challengeData.startDate}</p>
