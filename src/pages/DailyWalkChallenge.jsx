@@ -59,6 +59,14 @@ const DailyWalkChallenge = () => {
             </button>
           </div>
 
+          <div className="mb-6">
+            <div className="text-4xl font-bold">
+              {challengeData.rank}
+              <span className="text-gray-400 text-2xl">/{challengeData.totalParticipants}</span>
+            </div>
+            <div className="text-sm text-gray-400">RANK</div>
+          </div>
+
           <Button 
             className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
           >
@@ -73,21 +81,11 @@ const DailyWalkChallenge = () => {
             <ArrowRight className="h-6 w-6" />
           </Button>
 
-          <div className="relative mb-6">
-            <div className="w-full h-40 rounded-lg bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512420853944352/Rectangle_6.png?ex=66dbfcf2&is=66daab72&hm=54d3401d917b1176c5ed2054a7f648320c1bd12575272801f6c8fdd986bdaee7&')"}}></div>
-          </div>
+          <div className="w-full h-40 rounded-lg bg-gradient-to-b from-blue-500 to-blue-600 mb-6"></div>
 
           <p className="text-sm text-gray-400 mb-4 pr-8">
             Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. If you miss a day, just make up for it the next time. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
           </p>
-
-          <div className="mb-6">
-            <div className="text-4xl font-bold">
-              {challengeData.rank}
-              <span className="text-gray-400 text-2xl">/{challengeData.totalParticipants}</span>
-            </div>
-            <div className="text-sm text-gray-400">RANK</div>
-          </div>
 
           <div className="flex mb-6 space-x-8">
             <div>
