@@ -19,6 +19,9 @@ const DailyWalkChallenge = () => {
     likes: "124",
     highestStreak: "7",
     activeParticipants: "16.5k",
+    startDate: "Sep 1",
+    endDate: "Sep 30",
+    remainingDays: "24 days",
     achievements: [
       { id: 1, name: "5-day streak", icon: Flame },
       { id: 2, name: "Breezy walker-10km", icon: Wind },
@@ -54,6 +57,21 @@ const DailyWalkChallenge = () => {
             <button onClick={handleHistoryClick} className="flex items-center">
               <History className="h-7 w-7 text-white stroke-[1.5]" />
             </button>
+          </div>
+
+          <div className="flex justify-between text-sm mb-6">
+            <div>
+              <p className="text-gray-400">START</p>
+              <p>{challengeData.startDate}</p>
+            </div>
+            <div>
+              <p className="text-gray-400">END</p>
+              <p>{challengeData.endDate}</p>
+            </div>
+            <div>
+              <p className="text-gray-400">REMAINING</p>
+              <p>{challengeData.remainingDays}</p>
+            </div>
           </div>
 
           <Button 
