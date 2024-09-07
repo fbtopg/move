@@ -61,7 +61,7 @@ const Friends = () => {
             name={activity.name}
             activity={activity.activity}
             type={activity.type}
-            profilePicture={getRandomProfilePicture()}
+            profilePicture={Math.random() > 0.3 ? getRandomProfilePicture() : null}
           />
         ))}
       </div>

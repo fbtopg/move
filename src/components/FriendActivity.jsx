@@ -32,7 +32,6 @@ const FriendActivity = ({ name, activity, type, profilePicture }) => {
       activityText = activityText.replace('solved the quiz', `solved the quiz${quizNumber}`);
     }
 
-    // Remove full stops except at the end of the sentence
     activityText = activityText.replace(/\./g, '').trim() + '.';
 
     return { activityText, activityTime };
@@ -43,8 +42,11 @@ const FriendActivity = ({ name, activity, type, profilePicture }) => {
   return (
     <div className="flex items-start space-x-3">
       <Avatar className="w-10 h-10 mt-1 flex-shrink-0">
-        <AvatarImage src={profilePicture || `https://api.dicebear.com/6.x/initials/svg?seed=${name}`} alt={name} />
-        <AvatarFallback>{name[0]}</AvatarFallback>
+        {profilePicture ? (
+          <AvatarImage src={profilePicture} alt={name} />
+        ) : (
+          <AvatarFallback>{name.slice(0, 2).toUpperCase()}</AvatarFallback>
+        )}
       </Avatar>
       <div className="flex-grow min-w-0">
         <div className="flex items-start justify-between">
