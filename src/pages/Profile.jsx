@@ -79,11 +79,11 @@ const Profile = () => {
           </div>
           
           <div className="flex mb-8">
-            <div className="mr-24">
+            <div className="mr-24 cursor-pointer" onClick={() => navigate('/follow', { state: { initialTab: 'followers' } })}>
               <p className="text-sm text-white uppercase mb-1">Followers</p>
               <p className="text-sm">{followers}</p>
             </div>
-            <div>
+            <div className="cursor-pointer" onClick={() => navigate('/follow', { state: { initialTab: 'following' } })}>
               <p className="text-sm text-white uppercase mb-1">Following</p>
               <p className="text-sm">{following}</p>
             </div>
