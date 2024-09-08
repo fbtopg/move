@@ -57,7 +57,7 @@ const Follow = () => {
             <ArrowLeft className="h-6 w-6" />
           </button>
 
-          <div className="flex justify-between mb-6 relative">
+          <div className="flex justify-between mb-8 relative">
             <button
               className={`text-base font-normal flex-1 text-center ${activeTab === 'followers' ? 'text-white' : 'text-gray-400'}`}
               onClick={() => setActiveTab('followers')}
@@ -95,7 +95,7 @@ const Follow = () => {
             {displayUsers.map((user) => (
               <div key={user.id} className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <Avatar className="w-8 h-8 mr-3">
+                  <Avatar className="w-6 h-6 mr-3">
                     <AvatarImage src={getRandomProfilePicture()} alt={user.username} />
                     <AvatarFallback>{user.username.slice(0, 2).toUpperCase()}</AvatarFallback>
                   </Avatar>
