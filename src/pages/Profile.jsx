@@ -93,7 +93,7 @@ const Profile = () => {
                 <ArrowRight className="w-3 h-3 ml-1" />
               </div>
             </div>
-            <div className="flex flex-col items-start mt-[72px]">
+            <div className="flex flex-col items-start">
               <div 
                 className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
                 style={{
