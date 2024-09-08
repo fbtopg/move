@@ -84,6 +84,7 @@ const DailyWalkChallenge = () => {
 
           <Button 
             className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
+            onClick={() => navigate('/rewards')}
           >
             <span>Check reward</span>
             <ArrowRight className="h-6 w-6" />
