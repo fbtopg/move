@@ -16,7 +16,7 @@ const Achievements = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto">
-        <div className="max-w-md mx-auto p-4">
+        <div className="max-w-md mx-auto p-2">
           <button onClick={() => navigate(-1)} className="mb-6">
             <ArrowLeft className="h-6 w-6" />
           </button>
