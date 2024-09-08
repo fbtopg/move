@@ -9,6 +9,7 @@ import DailyWalkHistory from "./pages/DailyWalkHistory";
 import DailyQuizHistory from "./pages/DailyQuizHistory";
 import Profile from "./pages/Profile";
 import Rewards from "./pages/Rewards";
+import Achievements from "./pages/Achievements";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/daily-quiz-history" element={<DailyQuizHistory />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/rewards" element={<Rewards />} />
+          <Route path="/achievements" element={<Achievements />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
