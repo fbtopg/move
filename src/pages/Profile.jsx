@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Gift, ArrowRight } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { handleImageUpload } from '../utils/imageUtils';
 
@@ -29,11 +29,6 @@ const Profile = () => {
         console.error('Error uploading image:', error);
       }
     }
-  };
-
-  const handleCheckReward = () => {
-    // TODO: Implement reward checking functionality
-    console.log('Checking rewards...');
   };
 
   return (
@@ -76,17 +71,6 @@ const Profile = () => {
               <p className="text-sm">{following}</p>
             </div>
           </div>
-          
-          <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-8 h-16 flex justify-between items-center px-6"
-            onClick={handleCheckReward}
-          >
-            <span className="flex items-center">
-              <Gift className="mr-2 h-5 w-5" />
-              Check reward
-            </span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
           
           {/* Add more profile content here */}
         </div>
