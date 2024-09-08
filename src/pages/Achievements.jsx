@@ -1,14 +1,16 @@
 import React from 'react';
-import { ArrowLeft, Flame, Wind, Heart } from 'lucide-react';
+import { ArrowLeft, Flame, Wind, Heart, Brain, Trophy } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Achievements = () => {
   const navigate = useNavigate();
 
   const achievements = [
-    { id: 1, name: "5-day streak", icon: Flame },
-    { id: 2, name: "Breezy walker-10km", icon: Wind },
-    { id: 3, name: "100 likes", icon: Heart },
+    { id: 1, name: "5-day streak", icon: Flame, count: 3 },
+    { id: 2, name: "Breezy walker-10km", icon: Wind, count: 2 },
+    { id: 3, name: "100 likes", icon: Heart, count: 1 },
+    { id: 4, name: "Quiz master", icon: Brain, count: 5 },
+    { id: 5, name "Challenge champion", icon: Trophy, count: 2 },
   ];
 
   return (
@@ -21,17 +23,19 @@ const Achievements = () => {
 
           <h1 className="text-2xl font-bold mb-6">Achievements</h1>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-4">
             {achievements.map((achievement) => (
               <div 
                 key={achievement.id} 
-                className="flex flex-col items-center justify-center w-full aspect-square rounded-lg"
-                style={{
-                  background: 'radial-gradient(circle at center, #222222, #111111)',
-                }}
+                className="flex items-center justify-between h-16 border border-gray-700 rounded-lg p-4"
               >
-                <achievement.icon className="h-24 w-24 text-white mb-2 stroke-[0.5]" />
-                <span className="text-sm text-center px-2">{achievement.name}</span>
+                <div className="flex items-center">
+                  <achievement.icon className="h-8 w-8 text-white mr-4 stroke-[1.5]" />
+                  <span className="text-sm">{achievement.name}</span>
+                </div>
+                <div className="flex items-center justify-center w-8 h-8 bg-gray-800 rounded-full">
+                  <span className="text-sm font-semibold">{achievement.count}</span>
+                </div>
               </div>
             ))}
           </div>
