@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const Follow = () => {
@@ -18,31 +19,28 @@ const Follow = () => {
     }
   }, [location]);
 
-  const followers = [
+  const [followers, setFollowers] = useState([
     { id: 1, username: "Joan Charita", handle: "@charita08", isFollowing: false },
     { id: 2, username: "John Doe", handle: "@johndoe", isFollowing: true },
     { id: 3, username: "Sarah Jones", handle: "@sarahjones", isFollowing: true },
-  ];
+  ]);
 
-  const following = [
-    { id: 1, username: "Emma Smith", handle: "@emmasmith", isFollowing: true },
-    { id: 5, username: "Alex Wilson", handle: "@alexwilson", isFollowing: true },
-    { id: 6, username: "Lisa Taylor", handle: "@lisataylor", isFollowing: true },
-  ];
-
-  const [followState, setFollowState] = useState({
-    followers: followers.reduce((acc, user) => ({ ...acc, [user.id]: user.isFollowing }), {}),
-    following: following.reduce((acc, user) => ({ ...acc, [user.id]: true }), {}),
-  });
+  const [following, setFollowing] = useState([
+    { id: 1, username: "Emma Smith", handle: "@emmasmith" },
+    { id: 5, username: "Alex Wilson", handle: "@alexwilson" },
+    { id: 6, username: "Lisa Taylor", handle: "@lisataylor" },
+  ]);
 
   const toggleFollow = (userId, type) => {
-    setFollowState(prevState => ({
-      ...prevState,
-      [type]: {
-        ...prevState[type],
-        [userId]: !prevState[type][userId]
-      }
-    }));
+    if (type === 'followers') {
+      setFollowers(prevFollowers =>
+        prevFollowers.map(user =>
+          user.id === userId ? { ...user, isFollowing: !user.isFollowing } : user
+        )
+      );
+    } else {
+      setFollowing(prevFollowing => prevFollowing.filter(user => user.id !== userId));
+    }
   };
 
   const filteredUsers = activeTab === 'followers' ? followers : following;
@@ -59,19 +57,28 @@ const Follow = () => {
             <ArrowLeft className="h-6 w-6" />
           </button>
 
-          <div className="flex justify-between mb-6">
+          <div className="flex justify-between mb-6 relative">
             <button
-              className={`text-2xl font-bold ${activeTab === 'followers' ? 'text-white' : 'text-gray-400'}`}
+              className={`text-xl ${activeTab === 'followers' ? 'text-white' : 'text-gray-400'}`}
               onClick={() => setActiveTab('followers')}
             >
               {followers.length} Followers
             </button>
             <button
-              className={`text-2xl font-bold ${activeTab === 'following' ? 'text-white' : 'text-gray-400'}`}
+              className={`text-xl ${activeTab === 'following' ? 'text-white' : 'text-gray-400'}`}
               onClick={() => setActiveTab('following')}
             >
               {following.length} Following
             </button>
+            <motion.div
+              className="absolute bottom-0 h-0.5 bg-white"
+              initial={false}
+              animate={{
+                left: activeTab === 'followers' ? '0%' : '50%',
+                width: '50%'
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            />
           </div>
 
           <div className="relative mb-6">
@@ -88,7 +95,7 @@ const Follow = () => {
             {displayUsers.map((user) => (
               <div key={user.id} className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <Avatar className="w-12 h-12 mr-3">
+                  <Avatar className="w-10 h-10 mr-3">
                     <AvatarImage src={getRandomProfilePicture()} alt={user.username} />
                     <AvatarFallback>{user.username.slice(0, 2).toUpperCase()}</AvatarFallback>
                   </Avatar>
@@ -97,18 +104,30 @@ const Follow = () => {
                     <p className="text-sm text-gray-400">{user.handle}</p>
                   </div>
                 </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => toggleFollow(user.id, activeTab)}
-                  className={followState[activeTab][user.id] ? "text-green-500" : "text-white"}
-                >
-                  {followState[activeTab][user.id] ? (
+                {activeTab === 'followers' && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => toggleFollow(user.id, 'followers')}
+                    className={user.isFollowing ? "text-green-500" : "text-white"}
+                  >
+                    {user.isFollowing ? (
+                      <Check className="h-5 w-5" />
+                    ) : (
+                      <Plus className="h-5 w-5" />
+                    )}
+                  </Button>
+                )}
+                {activeTab === 'following' && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => toggleFollow(user.id, 'following')}
+                    className="text-green-500"
+                  >
                     <Check className="h-5 w-5" />
-                  ) : (
-                    <Plus className="h-5 w-5" />
-                  )}
-                </Button>
+                  </Button>
+                )}
               </div>
             ))}
           </div>
