@@ -8,7 +8,8 @@ import { handleImageUpload } from '../utils/imageUtils';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = React.useState('profile');
-  const username = "Username";
+  const displayName = "James";
+  const username = "@username";
   const followers = 57;
   const following = 151;
   const navigate = useNavigate();
@@ -51,8 +52,11 @@ const Profile = () => {
             </Button>
           </div>
           
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-2xl font-light">{username}</h1>
+          <div className="flex justify-between items-center mb-2">
+            <div>
+              <h1 className="text-2xl font-light">{displayName}</h1>
+              <p className="text-sm text-gray-400">{username}</p>
+            </div>
             <Avatar className="w-20 h-20 rounded-full cursor-pointer" onClick={handleAvatarClick}>
               <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" />
               <AvatarFallback>PFP</AvatarFallback>
@@ -78,7 +82,7 @@ const Profile = () => {
           </div>
           
           <div className="flex mb-8">
-            <div className="flex flex-col items-start mr-12">
+            <div className="flex flex-col items-start mr-4">
               <div 
                 className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
                 style={{
