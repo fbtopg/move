@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Gift } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { handleImageUpload } from '../utils/imageUtils';
 
@@ -29,6 +29,11 @@ const Profile = () => {
         console.error('Error uploading image:', error);
       }
     }
+  };
+
+  const handleCheckReward = () => {
+    // TODO: Implement reward checking functionality
+    console.log('Checking rewards...');
   };
 
   return (
@@ -61,7 +66,7 @@ const Profile = () => {
             />
           </div>
           
-          <div className="flex mb-12">
+          <div className="flex mb-8">
             <div className="mr-24">
               <p className="text-sm text-gray-400 uppercase mb-1">Followers</p>
               <p className="text-sm">{followers}</p>
@@ -71,6 +76,14 @@ const Profile = () => {
               <p className="text-sm">{following}</p>
             </div>
           </div>
+          
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-8 h-12"
+            onClick={handleCheckReward}
+          >
+            <Gift className="mr-2 h-5 w-5" />
+            Check Reward
+          </Button>
           
           {/* Add more profile content here */}
         </div>
