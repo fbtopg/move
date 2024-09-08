@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Gift } from "lucide-react";
+import { MoreHorizontal, Gift, ArrowRight } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { handleImageUpload } from '../utils/imageUtils';
 
@@ -78,11 +78,14 @@ const Profile = () => {
           </div>
           
           <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-8 h-12"
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-8 h-16 flex justify-between items-center px-6"
             onClick={handleCheckReward}
           >
-            <Gift className="mr-2 h-5 w-5" />
-            Check Reward
+            <span className="flex items-center">
+              <Gift className="mr-2 h-5 w-5" />
+              Check reward
+            </span>
+            <ArrowRight className="h-6 w-6" />
           </Button>
           
           {/* Add more profile content here */}
