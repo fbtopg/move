@@ -27,15 +27,13 @@ const Achievements = () => {
             {achievements.map((achievement) => (
               <div 
                 key={achievement.id} 
-                className="flex items-center justify-between h-16 border border-gray-700 rounded-lg p-4"
+                className="flex items-center justify-between h-12 border border-gray-700 rounded-lg p-2"
               >
                 <div className="flex items-center">
                   <achievement.icon className="h-8 w-8 text-white mr-4 stroke-[1.5]" />
                   <span className="text-sm">{achievement.name}</span>
                 </div>
-                <div className="flex items-center justify-center w-8 h-8 bg-gray-800 rounded-full">
-                  <span className="text-sm font-semibold">{achievement.count}</span>
-                </div>
+                <span className="text-xs font-normal text-gray-400">{achievement.count}</span>
               </div>
             ))}
           </div>
