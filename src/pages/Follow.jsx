@@ -59,13 +59,13 @@ const Follow = () => {
 
           <div className="flex justify-between mb-8 relative">
             <button
-              className={`text-base font-normal flex-1 text-center ${activeTab === 'followers' ? 'text-white' : 'text-gray-400'}`}
+              className={`text-base font-normal flex-1 text-center py-2 ${activeTab === 'followers' ? 'text-white' : 'text-gray-400'}`}
               onClick={() => setActiveTab('followers')}
             >
               {followers.length} Followers
             </button>
             <button
-              className={`text-base font-normal flex-1 text-center ${activeTab === 'following' ? 'text-white' : 'text-gray-400'}`}
+              className={`text-base font-normal flex-1 text-center py-2 ${activeTab === 'following' ? 'text-white' : 'text-gray-400'}`}
               onClick={() => setActiveTab('following')}
             >
               {following.length} Following
