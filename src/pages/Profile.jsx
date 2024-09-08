@@ -37,6 +37,14 @@ const Profile = () => {
     { name: "Daily Quiz", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailyquizimage5_square_small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHlxdWl6aW1hZ2U1X3NxdWFyZV9zbWFsbC5wbmciLCJpYXQiOjE3MjU2OTAwODIsImV4cCI6MTc1NzIyNjA4Mn0.Pd1SiAgUnY8OeTe7CrOYIzgibXJ2SOPxKPw4SKcKEwU&t=2024-09-07T06%3A21%3A22.177Z", date: "September 2024" },
   ];
 
+  const handleChallengeClick = (challengeName) => {
+    if (challengeName === "Daily Walk") {
+      navigate('/daily-walk-challenge');
+    } else if (challengeName === "Daily Quiz") {
+      navigate('/daily-quiz-challenge');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
@@ -118,7 +126,11 @@ const Profile = () => {
             <h2 className="text-sm text-gray-400 uppercase mb-4">ACTIVE</h2>
             <div className="grid grid-cols-1 gap-4">
               {activeChallenges.map((challenge, index) => (
-                <div key={index} className="flex items-center justify-between h-12 border border-gray-700 rounded-lg p-2">
+                <div 
+                  key={index} 
+                  className="flex items-center justify-between h-12 border border-gray-700 rounded-lg p-2 cursor-pointer"
+                  onClick={() => handleChallengeClick(challenge.name)}
+                >
                   <div>
                     <p className="text-sm">{challenge.name}</p>
                     <p className="text-xs text-gray-400">{challenge.date}</p>
