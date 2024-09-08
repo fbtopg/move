@@ -144,8 +144,14 @@ const DailyQuizChallenge = () => {
             <h2 className="text-lg font-bold mb-4">ACHIEVEMENTS</h2>
             <div className="grid grid-cols-2 gap-4">
               {challengeData.achievements.map((achievement) => (
-                <div key={achievement.id} className="flex flex-col items-center justify-center w-full aspect-square border border-white rounded-lg">
-                  <achievement.icon className="h-24 w-24 text-white mb-2 stroke-[1]" />
+                <div 
+                  key={achievement.id} 
+                  className="flex flex-col items-center justify-center w-full aspect-square rounded-lg"
+                  style={{
+                    background: 'radial-gradient(circle at center, #222222, #111111)',
+                  }}
+                >
+                  <achievement.icon className="h-24 w-24 text-white mb-2 stroke-[0.5]" />
                   <span className="text-sm text-center px-2">{achievement.name}</span>
                 </div>
               ))}
