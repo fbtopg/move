@@ -92,11 +92,11 @@ const Profile = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-4 mb-8">
+          <div className="flex space-x-4 mb-8">
             <div 
-              className="aspect-square rounded-lg flex flex-col items-center justify-center cursor-pointer"
+              className="w-36 h-36 rounded-lg flex flex-col items-center justify-center cursor-pointer"
               style={{
-                background: 'radial-gradient(circle at center, #333333, #111111)',
+                background: 'radial-gradient(circle at center, #222222, #111111)',
               }}
               onClick={() => navigate('/rewards')}
             >
@@ -107,9 +107,9 @@ const Profile = () => {
               </div>
             </div>
             <div 
-              className="aspect-square rounded-lg flex flex-col items-center justify-center cursor-pointer"
+              className="w-36 h-36 rounded-lg flex flex-col items-center justify-center cursor-pointer"
               style={{
-                background: 'radial-gradient(circle at center, #333333, #111111)',
+                background: 'radial-gradient(circle at center, #222222, #111111)',
               }}
               onClick={() => navigate('/achievements')}
             >
