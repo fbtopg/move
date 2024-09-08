@@ -68,11 +68,11 @@ const Profile = () => {
           
           <div className="flex mb-8">
             <div className="mr-24">
-              <p className="text-sm text-gray-300 uppercase mb-1">Followers</p>
+              <p className="text-sm text-white uppercase mb-1">Followers</p>
               <p className="text-sm">{followers}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-300 uppercase mb-1">Following</p>
+              <p className="text-sm text-white uppercase mb-1">Following</p>
               <p className="text-sm">{following}</p>
             </div>
           </div>
@@ -81,9 +81,9 @@ const Profile = () => {
             <h2 className="text-sm text-gray-400 uppercase mb-4">ACTIVE</h2>
             <div className="grid grid-cols-2 gap-4">
               {activeChallenges.map((challenge, index) => (
-                <div key={index} className="bg-gray-800 rounded-lg p-3 flex items-center h-16">
-                  <img src={challenge.image} alt={challenge.name} className="w-10 h-10 rounded-lg mr-3" />
-                  <p className="text-sm">{challenge.name}</p>
+                <div key={index} className="bg-gray-800 rounded-lg p-2 flex items-center h-14">
+                  <img src={challenge.image} alt={challenge.name} className="w-8 h-8 rounded-lg mr-2" />
+                  <p className="text-sm flex-grow text-right">{challenge.name}</p>
                 </div>
               ))}
             </div>
