@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Heart, RotateCcw, ArrowRight } from "lucide-react";
+import { MoreHorizontal, ArrowRight, Trophy, Gift } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { handleImageUpload } from '../utils/imageUtils';
 
@@ -77,6 +77,39 @@ const Profile = () => {
             </div>
           </div>
           
+          <div className="flex space-x-4 mb-8">
+            <div className="flex flex-col items-center">
+              <div 
+                className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
+                style={{
+                  background: 'radial-gradient(circle at center, #222222, #111111)',
+                }}
+                onClick={() => navigate('/rewards')}
+              >
+                <Gift className="w-10 h-10 stroke-1" />
+              </div>
+              <div className="flex items-center mt-2">
+                <span className="text-sm">Rewards</span>
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </div>
+            </div>
+            <div className="flex flex-col items-center">
+              <div 
+                className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
+                style={{
+                  background: 'radial-gradient(circle at center, #222222, #111111)',
+                }}
+                onClick={() => navigate('/achievements')}
+              >
+                <Trophy className="w-10 h-10 stroke-1" />
+              </div>
+              <div className="flex items-center mt-2">
+                <span className="text-sm">Achievements</span>
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </div>
+            </div>
+          </div>
+          
           <div className="mb-8">
             <h2 className="text-sm text-gray-400 uppercase mb-4">ACTIVE</h2>
             <div className="grid grid-cols-1 gap-4">
@@ -89,35 +122,6 @@ const Profile = () => {
                   <img src={challenge.image} alt={challenge.name} className="w-8 h-8 rounded-lg" />
                 </div>
               ))}
-            </div>
-          </div>
-          
-          <div className="flex space-x-4 mb-8">
-            <div 
-              className="w-36 h-36 rounded-lg flex flex-col items-center justify-center cursor-pointer"
-              style={{
-                background: 'radial-gradient(circle at center, #222222, #111111)',
-              }}
-              onClick={() => navigate('/rewards')}
-            >
-              <Heart className="w-12 h-12 mb-2 stroke-1" />
-              <div className="flex items-center mt-2">
-                <ArrowRight className="w-4 h-4 mr-1" />
-                <span className="text-sm">Rewards</span>
-              </div>
-            </div>
-            <div 
-              className="w-36 h-36 rounded-lg flex flex-col items-center justify-center cursor-pointer"
-              style={{
-                background: 'radial-gradient(circle at center, #222222, #111111)',
-              }}
-              onClick={() => navigate('/achievements')}
-            >
-              <RotateCcw className="w-12 h-12 mb-2 stroke-1" />
-              <div className="flex items-center mt-2">
-                <ArrowRight className="w-4 h-4 mr-1" />
-                <span className="text-sm">Achievements</span>
-              </div>
             </div>
           </div>
         </div>
