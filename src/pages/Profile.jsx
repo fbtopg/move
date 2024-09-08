@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Heart, RotateCcw, ArrowRight } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { handleImageUpload } from '../utils/imageUtils';
 
@@ -92,7 +92,34 @@ const Profile = () => {
             </div>
           </div>
           
-          {/* Add more profile content here */}
+          <div className="grid grid-cols-2 gap-4 mb-8">
+            <div 
+              className="aspect-square rounded-lg flex flex-col items-center justify-center cursor-pointer"
+              style={{
+                background: 'radial-gradient(circle at center, #333333, #111111)',
+              }}
+              onClick={() => navigate('/rewards')}
+            >
+              <Heart className="w-12 h-12 mb-2 stroke-1" />
+              <div className="flex items-center mt-2">
+                <ArrowRight className="w-4 h-4 mr-1" />
+                <span className="text-sm">Rewards</span>
+              </div>
+            </div>
+            <div 
+              className="aspect-square rounded-lg flex flex-col items-center justify-center cursor-pointer"
+              style={{
+                background: 'radial-gradient(circle at center, #333333, #111111)',
+              }}
+              onClick={() => navigate('/achievements')}
+            >
+              <RotateCcw className="w-12 h-12 mb-2 stroke-1" />
+              <div className="flex items-center mt-2">
+                <ArrowRight className="w-4 h-4 mr-1" />
+                <span className="text-sm">Achievements</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
