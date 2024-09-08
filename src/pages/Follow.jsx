@@ -59,13 +59,13 @@ const Follow = () => {
 
           <div className="flex justify-between mb-6 relative">
             <button
-              className={`text-xl ${activeTab === 'followers' ? 'text-white' : 'text-gray-400'}`}
+              className={`text-base font-normal flex-1 text-center ${activeTab === 'followers' ? 'text-white' : 'text-gray-400'}`}
               onClick={() => setActiveTab('followers')}
             >
               {followers.length} Followers
             </button>
             <button
-              className={`text-xl ${activeTab === 'following' ? 'text-white' : 'text-gray-400'}`}
+              className={`text-base font-normal flex-1 text-center ${activeTab === 'following' ? 'text-white' : 'text-gray-400'}`}
               onClick={() => setActiveTab('following')}
             >
               {following.length} Following
@@ -95,7 +95,7 @@ const Follow = () => {
             {displayUsers.map((user) => (
               <div key={user.id} className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <Avatar className="w-10 h-10 mr-3">
+                  <Avatar className="w-8 h-8 mr-3">
                     <AvatarImage src={getRandomProfilePicture()} alt={user.username} />
                     <AvatarFallback>{user.username.slice(0, 2).toUpperCase()}</AvatarFallback>
                   </Avatar>
