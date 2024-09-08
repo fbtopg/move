@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
 const getGradient = (name) => {
   const charCode = name.charCodeAt(0);
@@ -12,6 +13,7 @@ const getGradient = (name) => {
 
 const FriendActivity = ({ name, activity, type, profilePicture }) => {
   const [liked, setLiked] = useState(false);
+  const navigate = useNavigate();
 
   const getActivityImage = () => {
     return type === 'walk'
@@ -46,6 +48,14 @@ const FriendActivity = ({ name, activity, type, profilePicture }) => {
 
   const { activityText, activityTime } = parseActivity(activity);
 
+  const handleImageClick = () => {
+    if (type === 'walk') {
+      navigate('/daily-walk-challenge');
+    } else if (type === 'quiz') {
+      navigate('/daily-quiz-challenge');
+    }
+  };
+
   return (
     <div className="flex items-start space-x-3">
       <Avatar className="w-10 h-10 mt-1 flex-shrink-0">
@@ -70,10 +80,11 @@ const FriendActivity = ({ name, activity, type, profilePicture }) => {
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
             <div 
-              className="w-10 h-10 rounded-lg bg-cover bg-center"
+              className="w-10 h-10 rounded-lg bg-cover bg-center cursor-pointer"
               style={{
                 backgroundImage: `url(${getActivityImage()})`,
               }}
+              onClick={handleImageClick}
             ></div>
             <Button 
               variant="ghost" 
