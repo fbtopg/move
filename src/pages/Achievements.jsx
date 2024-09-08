@@ -10,7 +10,7 @@ const Achievements = () => {
     { id: 2, name: "Breezy walker-10km", icon: Wind, count: 2 },
     { id: 3, name: "100 likes", icon: Heart, count: 1 },
     { id: 4, name: "Quiz master", icon: Brain, count: 5 },
-    { id: 5, name "Challenge champion", icon: Trophy, count: 2 },
+    { id: 5, name: "Challenge champion", icon: Trophy, count: 2 },
   ];
 
   return (
