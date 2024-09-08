@@ -77,8 +77,8 @@ const Profile = () => {
             </div>
           </div>
           
-          <div className="flex space-x-4 mb-8">
-            <div className="flex flex-col items-center">
+          <div className="flex mb-8">
+            <div className="flex flex-col items-start mr-12">
               <div 
                 className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
                 style={{
@@ -86,14 +86,14 @@ const Profile = () => {
                 }}
                 onClick={() => navigate('/rewards')}
               >
-                <Gift className="w-10 h-10 stroke-1" />
+                <Gift className="w-10 h-10 stroke-[0.5]" />
               </div>
               <div className="flex items-center mt-2">
-                <span className="text-sm">Rewards</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
+                <span className="text-xs">Rewards</span>
+                <ArrowRight className="w-3 h-3 ml-1" />
               </div>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-start mt-[72px]">
               <div 
                 className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
                 style={{
@@ -101,11 +101,11 @@ const Profile = () => {
                 }}
                 onClick={() => navigate('/achievements')}
               >
-                <Trophy className="w-10 h-10 stroke-1" />
+                <Trophy className="w-10 h-10 stroke-[0.5]" />
               </div>
               <div className="flex items-center mt-2">
-                <span className="text-sm">Achievements</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
+                <span className="text-xs">Achievements</span>
+                <ArrowRight className="w-3 h-3 ml-1" />
               </div>
             </div>
           </div>
