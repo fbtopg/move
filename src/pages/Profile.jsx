@@ -31,6 +31,11 @@ const Profile = () => {
     }
   };
 
+  const activeChallenges = [
+    { name: "Daily Walk", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square_small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZV9zbWFsbC5wbmciLCJpYXQiOjE3MjU2OTAwNDEsImV4cCI6MTc1NzIyNjA0MX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A20%3A41.451Z" },
+    { name: "Daily Quiz", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailyquizimage5_square_small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHlxdWl6aW1hZ2U1X3NxdWFyZV9zbWFsbC5wbmciLCJpYXQiOjE3MjU2OTAwODIsImV4cCI6MTc1NzIyNjA4Mn0.Pd1SiAgUnY8OeTe7CrOYIzgibXJ2SOPxKPw4SKcKEwU&t=2024-09-07T06%3A21%3A22.177Z" },
+  ];
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
@@ -69,6 +74,18 @@ const Profile = () => {
             <div>
               <p className="text-sm text-gray-400 uppercase mb-1">Following</p>
               <p className="text-sm">{following}</p>
+            </div>
+          </div>
+          
+          <div className="mb-8">
+            <h2 className="text-sm text-gray-400 uppercase mb-4">ACTIVE</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {activeChallenges.map((challenge, index) => (
+                <div key={index} className="bg-gray-800 rounded-lg p-4 flex flex-col items-center">
+                  <img src={challenge.image} alt={challenge.name} className="w-16 h-16 mb-2 rounded-lg" />
+                  <p className="text-sm text-center">{challenge.name}</p>
+                </div>
+              ))}
             </div>
           </div>
           
