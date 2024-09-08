@@ -81,8 +81,8 @@ const Profile = () => {
             </div>
           </div>
           
-          <div className="flex mb-8">
-            <div className="flex flex-col items-start mr-4">
+          <div className="flex mb-8 space-x-8">
+            <div className="flex flex-col items-start">
               <div 
                 className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
                 style={{
