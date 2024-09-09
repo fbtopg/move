@@ -31,10 +31,21 @@ const Walk = () => {
           >
             Close
           </button>
-          <h1 className="text-xl font-bold">Walk</h1>
+          <h1 className="text-base font-normal">Walk</h1>
           <div className="w-12"></div> {/* Placeholder for balance */}
         </div>
+      </div>
 
+      <div className="flex-grow relative">
+        <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+        </MapContainer>
+      </div>
+
+      <div className="bg-[#111111] p-4">
         <div className="mb-4">
           {activeChallenges.map((challenge, index) => (
             <div 
@@ -53,7 +64,7 @@ const Walk = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mb-2 text-center">
+        <div className="grid grid-cols-3 gap-4 mb-4 text-center">
           <div>
             <p className="text-xs text-gray-400">DISTANCE</p>
             <p className="text-xs font-bold">{challengeData.distance}</p>
@@ -67,21 +78,9 @@ const Walk = () => {
             <p className="text-xs font-bold">{challengeData.highestStreak}</p>
           </div>
         </div>
-      </div>
 
-      <div className="flex-grow relative">
-        <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-        </MapContainer>
-      </div>
-
-      <div className="h-32 relative">
-        <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-transparent to-[#111111]"></div>
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-[#111111] flex items-center justify-center">
-          <Button className="w-20 h-20 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-base font-bold">
+        <div className="flex items-center justify-center">
+          <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
             START
           </Button>
         </div>
