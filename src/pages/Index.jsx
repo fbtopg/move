@@ -5,11 +5,24 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Friends from './Friends';
 import Me from './Me';
+import UserProfilePopup from '../components/UserProfilePopup';
+import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('community');
   const [isInviteOpen, setIsInviteOpen] = useState(false);
   const [currentView, setCurrentView] = useState('friends');
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleUserClick = (user) => {
+    setSelectedUser({
+      username: user.name,
+      handle: `@${user.name.toLowerCase()}`,
+      avatarUrl: getRandomProfilePicture(),
+      followers: Math.floor(Math.random() * 1000),
+      following: Math.floor(Math.random() * 1000),
+    });
+  };
 
   return (
     <div className="min-h-screen bg-black flex flex-col">
@@ -41,11 +54,22 @@ const Index = () => {
       </div>
       <div className="flex-grow overflow-y-auto scrollbar-hide">
         <div className="max-w-md mx-auto p-2">
-          {currentView === 'friends' ? <Friends /> : <Me />}
+          {currentView === 'friends' ? (
+            <Friends onUserClick={handleUserClick} />
+          ) : (
+            <Me />
+          )}
         </div>
       </div>
       <InviteFriends isOpen={isInviteOpen} onClose={() => setIsInviteOpen(false)} />
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
+      {selectedUser && (
+        <UserProfilePopup
+          isOpen={!!selectedUser}
+          onClose={() => setSelectedUser(null)}
+          user={selectedUser}
+        />
+      )}
     </div>
   );
 };
