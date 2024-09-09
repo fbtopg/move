@@ -23,11 +23,13 @@ export const SupabaseAuthProviderInner = ({ children }) => {
     const getSession = async () => {
       setLoading(true);
       const { data: { session } } = await supabase.auth.getSession();
+      console.log("Initial session:", session);
       setSession(session);
       setLoading(false);
     };
 
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log("Auth state changed:", event, session);
       setSession(session);
       if (event === 'SIGNED_IN') {
         await createOrUpdateUser(session.user);
