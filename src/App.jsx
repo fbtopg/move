@@ -12,6 +12,7 @@ import Rewards from "./pages/Rewards";
 import Achievements from "./pages/Achievements";
 import Follow from "./pages/Follow";
 import Walk from "./pages/Walk";
+import Login from "./pages/Login";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
       <Toaster />
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<Login />} />
           {navItems.map(({ to, page }) => (
             <Route key={to} path={to} element={page} />
           ))}
