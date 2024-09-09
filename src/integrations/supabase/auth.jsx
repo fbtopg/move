@@ -40,6 +40,14 @@ export const SupabaseAuthProviderInner = ({ children }) => {
     };
   }, [queryClient]);
 
+  const login = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    });
+    if (error) throw error;
+    return data;
+  };
+
   const logout = async () => {
     await supabase.auth.signOut();
     setSession(null);
@@ -48,7 +56,7 @@ export const SupabaseAuthProviderInner = ({ children }) => {
   };
 
   return (
-    <SupabaseAuthContext.Provider value={{ session, loading, logout }}>
+    <SupabaseAuthContext.Provider value={{ session, loading, login, logout }}>
       {children}
     </SupabaseAuthContext.Provider>
   );
@@ -63,6 +71,6 @@ export const SupabaseAuthUI = () => (
     supabaseClient={supabase}
     appearance={{ theme: ThemeSupa }}
     theme="default"
-    providers={[]}
+    providers={['google']}
   />
 );
