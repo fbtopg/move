@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+import { Locate } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
 const Walk = () => {
   const navigate = useNavigate();
+  const [position, setPosition] = useState(null);
 
   const challengeData = {
     distance: "56.7km",
@@ -21,6 +23,34 @@ const Walk = () => {
     navigate('/daily-walk-challenge');
   };
 
+  const LocationMarker = () => {
+    const map = useMap();
+    useEffect(() => {
+      if (position) {
+        map.flyTo(position, map.getZoom());
+      }
+    }, [position, map]);
+
+    return position === null ? null : (
+      <Marker position={position}></Marker>
+    );
+  };
+
+  const handleFindLocation = () => {
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by your browser');
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setPosition([position.coords.latitude, position.coords.longitude]);
+        },
+        () => {
+          alert('Unable to retrieve your location');
+        }
+      );
+    }
+  };
+
   return (
     <div className="h-screen flex flex-col bg-black text-white">
       <div className="p-3 bg-black">
@@ -32,7 +62,7 @@ const Walk = () => {
             Close
           </button>
           <h1 className="text-base font-semibold">Walk</h1>
-          <div className="w-12"></div> {/* Placeholder for balance */}
+          <div className="w-12"></div>
         </div>
       </div>
 
@@ -42,7 +72,14 @@ const Walk = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
+          <LocationMarker />
         </MapContainer>
+        <Button
+          className="absolute bottom-4 right-4 bg-white text-black hover:bg-gray-200 transition-colors rounded-full p-2"
+          onClick={handleFindLocation}
+        >
+          <Locate className="h-6 w-6" />
+        </Button>
       </div>
 
       <div className="bg-[#111111] p-4 pb-12">
