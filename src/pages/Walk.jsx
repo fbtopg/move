@@ -73,9 +73,9 @@ const Walk = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           <LocationMarker />
-          <div className="leaflet-bottom leaflet-right" style={{ zIndex: 1000 }}>
+          <div className="leaflet-bottom leaflet-right" style={{ zIndex: 1000, bottom: '20px', right: '20px' }}>
             <Button
-              className="m-4 bg-white text-black hover:bg-gray-200 transition-colors rounded-full p-2"
+              className="bg-white text-black hover:bg-gray-200 transition-colors rounded-full p-2"
               onClick={handleFindLocation}
             >
               <Locate className="h-6 w-6" />
@@ -84,7 +84,7 @@ const Walk = () => {
         </MapContainer>
       </div>
 
-      <div className="bg-[#111111] p-4 pb-12">
+      <div className="bg-[#111111] p-4 pb-16">
         <div className="mb-4">
           {activeChallenges.map((challenge, index) => (
             <div 
@@ -118,7 +118,7 @@ const Walk = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center mt-4">
+        <div className="flex items-center justify-center mt-6">
           <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
             START
           </Button>
