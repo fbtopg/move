@@ -23,7 +23,7 @@ const Walk = () => {
 
   return (
     <div className="h-screen flex flex-col bg-black text-white">
-      <div className="p-3 bg-[#111111]">
+      <div className="p-3 bg-black">
         <div className="flex justify-between items-center">
           <button 
             onClick={() => navigate('/')} 
