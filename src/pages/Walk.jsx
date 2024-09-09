@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { MapContainer, TileLayer } from 'react-leaflet';
+import { ArrowRight } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
 const Walk = () => {
@@ -13,15 +14,42 @@ const Walk = () => {
     highestStreak: "7",
   };
 
+  const activeChallenges = [
+    { name: "Daily Walk", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square_small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZV9zbWFsbC5wbmciLCJpYXQiOjE3MjU3NjM1MTgsImV4cCI6MTc1NzI5OTUxOH0.GLkQ1VOFZKx98eUHrlNTYxPi7lBaji1GVRee_iUDljs&t=2024-09-08T02%3A45%3A16.927Z", date: "September 2024" },
+  ];
+
+  const handleChallengeClick = () => {
+    navigate('/daily-walk-challenge');
+  };
+
   return (
     <div className="h-screen flex flex-col bg-black text-white">
       <div className="p-4 bg-[#111111]">
         <button 
           onClick={() => navigate('/')} 
-          className="mb-2 text-base text-white hover:text-gray-200 transition-colors"
+          className="mb-4 text-base text-white hover:text-gray-200 transition-colors"
         >
           Close
         </button>
+
+        <div className="mb-4">
+          {activeChallenges.map((challenge, index) => (
+            <div 
+              key={index} 
+              className="flex items-center justify-between h-12 border border-gray-700 rounded-lg p-2 cursor-pointer"
+              onClick={handleChallengeClick}
+            >
+              <div>
+                <p className="text-sm">{challenge.name}</p>
+                <p className="text-xs text-gray-400">{challenge.date}</p>
+              </div>
+              <div className="flex items-center">
+                <img src={challenge.image} alt={challenge.name} className="w-8 h-8 rounded-lg mr-2" />
+                <ArrowRight className="h-4 w-4" />
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div className="grid grid-cols-3 gap-4 mb-2 text-center">
           <div>
