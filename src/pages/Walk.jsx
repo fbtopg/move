@@ -45,7 +45,7 @@ const Walk = () => {
         </MapContainer>
       </div>
 
-      <div className="bg-[#111111] p-4 pb-8"> {/* Increased bottom padding */}
+      <div className="bg-[#111111] p-4 pb-8">
         <div className="mb-4">
           {activeChallenges.map((challenge, index) => (
             <div 
@@ -64,7 +64,7 @@ const Walk = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mb-6"> {/* Increased bottom margin */}
+        <div className="grid grid-cols-3 gap-4 mb-8 text-center"> {/* Added text-center class here */}
           <div>
             <p className="text-xs text-gray-400">DISTANCE</p>
             <p className="text-xs font-bold">{challengeData.distance}</p>
