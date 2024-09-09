@@ -52,14 +52,14 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
         <div className="p-4 flex flex-col h-full w-full">
           <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-8" />
           
-          <div className="flex justify-between items-start mb-4">
+          <div className="flex justify-between items-start mb-6">
             <div>
               <h1 className="text-2xl font-light">{user.username}</h1>
               <p className="text-sm text-gray-400 mb-4">{user.handle}</p>
               <Button 
                 variant="outline" 
                 size="sm" 
-                className={`text-white bg-gray-700 hover:bg-gray-600 transition-colors h-8 ${isFollowing ? 'bg-gray-600' : ''}`}
+                className={`text-white bg-gray-700 hover:bg-gray-600 transition-colors h-8 rounded-full ${isFollowing ? 'bg-gray-600' : ''}`}
                 onClick={toggleFollow}
                 style={{ border: 'none' }}
               >
@@ -73,7 +73,7 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
             </Avatar>
           </div>
           
-          <div className="flex mb-12">
+          <div className="flex mb-8">
             <div className="mr-24">
               <p className="text-sm text-gray-400 uppercase mb-1">Followers</p>
               <p className="text-sm">{user.followers}</p>
@@ -84,7 +84,7 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
             </div>
           </div>
           
-          <div className="flex mb-8">
+          <div className="flex mb-8 space-x-8">
             <div className="flex flex-col items-start">
               <div 
                 className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
@@ -98,7 +98,10 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
               >
                 <Trophy className="w-10 h-10 stroke-[0.5]" />
               </div>
-              <span className="text-xs mt-2">Achievements</span>
+              <div className="flex items-center mt-2">
+                <span className="text-xs">Achievements</span>
+                <ArrowRight className="w-3 h-3 ml-1" />
+              </div>
             </div>
           </div>
           
