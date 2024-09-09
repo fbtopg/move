@@ -24,12 +24,16 @@ const Walk = () => {
   return (
     <div className="h-screen flex flex-col bg-black text-white">
       <div className="p-4 bg-[#111111]">
-        <button 
-          onClick={() => navigate('/')} 
-          className="mb-4 text-base text-white hover:text-gray-200 transition-colors"
-        >
-          Close
-        </button>
+        <div className="flex justify-between items-center mb-4">
+          <button 
+            onClick={() => navigate('/')} 
+            className="text-base text-white hover:text-gray-200 transition-colors"
+          >
+            Close
+          </button>
+          <h1 className="text-xl font-bold">Walk</h1>
+          <div className="w-12"></div> {/* Placeholder for balance */}
+        </div>
 
         <div className="mb-4">
           {activeChallenges.map((challenge, index) => (
