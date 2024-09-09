@@ -27,11 +27,11 @@ const Walk = () => {
         <div className="flex justify-between items-center">
           <button 
             onClick={() => navigate('/')} 
-            className="text-sm text-white hover:text-gray-200 transition-colors"
+            className="text-base text-white hover:text-gray-200 transition-colors"
           >
             Close
           </button>
-          <h1 className="text-sm font-semibold">Walk</h1>
+          <h1 className="text-base font-semibold">Walk</h1>
           <div className="w-12"></div> {/* Placeholder for balance */}
         </div>
       </div>
@@ -45,7 +45,7 @@ const Walk = () => {
         </MapContainer>
       </div>
 
-      <div className="bg-[#111111] p-4 pb-8">
+      <div className="bg-[#111111] p-4 pb-12">
         <div className="mb-4">
           {activeChallenges.map((challenge, index) => (
             <div 
@@ -64,7 +64,7 @@ const Walk = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mb-8 text-center"> {/* Added text-center class here */}
+        <div className="grid grid-cols-3 gap-4 mb-8 text-center">
           <div>
             <p className="text-xs text-gray-400">DISTANCE</p>
             <p className="text-xs font-bold">{challengeData.distance}</p>
@@ -79,7 +79,7 @@ const Walk = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center mt-4">
           <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
             START
           </Button>
