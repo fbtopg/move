@@ -22,17 +22,17 @@ const ChallengeCard = ({ type, date, active, progress }) => {
 
   return (
     <div 
-      className="w-full max-w-md mx-auto overflow-hidden h-[180px] flex cursor-pointer"
+      className="w-full max-w-md mx-auto overflow-hidden h-[160px] flex cursor-pointer"
       onClick={handleClick}
     >
       <div 
-        className="w-[180px] h-[180px] flex-shrink-0 bg-cover bg-center"
+        className="w-[160px] h-[160px] flex-shrink-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${squareImageUrl})` }}
       ></div>
-      <div className="flex-grow p-5 text-white flex flex-col justify-between">
+      <div className="flex-grow p-4 text-white flex flex-col justify-between">
         <div>
           <p className="text-xs text-white/80">{date}</p>
-          <h2 className="text-2xl font-bold mb-2">{type}</h2>
+          <h2 className="text-xl font-bold mb-2">{type}</h2>
           <div className="flex items-center space-x-2 mb-1">
             <div className="flex -space-x-2">
               {[...Array(3)].map((_, index) => (
