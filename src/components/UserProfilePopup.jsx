@@ -66,12 +66,14 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
               <Button 
                 variant="outline" 
                 size="sm" 
-                className={`text-white bg-gray-700 hover:bg-gray-600 transition-colors h-8 rounded-full ${isFollowing ? 'bg-gray-600' : ''}`}
+                className={`text-white hover:bg-gray-600 transition-colors h-8 rounded-full w-36 flex justify-between items-center px-4 ${
+                  isFollowing ? 'bg-transparent border border-gray-600' : 'bg-gray-700'
+                }`}
                 onClick={toggleFollow}
-                style={{ border: 'none' }}
+                style={{ border: isFollowing ? '1px solid #4B5563' : 'none' }}
               >
-                {isFollowing ? 'Following' : 'Follow'}
-                {!isFollowing && <Plus className="h-4 w-4 ml-1" />}
+                <span>{isFollowing ? 'Following' : 'Follow'}</span>
+                {!isFollowing && <Plus className="h-4 w-4" />}
               </Button>
             </div>
             <Avatar className="w-20 h-20 rounded-full">
