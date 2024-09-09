@@ -15,31 +15,31 @@ const Walk = () => {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      <div className="p-4">
+      <div className="p-4 bg-[#111111]">
         <button 
           onClick={() => navigate('/')} 
-          className="mb-6 text-sm text-gray-400 hover:text-white transition-colors"
+          className="mb-6 text-sm text-white hover:text-gray-200 transition-colors"
         >
           Close
         </button>
 
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-3 gap-4 mb-6 text-center">
           <div>
             <p className="text-xs text-gray-400">DISTANCE</p>
-            <p className="text-sm font-bold">{challengeData.distance}</p>
+            <p className="text-xs font-bold">{challengeData.distance}</p>
           </div>
           <div>
             <p className="text-xs text-gray-400">LIKES</p>
-            <p className="text-sm font-bold">{challengeData.likes}</p>
+            <p className="text-xs font-bold">{challengeData.likes}</p>
           </div>
           <div>
             <p className="text-xs text-gray-400">HIGHEST STREAK</p>
-            <p className="text-sm font-bold">{challengeData.highestStreak}</p>
+            <p className="text-xs font-bold">{challengeData.highestStreak}</p>
           </div>
         </div>
       </div>
 
-      <div className="flex-grow">
+      <div className="flex-grow relative">
         <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -48,10 +48,12 @@ const Walk = () => {
         </MapContainer>
       </div>
 
-      <div className="p-4 flex justify-center">
-        <Button className="w-24 h-24 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-lg font-bold">
-          START
-        </Button>
+      <div className="h-16 bg-[#111111] relative">
+        <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
+            START
+          </Button>
+        </div>
       </div>
     </div>
   );
