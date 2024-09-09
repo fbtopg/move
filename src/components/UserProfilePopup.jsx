@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, useAnimation } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Trophy, Plus, ArrowRight, Gift } from "lucide-react";
+import { Trophy, Plus, ArrowRight } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 
 const getGradient = (name) => {
@@ -31,7 +31,7 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
     if (info.offset.y > 100 || info.velocity.y > 500) {
       onClose();
     } else {
-      controls.start({ y: 0 });
+      controls.start({ y: 0, transition: { type: "spring", stiffness: 300, damping: 30 } });
     }
     setIsDragging(false);
   };
@@ -113,24 +113,6 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
           </div>
           
           <div className="flex mb-8 space-x-8">
-            <div className="flex flex-col items-start">
-              <div 
-                className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
-                style={{
-                  background: 'radial-gradient(circle at center, #222222, #111111)',
-                }}
-                onClick={() => {
-                  navigate('/rewards');
-                  onClose();
-                }}
-              >
-                <Gift className="w-10 h-10 stroke-[0.5]" />
-              </div>
-              <div className="flex items-center mt-2">
-                <span className="text-xs">Rewards</span>
-                <ArrowRight className="w-3 h-3 ml-1" />
-              </div>
-            </div>
             <div className="flex flex-col items-start">
               <div 
                 className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
