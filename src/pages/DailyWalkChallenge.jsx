@@ -42,6 +42,10 @@ const DailyWalkChallenge = () => {
     navigate('/daily-walk-history');
   };
 
+  const handleStartWalking = () => {
+    navigate('/walk');
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
@@ -77,6 +81,7 @@ const DailyWalkChallenge = () => {
 
           <Button 
             className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
+            onClick={handleStartWalking}
           >
             <span>Start walking</span>
             <ArrowRight className="h-6 w-6" />
