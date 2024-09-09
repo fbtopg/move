@@ -14,16 +14,16 @@ const Walk = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <div className="h-screen flex flex-col bg-black text-white">
       <div className="p-4 bg-[#111111]">
         <button 
           onClick={() => navigate('/')} 
-          className="mb-6 text-sm text-white hover:text-gray-200 transition-colors"
+          className="mb-2 text-sm text-white hover:text-gray-200 transition-colors"
         >
           Close
         </button>
 
-        <div className="grid grid-cols-3 gap-4 mb-6 text-center">
+        <div className="grid grid-cols-3 gap-4 mb-2 text-center">
           <div>
             <p className="text-xs text-gray-400">DISTANCE</p>
             <p className="text-xs font-bold">{challengeData.distance}</p>
