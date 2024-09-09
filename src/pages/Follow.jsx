@@ -6,12 +6,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { getRandomProfilePicture } from '../utils/profilePictures';
+import UserProfilePopup from '../components/UserProfilePopup';
 
 const Follow = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('followers');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     if (location.state && location.state.initialTab) {
@@ -48,6 +50,10 @@ const Follow = () => {
     user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.handle.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+  };
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -94,7 +100,7 @@ const Follow = () => {
           <div className="space-y-4">
             {displayUsers.map((user) => (
               <div key={user.id} className="flex items-center justify-between">
-                <div className="flex items-center">
+                <div className="flex items-center cursor-pointer" onClick={() => handleUserClick(user)}>
                   <Avatar className="w-6 h-6 mr-3">
                     <AvatarImage src={getRandomProfilePicture()} alt={user.username} />
                     <AvatarFallback>{user.username.slice(0, 2).toUpperCase()}</AvatarFallback>
@@ -133,6 +139,18 @@ const Follow = () => {
           </div>
         </div>
       </div>
+      {selectedUser && (
+        <UserProfilePopup
+          isOpen={!!selectedUser}
+          onClose={() => setSelectedUser(null)}
+          user={{
+            ...selectedUser,
+            avatarUrl: getRandomProfilePicture(),
+            followers: Math.floor(Math.random() * 1000),
+            following: Math.floor(Math.random() * 1000),
+          }}
+        />
+      )}
     </div>
   );
 };

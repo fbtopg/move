@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
+import UserProfilePopup from './UserProfilePopup';
 
 const getGradient = (name) => {
   const charCode = name.charCodeAt(0);
@@ -13,6 +14,7 @@ const getGradient = (name) => {
 
 const FriendActivity = ({ name, activity, type, profilePicture }) => {
   const [liked, setLiked] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
 
   const getActivityImage = () => {
@@ -56,9 +58,13 @@ const FriendActivity = ({ name, activity, type, profilePicture }) => {
     }
   };
 
+  const handleAvatarClick = () => {
+    setIsProfileOpen(true);
+  };
+
   return (
     <div className="flex items-start space-x-3">
-      <Avatar className="w-10 h-10 mt-1 flex-shrink-0">
+      <Avatar className="w-10 h-10 mt-1 flex-shrink-0 cursor-pointer" onClick={handleAvatarClick}>
         {profilePicture ? (
           <AvatarImage src={profilePicture} alt={name} />
         ) : (
@@ -97,6 +103,17 @@ const FriendActivity = ({ name, activity, type, profilePicture }) => {
           </div>
         </div>
       </div>
+      <UserProfilePopup
+        isOpen={isProfileOpen}
+        onClose={() => setIsProfileOpen(false)}
+        user={{
+          username: name,
+          handle: `@${name.toLowerCase()}`,
+          avatarUrl: profilePicture,
+          followers: Math.floor(Math.random() * 1000),
+          following: Math.floor(Math.random() * 1000),
+        }}
+      />
     </div>
   );
 };

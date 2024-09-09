@@ -6,6 +6,7 @@ import { Search, Share, X, Plus, Check } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { cn } from "@/lib/utils";
+import UserProfilePopup from './UserProfilePopup';
 
 const users = [
   { id: 1, name: "John" },
@@ -27,12 +28,12 @@ const getGradient = (name) => {
   return `linear-gradient(135deg, hsl(${hue1}, 70%, 60%), hsl(${hue2}, 70%, 60%))`;
 };
 
-const UserSearchResult = ({ user, onInvite, isInvited }) => {
+const UserSearchResult = ({ user, onInvite, isInvited, onUserClick }) => {
   const profilePicture = Math.random() > 0.3 ? getRandomProfilePicture() : null;
 
   return (
     <div className="flex items-center justify-between py-2">
-      <div className="flex items-center">
+      <div className="flex items-center cursor-pointer" onClick={() => onUserClick(user)}>
         <Avatar className="w-10 h-10 mr-3">
           {profilePicture ? (
             <AvatarImage src={profilePicture} alt={user.name} />
@@ -63,6 +64,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [invitedUsers, setInvitedUsers] = useState(new Set());
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     if (searchTerm.trim() !== '') {
@@ -114,6 +116,10 @@ const InviteFriends = ({ isOpen, onClose }) => {
     });
   };
 
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+  };
+
   return (
     <motion.div
       initial={{ y: "100%" }}
@@ -145,6 +151,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
                 user={user} 
                 onInvite={handleInvite}
                 isInvited={invitedUsers.has(user.id)}
+                onUserClick={handleUserClick}
               />
             ))
           ) : searchTerm.trim() !== '' && (
@@ -160,6 +167,19 @@ const InviteFriends = ({ isOpen, onClose }) => {
           </Button>
         </div>
       </div>
+      {selectedUser && (
+        <UserProfilePopup
+          isOpen={!!selectedUser}
+          onClose={() => setSelectedUser(null)}
+          user={{
+            username: selectedUser.name,
+            handle: `@${selectedUser.name.toLowerCase()}`,
+            avatarUrl: getRandomProfilePicture(),
+            followers: Math.floor(Math.random() * 1000),
+            following: Math.floor(Math.random() * 1000),
+          }}
+        />
+      )}
     </motion.div>
   );
 };
