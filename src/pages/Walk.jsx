@@ -126,7 +126,7 @@ const Walk = () => {
         </div>
 
         <div className="flex items-center justify-center mt-3">
-          <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
+          <Button className="w-16 h-16 bg-red-500 text-white hover:bg-red-600 transition-colors rounded-full text-sm font-bold">
             START
           </Button>
         </div>
