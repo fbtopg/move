@@ -84,12 +84,12 @@ const Walk = () => {
         </MapContainer>
       </div>
 
-      <div className="bg-[#111111] p-3 pb-10">
-        <div className="mb-3">
+      <div className="bg-[#111111] p-2 pb-8">
+        <div className="mb-2">
           {activeChallenges.map((challenge, index) => (
             <div 
               key={index} 
-              className="flex items-center justify-between h-12 border border-gray-700 rounded-lg p-2 cursor-pointer"
+              className="flex items-center justify-between h-10 border border-gray-700 rounded-lg p-2 cursor-pointer"
               onClick={handleChallengeClick}
             >
               <div>
@@ -97,13 +97,13 @@ const Walk = () => {
                 <p className="text-xs text-gray-400">{challenge.date}</p>
               </div>
               <div className="flex items-center">
-                <img src={challenge.image} alt={challenge.name} className="w-8 h-8 rounded-lg" />
+                <img src={challenge.image} alt={challenge.name} className="w-6 h-6 rounded-lg" />
               </div>
             </div>
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mb-6 text-center">
+        <div className="grid grid-cols-3 gap-4 mb-4 text-center">
           <div>
             <p className="text-xs text-gray-400">DISTANCE</p>
             <p className="text-xs font-bold">{challengeData.distance}</p>
@@ -118,8 +118,8 @@ const Walk = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center mt-3">
-          <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
+        <div className="flex items-center justify-center mt-2">
+          <Button className="w-14 h-14 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
             START
           </Button>
         </div>
