@@ -23,15 +23,15 @@ const Walk = () => {
 
   return (
     <div className="h-screen flex flex-col bg-black text-white">
-      <div className="p-4 bg-[#111111]">
-        <div className="flex justify-between items-center mb-4">
+      <div className="p-2 bg-[#111111]">
+        <div className="flex justify-between items-center">
           <button 
             onClick={() => navigate('/')} 
-            className="text-base text-white hover:text-gray-200 transition-colors"
+            className="text-sm text-white hover:text-gray-200 transition-colors"
           >
             Close
           </button>
-          <h1 className="text-base font-normal">Walk</h1>
+          <h1 className="text-sm font-normal">Walk</h1>
           <div className="w-12"></div> {/* Placeholder for balance */}
         </div>
       </div>
@@ -80,7 +80,7 @@ const Walk = () => {
         </div>
 
         <div className="flex items-center justify-center">
-          <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
+          <Button className="w-12 h-12 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-xs font-bold">
             START
           </Button>
         </div>
