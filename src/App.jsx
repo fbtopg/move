@@ -61,6 +61,7 @@ const App = () => {
 
   useEffect(() => {
     setMounted(true);
+    return () => setMounted(false);
   }, []);
 
   if (!mounted) {
@@ -85,7 +86,8 @@ const App = () => {
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(<App />);
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(<App />);
 } else {
   console.error('Failed to find the root element');
 }
