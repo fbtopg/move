@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Plus, Trophy } from "lucide-react";
+import { Trophy } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 
 const UserProfilePopup = ({ isOpen, onClose, user }) => {
@@ -41,14 +41,14 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
           <div className="flex justify-between items-start mb-4">
             <div>
               <h1 className="text-2xl font-light">{user.username}</h1>
-              <p className="text-sm text-gray-400 mb-2">{user.handle}</p>
+              <p className="text-sm text-gray-400 mb-4">{user.handle}</p>
               <Button 
                 variant="outline" 
                 size="sm" 
-                className={`text-white border-gray-500 hover:bg-gray-700 hover:text-white transition-colors ${isFollowing ? 'bg-gray-700' : 'bg-transparent'}`}
+                className={`text-white bg-gray-700 hover:bg-gray-600 transition-colors ${isFollowing ? 'bg-gray-600' : ''}`}
                 onClick={toggleFollow}
               >
-                {isFollowing ? 'Following' : <><Plus className="h-4 w-4 mr-2" /> Follow</>}
+                {isFollowing ? 'Following' : 'Follow'}
               </Button>
             </div>
             <Avatar className="w-20 h-20 rounded-full">
