@@ -79,11 +79,11 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
         dragElastic={0.2}
         onDragStart={() => setIsDragging(true)}
         onDragEnd={handleDragEnd}
-        className={`fixed inset-x-0 bottom-0 bg-black text-white z-50 ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
-        style={{ touchAction: 'none', height: '90vh', width: '100%' }}
+        className={`fixed inset-0 bg-black text-white z-50 ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        style={{ touchAction: 'none', height: '90vh', top: 'auto', width: '100%', left: 0, right: 0 }}
       >
         <div className="h-full overflow-y-auto" style={{ pointerEvents: isDragging ? 'none' : 'auto' }}>
-          <div className="p-4 flex flex-col h-full w-full max-w-3xl mx-auto">
+          <div className="p-4 flex flex-col h-full w-full">
             <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-8" />
             
             <div className="flex justify-between items-start mb-6">

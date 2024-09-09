@@ -22,7 +22,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
 
   return (
     <div 
-      className="w-full max-w-3xl mx-auto overflow-hidden h-[160px] flex cursor-pointer"
+      className="w-full max-w-md mx-auto overflow-hidden h-[160px] flex cursor-pointer"
       onClick={handleClick}
     >
       <div 
