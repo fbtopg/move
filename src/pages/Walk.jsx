@@ -8,6 +8,7 @@ import 'leaflet/dist/leaflet.css';
 const Walk = () => {
   const navigate = useNavigate();
   const [position, setPosition] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const challengeData = {
     distance: "56.7km",
@@ -25,6 +26,7 @@ const Walk = () => {
 
   const LocationMarker = () => {
     const map = useMap();
+    
     useEffect(() => {
       if (position) {
         map.flyTo(position, map.getZoom());
@@ -40,13 +42,17 @@ const Walk = () => {
     if (!navigator.geolocation) {
       alert('Geolocation is not supported by your browser');
     } else {
+      setIsLoading(true);
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setPosition([position.coords.latitude, position.coords.longitude]);
+          setIsLoading(false);
         },
-        () => {
-          alert('Unable to retrieve your location');
-        }
+        (error) => {
+          setIsLoading(false);
+          alert(`Unable to retrieve your location: ${error.message}`);
+        },
+        { timeout: 10000, enableHighAccuracy: true }
       );
     }
   };
@@ -77,8 +83,9 @@ const Walk = () => {
             <Button
               className="m-4 bg-white text-black hover:bg-gray-200 transition-colors rounded-full p-2"
               onClick={handleFindLocation}
+              disabled={isLoading}
             >
-              <Locate className="h-6 w-6" />
+              {isLoading ? 'Loading...' : <Locate className="h-6 w-6" />}
             </Button>
           </div>
         </MapContainer>
