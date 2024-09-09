@@ -9,16 +9,16 @@ import { cn } from "@/lib/utils";
 import UserProfilePopup from './UserProfilePopup';
 
 const users = [
-  { id: 1, name: "John" },
-  { id: 2, name: "Tate" },
-  { id: 3, name: "Aquafina" },
-  { id: 4, name: "Geonu" },
-  { id: 5, name: "Astrid" },
-  { id: 6, name: "Fitra" },
-  { id: 7, name: "Rissa" },
-  { id: 8, name: "Emma" },
-  { id: 9, name: "Sarah" },
-  { id: 10, name: "Mike" },
+  { id: 1, displayName: "John Doe", username: "john" },
+  { id: 2, displayName: "Tate Modern", username: "tate" },
+  { id: 3, displayName: "Aquafina Waters", username: "aquafina" },
+  { id: 4, displayName: "Geonu Park", username: "geonu" },
+  { id: 5, displayName: "Astrid Lindgren", username: "astrid" },
+  { id: 6, displayName: "Fitra Eri", username: "fitra" },
+  { id: 7, displayName: "Rissa Chahyadi", username: "rissa" },
+  { id: 8, displayName: "Emma Watson", username: "emma" },
+  { id: 9, displayName: "Sarah Connor", username: "sarah" },
+  { id: 10, displayName: "Mike Tyson", username: "mike" },
 ];
 
 const getGradient = (name) => {
@@ -36,14 +36,17 @@ const UserSearchResult = ({ user, onInvite, isInvited, onUserClick }) => {
       <div className="flex items-center cursor-pointer" onClick={() => onUserClick(user)}>
         <Avatar className="w-10 h-10 mr-3">
           {profilePicture ? (
-            <AvatarImage src={profilePicture} alt={user.name} />
+            <AvatarImage src={profilePicture} alt={user.displayName} />
           ) : (
-            <AvatarFallback style={{ background: getGradient(user.name) }} className="text-white font-semibold">
-              {user.name.slice(0, 2).toUpperCase()}
+            <AvatarFallback style={{ background: getGradient(user.displayName) }} className="text-white font-semibold">
+              {user.displayName.slice(0, 2).toUpperCase()}
             </AvatarFallback>
           )}
         </Avatar>
-        <span className="text-white">{user.name}</span>
+        <div>
+          <span className="text-white">{user.displayName}</span>
+          <p className="text-sm text-gray-400">@{user.username}</p>
+        </div>
       </div>
       <Button 
         variant="ghost" 
@@ -69,7 +72,8 @@ const InviteFriends = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (searchTerm.trim() !== '') {
       const filteredUsers = users.filter(user =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase())
+        user.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.username.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setSearchResults(filteredUsers);
     } else {
@@ -172,8 +176,8 @@ const InviteFriends = ({ isOpen, onClose }) => {
           isOpen={!!selectedUser}
           onClose={() => setSelectedUser(null)}
           user={{
-            username: selectedUser.name,
-            handle: `@${selectedUser.name.toLowerCase()}`,
+            username: selectedUser.username,
+            handle: `@${selectedUser.username}`,
             avatarUrl: getRandomProfilePicture(),
             followers: Math.floor(Math.random() * 1000),
             following: Math.floor(Math.random() * 1000),
