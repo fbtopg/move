@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { navItems } from "./nav-items";
 import DailyWalkChallenge from "./pages/DailyWalkChallenge";
 import DailyQuizChallenge from "./pages/DailyQuizChallenge";
@@ -23,7 +23,10 @@ const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("ProtectedRoute - Session:", session);
+    console.log("ProtectedRoute - Loading:", loading);
     if (!loading && !session) {
+      console.log("Redirecting to login");
       navigate('/login');
     }
   }, [session, loading, navigate]);
@@ -32,17 +35,25 @@ const ProtectedRoute = ({ children }) => {
     return <div>Loading...</div>;
   }
 
-  return children;
+  return session ? children : null;
 };
 
 const AppRoutes = () => {
   const { session } = useSupabaseAuth();
+  console.log("AppRoutes - Session:", session);
 
   return (
     <Routes>
-      <Route path="/login" element={session ? <Navigate to="/" replace /> : <Login />} />
+      <Route 
+        path="/login" 
+        element={session ? <Navigate to="/" replace /> : <Login />} 
+      />
       {navItems.map(({ to, page }) => (
-        <Route key={to} path={to} element={<ProtectedRoute>{page}</ProtectedRoute>} />
+        <Route 
+          key={to} 
+          path={to} 
+          element={<ProtectedRoute>{page}</ProtectedRoute>} 
+        />
       ))}
       <Route path="/daily-walk-challenge" element={<ProtectedRoute><DailyWalkChallenge /></ProtectedRoute>} />
       <Route path="/daily-quiz-challenge" element={<ProtectedRoute><DailyQuizChallenge /></ProtectedRoute>} />
@@ -58,17 +69,20 @@ const AppRoutes = () => {
   );
 };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <SupabaseAuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
-      </TooltipProvider>
-    </SupabaseAuthProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  console.log("App component rendered");
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SupabaseAuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </TooltipProvider>
+      </SupabaseAuthProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
