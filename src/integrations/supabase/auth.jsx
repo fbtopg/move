@@ -22,7 +22,10 @@ export const SupabaseAuthProviderInner = ({ children }) => {
   useEffect(() => {
     const getSession = async () => {
       setLoading(true);
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (error) {
+        console.error("Error getting session:", error);
+      }
       console.log("Initial session:", session);
       setSession(session);
       setLoading(false);
@@ -70,10 +73,14 @@ export const SupabaseAuthProviderInner = ({ children }) => {
   };
 
   const logout = async () => {
-    await supabase.auth.signOut();
-    setSession(null);
-    queryClient.invalidateQueries('user');
-    setLoading(false);
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Error signing out:', error);
+    } else {
+      setSession(null);
+      queryClient.invalidateQueries('user');
+      setLoading(false);
+    }
   };
 
   return (
