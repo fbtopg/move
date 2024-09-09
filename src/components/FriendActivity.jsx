@@ -59,7 +59,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
   const handleAvatarClick = () => {
     if (isOwnActivity) {
       navigate('/profile');
-    } else {
+    } else if (onOpenSearchCommunity) {
       onOpenSearchCommunity();
     }
   };
