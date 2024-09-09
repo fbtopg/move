@@ -66,7 +66,7 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
               <Button 
                 variant="outline" 
                 size="sm" 
-                className={`text-white hover:bg-gray-600 transition-colors h-8 rounded-full w-36 flex justify-between items-center px-4 ${
+                className={`text-white hover:bg-gray-600 transition-colors h-8 rounded-full w-32 flex justify-between items-center px-4 ${
                   isFollowing ? 'bg-transparent border border-gray-600' : 'bg-gray-700'
                 }`}
                 onClick={toggleFollow}
@@ -87,7 +87,7 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
             </Avatar>
           </div>
           
-          <div className="flex mb-8">
+          <div className="flex mb-10">
             <div className="mr-24">
               <p className="text-sm text-gray-400 uppercase mb-1">Followers</p>
               <p className="text-sm">{user.followers}</p>
