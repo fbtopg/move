@@ -18,7 +18,7 @@ const Walk = () => {
       <div className="p-4 bg-[#111111]">
         <button 
           onClick={() => navigate('/')} 
-          className="mb-2 text-sm text-white hover:text-gray-200 transition-colors"
+          className="mb-2 text-base text-white hover:text-gray-200 transition-colors"
         >
           Close
         </button>
@@ -48,9 +48,10 @@ const Walk = () => {
         </MapContainer>
       </div>
 
-      <div className="h-16 bg-[#111111] relative">
-        <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
+      <div className="h-32 relative">
+        <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-transparent to-[#111111]"></div>
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-[#111111] flex items-center justify-center">
+          <Button className="w-24 h-24 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-lg font-bold absolute bottom-4">
             START
           </Button>
         </div>
