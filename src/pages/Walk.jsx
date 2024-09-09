@@ -50,8 +50,8 @@ const Walk = () => {
 
       <div className="h-32 relative">
         <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-transparent to-[#111111]"></div>
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-[#111111] flex items-center justify-center">
-          <Button className="w-24 h-24 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-lg font-bold absolute bottom-4">
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-[#111111] flex items-center justify-center">
+          <Button className="w-20 h-20 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-base font-bold">
             START
           </Button>
         </div>
