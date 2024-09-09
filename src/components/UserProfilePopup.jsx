@@ -18,7 +18,7 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
   const navigate = useNavigate();
 
   const handleDragEnd = (event, info) => {
-    if (info.offset.y > 100) {
+    if (info.offset.y > 50 || (info.velocity.y > 500 && info.offset.y > 10)) {
       onClose();
     }
     setIsDragging(false);
@@ -49,7 +49,7 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
       exit={{ y: "100%" }}
       transition={{ type: "spring", damping: 30, stiffness: 300 }}
       drag="y"
-      dragConstraints={{ top: 0 }}
+      dragConstraints={{ top: 0, bottom: 300 }}
       onDragStart={() => setIsDragging(true)}
       onDragEnd={handleDragEnd}
       className={`fixed inset-0 bg-black text-white z-50 ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
@@ -72,7 +72,7 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
                 onClick={toggleFollow}
                 style={{ border: isFollowing ? '1px solid #4B5563' : 'none' }}
               >
-                <span>{isFollowing ? 'Following' : 'Follow'}</span>
+                <span className="text-xs">{isFollowing ? 'Following' : 'Follow'}</span>
                 {!isFollowing && <Plus className="h-4 w-4" />}
               </Button>
             </div>
@@ -87,7 +87,7 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
             </Avatar>
           </div>
           
-          <div className="flex mb-12">
+          <div className="flex mb-16">
             <div className="mr-24">
               <p className="text-sm text-gray-400 uppercase mb-1">Followers</p>
               <p className="text-sm">{user.followers}</p>
