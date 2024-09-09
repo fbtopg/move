@@ -39,21 +39,18 @@ const Walk = () => {
         </div>
       </div>
 
-      <div className="flex-grow relative">
+      <div className="relative flex-grow">
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
+          <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
+            START
+          </Button>
+        </div>
         <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
         </MapContainer>
-      </div>
-
-      <div className="h-16 bg-[#111111] relative">
-        <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
-            START
-          </Button>
-        </div>
       </div>
     </div>
   );
