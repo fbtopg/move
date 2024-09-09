@@ -95,7 +95,7 @@ const FriendActivity = ({ name, activity, type, profilePicture }) => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent`}
+              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"}`}
               onClick={() => setLiked(!liked)}
             >
               <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
