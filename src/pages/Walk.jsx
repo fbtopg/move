@@ -2,7 +2,27 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { MapContainer, TileLayer } from 'react-leaflet';
+import { Signal } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
+
+const GPSSignalIcon = ({ strength }) => {
+  const bars = [1, 2, 3, 4];
+  return (
+    <div className="flex items-center">
+      <Signal className="h-5 w-5 text-green-500" />
+      <div className="flex ml-1">
+        {bars.map((bar) => (
+          <div
+            key={bar}
+            className={`w-1 h-${bar} mx-px ${
+              bar <= strength ? 'bg-green-500' : 'bg-gray-500'
+            }`}
+          ></div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const Walk = () => {
   const navigate = useNavigate();
@@ -32,7 +52,7 @@ const Walk = () => {
             Close
           </button>
           <h1 className="text-base font-semibold">Walk</h1>
-          <div className="w-12"></div> {/* Placeholder for balance */}
+          <GPSSignalIcon strength={3} />
         </div>
       </div>
 
