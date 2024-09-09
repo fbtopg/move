@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { MapContainer, TileLayer } from 'react-leaflet';
-import { ArrowRight } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
 const Walk = () => {
@@ -44,8 +43,7 @@ const Walk = () => {
                 <p className="text-xs text-gray-400">{challenge.date}</p>
               </div>
               <div className="flex items-center">
-                <img src={challenge.image} alt={challenge.name} className="w-8 h-8 rounded-lg mr-2" />
-                <ArrowRight className="h-4 w-4" />
+                <img src={challenge.image} alt={challenge.name} className="w-8 h-8 rounded-lg" />
               </div>
             </div>
           ))}
