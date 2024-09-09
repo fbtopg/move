@@ -19,16 +19,19 @@ export const SupabaseAuthProvider = ({ children }) => {
       setLoading(false);
     };
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       setSession(session);
       queryClient.invalidateQueries('user');
+      if (event === 'SIGNED_IN') {
+        // Redirect to home page or dashboard after sign in
+        window.location.href = '/';
+      }
     });
 
     getSession();
 
     return () => {
       authListener.subscription.unsubscribe();
-      setLoading(false);
     };
   }, [queryClient]);
 
@@ -57,5 +60,6 @@ export const SupabaseAuthUI = () => (
     theme="dark"
     providers={['google']}
     socialLayout="horizontal"
+    redirectTo={`${window.location.origin}/auth/callback`}
   />
 );

@@ -13,21 +13,29 @@ import Achievements from "./pages/Achievements";
 import Follow from "./pages/Follow";
 import Walk from "./pages/Walk";
 import Login from "./pages/Login";
+import AuthCallback from "./pages/AuthCallback";
 import { SupabaseAuthProvider, useSupabaseAuth } from "./integrations/supabase";
 
 const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }) => {
-  const { session } = useSupabaseAuth();
+  const { session, loading } = useSupabaseAuth();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   if (!session) {
     return <Navigate to="/login" replace />;
   }
+
   return children;
 };
 
 const AppRoutes = () => (
   <Routes>
     <Route path="/login" element={<Login />} />
+    <Route path="/auth/callback" element={<AuthCallback />} />
     {navItems.map(({ to, page }) => (
       <Route key={to} path={to} element={<ProtectedRoute>{page}</ProtectedRoute>} />
     ))}
