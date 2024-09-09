@@ -22,15 +22,9 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
   useEffect(() => {
     if (isOpen) {
       controls.start({ y: 0 });
-      document.body.classList.add('no-scroll');
     } else {
       controls.start({ y: "100%" });
-      document.body.classList.remove('no-scroll');
     }
-
-    return () => {
-      document.body.classList.remove('no-scroll');
-    };
   }, [isOpen, controls]);
 
   const handleDragEnd = (event, info) => {
