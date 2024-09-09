@@ -38,14 +38,14 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
         <div className="p-4 flex flex-col h-full w-full">
           <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-8" />
           
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-start mb-4">
             <div>
               <h1 className="text-2xl font-light">{user.username}</h1>
               <p className="text-sm text-gray-400 mb-2">{user.handle}</p>
               <Button 
                 variant="outline" 
                 size="sm" 
-                className={`text-white border-white hover:bg-white hover:text-black transition-colors ${isFollowing ? 'bg-white text-black' : ''}`}
+                className={`text-white border-gray-500 hover:bg-gray-700 hover:text-white transition-colors ${isFollowing ? 'bg-gray-700' : 'bg-transparent'}`}
                 onClick={toggleFollow}
               >
                 {isFollowing ? 'Following' : <><Plus className="h-4 w-4 mr-2" /> Follow</>}
