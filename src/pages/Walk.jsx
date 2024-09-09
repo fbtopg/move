@@ -80,7 +80,7 @@ const Walk = () => {
         </div>
 
         <div className="flex items-center justify-center">
-          <Button className="w-12 h-12 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-xs font-bold">
+          <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
             START
           </Button>
         </div>
