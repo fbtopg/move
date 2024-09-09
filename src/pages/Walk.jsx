@@ -77,9 +77,7 @@ const Walk = () => {
                 <p className="text-sm">{challenge.name}</p>
                 <p className="text-xs text-gray-400">{challenge.date}</p>
               </div>
-              <div className="flex items-center">
-                <img src={challenge.image} alt={challenge.name} className="w-8 h-8 rounded-lg" />
-              </div>
+              <img src={challenge.image} alt={challenge.name} className="w-8 h-8 rounded-lg" />
             </div>
           ))}
         </div>
