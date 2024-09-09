@@ -84,8 +84,8 @@ const Walk = () => {
         </MapContainer>
       </div>
 
-      <div className="bg-[#111111] p-4 pb-12">
-        <div className="mb-4">
+      <div className="bg-[#111111] p-3 pb-10">
+        <div className="mb-3">
           {activeChallenges.map((challenge, index) => (
             <div 
               key={index} 
@@ -103,7 +103,7 @@ const Walk = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mb-8 text-center">
+        <div className="grid grid-cols-3 gap-4 mb-6 text-center">
           <div>
             <p className="text-xs text-gray-400">DISTANCE</p>
             <p className="text-xs font-bold">{challengeData.distance}</p>
@@ -118,7 +118,7 @@ const Walk = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center mt-4">
+        <div className="flex items-center justify-center mt-3">
           <Button className="w-16 h-16 bg-white text-black hover:bg-gray-200 transition-colors rounded-full text-sm font-bold">
             START
           </Button>
