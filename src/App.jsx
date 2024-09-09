@@ -20,22 +20,19 @@ import { SupabaseAuthProvider, useSupabaseAuth } from './integrations/supabase';
 const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }) => {
-  const { session } = useSupabaseAuth();
+  const { session, loading } = useSupabaseAuth();
+  
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  
   return session ? children : <Navigate to="/login" />;
 };
 
 const AppRoutes = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const { session } = useSupabaseAuth();
+  const { session, loading } = useSupabaseAuth();
 
-  useEffect(() => {
-    // Simulate authentication check
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
-
-  if (isLoading) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
@@ -59,20 +56,32 @@ const AppRoutes = () => {
   );
 };
 
-const App = () => (
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <SupabaseAuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
-        </TooltipProvider>
-      </SupabaseAuthProvider>
-    </QueryClientProvider>
-  </React.StrictMode>
-);
+const App = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <SupabaseAuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <BrowserRouter>
+              <AppRoutes />
+            </BrowserRouter>
+          </TooltipProvider>
+        </SupabaseAuthProvider>
+      </QueryClientProvider>
+    </React.StrictMode>
+  );
+};
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
