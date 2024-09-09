@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap, Circle } from 'react-leaflet';
 import { Locate } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
@@ -29,12 +29,12 @@ const Walk = () => {
     
     useEffect(() => {
       if (position) {
-        map.flyTo(position, map.getZoom());
+        map.flyTo(position, 16);
       }
     }, [position, map]);
 
     return position === null ? null : (
-      <Marker position={position}></Marker>
+      <Circle center={position} radius={10} pathOptions={{ color: 'blue', fillColor: 'blue', fillOpacity: 1 }} />
     );
   };
 
@@ -126,7 +126,7 @@ const Walk = () => {
         </div>
 
         <div className="flex items-center justify-center mt-3">
-          <Button className="w-16 h-16 bg-red-500 text-white hover:bg-red-600 transition-colors rounded-full text-sm font-bold">
+          <Button className="w-16 h-16 bg-red-500 hover:bg-red-600 text-white transition-colors rounded-full text-sm font-bold">
             START
           </Button>
         </div>
