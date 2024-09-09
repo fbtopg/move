@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../integrations/supabase/supabase';
+import { useSupabaseAuth } from '../integrations/supabase/auth';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { session } = useSupabaseAuth();
+
+  useEffect(() => {
+    if (session) {
+      navigate('/');
+    }
+  }, [session, navigate]);
 
   const handleGoogleLogin = async () => {
     try {
