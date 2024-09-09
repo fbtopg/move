@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const UserProfilePopup = ({ isOpen, onClose, user }) => {
   const [isDragging, setIsDragging] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
   const navigate = useNavigate();
 
   const handleDragEnd = (event, info) => {
@@ -14,6 +15,10 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
       onClose();
     }
     setIsDragging(false);
+  };
+
+  const toggleFollow = () => {
+    setIsFollowing(!isFollowing);
   };
 
   return (
@@ -33,10 +38,18 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
         <div className="p-4 flex flex-col h-full w-full">
           <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-8" />
           
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex justify-between items-center mb-4">
             <div>
               <h1 className="text-2xl font-light">{user.username}</h1>
-              <p className="text-sm text-gray-400">{user.handle}</p>
+              <p className="text-sm text-gray-400 mb-2">{user.handle}</p>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className={`text-white border-white hover:bg-white hover:text-black transition-colors ${isFollowing ? 'bg-white text-black' : ''}`}
+                onClick={toggleFollow}
+              >
+                {isFollowing ? 'Following' : <><Plus className="h-4 w-4 mr-2" /> Follow</>}
+              </Button>
             </div>
             <Avatar className="w-20 h-20 rounded-full">
               <AvatarImage src={user.avatarUrl} />
@@ -54,14 +67,6 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
               <p className="text-sm">{user.following}</p>
             </div>
           </div>
-          
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="text-white border-white hover:bg-white hover:text-black transition-colors mb-8"
-          >
-            <Plus className="h-4 w-4 mr-2" /> Follow
-          </Button>
           
           <div className="flex mb-8">
             <div className="flex flex-col items-start">
