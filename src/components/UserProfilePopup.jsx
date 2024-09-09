@@ -5,6 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Trophy, Plus, ArrowRight } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 
+const getGradient = (name) => {
+  const charCode = name.charCodeAt(0);
+  const hue1 = (charCode * 7) % 360;
+  const hue2 = (hue1 + 60) % 360;
+  return `linear-gradient(135deg, hsl(${hue1}, 70%, 60%), hsl(${hue2}, 70%, 60%))`;
+};
+
 const UserProfilePopup = ({ isOpen, onClose, user }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -68,8 +75,13 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
               </Button>
             </div>
             <Avatar className="w-20 h-20 rounded-full">
-              <AvatarImage src={user.avatarUrl} />
-              <AvatarFallback>{user.username[0]}</AvatarFallback>
+              {user.avatarUrl ? (
+                <AvatarImage src={user.avatarUrl} />
+              ) : (
+                <AvatarFallback style={{ background: getGradient(user.username) }} className="text-white font-semibold">
+                  {user.username.slice(0, 2).toUpperCase()}
+                </AvatarFallback>
+              )}
             </Avatar>
           </div>
           
