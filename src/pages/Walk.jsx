@@ -73,13 +73,15 @@ const Walk = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           <LocationMarker />
+          <div className="leaflet-bottom leaflet-right" style={{ zIndex: 1000 }}>
+            <Button
+              className="m-4 bg-white text-black hover:bg-gray-200 transition-colors rounded-full p-2"
+              onClick={handleFindLocation}
+            >
+              <Locate className="h-6 w-6" />
+            </Button>
+          </div>
         </MapContainer>
-        <Button
-          className="absolute bottom-4 right-4 bg-white text-black hover:bg-gray-200 transition-colors rounded-full p-2"
-          onClick={handleFindLocation}
-        >
-          <Locate className="h-6 w-6" />
-        </Button>
       </div>
 
       <div className="bg-[#111111] p-4 pb-12">
