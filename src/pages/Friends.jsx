@@ -3,11 +3,9 @@ import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import { getRandomProfilePicture } from '../utils/profilePictures';
-import InviteFriends from '../components/InviteFriends';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
-  const [isInviteOpen, setIsInviteOpen] = useState(false);
   const challenges = [
     { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
     { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
@@ -53,10 +51,6 @@ const Friends = () => {
     { name: "Fitra", activity: "finished walking 1.7km and completed daily walk • 3m", type: "walk" },
   ];
 
-  const handleOpenSearchCommunity = () => {
-    setIsInviteOpen(true);
-  };
-
   const renderActivitySection = (title, activities) => (
     <>
       <h2 className="text-xs font-semibold mb-3 text-gray-400">{title}</h2>
@@ -68,7 +62,6 @@ const Friends = () => {
             activity={activity.activity}
             type={activity.type}
             profilePicture={Math.random() > 0.3 ? getRandomProfilePicture() : null}
-            onOpenSearchCommunity={handleOpenSearchCommunity}
           />
         ))}
       </div>
@@ -123,8 +116,6 @@ const Friends = () => {
         <div className="h-px bg-gray-700"></div>
         {renderActivitySection("EARLIER", earlierActivities)}
       </section>
-
-      <InviteFriends isOpen={isInviteOpen} onClose={() => setIsInviteOpen(false)} />
     </>
   );
 };
