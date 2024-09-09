@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -24,23 +24,40 @@ const ProtectedRoute = ({ children }) => {
   return session ? children : <Navigate to="/login" />;
 };
 
-const AppRoutes = () => (
-  <Routes>
-    <Route path="/login" element={<Login />} />
-    {navItems.map(({ to, page }) => (
-      <Route key={to} path={to} element={<ProtectedRoute>{page}</ProtectedRoute>} />
-    ))}
-    <Route path="/daily-walk-challenge" element={<ProtectedRoute><DailyWalkChallenge /></ProtectedRoute>} />
-    <Route path="/daily-quiz-challenge" element={<ProtectedRoute><DailyQuizChallenge /></ProtectedRoute>} />
-    <Route path="/daily-walk-history" element={<ProtectedRoute><DailyWalkHistory /></ProtectedRoute>} />
-    <Route path="/daily-quiz-history" element={<ProtectedRoute><DailyQuizHistory /></ProtectedRoute>} />
-    <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-    <Route path="/rewards" element={<ProtectedRoute><Rewards /></ProtectedRoute>} />
-    <Route path="/achievements" element={<ProtectedRoute><Achievements /></ProtectedRoute>} />
-    <Route path="/follow" element={<ProtectedRoute><Follow /></ProtectedRoute>} />
-    <Route path="/walk" element={<ProtectedRoute><Walk /></ProtectedRoute>} />
-  </Routes>
-);
+const AppRoutes = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const { session } = useSupabaseAuth();
+
+  useEffect(() => {
+    // Simulate authentication check
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      {navItems.map(({ to, page }) => (
+        <Route key={to} path={to} element={<ProtectedRoute>{page}</ProtectedRoute>} />
+      ))}
+      <Route path="/daily-walk-challenge" element={<ProtectedRoute><DailyWalkChallenge /></ProtectedRoute>} />
+      <Route path="/daily-quiz-challenge" element={<ProtectedRoute><DailyQuizChallenge /></ProtectedRoute>} />
+      <Route path="/daily-walk-history" element={<ProtectedRoute><DailyWalkHistory /></ProtectedRoute>} />
+      <Route path="/daily-quiz-history" element={<ProtectedRoute><DailyQuizHistory /></ProtectedRoute>} />
+      <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+      <Route path="/rewards" element={<ProtectedRoute><Rewards /></ProtectedRoute>} />
+      <Route path="/achievements" element={<ProtectedRoute><Achievements /></ProtectedRoute>} />
+      <Route path="/follow" element={<ProtectedRoute><Follow /></ProtectedRoute>} />
+      <Route path="/walk" element={<ProtectedRoute><Walk /></ProtectedRoute>} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+};
 
 const App = () => (
   <React.StrictMode>
@@ -57,6 +74,11 @@ const App = () => (
   </React.StrictMode>
 );
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(<App />);
+} else {
+  console.error('Failed to find the root element');
+}
 
 export default App;
