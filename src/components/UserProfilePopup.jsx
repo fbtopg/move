@@ -21,10 +21,10 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
 
   useEffect(() => {
     if (isOpen) {
-      controls.start({ y: 0, opacity: 1 });
+      controls.start({ y: 0 });
       document.body.style.overflow = 'hidden';
     } else {
-      controls.start({ y: "100%", opacity: 0 });
+      controls.start({ y: "100%" });
       document.body.style.overflow = '';
     }
 
@@ -70,17 +70,17 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
       )}
       <motion.div
         ref={constraintsRef}
-        initial={{ y: "100%", opacity: 0 }}
+        initial={{ y: "100%" }}
         animate={controls}
-        exit={{ y: "100%", opacity: 0 }}
+        exit={{ y: "100%" }}
         transition={{ type: "spring", damping: 30, stiffness: 300 }}
         drag="y"
         dragConstraints={{ top: 0, bottom: 300 }}
         dragElastic={0.2}
         onDragStart={() => setIsDragging(true)}
         onDragEnd={handleDragEnd}
-        className={`fixed inset-x-0 bottom-0 bg-black text-white z-50 ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
-        style={{ touchAction: 'none', height: '90vh', width: '100%' }}
+        className={`fixed inset-0 bg-black text-white z-50 ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        style={{ touchAction: 'none', height: '90vh', top: 'auto', width: '100%', left: 0, right: 0 }}
       >
         <div className="h-full overflow-y-auto" style={{ pointerEvents: isDragging ? 'none' : 'auto' }}>
           <div className="p-4 flex flex-col h-full w-full">
