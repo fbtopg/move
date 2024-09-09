@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { MapContainer, TileLayer, Marker, useMap, Circle } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap, Circle, CircleMarker } from 'react-leaflet';
 import { Locate } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
@@ -34,7 +34,18 @@ const Walk = () => {
     }, [position, map]);
 
     return position === null ? null : (
-      <Circle center={position} radius={10} pathOptions={{ color: 'blue', fillColor: 'blue', fillOpacity: 1 }} />
+      <>
+        <Circle 
+          center={position} 
+          radius={15} 
+          pathOptions={{ color: '#4a90e2', fillColor: '#4a90e2', fillOpacity: 0.3 }} 
+        />
+        <CircleMarker 
+          center={position} 
+          radius={5} 
+          pathOptions={{ color: '#1c6ed1', fillColor: '#1c6ed1', fillOpacity: 1 }} 
+        />
+      </>
     );
   };
 
