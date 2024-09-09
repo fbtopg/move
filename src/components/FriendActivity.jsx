@@ -3,7 +3,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
-import UserProfilePopup from './UserProfilePopup';
 
 const getGradient = (name) => {
   const charCode = name.charCodeAt(0);
@@ -12,9 +11,8 @@ const getGradient = (name) => {
   return `linear-gradient(135deg, hsl(${hue1}, 70%, 60%), hsl(${hue2}, 70%, 60%))`;
 };
 
-const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = false }) => {
+const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = false, onOpenSearchCommunity }) => {
   const [liked, setLiked] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
 
   const getActivityImage = () => {
@@ -62,7 +60,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
     if (isOwnActivity) {
       navigate('/profile');
     } else {
-      setIsProfileOpen(true);
+      onOpenSearchCommunity();
     }
   };
 
@@ -107,19 +105,6 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
           </div>
         </div>
       </div>
-      {!isOwnActivity && (
-        <UserProfilePopup
-          isOpen={isProfileOpen}
-          onClose={() => setIsProfileOpen(false)}
-          user={{
-            username: name,
-            handle: `@${name.toLowerCase()}`,
-            avatarUrl: profilePicture,
-            followers: Math.floor(Math.random() * 1000),
-            following: Math.floor(Math.random() * 1000),
-          }}
-        />
-      )}
     </div>
   );
 };
