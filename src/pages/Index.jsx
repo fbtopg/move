@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import InviteFriends from '../components/InviteFriends';
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
@@ -8,21 +7,12 @@ import Friends from './Friends';
 import Me from './Me';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { getRandomProfilePicture } from '../utils/profilePictures';
-import { useSupabaseAuth } from '../integrations/supabase';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('community');
   const [isInviteOpen, setIsInviteOpen] = useState(false);
   const [currentView, setCurrentView] = useState('friends');
   const [selectedUser, setSelectedUser] = useState(null);
-  const { session } = useSupabaseAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!session) {
-      navigate('/login');
-    }
-  }, [session, navigate]);
 
   const handleUserClick = (user) => {
     setSelectedUser({
@@ -33,10 +23,6 @@ const Index = () => {
       following: Math.floor(Math.random() * 1000),
     });
   };
-
-  if (!session) {
-    return null; // or a loading spinner
-  }
 
   return (
     <div className="min-h-screen bg-black flex flex-col">
