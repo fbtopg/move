@@ -27,8 +27,11 @@ export const SupabaseAuthProviderInner = ({ children }) => {
       setLoading(false);
     };
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       setSession(session);
+      if (event === 'SIGNED_IN') {
+        await createOrUpdateUser(session.user);
+      }
       queryClient.invalidateQueries('user');
     });
 
@@ -39,6 +42,30 @@ export const SupabaseAuthProviderInner = ({ children }) => {
       setLoading(false);
     };
   }, [queryClient]);
+
+  const createOrUpdateUser = async (user) => {
+    const { data, error } = await supabase
+      .from('users')
+      .select('id')
+      .eq('id', user.id)
+      .single();
+
+    if (error || !data) {
+      const name = user.email.split('@')[0];
+      const { error: insertError } = await supabase
+        .from('users')
+        .insert({
+          id: user.id,
+          name: name,
+          email: user.email,
+          created_at: new Date().toISOString(),
+        });
+
+      if (insertError) {
+        console.error('Error creating user:', insertError);
+      }
+    }
+  };
 
   const logout = async () => {
     await supabase.auth.signOut();
