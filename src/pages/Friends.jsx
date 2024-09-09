@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import { getRandomProfilePicture } from '../utils/profilePictures';
+import UserProfilePopup from '../components/UserProfilePopup';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
+  const [selectedUser, setSelectedUser] = useState(null);
   const challenges = [
     { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
     { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
@@ -51,6 +53,16 @@ const Friends = () => {
     { name: "Fitra", activity: "finished walking 1.7km and completed daily walk • 3m", type: "walk" },
   ];
 
+  const handleUserClick = (user) => {
+    setSelectedUser({
+      username: user.name,
+      handle: `@${user.name.toLowerCase()}`,
+      avatarUrl: getRandomProfilePicture(),
+      followers: Math.floor(Math.random() * 1000),
+      following: Math.floor(Math.random() * 1000),
+    });
+  };
+
   const renderActivitySection = (title, activities) => (
     <>
       <h2 className="text-xs font-semibold mb-3 text-gray-400">{title}</h2>
@@ -62,6 +74,7 @@ const Friends = () => {
             activity={activity.activity}
             type={activity.type}
             profilePicture={Math.random() > 0.3 ? getRandomProfilePicture() : null}
+            onUserClick={() => handleUserClick(activity)}
           />
         ))}
       </div>
@@ -116,6 +129,14 @@ const Friends = () => {
         <div className="h-px bg-gray-700"></div>
         {renderActivitySection("EARLIER", earlierActivities)}
       </section>
+
+      {selectedUser && (
+        <UserProfilePopup
+          isOpen={!!selectedUser}
+          onClose={() => setSelectedUser(null)}
+          user={selectedUser}
+        />
+      )}
     </>
   );
 };
