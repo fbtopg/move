@@ -7,6 +7,14 @@ import { ThemeSupa } from '@supabase/auth-ui-shared';
 const SupabaseAuthContext = createContext();
 
 export const SupabaseAuthProvider = ({ children }) => {
+  return (
+    <SupabaseAuthProviderInner>
+      {children}
+    </SupabaseAuthProviderInner>
+  );
+}
+
+export const SupabaseAuthProviderInner = ({ children }) => {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
   const queryClient = useQueryClient();
@@ -19,19 +27,16 @@ export const SupabaseAuthProvider = ({ children }) => {
       setLoading(false);
     };
 
-    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       setSession(session);
       queryClient.invalidateQueries('user');
-      if (event === 'SIGNED_IN') {
-        // Redirect to home page or dashboard after sign in
-        window.location.href = '/';
-      }
     });
 
     getSession();
 
     return () => {
       authListener.subscription.unsubscribe();
+      setLoading(false);
     };
   }, [queryClient]);
 
@@ -57,9 +62,7 @@ export const SupabaseAuthUI = () => (
   <Auth
     supabaseClient={supabase}
     appearance={{ theme: ThemeSupa }}
-    theme="dark"
-    providers={['google']}
-    socialLayout="horizontal"
-    redirectTo={`${window.location.origin}/auth/callback`}
+    theme="default"
+    providers={[]}
   />
 );
