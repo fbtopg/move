@@ -38,24 +38,25 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
         <div className="p-4 flex flex-col h-full w-full">
           <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-8" />
           
-          <div className="flex justify-between items-start mb-4">
-            <div>
-              <h1 className="text-2xl font-light">{user.username}</h1>
-              <p className="text-sm text-gray-400 mb-4">{user.handle}</p>
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className={`text-white bg-gray-700 hover:bg-gray-600 transition-colors ${isFollowing ? 'bg-gray-600' : ''}`}
-                onClick={toggleFollow}
-              >
-                {isFollowing ? 'Following' : 'Follow'}
-              </Button>
-            </div>
+          <div className="flex items-center mb-6">
             <Avatar className="w-20 h-20 rounded-full">
               <AvatarImage src={user.avatarUrl} />
               <AvatarFallback>{user.username[0]}</AvatarFallback>
             </Avatar>
+            <div className="ml-4">
+              <h1 className="text-2xl font-light">{user.username}</h1>
+              <p className="text-sm text-gray-400">{user.handle}</p>
+            </div>
           </div>
+          
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className={`text-white bg-gray-700 hover:bg-gray-600 transition-colors ${isFollowing ? 'bg-gray-600' : ''} mb-8`}
+            onClick={toggleFollow}
+          >
+            {isFollowing ? 'Following' : 'Follow'}
+          </Button>
           
           <div className="flex mb-12">
             <div className="mr-24">
