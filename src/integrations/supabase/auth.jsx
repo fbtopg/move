@@ -22,21 +22,13 @@ export const SupabaseAuthProviderInner = ({ children }) => {
   useEffect(() => {
     const getSession = async () => {
       setLoading(true);
-      const { data: { session }, error } = await supabase.auth.getSession();
-      if (error) {
-        console.error("Error getting session:", error);
-      }
-      console.log("Initial session:", session);
+      const { data: { session } } = await supabase.auth.getSession();
       setSession(session);
       setLoading(false);
     };
 
-    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log("Auth state changed:", event, session);
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       setSession(session);
-      if (event === 'SIGNED_IN') {
-        await createOrUpdateUser(session.user);
-      }
       queryClient.invalidateQueries('user');
     });
 
@@ -48,39 +40,11 @@ export const SupabaseAuthProviderInner = ({ children }) => {
     };
   }, [queryClient]);
 
-  const createOrUpdateUser = async (user) => {
-    const { data, error } = await supabase
-      .from('users')
-      .select('id')
-      .eq('id', user.id)
-      .single();
-
-    if (error || !data) {
-      const name = user.email.split('@')[0];
-      const { error: insertError } = await supabase
-        .from('users')
-        .insert({
-          id: user.id,
-          name: name,
-          email: user.email,
-          created_at: new Date().toISOString(),
-        });
-
-      if (insertError) {
-        console.error('Error creating user:', insertError);
-      }
-    }
-  };
-
   const logout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.error('Error signing out:', error);
-    } else {
-      setSession(null);
-      queryClient.invalidateQueries('user');
-      setLoading(false);
-    }
+    await supabase.auth.signOut();
+    setSession(null);
+    queryClient.invalidateQueries('user');
+    setLoading(false);
   };
 
   return (
@@ -98,9 +62,7 @@ export const SupabaseAuthUI = () => (
   <Auth
     supabaseClient={supabase}
     appearance={{ theme: ThemeSupa }}
-    theme="dark"
-    providers={['google']}
-    socialLayout="horizontal"
-    socialButtonSize="large"
+    theme="default"
+    providers={[]}
   />
 );
