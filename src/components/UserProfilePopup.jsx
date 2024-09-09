@@ -47,8 +47,14 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
                 size="sm" 
                 className={`text-white bg-gray-700 hover:bg-gray-600 transition-colors h-8 ${isFollowing ? 'bg-gray-600' : ''}`}
                 onClick={toggleFollow}
+                style={{ border: 'none' }}
               >
-                {isFollowing ? 'Following' : <><Plus className="h-4 w-4 mr-1" /> Follow</>}
+                {isFollowing ? 'Following' : (
+                  <>
+                    Follow
+                    <Plus className="h-4 w-4 ml-1" />
+                  </>
+                )}
               </Button>
             </div>
             <Avatar className="w-20 h-20 rounded-full">
