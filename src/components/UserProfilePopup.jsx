@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Trophy } from "lucide-react";
+import { Trophy, Plus } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 
 const UserProfilePopup = ({ isOpen, onClose, user }) => {
@@ -45,10 +45,10 @@ const UserProfilePopup = ({ isOpen, onClose, user }) => {
               <Button 
                 variant="outline" 
                 size="sm" 
-                className={`text-white bg-gray-700 hover:bg-gray-600 transition-colors ${isFollowing ? 'bg-gray-600' : ''}`}
+                className={`text-white bg-gray-700 hover:bg-gray-600 transition-colors h-8 ${isFollowing ? 'bg-gray-600' : ''}`}
                 onClick={toggleFollow}
               >
-                {isFollowing ? 'Following' : 'Follow'}
+                {isFollowing ? 'Following' : <><Plus className="h-4 w-4 mr-1" /> Follow</>}
               </Button>
             </div>
             <Avatar className="w-20 h-20 rounded-full">
