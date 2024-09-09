@@ -31,7 +31,7 @@ const Walk = () => {
           >
             Close
           </button>
-          <h1 className="text-sm font-normal">Walk</h1>
+          <h1 className="text-sm font-semibold">Walk</h1>
           <div className="w-12"></div> {/* Placeholder for balance */}
         </div>
       </div>
