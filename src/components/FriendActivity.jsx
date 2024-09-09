@@ -12,7 +12,7 @@ const getGradient = (name) => {
   return `linear-gradient(135deg, hsl(${hue1}, 70%, 60%), hsl(${hue2}, 70%, 60%))`;
 };
 
-const FriendActivity = ({ name, activity, type, profilePicture }) => {
+const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = false }) => {
   const [liked, setLiked] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
@@ -59,7 +59,11 @@ const FriendActivity = ({ name, activity, type, profilePicture }) => {
   };
 
   const handleAvatarClick = () => {
-    setIsProfileOpen(true);
+    if (isOwnActivity) {
+      navigate('/profile');
+    } else {
+      setIsProfileOpen(true);
+    }
   };
 
   return (
@@ -103,17 +107,19 @@ const FriendActivity = ({ name, activity, type, profilePicture }) => {
           </div>
         </div>
       </div>
-      <UserProfilePopup
-        isOpen={isProfileOpen}
-        onClose={() => setIsProfileOpen(false)}
-        user={{
-          username: name,
-          handle: `@${name.toLowerCase()}`,
-          avatarUrl: profilePicture,
-          followers: Math.floor(Math.random() * 1000),
-          following: Math.floor(Math.random() * 1000),
-        }}
-      />
+      {!isOwnActivity && (
+        <UserProfilePopup
+          isOpen={isProfileOpen}
+          onClose={() => setIsProfileOpen(false)}
+          user={{
+            username: name,
+            handle: `@${name.toLowerCase()}`,
+            avatarUrl: profilePicture,
+            followers: Math.floor(Math.random() * 1000),
+            following: Math.floor(Math.random() * 1000),
+          }}
+        />
+      )}
     </div>
   );
 };

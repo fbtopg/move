@@ -63,6 +63,7 @@ const Me = () => {
             activity={activity.activity}
             type={activity.type}
             profilePicture={userProfilePicture}
+            isOwnActivity={true}
           />
         ))}
       </div>
