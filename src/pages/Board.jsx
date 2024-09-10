@@ -6,6 +6,8 @@ import BottomNavBar from '../components/BottomNavBar';
 const Board = () => {
   const [activeTab, setActiveTab] = React.useState('board');
 
+  const headerItems = ['Quiz', 'News', 'Community'];
+
   const newsItems = [
     { label: "Label", headline: "News Headline", likes: "1.6k", comments: "560" },
     { label: "Label", headline: "News Headline", likes: "1.6k", comments: "560" },
@@ -14,9 +16,9 @@ const Board = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
-        <div className="max-w-md mx-auto p-4">
-          <div className="flex mb-8">
-            {['Quiz', 'News', 'Community'].map((item) => (
+        <div className="max-w-md mx-auto px-4">
+          <div className="flex mb-8 -ml-2">
+            {headerItems.map((item) => (
               <div key={item} className="flex flex-col items-center mr-4">
                 <Button
                   variant="ghost"
@@ -30,9 +32,9 @@ const Board = () => {
           </div>
 
           <h2 className="text-xl font-bold mb-4">Today's Quiz</h2>
-          <div className="bg-white text-black rounded-lg p-4 mb-8 aspect-square flex flex-col justify-between">
-            <p className="text-sm text-gray-600">Quiz #089</p>
-            <h3 className="text-lg font-semibold">How many steps a day should you walk to keep healthy?</h3>
+          <div className="bg-white text-black rounded-lg p-4 mb-8 aspect-square flex flex-col justify-center items-center">
+            <p className="text-sm text-gray-600 mb-4">Quiz #089</p>
+            <h3 className="text-2xl font-light text-center px-4">How many steps a day should you walk to keep healthy?</h3>
           </div>
 
           <h2 className="text-xl font-bold mb-4">News</h2>
