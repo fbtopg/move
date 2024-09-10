@@ -15,7 +15,7 @@ const Comment = ({ author, username, content, timestamp, likes, onLike, onReply 
         <div className="flex items-center space-x-2">
           <p className="text-sm font-semibold">{author}</p>
           <p className="text-xs text-gray-400">@{username}</p>
-          <p className="text-xs text-gray-400">{timestamp}</p>
+          <p className="text-xs text-gray-400">• {timestamp}</p>
         </div>
         <p className="text-sm text-gray-300">{content}</p>
         <div className="flex items-center space-x-4 mt-1">
