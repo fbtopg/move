@@ -2,9 +2,11 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Heart, MessageCircle, ArrowRight } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
+import { useNavigate } from 'react-router-dom';
 
 const Board = () => {
   const [activeTab, setActiveTab] = React.useState('board');
+  const navigate = useNavigate();
 
   const headerItems = ['Quiz', 'News', 'Community'];
 
@@ -13,16 +15,24 @@ const Board = () => {
     { label: "Label", headline: "News Headline", likes: "1.6k", comments: "560" },
   ];
 
+  const handleHeaderItemClick = (item) => {
+    if (item === 'Quiz') {
+      navigate('/quiz');
+    }
+    // Add navigation for other items if needed
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          <div className="flex mb-8 ml-2 mt-8"> {/* Added ml-2 here for left margin */}
+          <div className="flex mb-8 ml-2 mt-8">
             {headerItems.map((item) => (
               <div key={item} className="flex flex-col items-center mr-4">
                 <Button
                   variant="ghost"
                   className="w-16 h-16 rounded-full bg-gray-800 hover:bg-gray-700 focus:outline-none mb-1"
+                  onClick={() => handleHeaderItemClick(item)}
                 >
                   {item[0]}
                 </Button>
@@ -46,7 +56,7 @@ const Board = () => {
             </div>
             <Button
               className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200 transition-colors"
-              onClick={() => console.log('Participate in quiz')}
+              onClick={() => navigate('/quiz')}
             >
               <ArrowRight className="h-6 w-6" />
             </Button>
