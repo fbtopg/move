@@ -39,6 +39,49 @@ const Comment = ({ author, content, timestamp, likes, onLike, onReply }) => {
   );
 };
 
+const AnswerSection = ({ answers, selectedAnswer, handleAnswerSelect, handleSubmitAnswer }) => (
+  <div className="mt-4 mb-6">
+    <h3 className="text-lg font-semibold mb-2">Choose your answer:</h3>
+    <div className="grid grid-cols-2 gap-2">
+      {answers.map((answer) => (
+        <Button
+          key={answer.id}
+          variant={selectedAnswer === answer.id ? "default" : "outline"}
+          className={`h-12 ${
+            selectedAnswer === answer.id
+              ? 'bg-white text-black'
+              : 'bg-transparent text-gray-400 border-gray-400 hover:bg-white hover:text-black'
+          }`}
+          onClick={() => handleAnswerSelect(answer.id)}
+        >
+          {answer.text}
+        </Button>
+      ))}
+    </div>
+    <Button
+      className="w-full mt-4 bg-white text-black hover:bg-gray-200 transition-colors h-12"
+      onClick={handleSubmitAnswer}
+      disabled={!selectedAnswer}
+    >
+      Submit Answer
+    </Button>
+  </div>
+);
+
+const CommentsSection = ({ comments, handleCommentLike, handleCommentReply }) => (
+  <div className="mt-6 mb-20">
+    <h4 className="text-sm font-semibold mb-2">Comments</h4>
+    {comments.map((comment) => (
+      <Comment
+        key={comment.id}
+        {...comment}
+        onLike={() => handleCommentLike(comment.id)}
+        onReply={() => handleCommentReply(comment.id)}
+      />
+    ))}
+  </div>
+);
+
 const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [newComment, setNewComment] = useState('');
@@ -60,7 +103,6 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
   };
 
   const handleSubmitAnswer = () => {
-    // TODO: Implement answer submission logic
     console.log('Submitted answer:', selectedAnswer);
   };
 
@@ -71,7 +113,6 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
   };
 
   const handleCommentReply = (commentId) => {
-    // TODO: Implement reply functionality
     console.log('Reply to comment:', commentId);
   };
 
@@ -144,55 +185,32 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
             </Button>
           </div>
 
-          <div className="mt-4 mb-6">
-            <h3 className="text-lg font-semibold mb-2">Choose your answer:</h3>
-            <div className="grid grid-cols-2 gap-2">
-              {answers.map((answer) => (
-                <Button
-                  key={answer.id}
-                  variant={selectedAnswer === answer.id ? "default" : "outline"}
-                  className={`h-12 ${
-                    selectedAnswer === answer.id
-                      ? 'bg-white text-black'
-                      : 'bg-transparent text-gray-400 border-gray-400 hover:bg-white hover:text-black'
-                  }`}
-                  onClick={() => handleAnswerSelect(answer.id)}
-                >
-                  {answer.text}
-                </Button>
-              ))}
-            </div>
-            <Button
-              className="w-full mt-4 bg-white text-black hover:bg-gray-200 transition-colors h-12"
-              onClick={handleSubmitAnswer}
-              disabled={!selectedAnswer}
-            >
-              Submit Answer
-            </Button>
-          </div>
+          <AnswerSection 
+            answers={answers}
+            selectedAnswer={selectedAnswer}
+            handleAnswerSelect={handleAnswerSelect}
+            handleSubmitAnswer={handleSubmitAnswer}
+          />
 
-          <div className="mt-6">
-            <h4 className="text-sm font-semibold mb-2">Comments</h4>
-            <div className="flex items-center space-x-2 mb-4">
-              <Input
-                type="text"
-                placeholder="Write a comment..."
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                className="flex-grow bg-gray-800 border-gray-700 text-white"
-              />
-              <Button onClick={handleAddComment} disabled={!newComment.trim()}>
-                <Send className="h-4 w-4" />
-              </Button>
-            </div>
-            {comments.map((comment) => (
-              <Comment
-                key={comment.id}
-                {...comment}
-                onLike={() => handleCommentLike(comment.id)}
-                onReply={() => handleCommentReply(comment.id)}
-              />
-            ))}
+          <CommentsSection 
+            comments={comments}
+            handleCommentLike={handleCommentLike}
+            handleCommentReply={handleCommentReply}
+          />
+        </div>
+
+        <div className="fixed bottom-0 left-0 right-0 bg-black p-4">
+          <div className="flex items-center space-x-2">
+            <Input
+              type="text"
+              placeholder="Write a comment..."
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              className="flex-grow bg-gray-800 border-gray-700 text-white"
+            />
+            <Button onClick={handleAddComment} disabled={!newComment.trim()}>
+              <Send className="h-4 w-4" />
+            </Button>
           </div>
         </div>
       </div>
