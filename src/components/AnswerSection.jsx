@@ -22,18 +22,19 @@ const AnswerSection = () => {
   return (
     <div className="mt-4 mb-6">
       <h3 className="text-lg font-semibold mb-2">Choose your answer:</h3>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="space-y-2">
         {answers.map((answer) => (
           <Button
             key={answer.id}
             variant={selectedAnswer === answer.id ? "default" : "outline"}
-            className={`h-12 ${
+            className={`w-full h-12 justify-start ${
               selectedAnswer === answer.id
                 ? 'bg-white text-black'
                 : 'bg-transparent text-gray-400 border-gray-400 hover:bg-white hover:text-black'
             }`}
             onClick={() => handleAnswerSelect(answer.id)}
           >
+            <span className="mr-2">{answer.id}.</span>
             {answer.text}
           </Button>
         ))}
