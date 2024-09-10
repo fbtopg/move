@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle, ArrowRight } from 'lucide-react';
+import { Heart, MessageCircle } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -72,7 +72,10 @@ const Board = () => {
             </div>
           </div>
 
-          <div className="aspect-square mb-8 rounded-lg overflow-hidden relative">
+          <div 
+            className="aspect-square mb-8 rounded-lg overflow-hidden relative cursor-pointer"
+            onClick={() => navigate('/quiz')}
+          >
             <img 
               src={todaysQuiz.image}
               alt="Today's Quiz" 
@@ -86,12 +89,6 @@ const Board = () => {
                 </h3>
               </div>
             </div>
-            <Button
-              className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200 transition-colors"
-              onClick={() => navigate('/quiz')}
-            >
-              <ArrowRight className="h-6 w-6" />
-            </Button>
           </div>
 
           <h2 className="text-xl font-bold mb-4">News</h2>
