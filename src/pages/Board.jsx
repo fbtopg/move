@@ -40,7 +40,7 @@ const Board = () => {
             />
             <div className="absolute inset-0 flex flex-col justify-center p-6">
               <p className="text-sm font-semibold mb-2">Quiz #089</p>
-              <h3 className="text-3xl font-light text-white">
+              <h3 className="text-4xl font-light text-white">
                 What is the capital of Indonesia?
               </h3>
             </div>
