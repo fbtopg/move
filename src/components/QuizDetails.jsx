@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Heart, MessageCircle, Share2 } from 'lucide-react';
+import { ArrowLeft, Heart, MessageCircle, Share2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
@@ -26,7 +26,7 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
         <div 
           className="w-full bg-cover bg-center relative"
           style={{ 
-            backgroundImage: `url(https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5NDMwNjAsImV4cCI6MTc1NzQ3OTA2MH0.j_tghbLb6fbMACrek7Eu4cye3YYIdKhgVLC4ct2u-zU&t=2024-09-10T04%3A37%3A40.433Z)`,
+            backgroundImage: `url(${quiz.image})`,
             marginLeft: 0,
             marginRight: 0,
             height: '50vh'
@@ -38,10 +38,15 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
             className="absolute top-4 left-4 text-white"
             onClick={onClose}
           >
-            <X className="h-6 w-6" />
+            <ArrowLeft className="h-6 w-6" />
           </Button>
-          <div className="absolute bottom-4 left-4 right-4">
-            <h2 className="text-white text-2xl font-light">{quiz.question}</h2>
+          <div className="absolute inset-0 flex flex-col justify-center p-6">
+            <div className="flex flex-col items-start">
+              <p className="text-sm font-semibold mb-2 text-white">Quiz #{quiz.id || '000'}</p>
+              <h3 className="text-4xl font-light text-white mb-4">
+                {quiz.question}
+              </h3>
+            </div>
           </div>
         </div>
         
