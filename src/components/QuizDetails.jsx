@@ -80,7 +80,7 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
               <span className="text-xs">{quiz.comments} Comments</span>
             </Button>
             <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-1" onClick={shareInvite}>
-              <Share2 className="w-4 h-4" />
+              <Share2 className="w-4 w-4" />
             </Button>
           </div>
 
@@ -91,7 +91,11 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
                 <Button
                   key={answer.id}
                   variant={selectedAnswer === answer.id ? "default" : "outline"}
-                  className={`h-12 ${selectedAnswer === answer.id ? 'bg-white text-black' : 'text-white'}`}
+                  className={`h-12 ${
+                    selectedAnswer === answer.id
+                      ? 'bg-white text-black'
+                      : 'bg-transparent text-gray-400 border-gray-400 hover:bg-white hover:text-black'
+                  }`}
                   onClick={() => handleAnswerSelect(answer.id)}
                 >
                   {answer.text}
