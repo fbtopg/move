@@ -1,7 +1,6 @@
 import React from 'react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
 
@@ -70,12 +69,13 @@ const Quiz = () => {
                   )}
                 </div>
                 <div 
-                  className="aspect-square mb-4 rounded-lg overflow-hidden relative"
+                  className="aspect-square mb-4 rounded-lg overflow-hidden relative cursor-pointer"
                   style={{
                     backgroundImage: `url(${quiz.image})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
+                  onClick={() => console.log(`Participate in ${quiz.title}`)}
                 >
                   <div className="absolute inset-0 flex flex-col justify-center p-6">
                     <div className="text-left">
@@ -85,14 +85,6 @@ const Quiz = () => {
                       </h3>
                     </div>
                   </div>
-                  {quiz.status === "active" && (
-                    <Button
-                      className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200 transition-colors"
-                      onClick={() => console.log(`Participate in ${quiz.title}`)}
-                    >
-                      <ArrowRight className="h-6 w-6" />
-                    </Button>
-                  )}
                 </div>
               </div>
             </React.Fragment>
