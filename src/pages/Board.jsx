@@ -29,27 +29,13 @@ const Board = () => {
           <div className="flex mb-8 ml-2 mt-8">
             {headerItems.map((item) => (
               <div key={item} className="flex flex-col items-center mr-4">
-                {item === 'Quiz' ? (
-                  <Button
-                    variant="ghost"
-                    className="w-16 h-16 p-0 hover:bg-transparent focus:outline-none mb-1"
-                    onClick={() => handleHeaderItemClick(item)}
-                  >
-                    <img
-                      src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Giftbox%20(HD).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9HaWZ0Ym94IChIRCkucG5nIiwiaWF0IjoxNzI1OTM3Nzg1LCJleHAiOjE3NTc0NzM3ODV9.mK9yvDgiJF6AHFd-wBx3txvVsq2FnTAmlMyAbOoZLmY&t=2024-09-10T03%3A09%3A45.621Z"
-                      alt="Quiz"
-                      className="w-full h-full object-contain"
-                    />
-                  </Button>
-                ) : (
-                  <Button
-                    variant="ghost"
-                    className="w-16 h-16 rounded-full bg-gray-800 hover:bg-gray-700 focus:outline-none mb-1"
-                    onClick={() => handleHeaderItemClick(item)}
-                  >
-                    {item[0]}
-                  </Button>
-                )}
+                <Button
+                  variant="ghost"
+                  className="w-16 h-16 rounded-full bg-gray-800 hover:bg-gray-700 focus:outline-none mb-1"
+                  onClick={() => handleHeaderItemClick(item)}
+                >
+                  {item[0]}
+                </Button>
                 <span className="text-xs">{item}</span>
               </div>
             ))}
