@@ -30,9 +30,9 @@ const Board = () => {
           </div>
 
           <h2 className="text-xl font-bold mb-4">Today's Quiz</h2>
-          <div className="bg-white text-black rounded-lg p-4 mb-8">
-            <p className="text-sm text-gray-600 mb-2">Quiz #089</p>
-            <h3 className="text-lg font-semibold mb-2">How many steps a day should you walk to keep healthy?</h3>
+          <div className="bg-white text-black rounded-lg p-4 mb-8 aspect-square flex flex-col justify-between">
+            <p className="text-sm text-gray-600">Quiz #089</p>
+            <h3 className="text-lg font-semibold">How many steps a day should you walk to keep healthy?</h3>
           </div>
 
           <h2 className="text-xl font-bold mb-4">News</h2>
