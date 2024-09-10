@@ -126,7 +126,7 @@ const Quiz = () => {
           {activeQuizzes.map((quiz, index) => (
             <React.Fragment key={quiz.id}>
               {index > 0 && <div className="h-px bg-gray-700 my-8"></div>}
-              <QuizItem quiz={quiz} onLike={handleLike} />
+              <QuizItem quiz={quiz} onLike={handleLike} isSquare={index < 3} />
             </React.Fragment>
           ))}
           {finishedQuizzes.length > 0 && (

@@ -5,7 +5,7 @@ import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { shareInvite } from '../utils/shareUtils';
 
-const QuizItem = ({ quiz, onLike, isSmall = false }) => {
+const QuizItem = ({ quiz, onLike, isSmall = false, isSquare = false }) => {
   return (
     <div className={`mb-${isSmall ? '0' : '8'}`}>
       {!isSmall && (
@@ -27,7 +27,7 @@ const QuizItem = ({ quiz, onLike, isSmall = false }) => {
         </div>
       )}
       <div 
-        className={`${isSmall ? 'aspect-square' : 'aspect-[4/3]'} mb-4 rounded-lg overflow-hidden relative cursor-pointer`}
+        className={`${isSmall ? 'aspect-square' : (isSquare ? 'aspect-square' : 'aspect-[4/3]')} mb-4 rounded-lg overflow-hidden relative cursor-pointer`}
         style={{
           backgroundImage: `url(${quiz.image})`,
           backgroundSize: 'cover',
