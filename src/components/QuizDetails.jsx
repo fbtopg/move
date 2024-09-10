@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Heart, MessageCircle, Share2 } from 'lucide-react';
+import { X, Heart, MessageCircle, Share2, ArrowLeft } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
@@ -38,7 +38,7 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
             className="absolute top-4 left-4 text-white"
             onClick={onClose}
           >
-            <X className="h-6 w-6" />
+            <ArrowLeft className="h-6 w-6" />
           </Button>
           <div className="absolute inset-0 flex flex-col justify-center p-6">
             <div className="text-left">
