@@ -3,108 +3,18 @@ import { X, Heart, MessageCircle, Share2, ArrowLeft, Send } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { getRandomProfilePicture } from '../utils/profilePictures';
 import { shareInvite } from '../utils/shareUtils';
-
-const Comment = ({ author, content, timestamp, likes, onLike, onReply }) => {
-  const [isLiked, setIsLiked] = useState(false);
-
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-    onLike();
-  };
-
-  return (
-    <div className="flex items-start space-x-2 mb-4">
-      <Avatar className="w-8 h-8">
-        <AvatarImage src={getRandomProfilePicture()} alt={author} />
-        <AvatarFallback>{author[0]}</AvatarFallback>
-      </Avatar>
-      <div className="flex-1">
-        <p className="text-sm font-semibold">{author}</p>
-        <p className="text-sm text-gray-300">{content}</p>
-        <div className="flex items-center space-x-4 mt-1">
-          <p className="text-xs text-gray-400">{timestamp}</p>
-          <Button variant="ghost" size="sm" onClick={handleLike} className={`p-0 h-auto ${isLiked ? 'text-red-500' : 'text-gray-400'}`}>
-            <Heart className="h-4 w-4 mr-1" />
-            <span className="text-xs">{likes}</span>
-          </Button>
-          <Button variant="ghost" size="sm" onClick={onReply} className="p-0 h-auto text-gray-400">
-            <MessageCircle className="h-4 w-4 mr-1" />
-            <span className="text-xs">Reply</span>
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const AnswerSection = ({ answers, selectedAnswer, handleAnswerSelect, handleSubmitAnswer }) => (
-  <div className="mt-4 mb-6">
-    <h3 className="text-lg font-semibold mb-2">Choose your answer:</h3>
-    <div className="grid grid-cols-2 gap-2">
-      {answers.map((answer) => (
-        <Button
-          key={answer.id}
-          variant={selectedAnswer === answer.id ? "default" : "outline"}
-          className={`h-12 ${
-            selectedAnswer === answer.id
-              ? 'bg-white text-black'
-              : 'bg-transparent text-gray-400 border-gray-400 hover:bg-white hover:text-black'
-          }`}
-          onClick={() => handleAnswerSelect(answer.id)}
-        >
-          {answer.text}
-        </Button>
-      ))}
-    </div>
-    <Button
-      className="w-full mt-4 bg-white text-black hover:bg-gray-200 transition-colors h-12"
-      onClick={handleSubmitAnswer}
-      disabled={!selectedAnswer}
-    >
-      Submit Answer
-    </Button>
-  </div>
-);
-
-const CommentsSection = ({ comments, handleCommentLike, handleCommentReply }) => (
-  <div className="mt-6 mb-20">
-    <h4 className="text-sm font-semibold mb-2">Comments</h4>
-    {comments.map((comment) => (
-      <Comment
-        key={comment.id}
-        {...comment}
-        onLike={() => handleCommentLike(comment.id)}
-        onReply={() => handleCommentReply(comment.id)}
-      />
-    ))}
-  </div>
-);
+import AnswerSection from './AnswerSection';
+import CommentsSection from './CommentsSection';
 
 const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [newComment, setNewComment] = useState('');
+  const [isCommentFocused, setIsCommentFocused] = useState(false);
   const [comments, setComments] = useState([
     { id: 1, author: "Alice", content: "Great question!", timestamp: "2h ago", likes: 5 },
     { id: 2, author: "Bob", content: "I think I know the answer.", timestamp: "1h ago", likes: 3 },
     { id: 3, author: "Charlie", content: "This one's tricky!", timestamp: "30m ago", likes: 2 },
   ]);
-
-  const answers = [
-    { id: 'A', text: 'Jakarta' },
-    { id: 'B', text: 'Surabaya' },
-    { id: 'C', text: 'Bali' },
-    { id: 'D', text: 'Yogyakarta' },
-  ];
-
-  const handleAnswerSelect = (answerId) => {
-    setSelectedAnswer(answerId);
-  };
-
-  const handleSubmitAnswer = () => {
-    console.log('Submitted answer:', selectedAnswer);
-  };
 
   const handleCommentLike = (commentId) => {
     setComments(comments.map(comment => 
@@ -151,7 +61,7 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
         <div 
           className="w-full aspect-square bg-cover bg-center relative"
           style={{ 
-            backgroundImage: `url(https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5NDMwNjAsImV4cCI6MTc1NzQ3OTA2MH0.j_tghbLb6fbMACrek7Eu4cye3YYIdKhgVLC4ct2u-zU&t=2024-09-10T04%3A37%3A40.433Z)`,
+            backgroundImage: `url(https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5NDMwNjAsImV4cCI6MTc1NzQ3OTA2MH0.j_tghBkpc92hU749PoU_fV_q0HSHBg4SZw8FVeNDsa8J0&t=2024-09-10T04%3A37%3A40.433Z)`,
           }}
         >
           <div className="absolute inset-0 flex flex-col justify-center p-6">
@@ -162,7 +72,7 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
           </div>
         </div>
         
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-4 pb-20">
           <div className="flex justify-start items-center mb-4">
             <Button 
               variant="ghost" 
@@ -185,12 +95,7 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
             </Button>
           </div>
 
-          <AnswerSection 
-            answers={answers}
-            selectedAnswer={selectedAnswer}
-            handleAnswerSelect={handleAnswerSelect}
-            handleSubmitAnswer={handleSubmitAnswer}
-          />
+          <AnswerSection />
 
           <CommentsSection 
             comments={comments}
@@ -201,16 +106,30 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
 
         <div className="fixed bottom-0 left-0 right-0 bg-black p-4">
           <div className="flex items-center space-x-2">
-            <Input
-              type="text"
-              placeholder="Write a comment..."
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              className="flex-grow bg-gray-800 border-gray-700 text-white"
-            />
-            <Button onClick={handleAddComment} disabled={!newComment.trim()}>
-              <Send className="h-4 w-4" />
-            </Button>
+            <Avatar className="w-8 h-8">
+              <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" />
+              <AvatarFallback>U</AvatarFallback>
+            </Avatar>
+            <div className="flex-grow relative">
+              <Input
+                type="text"
+                placeholder="Write a comment..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                onFocus={() => setIsCommentFocused(true)}
+                onBlur={() => setIsCommentFocused(false)}
+                className="flex-grow bg-gray-800 border-gray-700 text-white pr-10"
+              />
+              {(isCommentFocused || newComment) && (
+                <Button 
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                  onClick={handleAddComment}
+                  disabled={!newComment.trim()}
+                >
+                  <Send className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
