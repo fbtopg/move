@@ -7,23 +7,10 @@ const Quiz = () => {
   const navigate = useNavigate();
 
   const quizzes = [
-    { title: "Today's Quiz", question: "What is the capital of Indonesia?", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095%20(1).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NSAoMSkucG5nIiwiaWF0IjoxNzI1OTM2MjUwLCJleHAiOjE3NTc0NzIyNTB9.kn7-2IZsbyj28fZxa2AFPlf8HgTv_b8s2GqS3W_qw2M&t=2024-09-10T02%3A44%3A10.934Z" },
-    { title: "Yesterday's Quiz", question: "Which planet is known as the Red Planet?", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095%20(2).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NSAoMikucG5nIiwiaWF0IjoxNzI1OTM2MjgwLCJleHAiOjE3NTc0NzIyODB9.vhfWwRXNNVGGLZVVhOmV7GyRyBZwMwVmOEp1yfLBdQY&t=2024-09-10T02%3A44%3A40.422Z" },
-    { title: "Finished Quiz", question: "What is the largest mammal on Earth?", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5MzYyMjMsImV4cCI6MTc1NzQ3MjIyM30.7AQFM0V8Yl3KkXBPzBOz3KqJfZZoNpOypLo34nXNRVY&t=2024-09-10T02%3A43%3A43.355Z" },
+    { title: "Today's Quiz", question: "What is the capital of Indonesia?", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5Mzg1NzMsImV4cCI6MTc1NzQ3NDU3M30.i7Qjnq4mYr_VgnhL9CkNXXdCIFCLsLKp2lIaZ0ijWmo&t=2024-09-10T03%3A22%3A54.207Z" },
+    { title: "Yesterday's Quiz", question: "Which planet is known as the Red Planet?", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2096.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ni5wbmciLCJpYXQiOjE3MjU5Mzg1OTMsImV4cCI6MTc1NzQ3NDU5M30.F0bZeKm1pv_2ciSkNqRSnp-MyncY9zmrWCsniCG5iZo&t=2024-09-10T03%3A23%3A13.842Z" },
+    { title: "Finished Quiz", question: "What is the largest mammal on Earth?", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2097.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ny5wbmciLCJpYXQiOjE3MjU5Mzg2MTAsImV4cCI6MTc1NzQ3NDYxMH0.-tBzfXj83KjZJmrJWN4UL18P13kZ4Bt6Fwv7n-6E53s&t=2024-09-10T03%3A23%3A31.080Z" },
   ];
-
-  const getBackgroundStyle = (index) => {
-    if (index === 1) { // Yesterday's Quiz
-      return {
-        background: 'linear-gradient(135deg, #4a90e2, #8e44ad)',
-      };
-    } else if (index === 2) { // Finished Quiz
-      return {
-        background: 'linear-gradient(135deg, #2ecc71, #3498db)',
-      };
-    }
-    return {}; // Default (no gradient for Today's Quiz)
-  };
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -42,13 +29,12 @@ const Quiz = () => {
               <h2 className="text-xl font-bold mb-4">{quiz.title}</h2>
               <div 
                 className="aspect-square mb-4 rounded-lg overflow-hidden relative"
-                style={getBackgroundStyle(index)}
+                style={{
+                  backgroundImage: `url(${quiz.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
               >
-                <img 
-                  src={quiz.image}
-                  alt={quiz.title}
-                  className="w-full h-full object-cover"
-                />
                 <div className="absolute inset-0 flex flex-col justify-center p-6">
                   <p className="text-sm font-semibold mb-2">Quiz #{index + 1}</p>
                   <h3 className="text-2xl font-light text-white">
