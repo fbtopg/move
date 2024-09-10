@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
@@ -7,12 +7,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const Board = () => {
-  const [activeTab, setActiveTab] = React.useState('board');
+  const [activeTab, setActiveTab] = useState('board');
   const navigate = useNavigate();
 
   const headerItems = ['Quiz', 'News', 'Community'];
 
-  const todaysQuiz = {
+  const [todaysQuiz, setTodaysQuiz] = useState({
     title: "Today's Quiz",
     question: "What is the capital of Indonesia?",
     image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095%20(1).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NSAoMSkucG5nIiwiaWF0IjoxNzI1OTM2MjUwLCJleHAiOjE3NTc0NzIyNTB9.kn7-2IZsbyj28fZxa2AFPlf8HgTv_b8s2GqS3W_qw2M&t=2024-09-10T02%3A44%3A10.934Z",
@@ -26,19 +26,38 @@ const Board = () => {
     activeParticipants: "16.5k",
     likes: "1.2k",
     comments: "324",
-    shares: "89"
-  };
+    shares: "89",
+    isLiked: false
+  });
 
-  const newsItems = [
-    { label: "Label", headline: "News Headline", likes: "1.6k", comments: "560" },
-    { label: "Label", headline: "News Headline", likes: "1.6k", comments: "560" },
-  ];
+  const [newsItems, setNewsItems] = useState([
+    { id: 1, label: "Label", headline: "News Headline", likes: "1.6k", comments: "560", isLiked: false },
+    { id: 2, label: "Label", headline: "News Headline", likes: "1.6k", comments: "560", isLiked: false },
+  ]);
 
   const handleHeaderItemClick = (item) => {
     if (item === 'Quiz') {
       navigate('/quiz');
     }
     // Add navigation for other items if needed
+  };
+
+  const handleLike = (itemType, itemId) => {
+    if (itemType === 'quiz') {
+      setTodaysQuiz(prev => ({
+        ...prev,
+        isLiked: !prev.isLiked,
+        likes: prev.isLiked ? (parseInt(prev.likes) - 1).toString() + 'k' : (parseInt(prev.likes) + 1).toString() + 'k'
+      }));
+    } else if (itemType === 'news') {
+      setNewsItems(prev => prev.map(item => 
+        item.id === itemId ? {
+          ...item,
+          isLiked: !item.isLiked,
+          likes: item.isLiked ? (parseInt(item.likes) - 0.1).toFixed(1) + 'k' : (parseInt(item.likes) + 0.1).toFixed(1) + 'k'
+        } : item
+      ));
+    }
   };
 
   return (
@@ -95,8 +114,12 @@ const Board = () => {
           </div>
 
           <div className="flex justify-start items-center mb-8">
-            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-1 p-1">
-              <Heart className="w-4 h-4 mr-1" />
+            <Button 
+              variant="ghost" 
+              className={`flex items-center ${todaysQuiz.isLiked ? 'text-red-500' : 'text-gray-400'} hover:text-red-500 mr-1 p-1`}
+              onClick={() => handleLike('quiz')}
+            >
+              <Heart className={`w-4 h-4 mr-1 ${todaysQuiz.isLiked ? 'fill-current' : ''}`} />
               <span className="text-xs">{todaysQuiz.likes}</span>
             </Button>
             <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-1 p-1">
@@ -110,13 +133,19 @@ const Board = () => {
           </div>
 
           <h2 className="text-xl font-bold mb-4">News</h2>
-          {newsItems.map((item, index) => (
-            <div key={index} className="bg-white text-black rounded-lg p-4 mb-4">
+          {newsItems.map((item) => (
+            <div key={item.id} className="bg-white text-black rounded-lg p-4 mb-4">
               <p className="text-sm text-gray-600 mb-2">{item.label}</p>
               <h3 className="text-lg font-semibold mb-2">{item.headline}</h3>
               <div className="flex items-center text-sm text-gray-600">
-                <Heart className="w-4 h-4 mr-1" />
-                <span className="mr-4">{item.likes}</span>
+                <Button 
+                  variant="ghost" 
+                  className={`flex items-center ${item.isLiked ? 'text-red-500' : 'text-gray-600'} hover:text-red-500 mr-2 p-0`}
+                  onClick={() => handleLike('news', item.id)}
+                >
+                  <Heart className={`w-4 h-4 mr-1 ${item.isLiked ? 'fill-current' : ''}`} />
+                  <span>{item.likes}</span>
+                </Button>
                 <MessageCircle className="w-4 h-4 mr-1" />
                 <span>{item.comments}</span>
               </div>
