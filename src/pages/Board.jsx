@@ -134,20 +134,20 @@ const Board = () => {
 
           <h2 className="text-xl font-bold mb-4">News</h2>
           {newsItems.map((item) => (
-            <div key={item.id} className="bg-white text-black rounded-lg p-4 mb-4">
-              <p className="text-sm text-gray-600 mb-2">{item.label}</p>
+            <div key={item.id} className="bg-[#111111] text-white rounded-lg p-4 mb-4">
+              <p className="text-sm text-gray-400 mb-2">{item.label}</p>
               <h3 className="text-lg font-semibold mb-2">{item.headline}</h3>
-              <div className="flex items-center text-sm text-gray-600">
+              <div className="flex items-center text-sm text-gray-400">
                 <Button 
                   variant="ghost" 
-                  className={`flex items-center ${item.isLiked ? 'text-red-500' : 'text-gray-600'} hover:text-red-500 mr-2 p-0`}
+                  className={`flex items-center ${item.isLiked ? 'text-red-500' : 'text-gray-400'} hover:text-red-500 mr-2 p-0`}
                   onClick={() => handleLike('news', item.id)}
                 >
                   <Heart className={`w-4 h-4 mr-1 ${item.isLiked ? 'fill-current' : ''}`} />
-                  <span>{item.likes}</span>
+                  <span className="text-xs">{item.likes}</span>
                 </Button>
                 <MessageCircle className="w-4 h-4 mr-1" />
-                <span>{item.comments}</span>
+                <span className="text-xs">{item.comments}</span>
               </div>
             </div>
           ))}
