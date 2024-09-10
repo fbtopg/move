@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle } from 'lucide-react';
+import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -23,7 +23,10 @@ const Board = () => {
       { id: 4, name: "Sarah" },
       { id: 5, name: "Mike" },
     ],
-    activeParticipants: "16.5k"
+    activeParticipants: "16.5k",
+    likes: "1.2k",
+    comments: "324",
+    shares: "89"
   };
 
   const newsItems = [
@@ -73,7 +76,7 @@ const Board = () => {
           </div>
 
           <div 
-            className="aspect-square mb-8 rounded-lg overflow-hidden relative cursor-pointer"
+            className="aspect-square mb-4 rounded-lg overflow-hidden relative cursor-pointer"
             onClick={() => navigate('/quiz')}
           >
             <img 
@@ -89,6 +92,21 @@ const Board = () => {
                 </h3>
               </div>
             </div>
+          </div>
+
+          <div className="flex justify-between items-center mb-8">
+            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white">
+              <Heart className="w-5 h-5 mr-2" />
+              <span>{todaysQuiz.likes}</span>
+            </Button>
+            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white">
+              <MessageCircle className="w-5 h-5 mr-2" />
+              <span>{todaysQuiz.comments}</span>
+            </Button>
+            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white">
+              <Share2 className="w-5 h-5 mr-2" />
+              <span>{todaysQuiz.shares}</span>
+            </Button>
           </div>
 
           <h2 className="text-xl font-bold mb-4">News</h2>
