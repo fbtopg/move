@@ -3,12 +3,28 @@ import { Button } from "@/components/ui/button";
 import { Heart, MessageCircle, ArrowRight } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const Board = () => {
   const [activeTab, setActiveTab] = React.useState('board');
   const navigate = useNavigate();
 
   const headerItems = ['Quiz', 'News', 'Community'];
+
+  const todaysQuiz = {
+    title: "Today's Quiz",
+    question: "What is the capital of Indonesia?",
+    image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095%20(1).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NSAoMSkucG5nIiwiaWF0IjoxNzI1OTM2MjUwLCJleHAiOjE3NTc0NzIyNTB9.kn7-2IZsbyj28fZxa2AFPlf8HgTv_b8s2GqS3W_qw2M&t=2024-09-10T02%3A44%3A10.934Z",
+    participants: [
+      { id: 1, name: "John" },
+      { id: 2, name: "Emma" },
+      { id: 3, name: "Alex" },
+      { id: 4, name: "Sarah" },
+      { id: 5, name: "Mike" },
+    ],
+    activeParticipants: "16.5k"
+  };
 
   const newsItems = [
     { label: "Label", headline: "News Headline", likes: "1.6k", comments: "560" },
@@ -44,15 +60,28 @@ const Board = () => {
           <h2 className="text-xl font-bold mb-4">Today's Quiz</h2>
           <div className="aspect-square mb-8 rounded-lg overflow-hidden relative">
             <img 
-              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095%20(1).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NSAoMSkucG5nIiwiaWF0IjoxNzI1OTM2MjUwLCJleHAiOjE3NTc0NzIyNTB9.kn7-2IZsbyj28fZxa2AFPlf8HgTv_b8s2GqS3W_qw2M&t=2024-09-10T02%3A44%3A10.934Z" 
+              src={todaysQuiz.image}
               alt="Today's Quiz" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 flex flex-col justify-center p-6">
-              <p className="text-sm font-semibold mb-2">Quiz #089</p>
-              <h3 className="text-4xl font-light text-white">
-                What is the capital of Indonesia?
-              </h3>
+            <div className="absolute inset-0 flex flex-col justify-between p-6">
+              <div>
+                <p className="text-sm font-semibold mb-2">Quiz #089</p>
+                <h3 className="text-4xl font-light text-white mb-4">
+                  {todaysQuiz.question}
+                </h3>
+              </div>
+              <div className="flex items-center">
+                <div className="flex -space-x-2 overflow-hidden">
+                  {todaysQuiz.participants.map((participant) => (
+                    <Avatar key={participant.id} className="inline-block h-8 w-8 rounded-full ring-2 ring-black">
+                      <AvatarImage src={getRandomProfilePicture()} alt={participant.name} />
+                      <AvatarFallback>{participant.name[0]}</AvatarFallback>
+                    </Avatar>
+                  ))}
+                </div>
+                <span className="ml-2 text-sm text-white">{todaysQuiz.activeParticipants} active</span>
+              </div>
             </div>
             <Button
               className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200 transition-colors"
