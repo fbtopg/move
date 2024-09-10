@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle, Share2 } from 'lucide-react';
+import { Heart, MessageCircle, Share2, HelpCircle, Newspaper, Users } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,7 +11,11 @@ const Board = () => {
   const [activeTab, setActiveTab] = useState('board');
   const navigate = useNavigate();
 
-  const headerItems = ['Quiz', 'News', 'Community'];
+  const headerItems = [
+    { name: 'Quiz', icon: HelpCircle },
+    { name: 'News', icon: Newspaper },
+    { name: 'Community', icon: Users }
+  ];
 
   const [todaysQuiz, setTodaysQuiz] = useState({
     title: "Today's Quiz",
@@ -66,15 +70,15 @@ const Board = () => {
         <div className="max-w-md mx-auto p-2">
           <div className="flex mb-8 ml-2 mt-8">
             {headerItems.map((item) => (
-              <div key={item} className="flex flex-col items-center mr-4">
+              <div key={item.name} className="flex flex-col items-center mr-4">
                 <Button
                   variant="ghost"
-                  className="w-16 h-16 rounded-full bg-gray-800 hover:bg-gray-700 focus:outline-none mb-1"
-                  onClick={() => handleHeaderItemClick(item)}
+                  className="w-16 h-16 rounded-full bg-gray-800 hover:bg-gray-700 focus:outline-none mb-1 flex items-center justify-center"
+                  onClick={() => handleHeaderItemClick(item.name)}
                 >
-                  {item[0]}
+                  <item.icon className="w-6 h-6" />
                 </Button>
-                <span className="text-xs">{item}</span>
+                <span className="text-xs">{item.name}</span>
               </div>
             ))}
           </div>
