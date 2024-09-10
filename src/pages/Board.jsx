@@ -116,10 +116,10 @@ const Board = () => {
           <div className="flex justify-start items-center mb-8">
             <Button 
               variant="ghost" 
-              className={`flex items-center ${todaysQuiz.isLiked ? 'text-red-500' : 'text-gray-400'} hover:text-red-500 mr-4 p-1`}
+              className="flex items-center text-white hover:text-white mr-4 p-1"
               onClick={() => handleLike('quiz')}
             >
-              <Heart className={`w-4 h-4 mr-1 ${todaysQuiz.isLiked ? 'fill-current' : ''}`} />
+              <Heart className={`w-4 h-4 mr-1 ${todaysQuiz.isLiked ? 'fill-red-500 text-red-500' : ''}`} />
               <span className="text-xs">{todaysQuiz.likes} Likes</span>
             </Button>
             <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-4 p-1">
@@ -139,10 +139,10 @@ const Board = () => {
               <div className="flex items-center text-sm text-gray-400">
                 <Button 
                   variant="ghost" 
-                  className={`flex items-center ${item.isLiked ? 'text-red-500' : 'text-gray-400'} hover:text-red-500 mr-4 p-0`}
+                  className="flex items-center text-white hover:text-white mr-4 p-0"
                   onClick={() => handleLike('news', item.id)}
                 >
-                  <Heart className={`w-4 h-4 mr-1 ${item.isLiked ? 'fill-current' : ''}`} />
+                  <Heart className={`w-4 h-4 mr-1 ${item.isLiked ? 'fill-red-500 text-red-500' : ''}`} />
                   <span className="text-xs">{item.likes} Likes</span>
                 </Button>
                 <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-4 p-0">
