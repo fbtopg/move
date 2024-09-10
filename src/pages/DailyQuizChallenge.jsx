@@ -41,6 +41,10 @@ const DailyQuizChallenge = () => {
     navigate('/daily-quiz-history');
   };
 
+  const handleCheckTodaysQuiz = () => {
+    navigate('/board');
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
@@ -76,6 +80,7 @@ const DailyQuizChallenge = () => {
 
           <Button 
             className="w-full bg-white text-black hover:bg-gray-200 transition-colors mb-4 h-16 flex justify-between items-center px-6"
+            onClick={handleCheckTodaysQuiz}
           >
             <span>Check today's quiz</span>
             <ArrowRight className="h-6 w-6" />
