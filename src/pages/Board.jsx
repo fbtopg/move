@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle, Share } from 'lucide-react';
+import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -127,7 +127,7 @@ const Board = () => {
               <span className="text-xs">{todaysQuiz.comments} Comments</span>
             </Button>
             <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-1" onClick={shareInvite}>
-              <Share className="w-4 h-4" />
+              <Share2 className="w-4 h-4" />
             </Button>
           </div>
 
@@ -150,7 +150,7 @@ const Board = () => {
                   <span className="text-xs">{item.comments} Comments</span>
                 </Button>
                 <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-0" onClick={shareInvite}>
-                  <Share className="w-4 h-4" />
+                  <Share2 className="w-4 h-4" />
                 </Button>
               </div>
             </div>
