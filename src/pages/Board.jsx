@@ -7,6 +7,20 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { shareInvite } from '../utils/shareUtils';
 
+const Comment = ({ author, content, timestamp }) => (
+  <div className="flex items-start space-x-2 mb-4">
+    <Avatar className="w-8 h-8">
+      <AvatarImage src={getRandomProfilePicture()} alt={author} />
+      <AvatarFallback>{author[0]}</AvatarFallback>
+    </Avatar>
+    <div className="flex-1">
+      <p className="text-sm font-semibold">{author}</p>
+      <p className="text-sm text-gray-300">{content}</p>
+      <p className="text-xs text-gray-400 mt-1">{timestamp}</p>
+    </div>
+  </div>
+);
+
 const Board = () => {
   const [activeTab, setActiveTab] = useState('board');
   const navigate = useNavigate();
@@ -31,12 +45,13 @@ const Board = () => {
     activeParticipants: "16.5k",
     likes: "1.2k",
     comments: "324",
-    isLiked: false
+    isLiked: false,
+    isCommentsOpen: false
   });
 
   const [newsItems, setNewsItems] = useState([
-    { id: 1, label: "Label", headline: "News Headline", likes: "1.6k", comments: "560", isLiked: false },
-    { id: 2, label: "Label", headline: "News Headline", likes: "1.6k", comments: "560", isLiked: false },
+    { id: 1, label: "Label", headline: "News Headline", likes: "1.6k", comments: "560", isLiked: false, isCommentsOpen: false },
+    { id: 2, label: "Label", headline: "News Headline", likes: "1.6k", comments: "560", isLiked: false, isCommentsOpen: false },
   ]);
 
   const handleHeaderItemClick = (item) => {
@@ -63,6 +78,25 @@ const Board = () => {
       ));
     }
   };
+
+  const toggleComments = (itemType, itemId) => {
+    if (itemType === 'quiz') {
+      setTodaysQuiz(prev => ({
+        ...prev,
+        isCommentsOpen: !prev.isCommentsOpen
+      }));
+    } else if (itemType === 'news') {
+      setNewsItems(prev => prev.map(item =>
+        item.id === itemId ? { ...item, isCommentsOpen: !item.isCommentsOpen } : item
+      ));
+    }
+  };
+
+  const mockComments = [
+    { author: "Alice", content: "Great question!", timestamp: "2h ago" },
+    { author: "Bob", content: "I think I know the answer.", timestamp: "1h ago" },
+    { author: "Charlie", content: "This one's tricky!", timestamp: "30m ago" },
+  ];
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -117,7 +151,7 @@ const Board = () => {
             </div>
           </div>
 
-          <div className="flex justify-start items-center mb-8">
+          <div className="flex justify-start items-center mb-4">
             <Button 
               variant="ghost" 
               className={`flex items-center ${todaysQuiz.isLiked ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
@@ -126,7 +160,11 @@ const Board = () => {
               <Heart className={`w-4 h-4 mr-1 ${todaysQuiz.isLiked ? 'fill-red-500 text-red-500' : ''}`} />
               <span className="text-xs">{todaysQuiz.likes} Likes</span>
             </Button>
-            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-4 p-1">
+            <Button 
+              variant="ghost" 
+              className={`flex items-center ${todaysQuiz.isCommentsOpen ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
+              onClick={() => toggleComments('quiz')}
+            >
               <MessageCircle className="w-4 h-4 mr-1" />
               <span className="text-xs">{todaysQuiz.comments} Comments</span>
             </Button>
@@ -134,6 +172,15 @@ const Board = () => {
               <Share2 className="w-4 h-4" />
             </Button>
           </div>
+
+          {todaysQuiz.isCommentsOpen && (
+            <div className="mt-4 bg-gray-900 p-4 rounded-lg mb-4">
+              <h4 className="text-sm font-semibold mb-2">Comments</h4>
+              {mockComments.map((comment, index) => (
+                <Comment key={index} {...comment} />
+              ))}
+            </div>
+          )}
 
           <h2 className="text-xl font-bold mb-4">News</h2>
           {newsItems.map((item) => (
@@ -149,7 +196,11 @@ const Board = () => {
                   <Heart className={`w-4 h-4 mr-1 ${item.isLiked ? 'fill-red-500 text-red-500' : ''}`} />
                   <span className="text-xs">{item.likes} Likes</span>
                 </Button>
-                <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-4 p-0">
+                <Button 
+                  variant="ghost" 
+                  className={`flex items-center ${item.isCommentsOpen ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-0`}
+                  onClick={() => toggleComments('news', item.id)}
+                >
                   <MessageCircle className="w-4 h-4 mr-1" />
                   <span className="text-xs">{item.comments} Comments</span>
                 </Button>
@@ -157,6 +208,14 @@ const Board = () => {
                   <Share2 className="w-4 h-4" />
                 </Button>
               </div>
+              {item.isCommentsOpen && (
+                <div className="mt-4 bg-gray-800 p-4 rounded-lg">
+                  <h4 className="text-sm font-semibold mb-2">Comments</h4>
+                  {mockComments.map((comment, index) => (
+                    <Comment key={index} {...comment} />
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
