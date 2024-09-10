@@ -94,12 +94,12 @@ const Board = () => {
             </div>
           </div>
 
-          <div className="flex justify-between items-center mb-8">
-            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white">
+          <div className="flex justify-start items-center mb-8">
+            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-4">
               <Heart className="w-5 h-5 mr-2" />
               <span>{todaysQuiz.likes}</span>
             </Button>
-            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white">
+            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-4">
               <MessageCircle className="w-5 h-5 mr-2" />
               <span>{todaysQuiz.comments}</span>
             </Button>
