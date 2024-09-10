@@ -9,7 +9,7 @@ const BottomNavBar = ({ activeTab, setActiveTab }) => {
   const navItems = [
     { id: 'community', icon: Globe, label: 'Community', route: '/' },
     { id: 'walk', icon: Zap, label: 'Walk', route: '/walk' },
-    { id: 'board', icon: LayoutGrid, label: 'Board', route: null },
+    { id: 'board', icon: LayoutGrid, label: 'Board', route: '/board' },
     { id: 'profile', icon: Avatar, label: 'Profile', route: '/profile' },
   ];
 
