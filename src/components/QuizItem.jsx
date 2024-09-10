@@ -38,7 +38,7 @@ const QuizItem = ({ quiz, onLike, isSmall = false }) => {
         <div className="absolute inset-0 flex flex-col justify-center p-6">
           <div className="text-left">
             {!isSmall && <p className="text-sm font-semibold mb-2">Quiz #{quiz.id}</p>}
-            <h3 className={`${isSmall ? 'text-lg' : 'text-4xl'} font-light text-white mb-4`}>
+            <h3 className={`${isSmall ? 'text-base' : 'text-4xl'} font-light text-white mb-4`}>
               {quiz.question}
             </h3>
           </div>
