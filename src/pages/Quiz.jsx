@@ -25,30 +25,33 @@ const Quiz = () => {
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
           {quizzes.map((quiz, index) => (
-            <div key={index} className="mb-8">
-              <h2 className="text-xl font-bold mb-4">{quiz.title}</h2>
-              <div 
-                className="aspect-square mb-4 rounded-lg overflow-hidden relative"
-                style={{
-                  backgroundImage: `url(${quiz.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              >
-                <div className="absolute inset-0 flex flex-col justify-center p-6">
-                  <p className="text-sm font-semibold mb-2">Quiz #{index + 1}</p>
-                  <h3 className="text-2xl font-light text-white">
-                    {quiz.question}
-                  </h3>
-                </div>
-                <Button
-                  className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200 transition-colors"
-                  onClick={() => console.log(`Participate in ${quiz.title}`)}
+            <React.Fragment key={index}>
+              {index > 0 && <div className="h-px bg-gray-700 my-8"></div>}
+              <div className="mb-8">
+                <h2 className="text-xl font-bold mb-4">{quiz.title}</h2>
+                <div 
+                  className="aspect-square mb-4 rounded-lg overflow-hidden relative"
+                  style={{
+                    backgroundImage: `url(${quiz.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
                 >
-                  <ArrowRight className="h-6 w-6" />
-                </Button>
+                  <div className="absolute inset-0 flex flex-col justify-center p-6">
+                    <p className="text-sm font-semibold mb-2">Quiz #{index + 1}</p>
+                    <h3 className="text-4xl font-light text-white">
+                      {quiz.question}
+                    </h3>
+                  </div>
+                  <Button
+                    className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200 transition-colors"
+                    onClick={() => console.log(`Participate in ${quiz.title}`)}
+                  >
+                    <ArrowRight className="h-6 w-6" />
+                  </Button>
+                </div>
               </div>
-            </div>
+            </React.Fragment>
           ))}
         </div>
       </div>
