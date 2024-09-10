@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { X, Heart, MessageCircle, Share2, ArrowLeft } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -20,6 +20,19 @@ const Comment = ({ author, content, timestamp }) => (
 );
 
 const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+
+  const answers = [
+    { id: 'A', text: 'Jakarta' },
+    { id: 'B', text: 'Surabaya' },
+    { id: 'C', text: 'Bali' },
+    { id: 'D', text: 'Yogyakarta' },
+  ];
+
+  const handleAnswerSelect = (answerId) => {
+    setSelectedAnswer(answerId);
+  };
+
   return (
     <div className="fixed inset-0 bg-black z-50 overflow-y-auto">
       <div className="relative h-screen flex flex-col">
@@ -69,6 +82,22 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
             <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-1" onClick={shareInvite}>
               <Share2 className="w-4 h-4" />
             </Button>
+          </div>
+
+          <div className="mt-4 mb-6">
+            <h3 className="text-lg font-semibold mb-2">Choose your answer:</h3>
+            <div className="grid grid-cols-2 gap-2">
+              {answers.map((answer) => (
+                <Button
+                  key={answer.id}
+                  variant={selectedAnswer === answer.id ? "default" : "outline"}
+                  className={`h-12 ${selectedAnswer === answer.id ? 'bg-white text-black' : 'text-white'}`}
+                  onClick={() => handleAnswerSelect(answer.id)}
+                >
+                  {answer.text}
+                </Button>
+              ))}
+            </div>
           </div>
 
           {quiz.isCommentsOpen && (
