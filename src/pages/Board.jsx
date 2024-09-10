@@ -57,30 +57,33 @@ const Board = () => {
             ))}
           </div>
 
-          <h2 className="text-xl font-bold mb-4">Today's Quiz</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold">Today's Quiz</h2>
+            <div className="flex items-center">
+              <div className="flex -space-x-2 overflow-hidden mr-2">
+                {todaysQuiz.participants.slice(0, 3).map((participant) => (
+                  <Avatar key={participant.id} className="inline-block h-6 w-6 rounded-full ring-2 ring-black">
+                    <AvatarImage src={getRandomProfilePicture()} alt={participant.name} />
+                    <AvatarFallback>{participant.name[0]}</AvatarFallback>
+                  </Avatar>
+                ))}
+              </div>
+              <span className="text-xs text-gray-400">{todaysQuiz.activeParticipants} active</span>
+            </div>
+          </div>
+
           <div className="aspect-square mb-8 rounded-lg overflow-hidden relative">
             <img 
               src={todaysQuiz.image}
               alt="Today's Quiz" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 flex flex-col justify-between p-6">
-              <div className="flex flex-col items-start justify-center h-full">
+            <div className="absolute inset-0 flex flex-col justify-center p-6">
+              <div className="flex flex-col items-start">
                 <p className="text-sm font-semibold mb-2">Quiz #089</p>
                 <h3 className="text-4xl font-light text-white mb-4 text-left">
                   {todaysQuiz.question}
                 </h3>
-              </div>
-              <div className="flex items-center">
-                <div className="flex -space-x-2 overflow-hidden">
-                  {todaysQuiz.participants.map((participant) => (
-                    <Avatar key={participant.id} className="inline-block h-8 w-8 rounded-full ring-2 ring-black">
-                      <AvatarImage src={getRandomProfilePicture()} alt={participant.name} />
-                      <AvatarFallback>{participant.name[0]}</AvatarFallback>
-                    </Avatar>
-                  ))}
-                </div>
-                <span className="ml-2 text-sm text-white">{todaysQuiz.activeParticipants} active</span>
               </div>
             </div>
             <Button
