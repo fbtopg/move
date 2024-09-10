@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getRandomProfilePicture } from '../utils/profilePictures';
 import QuizItem from '../components/QuizItem';
 
 const Quiz = () => {
@@ -72,6 +70,16 @@ const Quiz = () => {
       comments: "450",
       isLiked: false
     },
+    { 
+      id: 5,
+      title: "Finished", 
+      question: "What is the largest organ in the human body?", 
+      image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2099.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5OS5wbmciLCJpYXQiOjE3MjU5NTA0MzAsImV4cCI6MTc1NzQ4NjQzMH0.vON3tWHlTOBnqPDjvXXE8Uy8Oj8Yl_3QY3cL4gkKBvY&t=2024-09-10T06%3A40%3A30.760Z",
+      status: "finished",
+      likes: "1.3k",
+      comments: "380",
+      isLiked: false
+    },
   ]);
 
   const handleLike = (id) => {
@@ -79,6 +87,9 @@ const Quiz = () => {
       quiz.id === id ? { ...quiz, isLiked: !quiz.isLiked } : quiz
     ));
   };
+
+  const activeQuizzes = quizzes.filter(quiz => quiz.status !== "finished");
+  const finishedQuizzes = quizzes.filter(quiz => quiz.status === "finished");
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -92,12 +103,23 @@ const Quiz = () => {
       </div>
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          {quizzes.map((quiz, index) => (
+          {activeQuizzes.map((quiz, index) => (
             <React.Fragment key={quiz.id}>
               {index > 0 && <div className="h-px bg-gray-700 my-8"></div>}
               <QuizItem quiz={quiz} onLike={handleLike} />
             </React.Fragment>
           ))}
+          {finishedQuizzes.length > 0 && (
+            <>
+              <div className="h-px bg-gray-700 my-8"></div>
+              <h2 className="text-xl font-bold mb-4">Finished Quizzes</h2>
+              <div className="grid grid-cols-2 gap-4">
+                {finishedQuizzes.map((quiz) => (
+                  <QuizItem key={quiz.id} quiz={quiz} onLike={handleLike} isSmall />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
