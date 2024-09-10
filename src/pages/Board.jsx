@@ -32,9 +32,12 @@ const Board = () => {
           </div>
 
           <h2 className="text-xl font-bold mb-4">Today's Quiz</h2>
-          <div className="bg-white text-black rounded-lg p-4 mb-8 aspect-square flex flex-col justify-center items-center">
-            <p className="text-sm text-gray-600 mb-4">Quiz #089</p>
-            <h3 className="text-2xl font-light text-center px-4">How many steps a day should you walk to keep healthy?</h3>
+          <div className="aspect-square mb-8 rounded-lg overflow-hidden">
+            <img 
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5MzYxMjMsImV4cCI6MTc1NzQ3MjEyM30.dgUi8_QKw7E1yti77dgk79K49NAtGIJ2gmjPunqreJU&t=2024-09-10T02%3A42%3A04.018Z" 
+              alt="Today's Quiz" 
+              className="w-full h-full object-cover"
+            />
           </div>
 
           <h2 className="text-xl font-bold mb-4">News</h2>
