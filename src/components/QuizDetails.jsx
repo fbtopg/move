@@ -25,7 +25,11 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
       <div className="relative h-screen flex flex-col">
         <div 
           className="h-[30vh] bg-cover bg-center relative"
-          style={{ backgroundImage: `url(${quiz.image})` }}
+          style={{ 
+            backgroundImage: `url(${quiz.image})`,
+            marginLeft: 0,
+            marginRight: 0
+          }}
         >
           <Button
             variant="ghost"
