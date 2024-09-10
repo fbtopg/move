@@ -73,11 +73,12 @@ const Board = () => {
           </div>
 
           <div className="aspect-square mb-8 rounded-lg overflow-hidden relative">
-            <img 
-              src={todaysQuiz.image}
-              alt="Today's Quiz" 
-              className="w-full h-full object-cover"
-            />
+            <div 
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${todaysQuiz.image})`,
+              }}
+            ></div>
             <div className="absolute inset-0 flex flex-col justify-center p-6">
               <div className="flex flex-col items-start">
                 <p className="text-sm font-semibold mb-2">Quiz #089</p>
