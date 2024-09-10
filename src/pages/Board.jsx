@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { shareInvite } from '../utils/shareUtils';
+import QuizDetails from '../components/QuizDetails';
 
 const Comment = ({ author, content, timestamp }) => (
   <div className="flex items-start space-x-2 mb-4">
@@ -54,11 +55,12 @@ const Board = () => {
     { id: 2, label: "Label", headline: "News Headline", likes: "1.6k", comments: "560", isLiked: false, isCommentsOpen: false },
   ]);
 
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
+
   const handleHeaderItemClick = (item) => {
     if (item === 'Quiz') {
       navigate('/quiz');
     }
-    // Add navigation for other items if needed
   };
 
   const handleLike = (itemType, itemId) => {
@@ -134,7 +136,7 @@ const Board = () => {
 
           <div 
             className="aspect-square mb-4 rounded-lg overflow-hidden relative cursor-pointer"
-            onClick={() => navigate('/quiz')}
+            onClick={() => setSelectedQuiz(todaysQuiz)}
           >
             <img 
               src={todaysQuiz.image}
@@ -221,6 +223,14 @@ const Board = () => {
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
+      {selectedQuiz && (
+        <QuizDetails
+          quiz={selectedQuiz}
+          onClose={() => setSelectedQuiz(null)}
+          handleLike={handleLike}
+          toggleComments={toggleComments}
+        />
+      )}
     </div>
   );
 };
