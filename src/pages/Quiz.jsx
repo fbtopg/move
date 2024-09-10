@@ -26,7 +26,7 @@ const Quiz = () => {
   const [quizzes, setQuizzes] = useState([
     { 
       id: 1,
-      title: "Today's Quiz", 
+      title: "Today", 
       question: "What is the capital of Indonesia?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5Mzg1NzMsImV4cCI6MTc1NzQ3NDU3M30.i7Qjnq4mYr_VgnhL9CkNXXdCIFCLsLKp2lIaZ0ijWmo&t=2024-09-10T03%3A22%3A54.207Z",
       participants: [
@@ -44,7 +44,7 @@ const Quiz = () => {
     },
     { 
       id: 2,
-      title: "Yesterday's Quiz", 
+      title: "Yesterday", 
       question: "Which planet is known as the Red Planet?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2096.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ni5wbmciLCJpYXQiOjE3MjU5Mzg1OTMsImV4cCI6MTc1NzQ3NDU5M30.F0bZeKm1pv_2ciSkNqRSnp-MyncY9zmrWCsniCG5iZo&t=2024-09-10T03%3A23%3A13.842Z",
       status: "active",
@@ -54,9 +54,19 @@ const Quiz = () => {
     },
     { 
       id: 3,
-      title: "Finished Quiz", 
+      title: "8 SEPTEMBER 2024", 
       question: "What is the largest mammal on Earth?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2097.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ny5wbmciLCJpYXQiOjE3MjU5Mzg2MTAsImV4cCI6MTc1NzQ3NDYxMH0.-tBzfXj83KjZJmrJWN4UL18P13kZ4Bt6Fwv7n-6E53s&t=2024-09-10T03%3A23%3A31.080Z",
+      status: "active",
+      likes: "850",
+      comments: "180",
+      isLiked: false
+    },
+    { 
+      id: 4,
+      title: "Finished", 
+      question: "Which element has the chemical symbol 'Au'?", 
+      image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2098.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5OC5wbmciLCJpYXQiOjE3MjU5NDM3NzAsImV4cCI6MTc1NzQ3OTc3MH0.ycJJMgwuQHJUNZLFVZVPLCFXhJQZQRQjxZVBD_Zy7Oc&t=2024-09-10T04%3A49%3A30.744Z",
       status: "finished",
       likes: "1.5k",
       comments: "450",
@@ -121,7 +131,7 @@ const Quiz = () => {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
-                  onClick={() => console.log(`Participate in ${quiz.title}`)}
+                  onClick={() => quiz.status !== 'finished' && console.log(`Participate in ${quiz.title}`)}
                 >
                   <div className="absolute inset-0 flex flex-col justify-center p-6">
                     <div className="text-left">
