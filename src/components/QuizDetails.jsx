@@ -100,18 +100,16 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
             </div>
           </div>
 
-          {quiz.isCommentsOpen && (
-            <div className="mt-4">
-              <h4 className="text-sm font-semibold mb-2">Comments</h4>
-              {[
-                { author: "Alice", content: "Great question!", timestamp: "2h ago" },
-                { author: "Bob", content: "I think I know the answer.", timestamp: "1h ago" },
-                { author: "Charlie", content: "This one's tricky!", timestamp: "30m ago" },
-              ].map((comment, index) => (
-                <Comment key={index} {...comment} />
-              ))}
-            </div>
-          )}
+          <div className="mt-6">
+            <h4 className="text-sm font-semibold mb-2">Comments</h4>
+            {[
+              { author: "Alice", content: "Great question!", timestamp: "2h ago" },
+              { author: "Bob", content: "I think I know the answer.", timestamp: "1h ago" },
+              { author: "Charlie", content: "This one's tricky!", timestamp: "30m ago" },
+            ].map((comment, index) => (
+              <Comment key={index} {...comment} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
