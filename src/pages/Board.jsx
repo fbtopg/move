@@ -16,7 +16,7 @@ const Board = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
-        <div className="max-w-md mx-auto px-4">
+        <div className="max-w-md mx-auto p-2">
           <div className="flex mb-8 -ml-2">
             {headerItems.map((item) => (
               <div key={item} className="flex flex-col items-center mr-4">
