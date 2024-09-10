@@ -27,7 +27,7 @@ const AnswerSection = () => {
           <Button
             key={answer.id}
             variant={selectedAnswer === answer.id ? "default" : "outline"}
-            className={`w-full h-12 justify-start ${
+            className={`w-full h-12 justify-start text-left ${
               selectedAnswer === answer.id
                 ? 'bg-white text-black'
                 : 'bg-transparent text-gray-400 border-gray-400 hover:bg-white hover:text-black'
@@ -40,7 +40,7 @@ const AnswerSection = () => {
         ))}
       </div>
       <Button
-        className="w-full mt-4 bg-white text-black hover:bg-gray-200 transition-colors h-12"
+        className="w-full mt-4 bg-white text-black hover:bg-gray-200 transition-colors h-10 rounded-full"
         onClick={handleSubmitAnswer}
         disabled={!selectedAnswer}
       >
