@@ -3,8 +3,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart, MessageCircle } from 'lucide-react';
 import { getRandomProfilePicture } from '../utils/profilePictures';
+import { getRandomUsername } from '../utils/userUtils';
 
-const Comment = ({ author, username, content, timestamp, likes, onLike, onReply }) => {
+const Comment = ({ author, content, timestamp, likes, onLike, onReply }) => {
+  const username = getRandomUsername();
   return (
     <div className="flex items-start space-x-2 mb-4">
       <Avatar className="w-8 h-8">
