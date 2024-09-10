@@ -65,9 +65,9 @@ const Board = () => {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 flex flex-col justify-between p-6">
-              <div>
+              <div className="flex flex-col items-start justify-center h-full">
                 <p className="text-sm font-semibold mb-2">Quiz #089</p>
-                <h3 className="text-4xl font-light text-white mb-4">
+                <h3 className="text-4xl font-light text-white mb-4 text-left">
                   {todaysQuiz.question}
                 </h3>
               </div>
