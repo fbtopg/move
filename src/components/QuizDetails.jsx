@@ -33,6 +33,11 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
     setSelectedAnswer(answerId);
   };
 
+  const handleSubmitAnswer = () => {
+    // TODO: Implement answer submission logic
+    console.log('Submitted answer:', selectedAnswer);
+  };
+
   useEffect(() => {
     // Disable scrolling on the body when the quiz detail is open
     document.body.style.overflow = 'hidden';
@@ -108,6 +113,13 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
                 </Button>
               ))}
             </div>
+            <Button
+              className="w-full mt-4 bg-white text-black hover:bg-gray-200 transition-colors h-12"
+              onClick={handleSubmitAnswer}
+              disabled={!selectedAnswer}
+            >
+              Submit Answer
+            </Button>
           </div>
 
           <div className="mt-6">
