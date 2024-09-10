@@ -23,6 +23,14 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
   return (
     <div className="fixed inset-0 bg-black z-50 overflow-y-auto">
       <div className="relative h-screen flex flex-col">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute top-4 left-4 text-white z-10"
+          onClick={onClose}
+        >
+          <ArrowLeft className="h-6 w-6" />
+        </Button>
         <div 
           className="w-full bg-cover bg-center relative"
           style={{ 
@@ -32,14 +40,6 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
             height: '50vh'
           }}
         >
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute top-4 left-4 text-white"
-            onClick={onClose}
-          >
-            <ArrowLeft className="h-6 w-6" />
-          </Button>
           <div className="absolute inset-0 flex flex-col justify-center p-6">
             <div className="text-left">
               <p className="text-sm font-semibold mb-2">Quiz #089</p>
