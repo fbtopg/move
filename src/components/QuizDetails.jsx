@@ -29,7 +29,7 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
             backgroundImage: `url(${quiz.image})`,
             marginLeft: 0,
             marginRight: 0,
-            height: '50vh'
+            height: '100vh'
           }}
         >
           <Button
@@ -50,7 +50,7 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
           </div>
         </div>
         
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-4 bg-black">
           <div className="flex justify-start items-center mb-4">
             <Button 
               variant="ghost" 
