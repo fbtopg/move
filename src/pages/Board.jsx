@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle } from 'lucide-react';
+import { Heart, MessageCircle, ArrowRight } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 
 const Board = () => {
@@ -17,7 +17,7 @@ const Board = () => {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          <div className="flex mb-8 -ml-2 mt-8"> {/* Changed mt-4 to mt-8 for more top margin */}
+          <div className="flex mb-8 -ml-2 mt-8">
             {headerItems.map((item) => (
               <div key={item} className="flex flex-col items-center mr-4">
                 <Button
@@ -44,6 +44,12 @@ const Board = () => {
                 What is the capital of Indonesia?
               </h3>
             </div>
+            <Button
+              className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200 transition-colors"
+              onClick={() => console.log('Participate in quiz')}
+            >
+              <ArrowRight className="h-6 w-6" />
+            </Button>
           </div>
 
           <h2 className="text-xl font-bold mb-4">News</h2>
