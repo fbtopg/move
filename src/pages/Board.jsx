@@ -130,6 +130,27 @@ const Board = () => {
           </div>
         </div>
       </div>
+      <div className="flex justify-start items-center mb-6">
+        <Button 
+          variant="ghost" 
+          className={`flex items-center ${todaysQuiz.isLiked ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
+          onClick={() => handleLike('quiz')}
+        >
+          <Heart className={`w-4 h-4 mr-1 ${todaysQuiz.isLiked ? 'fill-red-500 text-red-500' : ''}`} />
+          <span className="text-xs">{todaysQuiz.likes} Likes</span>
+        </Button>
+        <Button 
+          variant="ghost" 
+          className={`flex items-center ${todaysQuiz.isCommentsOpen ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
+          onClick={() => toggleComments('quiz')}
+        >
+          <MessageCircle className="w-4 h-4 mr-1" />
+          <span className="text-xs">{todaysQuiz.comments} Comments</span>
+        </Button>
+        <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-1" onClick={shareInvite}>
+          <Share2 className="w-4 h-4" />
+        </Button>
+      </div>
     </>
   );
 
