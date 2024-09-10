@@ -3,6 +3,9 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
+import { Button } from "@/components/ui/button";
+import { Heart, MessageCircle, Share2 } from 'lucide-react';
+import { shareInvite } from '../utils/shareUtils';
 
 const Quiz = () => {
   const navigate = useNavigate();
@@ -20,21 +23,40 @@ const Quiz = () => {
         { id: 5, name: "Mike" },
       ],
       activeParticipants: "16.5k",
-      status: "active"
+      status: "active",
+      likes: "1.2k",
+      comments: "324",
+      isLiked: false
     },
     { 
       title: "Yesterday's Quiz", 
       question: "Which planet is known as the Red Planet?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2096.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ni5wbmciLCJpYXQiOjE3MjU5Mzg1OTMsImV4cCI6MTc1NzQ3NDU5M30.F0bZeKm1pv_2ciSkNqRSnp-MyncY9zmrWCsniCG5iZo&t=2024-09-10T03%3A23%3A13.842Z",
-      status: "active"
+      status: "active",
+      likes: "980",
+      comments: "210",
+      isLiked: false
     },
     { 
       title: "Finished Quiz", 
       question: "What is the largest mammal on Earth?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2097.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ny5wbmciLCJpYXQiOjE3MjU5Mzg2MTAsImV4cCI6MTc1NzQ3NDYxMH0.-tBzfXj83KjZJmrJWN4UL18P13kZ4Bt6Fwv7n-6E53s&t=2024-09-10T03%3A23%3A31.080Z",
-      status: "finished"
+      status: "finished",
+      likes: "1.5k",
+      comments: "450",
+      isLiked: false
     },
   ];
+
+  const handleLike = (index) => {
+    // This is a placeholder function. In a real app, you'd update the state and possibly send a request to a backend.
+    console.log(`Liked quiz at index ${index}`);
+  };
+
+  const handleComment = (index) => {
+    // This is a placeholder function. In a real app, you'd open a comment interface.
+    console.log(`Commenting on quiz at index ${index}`);
+  };
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -85,6 +107,31 @@ const Quiz = () => {
                       </h3>
                     </div>
                   </div>
+                </div>
+                <div className="flex justify-start items-center">
+                  <Button 
+                    variant="ghost" 
+                    className={`flex items-center ${quiz.isLiked ? 'text-red-500' : 'text-gray-400'} hover:text-red-500 mr-4 p-1`}
+                    onClick={() => handleLike(index)}
+                  >
+                    <Heart className={`w-4 h-4 mr-1 ${quiz.isLiked ? 'fill-current' : ''}`} />
+                    <span className="text-xs">{quiz.likes} Likes</span>
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    className="flex items-center text-gray-400 hover:text-white mr-4 p-1"
+                    onClick={() => handleComment(index)}
+                  >
+                    <MessageCircle className="w-4 h-4 mr-1" />
+                    <span className="text-xs">{quiz.comments} Comments</span>
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    className="flex items-center text-gray-400 hover:text-white p-1"
+                    onClick={shareInvite}
+                  >
+                    <Share2 className="w-4 h-4" />
+                  </Button>
                 </div>
               </div>
             </React.Fragment>
