@@ -38,9 +38,10 @@ const Board = () => {
               alt="Today's Quiz" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <h3 className="text-3xl font-light text-white text-center px-4">
-                What is the capital of France?
+            <div className="absolute inset-0 flex flex-col justify-center p-6">
+              <p className="text-sm font-semibold mb-2">Quiz #089</p>
+              <h3 className="text-3xl font-light text-white">
+                What is the capital of Indonesia?
               </h3>
             </div>
           </div>
