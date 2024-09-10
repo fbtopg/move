@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle } from 'lucide-react';
+import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
+import { shareInvite } from '../utils/shareUtils';
 
 const Board = () => {
   const [activeTab, setActiveTab] = useState('board');
@@ -121,9 +122,13 @@ const Board = () => {
               <Heart className={`w-4 h-4 mr-1 ${todaysQuiz.isLiked ? 'fill-current' : ''}`} />
               <span className="text-xs">{todaysQuiz.likes} Likes</span>
             </Button>
-            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-1 p-1">
+            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-4 p-1">
               <MessageCircle className="w-4 h-4 mr-1" />
               <span className="text-xs">{todaysQuiz.comments} Comments</span>
+            </Button>
+            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-1" onClick={shareInvite}>
+              <Share2 className="w-4 h-4 mr-1" />
+              <span className="text-xs">Share</span>
             </Button>
           </div>
 
@@ -141,9 +146,13 @@ const Board = () => {
                   <Heart className={`w-4 h-4 mr-1 ${item.isLiked ? 'fill-current' : ''}`} />
                   <span className="text-xs">{item.likes} Likes</span>
                 </Button>
-                <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-0">
+                <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-4 p-0">
                   <MessageCircle className="w-4 h-4 mr-1" />
                   <span className="text-xs">{item.comments} Comments</span>
+                </Button>
+                <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-0" onClick={shareInvite}>
+                  <Share2 className="w-4 h-4 mr-1" />
+                  <span className="text-xs">Share</span>
                 </Button>
               </div>
             </div>
