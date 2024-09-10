@@ -1,26 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { X, Heart, MessageCircle, Share2, ArrowLeft } from 'lucide-react';
+import { X, Heart, MessageCircle, Share2, ArrowLeft, Send } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { shareInvite } from '../utils/shareUtils';
 
-const Comment = ({ author, content, timestamp }) => (
-  <div className="flex items-start space-x-2 mb-4">
-    <Avatar className="w-8 h-8">
-      <AvatarImage src={getRandomProfilePicture()} alt={author} />
-      <AvatarFallback>{author[0]}</AvatarFallback>
-    </Avatar>
-    <div className="flex-1">
-      <p className="text-sm font-semibold">{author}</p>
-      <p className="text-sm text-gray-300">{content}</p>
-      <p className="text-xs text-gray-400 mt-1">{timestamp}</p>
+const Comment = ({ author, content, timestamp, likes, onLike, onReply }) => {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+    onLike();
+  };
+
+  return (
+    <div className="flex items-start space-x-2 mb-4">
+      <Avatar className="w-8 h-8">
+        <AvatarImage src={getRandomProfilePicture()} alt={author} />
+        <AvatarFallback>{author[0]}</AvatarFallback>
+      </Avatar>
+      <div className="flex-1">
+        <p className="text-sm font-semibold">{author}</p>
+        <p className="text-sm text-gray-300">{content}</p>
+        <div className="flex items-center space-x-4 mt-1">
+          <p className="text-xs text-gray-400">{timestamp}</p>
+          <Button variant="ghost" size="sm" onClick={handleLike} className={`p-0 h-auto ${isLiked ? 'text-red-500' : 'text-gray-400'}`}>
+            <Heart className="h-4 w-4 mr-1" />
+            <span className="text-xs">{likes}</span>
+          </Button>
+          <Button variant="ghost" size="sm" onClick={onReply} className="p-0 h-auto text-gray-400">
+            <MessageCircle className="h-4 w-4 mr-1" />
+            <span className="text-xs">Reply</span>
+          </Button>
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [newComment, setNewComment] = useState('');
+  const [comments, setComments] = useState([
+    { id: 1, author: "Alice", content: "Great question!", timestamp: "2h ago", likes: 5 },
+    { id: 2, author: "Bob", content: "I think I know the answer.", timestamp: "1h ago", likes: 3 },
+    { id: 3, author: "Charlie", content: "This one's tricky!", timestamp: "30m ago", likes: 2 },
+  ]);
 
   const answers = [
     { id: 'A', text: 'Jakarta' },
@@ -38,11 +64,34 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
     console.log('Submitted answer:', selectedAnswer);
   };
 
+  const handleCommentLike = (commentId) => {
+    setComments(comments.map(comment => 
+      comment.id === commentId ? { ...comment, likes: comment.likes + 1 } : comment
+    ));
+  };
+
+  const handleCommentReply = (commentId) => {
+    // TODO: Implement reply functionality
+    console.log('Reply to comment:', commentId);
+  };
+
+  const handleAddComment = () => {
+    if (newComment.trim()) {
+      const newCommentObj = {
+        id: comments.length + 1,
+        author: "You",
+        content: newComment.trim(),
+        timestamp: "Just now",
+        likes: 0
+      };
+      setComments([newCommentObj, ...comments]);
+      setNewComment('');
+    }
+  };
+
   useEffect(() => {
-    // Disable scrolling on the body when the quiz detail is open
     document.body.style.overflow = 'hidden';
     return () => {
-      // Re-enable scrolling when the component unmounts
       document.body.style.overflow = 'unset';
     };
   }, []);
@@ -124,12 +173,25 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
 
           <div className="mt-6">
             <h4 className="text-sm font-semibold mb-2">Comments</h4>
-            {[
-              { author: "Alice", content: "Great question!", timestamp: "2h ago" },
-              { author: "Bob", content: "I think I know the answer.", timestamp: "1h ago" },
-              { author: "Charlie", content: "This one's tricky!", timestamp: "30m ago" },
-            ].map((comment, index) => (
-              <Comment key={index} {...comment} />
+            <div className="flex items-center space-x-2 mb-4">
+              <Input
+                type="text"
+                placeholder="Write a comment..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                className="flex-grow bg-gray-800 border-gray-700 text-white"
+              />
+              <Button onClick={handleAddComment} disabled={!newComment.trim()}>
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+            {comments.map((comment) => (
+              <Comment
+                key={comment.id}
+                {...comment}
+                onLike={() => handleCommentLike(comment.id)}
+                onReply={() => handleCommentReply(comment.id)}
+              />
             ))}
           </div>
         </div>
