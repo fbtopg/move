@@ -17,7 +17,7 @@ const Board = () => {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          <div className="flex mb-8 -ml-2 mt-8">
+          <div className="flex mb-8 ml-2 mt-8"> {/* Added ml-2 here for left margin */}
             {headerItems.map((item) => (
               <div key={item} className="flex flex-col items-center mr-4">
                 <Button
