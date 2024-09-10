@@ -61,7 +61,7 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
         <div 
           className="w-full aspect-square bg-cover bg-center relative"
           style={{ 
-            backgroundImage: `url(https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5NDMwNjAsImV4cCI6MTc1NzQ3OTA2MH0.j_tghBkpc92hU749PoU_fV_q0HSHBg4SZw8FVeNDsa8J0&t=2024-09-10T04%3A37%3A40.433Z)`,
+            backgroundImage: `url(https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5NTM1MTksImV4cCI6MTc1NzQ4OTUxOX0.W9yXSihxUZCw4fiUcmV8VkFCg9LRnk-V5IFnXtDQB1I&t=2024-09-10T07%3A31%3A59.550Z)`,
           }}
         >
           <div className="absolute inset-0 flex flex-col justify-center p-6">
