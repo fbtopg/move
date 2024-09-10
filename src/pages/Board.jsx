@@ -5,7 +5,6 @@ import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
-import QuizBox from '../components/QuizBox';
 
 const Board = () => {
   const [activeTab, setActiveTab] = React.useState('board');
@@ -73,12 +72,27 @@ const Board = () => {
             </div>
           </div>
 
-          <QuizBox
-            image={todaysQuiz.image}
-            quizNumber="089"
-            question={todaysQuiz.question}
-            onParticipate={() => navigate('/quiz')}
-          />
+          <div className="aspect-square mb-8 rounded-lg overflow-hidden relative">
+            <img 
+              src={todaysQuiz.image}
+              alt="Today's Quiz" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 flex flex-col justify-center p-6">
+              <div className="flex flex-col items-start">
+                <p className="text-sm font-semibold mb-2">Quiz #089</p>
+                <h3 className="text-4xl font-light text-white mb-4 text-left">
+                  {todaysQuiz.question}
+                </h3>
+              </div>
+            </div>
+            <Button
+              className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200 transition-colors"
+              onClick={() => navigate('/quiz')}
+            >
+              <ArrowRight className="h-6 w-6" />
+            </Button>
+          </div>
 
           <h2 className="text-xl font-bold mb-4">News</h2>
           {newsItems.map((item, index) => (
