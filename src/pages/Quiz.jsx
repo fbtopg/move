@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -9,8 +9,7 @@ import { shareInvite } from '../utils/shareUtils';
 
 const Quiz = () => {
   const navigate = useNavigate();
-
-  const quizzes = [
+  const [quizzes, setQuizzes] = useState([
     { 
       title: "Today's Quiz", 
       question: "What is the capital of Indonesia?", 
@@ -46,15 +45,18 @@ const Quiz = () => {
       comments: "450",
       isLiked: false
     },
-  ];
+  ]);
 
   const handleLike = (index) => {
-    // This is a placeholder function. In a real app, you'd update the state and possibly send a request to a backend.
-    console.log(`Liked quiz at index ${index}`);
+    setQuizzes(prevQuizzes => prevQuizzes.map((quiz, i) => {
+      if (i === index) {
+        return { ...quiz, isLiked: !quiz.isLiked };
+      }
+      return quiz;
+    }));
   };
 
   const handleComment = (index) => {
-    // This is a placeholder function. In a real app, you'd open a comment interface.
     console.log(`Commenting on quiz at index ${index}`);
   };
 
@@ -111,10 +113,10 @@ const Quiz = () => {
                 <div className="flex justify-start items-center">
                   <Button 
                     variant="ghost" 
-                    className={`flex items-center ${quiz.isLiked ? 'text-red-500' : 'text-gray-400'} hover:text-red-500 mr-4 p-1`}
+                    className={`flex items-center ${quiz.isLiked ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
                     onClick={() => handleLike(index)}
                   >
-                    <Heart className={`w-4 h-4 mr-1 ${quiz.isLiked ? 'fill-current' : ''}`} />
+                    <Heart className={`w-4 h-4 mr-1 ${quiz.isLiked ? 'fill-red-500 text-red-500' : ''}`} />
                     <span className="text-xs">{quiz.likes} Likes</span>
                   </Button>
                   <Button 
