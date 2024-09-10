@@ -115,15 +115,15 @@ const Board = () => {
           <div className="flex justify-start items-center mb-8">
             <Button 
               variant="ghost" 
-              className={`flex items-center ${todaysQuiz.isLiked ? 'text-red-500' : 'text-gray-400'} hover:text-red-500 mr-1 p-1`}
+              className={`flex items-center ${todaysQuiz.isLiked ? 'text-red-500' : 'text-gray-400'} hover:text-red-500 mr-4 p-1`}
               onClick={() => handleLike('quiz')}
             >
               <Heart className={`w-4 h-4 mr-1 ${todaysQuiz.isLiked ? 'fill-current' : ''}`} />
-              <span className="text-xs">{todaysQuiz.likes}</span>
+              <span className="text-xs">Like {todaysQuiz.likes}</span>
             </Button>
             <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-1 p-1">
               <MessageCircle className="w-4 h-4 mr-1" />
-              <span className="text-xs">{todaysQuiz.comments}</span>
+              <span className="text-xs">Comment {todaysQuiz.comments}</span>
             </Button>
           </div>
 
@@ -135,14 +135,16 @@ const Board = () => {
               <div className="flex items-center text-sm text-gray-400">
                 <Button 
                   variant="ghost" 
-                  className={`flex items-center ${item.isLiked ? 'text-red-500' : 'text-gray-400'} hover:text-red-500 mr-2 p-0`}
+                  className={`flex items-center ${item.isLiked ? 'text-red-500' : 'text-gray-400'} hover:text-red-500 mr-4 p-0`}
                   onClick={() => handleLike('news', item.id)}
                 >
                   <Heart className={`w-4 h-4 mr-1 ${item.isLiked ? 'fill-current' : ''}`} />
-                  <span className="text-xs">{item.likes}</span>
+                  <span className="text-xs">Like {item.likes}</span>
                 </Button>
-                <MessageCircle className="w-4 h-4 mr-1" />
-                <span className="text-xs">{item.comments}</span>
+                <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-0">
+                  <MessageCircle className="w-4 h-4 mr-1" />
+                  <span className="text-xs">Comment {item.comments}</span>
+                </Button>
               </div>
             </div>
           ))}
