@@ -67,7 +67,7 @@ const Quiz = () => {
           <button onClick={() => navigate(-1)} className="mb-4">
             <ArrowLeft className="h-6 w-6" />
           </button>
-          <h1 className="text-2xl font-bold mb-6">Quiz</h1>
+          <h1 className="text-2xl font-bold mb-6">Daily Quiz</h1>
         </div>
       </div>
       <div className="flex-grow overflow-y-auto pb-20">
