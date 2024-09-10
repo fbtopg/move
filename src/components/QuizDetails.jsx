@@ -24,12 +24,11 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
     <div className="fixed inset-0 bg-black z-50 overflow-y-auto">
       <div className="relative h-screen flex flex-col">
         <div 
-          className="w-full bg-cover bg-center relative"
+          className="w-full h-screen bg-cover bg-center relative"
           style={{ 
-            backgroundImage: `url(https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5NDMwNjAsImV4cCI6MTc1NzQ3OTA2MH0.j_tghbLb6fbMACrek7Eu4cye3YYIdKhgVLC4ct2u-zU&t=2024-09-10T04%3A37%3A40.433Z)`,
+            backgroundImage: `url(${quiz.image})`,
             marginLeft: 0,
             marginRight: 0,
-            height: '50vh'
           }}
         >
           <Button
@@ -40,12 +39,30 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
           >
             <X className="h-6 w-6" />
           </Button>
-          <div className="absolute bottom-4 left-4 right-4">
-            <h2 className="text-white text-2xl font-light">{quiz.question}</h2>
+          <div className="absolute inset-0 flex flex-col justify-between p-6">
+            <div className="flex justify-between items-start">
+              <p className="text-sm text-white font-semibold mb-2">Quiz #{quiz.id || '000'}</p>
+              {quiz.participants && (
+                <div className="flex items-center">
+                  <div className="flex -space-x-2 overflow-hidden mr-2">
+                    {quiz.participants.slice(0, 3).map((participant, index) => (
+                      <Avatar key={index} className="inline-block h-6 w-6 rounded-full ring-2 ring-black">
+                        <AvatarImage src={getRandomProfilePicture()} alt={participant.name} />
+                        <AvatarFallback>{participant.name[0]}</AvatarFallback>
+                      </Avatar>
+                    ))}
+                  </div>
+                  <span className="text-xs text-white">{quiz.activeParticipants} active</span>
+                </div>
+              )}
+            </div>
+            <h3 className="text-4xl font-light text-white mb-4">
+              {quiz.question}
+            </h3>
           </div>
         </div>
         
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-4 bg-black">
           <div className="flex justify-start items-center mb-4">
             <Button 
               variant="ghost" 
