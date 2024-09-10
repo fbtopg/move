@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Heart, MessageCircle, Share2, ArrowLeft, Send } from 'lucide-react';
+import { X, Heart, MessageCircle, Share2, ArrowLeft } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
@@ -118,15 +118,15 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
                 onChange={(e) => setNewComment(e.target.value)}
                 onFocus={() => setIsCommentFocused(true)}
                 onBlur={() => setIsCommentFocused(false)}
-                className="flex-grow bg-gray-800 border-gray-700 text-white pr-10"
+                className="flex-grow bg-gray-800 border-gray-700 text-white pr-20"
               />
               {(isCommentFocused || newComment) && (
                 <Button 
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white text-black hover:bg-gray-200 px-3 py-1 text-sm rounded-full"
                   onClick={handleAddComment}
                   disabled={!newComment.trim()}
                 >
-                  <Send className="h-4 w-4" />
+                  Send
                 </Button>
               )}
             </div>
