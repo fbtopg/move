@@ -9,7 +9,7 @@ import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const DailyWalkChallenge = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('walk');
+  const [activeTab, setActiveTab] = useState('community');
 
   const challengeData = {
     month: "SEPTEMBER 2024",
