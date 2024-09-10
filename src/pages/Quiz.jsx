@@ -62,7 +62,7 @@ const Quiz = () => {
     },
     { 
       id: 4,
-      title: "FINISHED", 
+      title: "Quiz #004", 
       question: "Which element has the chemical symbol 'Au'?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2098.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5OC5wbmciLCJpYXQiOjE3MjU5NTA0MTMsImV4cCI6MTc1NzQ4NjQxM30.5thHmNoEE4jAQ0d57HyF4TCdUJJclQZcy9Uq5zoLXoA&t=2024-09-10T06%3A40%3A14.106Z",
       status: "finished",
@@ -72,7 +72,7 @@ const Quiz = () => {
     },
     { 
       id: 5,
-      title: "FINISHED", 
+      title: "Quiz #005", 
       question: "What is the largest organ in the human body?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2099.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5OS5wbmciLCJpYXQiOjE3MjU5NTEyNDQsImV4cCI6MTc1NzQ4NzI0NH0.-6RLuFmnmD3b6KtxPSq0qJL6OL3LaG4g69bQ_t-LAvc&t=2024-09-10T06%3A54%3A04.726Z",
       status: "finished",
@@ -82,7 +82,7 @@ const Quiz = () => {
     },
     { 
       id: 6,
-      title: "FINISHED", 
+      title: "Quiz #006", 
       question: "Which country is known as the Land of the Rising Sun?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%20100.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSAxMDAucG5nIiwiaWF0IjoxNzI1OTUxMzEzLCJleHAiOjE3NTc0ODczMTN9.r0n1rlbMRe-qIxkw8W4sVgj339oDty4Ukoxi3musQSs&t=2024-09-10T06%3A55%3A13.329Z",
       status: "finished",
@@ -92,7 +92,7 @@ const Quiz = () => {
     },
     { 
       id: 7,
-      title: "FINISHED", 
+      title: "Quiz #007", 
       question: "What is the chemical formula for water?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%20101.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSAxMDEucG5nIiwiaWF0IjoxNzI1OTUxMzI3LCJleHAiOjE3NTc0ODczMjd9.potSLcdm69nQ1YnBCqiYWFlcxoCJSbOEbSXFtMBxuGw&t=2024-09-10T06%3A55%3A28.006Z",
       status: "finished",
