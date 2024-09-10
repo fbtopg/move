@@ -40,9 +40,11 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
           >
             <X className="h-6 w-6" />
           </Button>
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-            <p className="text-sm font-semibold mb-2">Quiz #089</p>
-            <h2 className="text-4xl font-light text-white">{quiz.question}</h2>
+          <div className="absolute inset-0 flex flex-col justify-center p-6">
+            <div className="text-left">
+              <p className="text-sm font-semibold mb-2">Quiz #089</p>
+              <h2 className="text-4xl font-light text-white">{quiz.question}</h2>
+            </div>
           </div>
         </div>
         
