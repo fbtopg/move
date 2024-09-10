@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Heart, MessageCircle, Share2, ArrowLeft } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -33,9 +33,18 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
     setSelectedAnswer(answerId);
   };
 
+  useEffect(() => {
+    // Disable scrolling on the body when the quiz detail is open
+    document.body.style.overflow = 'hidden';
+    return () => {
+      // Re-enable scrolling when the component unmounts
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   return (
     <div className="fixed inset-0 bg-black z-50 overflow-y-auto">
-      <div className="relative h-screen flex flex-col">
+      <div className="relative min-h-screen flex flex-col">
         <Button
           variant="ghost"
           size="icon"
@@ -45,12 +54,9 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
           <ArrowLeft className="h-6 w-6" />
         </Button>
         <div 
-          className="w-full bg-cover bg-center relative"
+          className="w-full aspect-square bg-cover bg-center relative"
           style={{ 
             backgroundImage: `url(https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5NDMwNjAsImV4cCI6MTc1NzQ3OTA2MH0.j_tghbLb6fbMACrek7Eu4cye3YYIdKhgVLC4ct2u-zU&t=2024-09-10T04%3A37%3A40.433Z)`,
-            marginLeft: 0,
-            marginRight: 0,
-            height: '50vh'
           }}
         >
           <div className="absolute inset-0 flex flex-col justify-center p-6">
