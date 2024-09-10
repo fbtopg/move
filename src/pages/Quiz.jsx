@@ -133,7 +133,7 @@ const Quiz = () => {
             <>
               <div className="h-px bg-gray-700 my-8"></div>
               <h2 className="text-xl font-bold mb-4">Finished Quizzes</h2>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-2">
                 {finishedQuizzes.map((quiz) => (
                   <QuizItem key={quiz.id} quiz={quiz} onLike={handleLike} isSmall />
                 ))}
