@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle, Share2 } from 'lucide-react';
+import { Heart, MessageCircle } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -26,7 +26,6 @@ const Board = () => {
     activeParticipants: "16.5k",
     likes: "1.2k",
     comments: "324",
-    shares: "89",
     isLiked: false
   });
 
@@ -125,10 +124,6 @@ const Board = () => {
             <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-1 p-1">
               <MessageCircle className="w-4 h-4 mr-1" />
               <span className="text-xs">{todaysQuiz.comments}</span>
-            </Button>
-            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-1">
-              <Share2 className="w-4 h-4 mr-1" />
-              <span className="text-xs">{todaysQuiz.shares}</span>
             </Button>
           </div>
 
