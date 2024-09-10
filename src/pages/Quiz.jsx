@@ -42,7 +42,22 @@ const Quiz = () => {
             <React.Fragment key={index}>
               {index > 0 && <div className="h-px bg-gray-700 my-8"></div>}
               <div className="mb-8">
-                <h2 className="text-xl font-bold mb-4">{quiz.title}</h2>
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xl font-bold">{quiz.title}</h2>
+                  {index === 0 && (
+                    <div className="flex items-center">
+                      <div className="flex -space-x-2 overflow-hidden mr-2">
+                        {quiz.participants.slice(0, 3).map((participant) => (
+                          <Avatar key={participant.id} className="inline-block h-6 w-6 rounded-full ring-2 ring-black">
+                            <AvatarImage src={getRandomProfilePicture()} alt={participant.name} />
+                            <AvatarFallback>{participant.name[0]}</AvatarFallback>
+                          </Avatar>
+                        ))}
+                      </div>
+                      <span className="text-xs text-gray-400">{quiz.activeParticipants} active</span>
+                    </div>
+                  )}
+                </div>
                 <div 
                   className="aspect-square mb-4 rounded-lg overflow-hidden relative"
                   style={{
@@ -51,26 +66,13 @@ const Quiz = () => {
                     backgroundPosition: 'center',
                   }}
                 >
-                  <div className="absolute inset-0 flex flex-col justify-between p-6">
-                    <div>
+                  <div className="absolute inset-0 flex flex-col justify-center p-6">
+                    <div className="text-left">
                       <p className="text-sm font-semibold mb-2">Quiz #{index + 1}</p>
                       <h3 className="text-4xl font-light text-white mb-4">
                         {quiz.question}
                       </h3>
                     </div>
-                    {index === 0 && (
-                      <div className="flex items-center">
-                        <div className="flex -space-x-2 overflow-hidden">
-                          {quiz.participants.map((participant) => (
-                            <Avatar key={participant.id} className="inline-block h-8 w-8 rounded-full ring-2 ring-black">
-                              <AvatarImage src={getRandomProfilePicture()} alt={participant.name} />
-                              <AvatarFallback>{participant.name[0]}</AvatarFallback>
-                            </Avatar>
-                          ))}
-                        </div>
-                        <span className="ml-2 text-sm text-white">{quiz.activeParticipants} active</span>
-                      </div>
-                    )}
                   </div>
                   <Button
                     className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200 transition-colors"
