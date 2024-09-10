@@ -54,7 +54,7 @@ const Quiz = () => {
               {index > 0 && <div className="h-px bg-gray-700 my-8"></div>}
               <div className="mb-8">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-bold">{quiz.title}</h2>
+                  <h2 className="text-sm text-gray-400">{quiz.title.toUpperCase()}</h2>
                   {quiz.participants && (
                     <div className="flex items-center">
                       <div className="flex -space-x-2 overflow-hidden mr-2">
