@@ -12,6 +12,19 @@ const Quiz = () => {
     { title: "Finished Quiz", question: "What is the largest mammal on Earth?", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5MzYyMjMsImV4cCI6MTc1NzQ3MjIyM30.7AQFM0V8Yl3KkXBPzBOz3KqJfZZoNpOypLo34nXNRVY&t=2024-09-10T02%3A43%3A43.355Z" },
   ];
 
+  const getBackgroundStyle = (index) => {
+    if (index === 1) { // Yesterday's Quiz
+      return {
+        background: 'linear-gradient(135deg, #4a90e2, #8e44ad)',
+      };
+    } else if (index === 2) { // Finished Quiz
+      return {
+        background: 'linear-gradient(135deg, #2ecc71, #3498db)',
+      };
+    }
+    return {}; // Default (no gradient for Today's Quiz)
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="p-4">
@@ -25,7 +38,10 @@ const Quiz = () => {
           {quizzes.map((quiz, index) => (
             <div key={index} className="mb-8">
               <h2 className="text-xl font-bold mb-4">{quiz.title}</h2>
-              <div className="aspect-square mb-4 rounded-lg overflow-hidden relative">
+              <div 
+                className="aspect-square mb-4 rounded-lg overflow-hidden relative"
+                style={getBackgroundStyle(index)}
+              >
                 <img 
                   src={quiz.image}
                   alt={quiz.title}
