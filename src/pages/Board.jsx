@@ -119,11 +119,11 @@ const Board = () => {
               onClick={() => handleLike('quiz')}
             >
               <Heart className={`w-4 h-4 mr-1 ${todaysQuiz.isLiked ? 'fill-current' : ''}`} />
-              <span className="text-xs">Like {todaysQuiz.likes}</span>
+              <span className="text-xs">{todaysQuiz.likes} Likes</span>
             </Button>
             <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white mr-1 p-1">
               <MessageCircle className="w-4 h-4 mr-1" />
-              <span className="text-xs">Comment {todaysQuiz.comments}</span>
+              <span className="text-xs">{todaysQuiz.comments} Comments</span>
             </Button>
           </div>
 
@@ -139,11 +139,11 @@ const Board = () => {
                   onClick={() => handleLike('news', item.id)}
                 >
                   <Heart className={`w-4 h-4 mr-1 ${item.isLiked ? 'fill-current' : ''}`} />
-                  <span className="text-xs">Like {item.likes}</span>
+                  <span className="text-xs">{item.likes} Likes</span>
                 </Button>
                 <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-0">
                   <MessageCircle className="w-4 h-4 mr-1" />
-                  <span className="text-xs">Comment {item.comments}</span>
+                  <span className="text-xs">{item.comments} Comments</span>
                 </Button>
               </div>
             </div>
