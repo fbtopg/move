@@ -66,7 +66,7 @@ const Quiz = () => {
       id: 4,
       title: "Finished", 
       question: "Which element has the chemical symbol 'Au'?", 
-      image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2098.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5OC5wbmciLCJpYXQiOjE3MjU5NDM3NzAsImV4cCI6MTc1NzQ3OTc3MH0.ycJJMgwuQHJUNZLFVZVPLCFXhJQZQRQjxZVBD_Zy7Oc&t=2024-09-10T04%3A49%3A30.744Z",
+      image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2098.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5OC5wbmciLCJpYXQiOjE3MjU5NTA0MTMsImV4cCI6MTc1NzQ4NjQxM30.5thHmNoEE4jAQ0d57HyF4TCdUJJclQZcy9Uq5zoLXoA&t=2024-09-10T06%3A40%3A14.106Z",
       status: "finished",
       likes: "1.5k",
       comments: "450",
