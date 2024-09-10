@@ -7,10 +7,25 @@ import { Button } from "@/components/ui/button";
 import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { shareInvite } from '../utils/shareUtils';
 
+const Comment = ({ author, content, timestamp }) => (
+  <div className="flex items-start space-x-2 mb-4">
+    <Avatar className="w-8 h-8">
+      <AvatarImage src={getRandomProfilePicture()} alt={author} />
+      <AvatarFallback>{author[0]}</AvatarFallback>
+    </Avatar>
+    <div className="flex-1">
+      <p className="text-sm font-semibold">{author}</p>
+      <p className="text-sm text-gray-300">{content}</p>
+      <p className="text-xs text-gray-400 mt-1">{timestamp}</p>
+    </div>
+  </div>
+);
+
 const Quiz = () => {
   const navigate = useNavigate();
   const [quizzes, setQuizzes] = useState([
     { 
+      id: 1,
       title: "Today's Quiz", 
       question: "What is the capital of Indonesia?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5Mzg1NzMsImV4cCI6MTc1NzQ3NDU3M30.i7Qjnq4mYr_VgnhL9CkNXXdCIFCLsLKp2lIaZ0ijWmo&t=2024-09-10T03%3A22%3A54.207Z",
@@ -28,6 +43,7 @@ const Quiz = () => {
       isLiked: false
     },
     { 
+      id: 2,
       title: "Yesterday's Quiz", 
       question: "Which planet is known as the Red Planet?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2096.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ni5wbmciLCJpYXQiOjE3MjU5Mzg1OTMsImV4cCI6MTc1NzQ3NDU5M30.F0bZeKm1pv_2ciSkNqRSnp-MyncY9zmrWCsniCG5iZo&t=2024-09-10T03%3A23%3A13.842Z",
@@ -37,6 +53,7 @@ const Quiz = () => {
       isLiked: false
     },
     { 
+      id: 3,
       title: "Finished Quiz", 
       question: "What is the largest mammal on Earth?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2097.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ny5wbmciLCJpYXQiOjE3MjU5Mzg2MTAsImV4cCI6MTc1NzQ3NDYxMH0.-tBzfXj83KjZJmrJWN4UL18P13kZ4Bt6Fwv7n-6E53s&t=2024-09-10T03%3A23%3A31.080Z",
@@ -47,18 +64,23 @@ const Quiz = () => {
     },
   ]);
 
-  const handleLike = (index) => {
-    setQuizzes(prevQuizzes => prevQuizzes.map((quiz, i) => {
-      if (i === index) {
-        return { ...quiz, isLiked: !quiz.isLiked };
-      }
-      return quiz;
-    }));
+  const [openComments, setOpenComments] = useState(null);
+
+  const handleLike = (id) => {
+    setQuizzes(prevQuizzes => prevQuizzes.map(quiz => 
+      quiz.id === id ? { ...quiz, isLiked: !quiz.isLiked } : quiz
+    ));
   };
 
-  const handleComment = (index) => {
-    console.log(`Commenting on quiz at index ${index}`);
+  const handleComment = (id) => {
+    setOpenComments(openComments === id ? null : id);
   };
+
+  const mockComments = [
+    { author: "Alice", content: "Great question!", timestamp: "2h ago" },
+    { author: "Bob", content: "I think I know the answer.", timestamp: "1h ago" },
+    { author: "Charlie", content: "This one's tricky!", timestamp: "30m ago" },
+  ];
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -72,9 +94,9 @@ const Quiz = () => {
       </div>
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          {quizzes.map((quiz, index) => (
-            <React.Fragment key={index}>
-              {index > 0 && <div className="h-px bg-gray-700 my-8"></div>}
+          {quizzes.map((quiz) => (
+            <React.Fragment key={quiz.id}>
+              {quiz.id > 1 && <div className="h-px bg-gray-700 my-8"></div>}
               <div className="mb-8">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-sm text-gray-400">{quiz.title.toUpperCase()}</h2>
@@ -103,7 +125,7 @@ const Quiz = () => {
                 >
                   <div className="absolute inset-0 flex flex-col justify-center p-6">
                     <div className="text-left">
-                      <p className="text-sm font-semibold mb-2">Quiz #{index + 1}</p>
+                      <p className="text-sm font-semibold mb-2">Quiz #{quiz.id}</p>
                       <h3 className="text-4xl font-light text-white mb-4">
                         {quiz.question}
                       </h3>
@@ -114,15 +136,15 @@ const Quiz = () => {
                   <Button 
                     variant="ghost" 
                     className={`flex items-center ${quiz.isLiked ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
-                    onClick={() => handleLike(index)}
+                    onClick={() => handleLike(quiz.id)}
                   >
                     <Heart className={`w-4 h-4 mr-1 ${quiz.isLiked ? 'fill-red-500 text-red-500' : ''}`} />
                     <span className="text-xs">{quiz.likes} Likes</span>
                   </Button>
                   <Button 
                     variant="ghost" 
-                    className="flex items-center text-gray-400 hover:text-white mr-4 p-1"
-                    onClick={() => handleComment(index)}
+                    className={`flex items-center ${openComments === quiz.id ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
+                    onClick={() => handleComment(quiz.id)}
                   >
                     <MessageCircle className="w-4 h-4 mr-1" />
                     <span className="text-xs">{quiz.comments} Comments</span>
@@ -135,6 +157,14 @@ const Quiz = () => {
                     <Share2 className="w-4 h-4" />
                   </Button>
                 </div>
+                {openComments === quiz.id && (
+                  <div className="mt-4 bg-gray-900 p-4 rounded-lg">
+                    <h4 className="text-sm font-semibold mb-2">Comments</h4>
+                    {mockComments.map((comment, index) => (
+                      <Comment key={index} {...comment} />
+                    ))}
+                  </div>
+                )}
               </div>
             </React.Fragment>
           ))}
