@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Globe, Zap, HelpCircle, Newspaper, Users } from 'lucide-react';
+import { Globe, Zap, LayoutGrid } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
 import QuizDetails from '../components/QuizDetails';
 import TodaysQuiz from '../components/TodaysQuiz';
 import NewsItems from '../components/NewsItems';
-import HeaderItems from '../components/HeaderItems';
 
 const Board = () => {
   const [activeTab, setActiveTab] = useState('board');
   const navigate = useNavigate();
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [timer, setTimer] = useState('23:59:59');
-
-  const headerItems = [
-    { name: 'Quiz', icon: HelpCircle },
-    { name: 'News', icon: Newspaper },
-    { name: 'Community', icon: Users }
-  ];
 
   const [todaysQuiz, setTodaysQuiz] = useState({
     title: "Today's Quiz",
@@ -54,12 +47,6 @@ const Board = () => {
     return () => clearInterval(timerInterval);
   }, []);
 
-  const handleHeaderItemClick = (item) => {
-    if (item === 'Quiz') {
-      navigate('/quiz');
-    }
-  };
-
   const handleLike = (itemType, itemId) => {
     if (itemType === 'news') {
       setNewsItems(prev => prev.map(item => 
@@ -84,8 +71,6 @@ const Board = () => {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          <HeaderItems items={headerItems} onItemClick={handleHeaderItemClick} />
-          <div className="h-px bg-gray-700 my-4"></div>
           <TodaysQuiz
             quiz={todaysQuiz}
             onQuizClick={() => setSelectedQuiz(todaysQuiz)}
