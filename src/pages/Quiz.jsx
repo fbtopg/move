@@ -87,12 +87,10 @@ const Quiz = () => {
 
           <h2 className="text-xs font-semibold mb-3 mt-6 text-gray-400">FINISHED</h2>
           {quizzes.slice(1).map((quiz) => (
-            <QuizItem 
-              key={quiz.id}
-              quiz={{...quiz, quizNumber: `Quiz #${quiz.id}`}}
-              isSquare={true}
-              isSmall={true}
-            />
+            <div key={quiz.id}>
+              <p className="text-xs text-gray-400 mb-1">Quiz #{quiz.id}</p>
+              <QuizItem quiz={quiz} isSquare={true} isSmall={true} />
+            </div>
           ))}
         </div>
       </div>
