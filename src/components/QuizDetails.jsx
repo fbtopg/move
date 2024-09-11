@@ -7,7 +7,7 @@ import { shareInvite } from '../utils/shareUtils';
 import AnswerSection from './AnswerSection';
 import CommentsSection from './CommentsSection';
 
-const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
+const QuizDetails = ({ quiz, onClose, handleLike, toggleComments, timer }) => {
   const [newComment, setNewComment] = useState('');
   const [isCommentFocused, setIsCommentFocused] = useState(false);
   const [comments, setComments] = useState([
@@ -68,6 +68,22 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
             <div className="text-left">
               <p className="text-sm font-semibold mb-2">Quiz #089</p>
               <h2 className="text-4xl font-light text-white">{quiz.question}</h2>
+            </div>
+          </div>
+          <div className="absolute bottom-4 right-4 flex flex-col items-end">
+            <span className="text-xs text-gray-400 mb-1">Ends in</span>
+            <div className="flex space-x-1">
+              {timer.split(':').map((digit, index) => (
+                <React.Fragment key={index}>
+                  <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-6 h-7">
+                    <span className="font-mono text-base font-normal">{digit[0]}</span>
+                  </div>
+                  <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-6 h-7">
+                    <span className="font-mono text-base font-normal">{digit[1]}</span>
+                  </div>
+                  {index < 2 && <span className="text-white font-mono text-base font-normal">:</span>}
+                </React.Fragment>
+              ))}
             </div>
           </div>
         </div>

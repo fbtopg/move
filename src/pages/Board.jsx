@@ -105,6 +105,7 @@ const Board = () => {
           onClose={() => setSelectedQuiz(null)}
           handleLike={handleLike}
           toggleComments={toggleComments}
+          timer={timer}
         />
       )}
     </div>
