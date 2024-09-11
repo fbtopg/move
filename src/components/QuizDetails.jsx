@@ -118,11 +118,11 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
                 onChange={(e) => setNewComment(e.target.value)}
                 onFocus={() => setIsCommentFocused(true)}
                 onBlur={() => setIsCommentFocused(false)}
-                className="flex-grow bg-gray-800 border-gray-700 text-white pr-20"
+                className="flex-grow bg-gray-800 border-gray-700 text-white pr-20 rounded-full"
               />
               {(isCommentFocused || newComment) && (
                 <Button 
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white hover:bg-blue-600 px-3 py-1 text-sm rounded-full h-8"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white hover:bg-blue-600 px-3 py-1 text-sm rounded-full h-6"
                   onClick={handleAddComment}
                   disabled={!newComment.trim()}
                 >
