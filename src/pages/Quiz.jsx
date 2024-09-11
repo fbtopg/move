@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import QuizItem from '../components/QuizItem';
+import TodaysQuiz from '../components/TodaysQuiz';
 
 const Quiz = () => {
   const navigate = useNavigate();
@@ -23,22 +24,19 @@ const Quiz = () => {
     return () => clearInterval(timerInterval);
   }, []);
 
-  const quizzes = [
-    { 
-      id: 1,
-      title: "ACTIVE", 
-      question: "What is the capital of Indonesia?", 
-      image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5Mzg1NzMsImV4cCI6MTc1NzQ3NDU3M30.i7Qjnq4mYr_VgnhL9CkNXXdCIFCLsLKp2lIaZ0ijWmo&t=2024-09-10T03%3A22%3A54.207Z",
-      participants: [
-        { id: 1, name: "John" },
-        { id: 2, name: "Emma" },
-        { id: 3, name: "Alex" },
-        { id: 4, name: "Sarah" },
-        { id: 5, name: "Mike" },
-      ],
-      activeParticipants: "16.5k",
-      status: "active"
-    },
+  const todaysQuiz = {
+    title: "Today's Quiz",
+    question: "What is the capital of Indonesia?",
+    image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjYwMTc2MDksImV4cCI6MTc1NzU1MzYwOX0.XTT-akjESWwEYZAztIW2zMNgUPidhExbEfGjMl3F7oA&t=2024-09-11T01%3A20%3A09.296Z",
+    participants: [
+      { id: 1, name: "John", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTEucG5nIiwiaWF0IjoxNzI1NzE3Mjg1LCJleHAiOjE3NTcyNTMyODV9.qVjtzjCu_bW-iEyzul3BjNeCwoMS6prEcNFETCCBzrs&t=2024-09-07T13%3A54%3A44.233Z" },
+      { id: 2, name: "Emma", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTIucG5nIiwiaWF0IjoxNzI1NzE3Mjk1LCJleHAiOjE3NTcyNTMyOTV9.ZggcfcQRRTSdDHtyXr8Opujx6iGlBEISYrW-scvSMik&t=2024-09-07T13%3A54%3A54.988Z" },
+      { id: 3, name: "Alex", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-3.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTMucG5nIiwiaWF0IjoxNzI1NzE3MzExLCJleHAiOjE3NTcyNTMzMTF9.ghhBkpc92hU749PoU_fV_q0HSHBg4SZw8FVeNDsa8J0&t=2024-09-07T13%3A55%3A10.841Z" },
+    ],
+    activeParticipants: "16.5k",
+  };
+
+  const finishedQuizzes = [
     { 
       id: 2,
       title: "FINISHED", 
@@ -48,8 +46,6 @@ const Quiz = () => {
         { id: 1, name: "Alice" },
         { id: 2, name: "Bob" },
         { id: 3, name: "Charlie" },
-        { id: 4, name: "Diana" },
-        { id: 5, name: "Ethan" },
       ],
       activeParticipants: "15.8k",
       status: "finished"
@@ -63,13 +59,16 @@ const Quiz = () => {
         { id: 1, name: "Frank" },
         { id: 2, name: "Grace" },
         { id: 3, name: "Henry" },
-        { id: 4, name: "Ivy" },
-        { id: 5, name: "Jack" },
       ],
       activeParticipants: "14.2k",
       status: "finished"
     },
   ];
+
+  const handleQuizClick = () => {
+    // Handle quiz click, e.g., navigate to quiz details
+    console.log("Quiz clicked");
+  };
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -84,11 +83,20 @@ const Quiz = () => {
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
           <h2 className="text-xs font-semibold mb-3 text-gray-400">ACTIVE</h2>
-          <QuizItem quiz={quizzes[0]} isSquare={true} timer={timer} />
+          <TodaysQuiz
+            quiz={todaysQuiz}
+            onQuizClick={handleQuizClick}
+            timer={timer}
+          />
 
           <h2 className="text-xs font-semibold mb-3 mt-6 text-gray-400">FINISHED</h2>
-          {quizzes.slice(1).map((quiz) => (
-            <QuizItem key={quiz.id} quiz={quiz} isSquare={true} isSmall={true} />
+          {finishedQuizzes.map((quiz) => (
+            <QuizItem 
+              key={quiz.id} 
+              quiz={quiz} 
+              isSquare={true} 
+              isSmall={true} 
+            />
           ))}
         </div>
       </div>
