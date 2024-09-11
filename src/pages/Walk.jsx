@@ -83,6 +83,10 @@ const Walk = () => {
         </div>
       </div>
 
+      <div className="bg-green-500 p-2">
+        {/* Green belt content can be added here */}
+      </div>
+
       <div className="flex-grow relative">
         <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
           <TileLayer
