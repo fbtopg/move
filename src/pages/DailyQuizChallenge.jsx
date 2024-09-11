@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Flame, Brain, ArrowRight, History } from 'lucide-react';
+import { ArrowLeft, Flame, Brain, Heart, ArrowRight, Share, History } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 import BottomNavBar from '../components/BottomNavBar';
+import { shareInvite } from '../utils/shareUtils';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const DailyQuizChallenge = () => {
@@ -15,6 +16,7 @@ const DailyQuizChallenge = () => {
     title: "Daily Quiz",
     progress: "11/30",
     answers: "11",
+    likes: "124",
     highestStreak: "7",
     activeParticipants: "16.5k",
     startDate: "Sep 1",
@@ -23,6 +25,7 @@ const DailyQuizChallenge = () => {
     achievements: [
       { id: 1, name: "5-day streak", icon: Flame },
       { id: 2, name: "Conscious mind", icon: Brain },
+      { id: 3, name: "100 likes", icon: Heart },
     ],
   };
 
@@ -116,6 +119,10 @@ const DailyQuizChallenge = () => {
               <div className="text-base font-bold">{challengeData.answers}</div>
             </div>
             <div>
+              <div className="text-xs text-gray-400">LIKES</div>
+              <div className="text-base font-bold">{challengeData.likes}</div>
+            </div>
+            <div>
               <div className="text-xs text-gray-400">HIGHEST STREAK</div>
               <div className="text-base font-bold">{challengeData.highestStreak}</div>
             </div>
@@ -156,6 +163,14 @@ const DailyQuizChallenge = () => {
               ))}
             </div>
           </div>
+
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full"
+            onClick={shareInvite}
+          >
+            <Share className="mr-2 h-5 w-5" />
+            Invite Friends
+          </Button>
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
