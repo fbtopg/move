@@ -89,6 +89,21 @@ const Walk = () => {
         </div>
       </div>
 
+      <div className="bg-[#39FF14] p-2 overflow-hidden z-[1000]">
+        <div className="flex whitespace-nowrap animate-marquee">
+          {friendActivities.map((activity, index) => (
+            <span key={index} className="inline-block mr-8 text-xs text-black">
+              <strong>{activity.username}</strong> just finished walking {activity.distance}. {activity.timestamp}
+            </span>
+          ))}
+          {friendActivities.map((activity, index) => (
+            <span key={`repeat-${index}`} className="inline-block mr-8 text-xs text-black">
+              <strong>{activity.username}</strong> just finished walking {activity.distance}. {activity.timestamp}
+            </span>
+          ))}
+        </div>
+      </div>
+
       <div className="flex-grow relative">
         <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
           <TileLayer
@@ -97,20 +112,6 @@ const Walk = () => {
           />
           <LocationMarker />
         </MapContainer>
-        <div className="absolute bottom-0 left-0 right-0 bg-[#39FF14] p-2 overflow-hidden z-[1000]">
-          <div className="flex whitespace-nowrap animate-marquee">
-            {friendActivities.map((activity, index) => (
-              <span key={index} className="inline-block mr-8 text-xs text-black">
-                <strong>{activity.username}</strong> just finished walking {activity.distance}. {activity.timestamp}
-              </span>
-            ))}
-            {friendActivities.map((activity, index) => (
-              <span key={`repeat-${index}`} className="inline-block mr-8 text-xs text-black">
-                <strong>{activity.username}</strong> just finished walking {activity.distance}. {activity.timestamp}
-              </span>
-            ))}
-          </div>
-        </div>
         <div className="absolute bottom-4 right-4 z-[1000]">
           <Button
             className="bg-white text-black hover:bg-gray-200 transition-colors rounded-full p-2"
