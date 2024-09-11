@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const TodaysQuiz = ({ quiz, onQuizClick, timer }) => (
   <>
     <div className="flex items-center justify-between mb-4">
-      <h2 className="text-xl font-bold">Today's Quiz</h2>
+      <h2 className="text-lg font-bold">Today's Quiz</h2>
       <div className="flex items-center">
         <div className="flex -space-x-2 overflow-hidden mr-2">
           {quiz.participants.slice(0, 3).map((participant) => (
