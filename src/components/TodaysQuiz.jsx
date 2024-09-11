@@ -41,12 +41,12 @@ const TodaysQuiz = ({ quiz, onQuizClick, onLike, onComment, timer }) => (
         {timer.split(':').map((digit, index) => (
           <React.Fragment key={index}>
             <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-7 h-8">
-              <span className="font-mono text-lg font-bold">{digit[0]}</span>
+              <span className="font-mono text-lg font-normal">{digit[0]}</span>
             </div>
             <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-7 h-8">
-              <span className="font-mono text-lg font-bold">{digit[1]}</span>
+              <span className="font-mono text-lg font-normal">{digit[1]}</span>
             </div>
-            {index < 2 && <span className="text-white font-mono text-lg font-bold">:</span>}
+            {index < 2 && <span className="text-white font-mono text-lg font-normal">:</span>}
           </React.Fragment>
         ))}
       </div>
