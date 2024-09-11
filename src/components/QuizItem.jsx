@@ -1,11 +1,8 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { getRandomProfilePicture } from '../utils/profilePictures';
-import { shareInvite } from '../utils/shareUtils';
 
-const QuizItem = ({ quiz, onLike, isSmall = false, isSquare = false }) => {
+const QuizItem = ({ quiz, isSmall = false, isSquare = false }) => {
   return (
     <div className={`mb-${isSmall ? '0' : '8'}`}>
       {!isSmall && (
@@ -44,32 +41,6 @@ const QuizItem = ({ quiz, onLike, isSmall = false, isSquare = false }) => {
           </div>
         </div>
       </div>
-      {!isSmall && quiz.status !== 'finished' && (
-        <div className="flex justify-start items-center">
-          <Button 
-            variant="ghost" 
-            className={`flex items-center ${quiz.isLiked ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
-            onClick={() => onLike(quiz.id)}
-          >
-            <Heart className={`w-4 h-4 mr-1 ${quiz.isLiked ? 'fill-red-500 text-red-500' : ''}`} />
-            <span className="text-xs">{quiz.likes} Likes</span>
-          </Button>
-          <Button 
-            variant="ghost" 
-            className="flex items-center text-gray-400 hover:text-white mr-4 p-1"
-          >
-            <MessageCircle className="w-4 h-4 mr-1" />
-            <span className="text-xs">{quiz.comments} Comments</span>
-          </Button>
-          <Button 
-            variant="ghost" 
-            className="flex items-center text-gray-400 hover:text-white p-1"
-            onClick={shareInvite}
-          >
-            <Share2 className="w-4 h-4" />
-          </Button>
-        </div>
-      )}
     </div>
   );
 };

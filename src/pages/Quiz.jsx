@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import QuizItem from '../components/QuizItem';
 
 const Quiz = () => {
   const navigate = useNavigate();
-  const [quizzes, setQuizzes] = useState([
+  const quizzes = [
     { 
       id: 1,
       title: "Today", 
@@ -19,10 +19,7 @@ const Quiz = () => {
         { id: 5, name: "Mike" },
       ],
       activeParticipants: "16.5k",
-      status: "active",
-      likes: "1.2k",
-      comments: "324",
-      isLiked: false
+      status: "active"
     },
     { 
       id: 2,
@@ -37,10 +34,7 @@ const Quiz = () => {
         { id: 5, name: "Ethan" },
       ],
       activeParticipants: "15.8k",
-      status: "active",
-      likes: "980",
-      comments: "210",
-      isLiked: false
+      status: "active"
     },
     { 
       id: 3,
@@ -55,58 +49,37 @@ const Quiz = () => {
         { id: 5, name: "Jack" },
       ],
       activeParticipants: "14.2k",
-      status: "active",
-      likes: "850",
-      comments: "180",
-      isLiked: false
+      status: "active"
     },
     { 
       id: 4,
       title: "FINISHED", 
       question: "Which element has the chemical symbol 'Au'?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2098.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5OC5wbmciLCJpYXQiOjE3MjU5NTA0MTMsImV4cCI6MTc1NzQ4NjQxM30.5thHmNoEE4jAQ0d57HyF4TCdUJJclQZcy9Uq5zoLXoA&t=2024-09-10T06%3A40%3A14.106Z",
-      status: "finished",
-      likes: "1.5k",
-      comments: "450",
-      isLiked: false
+      status: "finished"
     },
     { 
       id: 5,
       title: "FINISHED", 
       question: "What is the largest organ in the human body?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2099.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5OS5wbmciLCJpYXQiOjE3MjU5NTEyNDQsImV4cCI6MTc1NzQ4NzI0NH0.-6RLuFmnmD3b6KtxPSq0qJL6OL3LaG4g69bQ_t-LAvc&t=2024-09-10T06%3A54%3A04.726Z",
-      status: "finished",
-      likes: "1.3k",
-      comments: "380",
-      isLiked: false
+      status: "finished"
     },
     { 
       id: 6,
       title: "FINISHED", 
       question: "Which country is known as the Land of the Rising Sun?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%20100.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSAxMDAucG5nIiwiaWF0IjoxNzI1OTUxMzEzLCJleHAiOjE3NTc0ODczMTN9.r0n1rlbMRe-qIxkw8W4sVgj339oDty4Ukoxi3musQSs&t=2024-09-10T06%3A55%3A13.329Z",
-      status: "finished",
-      likes: "1.1k",
-      comments: "290",
-      isLiked: false
+      status: "finished"
     },
     { 
       id: 7,
       title: "FINISHED", 
       question: "What is the chemical formula for water?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%20101.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSAxMDEucG5nIiwiaWF0IjoxNzI1OTUxMzI3LCJleHAiOjE3NTc0ODczMjd9.potSLcdm69nQ1YnBCqiYWFlcxoCJSbOEbSXFtMBxuGw&t=2024-09-10T06%3A55%3A28.006Z",
-      status: "finished",
-      likes: "980",
-      comments: "210",
-      isLiked: false
+      status: "finished"
     },
-  ]);
-
-  const handleLike = (id) => {
-    setQuizzes(prevQuizzes => prevQuizzes.map(quiz => 
-      quiz.id === id ? { ...quiz, isLiked: !quiz.isLiked } : quiz
-    ));
-  };
+  ];
 
   const activeQuizzes = quizzes.filter(quiz => quiz.status !== "finished");
   const finishedQuizzes = quizzes.filter(quiz => quiz.status === "finished");
@@ -126,7 +99,7 @@ const Quiz = () => {
           {activeQuizzes.map((quiz, index) => (
             <React.Fragment key={quiz.id}>
               {index > 0 && <div className="h-px bg-gray-700 my-8"></div>}
-              <QuizItem quiz={quiz} onLike={handleLike} isSquare={index < 3} />
+              <QuizItem quiz={quiz} isSquare={index < 3} />
             </React.Fragment>
           ))}
           {finishedQuizzes.length > 0 && (
@@ -138,7 +111,6 @@ const Quiz = () => {
                   <QuizItem 
                     key={quiz.id} 
                     quiz={quiz} 
-                    onLike={handleLike} 
                     isSmall 
                   />
                 ))}
