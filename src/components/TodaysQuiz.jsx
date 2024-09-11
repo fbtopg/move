@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getRandomProfilePicture } from '../utils/profilePictures';
 import { shareInvite } from '../utils/shareUtils';
 
 const TodaysQuiz = ({ quiz, onQuizClick, onLike, onComment, timer }) => (
@@ -13,7 +12,7 @@ const TodaysQuiz = ({ quiz, onQuizClick, onLike, onComment, timer }) => (
         <div className="flex -space-x-2 overflow-hidden mr-2">
           {quiz.participants.slice(0, 3).map((participant) => (
             <Avatar key={participant.id} className="inline-block h-6 w-6 rounded-full ring-2 ring-black">
-              <AvatarImage src={getRandomProfilePicture()} alt={participant.name} />
+              <AvatarImage src={participant.avatar} alt={participant.name} />
               <AvatarFallback>{participant.name[0]}</AvatarFallback>
             </Avatar>
           ))}
