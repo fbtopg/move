@@ -83,7 +83,7 @@ const Walk = () => {
         </div>
       </div>
 
-      <div className="bg-green-500 p-2">
+      <div className="bg-green-500 p-6">
         {/* Green belt content can be added here */}
       </div>
 
