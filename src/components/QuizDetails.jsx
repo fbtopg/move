@@ -122,7 +122,7 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments }) => {
               />
               {(isCommentFocused || newComment) && (
                 <Button 
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white text-black hover:bg-gray-200 px-3 py-1 text-sm rounded-full"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white hover:bg-blue-600 px-3 py-1 text-sm rounded-full h-8"
                   onClick={handleAddComment}
                   disabled={!newComment.trim()}
                 >
