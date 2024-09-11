@@ -20,6 +20,14 @@ const Walk = () => {
     { name: "Daily Walk", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square_small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZV9zbWFsbC5wbmciLCJpYXQiOjE3MjU3NjM1MTgsImV4cCI6MTc1NzI5OTUxOH0.GLkQ1VOFZKx98eUHrlNTYxPi7lBaji1GVRee_iUDljs&t=2024-09-08T02%3A45%3A16.927Z", date: "September 2024" },
   ];
 
+  const friendActivities = [
+    { name: "Emma", activity: "walked 1.2km", timestamp: "2m ago" },
+    { name: "John", activity: "completed daily walk", timestamp: "5m ago" },
+    { name: "Sarah", activity: "walked 800m", timestamp: "10m ago" },
+    { name: "Mike", activity: "started walking", timestamp: "15m ago" },
+    { name: "Lisa", activity: "walked 2km", timestamp: "20m ago" },
+  ];
+
   const handleChallengeClick = () => {
     navigate('/daily-walk-challenge');
   };
@@ -83,8 +91,14 @@ const Walk = () => {
         </div>
       </div>
 
-      <div className="bg-green-500 p-6">
-        {/* Green belt content can be added here */}
+      <div className="bg-green-500 p-6 overflow-hidden">
+        <div className="whitespace-nowrap animate-marquee">
+          {friendActivities.map((activity, index) => (
+            <span key={index} className="inline-block mr-8">
+              <strong>{activity.name}</strong> {activity.activity} • {activity.timestamp}
+            </span>
+          ))}
+        </div>
       </div>
 
       <div className="flex-grow relative">
