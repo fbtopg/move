@@ -7,7 +7,7 @@ import { shareInvite } from '../utils/shareUtils';
 import AnswerSection from './AnswerSection';
 import CommentsSection from './CommentsSection';
 
-const QuizDetails = ({ quiz, onClose, handleLike, toggleComments, timer }) => {
+const QuizDetails = ({ quiz, onClose, handleLike, toggleComments, timer = '00:00:00' }) => {
   const [newComment, setNewComment] = useState('');
   const [isCommentFocused, setIsCommentFocused] = useState(false);
   const [comments, setComments] = useState([
