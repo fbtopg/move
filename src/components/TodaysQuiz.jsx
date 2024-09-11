@@ -31,15 +31,25 @@ const TodaysQuiz = ({ quiz, onQuizClick, onLike, onComment, timer }) => (
         className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 flex flex-col justify-center p-6">
-        <div className="flex flex-col items-start">
+        <div className="text-left">
           <p className="text-sm font-semibold mb-2">Quiz #089</p>
-          <h3 className="text-4xl font-light text-white mb-4 text-left">
+          <h3 className="text-4xl font-light text-white mb-4">
             {quiz.question}
           </h3>
         </div>
       </div>
-      <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 px-2 py-1 rounded">
-        <span className="text-white text-sm">{timer}</span>
+      <div className="absolute bottom-4 right-4 flex space-x-1">
+        {timer.split(':').map((digit, index) => (
+          <React.Fragment key={index}>
+            <div className="bg-gray-800 rounded-md p-1 text-white text-sm font-mono">
+              {digit[0]}
+            </div>
+            <div className="bg-gray-800 rounded-md p-1 text-white text-sm font-mono">
+              {digit[1]}
+            </div>
+            {index < 2 && <span className="text-white text-sm font-mono">:</span>}
+          </React.Fragment>
+        ))}
       </div>
     </div>
     <div className="flex justify-start items-center mb-6">
