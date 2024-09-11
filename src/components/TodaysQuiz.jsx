@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { shareInvite } from '../utils/shareUtils';
 
-const TodaysQuiz = ({ quiz, onQuizClick, onLike, onComment }) => (
+const TodaysQuiz = ({ quiz, onQuizClick, onLike, onComment, timer }) => (
   <>
     <div className="flex items-center justify-between mb-4">
       <h2 className="text-xl font-bold">Today's Quiz</h2>
@@ -37,6 +37,9 @@ const TodaysQuiz = ({ quiz, onQuizClick, onLike, onComment }) => (
             {quiz.question}
           </h3>
         </div>
+      </div>
+      <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 px-2 py-1 rounded">
+        <span className="text-white text-sm">{timer}</span>
       </div>
     </div>
     <div className="flex justify-start items-center mb-6">

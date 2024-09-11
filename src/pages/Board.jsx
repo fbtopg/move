@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Globe, Zap, HelpCircle, Newspaper, Users } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
@@ -12,6 +12,7 @@ const Board = () => {
   const [activeTab, setActiveTab] = useState('board');
   const navigate = useNavigate();
   const [selectedQuiz, setSelectedQuiz] = useState(null);
+  const [timer, setTimer] = useState('23:59:59');
 
   const headerItems = [
     { name: 'Quiz', icon: HelpCircle },
@@ -41,6 +42,22 @@ const Board = () => {
     { id: 1, label: "Label", headline: "News Headline", likes: "1.6k", comments: "560", isLiked: false, isCommentsOpen: false },
     { id: 2, label: "Label", headline: "News Headline", likes: "1.6k", comments: "560", isLiked: false, isCommentsOpen: false },
   ]);
+
+  useEffect(() => {
+    const updateTimer = () => {
+      const now = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
+      const kstNow = new Date(now);
+      const hours = 23 - kstNow.getHours();
+      const minutes = 59 - kstNow.getMinutes();
+      const seconds = 59 - kstNow.getSeconds();
+
+      setTimer(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+    };
+
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    return () => clearInterval(timerInterval);
+  }, []);
 
   const handleHeaderItemClick = (item) => {
     if (item === 'Quiz') {
@@ -90,6 +107,7 @@ const Board = () => {
             onQuizClick={() => setSelectedQuiz(todaysQuiz)}
             onLike={() => handleLike('quiz')}
             onComment={() => toggleComments('quiz')}
+            timer={timer}
           />
           <NewsItems
             items={newsItems}
