@@ -30,9 +30,11 @@ const Quiz = () => {
       question: "What is the capital of Indonesia?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5Mzg1NzMsImV4cCI6MTc1NzQ3NDU3M30.i7Qjnq4mYr_VgnhL9CkNXXdCIFCLsLKp2lIaZ0ijWmo&t=2024-09-10T03%3A22%3A54.207Z",
       participants: [
-        { id: 1, name: "John", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTEucG5nIiwiaWF0IjoxNzI2MDI5ODQ2LCJleHAiOjE3NTc1NjU4NDZ9.hL3g-fiKZGMlidUSQuchd5mS6gd74Ve20WSofsCzFak&t=2024-09-11T04%3A44%3A06.651Z" },
-        { id: 2, name: "Emma", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTIucG5nIiwiaWF0IjoxNzI2MDI5ODczLCJleHAiOjE3NTc1NjU4NzN9.-PUMEkXCuZTG-pWZrBL5S77sd7bzqnmuJrtBvxzX_7g&t=2024-09-11T04%3A44%3A32.934Z" },
-        { id: 3, name: "Alex", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-3.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTMucG5nIiwiaWF0IjoxNzI2MDI5ODc4LCJleHAiOjE3NTc1NjU4Nzh9.q9j81AbxaBtFI2WsCN85nv0kYtUjct0OtrS9ZFvKcew&t=2024-09-11T04%3A44%3A38.870Z" },
+        { id: 1, name: "John" },
+        { id: 2, name: "Emma" },
+        { id: 3, name: "Alex" },
+        { id: 4, name: "Sarah" },
+        { id: 5, name: "Mike" },
       ],
       activeParticipants: "16.5k",
       status: "active"
@@ -43,9 +45,11 @@ const Quiz = () => {
       question: "Which planet is known as the Red Planet?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2096.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ni5wbmciLCJpYXQiOjE3MjU5Mzg1OTMsImV4cCI6MTc1NzQ3NDU5M30.F0bZeKm1pv_2ciSkNqRSnp-MyncY9zmrWCsniCG5iZo&t=2024-09-10T03%3A23%3A13.842Z",
       participants: [
-        { id: 1, name: "Alice", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTEucG5nIiwiaWF0IjoxNzI2MDI5ODQ2LCJleHAiOjE3NTc1NjU4NDZ9.hL3g-fiKZGMlidUSQuchd5mS6gd74Ve20WSofsCzFak&t=2024-09-11T04%3A44%3A06.651Z" },
-        { id: 2, name: "Bob", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTIucG5nIiwiaWF0IjoxNzI2MDI5ODczLCJleHAiOjE3NTc1NjU4NzN9.-PUMEkXCuZTG-pWZrBL5S77sd7bzqnmuJrtBvxzX_7g&t=2024-09-11T04%3A44%3A32.934Z" },
-        { id: 3, name: "Charlie", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-3.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTMucG5nIiwiaWF0IjoxNzI2MDI5ODc4LCJleHAiOjE3NTc1NjU4Nzh9.q9j81AbxaBtFI2WsCN85nv0kYtUjct0OtrS9ZFvKcew&t=2024-09-11T04%3A44%3A38.870Z" },
+        { id: 1, name: "Alice" },
+        { id: 2, name: "Bob" },
+        { id: 3, name: "Charlie" },
+        { id: 4, name: "Diana" },
+        { id: 5, name: "Ethan" },
       ],
       activeParticipants: "15.8k",
       status: "finished"
@@ -56,9 +60,11 @@ const Quiz = () => {
       question: "What is the largest mammal on Earth?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2097.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ny5wbmciLCJpYXQiOjE3MjU5Mzg2MTAsImV4cCI6MTc1NzQ3NDYxMH0.-tBzfXj83KjZJmrJWN4UL18P13kZ4Bt6Fwv7n-6E53s&t=2024-09-10T03%3A23%3A31.080Z",
       participants: [
-        { id: 1, name: "Frank", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTEucG5nIiwiaWF0IjoxNzI2MDI5ODQ2LCJleHAiOjE3NTc1NjU4NDZ9.hL3g-fiKZGMlidUSQuchd5mS6gd74Ve20WSofsCzFak&t=2024-09-11T04%3A44%3A06.651Z" },
-        { id: 2, name: "Grace", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTIucG5nIiwiaWF0IjoxNzI2MDI5ODczLCJleHAiOjE3NTc1NjU4NzN9.-PUMEkXCuZTG-pWZrBL5S77sd7bzqnmuJrtBvxzX_7g&t=2024-09-11T04%3A44%3A32.934Z" },
-        { id: 3, name: "Henry", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-3.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTMucG5nIiwiaWF0IjoxNzI2MDI5ODc4LCJleHAiOjE3NTc1NjU4Nzh9.q9j81AbxaBtFI2WsCN85nv0kYtUjct0OtrS9ZFvKcew&t=2024-09-11T04%3A44%3A38.870Z" },
+        { id: 1, name: "Frank" },
+        { id: 2, name: "Grace" },
+        { id: 3, name: "Henry" },
+        { id: 4, name: "Ivy" },
+        { id: 5, name: "Jack" },
       ],
       activeParticipants: "14.2k",
       status: "finished"
