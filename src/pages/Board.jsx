@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button";
 import { Globe, Zap, HelpCircle, Newspaper, Users } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
@@ -32,10 +31,6 @@ const Board = () => {
       { id: 5, name: "Mike", avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-5.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTUucG5nIiwiaWF0IjoxNzI1NzE3MzI1LCJleHAiOjE3NTcyNTMzMjV9.e5H4nq1qEjoOIcShw-3CyS_5GieWWhI4cp85LjjW2vo&t=2024-09-07T13%3A55%3A25.054Z" },
     ],
     activeParticipants: "16.5k",
-    likes: "1.2k",
-    comments: "324",
-    isLiked: false,
-    isCommentsOpen: false
   });
 
   const [newsItems, setNewsItems] = useState([
@@ -66,13 +61,7 @@ const Board = () => {
   };
 
   const handleLike = (itemType, itemId) => {
-    if (itemType === 'quiz') {
-      setTodaysQuiz(prev => ({
-        ...prev,
-        isLiked: !prev.isLiked,
-        likes: prev.isLiked ? (parseInt(prev.likes) - 1).toString() + 'k' : (parseInt(prev.likes) + 1).toString() + 'k'
-      }));
-    } else if (itemType === 'news') {
+    if (itemType === 'news') {
       setNewsItems(prev => prev.map(item => 
         item.id === itemId ? {
           ...item,
@@ -84,12 +73,7 @@ const Board = () => {
   };
 
   const toggleComments = (itemType, itemId) => {
-    if (itemType === 'quiz') {
-      setTodaysQuiz(prev => ({
-        ...prev,
-        isCommentsOpen: !prev.isCommentsOpen
-      }));
-    } else if (itemType === 'news') {
+    if (itemType === 'news') {
       setNewsItems(prev => prev.map(item =>
         item.id === itemId ? { ...item, isCommentsOpen: !item.isCommentsOpen } : item
       ));
@@ -105,8 +89,6 @@ const Board = () => {
           <TodaysQuiz
             quiz={todaysQuiz}
             onQuizClick={() => setSelectedQuiz(todaysQuiz)}
-            onLike={() => handleLike('quiz')}
-            onComment={() => toggleComments('quiz')}
             timer={timer}
           />
           <NewsItems

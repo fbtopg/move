@@ -1,10 +1,7 @@
 import React from 'react';
-import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { shareInvite } from '../utils/shareUtils';
 
-const TodaysQuiz = ({ quiz, onQuizClick, onLike, onComment, timer }) => (
+const TodaysQuiz = ({ quiz, onQuizClick, timer }) => (
   <>
     <div className="flex items-center justify-between mb-4">
       <h2 className="text-xl font-bold">Today's Quiz</h2>
@@ -42,38 +39,17 @@ const TodaysQuiz = ({ quiz, onQuizClick, onLike, onComment, timer }) => (
         <div className="flex space-x-1">
           {timer.split(':').map((digit, index) => (
             <React.Fragment key={index}>
-              <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
-                <span className="font-mono text-sm font-normal">{digit[0]}</span>
+              <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-4 h-5">
+                <span className="font-mono text-xs font-normal">{digit[0]}</span>
               </div>
-              <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
-                <span className="font-mono text-sm font-normal">{digit[1]}</span>
+              <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-4 h-5">
+                <span className="font-mono text-xs font-normal">{digit[1]}</span>
               </div>
-              {index < 2 && <span className="text-white font-mono text-sm font-normal">:</span>}
+              {index < 2 && <span className="text-white font-mono text-xs font-normal">:</span>}
             </React.Fragment>
           ))}
         </div>
       </div>
-    </div>
-    <div className="flex justify-start items-center mb-6">
-      <Button 
-        variant="ghost" 
-        className={`flex items-center ${quiz.isLiked ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
-        onClick={onLike}
-      >
-        <Heart className={`w-4 h-4 mr-1 ${quiz.isLiked ? 'fill-red-500 text-red-500' : ''}`} />
-        <span className="text-xs">{quiz.likes} Likes</span>
-      </Button>
-      <Button 
-        variant="ghost" 
-        className={`flex items-center ${quiz.isCommentsOpen ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
-        onClick={onComment}
-      >
-        <MessageCircle className="w-4 h-4 mr-1" />
-        <span className="text-xs">{quiz.comments} Comments</span>
-      </Button>
-      <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-1" onClick={shareInvite}>
-        <Share2 className="w-4 h-4" />
-      </Button>
     </div>
   </>
 );
