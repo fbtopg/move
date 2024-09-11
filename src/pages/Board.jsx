@@ -69,7 +69,7 @@ const Board = () => {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      <div className="flex-grow overflow-y-auto pb-20">
+      <div className="flex-grow overflow-y-auto pb-20 pt-2">
         <div className="max-w-md mx-auto p-2">
           <TodaysQuiz
             quiz={todaysQuiz}
