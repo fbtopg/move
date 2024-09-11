@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Globe, Zap, LayoutGrid } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
 import QuizDetails from '../components/QuizDetails';
