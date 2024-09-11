@@ -103,7 +103,7 @@ const Walk = () => {
           <div className="whitespace-nowrap animate-marquee">
             {friendActivities.map((activity, index) => (
               <span key={index} className="inline-block mr-8 text-xs text-black">
-                <strong>{activity.username}</strong> just finished walk {activity.distance}. {activity.timestamp}
+                <strong>{activity.username}</strong> just finished walking {activity.distance}. {activity.timestamp}
               </span>
             ))}
           </div>
