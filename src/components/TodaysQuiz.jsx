@@ -37,18 +37,21 @@ const TodaysQuiz = ({ quiz, onQuizClick, onLike, onComment, timer }) => (
           </h3>
         </div>
       </div>
-      <div className="absolute bottom-4 right-4 flex space-x-1">
-        {timer.split(':').map((digit, index) => (
-          <React.Fragment key={index}>
-            <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-6 h-7">
-              <span className="font-mono text-base font-normal">{digit[0]}</span>
-            </div>
-            <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-6 h-7">
-              <span className="font-mono text-base font-normal">{digit[1]}</span>
-            </div>
-            {index < 2 && <span className="text-white font-mono text-base font-normal">:</span>}
-          </React.Fragment>
-        ))}
+      <div className="absolute bottom-4 right-4 flex flex-col items-end">
+        <span className="text-xs text-gray-400 mb-1">Ends in</span>
+        <div className="flex space-x-1">
+          {timer.split(':').map((digit, index) => (
+            <React.Fragment key={index}>
+              <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
+                <span className="font-mono text-sm font-normal">{digit[0]}</span>
+              </div>
+              <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
+                <span className="font-mono text-sm font-normal">{digit[1]}</span>
+              </div>
+              {index < 2 && <span className="text-white font-mono text-sm font-normal">:</span>}
+            </React.Fragment>
+          ))}
+        </div>
       </div>
     </div>
     <div className="flex justify-start items-center mb-6">
