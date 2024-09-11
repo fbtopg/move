@@ -24,8 +24,6 @@ const Walk = () => {
     { username: "Emma", distance: "1.2km", timestamp: "2m ago" },
     { username: "John", distance: "2.5km", timestamp: "5m ago" },
     { username: "Sarah", distance: "800m", timestamp: "10m ago" },
-    { username: "Mike", distance: "3km", timestamp: "15m ago" },
-    { username: "Lisa", distance: "2km", timestamp: "20m ago" },
   ];
 
   const handleChallengeClick = () => {
@@ -100,10 +98,15 @@ const Walk = () => {
           <LocationMarker />
         </MapContainer>
         <div className="absolute bottom-0 left-0 right-0 bg-[#39FF14] p-2 overflow-hidden z-[1000]">
-          <div className="whitespace-nowrap animate-marquee">
+          <div className="flex whitespace-nowrap animate-marquee">
             {friendActivities.map((activity, index) => (
               <span key={index} className="inline-block mr-8 text-xs text-black">
-                <strong>{activity.username}</strong> just finished walking {activity.distance}. {activity.timestamp}
+                {activity.username} just finished walking {activity.distance}. {activity.timestamp}
+              </span>
+            ))}
+            {friendActivities.map((activity, index) => (
+              <span key={`repeat-${index}`} className="inline-block mr-8 text-xs text-black">
+                {activity.username} just finished walking {activity.distance}. {activity.timestamp}
               </span>
             ))}
           </div>
