@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import QuizItem from '../components/QuizItem';
 
 const Quiz = () => {
   const navigate = useNavigate();
+  const [timer, setTimer] = useState('23:59:59');
+
+  useEffect(() => {
+    const updateTimer = () => {
+      const now = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
+      const kstNow = new Date(now);
+      const hours = 23 - kstNow.getHours();
+      const minutes = 59 - kstNow.getMinutes();
+      const seconds = 59 - kstNow.getSeconds();
+
+      setTimer(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+    };
+
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    return () => clearInterval(timerInterval);
+  }, []);
+
   const quizzes = [
     { 
       id: 1,
@@ -66,7 +84,7 @@ const Quiz = () => {
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
           <h2 className="text-xs font-semibold mb-3 text-gray-400">ACTIVE</h2>
-          <QuizItem quiz={quizzes[0]} isSquare={true} />
+          <QuizItem quiz={quizzes[0]} isSquare={true} timer={timer} />
 
           <h2 className="text-xs font-semibold mb-3 mt-6 text-gray-400">FINISHED</h2>
           {quizzes.slice(1).map((quiz) => (
