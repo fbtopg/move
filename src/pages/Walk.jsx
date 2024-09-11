@@ -91,16 +91,6 @@ const Walk = () => {
         </div>
       </div>
 
-      <div className="bg-green-500 p-6 overflow-hidden">
-        <div className="whitespace-nowrap animate-marquee">
-          {friendActivities.map((activity, index) => (
-            <span key={index} className="inline-block mr-8">
-              <strong>{activity.name}</strong> {activity.activity} • {activity.timestamp}
-            </span>
-          ))}
-        </div>
-      </div>
-
       <div className="flex-grow relative">
         <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
           <TileLayer
@@ -109,6 +99,15 @@ const Walk = () => {
           />
           <LocationMarker />
         </MapContainer>
+        <div className="absolute top-0 left-0 right-0 bg-green-500 p-6 overflow-hidden z-[1000]">
+          <div className="whitespace-nowrap animate-marquee">
+            {friendActivities.map((activity, index) => (
+              <span key={index} className="inline-block mr-8">
+                <strong>{activity.name}</strong> {activity.activity} • {activity.timestamp}
+              </span>
+            ))}
+          </div>
+        </div>
         <div className="absolute bottom-4 right-4 z-[1000]">
           <Button
             className="bg-white text-black hover:bg-gray-200 transition-colors rounded-full p-2"
