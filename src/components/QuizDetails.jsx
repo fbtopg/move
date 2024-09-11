@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ArrowLeft, Share2 } from 'lucide-react';
+import { ArrowLeft, Share } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
@@ -50,30 +50,30 @@ const QuizDetails = ({ quiz, onClose, timer = '00:00:00' }) => {
   return (
     <div className="fixed inset-0 bg-black z-50 overflow-y-auto">
       <div className="relative min-h-screen flex flex-col">
-        <div className="absolute top-0 left-0 right-0 z-10 flex justify-between items-center p-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-white"
-            onClick={onClose}
-          >
-            <ArrowLeft className="h-6 w-6" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-white"
-            onClick={shareInvite}
-          >
-            <Share2 className="h-6 w-6" />
-          </Button>
-        </div>
         <div 
           className="w-full aspect-square bg-cover bg-center relative"
           style={{ 
             backgroundImage: `url(https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5NTM1MTksImV4cCI6MTc1NzQ4OTUxOX0.W9yXSihxUZCw4fiUcmV8VkFCg9LRnk-V5IFnXtDQB1I&t=2024-09-10T07%3A31%3A59.550Z)`,
           }}
         >
+          <div className="absolute top-0 left-0 right-0 z-10 flex justify-between items-center p-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white"
+              onClick={onClose}
+            >
+              <ArrowLeft className="h-6 w-6" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white"
+              onClick={shareInvite}
+            >
+              <Share className="h-6 w-6" />
+            </Button>
+          </div>
           <div className="absolute inset-0 flex flex-col justify-center p-6">
             <div className="text-left">
               <p className="text-sm font-semibold mb-2">Quiz #089</p>
