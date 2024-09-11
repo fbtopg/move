@@ -99,10 +99,10 @@ const Walk = () => {
           />
           <LocationMarker />
         </MapContainer>
-        <div className="absolute top-0 left-0 right-0 bg-green-500 p-6 overflow-hidden z-[1000]">
+        <div className="absolute bottom-0 left-0 right-0 bg-green-500 p-2 overflow-hidden z-[1000]">
           <div className="whitespace-nowrap animate-marquee">
             {friendActivities.map((activity, index) => (
-              <span key={index} className="inline-block mr-8">
+              <span key={index} className="inline-block mr-8 text-xs">
                 <strong>{activity.name}</strong> {activity.activity} • {activity.timestamp}
               </span>
             ))}
