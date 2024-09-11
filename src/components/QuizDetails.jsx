@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Heart, MessageCircle, Share2, ArrowLeft } from 'lucide-react';
+import { X, ArrowLeft, Share2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,7 @@ import { shareInvite } from '../utils/shareUtils';
 import AnswerSection from './AnswerSection';
 import CommentsSection from './CommentsSection';
 
-const QuizDetails = ({ quiz, onClose, handleLike, toggleComments, timer = '00:00:00' }) => {
+const QuizDetails = ({ quiz, onClose, timer = '00:00:00' }) => {
   const [newComment, setNewComment] = useState('');
   const [isCommentFocused, setIsCommentFocused] = useState(false);
   const [comments, setComments] = useState([
@@ -50,14 +50,24 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments, timer = '00:00
   return (
     <div className="fixed inset-0 bg-black z-50 overflow-y-auto">
       <div className="relative min-h-screen flex flex-col">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-4 left-4 text-white z-10"
-          onClick={onClose}
-        >
-          <ArrowLeft className="h-6 w-6" />
-        </Button>
+        <div className="flex justify-between items-center p-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-white"
+            onClick={onClose}
+          >
+            <ArrowLeft className="h-6 w-6" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-white"
+            onClick={shareInvite}
+          >
+            <Share2 className="h-6 w-6" />
+          </Button>
+        </div>
         <div 
           className="w-full aspect-square bg-cover bg-center relative"
           style={{ 
@@ -89,28 +99,6 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments, timer = '00:00
         </div>
         
         <div className="flex-1 p-4 pb-20">
-          <div className="flex justify-start items-center mb-4">
-            <Button 
-              variant="ghost" 
-              className={`flex items-center ${quiz.isLiked ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
-              onClick={() => handleLike('quiz')}
-            >
-              <Heart className={`w-4 h-4 mr-1 ${quiz.isLiked ? 'fill-red-500 text-red-500' : ''}`} />
-              <span className="text-xs">{quiz.likes} Likes</span>
-            </Button>
-            <Button 
-              variant="ghost" 
-              className={`flex items-center ${quiz.isCommentsOpen ? 'text-white' : 'text-gray-400'} hover:text-white mr-4 p-1`}
-              onClick={() => toggleComments('quiz')}
-            >
-              <MessageCircle className="w-4 h-4 mr-1" />
-              <span className="text-xs">{quiz.comments} Comments</span>
-            </Button>
-            <Button variant="ghost" className="flex items-center text-gray-400 hover:text-white p-1" onClick={shareInvite}>
-              <Share2 className="w-4 w-4" />
-            </Button>
-          </div>
-
           <AnswerSection />
 
           <CommentsSection 
