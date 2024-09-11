@@ -26,7 +26,7 @@ const Quiz = () => {
   const quizzes = [
     { 
       id: 1,
-      title: "ACTIVE", 
+      title: "Today's Quiz", 
       question: "What is the capital of Indonesia?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5Mzg1NzMsImV4cCI6MTc1NzQ3NDU3M30.i7Qjnq4mYr_VgnhL9CkNXXdCIFCLsLKp2lIaZ0ijWmo&t=2024-09-10T03%3A22%3A54.207Z",
       participants: [
@@ -83,7 +83,6 @@ const Quiz = () => {
       </div>
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          <h2 className="text-xs font-semibold mb-3 text-gray-400">ACTIVE</h2>
           <QuizItem quiz={quizzes[0]} isSquare={true} timer={timer} />
 
           <h2 className="text-xs font-semibold mb-3 mt-6 text-gray-400">FINISHED</h2>
