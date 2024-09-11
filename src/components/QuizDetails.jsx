@@ -11,9 +11,9 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments, timer = '00:00
   const [newComment, setNewComment] = useState('');
   const [isCommentFocused, setIsCommentFocused] = useState(false);
   const [comments, setComments] = useState([
-    { id: 1, author: "Alice", username: "alice_wonder", content: "Great question!", timestamp: "2h ago", likes: 5, avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTEucG5nIiwiaWF0IjoxNzI1NzE3Mjg1LCJleHAiOjE3NTcyNTMyODV9.qVjtzjCu_bW-iEyzul3BjNeCwoMS6prEcNFETCCBzrs&t=2024-09-07T13%3A54%3A44.233Z" },
-    { id: 2, author: "Bob", username: "bob_builder", content: "I think I know the answer.", timestamp: "1h ago", likes: 3, avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTIucG5nIiwiaWF0IjoxNzI1NzE3Mjk1LCJleHAiOjE3NTcyNTMyOTV9.ZggcfcQRRTSdDHtyXr8Opujx6iGlBEISYrW-scvSMik&t=2024-09-07T13%3A54%3A54.988Z" },
-    { id: 3, author: "Charlie", username: "charlie_chocolate", content: "This one's tricky!", timestamp: "30m ago", likes: 2, avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-3.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTMucG5nIiwiaWF0IjoxNzI1NzE3MzExLCJleHAiOjE3NTcyNTMzMTF9.ghhBkpc92hU749PoU_fV_q0HSHBg4SZw8FVeNDsa8J0&t=2024-09-07T13%3A55%3A10.841Z" },
+    { id: 1, author: "Alice", content: "Great question!", timestamp: "2h ago", likes: 5 },
+    { id: 2, author: "Bob", content: "I think I know the answer.", timestamp: "1h ago", likes: 3 },
+    { id: 3, author: "Charlie", content: "This one's tricky!", timestamp: "30m ago", likes: 2 },
   ]);
 
   const handleCommentLike = (commentId) => {
@@ -31,11 +31,9 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments, timer = '00:00
       const newCommentObj = {
         id: comments.length + 1,
         author: "You",
-        username: "your_username",
         content: newComment.trim(),
         timestamp: "Just now",
-        likes: 0,
-        avatar: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z"
+        likes: 0
       };
       setComments([newCommentObj, ...comments]);
       setNewComment('');
@@ -113,7 +111,6 @@ const QuizDetails = ({ quiz, onClose, handleLike, toggleComments, timer = '00:00
             </Button>
           </div>
 
-          <h3 className="text-sm font-semibold mb-2">Choose your answer:</h3>
           <AnswerSection />
 
           <CommentsSection 
