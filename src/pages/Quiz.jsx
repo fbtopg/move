@@ -68,14 +68,9 @@ const Quiz = () => {
           <h2 className="text-xs font-semibold mb-3 text-gray-400">ACTIVE</h2>
           <QuizItem quiz={quizzes[0]} isSquare={true} />
 
-          <div className="h-px bg-gray-700 my-8"></div>
-
-          <h2 className="text-xs font-semibold mb-3 text-gray-400">FINISHED</h2>
-          {quizzes.slice(1).map((quiz, index) => (
-            <React.Fragment key={quiz.id}>
-              {index > 0 && <div className="h-px bg-gray-700 my-4"></div>}
-              <QuizItem quiz={quiz} isSquare={true} isSmall={true} />
-            </React.Fragment>
+          <h2 className="text-xs font-semibold mb-3 mt-6 text-gray-400">FINISHED</h2>
+          {quizzes.slice(1).map((quiz) => (
+            <QuizItem key={quiz.id} quiz={quiz} isSquare={true} isSmall={true} />
           ))}
         </div>
       </div>
