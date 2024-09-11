@@ -23,7 +23,7 @@ const Quiz = () => {
     },
     { 
       id: 2,
-      title: "ACTIVE", 
+      title: "FINISHED", 
       question: "Which planet is known as the Red Planet?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2096.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ni5wbmciLCJpYXQiOjE3MjU5Mzg1OTMsImV4cCI6MTc1NzQ3NDU5M30.F0bZeKm1pv_2ciSkNqRSnp-MyncY9zmrWCsniCG5iZo&t=2024-09-10T03%3A23%3A13.842Z",
       participants: [
@@ -34,11 +34,11 @@ const Quiz = () => {
         { id: 5, name: "Ethan" },
       ],
       activeParticipants: "15.8k",
-      status: "active"
+      status: "finished"
     },
     { 
       id: 3,
-      title: "ACTIVE", 
+      title: "FINISHED", 
       question: "What is the largest mammal on Earth?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2097.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ny5wbmciLCJpYXQiOjE3MjU5Mzg2MTAsImV4cCI6MTc1NzQ3NDYxMH0.-tBzfXj83KjZJmrJWN4UL18P13kZ4Bt6Fwv7n-6E53s&t=2024-09-10T03%3A23%3A31.080Z",
       participants: [
@@ -49,7 +49,7 @@ const Quiz = () => {
         { id: 5, name: "Jack" },
       ],
       activeParticipants: "14.2k",
-      status: "active"
+      status: "finished"
     },
   ];
 
@@ -65,10 +65,16 @@ const Quiz = () => {
       </div>
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          {quizzes.map((quiz, index) => (
+          <h2 className="text-xs font-semibold mb-3 text-gray-400">ACTIVE</h2>
+          <QuizItem quiz={quizzes[0]} isSquare={true} />
+
+          <div className="h-px bg-gray-700 my-8"></div>
+
+          <h2 className="text-xs font-semibold mb-3 text-gray-400">FINISHED</h2>
+          {quizzes.slice(1).map((quiz, index) => (
             <React.Fragment key={quiz.id}>
-              {index > 0 && <div className="h-px bg-gray-700 my-8"></div>}
-              <QuizItem quiz={quiz} isSquare={index < 3} />
+              {index > 0 && <div className="h-px bg-gray-700 my-4"></div>}
+              <QuizItem quiz={quiz} isSquare={true} isSmall={true} />
             </React.Fragment>
           ))}
         </div>

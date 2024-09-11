@@ -24,7 +24,7 @@ const QuizItem = ({ quiz, isSmall = false, isSquare = false }) => {
         </div>
       )}
       <div 
-        className={`${isSmall ? 'aspect-square' : (isSquare ? 'aspect-square' : 'aspect-[4/3]')} mb-4 rounded-lg overflow-hidden relative cursor-pointer`}
+        className={`${isSmall ? 'aspect-[4/1]' : (isSquare ? 'aspect-square' : 'aspect-[4/3]')} mb-4 rounded-lg overflow-hidden relative cursor-pointer`}
         style={{
           backgroundImage: `url(${quiz.image})`,
           backgroundSize: 'cover',
