@@ -21,11 +21,11 @@ const Walk = () => {
   ];
 
   const friendActivities = [
-    { name: "Emma", activity: "walked 1.2km", timestamp: "2m ago" },
-    { name: "John", activity: "completed daily walk", timestamp: "5m ago" },
-    { name: "Sarah", activity: "walked 800m", timestamp: "10m ago" },
-    { name: "Mike", activity: "started walking", timestamp: "15m ago" },
-    { name: "Lisa", activity: "walked 2km", timestamp: "20m ago" },
+    { username: "Emma", distance: "1.2km", timestamp: "2m ago" },
+    { username: "John", distance: "2.5km", timestamp: "5m ago" },
+    { username: "Sarah", distance: "800m", timestamp: "10m ago" },
+    { username: "Mike", distance: "3km", timestamp: "15m ago" },
+    { username: "Lisa", distance: "2km", timestamp: "20m ago" },
   ];
 
   const handleChallengeClick = () => {
@@ -103,7 +103,7 @@ const Walk = () => {
           <div className="whitespace-nowrap animate-marquee">
             {friendActivities.map((activity, index) => (
               <span key={index} className="inline-block mr-8 text-xs text-black">
-                <strong>{activity.name}</strong> {activity.activity} • {activity.timestamp}
+                <strong>{activity.username}</strong> just finished walk {activity.distance}. {activity.timestamp}
               </span>
             ))}
           </div>
