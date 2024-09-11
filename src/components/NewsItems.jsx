@@ -8,7 +8,7 @@ const NewsItems = ({ items, onLike, onComment }) => (
     <h2 className="text-xl font-bold mb-4">News</h2>
     {items.map((item) => (
       <div key={item.id} className="bg-[#111111] text-white rounded-lg p-4 mb-4">
-        <p className="text-sm text-gray-400 mb-2">{item.label}</p>
+        <p className="text-sm text-gray-400 mb-2">{item.date}</p>
         <h3 className="text-lg font-semibold mb-2">{item.headline}</h3>
         <div className="flex items-center text-sm text-gray-400">
           <Button 

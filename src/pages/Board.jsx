@@ -34,8 +34,8 @@ const Board = () => {
   });
 
   const [newsItems, setNewsItems] = useState([
-    { id: 1, label: "Label", headline: "News Headline", likes: "1.6k", comments: "560", isLiked: false, isCommentsOpen: false },
-    { id: 2, label: "Label", headline: "News Headline", likes: "1.6k", comments: "560", isLiked: false, isCommentsOpen: false },
+    { id: 1, date: "11.09.2024", headline: "New Feature: Daily Challenges", likes: "1.6k", comments: "560", isLiked: false, isCommentsOpen: false },
+    { id: 2, date: "10.09.2024", headline: "Community Milestone: 1 Million Users!", likes: "2.3k", comments: "720", isLiked: false, isCommentsOpen: false },
   ]);
 
   useEffect(() => {
