@@ -2,15 +2,12 @@ import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart, MessageCircle } from 'lucide-react';
-import { getRandomProfilePicture } from '../utils/profilePictures';
-import { getRandomUsername } from '../utils/userUtils';
 
-const Comment = ({ author, content, timestamp, likes, onLike, onReply }) => {
-  const username = getRandomUsername();
+const Comment = ({ author, content, timestamp, likes, onLike, onReply, userProfilePicture, username }) => {
   return (
     <div className="flex items-start space-x-2 mb-4">
       <Avatar className="w-8 h-8">
-        <AvatarImage src={getRandomProfilePicture()} alt={author} />
+        <AvatarImage src={userProfilePicture} alt={author} />
         <AvatarFallback>{author[0]}</AvatarFallback>
       </Avatar>
       <div className="flex-1">
@@ -35,7 +32,7 @@ const Comment = ({ author, content, timestamp, likes, onLike, onReply }) => {
   );
 };
 
-const CommentsSection = ({ comments, handleCommentLike, handleCommentReply }) => {
+const CommentsSection = ({ comments, handleCommentLike, handleCommentReply, userProfilePicture, username }) => {
   return (
     <div className="mt-6 mb-20">
       <h4 className="text-sm font-semibold mb-2">Comments</h4>
@@ -45,6 +42,8 @@ const CommentsSection = ({ comments, handleCommentLike, handleCommentReply }) =>
           {...comment}
           onLike={() => handleCommentLike(comment.id)}
           onReply={() => handleCommentReply(comment.id)}
+          userProfilePicture={userProfilePicture}
+          username={username}
         />
       ))}
     </div>

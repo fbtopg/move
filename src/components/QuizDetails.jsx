@@ -11,10 +11,13 @@ const QuizDetails = ({ quiz, onClose, timer = '00:00:00' }) => {
   const [newComment, setNewComment] = useState('');
   const [isCommentFocused, setIsCommentFocused] = useState(false);
   const [comments, setComments] = useState([
-    { id: 1, author: "Alice", content: "Great question!", timestamp: "2h ago", likes: 5 },
-    { id: 2, author: "Bob", content: "I think I know the answer.", timestamp: "1h ago", likes: 3 },
-    { id: 3, author: "Charlie", content: "This one's tricky!", timestamp: "30m ago", likes: 2 },
+    { id: 1, author: "James", content: "Great question!", timestamp: "2h ago", likes: 5 },
+    { id: 2, author: "James", content: "I think I know the answer.", timestamp: "1h ago", likes: 3 },
+    { id: 3, author: "James", content: "This one's tricky!", timestamp: "30m ago", likes: 2 },
   ]);
+
+  const userProfilePicture = "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z";
+  const username = "James";
 
   const handleCommentLike = (commentId) => {
     setComments(comments.map(comment => 
@@ -30,7 +33,7 @@ const QuizDetails = ({ quiz, onClose, timer = '00:00:00' }) => {
     if (newComment.trim()) {
       const newCommentObj = {
         id: comments.length + 1,
-        author: "You",
+        author: username,
         content: newComment.trim(),
         timestamp: "Just now",
         likes: 0
@@ -105,14 +108,16 @@ const QuizDetails = ({ quiz, onClose, timer = '00:00:00' }) => {
             comments={comments}
             handleCommentLike={handleCommentLike}
             handleCommentReply={handleCommentReply}
+            userProfilePicture={userProfilePicture}
+            username={username}
           />
         </div>
 
         <div className="fixed bottom-0 left-0 right-0 bg-black p-4">
           <div className="flex items-center space-x-2">
             <Avatar className="w-8 h-8">
-              <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" />
-              <AvatarFallback>U</AvatarFallback>
+              <AvatarImage src={userProfilePicture} />
+              <AvatarFallback>J</AvatarFallback>
             </Avatar>
             <div className="flex-grow relative">
               <Input
