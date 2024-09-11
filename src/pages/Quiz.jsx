@@ -23,8 +23,6 @@ const Quiz = () => {
     return () => clearInterval(timerInterval);
   }, []);
 
-  const profilePicture = "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z";
-
   const quizzes = [
     { 
       id: 1,
@@ -32,11 +30,11 @@ const Quiz = () => {
       question: "What is the capital of Indonesia?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjU5Mzg1NzMsImV4cCI6MTc1NzQ3NDU3M30.i7Qjnq4mYr_VgnhL9CkNXXdCIFCLsLKp2lIaZ0ijWmo&t=2024-09-10T03%3A22%3A54.207Z",
       participants: [
-        { id: 1, name: "John", avatar: profilePicture },
-        { id: 2, name: "Emma", avatar: profilePicture },
-        { id: 3, name: "Alex", avatar: profilePicture },
-        { id: 4, name: "Sarah", avatar: profilePicture },
-        { id: 5, name: "Mike", avatar: profilePicture },
+        { id: 1, name: "John" },
+        { id: 2, name: "Emma" },
+        { id: 3, name: "Alex" },
+        { id: 4, name: "Sarah" },
+        { id: 5, name: "Mike" },
       ],
       activeParticipants: "16.5k",
       status: "active"
@@ -47,11 +45,11 @@ const Quiz = () => {
       question: "Which planet is known as the Red Planet?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2096.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ni5wbmciLCJpYXQiOjE3MjU5Mzg1OTMsImV4cCI6MTc1NzQ3NDU5M30.F0bZeKm1pv_2ciSkNqRSnp-MyncY9zmrWCsniCG5iZo&t=2024-09-10T03%3A23%3A13.842Z",
       participants: [
-        { id: 1, name: "Alice", avatar: profilePicture },
-        { id: 2, name: "Bob", avatar: profilePicture },
-        { id: 3, name: "Charlie", avatar: profilePicture },
-        { id: 4, name: "Diana", avatar: profilePicture },
-        { id: 5, name: "Ethan", avatar: profilePicture },
+        { id: 1, name: "Alice" },
+        { id: 2, name: "Bob" },
+        { id: 3, name: "Charlie" },
+        { id: 4, name: "Diana" },
+        { id: 5, name: "Ethan" },
       ],
       activeParticipants: "15.8k",
       status: "finished"
@@ -62,11 +60,11 @@ const Quiz = () => {
       question: "What is the largest mammal on Earth?", 
       image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2097.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5Ny5wbmciLCJpYXQiOjE3MjU5Mzg2MTAsImV4cCI6MTc1NzQ3NDYxMH0.-tBzfXj83KjZJmrJWN4UL18P13kZ4Bt6Fwv7n-6E53s&t=2024-09-10T03%3A23%3A31.080Z",
       participants: [
-        { id: 1, name: "Frank", avatar: profilePicture },
-        { id: 2, name: "Grace", avatar: profilePicture },
-        { id: 3, name: "Henry", avatar: profilePicture },
-        { id: 4, name: "Ivy", avatar: profilePicture },
-        { id: 5, name: "Jack", avatar: profilePicture },
+        { id: 1, name: "Frank" },
+        { id: 2, name: "Grace" },
+        { id: 3, name: "Henry" },
+        { id: 4, name: "Ivy" },
+        { id: 5, name: "Jack" },
       ],
       activeParticipants: "14.2k",
       status: "finished"
