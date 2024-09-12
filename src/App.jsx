@@ -20,23 +20,19 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    // Get the computed background color of the body
-    const bodyBackgroundColor = window.getComputedStyle(document.body).backgroundColor;
-    updateStatusBarColor(bodyBackgroundColor);
+    const updateColor = () => {
+      const bodyBackgroundColor = window.getComputedStyle(document.body).backgroundColor;
+      updateStatusBarColor(bodyBackgroundColor);
+    };
 
-    // Optional: Set up a MutationObserver to watch for changes in the body's style
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.type === "attributes" && mutation.attributeName === "style") {
-          const newBackgroundColor = window.getComputedStyle(document.body).backgroundColor;
-          updateStatusBarColor(newBackgroundColor);
-        }
-      });
-    });
+    // Initial update
+    updateColor();
 
-    observer.observe(document.body, { attributes: true });
+    // Set up MutationObserver to watch for changes in the body's style
+    const observer = new MutationObserver(updateColor);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
 
-    // Cleanup function
+    // Clean up observer on component unmount
     return () => observer.disconnect();
   }, []);
 
