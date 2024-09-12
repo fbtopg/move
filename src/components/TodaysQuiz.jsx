@@ -45,26 +45,30 @@ const TodaysQuiz = ({ quiz, timer }) => {
             </h3>
             <div className="flex space-x-4">
               <button 
-                className={`w-1/2 h-18 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
+                className={`w-1/2 aspect-square flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
                   selectedAnswer === 'Yes' 
                     ? 'bg-green-500 text-white' 
                     : 'bg-gray-700 text-white hover:bg-gray-600'
                 }`}
                 onClick={() => handleAnswerSelect('Yes')}
               >
-                <CheckCircle2 className="h-5 w-5 mr-2 text-green-300" />
-                Yes
+                <div className="flex flex-col items-center">
+                  <CheckCircle2 className="h-8 w-8 mb-2 text-green-300" />
+                  <span>Yes</span>
+                </div>
               </button>
               <button 
-                className={`w-1/2 h-18 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
+                className={`w-1/2 aspect-square flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
                   selectedAnswer === 'No' 
                     ? 'bg-red-500 text-white' 
                     : 'bg-gray-700 text-white hover:bg-gray-600'
                 }`}
                 onClick={() => handleAnswerSelect('No')}
               >
-                <X className="h-5 w-5 mr-2 text-red-300" />
-                No
+                <div className="flex flex-col items-center">
+                  <X className="h-8 w-8 mb-2 text-red-300" />
+                  <span>No</span>
+                </div>
               </button>
             </div>
           </div>
