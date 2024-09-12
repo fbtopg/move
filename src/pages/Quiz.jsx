@@ -2,13 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import QuizItem from '../components/QuizItem';
-import { Button } from "@/components/ui/button";
-import AnswerSection from '../components/AnswerSection';
 
 const Quiz = () => {
   const navigate = useNavigate();
   const [timer, setTimer] = useState('23:59:59');
-  const [showAnswers, setShowAnswers] = useState(false);
 
   useEffect(() => {
     const updateTimer = () => {
@@ -74,10 +71,6 @@ const Quiz = () => {
     },
   ];
 
-  const handleQuizClick = () => {
-    setShowAnswers(!showAnswers);
-  };
-
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="p-2">
@@ -90,15 +83,7 @@ const Quiz = () => {
       </div>
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          <div onClick={handleQuizClick}>
-            <QuizItem quiz={quizzes[0]} isSquare={true} timer={timer} />
-          </div>
-
-          {showAnswers && (
-            <div className="mt-4">
-              <AnswerSection />
-            </div>
-          )}
+          <QuizItem quiz={quizzes[0]} isSquare={true} timer={timer} />
 
           <h2 className="text-xs font-semibold mb-3 mt-6 text-gray-400">FINISHED</h2>
           {quizzes.slice(1).map((quiz) => (
