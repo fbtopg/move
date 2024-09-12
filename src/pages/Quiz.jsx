@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import QuizItem from '../components/QuizItem';
+import QuizBox from '../components/QuizBox';
 
 const Quiz = () => {
   const navigate = useNavigate();
@@ -83,11 +83,11 @@ const Quiz = () => {
       </div>
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
-          <QuizItem quiz={quizzes[0]} isSquare={true} timer={timer} />
+          <QuizBox {...quizzes[0]} timer={timer} />
 
           <h2 className="text-xs font-semibold mb-3 mt-6 text-gray-400">FINISHED</h2>
           {quizzes.slice(1).map((quiz) => (
-            <QuizItem key={quiz.id} quiz={quiz} isSquare={true} isSmall={true} />
+            <QuizBox key={quiz.id} {...quiz} />
           ))}
         </div>
       </div>
