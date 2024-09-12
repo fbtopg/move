@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Globe, Zap, LayoutGrid } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
-import QuizDetails from '../components/QuizDetails';
 import TodaysQuiz from '../components/TodaysQuiz';
 import NewsItems from '../components/NewsItems';
 
 const Board = () => {
   const [activeTab, setActiveTab] = useState('board');
   const navigate = useNavigate();
-  const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [timer, setTimer] = useState('23:59:59');
 
   const [todaysQuiz, setTodaysQuiz] = useState({
@@ -68,13 +66,17 @@ const Board = () => {
     }
   };
 
+  const handleQuizClick = () => {
+    navigate('/quiz');
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20 pt-1">
         <div className="max-w-md mx-auto p-2">
           <TodaysQuiz
             quiz={todaysQuiz}
-            onQuizClick={() => setSelectedQuiz(todaysQuiz)}
+            onQuizClick={handleQuizClick}
             timer={timer}
           />
           <NewsItems
@@ -85,15 +87,6 @@ const Board = () => {
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
-      {selectedQuiz && (
-        <QuizDetails
-          quiz={selectedQuiz}
-          onClose={() => setSelectedQuiz(null)}
-          handleLike={handleLike}
-          toggleComments={toggleComments}
-          timer={timer}
-        />
-      )}
     </div>
   );
 };
