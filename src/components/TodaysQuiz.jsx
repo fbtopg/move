@@ -43,6 +43,8 @@ const TodaysQuiz = ({ quiz, timer }) => {
             <h3 className="text-4xl font-light text-white mb-4">
               Jakarta is the capital of Indonesia?
             </h3>
+          </div>
+          <div className="absolute bottom-6 left-6 right-6">
             <div className="flex space-x-4">
               <button 
                 className={`w-1/2 aspect-square flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
