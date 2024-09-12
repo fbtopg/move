@@ -1,13 +1,12 @@
 import React from 'react';
 
-const TodaysQuiz = ({ quiz, onQuizClick, timer }) => (
+const TodaysQuiz = ({ quiz, timer }) => (
   <>
     <div className="flex items-center justify-between mb-4">
       <h2 className="text-lg font-bold">Today's Quiz</h2>
     </div>
     <div 
-      className="aspect-square mb-4 rounded-lg overflow-hidden relative cursor-pointer"
-      onClick={onQuizClick}
+      className="aspect-square mb-4 rounded-lg overflow-hidden relative"
     >
       <img 
         src={quiz.image}
@@ -22,7 +21,7 @@ const TodaysQuiz = ({ quiz, onQuizClick, timer }) => (
           </h3>
         </div>
       </div>
-      <div className="absolute bottom-4 right-4 flex flex-col items-end">
+      <div className="absolute top-4 right-4 flex flex-col items-end">
         <span className="text-xs text-gray-400 mb-1">Ends in</span>
         <div className="flex space-x-1">
           {timer.split(':').map((digit, index) => (
@@ -37,6 +36,14 @@ const TodaysQuiz = ({ quiz, onQuizClick, timer }) => (
             </React.Fragment>
           ))}
         </div>
+      </div>
+      <div className="absolute bottom-4 left-4 right-4 flex justify-between">
+        <button className="bg-white text-black px-4 py-2 rounded-full text-sm font-semibold">
+          Jakarta
+        </button>
+        <button className="bg-white text-black px-4 py-2 rounded-full text-sm font-semibold">
+          Bali
+        </button>
       </div>
     </div>
   </>
