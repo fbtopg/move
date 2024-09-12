@@ -24,13 +24,12 @@ const QuizItem = ({ quiz, isSmall = false, isSquare = false, timer }) => {
         </div>
       )}
       <div 
-        className={`${isSmall ? 'aspect-[4/2]' : (isSquare ? 'aspect-square' : 'aspect-[4/3]')} mb-4 rounded-lg overflow-hidden relative cursor-pointer`}
+        className={`${isSmall ? 'aspect-[4/2]' : (isSquare ? 'aspect-square' : 'aspect-[4/3]')} mb-4 rounded-lg overflow-hidden relative`}
         style={{
           backgroundImage: `url(${quiz.image})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
-        onClick={() => quiz.status !== 'finished' && console.log(`Participate in ${quiz.title}`)}
       >
         <div className="absolute inset-0 flex flex-col justify-center p-6">
           <div className="text-left">
