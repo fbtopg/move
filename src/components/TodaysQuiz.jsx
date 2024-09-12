@@ -14,22 +14,20 @@ const TodaysQuiz = ({ quiz, timer }) => (
         className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 flex flex-col justify-between p-6">
-        <div className="flex justify-end">
-          <div className="flex flex-col items-end">
-            <span className="text-xs text-gray-400 mb-1 text-right">Ends in</span>
-            <div className="flex space-x-1">
-              {timer.split(':').map((digit, index) => (
-                <React.Fragment key={index}>
-                  <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
-                    <span className="font-mono text-sm font-normal">{digit[0]}</span>
-                  </div>
-                  <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
-                    <span className="font-mono text-sm font-normal">{digit[1]}</span>
-                  </div>
-                  {index < 2 && <span className="text-white font-mono text-sm font-normal">:</span>}
-                </React.Fragment>
-              ))}
-            </div>
+        <div className="flex justify-end items-center">
+          <span className="text-xs text-gray-400 mr-2">Ends in</span>
+          <div className="flex space-x-1">
+            {timer.split(':').map((digit, index) => (
+              <React.Fragment key={index}>
+                <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
+                  <span className="font-mono text-sm font-normal">{digit[0]}</span>
+                </div>
+                <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
+                  <span className="font-mono text-sm font-normal">{digit[1]}</span>
+                </div>
+                {index < 2 && <span className="text-white font-mono text-sm font-normal">:</span>}
+              </React.Fragment>
+            ))}
           </div>
         </div>
         <div>
