@@ -13,37 +13,39 @@ const TodaysQuiz = ({ quiz, timer }) => (
         alt="Today's Quiz" 
         className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 flex flex-col justify-center p-6">
-        <div className="text-left">
+      <div className="absolute inset-0 flex flex-col justify-between p-6">
+        <div className="flex justify-end">
+          <div className="flex flex-col items-end">
+            <span className="text-xs text-gray-400 mb-1 text-right">Ends in</span>
+            <div className="flex space-x-1">
+              {timer.split(':').map((digit, index) => (
+                <React.Fragment key={index}>
+                  <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
+                    <span className="font-mono text-sm font-normal">{digit[0]}</span>
+                  </div>
+                  <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
+                    <span className="font-mono text-sm font-normal">{digit[1]}</span>
+                  </div>
+                  {index < 2 && <span className="text-white font-mono text-sm font-normal">:</span>}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div>
           <p className="text-sm font-semibold mb-2">Quiz #089</p>
           <h3 className="text-4xl font-light text-white mb-4">
             {quiz.question}
           </h3>
+          <div className="flex space-x-4">
+            <button className="w-1/2 aspect-square bg-white text-black flex items-center justify-center rounded-lg text-sm font-semibold">
+              Jakarta
+            </button>
+            <button className="w-1/2 aspect-square bg-white text-black flex items-center justify-center rounded-lg text-sm font-semibold">
+              Bali
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="absolute top-4 right-4 flex flex-col items-end">
-        <span className="text-xs text-gray-400 mb-1">Ends in</span>
-        <div className="flex space-x-1">
-          {timer.split(':').map((digit, index) => (
-            <React.Fragment key={index}>
-              <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
-                <span className="font-mono text-sm font-normal">{digit[0]}</span>
-              </div>
-              <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
-                <span className="font-mono text-sm font-normal">{digit[1]}</span>
-              </div>
-              {index < 2 && <span className="text-white font-mono text-sm font-normal">:</span>}
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-      <div className="absolute bottom-4 left-4 right-4 flex justify-between">
-        <button className="bg-white text-black px-4 py-2 rounded-full text-sm font-semibold">
-          Jakarta
-        </button>
-        <button className="bg-white text-black px-4 py-2 rounded-full text-sm font-semibold">
-          Bali
-        </button>
       </div>
     </div>
   </>
