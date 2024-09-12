@@ -109,13 +109,13 @@ const Me = () => {
         ))}
       </div>
 
-      <div className="h-2 bg-[#17171A] my-4 -mx-2"></div>
+      <div className="h-px bg-gray-700 my-4"></div>
 
       <section className="mt-4 pb-20 space-y-6">
         {renderActivitySection("TODAY", todayActivities)}
-        <div className="h-2 bg-[#17171A] -mx-2"></div>
+        <div className="h-px bg-gray-700"></div>
         {renderActivitySection("THIS MONTH", thisMonthActivities)}
-        <div className="h-2 bg-[#17171A] -mx-2"></div>
+        <div className="h-px bg-gray-700"></div>
         {renderActivitySection("EARLIER", earlierActivities)}
       </section>
     </>

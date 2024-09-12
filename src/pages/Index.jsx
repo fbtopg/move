@@ -25,8 +25,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#212124] flex flex-col">
-      <div className="sticky top-0 bg-[#212124] z-10 p-2">
+    <div className="min-h-screen bg-black flex flex-col">
+      <div className="sticky top-0 bg-black z-10 p-2">
         <div className="max-w-md mx-auto flex justify-between items-center">
           <div className="flex space-x-4">
             <button
