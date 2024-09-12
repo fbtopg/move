@@ -20,6 +20,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
+      <div className="status-bar-container"></div>
       <BrowserRouter>
         <Routes>
           {navItems.map(({ to, page }) => (

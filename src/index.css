@@ -97,3 +97,45 @@
 .animate-marquee {
   animation: marquee 30s linear infinite;
 }
+
+/* Status bar container styles */
+.status-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px; /* Adjust this value based on your needs */
+  background-color: inherit;
+  z-index: 9999;
+}
+
+/* Adjust for iOS safe area */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .status-bar-container {
+    height: calc(20px + env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Adjust body padding to account for status bar */
+body {
+  padding-top: 20px; /* Same as status bar height */
+}
+
+@supports (padding-top: env(safe-area-inset-top)) {
+  body {
+    padding-top: calc(20px + env(safe-area-inset-top));
+  }
+}
+
+/* For older iOS versions */
+@supports (padding-top: constant(safe-area-inset-top)) {
+  .status-bar-container {
+    height: calc(20px + constant(safe-area-inset-top));
+    padding-top: constant(safe-area-inset-top);
+  }
+
+  body {
+    padding-top: calc(20px + constant(safe-area-inset-top));
+  }
+}
