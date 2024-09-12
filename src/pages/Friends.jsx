@@ -124,9 +124,9 @@ const Friends = () => {
 
       <section className="mt-4 pb-20 space-y-6">
         {renderActivitySection("TODAY", todayActivities)}
-        <div className="h-px bg-[#424245] w-full"></div>
+        <div className="h-px bg-[#424245]"></div>
         {renderActivitySection("THIS MONTH", thisMonthActivities)}
-        <div className="h-px bg-[#424245] w-full"></div>
+        <div className="h-px bg-[#424245]"></div>
         {renderActivitySection("EARLIER", earlierActivities)}
       </section>
 
