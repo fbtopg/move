@@ -53,7 +53,7 @@ const TodaysQuiz = ({ quiz, timer }) => {
                 onClick={() => handleAnswerSelect('Yes')}
               >
                 <div className="flex flex-col items-center">
-                  <CheckCircle2 className="h-8 w-8 mb-2 text-green-300" />
+                  <CheckCircle2 className="h-7 w-7 mb-1 text-green-300" />
                   <span>Yes</span>
                 </div>
               </button>
@@ -66,7 +66,7 @@ const TodaysQuiz = ({ quiz, timer }) => {
                 onClick={() => handleAnswerSelect('No')}
               >
                 <div className="flex flex-col items-center">
-                  <X className="h-8 w-8 mb-2 text-red-300" />
+                  <X className="h-7 w-7 mb-1 text-red-300" />
                   <span>No</span>
                 </div>
               </button>
