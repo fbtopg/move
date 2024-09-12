@@ -12,18 +12,18 @@ const TodaysQuiz = ({ quiz, timer }) => {
     <>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-bold">Today's Quiz</h2>
-        <div className="flex items-center">
-          <span className="text-xs text-gray-400 mr-2">Ends in</span>
-          <div className="flex space-x-1">
+        <div className="flex items-center text-xs">
+          <span className="text-gray-400 mr-1">Ends in</span>
+          <div className="flex space-x-0.5">
             {timer.split(':').map((digit, index) => (
               <React.Fragment key={index}>
-                <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
-                  <span className="font-mono text-sm font-normal">{digit[0]}</span>
+                <div className="bg-gray-800 rounded-sm flex items-center justify-center text-white w-3.5 h-4">
+                  <span className="font-mono text-[10px] font-normal">{digit[0]}</span>
                 </div>
-                <div className="bg-gray-800 rounded-md flex items-center justify-center text-white w-5 h-6">
-                  <span className="font-mono text-sm font-normal">{digit[1]}</span>
+                <div className="bg-gray-800 rounded-sm flex items-center justify-center text-white w-3.5 h-4">
+                  <span className="font-mono text-[10px] font-normal">{digit[1]}</span>
                 </div>
-                {index < 2 && <span className="text-white font-mono text-sm font-normal">:</span>}
+                {index < 2 && <span className="text-white font-mono text-[10px] font-normal">:</span>}
               </React.Fragment>
             ))}
           </div>
@@ -53,7 +53,7 @@ const TodaysQuiz = ({ quiz, timer }) => {
                 onClick={() => handleAnswerSelect('Yes')}
               >
                 <div className="flex flex-col items-center">
-                  <CheckCircle2 className="h-8 w-8 mb-2 text-green-300" />
+                  <CheckCircle2 className="h-7 w-7 mb-1 text-green-300" />
                   <span>Yes</span>
                 </div>
               </button>
@@ -66,7 +66,7 @@ const TodaysQuiz = ({ quiz, timer }) => {
                 onClick={() => handleAnswerSelect('No')}
               >
                 <div className="flex flex-col items-center">
-                  <X className="h-8 w-8 mb-2 text-red-300" />
+                  <X className="h-7 w-7 mb-1 text-red-300" />
                   <span>No</span>
                 </div>
               </button>
