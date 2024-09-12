@@ -109,7 +109,7 @@ const Me = () => {
         ))}
       </div>
 
-      <div className="relative w-screen left-1/2 -translate-x-1/2 h-3 bg-[#212124] my-6"></div>
+      <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] my-6"></div>
 
       <section className="mt-4 pb-20 space-y-6">
         {renderActivitySection("TODAY", todayActivities)}
