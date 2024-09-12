@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { MapContainer, TileLayer, Marker, useMap, Circle, CircleMarker } from 'react-leaflet';
-import { Locate } from 'lucide-react';
+import { Locate, ArrowRight } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
 const Walk = () => {
@@ -16,18 +16,10 @@ const Walk = () => {
     highestStreak: "7",
   };
 
-  const activeChallenges = [
-    { name: "Daily Walk", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square_small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZV9zbWFsbC5wbmciLCJpYXQiOjE3MjU3NjM1MTgsImV4cCI6MTc1NzI5OTUxOH0.GLkQ1VOFZKx98eUHrlNTYxPi7lBaji1GVRee_iUDljs&t=2024-09-08T02%3A45%3A16.927Z", date: "September 2024" },
-  ];
-
-  const friendActivities = [
-    { username: "Emma", distance: "1.2km", timestamp: "2m ago" },
-    { username: "John", distance: "2.5km", timestamp: "5m ago" },
-    { username: "Sarah", distance: "800m", timestamp: "10m ago" },
-  ];
-
-  const handleChallengeClick = () => {
-    navigate('/daily-walk-challenge');
+  const activeChallenge = {
+    name: "Daily Walk",
+    image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square_small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZV9zbWFsbC5wbmciLCJpYXQiOjE3MjU3NjM1MTgsImV4cCI6MTc1NzI5OTUxOH0.GLkQ1VOFZKx98eUHrlNTYxPi7lBaji1GVRee_iUDljs&t=2024-09-08T02%3A45%3A16.927Z",
+    date: "September 2024"
   };
 
   const LocationMarker = () => {
@@ -74,10 +66,14 @@ const Walk = () => {
     }
   };
 
+  const handleChallengeClick = () => {
+    navigate('/daily-walk-challenge');
+  };
+
   return (
     <div className="h-screen flex flex-col bg-black text-white">
       <div className="p-3 bg-black">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-2">
           <button 
             onClick={() => navigate('/')} 
             className="text-base text-white hover:text-gray-200 transition-colors"
@@ -87,20 +83,18 @@ const Walk = () => {
           <h1 className="text-base font-semibold">Walk</h1>
           <div className="w-12"></div>
         </div>
-      </div>
-
-      <div className="bg-[#39FF14] p-2 overflow-hidden z-[1000]">
-        <div className="flex whitespace-nowrap animate-marquee">
-          {friendActivities.map((activity, index) => (
-            <span key={index} className="inline-block mr-8 text-xs text-black">
-              <strong>{activity.username}</strong> just finished walking {activity.distance}. {activity.timestamp}
-            </span>
-          ))}
-          {friendActivities.map((activity, index) => (
-            <span key={`repeat-${index}`} className="inline-block mr-8 text-xs text-black">
-              <strong>{activity.username}</strong> just finished walking {activity.distance}. {activity.timestamp}
-            </span>
-          ))}
+        <div 
+          className="flex items-center justify-between h-12 border border-gray-700 rounded-lg p-2 cursor-pointer"
+          onClick={handleChallengeClick}
+        >
+          <div>
+            <p className="text-sm">{activeChallenge.name}</p>
+            <p className="text-xs text-gray-400">{activeChallenge.date}</p>
+          </div>
+          <div className="flex items-center">
+            <img src={activeChallenge.image} alt={activeChallenge.name} className="w-8 h-8 rounded-lg mr-2" />
+            <ArrowRight className="h-4 w-4" />
+          </div>
         </div>
       </div>
 
@@ -124,24 +118,6 @@ const Walk = () => {
       </div>
 
       <div className="bg-[#111111] p-3 pb-10">
-        <div className="mb-3">
-          {activeChallenges.map((challenge, index) => (
-            <div 
-              key={index} 
-              className="flex items-center justify-between h-12 border border-gray-700 rounded-lg p-2 cursor-pointer"
-              onClick={handleChallengeClick}
-            >
-              <div>
-                <p className="text-sm">{challenge.name}</p>
-                <p className="text-xs text-gray-400">{challenge.date}</p>
-              </div>
-              <div className="flex items-center">
-                <img src={challenge.image} alt={challenge.name} className="w-8 h-8 rounded-lg" />
-              </div>
-            </div>
-          ))}
-        </div>
-
         <div className="grid grid-cols-3 gap-4 mb-6 text-center">
           <div>
             <p className="text-xs text-gray-400">DISTANCE</p>
