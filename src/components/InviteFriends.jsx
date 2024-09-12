@@ -141,7 +141,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
         <div className="relative mb-6">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <Input
-            className="pl-10 bg-gray-800 border-gray-700 text-white"
+            className="pl-10 bg-gray-800 border-gray-700 text-white rounded-full"
             placeholder="Search username"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
