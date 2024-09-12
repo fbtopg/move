@@ -33,14 +33,14 @@ const TodaysQuiz = ({ quiz, timer }) => (
         <div>
           <p className="text-sm font-semibold mb-2">Quiz #089</p>
           <h3 className="text-4xl font-light text-white mb-4">
-            {quiz.question}
+            Jakarta is the capital of Indonesia?
           </h3>
           <div className="flex space-x-4">
-            <button className="w-1/2 aspect-square bg-white text-black flex items-center justify-center rounded-lg text-sm font-semibold">
-              Jakarta
+            <button className="w-1/2 h-12 bg-white text-black flex items-center justify-center rounded-lg text-sm font-semibold">
+              Yes
             </button>
-            <button className="w-1/2 aspect-square bg-white text-black flex items-center justify-center rounded-lg text-sm font-semibold">
-              Bali
+            <button className="w-1/2 h-12 bg-white text-black flex items-center justify-center rounded-lg text-sm font-semibold">
+              No
             </button>
           </div>
         </div>
