@@ -6,6 +6,7 @@
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/image%202.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2ltYWdlIDIucG5nIiwiaWF0IjoxNzI1Njk1MDA2LCJleHAiOjE3NTcyMzEwMDZ9.W9-2C3Mu4VoUBVdg2PHEDXzcTGrMKaVpDKOKmMkVTeY&t=2024-09-07T07%3A43%3A25.813Z",
