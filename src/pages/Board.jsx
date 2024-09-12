@@ -28,6 +28,8 @@ const Board = () => {
   const [newsItems, setNewsItems] = useState([
     { id: 1, date: "11.09.2024", headline: "New Feature: Daily Challenges", likes: "1.6k", comments: "560", isLiked: false, isCommentsOpen: false },
     { id: 2, date: "10.09.2024", headline: "Community Milestone: 1 Million Users!", likes: "2.3k", comments: "720", isLiked: false, isCommentsOpen: false },
+    { id: 3, date: "09.09.2024", headline: "Introducing Weekly Leaderboards", likes: "1.8k", comments: "630", isLiked: false, isCommentsOpen: false },
+    { id: 4, date: "08.09.2024", headline: "App Update: Enhanced User Profiles", likes: "1.4k", comments: "480", isLiked: false, isCommentsOpen: false },
   ]);
 
   useEffect(() => {
