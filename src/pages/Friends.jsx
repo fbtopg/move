@@ -120,13 +120,13 @@ const Friends = () => {
         ))}
       </div>
 
-      <div className="h-px bg-gray-700 my-4"></div>
+      <div className="h-px bg-[#424245] my-4"></div>
 
       <section className="mt-4 pb-20 space-y-6">
         {renderActivitySection("TODAY", todayActivities)}
-        <div className="h-px bg-gray-700"></div>
+        <div className="h-px bg-[#424245]"></div>
         {renderActivitySection("THIS MONTH", thisMonthActivities)}
-        <div className="h-px bg-gray-700"></div>
+        <div className="h-px bg-[#424245]"></div>
         {renderActivitySection("EARLIER", earlierActivities)}
       </section>
 
