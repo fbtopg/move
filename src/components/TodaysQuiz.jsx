@@ -11,7 +11,7 @@ const TodaysQuiz = ({ quiz, timer }) => {
   return (
     <>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-base font-bold">Today's Quiz</h2>
+        <h2 className="text-lg font-bold">Today's Quiz</h2>
       </div>
       <div 
         className="aspect-square mb-4 rounded-lg overflow-hidden relative"
@@ -40,12 +40,12 @@ const TodaysQuiz = ({ quiz, timer }) => {
           </div>
           <div>
             <p className="text-sm font-semibold mb-2">Quiz #089</p>
-            <h3 className="text-3xl font-light text-white mb-4">
+            <h3 className="text-4xl font-light text-white mb-4">
               Jakarta is the capital of Indonesia?
             </h3>
             <div className="flex space-x-4">
               <button 
-                className={`w-1/2 h-18 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
+                className={`w-1/2 h-16 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
                   selectedAnswer === 'Yes' 
                     ? 'bg-green-500 text-white' 
                     : 'bg-gray-700 text-white hover:bg-gray-600'
@@ -56,7 +56,7 @@ const TodaysQuiz = ({ quiz, timer }) => {
                 Yes
               </button>
               <button 
-                className={`w-1/2 h-18 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
+                className={`w-1/2 h-16 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
                   selectedAnswer === 'No' 
                     ? 'bg-red-500 text-white' 
                     : 'bg-gray-700 text-white hover:bg-gray-600'
