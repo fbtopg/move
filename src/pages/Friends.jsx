@@ -120,7 +120,7 @@ const Friends = () => {
         ))}
       </div>
 
-      <div className="h-8 bg-[#212124] my-4"></div>
+      <div className="h-px bg-[#424245] my-4"></div>
 
       <section className="mt-4 pb-20 space-y-6">
         {renderActivitySection("TODAY", todayActivities)}
