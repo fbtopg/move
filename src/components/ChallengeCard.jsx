@@ -1,16 +1,29 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
+import { useNavigate } from 'react-router-dom';
 
 const ChallengeCard = ({ type, date, active, progress }) => {
   const isWalk = type === 'Daily Walk';
   const imageUrl = `https://source.unsplash.com/collection/3678981/300x300`;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (isWalk) {
+      navigate('/daily-walk-challenge');
+    } else {
+      navigate('/daily-quiz-challenge');
+    }
+  };
 
   return (
-    <div className={cn(
-      "w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[180px] flex flex-col",
-      isWalk ? "bg-blue-500" : "bg-green-500"
-    )}>
+    <div 
+      className={cn(
+        "w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[180px] flex flex-col cursor-pointer",
+        isWalk ? "bg-blue-500" : "bg-green-500"
+      )}
+      onClick={handleClick}
+    >
       <div 
         className="h-24 bg-cover bg-center"
         style={{
