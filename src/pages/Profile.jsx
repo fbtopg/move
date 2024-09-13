@@ -89,9 +89,15 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="mb-8 border border-gray-700 rounded-lg p-4">
+          <div className="mb-8 border border-gray-700 rounded-lg p-4 relative">
+            <img 
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTkyODkwLCJleHAiOjE3NTc3Mjg4OTB9.Bmiccih4P4b52zlZjCDDbPtBWYyG5J8UIzINASZL_UQ&t=2024-09-13T02%3A01%3A30.953Z"
+              alt="Reward Icon"
+              className="absolute top-2 right-2 w-12 h-12"
+            />
             <Button 
-              className="w-full bg-green-500 bg-opacity-20 text-green-500 border border-dashed border-green-500 hover:bg-green-500 hover:text-white transition-colors h-12 rounded-lg flex justify-between items-center px-4"
+              className="w-full bg-green-500 bg-opacity-20 text-green-500 border-2 border-dashed border-green-500 hover:bg-green-500 hover:text-white transition-colors h-12 rounded-lg flex justify-between items-center px-4 mt-8"
+              style={{ borderStyle: 'dashed', borderWidth: '2px', borderSpacing: '4px' }}
               onClick={() => navigate('/rewards')}
             >
               <span>Withdraw rewards</span>
