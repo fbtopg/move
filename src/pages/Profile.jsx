@@ -65,7 +65,7 @@ const Profile = () => {
               <h1 className="text-2xl font-light">{displayName}</h1>
               <p className="text-sm text-gray-400">{username}</p>
             </div>
-            <Avatar className="w-36 h-36 rounded-full cursor-pointer p-0" onClick={handleAvatarClick}>
+            <Avatar className="w-28 h-28 rounded-full cursor-pointer" onClick={handleAvatarClick}>
               <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" />
               <AvatarFallback>PFP</AvatarFallback>
             </Avatar>
@@ -89,9 +89,9 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="mb-6 border border-gray-700 rounded-lg p-4 relative h-36">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-14 h-14 flex items-center justify-center">
+          <div className="mb-6 border border-gray-700 rounded-lg p-3 relative">
+            <div className="flex items-center justify-between mb-3">
+              <div className="w-10 h-10 flex items-center justify-center">
                 <img 
                   src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTk0NjA1LCJleHAiOjE3NTc3MzA2MDV9.EkdEM-X2e2AC18wCrynOm6QUWdJItjaEBWfBtxAJIKY&t=2024-09-13T02%3A30%3A06.430Z"
                   alt="Reward Icon"
@@ -104,8 +104,7 @@ const Profile = () => {
               </div>
             </div>
             <Button 
-              className="w-full bg-[#00AFD6] bg-opacity-20 text-[#00AFD6] hover:bg-[#00AFD6] hover:bg-opacity-20 transition-colors h-12 rounded-lg flex items-center justify-center px-4 border border-[#00AFD6]"
-              style={{ borderStyle: 'dashed', borderWidth: '1px', borderSpacing: '6px' }}
+              className="w-full bg-[#00AFD6] bg-opacity-20 text-[#00AFD6] hover:bg-[#00AFD6] hover:bg-opacity-20 transition-colors h-9 rounded-lg flex items-center justify-center px-4 border border-[#00AFD6] border-dashed"
               onClick={() => navigate('/rewards')}
             >
               <span className="mr-2">Withdraw rewards</span>
