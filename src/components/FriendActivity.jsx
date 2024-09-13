@@ -7,65 +7,47 @@ const FriendActivity = ({ name, activity, type }) => {
   const [liked, setLiked] = useState(false);
   const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
 
-  const getActivityColor = () => {
-    return type === 'walk' ? 'bg-blue-500' : 'bg-green-500';
-  };
+  const getActivityColor = () => 'bg-gray-700';
 
   const parseActivity = (activity) => {
-    if (!activity) return { activityText: '', activityTime: '' };
+    const [activityText, activityTime] = activity.split('•');
+    let parsedText = activityText.trim();
+    let quizNumber = '';
 
-    const parts = activity.split('•');
-    let activityText = parts[0] ? parts[0].trim() : '';
-    let activityTime = parts[1] ? parts[1].trim() : '';
-
-    // Add full stop after 'walk' and 'quiz', ensuring only one full stop
-    activityText = activityText.replace(/\b(walk|quiz)\.*/g, '$1.');
-
-    // Extract time from activityText
-    const timeMatch = activityText.match(/(\d+[mhdw])$/);
-    if (timeMatch) {
-      activityTime = timeMatch[1];
-      activityText = activityText.replace(/\s+\d+[mhdw]$/, '');
+    if (parsedText.includes('solved the quiz')) {
+      quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
+      parsedText = parsedText.replace('solved the quiz', `solved the quiz${quizNumber}`);
     }
 
-    if (activityText.includes('solved the quiz.')) {
-      const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
-      activityText = activityText.replace('solved the quiz.', `solved the quiz.${quizNumber}`);
-    }
-
-    return { activityText, activityTime };
+    return { parsedText, activityTime: activityTime.trim(), quizNumber };
   };
 
-  const highlightText = (text) => {
-    return text
-      .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
-      .replace(/(quiz. #\d{3})/, '<span class="text-white">$1</span>');
-  };
+  const { parsedText, activityTime, quizNumber } = parseActivity(activity);
 
-  const { activityText, activityTime } = parseActivity(activity);
-  const parsedActivity = highlightText(activityText);
+  const highlightDistance = (text) => {
+    return text.replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>');
+  };
 
   return (
     <div className="flex items-start space-x-3">
-      <Avatar className="w-10 h-10 mt-1 flex-shrink-0">
+      <Avatar className="w-10 h-10 mt-1">
         <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${name}`} alt={name} />
         <AvatarFallback>{name[0]}</AvatarFallback>
       </Avatar>
-      <div className="flex-grow min-w-0">
-        <div className="flex items-start justify-between">
-          <div className="flex-grow min-w-0 pr-2">
+      <div className="flex-grow">
+        <div className="flex items-center justify-between">
+          <div className="flex-grow">
             <p className="text-sm text-white">
               <span className="font-semibold">{name}</span>{' '}
               <span 
-                className="text-gray-400 break-words"
-                dangerouslySetInnerHTML={{ __html: parsedActivity }}
+                className="text-gray-400"
+                dangerouslySetInnerHTML={{ __html: highlightDistance(parsedText) }}
               />
-              {activityTime && (
-                <span className="text-[#73777F] ml-1">{activityTime}</span>
-              )}
+              {quizNumber && <span className="text-white">{quizNumber}</span>}{' '}
+              <span className="text-gray-600">• {activityTime}</span>
             </p>
           </div>
-          <div className="flex items-center space-x-2 flex-shrink-0">
+          <div className="flex items-center space-x-2">
             <div 
               className={`w-10 h-10 rounded-lg bg-cover bg-center ${getActivityColor()}`}
               style={{
