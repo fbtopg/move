@@ -98,6 +98,10 @@ const Profile = () => {
                   className="w-full h-full object-contain"
                 />
               </div>
+              <div className="flex flex-col">
+                <span className="text-gray-400 text-sm">+8210-8374-6026</span>
+                <span className="text-gray-400 text-sm underline">Edit</span>
+              </div>
             </div>
             <Button 
               className="w-full bg-[#00AFD6] bg-opacity-50 text-white hover:bg-[#00AFD6] hover:bg-opacity-50 transition-colors h-10 rounded-lg flex justify-between items-center px-4 border border-[#00AFD6]"
