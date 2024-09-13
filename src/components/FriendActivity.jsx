@@ -12,25 +12,38 @@ const FriendActivity = ({ name, activity, type }) => {
   };
 
   const parseActivity = (activity) => {
-    const [activityText, activityTime] = activity.split('•');
-    let parsedText = activityText.trim();
+    if (!activity) return { activityText: '', activityTime: '' };
 
-    if (parsedText.includes('solved the quiz')) {
-      const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
-      parsedText = parsedText.replace('solved the quiz', `solved the quiz${quizNumber}`);
+    const parts = activity.split('•');
+    let activityText = parts[0] ? parts[0].trim() : '';
+    let activityTime = parts[1] ? parts[1].trim() : '';
+
+    // Add full stop after 'walk' and 'quiz', ensuring only one full stop
+    activityText = activityText.replace(/\b(walk|quiz)\.*/g, '$1.');
+
+    // Extract time from activityText
+    const timeMatch = activityText.match(/(\d+[mhdw])$/);
+    if (timeMatch) {
+      activityTime = timeMatch[1];
+      activityText = activityText.replace(/\s+\d+[mhdw]$/, '');
     }
 
-    return `${parsedText} ${activityTime.trim()}`;
+    if (activityText.includes('solved the quiz.')) {
+      const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
+      activityText = activityText.replace('solved the quiz.', `solved the quiz.${quizNumber}`);
+    }
+
+    return { activityText, activityTime };
   };
 
   const highlightText = (text) => {
     return text
       .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
-      .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>')
-      .replace(/(\s\w+)$/, '<span class="text-gray-500">$1</span>');
+      .replace(/(quiz. #\d{3})/, '<span class="text-white">$1</span>');
   };
 
-  const parsedActivity = parseActivity(activity);
+  const { activityText, activityTime } = parseActivity(activity);
+  const parsedActivity = highlightText(activityText);
 
   return (
     <div className="flex items-start space-x-3">
@@ -45,8 +58,11 @@ const FriendActivity = ({ name, activity, type }) => {
               <span className="font-semibold">{name}</span>{' '}
               <span 
                 className="text-gray-400 break-words"
-                dangerouslySetInnerHTML={{ __html: highlightText(parsedActivity) }}
+                dangerouslySetInnerHTML={{ __html: parsedActivity }}
               />
+              {activityTime && (
+                <span className="text-[#73777F] ml-1">{activityTime}</span>
+              )}
             </p>
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">

@@ -4,29 +4,44 @@ import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 
 const Me = () => {
-  const [currentChallenge, setCurrentChallenge] = useState('walks');
+  const [currentChallenge, setCurrentChallenge] = useState(0);
+  const challenges = [
+    { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
+    { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
+  ];
 
-  const handleSwipe = (direction) => {
-    if (direction === 'left' && currentChallenge === 'walks') {
-      setCurrentChallenge('quiz');
-    } else if (direction === 'right' && currentChallenge === 'quiz') {
-      setCurrentChallenge('walks');
-    }
+  const handleSwipe = (index) => {
+    setCurrentChallenge(index);
   };
 
   const todayActivities = [
-    { name: "You", activity: "finished walking 1km and completed daily walks • 3m", type: "walk" },
-    { name: "You", activity: "solved the quiz today and completed daily quiz • 1h", type: "quiz" },
+    { name: "You", activity: "finished walking 1km and completed daily walk. 3m", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 1h", type: "quiz" },
+    { name: "You", activity: "finished walking 800m and completed daily walk. 2h", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 4h", type: "quiz" },
+    { name: "You", activity: "finished walking 1.2km and completed daily walk. 5h", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 6h", type: "quiz" },
+    { name: "You", activity: "finished walking 500m and completed daily walk. 7h", type: "walk" },
   ];
 
   const thisMonthActivities = [
-    { name: "You", activity: "finished walking 750m and completed daily walks • 2d", type: "walk" },
-    { name: "You", activity: "solved the quiz today and completed daily quiz • 5d", type: "quiz" },
+    { name: "You", activity: "finished walking 750m and completed daily walk. 2d", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 5d", type: "quiz" },
+    { name: "You", activity: "finished walking 1.5km and completed daily walk. 1w", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 1w", type: "quiz" },
+    { name: "You", activity: "finished walking 900m and completed daily walk. 2w", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 3w", type: "quiz" },
+    { name: "You", activity: "finished walking 1.1km and completed daily walk. 3w", type: "walk" },
   ];
 
   const earlierActivities = [
-    { name: "You", activity: "finished walking 2km and completed daily walks • 2w", type: "walk" },
-    { name: "You", activity: "solved the quiz today and completed daily quiz • 1m", type: "quiz" },
+    { name: "You", activity: "finished walking 2km and completed daily walk. 2w", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 1m", type: "quiz" },
+    { name: "You", activity: "finished walking 1.8km and completed daily walk. 1m", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 2m", type: "quiz" },
+    { name: "You", activity: "finished walking 1.3km and completed daily walk. 2m", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 3m", type: "quiz" },
+    { name: "You", activity: "finished walking 1.6km and completed daily walk. 3m", type: "walk" },
   ];
 
   const renderActivitySection = (title, activities) => (
@@ -51,39 +66,38 @@ const Me = () => {
         className="overflow-hidden"
         onPanEnd={(e, { offset, velocity }) => {
           if (Math.abs(velocity.x) > 500) {
-            handleSwipe(velocity.x > 0 ? 'right' : 'left');
+            handleSwipe(currentChallenge === 0 ? 1 : 0);
           } else if (Math.abs(offset.x) > 50) {
-            handleSwipe(offset.x > 0 ? 'right' : 'left');
+            handleSwipe(currentChallenge === 0 ? 1 : 0);
           }
         }}
       >
         <motion.div
           className="flex"
-          animate={{ x: currentChallenge === 'walks' ? 0 : '-100%' }}
+          animate={{ x: `${-currentChallenge * 100}%` }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
-          <div className="flex-shrink-0 w-full">
-            <div className="mb-4">
-              <ChallengeCard
-                type="Daily Walks"
-                date="SEPTEMBER 2024"
-                active="16.5k"
-                progress="501/16.5K"
-              />
+          {challenges.map((challenge, index) => (
+            <div key={index} className="flex-shrink-0 w-full">
+              <div className="mb-4">
+                <ChallengeCard {...challenge} />
+              </div>
             </div>
-          </div>
-          <div className="flex-shrink-0 w-full">
-            <div className="mb-4">
-              <ChallengeCard
-                type="Daily Quiz"
-                date="SEPTEMBER 2024"
-                active="16.5k"
-                progress="11/30"
-              />
-            </div>
-          </div>
+          ))}
         </motion.div>
       </motion.div>
+
+      <div className="flex justify-center space-x-2 mb-4">
+        {challenges.map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 rounded-full ${
+              index === currentChallenge ? 'bg-white' : 'bg-gray-500'
+            }`}
+            onClick={() => handleSwipe(index)}
+          ></button>
+        ))}
+      </div>
 
       <div className="h-px bg-gray-700 my-4"></div>
 
