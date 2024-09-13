@@ -75,12 +75,10 @@
   }
 }
 
-@layer utilities {
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
+html, body {
+  @apply h-full overflow-hidden;
+}
+
+#root {
+  @apply h-full;
 }
