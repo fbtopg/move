@@ -89,8 +89,8 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="mb-6 border border-gray-700 rounded-lg p-3 relative">
-            <div className="flex items-center justify-between mb-3">
+          <div className="mb-5 border border-gray-700 rounded-lg p-2 relative">
+            <div className="flex items-center justify-between mb-2">
               <div className="w-16 h-16 flex items-center justify-center">
                 <img 
                   src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTk0NjA1LCJleHAiOjE3NTc3MzA2MDV9.EkdEM-X2e2AC18wCrynOm6QUWdJItjaEBWfBtxAJIKY&t=2024-09-13T02%3A30%3A06.430Z"
