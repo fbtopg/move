@@ -11,8 +11,9 @@ const ChallengeCard = ({ type, date, active, progress }) => {
   const handleClick = () => {
     if (isWalk) {
       navigate('/daily-walk-challenge');
+    } else {
+      navigate('/daily-quiz-challenge');
     }
-    // Add navigation for Daily Quiz if needed
   };
 
   return (
