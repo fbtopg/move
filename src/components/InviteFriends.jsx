@@ -1,17 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Share, X } from "lucide-react";
+import { Search, Share, X, Plus } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+const users = [
+  { id: 1, name: "John" },
+  { id: 2, name: "Tate" },
+  { id: 3, name: "Aquafina" },
+  { id: 4, name: "Geonu" },
+  { id: 5, name: "Astrid" },
+  { id: 6, name: "Fitra" },
+  { id: 7, name: "Rissa" },
+];
+
+const UserSearchResult = ({ user, onInvite }) => (
+  <div className="flex items-center justify-between py-2">
+    <div className="flex items-center">
+      <Avatar className="w-10 h-10 mr-3">
+        <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${user.name}`} alt={user.name} />
+        <AvatarFallback>{user.name[0]}</AvatarFallback>
+      </Avatar>
+      <span className="text-white">{user.name}</span>
+    </div>
+    <Button variant="ghost" size="icon" onClick={() => onInvite(user.id)}>
+      <Plus className="h-5 w-5" />
+    </Button>
+  </div>
+);
 
 const InviteFriends = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    const filteredUsers = users.filter(user =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(filteredUsers);
+  }, [searchTerm]);
 
   const handleShareLink = () => {
-    // Implement the share functionality here
-    // For now, we'll just log a message
     console.log("Sharing invite link...");
-    // In a real implementation, you might use the Web Share API or a custom sharing mechanism
+  };
+
+  const handleInvite = (userId) => {
+    console.log(`Inviting user with ID: ${userId}`);
   };
 
   return (
@@ -37,10 +72,15 @@ const InviteFriends = ({ isOpen, onClose }) => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="flex-grow">
-          {/* Add search results here */}
+        <div className="flex-grow overflow-y-auto">
+          {searchResults.map(user => (
+            <UserSearchResult key={user.id} user={user} onInvite={handleInvite} />
+          ))}
         </div>
-        <Button className="w-full mt-4" onClick={handleShareLink}>
+        <Button 
+          className="w-full mt-4 bg-transparent hover:bg-transparent text-white border border-white"
+          onClick={handleShareLink}
+        >
           <Share className="mr-2 h-5 w-5" /> Invite Friends
         </Button>
       </div>
