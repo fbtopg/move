@@ -98,7 +98,7 @@ const Profile = () => {
               />
             </div>
             <Button 
-              className="w-full bg-[#6FC3D5] text-white hover:bg-[#6FC3D5] transition-colors h-12 rounded-lg flex justify-between items-center px-4 border border-[#00AFD6]"
+              className="w-full bg-[#00AFD6] text-white hover:bg-[#00AFD6] transition-colors h-12 rounded-lg flex justify-between items-center px-4 border border-[#00AFD6]"
               onClick={() => navigate('/rewards')}
             >
               <span>Withdraw rewards</span>
