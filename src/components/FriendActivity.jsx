@@ -5,10 +5,12 @@ import { Heart } from "lucide-react";
 
 const FriendActivity = ({ name, activity, type }) => {
   const [liked, setLiked] = useState(false);
-  const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
+  const imageUrl = `https://api.dicebear.com/6.x/initials/svg?seed=${name}`;
 
-  const getActivityColor = () => {
-    return type === 'walk' ? 'bg-blue-500' : 'bg-green-500';
+  const getActivityImage = () => {
+    return type === 'walk' 
+      ? "https://cdn.midjourney.com/d7e39227-437f-4589-ad3e-612659a54916/0_1.png"
+      : "https://cdn.midjourney.com/b5b40151-9594-4005-a904-0701c493896b/0_1.png";
   };
 
   const parseActivity = (activity) => {
@@ -34,7 +36,7 @@ const FriendActivity = ({ name, activity, type }) => {
   return (
     <div className="flex items-start space-x-3">
       <Avatar className="w-10 h-10 mt-1 flex-shrink-0">
-        <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${name}`} alt={name} />
+        <AvatarImage src={imageUrl} alt={name} />
         <AvatarFallback>{name[0]}</AvatarFallback>
       </Avatar>
       <div className="flex-grow min-w-0">
@@ -51,9 +53,9 @@ const FriendActivity = ({ name, activity, type }) => {
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
             <div 
-              className={`w-10 h-10 rounded-lg bg-cover bg-center ${getActivityColor()}`}
+              className="w-10 h-10 rounded-lg bg-cover bg-center"
               style={{
-                backgroundImage: `url(${imageUrl})`,
+                backgroundImage: `url(${getActivityImage()})`,
               }}
             ></div>
             <Button 
