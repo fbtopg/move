@@ -1,19 +1,19 @@
 {
-  "name": "Move - Daily Walk & Quiz Challenge",
-  "short_name": "Move",
+  "name": "Daily Move & Minds",
+  "short_name": "Move & Minds",
   "description": "Track your daily walks and quiz challenges",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "theme_color": "#4a90e2",
   "icons": [
     {
-      "src": "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/image%202.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2ltYWdlIDIucG5nIiwiaWF0IjoxNzI1Njk1MDA2LCJleHAiOjE3NTcyMzEwMDZ9.W9-2C3Mu4VoUBVdg2PHEDXzcTGrMKaVpDKOKmMkVTeY&t=2024-09-07T07%3A43%3A25.813Z",
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/image%202.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2ltYWdlIDIucG5nIiwiaWF0IjoxNzI1Njk1MDA2LCJleHAiOjE3NTcyMzEwMDZ9.W9-2C3Mu4VoUBVdg2PHEDXzcTGrMKaVpDKOKmMkVTeY&t=2024-09-07T07%3A43%3A25.813Z",
+      "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
