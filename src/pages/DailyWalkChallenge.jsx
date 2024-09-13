@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Flame, Wind, Heart, ArrowRight } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -19,9 +19,9 @@ const DailyWalkChallenge = () => {
     highestStreak: "7",
     activeParticipants: "16.5k",
     achievements: [
-      { id: 1, name: "5-day streak", icon: Flame },
-      { id: 2, name: "Breezy walker-10km", icon: Wind },
-      { id: 3, name: "100 likes", icon: Heart },
+      { id: 1, name: "Badge 1" },
+      { id: 2, name: "Badge 2" },
+      { id: 3, name: "Badge 3" },
     ],
   };
 
@@ -50,7 +50,7 @@ const DailyWalkChallenge = () => {
             <h1 className="text-2xl font-bold">{challengeData.title}</h1>
           </div>
 
-          <div className="w-full h-40 rounded-lg mb-4 bg-cover bg-center" style={{backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1281512420853944352/Rectangle_6.png?ex=66dbfcf2&is=66daab72&hm=54d3401d917b1176c5ed2054a7f648320c1bd12575272801f6c8fdd986bdaee7&')"}}></div>
+          <div className="bg-blue-500 w-full h-40 rounded-lg mb-4"></div>
 
           <div className="mb-6">
             <div className="text-4xl font-bold">
@@ -75,20 +75,6 @@ const DailyWalkChallenge = () => {
             </div>
           </div>
 
-          <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-4 h-16 flex justify-between items-center px-6"
-          >
-            <span>Start walking</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
-
-          <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors mb-6 h-16 flex justify-between items-center px-6"
-          >
-            <span>Check today's reward</span>
-            <ArrowRight className="h-6 w-6" />
-          </Button>
-
           <div className="h-px bg-gray-700 my-4"></div>
 
           <p className="text-sm text-gray-400 mb-4 pr-8">
@@ -112,11 +98,13 @@ const DailyWalkChallenge = () => {
           <div className="h-px bg-gray-700 my-4"></div>
 
           <div className="mb-6">
-            <h2 className="text-lg font-bold mb-4">ACHIEVEMENTS</h2>
-            <div className="grid grid-cols-2 gap-6">
+            <h2 className="text-lg font-bold mb-2">ACHIEVEMENTS</h2>
+            <div className="grid grid-cols-2 gap-4">
               {challengeData.achievements.map((achievement) => (
                 <div key={achievement.id} className="flex flex-col items-center">
-                  <achievement.icon className="h-16 w-16 text-white mb-2" />
+                  <div className="bg-gray-800 w-full aspect-square rounded-lg flex items-center justify-center mb-2">
+                    {/* Badge image placeholder */}
+                  </div>
                   <span className="text-sm text-center">{achievement.name}</span>
                 </div>
               ))}
@@ -124,7 +112,7 @@ const DailyWalkChallenge = () => {
           </div>
 
           <Button className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors">
-            Invite Friends
+            Check Rewards
           </Button>
         </div>
       </div>
