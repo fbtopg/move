@@ -38,12 +38,12 @@ const FriendActivity = ({ name, activity, type }) => {
         <AvatarFallback>{name[0]}</AvatarFallback>
       </Avatar>
       <div className="flex-grow min-w-0">
-        <div className="flex items-start justify-between">
-          <div className="flex-grow min-w-0 pr-2">
-            <p className="text-sm text-white">
+        <div className="flex items-center justify-between">
+          <div className="flex-grow min-w-0">
+            <p className="text-sm text-white truncate">
               <span className="font-semibold">{name}</span>{' '}
               <span 
-                className="text-gray-400 break-words"
+                className="text-gray-400"
                 dangerouslySetInnerHTML={{ __html: highlightText(parsedText) }}
               />
             </p>
