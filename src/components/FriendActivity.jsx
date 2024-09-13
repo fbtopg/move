@@ -3,8 +3,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 
-const FriendActivity = ({ name, activity, type }) => {
+const FriendActivity = ({ name, activity, type, initialLikes = 0 }) => {
   const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(initialLikes);
   const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
 
   const getActivityColor = () => {
@@ -12,30 +13,33 @@ const FriendActivity = ({ name, activity, type }) => {
   };
 
   const parseActivity = (activity) => {
-    if (!activity) return { activityText: '', activityTime: '' };
+    const [activityText, activityTime] = activity.split('•');
+    let parsedText = activityText.trim();
 
-    const parts = activity.split('•');
-    let activityText = parts[0] ? parts[0].trim().replace('daily walk', 'daily walk') : '';
-    let activityTime = parts[1] ? parts[1].trim() : '';
-
-    if (activityText.includes('solved the quiz')) {
+    if (parsedText.includes('solved the quiz')) {
       const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
-      activityText = activityText.replace('solved the quiz', `solved the quiz${quizNumber}`);
+      parsedText = parsedText.replace('solved the quiz', `solved the quiz${quizNumber}`);
     }
 
-    return { activityText, activityTime };
+    return { parsedText, activityTime: activityTime.trim() };
   };
 
-  const highlightText = (text, time) => {
-    const highlightedText = text
+  const { parsedText, activityTime } = parseActivity(activity);
+
+  const highlightText = (text) => {
+    return text
       .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
       .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>');
-    
-    return `${highlightedText} <span class="text-gray-500">${time}</span>`;
   };
 
-  const { activityText, activityTime } = parseActivity(activity);
-  const parsedActivity = highlightText(activityText, activityTime);
+  const formatLikeCount = (count) => {
+    return count >= 1000 ? (count / 1000).toFixed(1) + 'k' : count.toString();
+  };
+
+  const handleLike = () => {
+    setLiked(!liked);
+    setLikeCount(prevCount => liked ? prevCount - 1 : prevCount + 1);
+  };
 
   return (
     <div className="flex items-start space-x-3">
@@ -50,9 +54,10 @@ const FriendActivity = ({ name, activity, type }) => {
               <span className="font-semibold">{name}</span>{' '}
               <span 
                 className="text-gray-400 break-words"
-                dangerouslySetInnerHTML={{ __html: parsedActivity }}
+                dangerouslySetInnerHTML={{ __html: highlightText(parsedText) }}
               />
             </p>
+            <p className="text-xs text-gray-600">{activityTime}</p>
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
             <div 
@@ -64,10 +69,11 @@ const FriendActivity = ({ name, activity, type }) => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent`}
-              onClick={() => setLiked(!liked)}
+              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent flex flex-col items-center justify-center`}
+              onClick={handleLike}
             >
               <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
+              <span className="text-xs mt-1">{formatLikeCount(likeCount)}</span>
             </Button>
           </div>
         </div>
