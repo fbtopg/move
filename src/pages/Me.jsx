@@ -4,14 +4,14 @@ import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 
 const Me = () => {
-  const [currentChallenge, setCurrentChallenge] = useState('walks');
+  const [currentChallenge, setCurrentChallenge] = useState(0);
+  const challenges = [
+    { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
+    { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
+  ];
 
-  const handleSwipe = (direction) => {
-    if (direction === 'left' && currentChallenge === 'walks') {
-      setCurrentChallenge('quiz');
-    } else if (direction === 'right' && currentChallenge === 'quiz') {
-      setCurrentChallenge('walks');
-    }
+  const handleSwipe = (index) => {
+    setCurrentChallenge(index);
   };
 
   const todayActivities = [
@@ -66,43 +66,38 @@ const Me = () => {
         className="overflow-hidden"
         onPanEnd={(e, { offset, velocity }) => {
           if (Math.abs(velocity.x) > 500) {
-            handleSwipe(velocity.x > 0 ? 'right' : 'left');
+            handleSwipe(currentChallenge === 0 ? 1 : 0);
           } else if (Math.abs(offset.x) > 50) {
-            handleSwipe(offset.x > 0 ? 'right' : 'left');
+            handleSwipe(currentChallenge === 0 ? 1 : 0);
           }
         }}
       >
         <motion.div
           className="flex"
-          animate={{ x: currentChallenge === 'walks' ? 0 : '-100%' }}
+          animate={{ x: `${-currentChallenge * 100}%` }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
-          <div className="flex-shrink-0 w-full">
-            <div className="mb-4">
-              <ChallengeCard
-                type="Daily Walk"
-                date="SEPTEMBER 2024"
-                active="16.5k"
-                progress="501/16.5K"
-                currentIndex={currentChallenge === 'walks' ? 0 : 1}
-                totalCards={2}
-              />
+          {challenges.map((challenge, index) => (
+            <div key={index} className="flex-shrink-0 w-full">
+              <div className="mb-4">
+                <ChallengeCard {...challenge} />
+              </div>
             </div>
-          </div>
-          <div className="flex-shrink-0 w-full">
-            <div className="mb-4">
-              <ChallengeCard
-                type="Daily Quiz"
-                date="SEPTEMBER 2024"
-                active="16.5k"
-                progress="11/30"
-                currentIndex={currentChallenge === 'quiz' ? 1 : 0}
-                totalCards={2}
-              />
-            </div>
-          </div>
+          ))}
         </motion.div>
       </motion.div>
+
+      <div className="flex justify-center space-x-2 mb-4">
+        {challenges.map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 rounded-full ${
+              index === currentChallenge ? 'bg-white' : 'bg-gray-500'
+            }`}
+            onClick={() => handleSwipe(index)}
+          ></button>
+        ))}
+      </div>
 
       <div className="h-px bg-gray-700 my-4"></div>
 
