@@ -1,91 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Share, X, Plus, Check } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-const users = [
-  { id: 1, name: "John" },
-  { id: 2, name: "Tate" },
-  { id: 3, name: "Aquafina" },
-  { id: 4, name: "Geonu" },
-  { id: 5, name: "Astrid" },
-  { id: 6, name: "Fitra" },
-  { id: 7, name: "Rissa" },
-];
-
-const UserSearchResult = ({ user, onInvite, isInvited }) => (
-  <div className="flex items-center justify-between py-2">
-    <div className="flex items-center">
-      <Avatar className="w-10 h-10 mr-3">
-        <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${user.name}`} alt={user.name} />
-        <AvatarFallback>{user.name[0]}</AvatarFallback>
-      </Avatar>
-      <span className="text-white">{user.name}</span>
-    </div>
-    <Button 
-      variant="ghost" 
-      size="icon" 
-      onClick={() => onInvite(user.id)}
-      className={`transition-colors duration-200 ${isInvited ? "text-green-500" : "text-white"}`}
-    >
-      {isInvited ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-    </Button>
-  </div>
-);
+import { Search, Share, X } from "lucide-react";
 
 const InviteFriends = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [invitedUsers, setInvitedUsers] = useState(new Set());
 
-  useEffect(() => {
-    if (searchTerm.trim() !== '') {
-      const filteredUsers = users.filter(user =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setSearchResults(filteredUsers);
-    } else {
-      setSearchResults([]);
-    }
-  }, [searchTerm]);
-
-  const handleShareLink = async () => {
-    const shareUrl = 'https://preview--daily-move-and-minds-06.gptengineer.run/';
-    const shareText = "I solved today's quiz, and I'm curious to hear what you think of it! Want to join the daily quiz challenge with me?";
-    
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Join Daily Move & Minds',
-          text: shareText,
-          url: shareUrl,
-        });
-        console.log('Content shared successfully');
-      } catch (err) {
-        console.error('Error sharing:', err);
-      }
-    } else {
-      try {
-        await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
-        alert('Invitation text and link copied to clipboard!');
-      } catch (err) {
-        console.error('Failed to copy link:', err);
-      }
-    }
-  };
-
-  const handleInvite = (userId) => {
-    setInvitedUsers(prevInvited => {
-      const newInvited = new Set(prevInvited);
-      if (newInvited.has(userId)) {
-        newInvited.delete(userId);
-      } else {
-        newInvited.add(userId);
-      }
-      return newInvited;
-    });
+  const handleShareLink = () => {
+    // Implement the share functionality here
+    // For now, we'll just log a message
+    console.log("Sharing invite link...");
+    // In a real implementation, you might use the Web Share API or a custom sharing mechanism
   };
 
   return (
@@ -111,20 +37,10 @@ const InviteFriends = ({ isOpen, onClose }) => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="flex-grow overflow-y-auto">
-          {searchTerm.trim() !== '' && searchResults.map(user => (
-            <UserSearchResult 
-              key={user.id} 
-              user={user} 
-              onInvite={handleInvite}
-              isInvited={invitedUsers.has(user.id)}
-            />
-          ))}
+        <div className="flex-grow">
+          {/* Add search results here */}
         </div>
-        <Button 
-          className="w-full mt-4 bg-transparent hover:bg-transparent text-white border border-white"
-          onClick={handleShareLink}
-        >
+        <Button className="w-full mt-4" onClick={handleShareLink}>
           <Share className="mr-2 h-5 w-5" /> Invite Friends
         </Button>
       </div>
