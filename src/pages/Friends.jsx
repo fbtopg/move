@@ -1,44 +1,48 @@
-import React, { useState } from 'react';
-import { motion } from "framer-motion";
+import React, { useState, useRef } from 'react';
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState('walks');
+  const touchStartX = useRef(null);
 
-  const handleSwipe = (direction) => {
-    if (direction === 'left' && currentChallenge === 'walks') {
-      setCurrentChallenge('quiz');
-    } else if (direction === 'right' && currentChallenge === 'quiz') {
-      setCurrentChallenge('walks');
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && currentChallenge === 'walks') {
+        setCurrentChallenge('quiz');
+      } else if (diff < 0 && currentChallenge === 'quiz') {
+        setCurrentChallenge('walks');
+      }
     }
+
+    touchStartX.current = null;
   };
 
   const todayActivities = [
-    { name: "John", activity: "finished walking 1km and completed daily walk. 3m", type: "walk" },
-    { name: "Tate", activity: "finished walking 500m and completed daily walk. 4m", type: "walk" },
-    { name: "Aquafina", activity: "finished walking 1km and completed daily walk. 59m", type: "walk" },
-    { name: "Geonu", activity: "solved the quiz today and completed daily quiz. 1h", type: "quiz" },
-    { name: "Astrid", activity: "finished walking 1.5km and completed daily walk. 2h", type: "walk" },
-    { name: "Fitra", activity: "solved the quiz today and completed daily quiz. 3h", type: "quiz" },
+    { name: "John", activity: "finished walking 1km and completed daily walks challenge • 3m", type: "walk" },
+    { name: "Tate", activity: "finished walking 500m and completed daily walks challenge • 4m", type: "walk" },
+    { name: "Aquafina", activity: "finished walking 1km and completed daily walks challenge • 59m", type: "walk" },
   ];
 
   const thisMonthActivities = [
-    { name: "Geonu", activity: "finished walking 750m and completed daily walk. 2d", type: "walk" },
-    { name: "Astrid", activity: "finished walking 2km and completed daily walk. 5d", type: "walk" },
-    { name: "Fitra", activity: "solved the quiz today and completed daily quiz. 1w", type: "quiz" },
-    { name: "Rissa", activity: "finished walking 1.2km and completed daily walk. 1w", type: "walk" },
-    { name: "John", activity: "solved the quiz today and completed daily quiz. 2w", type: "quiz" },
-    { name: "Tate", activity: "finished walking 900m and completed daily walk. 3w", type: "walk" },
+    { name: "Geonu", activity: "finished walking 750m and completed daily walks challenge • 2d", type: "walk" },
+    { name: "Astrid", activity: "finished walking 2km and completed daily walks challenge • 5d", type: "walk" },
+    { name: "Fitra", activity: "solved the quiz today and completed daily quiz challenge • 1w", type: "quiz" },
   ];
 
   const earlierActivities = [
-    { name: "Rissa", activity: "solved the quiz today and completed daily quiz. 2w", type: "quiz" },
-    { name: "John", activity: "finished walking 1.5km and completed daily walk. 3w", type: "walk" },
-    { name: "Tate", activity: "solved the quiz today and completed daily quiz. 1m", type: "quiz" },
-    { name: "Aquafina", activity: "finished walking 2km and completed daily walk. 1m", type: "walk" },
-    { name: "Geonu", activity: "solved the quiz today and completed daily quiz. 2m", type: "quiz" },
-    { name: "Astrid", activity: "finished walking 1.8km and completed daily walk. 2m", type: "walk" },
+    { name: "Rissa", activity: "solved the quiz today and completed daily quiz challenge • 2w", type: "quiz" },
+    { name: "John", activity: "finished walking 1.5km and completed daily walks challenge • 3w", type: "walk" },
+    { name: "Tate", activity: "solved the quiz today and completed daily quiz challenge • 1m", type: "quiz" },
   ];
 
   const renderActivitySection = (title, activities) => (
@@ -59,25 +63,19 @@ const Friends = () => {
 
   return (
     <>
-      <motion.div
+      <div
         className="overflow-hidden"
-        onPanEnd={(e, { offset, velocity }) => {
-          if (Math.abs(velocity.x) > 500) {
-            handleSwipe(velocity.x > 0 ? 'right' : 'left');
-          } else if (Math.abs(offset.x) > 50) {
-            handleSwipe(offset.x > 0 ? 'right' : 'left');
-          }
-        }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
-        <motion.div
-          className="flex"
-          animate={{ x: currentChallenge === 'walks' ? 0 : '-100%' }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        <div
+          className="flex transition-transform duration-300 ease-in-out"
+          style={{ transform: `translateX(${currentChallenge === 'walks' ? '0%' : '-50%'})` }}
         >
           <div className="flex-shrink-0 w-full">
             <div className="mb-4">
               <ChallengeCard
-                type="Daily Walk"
+                type="Daily Walks"
                 date="SEPTEMBER 2024"
                 active="16.5k"
                 progress="501/16.5K"
@@ -94,8 +92,8 @@ const Friends = () => {
               />
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       <div className="h-px bg-gray-700 my-4"></div>
 
