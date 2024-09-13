@@ -15,21 +15,21 @@ const Friends = () => {
   };
 
   const todayActivities = [
-    { name: "John", activity: "finished walking 1km and completed daily walk 3m", type: "walk" },
-    { name: "Tate", activity: "finished walking 500m and completed daily walk 4m", type: "walk" },
-    { name: "Aquafina", activity: "finished walking 1km and completed daily walk 59m", type: "walk" },
+    { name: "John", activity: "finished walking 1km and completed daily walks • 3m", type: "walk" },
+    { name: "Tate", activity: "finished walking 500m and completed daily walks • 4m", type: "walk" },
+    { name: "Aquafina", activity: "finished walking 1km and completed daily walks • 59m", type: "walk" },
   ];
 
   const thisMonthActivities = [
-    { name: "Geonu", activity: "finished walking 750m and completed daily walk 2d", type: "walk" },
-    { name: "Astrid", activity: "finished walking 2km and completed daily walk 5d", type: "walk" },
-    { name: "Fitra", activity: "solved the quiz today and completed daily quiz 1w", type: "quiz" },
+    { name: "Geonu", activity: "finished walking 750m and completed daily walks • 2d", type: "walk" },
+    { name: "Astrid", activity: "finished walking 2km and completed daily walks • 5d", type: "walk" },
+    { name: "Fitra", activity: "solved the quiz today and completed daily quiz • 1w", type: "quiz" },
   ];
 
   const earlierActivities = [
-    { name: "Rissa", activity: "solved the quiz today and completed daily quiz 2w", type: "quiz" },
-    { name: "John", activity: "finished walking 1.5km and completed daily walk 3w", type: "walk" },
-    { name: "Tate", activity: "solved the quiz today and completed daily quiz 1m", type: "quiz" },
+    { name: "Rissa", activity: "solved the quiz today and completed daily quiz • 2w", type: "quiz" },
+    { name: "John", activity: "finished walking 1.5km and completed daily walks • 3w", type: "walk" },
+    { name: "Tate", activity: "solved the quiz today and completed daily quiz • 1m", type: "quiz" },
   ];
 
   const renderActivitySection = (title, activities) => (
@@ -68,7 +68,7 @@ const Friends = () => {
           <div className="flex-shrink-0 w-full">
             <div className="mb-4">
               <ChallengeCard
-                type="Daily Walk"
+                type="Daily Walks"
                 date="SEPTEMBER 2024"
                 active="16.5k"
                 progress="501/16.5K"
