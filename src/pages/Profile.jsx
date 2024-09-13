@@ -65,7 +65,7 @@ const Profile = () => {
               <h1 className="text-2xl font-light">{displayName}</h1>
               <p className="text-sm text-gray-400">{username}</p>
             </div>
-            <Avatar className="w-24 h-24 rounded-full cursor-pointer" onClick={handleAvatarClick}>
+            <Avatar className="w-28 h-28 rounded-full cursor-pointer" onClick={handleAvatarClick}>
               <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" />
               <AvatarFallback>PFP</AvatarFallback>
             </Avatar>
@@ -78,7 +78,7 @@ const Profile = () => {
             />
           </div>
           
-          <div className="flex mb-5">
+          <div className="flex mb-4">
             <div className="mr-24 cursor-pointer" onClick={() => navigate('/follow', { state: { initialTab: 'followers' } })}>
               <p className="text-sm text-white uppercase mb-1">Followers</p>
               <p className="text-sm">{followers}</p>
@@ -99,8 +99,7 @@ const Profile = () => {
                 />
               </div>
               <div className="flex items-center">
-                <span className="text-gray-400 text-xs mr-2">+8210-8374-6026</span>
-                <span className="text-gray-400 text-xs underline">Edit</span>
+                <span className="text-white text-xs">100,000 IDR</span>
               </div>
             </div>
             <Button 
