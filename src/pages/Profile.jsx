@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Trophy, Gift } from "lucide-react";
+import { MoreHorizontal, ArrowRight, Trophy, Gift } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { handleImageUpload } from '../utils/imageUtils';
 
@@ -60,12 +60,12 @@ const Profile = () => {
             </Button>
           </div>
           
-          <div className="flex justify-between items-center mb-10">
+          <div className="flex justify-between items-center mb-2">
             <div>
               <h1 className="text-2xl font-light">{displayName}</h1>
               <p className="text-sm text-gray-400">{username}</p>
             </div>
-            <Avatar className="w-28 h-28 rounded-full cursor-pointer" onClick={handleAvatarClick}>
+            <Avatar className="w-20 h-20 rounded-full cursor-pointer" onClick={handleAvatarClick}>
               <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" />
               <AvatarFallback>PFP</AvatarFallback>
             </Avatar>
@@ -89,25 +89,28 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="mb-4 border border-gray-700 rounded-lg p-2 relative">
-            <div className="flex items-center justify-between mb-2">
-              <div className="w-14 h-14 flex items-center justify-center">
+          <div className="mb-8 border border-gray-700 rounded-lg p-4 relative">
+            <div className="flex items-center mb-4">
+              <div className="w-16 h-16 mr-4 flex items-center justify-center">
                 <img 
                   src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTk0NjA1LCJleHAiOjE3NTc3MzA2MDV9.EkdEM-X2e2AC18wCrynOm6QUWdJItjaEBWfBtxAJIKY&t=2024-09-13T02%3A30%3A06.430Z"
                   alt="Reward Icon"
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="flex items-center">
-                <span className="text-white text-xs">100,000 IDR</span>
+              <div className="flex flex-col items-end flex-grow">
+                <div className="flex items-center">
+                  <span className="text-gray-400 text-sm mr-2">+8210-8374-6026</span>
+                  <span className="text-gray-400 text-sm underline">Edit</span>
+                </div>
               </div>
             </div>
             <Button 
-              className="w-full bg-[#00AFD6] bg-opacity-20 text-[#00AFD6] hover:bg-[#00AFD6] hover:bg-opacity-20 transition-colors h-9 rounded-lg flex items-center justify-center px-4 border border-[#00AFD6] border-dashed"
+              className="w-full bg-[#00AFD6] bg-opacity-50 text-white hover:bg-[#00AFD6] hover:bg-opacity-50 transition-colors h-10 rounded-lg flex justify-between items-center px-4 border border-[#00AFD6]"
               onClick={() => navigate('/rewards')}
             >
-              <span className="mr-2">Withdraw rewards</span>
-              <span className="text-lg">&gt;</span>
+              <span>Withdraw rewards</span>
+              <ArrowRight className="h-5 w-5" />
             </Button>
           </div>
           
@@ -124,7 +127,7 @@ const Profile = () => {
               </div>
               <div className="flex items-center mt-2">
                 <span className="text-xs">Rewards</span>
-                <span className="text-xs ml-1">&gt;</span>
+                <ArrowRight className="w-3 h-3 ml-1" />
               </div>
             </div>
             <div className="flex flex-col items-start">
@@ -139,7 +142,7 @@ const Profile = () => {
               </div>
               <div className="flex items-center mt-2">
                 <span className="text-xs">Achievements</span>
-                <span className="text-xs ml-1">&gt;</span>
+                <ArrowRight className="w-3 h-3 ml-1" />
               </div>
             </div>
           </div>
