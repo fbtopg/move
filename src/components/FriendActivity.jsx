@@ -56,7 +56,7 @@ const FriendActivity = ({ name, activity, type }) => {
                 dangerouslySetInnerHTML={{ __html: parsedActivity }}
               />
               {activityTime && (
-                <span className="text-gray-600 ml-1">{activityTime}</span>
+                <span className="text-[#5C5C5C] ml-1">{activityTime}</span>
               )}
             </p>
           </div>
