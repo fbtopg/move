@@ -1,30 +1,17 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
+import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState('walks');
-  const touchStartX = useRef(null);
 
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e) => {
-    if (touchStartX.current === null) return;
-
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX.current - touchEndX;
-
-    if (Math.abs(diff) > 50) {
-      if (diff > 0 && currentChallenge === 'walks') {
-        setCurrentChallenge('quiz');
-      } else if (diff < 0 && currentChallenge === 'quiz') {
-        setCurrentChallenge('walks');
-      }
+  const handleSwipe = (direction) => {
+    if (direction === 'left' && currentChallenge === 'walks') {
+      setCurrentChallenge('quiz');
+    } else if (direction === 'right' && currentChallenge === 'quiz') {
+      setCurrentChallenge('walks');
     }
-
-    touchStartX.current = null;
   };
 
   const todayActivities = [
@@ -63,14 +50,20 @@ const Friends = () => {
 
   return (
     <>
-      <div
+      <motion.div
         className="overflow-hidden"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+        onPanEnd={(e, { offset, velocity }) => {
+          if (Math.abs(velocity.x) > 500) {
+            handleSwipe(velocity.x > 0 ? 'right' : 'left');
+          } else if (Math.abs(offset.x) > 50) {
+            handleSwipe(offset.x > 0 ? 'right' : 'left');
+          }
+        }}
       >
-        <div
-          className="flex transition-transform duration-300 ease-in-out"
-          style={{ transform: `translateX(${currentChallenge === 'walks' ? '0%' : '-50%'})` }}
+        <motion.div
+          className="flex"
+          animate={{ x: currentChallenge === 'walks' ? 0 : '-100%' }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
           <div className="flex-shrink-0 w-full">
             <div className="mb-4">
@@ -92,8 +85,8 @@ const Friends = () => {
               />
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       <div className="h-px bg-gray-700 my-4"></div>
 
