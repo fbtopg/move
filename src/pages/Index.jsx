@@ -12,8 +12,8 @@ const Index = () => {
   const [currentView, setCurrentView] = useState('friends');
 
   return (
-    <div className="min-h-screen bg-black overflow-y-auto scrollbar-hide">
-      <div className="max-w-md mx-auto p-2">
+    <div className="min-h-screen bg-black p-2">
+      <div className="max-w-md mx-auto">
         <div className="flex justify-between items-center mb-4">
           <div className="flex space-x-4">
             <button
@@ -33,9 +33,9 @@ const Index = () => {
             size="icon" 
             variant="ghost" 
             onClick={() => setIsInviteOpen(true)}
-            className="hover:bg-transparent p-1.5"
+            className="hover:bg-transparent"
           >
-            <Plus className="h-6 w-6 text-white" />
+            <Plus className="h-5 w-5 text-white" />
           </Button>
         </div>
 
