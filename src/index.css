@@ -75,19 +75,12 @@
   }
 }
 
-html, body {
-  @apply h-full overflow-hidden;
-}
-
-#root {
-  @apply h-full;
-}
-
-/* Safe area utilities */
-.pt-safe {
-  padding-top: env(safe-area-inset-top);
-}
-
-.pb-safe {
-  padding-bottom: env(safe-area-inset-bottom);
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
