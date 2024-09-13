@@ -7,29 +7,9 @@ const FriendActivity = ({ name, activity, type }) => {
   const [liked, setLiked] = useState(false);
   const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
 
-  const getActivityColor = () => {
-    return type === 'walk' ? 'bg-blue-500' : 'bg-green-500';
-  };
+  const getActivityColor = () => 'bg-gray-700';
 
-  const parseActivity = (activity) => {
-    const [activityText, activityTime] = activity.split('•');
-    let parsedText = activityText.trim();
-
-    if (parsedText.includes('solved the quiz')) {
-      const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
-      parsedText = parsedText.replace('solved the quiz', `solved the quiz${quizNumber}`);
-    }
-
-    return { parsedText, activityTime: activityTime.trim() };
-  };
-
-  const { parsedText, activityTime } = parseActivity(activity);
-
-  const highlightText = (text) => {
-    return text
-      .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
-      .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>');
-  };
+  const [activityText, activityTime] = activity.split('•');
 
   return (
     <div className="flex items-start space-x-3">
@@ -42,11 +22,8 @@ const FriendActivity = ({ name, activity, type }) => {
           <div className="flex-grow">
             <p className="text-sm text-white">
               <span className="font-semibold">{name}</span>{' '}
-              <span 
-                className="text-gray-400"
-                dangerouslySetInnerHTML={{ __html: highlightText(parsedText) }}
-              />{' '}
-              <span className="text-gray-600">• {activityTime}</span>
+              <span className="text-gray-400">{activityText.trim()}</span>{' '}
+              <span className="text-gray-600">• {activityTime.trim()}</span>
             </p>
           </div>
           <div className="flex items-center space-x-2">
