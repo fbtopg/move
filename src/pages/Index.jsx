@@ -12,8 +12,8 @@ const Index = () => {
   const [currentView, setCurrentView] = useState('friends');
 
   return (
-    <div className="min-h-screen bg-black overflow-y-auto scrollbar-hide">
-      <div className="max-w-md mx-auto p-2">
+    <div className="min-h-screen bg-black p-2">
+      <div className="max-w-md mx-auto">
         <div className="flex justify-between items-center mb-4">
           <div className="flex space-x-4">
             <button
