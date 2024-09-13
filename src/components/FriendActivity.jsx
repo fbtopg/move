@@ -3,8 +3,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 
-const FriendActivity = ({ name, activity, type }) => {
+const FriendActivity = ({ name, activity, type, initialLikes = 0 }) => {
   const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(initialLikes);
   const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
 
   const getActivityColor = () => {
@@ -31,6 +32,15 @@ const FriendActivity = ({ name, activity, type }) => {
       .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>');
   };
 
+  const formatLikeCount = (count) => {
+    return count >= 1000 ? (count / 1000).toFixed(1) + 'k' : count.toString();
+  };
+
+  const handleLike = () => {
+    setLiked(!liked);
+    setLikeCount(prevCount => liked ? prevCount - 1 : prevCount + 1);
+  };
+
   return (
     <div className="flex items-start space-x-3">
       <Avatar className="w-10 h-10 mt-1 flex-shrink-0">
@@ -49,9 +59,9 @@ const FriendActivity = ({ name, activity, type }) => {
             </p>
             <p className="text-xs text-gray-600">{activityTime}</p>
           </div>
-          <div className="flex flex-col items-end space-y-2 flex-shrink-0">
+          <div className="flex items-center space-x-2 flex-shrink-0">
             <div 
-              className={`w-10 h-10 rounded-lg bg-cover bg-center ${getActivityColor()}`}
+              className={`w-12 h-12 rounded-lg bg-cover bg-center ${getActivityColor()}`}
               style={{
                 backgroundImage: `url(${imageUrl})`,
               }}
@@ -59,10 +69,11 @@ const FriendActivity = ({ name, activity, type }) => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`w-8 h-8 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent`}
-              onClick={() => setLiked(!liked)}
+              className={`w-12 h-12 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent flex flex-col items-center justify-center`}
+              onClick={handleLike}
             >
-              <Heart className={`h-5 w-5 ${liked ? "fill-current" : ""}`} />
+              <Heart className={`h-7 w-7 ${liked ? "fill-current" : ""}`} />
+              <span className="text-[10px] mt-0.5">{formatLikeCount(likeCount)}</span>
             </Button>
           </div>
         </div>
