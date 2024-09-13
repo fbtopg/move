@@ -3,17 +3,17 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ChallengeCard from '../components/ChallengeCard';
 
-const DailyWalkHistory = () => {
+const DailyQuizHistory = () => {
   const navigate = useNavigate();
 
   const challenges = [
-    { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K", status: "ongoing" },
-    { type: "Daily Walk", date: "AUGUST 2024", active: "15.8k", progress: "1,234/15.8K", status: "finished" },
-    { type: "Daily Walk", date: "JULY 2024", active: "14.2k", progress: "987/14.2K", status: "finished" },
+    { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30", status: "ongoing" },
+    { type: "Daily Quiz", date: "AUGUST 2024", active: "15.8k", progress: "28/31", status: "finished" },
+    { type: "Daily Quiz", date: "JULY 2024", active: "14.2k", progress: "29/31", status: "finished" },
   ];
 
   const handleChallengeClick = (date) => {
-    navigate(`/daily-walk-challenge/${date}`);
+    navigate(`/daily-quiz-challenge/${date}`);
   };
 
   return (
@@ -24,7 +24,7 @@ const DailyWalkHistory = () => {
             <ArrowLeft className="h-6 w-6" />
           </button>
 
-          <h2 className="text-2xl font-bold mb-6">Daily Walk History</h2>
+          <h2 className="text-2xl font-bold mb-6">Daily Quiz History</h2>
 
           <div className="space-y-6">
             <div>
@@ -57,4 +57,4 @@ const DailyWalkHistory = () => {
   );
 };
 
-export default DailyWalkHistory;
+export default DailyQuizHistory;
