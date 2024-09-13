@@ -11,15 +11,11 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <BrowserRouter>
-        <div className="min-h-screen h-[100dvh] flex flex-col bg-black">
-          <div className="flex-grow overflow-auto">
-            <Routes>
-              {navItems.map(({ to, page }) => (
-                <Route key={to} path={to} element={page} />
-              ))}
-            </Routes>
-          </div>
-        </div>
+        <Routes>
+          {navItems.map(({ to, page }) => (
+            <Route key={to} path={to} element={page} />
+          ))}
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
