@@ -14,15 +14,36 @@ const Me = () => {
     }
   };
 
-  const activities = [
-    { name: "You", activity: "finished walking 1km and completed daily walks challenge • 3m", type: "walk" },
-    { name: "You", activity: "finished walking 500m and completed daily walks challenge • 4m", type: "walk" },
-    { name: "You", activity: "finished walking 1km and completed daily walks challenge • 59m", type: "walk" },
-    { name: "You", activity: "finished walking 750m and completed daily walks challenge • 4h", type: "walk" },
-    { name: "You", activity: "finished walking 2km and completed daily walks challenge • 5h", type: "walk" },
-    { name: "You", activity: "solved the quiz today and completed daily quiz challenge • 10h", type: "quiz" },
-    { name: "You", activity: "solved the quiz today and completed daily quiz challenge • 15h", type: "quiz" },
+  const todayActivities = [
+    { name: "You", activity: "finished walking 1km and completed daily walks • 3m", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz • 1h", type: "quiz" },
   ];
+
+  const thisMonthActivities = [
+    { name: "You", activity: "finished walking 750m and completed daily walks • 2d", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz • 5d", type: "quiz" },
+  ];
+
+  const earlierActivities = [
+    { name: "You", activity: "finished walking 2km and completed daily walks • 2w", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz • 1m", type: "quiz" },
+  ];
+
+  const renderActivitySection = (title, activities) => (
+    <>
+      <h2 className="text-xs font-semibold mb-3 text-gray-400">{title}</h2>
+      <div className="space-y-4">
+        {activities.map((activity, index) => (
+          <FriendActivity
+            key={index}
+            name={activity.name}
+            activity={activity.activity}
+            type={activity.type}
+          />
+        ))}
+      </div>
+    </>
+  );
 
   return (
     <>
@@ -66,18 +87,12 @@ const Me = () => {
 
       <div className="h-px bg-gray-700 my-4"></div>
 
-      <section className="mt-4 pb-20">
-        <h2 className="text-xs font-semibold mb-3 text-gray-400">TODAY</h2>
-        <div className="space-y-4">
-          {activities.map((activity, index) => (
-            <FriendActivity
-              key={index}
-              name={activity.name}
-              activity={activity.activity}
-              type={activity.type}
-            />
-          ))}
-        </div>
+      <section className="mt-4 pb-20 space-y-6">
+        {renderActivitySection("TODAY", todayActivities)}
+        <div className="h-px bg-gray-700"></div>
+        {renderActivitySection("THIS MONTH", thisMonthActivities)}
+        <div className="h-px bg-gray-700"></div>
+        {renderActivitySection("EARLIER", earlierActivities)}
       </section>
     </>
   );

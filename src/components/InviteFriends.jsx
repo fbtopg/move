@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Share, X, Plus } from "lucide-react";
+import { Search, Share, X, Plus, Check } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const users = [
@@ -15,7 +15,7 @@ const users = [
   { id: 7, name: "Rissa" },
 ];
 
-const UserSearchResult = ({ user, onInvite }) => (
+const UserSearchResult = ({ user, onInvite, isInvited }) => (
   <div className="flex items-center justify-between py-2">
     <div className="flex items-center">
       <Avatar className="w-10 h-10 mr-3">
@@ -24,8 +24,13 @@ const UserSearchResult = ({ user, onInvite }) => (
       </Avatar>
       <span className="text-white">{user.name}</span>
     </div>
-    <Button variant="ghost" size="icon" onClick={() => onInvite(user.id)}>
-      <Plus className="h-5 w-5" />
+    <Button 
+      variant="ghost" 
+      size="icon" 
+      onClick={() => onInvite(user.id)}
+      className={`transition-colors duration-200 ${isInvited ? "text-green-500" : "text-white"}`}
+    >
+      {isInvited ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
     </Button>
   </div>
 );
@@ -33,20 +38,56 @@ const UserSearchResult = ({ user, onInvite }) => (
 const InviteFriends = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [invitedUsers, setInvitedUsers] = useState(new Set());
 
   useEffect(() => {
-    const filteredUsers = users.filter(user =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(filteredUsers);
+    if (searchTerm.trim() !== '') {
+      const filteredUsers = users.filter(user =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(filteredUsers);
+    } else {
+      setSearchResults([]);
+    }
   }, [searchTerm]);
 
-  const handleShareLink = () => {
-    console.log("Sharing invite link...");
+  const handleShareLink = async () => {
+    const shareUrl = 'https://move.gptengineer.run/';
+    const shareTitle = "Move - connect with your friends";
+    const shareText = "Join the quiz today and share your thoughts with me!";
+    const shareImage = "https://cdn.discordapp.com/attachments/1057996608261869689/1281511084993544192/jellywalk_Move_logo_friendly_--ar_21_--v_6.1_10c32b8a-4761-40f7-b822-cc7814692207_0.png?ex=66dbfbb3&is=66daaa33&hm=57b8a67c02b8ed7326ebaa7c9417df79a6ca930697a1e8ccc70605f1d0173345&";
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+        console.log('Content shared successfully');
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(`${shareTitle}\n\n${shareText}\n\n${shareUrl}\n\nImage: ${shareImage}`);
+        alert('Invitation text, link, and image URL copied to clipboard!');
+      } catch (err) {
+        console.error('Failed to copy link:', err);
+      }
+    }
   };
 
   const handleInvite = (userId) => {
-    console.log(`Inviting user with ID: ${userId}`);
+    setInvitedUsers(prevInvited => {
+      const newInvited = new Set(prevInvited);
+      if (newInvited.has(userId)) {
+        newInvited.delete(userId);
+      } else {
+        newInvited.add(userId);
+      }
+      return newInvited;
+    });
   };
 
   return (
@@ -73,8 +114,13 @@ const InviteFriends = ({ isOpen, onClose }) => {
           />
         </div>
         <div className="flex-grow overflow-y-auto">
-          {searchResults.map(user => (
-            <UserSearchResult key={user.id} user={user} onInvite={handleInvite} />
+          {searchTerm.trim() !== '' && searchResults.map(user => (
+            <UserSearchResult 
+              key={user.id} 
+              user={user} 
+              onInvite={handleInvite}
+              isInvited={invitedUsers.has(user.id)}
+            />
           ))}
         </div>
         <Button 
