@@ -51,8 +51,31 @@ const InviteFriends = ({ isOpen, onClose }) => {
     }
   }, [searchTerm]);
 
-  const handleShareLink = () => {
-    console.log("Sharing invite link...");
+  const handleShareLink = async () => {
+    const shareUrl = 'https://move.gptengineer.run/';
+    const shareTitle = "Move - connect with your friends";
+    const shareText = "Join the quiz today and share your thoughts with me!";
+    const shareImage = "https://cdn.discordapp.com/attachments/1057996608261869689/1281511084993544192/jellywalk_Move_logo_friendly_--ar_21_--v_6.1_10c32b8a-4761-40f7-b822-cc7814692207_0.png?ex=66dbfbb3&is=66daaa33&hm=57b8a67c02b8ed7326ebaa7c9417df79a6ca930697a1e8ccc70605f1d0173345&";
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+        console.log('Content shared successfully');
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(`${shareTitle}\n\n${shareText}\n\n${shareUrl}\n\nImage: ${shareImage}`);
+        alert('Invitation text, link, and image URL copied to clipboard!');
+      } catch (err) {
+        console.error('Failed to copy link:', err);
+      }
+    }
   };
 
   const handleInvite = (userId) => {

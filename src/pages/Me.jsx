@@ -15,18 +15,33 @@ const Me = () => {
   };
 
   const todayActivities = [
-    { name: "You", activity: "finished walking 1km and completed daily walks challenge • 3m", type: "walk" },
-    { name: "You", activity: "solved the quiz today and completed daily quiz challenge • 1h", type: "quiz" },
+    { name: "You", activity: "finished walking 1km and completed daily walk. 3m", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 1h", type: "quiz" },
+    { name: "You", activity: "finished walking 800m and completed daily walk. 2h", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 4h", type: "quiz" },
+    { name: "You", activity: "finished walking 1.2km and completed daily walk. 5h", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 6h", type: "quiz" },
+    { name: "You", activity: "finished walking 500m and completed daily walk. 7h", type: "walk" },
   ];
 
   const thisMonthActivities = [
-    { name: "You", activity: "finished walking 750m and completed daily walks challenge • 2d", type: "walk" },
-    { name: "You", activity: "solved the quiz today and completed daily quiz challenge • 5d", type: "quiz" },
+    { name: "You", activity: "finished walking 750m and completed daily walk. 2d", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 5d", type: "quiz" },
+    { name: "You", activity: "finished walking 1.5km and completed daily walk. 1w", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 1w", type: "quiz" },
+    { name: "You", activity: "finished walking 900m and completed daily walk. 2w", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 3w", type: "quiz" },
+    { name: "You", activity: "finished walking 1.1km and completed daily walk. 3w", type: "walk" },
   ];
 
   const earlierActivities = [
-    { name: "You", activity: "finished walking 2km and completed daily walks challenge • 2w", type: "walk" },
-    { name: "You", activity: "solved the quiz today and completed daily quiz challenge • 1m", type: "quiz" },
+    { name: "You", activity: "finished walking 2km and completed daily walk. 2w", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 1m", type: "quiz" },
+    { name: "You", activity: "finished walking 1.8km and completed daily walk. 1m", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 2m", type: "quiz" },
+    { name: "You", activity: "finished walking 1.3km and completed daily walk. 2m", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz. 3m", type: "quiz" },
+    { name: "You", activity: "finished walking 1.6km and completed daily walk. 3m", type: "walk" },
   ];
 
   const renderActivitySection = (title, activities) => (
@@ -65,10 +80,12 @@ const Me = () => {
           <div className="flex-shrink-0 w-full">
             <div className="mb-4">
               <ChallengeCard
-                type="Daily Walks"
+                type="Daily Walk"
                 date="SEPTEMBER 2024"
                 active="16.5k"
                 progress="501/16.5K"
+                currentIndex={currentChallenge === 'walks' ? 0 : 1}
+                totalCards={2}
               />
             </div>
           </div>
@@ -79,6 +96,8 @@ const Me = () => {
                 date="SEPTEMBER 2024"
                 active="16.5k"
                 progress="11/30"
+                currentIndex={currentChallenge === 'quiz' ? 1 : 0}
+                totalCards={2}
               />
             </div>
           </div>
