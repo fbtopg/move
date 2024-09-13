@@ -1,17 +1,93 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Share, X } from "lucide-react";
+import { Search, Share, X, Plus, Check } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+const users = [
+  { id: 1, name: "John" },
+  { id: 2, name: "Tate" },
+  { id: 3, name: "Aquafina" },
+  { id: 4, name: "Geonu" },
+  { id: 5, name: "Astrid" },
+  { id: 6, name: "Fitra" },
+  { id: 7, name: "Rissa" },
+];
+
+const UserSearchResult = ({ user, onInvite, isInvited }) => (
+  <div className="flex items-center justify-between py-2">
+    <div className="flex items-center">
+      <Avatar className="w-10 h-10 mr-3">
+        <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${user.name}`} alt={user.name} />
+        <AvatarFallback>{user.name[0]}</AvatarFallback>
+      </Avatar>
+      <span className="text-white">{user.name}</span>
+    </div>
+    <Button 
+      variant="ghost" 
+      size="icon" 
+      onClick={() => onInvite(user.id)}
+      className={`transition-colors duration-200 ${isInvited ? "text-green-500" : "text-white"}`}
+    >
+      {isInvited ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+    </Button>
+  </div>
+);
 
 const InviteFriends = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [invitedUsers, setInvitedUsers] = useState(new Set());
 
-  const handleShareLink = () => {
-    // Implement the share functionality here
-    // For now, we'll just log a message
-    console.log("Sharing invite link...");
-    // In a real implementation, you might use the Web Share API or a custom sharing mechanism
+  useEffect(() => {
+    if (searchTerm.trim() !== '') {
+      const filteredUsers = users.filter(user =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(filteredUsers);
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchTerm]);
+
+  const handleShareLink = async () => {
+    const shareUrl = 'https://move.gptengineer.run/';
+    const shareTitle = "Move - connect with your friends";
+    const shareText = "Join the quiz today and share your thoughts with me!";
+    const shareImage = "https://cdn.discordapp.com/attachments/1057996608261869689/1281511084993544192/jellywalk_Move_logo_friendly_--ar_21_--v_6.1_10c32b8a-4761-40f7-b822-cc7814692207_0.png?ex=66dbfbb3&is=66daaa33&hm=57b8a67c02b8ed7326ebaa7c9417df79a6ca930697a1e8ccc70605f1d0173345&";
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+        console.log('Content shared successfully');
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(`${shareTitle}\n\n${shareText}\n\n${shareUrl}\n\nImage: ${shareImage}`);
+        alert('Invitation text, link, and image URL copied to clipboard!');
+      } catch (err) {
+        console.error('Failed to copy link:', err);
+      }
+    }
+  };
+
+  const handleInvite = (userId) => {
+    setInvitedUsers(prevInvited => {
+      const newInvited = new Set(prevInvited);
+      if (newInvited.has(userId)) {
+        newInvited.delete(userId);
+      } else {
+        newInvited.add(userId);
+      }
+      return newInvited;
+    });
   };
 
   return (
@@ -37,10 +113,20 @@ const InviteFriends = ({ isOpen, onClose }) => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="flex-grow">
-          {/* Add search results here */}
+        <div className="flex-grow overflow-y-auto">
+          {searchTerm.trim() !== '' && searchResults.map(user => (
+            <UserSearchResult 
+              key={user.id} 
+              user={user} 
+              onInvite={handleInvite}
+              isInvited={invitedUsers.has(user.id)}
+            />
+          ))}
         </div>
-        <Button className="w-full mt-4" onClick={handleShareLink}>
+        <Button 
+          className="w-full mt-4 bg-transparent hover:bg-transparent text-white border border-white"
+          onClick={handleShareLink}
+        >
           <Share className="mr-2 h-5 w-5" /> Invite Friends
         </Button>
       </div>
