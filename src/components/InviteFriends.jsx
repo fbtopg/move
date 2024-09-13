@@ -4,46 +4,76 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Share, X, Plus, Check } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getRandomProfilePicture } from '../utils/profilePictures';
+import { cn } from "@/lib/utils";
+import UserProfilePopup from './UserProfilePopup';
 
 const users = [
-  { id: 1, name: "John" },
-  { id: 2, name: "Tate" },
-  { id: 3, name: "Aquafina" },
-  { id: 4, name: "Geonu" },
-  { id: 5, name: "Astrid" },
-  { id: 6, name: "Fitra" },
-  { id: 7, name: "Rissa" },
+  { id: 1, displayName: "John Doe", username: "john" },
+  { id: 2, displayName: "Tate Modern", username: "tate" },
+  { id: 3, displayName: "Aquafina Waters", username: "aquafina" },
+  { id: 4, displayName: "Geonu Park", username: "geonu" },
+  { id: 5, displayName: "Astrid Lindgren", username: "astrid" },
+  { id: 6, displayName: "Fitra Eri", username: "fitra" },
+  { id: 7, displayName: "Rissa Chahyadi", username: "rissa" },
+  { id: 8, displayName: "Emma Watson", username: "emma" },
+  { id: 9, displayName: "Sarah Connor", username: "sarah" },
+  { id: 10, displayName: "Mike Tyson", username: "mike" },
 ];
 
-const UserSearchResult = ({ user, onInvite, isInvited }) => (
-  <div className="flex items-center justify-between py-2">
-    <div className="flex items-center">
-      <Avatar className="w-10 h-10 mr-3">
-        <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${user.name}`} alt={user.name} />
-        <AvatarFallback>{user.name[0]}</AvatarFallback>
-      </Avatar>
-      <span className="text-white">{user.name}</span>
+const getGradient = (name) => {
+  const charCode = name.charCodeAt(0);
+  const hue1 = (charCode * 7) % 360;
+  const hue2 = (hue1 + 60) % 360;
+  return `linear-gradient(135deg, hsl(${hue1}, 70%, 60%), hsl(${hue2}, 70%, 60%))`;
+};
+
+const UserSearchResult = ({ user, onInvite, isInvited, onUserClick }) => {
+  const profilePicture = Math.random() > 0.3 ? getRandomProfilePicture() : null;
+
+  return (
+    <div className="flex items-center justify-between py-2">
+      <div className="flex items-center cursor-pointer" onClick={() => onUserClick(user)}>
+        <Avatar className="w-10 h-10 mr-3">
+          {profilePicture ? (
+            <AvatarImage src={profilePicture} alt={user.displayName} />
+          ) : (
+            <AvatarFallback style={{ background: getGradient(user.displayName) }} className="text-white font-semibold">
+              {user.displayName.slice(0, 2).toUpperCase()}
+            </AvatarFallback>
+          )}
+        </Avatar>
+        <div>
+          <span className="text-white">{user.displayName}</span>
+          <p className="text-sm text-gray-400">@{user.username}</p>
+        </div>
+      </div>
+      <Button 
+        variant="ghost" 
+        size="icon" 
+        onClick={() => onInvite(user.id)}
+        className={cn(
+          "transition-colors duration-200",
+          isInvited ? "text-green-500" : "text-white"
+        )}
+      >
+        {isInvited ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
+      </Button>
     </div>
-    <Button 
-      variant="ghost" 
-      size="icon" 
-      onClick={() => onInvite(user.id)}
-      className={`transition-colors duration-200 ${isInvited ? "text-green-500" : "text-white"}`}
-    >
-      {isInvited ? <Check className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-    </Button>
-  </div>
-);
+  );
+};
 
 const InviteFriends = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [invitedUsers, setInvitedUsers] = useState(new Set());
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     if (searchTerm.trim() !== '') {
       const filteredUsers = users.filter(user =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase())
+        user.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.username.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setSearchResults(filteredUsers);
     } else {
@@ -90,6 +120,10 @@ const InviteFriends = ({ isOpen, onClose }) => {
     });
   };
 
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+  };
+
   return (
     <motion.div
       initial={{ y: "100%" }}
@@ -107,29 +141,49 @@ const InviteFriends = ({ isOpen, onClose }) => {
         <div className="relative mb-6">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <Input
-            className="pl-10 bg-gray-800 border-gray-700 text-white"
+            className="pl-10 bg-gray-800 border-gray-700 text-white rounded-full"
             placeholder="Search username"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="flex-grow overflow-y-auto">
-          {searchTerm.trim() !== '' && searchResults.map(user => (
-            <UserSearchResult 
-              key={user.id} 
-              user={user} 
-              onInvite={handleInvite}
-              isInvited={invitedUsers.has(user.id)}
-            />
-          ))}
+        <div className="flex-grow overflow-y-auto mb-6">
+          {searchResults.length > 0 ? (
+            searchResults.map(user => (
+              <UserSearchResult 
+                key={user.id} 
+                user={user} 
+                onInvite={handleInvite}
+                isInvited={invitedUsers.has(user.id)}
+                onUserClick={handleUserClick}
+              />
+            ))
+          ) : searchTerm.trim() !== '' && (
+            <p className="text-gray-400">No results found</p>
+          )}
         </div>
-        <Button 
-          className="w-full mt-4 bg-transparent hover:bg-transparent text-white border border-white"
-          onClick={handleShareLink}
-        >
-          <Share className="mr-2 h-5 w-5" /> Invite Friends
-        </Button>
+        <div className="mt-auto pb-6">
+          <Button 
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full flex items-center justify-center"
+            onClick={handleShareLink}
+          >
+            <Share className="mr-2 h-5 w-5" /> Invite Friends
+          </Button>
+        </div>
       </div>
+      {selectedUser && (
+        <UserProfilePopup
+          isOpen={!!selectedUser}
+          onClose={() => setSelectedUser(null)}
+          user={{
+            username: selectedUser.username,
+            handle: `@${selectedUser.username}`,
+            avatarUrl: getRandomProfilePicture(),
+            followers: Math.floor(Math.random() * 1000),
+            following: Math.floor(Math.random() * 1000),
+          }}
+        />
+      )}
     </motion.div>
   );
 };

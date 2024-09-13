@@ -1,46 +1,53 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
+import { useNavigate } from 'react-router-dom';
+import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const ChallengeCard = ({ type, date, active, progress }) => {
-  const isWalk = type === 'Daily Walks';
-  const imageUrl = isWalk
-    ? "https://cdn.midjourney.com/d7e39227-437f-4589-ad3e-612659a54916/0_1.png"
-    : "https://cdn.midjourney.com/b5b40151-9594-4005-a904-0701c493896b/0_1.png";
+  const isWalk = type === 'Daily Walk';
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (isWalk) {
+      navigate('/daily-walk-challenge');
+    } else {
+      navigate('/daily-quiz-challenge');
+    }
+  };
+
+  const squareImageUrl = isWalk
+    ? "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZS5wbmciLCJpYXQiOjE3MjU2ODk4NzcsImV4cCI6MTc1NzIyNTg3N30.nzNH06-Xz9MOJRbXK57YDU031uh7la7_QnXAITE5j8w&t=2024-09-07T06%3A17%3A57.421Z"
+    : "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailyquizimage5_square.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHlxdWl6aW1hZ2U1X3NxdWFyZS5wbmciLCJpYXQiOjE3MjU2ODk5MjMsImV4cCI6MTc1NzIyNTkyM30.ELyrp7TizCJbErr5wkfzeDEOQGtdd5KMDiCyR_oNmIk&t=2024-09-07T06%3A18%3A43.653Z";
 
   return (
-    <div className="w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[120px] flex bg-transparent">
+    <div 
+      className="w-full max-w-md mx-auto overflow-hidden h-[160px] flex cursor-pointer"
+      onClick={handleClick}
+    >
       <div 
-        className="w-[120px] h-[120px] bg-cover bg-center flex-shrink-0"
-        style={{
-          backgroundImage: `url(${imageUrl})`,
-        }}
+        className="w-[160px] h-[160px] flex-shrink-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${squareImageUrl})` }}
       ></div>
-      <div className="flex-grow p-3 flex flex-col justify-between">
+      <div className="flex-grow p-4 text-white flex flex-col justify-between">
         <div>
           <p className="text-xs text-white/80">{date}</p>
-          <h2 className="text-base font-bold mb-1 text-white">{type}</h2>
+          <h2 className="text-xl font-bold mb-2">{type}</h2>
           <div className="flex items-center space-x-2 mb-1">
-            <div className="flex -space-x-1">
-              <Avatar className="w-4 h-4 border-2 border-gray-800">
-                <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=John" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
-              <Avatar className="w-4 h-4 border-2 border-gray-800">
-                <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Jane" />
-                <AvatarFallback>JS</AvatarFallback>
-              </Avatar>
-              <Avatar className="w-4 h-4 border-2 border-gray-800">
-                <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Bob" />
-                <AvatarFallback>BS</AvatarFallback>
-              </Avatar>
+            <div className="flex -space-x-2">
+              {[...Array(3)].map((_, index) => (
+                <Avatar key={index} className="w-5 h-5 border-2 border-black">
+                  <AvatarImage src={getRandomProfilePicture()} />
+                  <AvatarFallback>U</AvatarFallback>
+                </Avatar>
+              ))}
             </div>
             <span className="text-xs text-white/80">{active} active</span>
           </div>
         </div>
         <div>
-          {isWalk && <p className="text-xs text-white/80 mb-0.5">RANK</p>}
-          <p className="text-sm font-bold text-white">{progress}</p>
+          <p className="text-xs text-white/80 mb-0.5">{isWalk ? 'RANK' : 'PROGRESS'}</p>
+          <p className="text-base font-bold">{progress}</p>
         </div>
       </div>
     </div>
