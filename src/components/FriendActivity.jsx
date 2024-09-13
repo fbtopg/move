@@ -5,50 +5,38 @@ import { Heart } from "lucide-react";
 
 const FriendActivity = ({ name, activity, type }) => {
   const [liked, setLiked] = useState(false);
-  const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
+  const imageUrl = `https://api.dicebear.com/6.x/initials/svg?seed=${name}`;
 
-  const getActivityColor = () => {
-    return type === 'walk' ? 'bg-blue-500' : 'bg-green-500';
+  const getActivityImage = () => {
+    return type === 'walk' 
+      ? "https://cdn.midjourney.com/d7e39227-437f-4589-ad3e-612659a54916/0_1.png"
+      : "https://cdn.midjourney.com/b5b40151-9594-4005-a904-0701c493896b/0_1.png";
   };
 
   const parseActivity = (activity) => {
-    if (!activity) return { activityText: '', activityTime: '' };
+    const [activityText, activityTime] = activity.split('•');
+    let parsedText = activityText.trim();
 
-    const parts = activity.split('•');
-    let activityText = parts[0] ? parts[0].trim() : '';
-    let activityTime = parts[1] ? parts[1].trim() : '';
-
-    // Add full stop after 'walk' and 'quiz', ensuring only one full stop
-    activityText = activityText.replace(/\b(walk|quiz)\.*/g, '$1.');
-
-    // Extract time from activityText
-    const timeMatch = activityText.match(/(\d+[mhdw])$/);
-    if (timeMatch) {
-      activityTime = timeMatch[1];
-      activityText = activityText.replace(/\s+\d+[mhdw]$/, '');
-    }
-
-    if (activityText.includes('solved the quiz.')) {
+    if (parsedText.includes('solved the quiz')) {
       const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
-      activityText = activityText.replace('solved the quiz.', `solved the quiz.${quizNumber}`);
+      parsedText = parsedText.replace('solved the quiz', `solved the quiz${quizNumber}`);
     }
 
-    return { activityText, activityTime };
+    return { parsedText, activityTime: activityTime.trim() };
   };
+
+  const { parsedText, activityTime } = parseActivity(activity);
 
   const highlightText = (text) => {
     return text
       .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
-      .replace(/(quiz. #\d{3})/, '<span class="text-white">$1</span>');
+      .replace(/(quiz #\d{3})/, '<span class="text-white">$1</span>');
   };
-
-  const { activityText, activityTime } = parseActivity(activity);
-  const parsedActivity = highlightText(activityText);
 
   return (
     <div className="flex items-start space-x-3">
       <Avatar className="w-10 h-10 mt-1 flex-shrink-0">
-        <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${name}`} alt={name} />
+        <AvatarImage src={imageUrl} alt={name} />
         <AvatarFallback>{name[0]}</AvatarFallback>
       </Avatar>
       <div className="flex-grow min-w-0">
@@ -58,18 +46,16 @@ const FriendActivity = ({ name, activity, type }) => {
               <span className="font-semibold">{name}</span>{' '}
               <span 
                 className="text-gray-400 break-words"
-                dangerouslySetInnerHTML={{ __html: parsedActivity }}
+                dangerouslySetInnerHTML={{ __html: highlightText(parsedText) }}
               />
-              {activityTime && (
-                <span className="text-[#73777F] ml-1">{activityTime}</span>
-              )}
             </p>
+            <p className="text-xs text-gray-600">{activityTime}</p>
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
             <div 
-              className={`w-10 h-10 rounded-lg bg-cover bg-center ${getActivityColor()}`}
+              className="w-10 h-10 rounded-lg bg-cover bg-center"
               style={{
-                backgroundImage: `url(${imageUrl})`,
+                backgroundImage: `url(${getActivityImage()})`,
               }}
             ></div>
             <Button 
