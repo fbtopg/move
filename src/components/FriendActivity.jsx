@@ -8,42 +8,28 @@ const FriendActivity = ({ name, activity, type }) => {
   const imageUrl = `https://source.unsplash.com/collection/3678981/100x100`;
 
   const getActivityColor = () => {
-    return type === 'walk' ? 'bg-blue-500' : 'bg-green-500';
+    return type === 'walk' ? 'bg-light-primary' : 'bg-light-accent';
   };
 
   const parseActivity = (activity) => {
-    if (!activity) return { activityText: '', activityTime: '' };
+    const [activityText, activityTime] = activity.split('•');
+    let parsedText = activityText.trim();
 
-    const parts = activity.split('•');
-    let activityText = parts[0] ? parts[0].trim() : '';
-    let activityTime = parts[1] ? parts[1].trim() : '';
-
-    // Add full stop after 'walk' and 'quiz', ensuring only one full stop
-    activityText = activityText.replace(/\b(walk|quiz)\.*/g, '$1.');
-
-    // Extract time from activityText
-    const timeMatch = activityText.match(/(\d+[mhdw])$/);
-    if (timeMatch) {
-      activityTime = timeMatch[1];
-      activityText = activityText.replace(/\s+\d+[mhdw]$/, '');
-    }
-
-    if (activityText.includes('solved the quiz.')) {
+    if (parsedText.includes('solved the quiz')) {
       const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
-      activityText = activityText.replace('solved the quiz.', `solved the quiz.${quizNumber}`);
+      parsedText = parsedText.replace('solved the quiz', `solved the quiz${quizNumber}`);
     }
 
-    return { activityText, activityTime };
+    return { parsedText, activityTime: activityTime.trim() };
   };
+
+  const { parsedText, activityTime } = parseActivity(activity);
 
   const highlightText = (text) => {
     return text
-      .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-white">$1</span>')
-      .replace(/(quiz. #\d{3})/, '<span class="text-white">$1</span>');
+      .replace(/(\d+(?:\.\d+)?(?:km|m))/, '<span class="text-light-primary">$1</span>')
+      .replace(/(quiz #\d{3})/, '<span class="text-light-accent">$1</span>');
   };
-
-  const { activityText, activityTime } = parseActivity(activity);
-  const parsedActivity = highlightText(activityText);
 
   return (
     <div className="flex items-start space-x-3">
@@ -54,16 +40,14 @@ const FriendActivity = ({ name, activity, type }) => {
       <div className="flex-grow min-w-0">
         <div className="flex items-start justify-between">
           <div className="flex-grow min-w-0 pr-2">
-            <p className="text-sm text-white">
+            <p className="text-sm text-light-text">
               <span className="font-semibold">{name}</span>{' '}
               <span 
-                className="text-gray-400 break-words"
-                dangerouslySetInnerHTML={{ __html: parsedActivity }}
+                className="text-light-secondary break-words"
+                dangerouslySetInnerHTML={{ __html: highlightText(parsedText) }}
               />
-              {activityTime && (
-                <span className="text-[#73777F] ml-1">{activityTime}</span>
-              )}
             </p>
+            <p className="text-xs text-light-secondary">{activityTime}</p>
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
             <div 
@@ -75,7 +59,7 @@ const FriendActivity = ({ name, activity, type }) => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent`}
+              className={`w-10 h-10 ${liked ? "text-light-primary" : "text-light-secondary"} hover:bg-transparent`}
               onClick={() => setLiked(!liked)}
             >
               <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
