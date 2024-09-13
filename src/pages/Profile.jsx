@@ -94,16 +94,12 @@ const Profile = () => {
               <img 
                 src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTkyODkwLCJleHAiOjE3NTc3Mjg4OTB9.Bmiccih4P4b52zlZjCDDbPtBWYyG5J8UIzINASZL_UQ&t=2024-09-13T02%3A01%3A30.953Z"
                 alt="Reward Icon"
-                className="w-10 h-10 mr-4"
+                className="w-8 h-8 mr-4"
               />
-              <div>
-                <h2 className="text-lg font-semibold">Rewards</h2>
-                <p className="text-sm text-gray-400">Claim your rewards</p>
-              </div>
             </div>
             <Button 
-              className="w-full bg-blue-500 bg-opacity-20 text-blue-500 hover:bg-blue-500 hover:text-white transition-colors h-12 rounded-lg flex justify-between items-center px-4"
-              style={{ borderStyle: 'dashed', borderWidth: '1px' }}
+              className="w-full bg-[#00AFD6] text-white hover:bg-[#00AFD6] transition-colors h-10 rounded-lg flex justify-between items-center px-4"
+              style={{ borderStyle: 'solid', borderWidth: '1px' }}
               onClick={() => navigate('/rewards')}
             >
               <span>Withdraw rewards</span>
