@@ -14,15 +14,39 @@ const Friends = () => {
     }
   };
 
-  const activities = [
-    { name: "John", activity: "finished walking 1km and completed daily walks challenge • 3m", type: "walk" },
-    { name: "Tate", activity: "finished walking 500m and completed daily walks challenge • 4m", type: "walk" },
-    { name: "Aquafina", activity: "finished walking 1km and completed daily walks challenge • 59m", type: "walk" },
-    { name: "Geonu", activity: "finished walking 750m and completed daily walks challenge • 4h", type: "walk" },
-    { name: "Astrid", activity: "finished walking 2km and completed daily walks challenge • 5h", type: "walk" },
-    { name: "Fitra", activity: "solved the quiz today and completed daily quiz challenge • 10h", type: "quiz" },
-    { name: "Rissa", activity: "solved the quiz today and completed daily quiz challenge • 15h", type: "quiz" },
+  const todayActivities = [
+    { name: "John", activity: "finished walking 1km and completed daily walk 3m", type: "walk" },
+    { name: "Tate", activity: "finished walking 500m and completed daily walk 4m", type: "walk" },
+    { name: "Aquafina", activity: "finished walking 1km and completed daily walk 59m", type: "walk" },
   ];
+
+  const thisMonthActivities = [
+    { name: "Geonu", activity: "finished walking 750m and completed daily walk 2d", type: "walk" },
+    { name: "Astrid", activity: "finished walking 2km and completed daily walk 5d", type: "walk" },
+    { name: "Fitra", activity: "solved the quiz today and completed daily quiz 1w", type: "quiz" },
+  ];
+
+  const earlierActivities = [
+    { name: "Rissa", activity: "solved the quiz today and completed daily quiz 2w", type: "quiz" },
+    { name: "John", activity: "finished walking 1.5km and completed daily walk 3w", type: "walk" },
+    { name: "Tate", activity: "solved the quiz today and completed daily quiz 1m", type: "quiz" },
+  ];
+
+  const renderActivitySection = (title, activities) => (
+    <>
+      <h2 className="text-xs font-semibold mb-3 text-gray-400">{title}</h2>
+      <div className="space-y-4">
+        {activities.map((activity, index) => (
+          <FriendActivity
+            key={index}
+            name={activity.name}
+            activity={activity.activity}
+            type={activity.type}
+          />
+        ))}
+      </div>
+    </>
+  );
 
   return (
     <>
@@ -44,7 +68,7 @@ const Friends = () => {
           <div className="flex-shrink-0 w-full">
             <div className="mb-4">
               <ChallengeCard
-                type="Daily Walks"
+                type="Daily Walk"
                 date="SEPTEMBER 2024"
                 active="16.5k"
                 progress="501/16.5K"
@@ -66,18 +90,12 @@ const Friends = () => {
 
       <div className="h-px bg-gray-700 my-4"></div>
 
-      <section className="mt-4 pb-20">
-        <h2 className="text-xs font-semibold mb-3 text-gray-400">TODAY</h2>
-        <div className="space-y-4">
-          {activities.map((activity, index) => (
-            <FriendActivity
-              key={index}
-              name={activity.name}
-              activity={activity.activity}
-              type={activity.type}
-            />
-          ))}
-        </div>
+      <section className="mt-4 pb-20 space-y-6">
+        {renderActivitySection("TODAY", todayActivities)}
+        <div className="h-px bg-gray-700"></div>
+        {renderActivitySection("THIS MONTH", thisMonthActivities)}
+        <div className="h-px bg-gray-700"></div>
+        {renderActivitySection("EARLIER", earlierActivities)}
       </section>
     </>
   );
