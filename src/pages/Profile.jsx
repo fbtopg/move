@@ -99,8 +99,10 @@ const Profile = () => {
                 />
               </div>
               <div className="flex flex-col items-end flex-grow">
-                <span className="text-gray-400 text-sm">+8210-8374-6026</span>
-                <span className="text-gray-400 text-sm underline">Edit</span>
+                <div className="flex items-center">
+                  <span className="text-gray-400 text-sm mr-2">+8210-8374-6026</span>
+                  <span className="text-gray-400 text-sm underline">Edit</span>
+                </div>
               </div>
             </div>
             <Button 
