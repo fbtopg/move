@@ -65,7 +65,7 @@ const Profile = () => {
               <h1 className="text-2xl font-light">{displayName}</h1>
               <p className="text-sm text-gray-400">{username}</p>
             </div>
-            <Avatar className="w-14 h-14 rounded-full cursor-pointer" onClick={handleAvatarClick}>
+            <Avatar className="w-20 h-20 rounded-full cursor-pointer" onClick={handleAvatarClick}>
               <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" />
               <AvatarFallback>PFP</AvatarFallback>
             </Avatar>
@@ -78,7 +78,7 @@ const Profile = () => {
             />
           </div>
           
-          <div className="flex mb-12">
+          <div className="flex mb-8">
             <div className="mr-24 cursor-pointer" onClick={() => navigate('/follow', { state: { initialTab: 'followers' } })}>
               <p className="text-sm text-white uppercase mb-1">Followers</p>
               <p className="text-sm">{followers}</p>
@@ -89,8 +89,8 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="mb-5 border border-gray-700 rounded-lg p-2 relative">
-            <div className="flex items-center justify-between mb-2">
+          <div className="mb-4 border border-gray-700 rounded-lg p-2 relative">
+            <div className="flex items-center justify-between mb-1">
               <div className="w-16 h-16 flex items-center justify-center">
                 <img 
                   src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTk0NjA1LCJleHAiOjE3NTc3MzA2MDV9.EkdEM-X2e2AC18wCrynOm6QUWdJItjaEBWfBtxAJIKY&t=2024-09-13T02%3A30%3A06.430Z"
