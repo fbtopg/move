@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, ArrowRight, Trophy, Gift } from "lucide-react";
+import { MoreHorizontal, Trophy, Gift } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { handleImageUpload } from '../utils/imageUtils';
 
@@ -99,18 +99,18 @@ const Profile = () => {
                 />
               </div>
               <div className="flex flex-col items-end flex-grow">
-                <div className="flex items-center">
-                  <span className="text-gray-400 text-sm mr-2">+8210-8374-6026</span>
+                <div className="flex items-center justify-between w-full">
+                  <span className="text-gray-400 text-sm">+8210-8374-6026</span>
                   <span className="text-gray-400 text-sm underline">Edit</span>
                 </div>
               </div>
             </div>
             <Button 
-              className="w-full bg-[#00AFD6] bg-opacity-50 text-white hover:bg-[#00AFD6] hover:bg-opacity-50 transition-colors h-10 rounded-lg flex justify-between items-center px-4 border border-[#00AFD6]"
+              className="w-full bg-[#00AFD6] bg-opacity-50 text-white hover:bg-[#00AFD6] hover:bg-opacity-50 transition-colors h-10 rounded-lg flex items-center justify-center px-4 border border-[#00AFD6]"
               onClick={() => navigate('/rewards')}
             >
-              <span>Withdraw rewards</span>
-              <ArrowRight className="h-5 w-5" />
+              <span className="mr-2">Withdraw rewards</span>
+              <span className="text-lg">&gt;</span>
             </Button>
           </div>
           
@@ -127,7 +127,7 @@ const Profile = () => {
               </div>
               <div className="flex items-center mt-2">
                 <span className="text-xs">Rewards</span>
-                <ArrowRight className="w-3 h-3 ml-1" />
+                <span className="text-xs ml-1">&gt;</span>
               </div>
             </div>
             <div className="flex flex-col items-start">
@@ -142,7 +142,7 @@ const Profile = () => {
               </div>
               <div className="flex items-center mt-2">
                 <span className="text-xs">Achievements</span>
-                <ArrowRight className="w-3 h-3 ml-1" />
+                <span className="text-xs ml-1">&gt;</span>
               </div>
             </div>
           </div>
