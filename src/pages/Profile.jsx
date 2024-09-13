@@ -78,7 +78,7 @@ const Profile = () => {
             />
           </div>
           
-          <div className="flex mb-8">
+          <div className="flex mb-4">
             <div className="mr-24 cursor-pointer" onClick={() => navigate('/follow', { state: { initialTab: 'followers' } })}>
               <p className="text-sm text-white uppercase mb-1">Followers</p>
               <p className="text-sm">{followers}</p>
@@ -87,6 +87,16 @@ const Profile = () => {
               <p className="text-sm text-white uppercase mb-1">Following</p>
               <p className="text-sm">{following}</p>
             </div>
+          </div>
+
+          <div className="mb-8">
+            <Button 
+              className="w-full bg-green-500 bg-opacity-20 text-green-500 border border-dashed border-green-500 hover:bg-green-500 hover:text-white transition-colors h-12 rounded-lg flex justify-between items-center px-4"
+              onClick={() => navigate('/rewards')}
+            >
+              <span>Withdraw rewards</span>
+              <ArrowRight className="h-5 w-5" />
+            </Button>
           </div>
           
           <div className="flex mb-8 space-x-8">
