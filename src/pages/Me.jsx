@@ -15,18 +15,18 @@ const Me = () => {
   };
 
   const todayActivities = [
-    { name: "You", activity: "finished walking 1km and completed daily walks • 3m", type: "walk" },
-    { name: "You", activity: "solved the quiz today and completed daily quiz • 1h", type: "quiz" },
+    { name: "You", activity: "finished walking 1km and completed daily walks challenge • 3m", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz challenge • 1h", type: "quiz" },
   ];
 
   const thisMonthActivities = [
-    { name: "You", activity: "finished walking 750m and completed daily walks • 2d", type: "walk" },
-    { name: "You", activity: "solved the quiz today and completed daily quiz • 5d", type: "quiz" },
+    { name: "You", activity: "finished walking 750m and completed daily walks challenge • 2d", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz challenge • 5d", type: "quiz" },
   ];
 
   const earlierActivities = [
-    { name: "You", activity: "finished walking 2km and completed daily walks • 2w", type: "walk" },
-    { name: "You", activity: "solved the quiz today and completed daily quiz • 1m", type: "quiz" },
+    { name: "You", activity: "finished walking 2km and completed daily walks challenge • 2w", type: "walk" },
+    { name: "You", activity: "solved the quiz today and completed daily quiz challenge • 1m", type: "quiz" },
   ];
 
   const renderActivitySection = (title, activities) => (

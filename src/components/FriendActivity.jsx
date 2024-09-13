@@ -59,10 +59,10 @@ const FriendActivity = ({ name, activity, type }) => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent`}
+              className={`w-8 h-8 ${liked ? "text-white" : "text-gray-500"} hover:bg-transparent`}
               onClick={() => setLiked(!liked)}
             >
-              <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
+              <Heart className={`h-5 w-5 ${liked ? "fill-current" : ""}`} />
             </Button>
           </div>
         </div>
