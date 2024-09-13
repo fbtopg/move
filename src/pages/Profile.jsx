@@ -91,7 +91,7 @@ const Profile = () => {
 
           <div className="mb-8 border border-gray-700 rounded-lg p-4 relative">
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 mr-4 flex items-center justify-center">
+              <div className="w-16 h-16 mr-4 flex items-center justify-center">
                 <img 
                   src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTk0NjA1LCJleHAiOjE3NTc3MzA2MDV9.EkdEM-X2e2AC18wCrynOm6QUWdJItjaEBWfBtxAJIKY&t=2024-09-13T02%3A30%3A06.430Z"
                   alt="Reward Icon"
