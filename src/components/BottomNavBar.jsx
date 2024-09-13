@@ -11,7 +11,7 @@ const BottomNavBar = ({ activeTab, setActiveTab }) => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-gray-900 text-white">
+    <nav className="fixed bottom-0 left-0 right-0 bg-[#111111] text-white">
       <ul className="flex justify-around items-center h-16">
         {navItems.map((item) => (
           <li key={item.id} className="flex-1">
@@ -22,9 +22,9 @@ const BottomNavBar = ({ activeTab, setActiveTab }) => {
                 activeTab === item.id ? "text-white" : "text-gray-400"
               )}
             >
-              <item.icon className="h-6 w-6 mb-1" />
+              <item.icon className="h-6 w-6 mb-1 stroke-1" />
               {activeTab === item.id && (
-                <span className="text-xs">{item.label}</span>
+                <span className="text-xs font-light">{item.label}</span>
               )}
             </button>
           </li>
