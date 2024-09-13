@@ -1,28 +1,18 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
-import { useNavigate } from 'react-router-dom';
 
 const ChallengeCard = ({ type, date, active, progress }) => {
-  const isWalk = type === 'Daily Walk';
-  const imageUrl = `https://source.unsplash.com/collection/3678981/300x300`;
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    if (isWalk) {
-      navigate('/daily-walk-challenge');
-    }
-    // Add navigation for Daily Quiz if needed
-  };
+  const isWalk = type === 'Daily Walks';
+  const imageUrl = isWalk
+    ? "https://cdn.discordapp.com/attachments/1057996608261869689/1281512420853944352/Rectangle_6.png?ex=66dbfcf2&is=66daab72&hm=54d3401d917b1176c5ed2054a7f648320c1bd12575272801f6c8fdd986bdaee7&"
+    : "https://cdn.discordapp.com/attachments/1057996608261869689/1281512421546262661/Rectangle_7.png?ex=66dbfcf2&is=66daab72&hm=e66dc0b2dc8ee7f23307913a1662f7c1cb2fbc4c4f71899f9d0be4b42f4b63f0&";
 
   return (
-    <div 
-      className={cn(
-        "w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[180px] flex flex-col cursor-pointer",
-        isWalk ? "bg-blue-500" : "bg-green-500"
-      )}
-      onClick={handleClick}
-    >
+    <div className={cn(
+      "w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[180px] flex flex-col",
+      isWalk ? "bg-blue-500" : "bg-green-500"
+    )}>
       <div 
         className="h-24 bg-cover bg-center"
         style={{

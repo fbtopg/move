@@ -113,7 +113,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="flex-grow overflow-y-auto mb-6">
+        <div className="flex-grow overflow-y-auto">
           {searchTerm.trim() !== '' && searchResults.map(user => (
             <UserSearchResult 
               key={user.id} 
@@ -123,14 +123,12 @@ const InviteFriends = ({ isOpen, onClose }) => {
             />
           ))}
         </div>
-        <div className="mt-auto pb-6">
-          <Button 
-            className="w-full bg-transparent hover:bg-transparent text-white border border-white"
-            onClick={handleShareLink}
-          >
-            <Share className="mr-2 h-5 w-5" /> Invite Friends
-          </Button>
-        </div>
+        <Button 
+          className="w-full mt-4 bg-transparent hover:bg-transparent text-white border border-white"
+          onClick={handleShareLink}
+        >
+          <Share className="mr-2 h-5 w-5" /> Invite Friends
+        </Button>
       </div>
     </motion.div>
   );
