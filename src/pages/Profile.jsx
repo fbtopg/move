@@ -93,14 +93,14 @@ const Profile = () => {
             <div className="flex items-center mb-4">
               <div className="w-8 h-8 mr-4 flex items-center justify-center">
                 <img 
-                  src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTk0MDY0LCJleHAiOjE3NTc3MzAwNjR9.h7qTMzC61fskMXtet_eRvYk1Ym05sZ-mU1YzIZzesO8&t=2024-09-13T02%3A21%3A05.035Z"
+                  src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTk0NjA1LCJleHAiOjE3NTc3MzA2MDV9.EkdEM-X2e2AC18wCrynOm6QUWdJItjaEBWfBtxAJIKY&t=2024-09-13T02%3A30%3A06.430Z"
                   alt="Reward Icon"
                   className="w-full h-full object-contain"
                 />
               </div>
             </div>
             <Button 
-              className="w-full bg-[#00AFD6] text-white hover:bg-[#00AFD6] transition-colors h-12 rounded-lg flex justify-between items-center px-4 border border-[#00AFD6]"
+              className="w-full bg-[#00AFD6] bg-opacity-50 text-white hover:bg-[#00AFD6] hover:bg-opacity-50 transition-colors h-10 rounded-lg flex justify-between items-center px-4 border border-[#00AFD6]"
               onClick={() => navigate('/rewards')}
             >
               <span>Withdraw rewards</span>
