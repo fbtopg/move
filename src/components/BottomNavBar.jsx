@@ -19,11 +19,13 @@ const BottomNavBar = ({ activeTab, setActiveTab }) => {
               onClick={() => setActiveTab(item.id)}
               className={cn(
                 "w-full h-full flex flex-col items-center justify-center",
-                activeTab === item.id ? "text-blue-500" : "text-gray-400"
+                activeTab === item.id ? "text-white" : "text-gray-400"
               )}
             >
               <item.icon className="h-6 w-6 mb-1" />
-              <span className="text-xs">{item.label}</span>
+              {activeTab === item.id && (
+                <span className="text-xs">{item.label}</span>
+              )}
             </button>
           </li>
         ))}
