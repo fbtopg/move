@@ -55,7 +55,6 @@ const InviteFriends = ({ isOpen, onClose }) => {
     const shareUrl = 'https://move.gptengineer.run/';
     const shareTitle = "Move - connect with your friends";
     const shareText = "Join the quiz today and share your thoughts with me!";
-    const shareImage = "https://cdn.discordapp.com/attachments/1057996608261869689/1281511084993544192/jellywalk_Move_logo_friendly_--ar_21_--v_6.1_10c32b8a-4761-40f7-b822-cc7814692207_0.png?ex=66dbfbb3&is=66daaa33&hm=57b8a67c02b8ed7326ebaa7c9417df79a6ca930697a1e8ccc70605f1d0173345&";
     
     if (navigator.share) {
       try {
@@ -70,8 +69,8 @@ const InviteFriends = ({ isOpen, onClose }) => {
       }
     } else {
       try {
-        await navigator.clipboard.writeText(`${shareTitle}\n\n${shareText}\n\n${shareUrl}\n\nImage: ${shareImage}`);
-        alert('Invitation text, link, and image URL copied to clipboard!');
+        await navigator.clipboard.writeText(`${shareTitle}\n\n${shareText}\n\n${shareUrl}`);
+        alert('Invitation text and link copied to clipboard!');
       } catch (err) {
         console.error('Failed to copy link:', err);
       }
@@ -113,7 +112,7 @@ const InviteFriends = ({ isOpen, onClose }) => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="flex-grow overflow-y-auto mb-6">
+        <div className="flex-grow overflow-y-auto">
           {searchTerm.trim() !== '' && searchResults.map(user => (
             <UserSearchResult 
               key={user.id} 
@@ -123,14 +122,12 @@ const InviteFriends = ({ isOpen, onClose }) => {
             />
           ))}
         </div>
-        <div className="mt-auto pb-6">
-          <Button 
-            className="w-full bg-transparent hover:bg-transparent text-white border border-white"
-            onClick={handleShareLink}
-          >
-            <Share className="mr-2 h-5 w-5" /> Invite Friends
-          </Button>
-        </div>
+        <Button 
+          className="w-full mt-4 bg-transparent hover:bg-transparent text-white border border-white"
+          onClick={handleShareLink}
+        >
+          <Share className="mr-2 h-5 w-5" /> Invite Friends
+        </Button>
       </div>
     </motion.div>
   );
