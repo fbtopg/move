@@ -22,9 +22,9 @@ const BottomNavBar = ({ activeTab, setActiveTab }) => {
                 activeTab === item.id ? "text-white" : "text-gray-400"
               )}
             >
-              <item.icon className="h-6 w-6 mb-1 stroke-1" />
+              <item.icon className="h-6 w-6 mb-1" />
               {activeTab === item.id && (
-                <span className="text-xs font-light">{item.label}</span>
+                <span className="text-xs">{item.label}</span>
               )}
             </button>
           </li>
