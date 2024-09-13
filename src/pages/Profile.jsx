@@ -92,14 +92,13 @@ const Profile = () => {
           <div className="mb-8 border border-gray-700 rounded-lg p-4 relative">
             <div className="flex items-center mb-4">
               <img 
-                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTkyODkwLCJleHAiOjE3NTc3Mjg4OTB9.Bmiccih4P4b52zlZjCDDbPtBWYyG5J8UIzINASZL_UQ&t=2024-09-13T02%3A01%3A30.953Z"
+                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTk0MDY0LCJleHAiOjE3NTc3MzAwNjR9.h7qTMzC61fskMXtet_eRvYk1Ym05sZ-mU1YzIZzesO8&t=2024-09-13T02%3A21%3A05.035Z"
                 alt="Reward Icon"
                 className="w-8 h-8 mr-4"
               />
             </div>
             <Button 
-              className="w-full bg-[#00AFD6] text-white hover:bg-[#00AFD6] transition-colors h-10 rounded-lg flex justify-between items-center px-4"
-              style={{ borderStyle: 'solid', borderWidth: '1px' }}
+              className="w-full bg-blue-500 text-white hover:bg-blue-600 transition-colors h-12 rounded-lg flex justify-between items-center px-4"
               onClick={() => navigate('/rewards')}
             >
               <span>Withdraw rewards</span>
