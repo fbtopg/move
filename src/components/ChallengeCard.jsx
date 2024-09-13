@@ -3,13 +3,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 
 const ChallengeCard = ({ type, date, active, progress }) => {
-  const isWalk = type === 'Daily Walks';
+  const isWalk = type === 'Daily Walk';
   const imageUrl = `https://source.unsplash.com/collection/3678981/300x300`;
 
   return (
     <div className={cn(
-      "w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-md h-[180px] flex flex-col",
-      isWalk ? "bg-light-primary" : "bg-light-accent"
+      "w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[180px] flex flex-col",
+      isWalk ? "bg-blue-500" : "bg-green-500"
     )}>
       <div 
         className="h-24 bg-cover bg-center"
