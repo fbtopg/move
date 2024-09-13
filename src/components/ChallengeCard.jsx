@@ -1,36 +1,50 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
+import { useNavigate } from 'react-router-dom';
 
 const ChallengeCard = ({ type, date, active, progress }) => {
-  const isWalk = type === 'Daily Walks';
-  const imageUrl = isWalk
-    ? "https://cdn.midjourney.com/d7e39227-437f-4589-ad3e-612659a54916/0_1.png"
-    : "https://cdn.midjourney.com/b5b40151-9594-4005-a904-0701c493896b/0_1.png";
+  const isWalk = type === 'Daily Walk';
+  const imageUrl = `https://source.unsplash.com/collection/3678981/300x300`;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (isWalk) {
+      navigate('/daily-walk-challenge');
+    } else {
+      navigate('/daily-quiz-challenge');
+    }
+  };
 
   return (
-    <div className="w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[180px] flex bg-gray-800">
+    <div 
+      className={cn(
+        "w-full max-w-md mx-auto rounded-lg overflow-hidden shadow-lg h-[180px] flex flex-col cursor-pointer",
+        isWalk ? "bg-blue-500" : "bg-green-500"
+      )}
+      onClick={handleClick}
+    >
       <div 
-        className="w-1/3 bg-cover bg-center"
+        className="h-24 bg-cover bg-center"
         style={{
           backgroundImage: `url(${imageUrl})`,
         }}
       ></div>
-      <div className="w-2/3 p-4 flex flex-col justify-between">
+      <div className="p-3 text-white flex-grow flex flex-col justify-between">
         <div>
           <p className="text-xs text-white/80">{date}</p>
-          <h2 className="text-lg font-bold mb-1 text-white">{type}</h2>
+          <h2 className="text-lg font-bold mb-1">{type}</h2>
           <div className="flex items-center space-x-2 mb-1">
             <div className="flex -space-x-2">
-              <Avatar className="w-5 h-5 border-2 border-gray-800">
+              <Avatar className="w-5 h-5 border-2 border-white/20">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=John" />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
-              <Avatar className="w-5 h-5 border-2 border-gray-800">
+              <Avatar className="w-5 h-5 border-2 border-white/20">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Jane" />
                 <AvatarFallback>JS</AvatarFallback>
               </Avatar>
-              <Avatar className="w-5 h-5 border-2 border-gray-800">
+              <Avatar className="w-5 h-5 border-2 border-white/20">
                 <AvatarImage src="https://api.dicebear.com/6.x/initials/svg?seed=Bob" />
                 <AvatarFallback>BS</AvatarFallback>
               </Avatar>
@@ -40,7 +54,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
         </div>
         <div>
           {isWalk && <p className="text-xs text-white/80 mb-0.5">RANK</p>}
-          <p className="text-base font-bold text-white">{progress}</p>
+          <p className="text-base font-bold">{progress}</p>
         </div>
       </div>
     </div>
