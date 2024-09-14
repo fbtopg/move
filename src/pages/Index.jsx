@@ -7,12 +7,17 @@ import Friends from './Friends';
 import Me from './Me';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { getRandomProfilePicture } from '../utils/profilePictures';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import DailyWalkChallenge from './DailyWalkChallenge';
+import DailyQuizChallenge from './DailyQuizChallenge';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('community');
   const [isInviteOpen, setIsInviteOpen] = useState(false);
   const [currentView, setCurrentView] = useState('friends');
   const [selectedUser, setSelectedUser] = useState(null);
+  const location = useLocation();
 
   const handleUserClick = (user) => {
     setSelectedUser({
@@ -54,11 +59,13 @@ const Index = () => {
       </div>
       <div className="flex-grow overflow-y-auto scrollbar-hide">
         <div className="max-w-md mx-auto p-2">
-          {currentView === 'friends' ? (
-            <Friends onUserClick={handleUserClick} />
-          ) : (
-            <Me />
-          )}
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={currentView === 'friends' ? <Friends onUserClick={handleUserClick} /> : <Me />} />
+              <Route path="/daily-walk-challenge" element={<DailyWalkChallenge />} />
+              <Route path="/daily-quiz-challenge" element={<DailyQuizChallenge />} />
+            </Routes>
+          </AnimatePresence>
         </div>
       </div>
       <InviteFriends isOpen={isInviteOpen} onClose={() => setIsInviteOpen(false)} />
