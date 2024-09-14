@@ -76,13 +76,14 @@ const Walk = () => {
       <div className="relative flex-grow" style={{ zIndex: 1 }}>
         {/* Content above the map can be added here */}
       </div>
-      <div className="relative" style={{ zIndex: 2 }}>
-        <div 
-          className="h-24"
-          style={{
-            background: 'linear-gradient(to top, #212124, rgba(33, 33, 36, 0))'
-          }}
-        ></div>
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-40"
+        style={{
+          zIndex: 2,
+          background: 'linear-gradient(to top, #212124, rgba(33, 33, 36, 0))'
+        }}
+      ></div>
+      <div className="relative" style={{ zIndex: 3 }}>
         <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
     </div>
