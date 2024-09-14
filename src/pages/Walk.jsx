@@ -55,7 +55,7 @@ const Walk = () => {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col bg-black text-white">
+    <div className="h-screen flex flex-col bg-black text-white relative">
       <div className="flex-grow relative">
         {position && (
           <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }}>
@@ -73,7 +73,7 @@ const Walk = () => {
           </MapContainer>
         )}
       </div>
-      <div className="h-40 relative z-[1001]">
+      <div className="absolute bottom-0 left-0 right-0 z-10">
         <div className="h-24 bg-black"></div>
         <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
