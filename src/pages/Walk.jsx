@@ -83,7 +83,7 @@ const Walk = () => {
         {/* Content above the map can be added here */}
       </div>
       <div 
-        className="absolute bottom-0 left-0 right-0 h-48 flex items-center justify-center"
+        className="absolute bottom-0 left-0 right-0 h-52 flex items-center justify-center"
         style={{
           zIndex: 2,
           background: 'linear-gradient(to top, #212124 85%, rgba(33, 33, 36, 0.2) 100%)'
@@ -91,7 +91,7 @@ const Walk = () => {
       >
         <Button
           onClick={handleStartWalk}
-          className="bg-white text-black hover:bg-gray-200 font-semibold py-2 px-4 rounded-lg text-lg w-full mx-2"
+          className="bg-white text-black hover:bg-gray-200 font-semibold py-3 px-4 rounded-lg text-lg w-full mx-2"
         >
           START
         </Button>
