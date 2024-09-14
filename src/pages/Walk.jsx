@@ -91,7 +91,7 @@ const Walk = () => {
       >
         <Button
           onClick={handleStartWalk}
-          className="bg-white text-black hover:bg-gray-200 font-semibold py-2 px-4 rounded-lg text-lg w-[calc(100%-32px)] mx-4"
+          className="bg-white text-black hover:bg-gray-200 font-semibold py-2 px-4 rounded-lg text-lg w-full mx-2"
         >
           START
         </Button>
