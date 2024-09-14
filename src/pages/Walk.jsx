@@ -61,8 +61,8 @@ const Walk = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-black text-white relative" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
-      <div className="absolute inset-0" style={{ zIndex: 0, top: 'env(safe-area-inset-top)' }}>
+    <div className="h-screen flex flex-col bg-black text-white relative">
+      <div className="absolute inset-0" style={{ zIndex: 0 }}>
         {position && (
           <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }} zoomControl={false}>
             <TileLayer
