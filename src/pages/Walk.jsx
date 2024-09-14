@@ -56,6 +56,7 @@ const Walk = () => {
 
   return (
     <div className="h-screen flex flex-col bg-black text-white">
+      <div className="h-24 bg-black z-50 relative"></div>
       <div className="flex-grow relative">
         {position && (
           <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }}>
@@ -72,7 +73,6 @@ const Walk = () => {
             <OrientationMarker position={position} />
           </MapContainer>
         )}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-black z-10"></div>
       </div>
       <div className="h-16 relative z-20">
         <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
