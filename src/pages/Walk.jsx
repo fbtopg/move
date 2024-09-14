@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Circle, CircleMarker, useMap } from 'react-leaflet';
 import BottomNavBar from '../components/BottomNavBar';
+import { Button } from "@/components/ui/button";
 import 'leaflet/dist/leaflet.css';
 
 const OrientationMarker = ({ position }) => {
@@ -54,6 +55,11 @@ const Walk = () => {
     }
   }, []);
 
+  const handleStartWalk = () => {
+    // Placeholder for start walk functionality
+    console.log("Start walk clicked");
+  };
+
   return (
     <div className="h-screen flex flex-col bg-black text-white relative">
       <div className="absolute inset-0" style={{ zIndex: 0 }}>
@@ -77,12 +83,19 @@ const Walk = () => {
         {/* Content above the map can be added here */}
       </div>
       <div 
-        className="absolute bottom-0 left-0 right-0 h-48"
+        className="absolute bottom-0 left-0 right-0 h-48 flex items-center justify-center"
         style={{
           zIndex: 2,
           background: 'linear-gradient(to top, #212124 85%, rgba(33, 33, 36, 0.2) 100%)'
         }}
-      ></div>
+      >
+        <Button
+          onClick={handleStartWalk}
+          className="bg-white text-black hover:bg-gray-200 font-semibold py-2 px-6 rounded-full text-lg"
+        >
+          START
+        </Button>
+      </div>
       <div className="relative" style={{ zIndex: 3 }}>
         <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
