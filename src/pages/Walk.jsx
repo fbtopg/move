@@ -79,11 +79,11 @@ const Walk = () => {
       <div 
         className="absolute bottom-0 left-0 right-0 h-40"
         style={{
-          zIndex: 3,
-          background: 'linear-gradient(to top, #212124 90%, rgba(33, 33, 36, 0) 100%)'
+          zIndex: 2,
+          background: 'linear-gradient(to top, #212124, rgba(33, 33, 36, 0))'
         }}
       ></div>
-      <div className="relative" style={{ zIndex: 2 }}>
+      <div className="relative" style={{ zIndex: 3 }}>
         <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
     </div>
