@@ -6,11 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import BottomNavBar from '../components/BottomNavBar';
 import { shareInvite } from '../utils/shareUtils';
 import { getRandomProfilePicture } from '../utils/profilePictures';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const DailyWalkChallenge = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('community');
   const [showFullImage, setShowFullImage] = useState(false);
+  const [imagePosition, setImagePosition] = useState({ top: 0, left: 0, width: 0, height: 0 });
 
   const challengeData = {
     month: "SEPTEMBER 2024",
@@ -43,7 +45,16 @@ const DailyWalkChallenge = () => {
     navigate('/daily-walk-history');
   };
 
-  const toggleFullImage = () => {
+  const toggleFullImage = (event) => {
+    if (!showFullImage && event) {
+      const rect = event.target.getBoundingClientRect();
+      setImagePosition({
+        top: rect.top,
+        left: rect.left,
+        width: rect.width,
+        height: rect.height,
+      });
+    }
     setShowFullImage(!showFullImage);
   };
 
@@ -172,14 +183,47 @@ const DailyWalkChallenge = () => {
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      {showFullImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={toggleFullImage}>
-          <div className="relative">
-            <img 
-              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z" 
-              alt="Daily Walk Challenge" 
-              className="max-w-full max-h-full"
-            />
+      <AnimatePresence>
+        {showFullImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            onClick={toggleFullImage}
+          >
+            <motion.div
+              initial={{
+                opacity: 0,
+                top: imagePosition.top,
+                left: imagePosition.left,
+                width: imagePosition.width,
+                height: imagePosition.height,
+              }}
+              animate={{
+                opacity: 1,
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+              }}
+              exit={{
+                opacity: 0,
+                top: imagePosition.top,
+                left: imagePosition.left,
+                width: imagePosition.width,
+                height: imagePosition.height,
+              }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute flex items-center justify-center"
+            >
+              <img 
+                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z" 
+                alt="Daily Walk Challenge" 
+                className="max-w-full max-h-full object-contain"
+              />
+            </motion.div>
             <button 
               className="absolute top-4 right-4 text-white"
               onClick={(e) => {
@@ -189,9 +233,9 @@ const DailyWalkChallenge = () => {
             >
               <X className="h-6 w-6" />
             </button>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
