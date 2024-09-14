@@ -83,7 +83,7 @@ const Walk = () => {
         {/* Content above the map can be added here */}
       </div>
       <div 
-        className="absolute bottom-0 left-0 right-0 h-64 flex items-center justify-center"
+        className="absolute bottom-0 left-0 right-0 h-72 flex items-end justify-center pb-8"
         style={{
           zIndex: 2,
           background: 'linear-gradient(to top, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0.2) 100%)'
