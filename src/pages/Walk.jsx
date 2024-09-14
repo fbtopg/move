@@ -77,7 +77,7 @@ const Walk = () => {
         {/* Content above the map can be added here */}
       </div>
       <div 
-        className="absolute bottom-0 left-0 right-0 h-40"
+        className="absolute bottom-0 left-0 right-0 h-48"
         style={{
           zIndex: 2,
           background: 'linear-gradient(to top, #212124 85%, rgba(33, 33, 36, 0.2) 100%)'
