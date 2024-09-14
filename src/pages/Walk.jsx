@@ -58,21 +58,23 @@ const Walk = () => {
     <div className="h-screen flex flex-col bg-black text-white">
       <div className="flex-grow relative">
         {position && (
-          <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }}>
-            <TileLayer
-              url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-              maxZoom={19}
-            />
-            <Circle 
-              center={position} 
-              radius={15} 
-              pathOptions={{ color: '#4a90e2', fillColor: '#4a90e2', fillOpacity: 0.3 }} 
-            />
-            <OrientationMarker position={position} />
-          </MapContainer>
+          <>
+            <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }}>
+              <TileLayer
+                url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                maxZoom={19}
+              />
+              <Circle 
+                center={position} 
+                radius={15} 
+                pathOptions={{ color: '#4a90e2', fillColor: '#4a90e2', fillOpacity: 0.3 }} 
+              />
+              <OrientationMarker position={position} />
+            </MapContainer>
+            <div className="absolute top-0 left-0 right-0 h-24 bg-black z-[1000]"></div>
+          </>
         )}
-        <div className="absolute top-0 left-0 right-0 h-24 bg-black z-50"></div>
       </div>
       <div className="h-16 relative z-20">
         <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
