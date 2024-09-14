@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { MapContainer, TileLayer, useMap, Circle, CircleMarker } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, CircleMarker, useMap } from 'react-leaflet';
 import { Locate, ArrowLeft, History } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
-const LocationMarker = ({ position, map }) => {
+const LocationMarker = ({ position }) => {
+  const map = useMap();
+
   useEffect(() => {
     if (position) map.flyTo(position, 16);
   }, [position, map]);
@@ -60,7 +62,7 @@ const Walk = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          <LocationMarker position={position} map={useMap()} />
+          <LocationMarker position={position} />
         </MapContainer>
         <div className="absolute bottom-4 right-4 z-[1000]">
           <Button
