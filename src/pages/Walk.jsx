@@ -83,15 +83,21 @@ const Walk = () => {
         {/* Content above the map can be added here */}
       </div>
       <div 
-        className="absolute bottom-0 left-0 right-0 h-64 flex items-center justify-center"
+        className="absolute bottom-0 left-0 right-0 h-64 flex flex-col items-center justify-between"
         style={{
           zIndex: 2,
           background: 'linear-gradient(to top, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0.2) 100%)'
         }}
       >
+        <div className="w-full px-4 pt-4">
+          <div className="bg-gray-800 rounded-lg p-3 mb-4">
+            <p className="text-sm text-gray-300">Last activity:</p>
+            <p className="text-white">Walked 2.5 km • 30 minutes ago</p>
+          </div>
+        </div>
         <Button
           onClick={handleStartWalk}
-          className="bg-[#FFC700] text-black hover:bg-[#E6B300] font-semibold py-7 px-4 rounded-lg text-xl w-[calc(100%-32px)] mx-4 mt-10 poetsen-one-regular"
+          className="bg-[#FFC700] text-black hover:bg-[#E6B300] font-semibold py-7 px-4 rounded-lg text-xl w-[calc(100%-32px)] mx-4 mb-6 poetsen-one-regular"
           style={{ fontFamily: '"Poetsen One", sans-serif', fontWeight: 400 }}
         >
           START
