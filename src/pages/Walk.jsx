@@ -1,7 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Circle, CircleMarker } from 'react-leaflet';
+import React, { useState, useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, Circle, CircleMarker, useMap } from 'react-leaflet';
 import BottomNavBar from '../components/BottomNavBar';
 import 'leaflet/dist/leaflet.css';
+
+const OrientationMarker = ({ position }) => {
+  const map = useMap();
+  const markerRef = useRef(null);
+
+  useEffect(() => {
+    if (!map || !position) return;
+
+    const handleOrientation = (event) => {
+      const { alpha } = event;
+      if (alpha !== null && markerRef.current) {
+        markerRef.current.setRotationAngle(alpha);
+      }
+    };
+
+    window.addEventListener('deviceorientation', handleOrientation, true);
+
+    return () => {
+      window.removeEventListener('deviceorientation', handleOrientation, true);
+    };
+  }, [map, position]);
+
+  if (!position) return null;
+
+  return (
+    <CircleMarker
+      center={position}
+      radius={5}
+      pathOptions={{ color: '#1c6ed1', fillColor: '#1c6ed1', fillOpacity: 1 }}
+      ref={markerRef}
+    />
+  );
+};
 
 const Walk = () => {
   const [position, setPosition] = useState(null);
@@ -36,11 +69,7 @@ const Walk = () => {
               radius={15} 
               pathOptions={{ color: '#4a90e2', fillColor: '#4a90e2', fillOpacity: 0.3 }} 
             />
-            <CircleMarker 
-              center={position} 
-              radius={5} 
-              pathOptions={{ color: '#1c6ed1', fillColor: '#1c6ed1', fillOpacity: 1 }} 
-            />
+            <OrientationMarker position={position} />
           </MapContainer>
         )}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-black z-10"></div>
