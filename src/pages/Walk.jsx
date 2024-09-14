@@ -56,9 +56,9 @@ const Walk = () => {
 
   return (
     <div className="h-screen flex flex-col bg-black text-white relative">
-      <div className="flex-grow relative">
+      <div className="absolute inset-0" style={{ zIndex: 0 }}>
         {position && (
-          <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%', zIndex: 0 }}>
+          <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }}>
             <TileLayer
               url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
@@ -73,7 +73,10 @@ const Walk = () => {
           </MapContainer>
         )}
       </div>
-      <div className="absolute bottom-0 left-0 right-0 z-10">
+      <div className="relative flex-grow" style={{ zIndex: 1 }}>
+        {/* Content above the map can be added here */}
+      </div>
+      <div className="relative" style={{ zIndex: 2 }}>
         <div 
           className="h-24"
           style={{
