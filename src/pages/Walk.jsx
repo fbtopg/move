@@ -91,8 +91,8 @@ const Walk = () => {
       >
         <Button
           onClick={handleStartWalk}
-          className="bg-white text-black hover:bg-gray-200 font-semibold py-7 px-4 rounded-lg text-xl w-[calc(100%-32px)] mx-4 mt-10 bebas-neue-regular"
-          style={{ fontFamily: '"Bebas Neue", sans-serif', fontWeight: 400 }}
+          className="bg-white text-black hover:bg-gray-200 font-semibold py-7 px-4 rounded-lg text-xl w-[calc(100%-32px)] mx-4 mt-10 poetsen-one-regular"
+          style={{ fontFamily: '"Poetsen One", sans-serif', fontWeight: 400 }}
         >
           START
         </Button>
