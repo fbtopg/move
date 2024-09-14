@@ -59,7 +59,7 @@ const DailyQuizChallenge = () => {
             </button>
           </div>
 
-          <div className="w-24 h-24 rounded-lg mb-6 overflow-hidden">
+          <div className="w-24 h-24 mb-6 overflow-hidden">
             <img 
               src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailyquizimage5_square.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHlxdWl6aW1hZ2U1X3NxdWFyZS5wbmciLCJpYXQiOjE3MjYyODY5ODksImV4cCI6MTc1NzgyMjk4OX0.5cAAfAV8oHmx9xqqyD-XrdanaSHQVPld4Sn5B-MeieY&t=2024-09-14T04%3A09%3A51.789Z" 
               alt="Daily Quiz Challenge" 
