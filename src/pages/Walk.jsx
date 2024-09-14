@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from "@/components/ui/button";
 import { MapContainer, TileLayer, useMap, Circle, CircleMarker } from 'react-leaflet';
-import { Locate } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import BottomNavBar from '../components/BottomNavBar';
 import 'leaflet/dist/leaflet.css';
 
 const Walk = () => {
-  const navigate = useNavigate();
   const [position, setPosition] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const challengeData = {
-    distance: "56.7km",
-    likes: "124",
-    highestStreak: "7",
-  };
+  const [activeTab, setActiveTab] = useState('walk');
 
   const LocationMarker = () => {
     const map = useMap();
@@ -41,40 +33,22 @@ const Walk = () => {
     );
   };
 
-  const handleFindLocation = () => {
-    if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser');
-    } else {
-      setIsLoading(true);
+  useEffect(() => {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setPosition([position.coords.latitude, position.coords.longitude]);
-          setIsLoading(false);
         },
         (error) => {
-          setIsLoading(false);
-          alert(`Unable to retrieve your location: ${error.message}`);
+          console.error(`Error: ${error.message}`);
         },
-        { timeout: 10000, enableHighAccuracy: true }
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
       );
     }
-  };
+  }, []);
 
   return (
     <div className="h-screen flex flex-col bg-black text-white">
-      <div className="p-3 bg-black">
-        <div className="flex justify-between items-center mb-2">
-          <button 
-            onClick={() => navigate('/')} 
-            className="text-base text-white hover:text-gray-200 transition-colors"
-          >
-            Close
-          </button>
-          <h1 className="text-base font-semibold">Walk</h1>
-          <div className="w-12"></div>
-        </div>
-      </div>
-
       <div className="flex-grow relative">
         <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
           <TileLayer
@@ -83,39 +57,17 @@ const Walk = () => {
           />
           <LocationMarker />
         </MapContainer>
-        <div className="absolute bottom-4 right-4 z-[1000]">
-          <Button
-            className="bg-white text-black hover:bg-gray-200 transition-colors rounded-full p-2"
-            onClick={handleFindLocation}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Loading...' : <Locate className="h-6 w-6" />}
-          </Button>
-        </div>
       </div>
 
       <div className="bg-[#111111] p-3 pb-10">
-        <div className="grid grid-cols-3 gap-4 mb-6 text-center">
-          <div>
-            <p className="text-xs text-gray-400">DISTANCE</p>
-            <p className="text-xs font-bold">{challengeData.distance}</p>
-          </div>
-          <div>
-            <p className="text-xs text-gray-400">LIKES</p>
-            <p className="text-xs font-bold">{challengeData.likes}</p>
-          </div>
-          <div>
-            <p className="text-xs text-gray-400">HIGHEST STREAK</p>
-            <p className="text-xs font-bold">{challengeData.highestStreak}</p>
-          </div>
-        </div>
-
         <div className="flex items-center justify-center mt-3">
           <Button className="w-16 h-16 bg-red-500 hover:bg-red-600 text-white transition-colors rounded-full text-sm font-bold">
             START
           </Button>
         </div>
       </div>
+
+      <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 };
