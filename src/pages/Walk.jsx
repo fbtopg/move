@@ -49,7 +49,7 @@ const Walk = () => {
   return (
     <div className="h-screen flex flex-col bg-black text-white">
       <div className="flex-grow relative">
-        <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: 'calc(100vh - 64px)', width: '100%' }}>
+        <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
           <TileLayer
             url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
