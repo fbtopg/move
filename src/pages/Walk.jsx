@@ -91,7 +91,7 @@ const Walk = () => {
       >
         <Button
           onClick={handleStartWalk}
-          className="bg-white text-black hover:bg-gray-200 font-semibold py-6 px-4 rounded-lg text-xl w-[calc(100%-32px)] mx-4 coda-regular"
+          className="bg-white text-black hover:bg-gray-200 font-semibold py-6 px-4 rounded-lg text-xl w-[calc(100%-32px)] mx-4 coda-regular mt-8"
           style={{ fontFamily: '"Coda", system-ui', fontWeight: 400 }}
         >
           START
