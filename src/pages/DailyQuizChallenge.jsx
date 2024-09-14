@@ -44,12 +44,12 @@ const DailyQuizChallenge = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
-        <div className="bg-gradient-to-b from-gray-900 to-black p-4">
+        <div className="bg-gradient-to-t from-gray-900 to-black p-4 relative">
           <button onClick={() => navigate(-1)} className="mb-4">
             <ArrowLeft className="h-6 w-6" />
           </button>
 
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-start mb-4">
             <div>
               <p className="text-sm text-gray-400">{challengeData.month}</p>
               <h1 className="text-3xl font-bold">{challengeData.title}</h1>
@@ -65,6 +65,13 @@ const DailyQuizChallenge = () => {
               alt="Daily Quiz Challenge" 
               className="w-full h-full object-cover"
             />
+          </div>
+
+          <div className="absolute bottom-4 right-4 text-right">
+            <div className="text-4xl font-bold">
+              {challengeData.progress}
+            </div>
+            <div className="text-sm text-gray-400">PROGRESS</div>
           </div>
         </div>
 
@@ -87,13 +94,6 @@ const DailyQuizChallenge = () => {
           <p className="text-sm text-gray-400 mb-4 pr-8">
             Engage your mind with the daily quiz challenge, designed to make you think more consciously about everyday topics. Each quiz encourages deeper reflection and awareness. Miss a day? No problem—just take two quizzes next time to stay on track. By the end of the challenge, you'll have developed a habit of mindful thinking and earned rewards to celebrate your journey!
           </p>
-
-          <div className="mb-6">
-            <div className="text-4xl font-bold">
-              {challengeData.progress}
-            </div>
-            <div className="text-sm text-gray-400">PROGRESS</div>
-          </div>
 
           <div className="flex mb-6 space-x-8">
             <div>
