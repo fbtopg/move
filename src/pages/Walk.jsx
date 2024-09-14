@@ -47,7 +47,7 @@ const Walk = () => {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col bg-black text-white">
+    <div className="h-screen flex flex-col bg-black text-white relative">
       <div className="flex-grow relative">
         <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: 'calc(100vh - 64px)', width: '100%' }}>
           <TileLayer
@@ -58,6 +58,12 @@ const Walk = () => {
           <LocationMarker />
         </MapContainer>
       </div>
+      <div 
+        className="absolute bottom-16 left-0 right-0 h-32 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to top, #212124, transparent)',
+        }}
+      ></div>
       <div className="h-16">
         <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
