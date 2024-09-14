@@ -6,13 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import BottomNavBar from '../components/BottomNavBar';
 import { shareInvite } from '../utils/shareUtils';
 import { getRandomProfilePicture } from '../utils/profilePictures';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const DailyWalkChallenge = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('community');
   const [showFullImage, setShowFullImage] = useState(false);
-  const [imagePosition, setImagePosition] = useState({ top: 0, left: 0, width: 0, height: 0 });
 
   const challengeData = {
     month: "SEPTEMBER 2024",
@@ -45,21 +44,18 @@ const DailyWalkChallenge = () => {
     navigate('/daily-walk-history');
   };
 
-  const toggleFullImage = (event) => {
-    if (!showFullImage && event) {
-      const rect = event.target.getBoundingClientRect();
-      setImagePosition({
-        top: rect.top,
-        left: rect.left,
-        width: rect.width,
-        height: rect.height,
-      });
-    }
+  const toggleFullImage = () => {
     setShowFullImage(!showFullImage);
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <motion.div
+      initial={{ x: '100%' }}
+      animate={{ x: 0 }}
+      exit={{ x: '100%' }}
+      transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
+      className="fixed inset-0 bg-black text-white flex flex-col z-50"
+    >
       <div className="sticky top-0 z-10 bg-black p-4 flex justify-between items-center">
         <button onClick={() => navigate(-1)} className="text-white">
           <ArrowLeft className="h-6 w-6" />
@@ -73,9 +69,7 @@ const DailyWalkChallenge = () => {
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="bg-gradient-to-t from-gray-900 to-black p-4 relative">
           <div className="flex justify-between items-center mb-4">
-            <div>
-              <p className="text-sm text-gray-400">{challengeData.month}</p>
-            </div>
+            <p className="text-sm text-gray-400">{challengeData.month}</p>
           </div>
 
           <div className="flex justify-between items-center">
@@ -98,80 +92,9 @@ const DailyWalkChallenge = () => {
         </div>
 
         <div className="max-w-md mx-auto p-4">
-          <div className="grid grid-cols-3 gap-1 text-xs mb-6">
-            <div>
-              <p className="text-gray-400">START</p>
-              <p>{challengeData.startDate}</p>
-            </div>
-            <div>
-              <p className="text-gray-400">END</p>
-              <p>{challengeData.endDate}</p>
-            </div>
-            <div>
-              <p className="text-gray-400">REMAINING</p>
-              <p>{challengeData.remainingDays}</p>
-            </div>
-          </div>
-
-          <p className="text-xs text-gray-400 mb-4 pr-8">
-            Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. If you miss a day, just make up for it the next time. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
-          </p>
-
-          <div className="h-px bg-gray-700 my-6"></div>
-
-          <h2 className="text-sm font-semibold mb-4">SUMMARY</h2>
-
-          <div className="flex mb-6 space-x-8">
-            <div>
-              <div className="text-xs text-gray-400">DISTANCE</div>
-              <div className="text-base font-bold">{challengeData.distance}</div>
-            </div>
-            <div>
-              <div className="text-xs text-gray-400">LIKES</div>
-              <div className="text-base font-bold">{challengeData.likes}</div>
-            </div>
-            <div>
-              <div className="text-xs text-gray-400">HIGHEST STREAK</div>
-              <div className="text-base font-bold">{challengeData.highestStreak}</div>
-            </div>
-          </div>
-
-          <div className="h-px bg-gray-700 my-4"></div>
-
-          <div className="flex items-center mb-4">
-            <div className="flex flex-shrink-0">
-              {participants.map((participant) => (
-                <Avatar key={participant.id} className="w-8 h-8 -ml-2 first:ml-0 border-2 border-black">
-                  <AvatarImage src={getRandomProfilePicture()} />
-                  <AvatarFallback>{participant.name[0]}</AvatarFallback>
-                </Avatar>
-              ))}
-            </div>
-            <div className="ml-2 text-sm text-gray-400">
-              {challengeData.activeParticipants} active
-            </div>
-          </div>
-
-          <div className="h-px bg-gray-700 my-4"></div>
-
-          <div className="mb-6">
-            <h2 className="text-lg font-bold mb-4">ACHIEVEMENTS</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {challengeData.achievements.map((achievement) => (
-                <div 
-                  key={achievement.id} 
-                  className="flex flex-col items-center justify-center w-full aspect-square rounded-lg"
-                  style={{
-                    background: 'radial-gradient(circle at center, #222222, #111111)',
-                  }}
-                >
-                  <achievement.icon className="h-24 w-24 text-white mb-2 stroke-[0.5]" />
-                  <span className="text-sm text-center px-2">{achievement.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
+          <ChallengeDetails challengeData={challengeData} />
+          <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
+          <ChallengeAchievements achievements={challengeData.achievements} />
           <Button 
             className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full"
             onClick={shareInvite}
@@ -182,62 +105,94 @@ const DailyWalkChallenge = () => {
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
-
-      <AnimatePresence>
-        {showFullImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-            onClick={toggleFullImage}
-          >
-            <motion.div
-              initial={{
-                opacity: 0,
-                top: imagePosition.top,
-                left: imagePosition.left,
-                width: imagePosition.width,
-                height: imagePosition.height,
-              }}
-              animate={{
-                opacity: 1,
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-              }}
-              exit={{
-                opacity: 0,
-                top: imagePosition.top,
-                left: imagePosition.left,
-                width: imagePosition.width,
-                height: imagePosition.height,
-              }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute flex items-center justify-center"
-            >
-              <img 
-                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z" 
-                alt="Daily Walk Challenge" 
-                className="max-w-full max-h-full object-contain"
-              />
-            </motion.div>
-            <button 
-              className="absolute top-4 right-4 text-white"
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleFullImage();
-              }}
-            >
-              <X className="h-6 w-6" />
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+      {showFullImage && <FullImageView toggleFullImage={toggleFullImage} />}
+    </motion.div>
   );
 };
+
+const ChallengeDetails = ({ challengeData }) => (
+  <>
+    <div className="grid grid-cols-3 gap-1 text-xs mb-6">
+      <DetailItem label="START" value={challengeData.startDate} />
+      <DetailItem label="END" value={challengeData.endDate} />
+      <DetailItem label="REMAINING" value={challengeData.remainingDays} />
+    </div>
+    <p className="text-xs text-gray-400 mb-4 pr-8">
+      Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. If you miss a day, just make up for it the next time. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
+    </p>
+    <div className="h-px bg-gray-700 my-6"></div>
+    <h2 className="text-sm font-semibold mb-4">SUMMARY</h2>
+    <div className="flex mb-6 space-x-8">
+      <DetailItem label="DISTANCE" value={challengeData.distance} />
+      <DetailItem label="LIKES" value={challengeData.likes} />
+      <DetailItem label="HIGHEST STREAK" value={challengeData.highestStreak} />
+    </div>
+  </>
+);
+
+const DetailItem = ({ label, value }) => (
+  <div>
+    <p className="text-gray-400">{label}</p>
+    <p>{value}</p>
+  </div>
+);
+
+const ChallengeParticipants = ({ participants, activeParticipants }) => (
+  <>
+    <div className="h-px bg-gray-700 my-4"></div>
+    <div className="flex items-center mb-4">
+      <div className="flex flex-shrink-0">
+        {participants.map((participant) => (
+          <Avatar key={participant.id} className="w-8 h-8 -ml-2 first:ml-0 border-2 border-black">
+            <AvatarImage src={getRandomProfilePicture()} />
+            <AvatarFallback>{participant.name[0]}</AvatarFallback>
+          </Avatar>
+        ))}
+      </div>
+      <div className="ml-2 text-sm text-gray-400">
+        {activeParticipants} active
+      </div>
+    </div>
+  </>
+);
+
+const ChallengeAchievements = ({ achievements }) => (
+  <>
+    <div className="h-px bg-gray-700 my-4"></div>
+    <div className="mb-6">
+      <h2 className="text-lg font-bold mb-4">ACHIEVEMENTS</h2>
+      <div className="grid grid-cols-2 gap-4">
+        {achievements.map((achievement) => (
+          <div 
+            key={achievement.id} 
+            className="flex flex-col items-center justify-center w-full aspect-square rounded-lg"
+            style={{
+              background: 'radial-gradient(circle at center, #222222, #111111)',
+            }}
+          >
+            <achievement.icon className="h-24 w-24 text-white mb-2 stroke-[0.5]" />
+            <span className="text-sm text-center px-2">{achievement.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </>
+);
+
+const FullImageView = ({ toggleFullImage }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50" onClick={toggleFullImage}>
+    <img 
+      src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z" 
+      alt="Daily Walk Challenge" 
+      className="max-w-full max-h-full object-contain"
+    />
+    <button 
+      className="absolute top-4 right-4 text-white"
+      onClick={toggleFullImage}
+    >
+      <X className="h-6 w-6" />
+    </button>
+  </div>
+);
 
 export default DailyWalkChallenge;
