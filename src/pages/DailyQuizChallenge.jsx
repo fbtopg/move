@@ -59,10 +59,10 @@ const DailyQuizChallenge = () => {
             </button>
           </div>
 
-          <div className="flex justify-between items-end">
+          <div className="flex justify-between items-center">
             <div className="w-24 h-24 overflow-hidden">
               <img 
-                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjYwMTc2MDksImV4cCI6MTc1NzU1MzYwOX0.XTT-akjESWwEYZAztIW2zMNgUPidhExbEfGjMl3F7oA&t=2024-09-11T01%3A20%3A09.296Z" 
+                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20104.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTA0LnBuZyIsImlhdCI6MTcyNjI4ODY3MCwiZXhwIjoxNzU3ODI0NjcwfQ.TdGTOMcfEw-wL-0ixshR_ckOzdkla8FJaSOymB8zA0M&t=2024-09-14T04%3A37%3A51.908Z" 
                 alt="Daily Quiz Challenge" 
                 className="w-full h-full object-cover"
               />
