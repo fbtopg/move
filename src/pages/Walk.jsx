@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, useMap, Circle, CircleMarker } from 'react-leaflet';
-import { Button } from "@/components/ui/button";
 import BottomNavBar from '../components/BottomNavBar';
 import 'leaflet/dist/leaflet.css';
 
@@ -57,14 +56,6 @@ const Walk = () => {
           />
           <LocationMarker />
         </MapContainer>
-      </div>
-
-      <div className="bg-[#111111] p-3 pb-10">
-        <div className="flex items-center justify-center mt-3">
-          <Button className="w-16 h-16 bg-red-500 hover:bg-red-600 text-white transition-colors rounded-full text-sm font-bold">
-            START
-          </Button>
-        </div>
       </div>
 
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
