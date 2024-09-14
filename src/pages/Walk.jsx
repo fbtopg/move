@@ -72,9 +72,9 @@ const Walk = () => {
             <OrientationMarker position={position} />
           </MapContainer>
         )}
-        <div className="absolute top-0 left-0 right-0 h-24 bg-black z-[1000]"></div>
       </div>
-      <div className="h-16 relative z-[1001]">
+      <div className="h-40 relative z-[1001]">
+        <div className="h-24 bg-black"></div>
         <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
     </div>
