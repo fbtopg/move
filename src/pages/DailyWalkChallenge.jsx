@@ -94,7 +94,7 @@ const DailyWalkChallenge = () => {
             </div>
           </div>
 
-          <p className="text-sm text-gray-400 mb-4 pr-8">
+          <p className="text-xs text-gray-400 mb-4 pr-8">
             Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. If you miss a day, just make up for it the next time. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
           </p>
 

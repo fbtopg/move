@@ -92,7 +92,7 @@ const DailyQuizChallenge = () => {
             </div>
           </div>
 
-          <p className="text-sm text-gray-400 mb-4 pr-8">
+          <p className="text-xs text-gray-400 mb-4 pr-8">
             Engage your mind with the daily quiz challenge, designed to make you think more consciously about everyday topics. Each quiz encourages deeper reflection and awareness. Miss a day? No problem—just take two quizzes next time to stay on track. By the end of the challenge, you'll have developed a habit of mindful thinking and earned rewards to celebrate your journey!
           </p>
 
