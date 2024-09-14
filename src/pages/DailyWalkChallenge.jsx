@@ -60,20 +60,21 @@ const DailyWalkChallenge = () => {
             </button>
           </div>
 
-          <div className="w-24 h-24 mb-6 overflow-hidden">
-            <img 
-              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZS5wbmciLCJpYXQiOjE3MjYyODcwNTgsImV4cCI6MTc1NzgyMzA1OH0.xrZjohfSzIw2U4K5b0qizFsvYF8GHgoRN2nMWKRN9kI&t=2024-09-14T04%3A11%3A01.173Z" 
-              alt="Daily Walk Challenge" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          <div className="absolute bottom-4 right-4 text-right">
-            <div className="text-4xl font-bold">
-              {challengeData.rank}
-              <span className="text-gray-400 text-2xl">/{challengeData.totalParticipants}</span>
+          <div className="flex justify-between items-end">
+            <div className="w-24 h-24 overflow-hidden">
+              <img 
+                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZS5wbmciLCJpYXQiOjE3MjYyODcwNTgsImV4cCI6MTc1NzgyMzA1OH0.xrZjohfSzIw2U4K5b0qizFsvYF8GHgoRN2nMWKRN9kI&t=2024-09-14T04%3A11%3A01.173Z" 
+                alt="Daily Walk Challenge" 
+                className="w-full h-full object-cover"
+              />
             </div>
-            <div className="text-sm text-gray-400">RANK</div>
+            <div className="text-right">
+              <div className="text-4xl font-bold">
+                {challengeData.rank}
+                <span className="text-gray-400 text-2xl">/{challengeData.totalParticipants}</span>
+              </div>
+              <div className="text-sm text-gray-400">RANK</div>
+            </div>
           </div>
         </div>
 
