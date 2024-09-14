@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Flame, Brain, Heart, Share, History } from 'lucide-react';
+import { ArrowLeft, Flame, Brain, Heart, Share, History, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { getRandomProfilePicture } from '../utils/profilePictures';
 const DailyQuizChallenge = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('community');
+  const [showFullImage, setShowFullImage] = useState(false);
 
   const challengeData = {
     month: "SEPTEMBER 2024",
@@ -41,6 +42,10 @@ const DailyQuizChallenge = () => {
     navigate('/daily-quiz-history');
   };
 
+  const toggleFullImage = () => {
+    setShowFullImage(!showFullImage);
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="sticky top-0 z-10 bg-black p-4 flex justify-between items-center">
@@ -66,7 +71,8 @@ const DailyQuizChallenge = () => {
               <img 
                 src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20104.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTA0LnBuZyIsImlhdCI6MTcyNjI4ODY3MCwiZXhwIjoxNzU3ODI0NjcwfQ.TdGTOMcfEw-wL-0ixshR_ckOzdkla8FJaSOymB8zA0M&t=2024-09-14T04%3A37%3A51.908Z" 
                 alt="Daily Quiz Challenge" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover cursor-pointer"
+                onClick={toggleFullImage}
               />
             </div>
             <div className="text-right">
@@ -163,6 +169,27 @@ const DailyQuizChallenge = () => {
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      {showFullImage && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={toggleFullImage}>
+          <div className="relative">
+            <img 
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20104.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTA0LnBuZyIsImlhdCI6MTcyNjI4ODY3MCwiZXhwIjoxNzU3ODI0NjcwfQ.TdGTOMcfEw-wL-0ixshR_ckOzdkla8FJaSOymB8zA0M&t=2024-09-14T04%3A37%3A51.908Z" 
+              alt="Daily Quiz Challenge" 
+              className="max-w-full max-h-full"
+            />
+            <button 
+              className="absolute top-4 right-4 text-white"
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleFullImage();
+              }}
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

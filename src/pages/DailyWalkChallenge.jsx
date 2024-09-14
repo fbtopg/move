@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Flame, Wind, Heart, Share, History } from 'lucide-react';
+import { ArrowLeft, Flame, Wind, Heart, Share, History, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { getRandomProfilePicture } from '../utils/profilePictures';
 const DailyWalkChallenge = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('community');
+  const [showFullImage, setShowFullImage] = useState(false);
 
   const challengeData = {
     month: "SEPTEMBER 2024",
@@ -42,6 +43,10 @@ const DailyWalkChallenge = () => {
     navigate('/daily-walk-history');
   };
 
+  const toggleFullImage = () => {
+    setShowFullImage(!showFullImage);
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="sticky top-0 z-10 bg-black p-4 flex justify-between items-center">
@@ -67,7 +72,8 @@ const DailyWalkChallenge = () => {
               <img 
                 src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z" 
                 alt="Daily Walk Challenge" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover cursor-pointer"
+                onClick={toggleFullImage}
               />
             </div>
             <div className="text-right">
@@ -165,6 +171,27 @@ const DailyWalkChallenge = () => {
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      {showFullImage && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={toggleFullImage}>
+          <div className="relative">
+            <img 
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z" 
+              alt="Daily Walk Challenge" 
+              className="max-w-full max-h-full"
+            />
+            <button 
+              className="absolute top-4 right-4 text-white"
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleFullImage();
+              }}
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
