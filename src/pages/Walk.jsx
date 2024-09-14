@@ -53,6 +53,15 @@ const Walk = () => {
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
       );
     }
+
+    // Add meta viewport tag to ensure full-screen display
+    const meta = document.createElement('meta');
+    meta.name = 'viewport';
+    meta.content = 'width=device-width, initial-scale=1, viewport-fit=cover';
+    document.getElementsByTagName('head')[0].appendChild(meta);
+
+    // Apply CSS to extend content behind status bar
+    document.body.style.setProperty('padding-top', 'env(safe-area-inset-top)');
   }, []);
 
   const handleStartWalk = () => {
@@ -61,10 +70,10 @@ const Walk = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-black text-white relative">
-      <div className="absolute inset-0" style={{ zIndex: 0 }}>
+    <div className="h-screen flex flex-col bg-black text-white relative" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
+      <div className="absolute inset-0" style={{ zIndex: 0, marginTop: 'calc(-1 * env(safe-area-inset-top))' }}>
         {position && (
-          <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }} zoomControl={false}>
+          <MapContainer center={position} zoom={16} style={{ height: 'calc(100% + env(safe-area-inset-top))', width: '100%' }} zoomControl={false}>
             <TileLayer
               url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
