@@ -61,10 +61,10 @@ const Walk = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-black text-white relative">
-      <div className="absolute inset-0" style={{ zIndex: 0 }}>
+    <div className="h-screen w-screen flex flex-col bg-black text-white relative overflow-hidden">
+      <div className="absolute inset-0 z-0">
         {position && (
-          <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }}>
+          <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }} zoomControl={false}>
             <TileLayer
               url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
@@ -78,9 +78,6 @@ const Walk = () => {
             <OrientationMarker position={position} />
           </MapContainer>
         )}
-      </div>
-      <div className="relative flex-grow" style={{ zIndex: 1 }}>
-        {/* Content above the map can be added here */}
       </div>
       <div 
         className="absolute bottom-0 left-0 right-0 h-64 flex items-center justify-center"
@@ -97,7 +94,7 @@ const Walk = () => {
           START
         </Button>
       </div>
-      <div className="relative" style={{ zIndex: 3 }}>
+      <div className="relative z-10">
         <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
     </div>
