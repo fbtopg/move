@@ -57,8 +57,9 @@ const Walk = () => {
           />
           <LocationMarker />
         </MapContainer>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-black z-10"></div>
       </div>
-      <div className="h-16">
+      <div className="h-16 relative z-20">
         <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
     </div>
