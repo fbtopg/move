@@ -47,8 +47,8 @@ const Walk = () => {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col bg-black text-white">
-      <div className="flex-grow relative">
+    <div className="h-screen flex flex-col bg-black text-white relative">
+      <div className="flex-grow">
         <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -58,7 +58,9 @@ const Walk = () => {
         </MapContainer>
       </div>
 
-      <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
+      </div>
     </div>
   );
 };
