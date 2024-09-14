@@ -1,36 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, useMap, Circle, CircleMarker } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, CircleMarker } from 'react-leaflet';
 import BottomNavBar from '../components/BottomNavBar';
 import 'leaflet/dist/leaflet.css';
 
 const Walk = () => {
   const [position, setPosition] = useState(null);
   const [activeTab, setActiveTab] = useState('walk');
-
-  const LocationMarker = () => {
-    const map = useMap();
-    
-    useEffect(() => {
-      if (position) {
-        map.flyTo(position, 16);
-      }
-    }, [position, map]);
-
-    return position === null ? null : (
-      <>
-        <Circle 
-          center={position} 
-          radius={15} 
-          pathOptions={{ color: '#4a90e2', fillColor: '#4a90e2', fillOpacity: 0.3 }} 
-        />
-        <CircleMarker 
-          center={position} 
-          radius={5} 
-          pathOptions={{ color: '#1c6ed1', fillColor: '#1c6ed1', fillOpacity: 1 }} 
-        />
-      </>
-    );
-  };
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -49,14 +24,25 @@ const Walk = () => {
   return (
     <div className="h-screen flex flex-col bg-black text-white">
       <div className="flex-grow relative">
-        <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
-          <TileLayer
-            url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-            maxZoom={19}
-          />
-          <LocationMarker />
-        </MapContainer>
+        {position && (
+          <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }}>
+            <TileLayer
+              url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+              maxZoom={19}
+            />
+            <Circle 
+              center={position} 
+              radius={15} 
+              pathOptions={{ color: '#4a90e2', fillColor: '#4a90e2', fillOpacity: 0.3 }} 
+            />
+            <CircleMarker 
+              center={position} 
+              radius={5} 
+              pathOptions={{ color: '#1c6ed1', fillColor: '#1c6ed1', fillOpacity: 1 }} 
+            />
+          </MapContainer>
+        )}
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-black z-10"></div>
       </div>
       <div className="h-16 relative z-20">
