@@ -98,7 +98,7 @@ const Walk = () => {
         </Button>
       </div>
       <div className="relative" style={{ zIndex: 3 }}>
-        <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} backgroundColor="black" />
       </div>
     </div>
   );

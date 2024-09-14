@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const BottomNavBar = ({ activeTab, setActiveTab }) => {
+const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) => {
   const navigate = useNavigate();
   const navItems = [
     { id: 'community', icon: Globe, label: 'Community', route: '/' },
@@ -21,7 +21,7 @@ const BottomNavBar = ({ activeTab, setActiveTab }) => {
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-[#212124] text-white border-t border-[#424245]">
+    <nav className={`fixed bottom-0 left-0 right-0 text-white`} style={{ backgroundColor, borderTop: backgroundColor === '#212124' ? '1px solid #424245' : 'none' }}>
       <ul className="flex justify-around items-center h-16">
         {navItems.map((item) => (
           <li key={item.id} className="flex-1">
