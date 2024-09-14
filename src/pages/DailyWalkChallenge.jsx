@@ -79,7 +79,7 @@ const DailyWalkChallenge = () => {
         </div>
 
         <div className="max-w-md mx-auto p-4">
-          <div className="grid grid-cols-3 gap-2 text-xs mb-6">
+          <div className="grid grid-cols-3 gap-1 text-xs mb-6">
             <div>
               <p className="text-gray-400">START</p>
               <p>{challengeData.startDate}</p>
