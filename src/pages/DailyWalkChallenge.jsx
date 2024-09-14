@@ -45,7 +45,7 @@ const DailyWalkChallenge = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
-        <div className="max-w-md mx-auto p-2">
+        <div className="bg-gradient-to-b from-gray-900 to-black p-4">
           <button onClick={() => navigate(-1)} className="mb-4">
             <ArrowLeft className="h-6 w-6" />
           </button>
@@ -67,7 +67,9 @@ const DailyWalkChallenge = () => {
               className="w-full h-full object-cover"
             />
           </div>
+        </div>
 
+        <div className="max-w-md mx-auto p-4">
           <div className="grid grid-cols-3 gap-2 text-xs mb-6">
             <div>
               <p className="text-gray-400">START</p>
