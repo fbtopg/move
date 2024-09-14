@@ -74,11 +74,11 @@ const DailyQuizChallenge = () => {
             </div>
           </div>
 
-          <div className="w-full h-40 rounded-lg mb-6 overflow-hidden">
+          <div className="w-full aspect-square rounded-lg mb-6 overflow-hidden">
             <img 
-              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailyquizimage5.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHlxdWl6aW1hZ2U1LnBuZyIsImlhdCI6MTcyNTY4OTMxOSwiZXhwIjoxNzU3MjI1MzE5fQ.9EInspWLkGg7g5fBzJgbJM6tZt8b-XC3pq3TTh9vIZs&t=2024-09-07T06%3A08%3A39.441Z" 
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailyquizimage5_square.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHlxdWl6aW1hZ2U1X3NxdWFyZS5wbmciLCJpYXQiOjE3MjYyODY5ODksImV4cCI6MTc1NzgyMjk4OX0.5cAAfAV8oHmx9xqqyD-XrdanaSHQVPld4Sn5B-MeieY&t=2024-09-14T04%3A09%3A51.789Z" 
               alt="Daily Quiz Challenge" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-left"
             />
           </div>
 

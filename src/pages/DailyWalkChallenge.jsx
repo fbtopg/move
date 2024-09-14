@@ -75,11 +75,11 @@ const DailyWalkChallenge = () => {
             </div>
           </div>
 
-          <div className="w-full h-40 rounded-lg mb-6 overflow-hidden">
+          <div className="w-full aspect-square rounded-lg mb-6 overflow-hidden">
             <img 
-              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1LnBuZyIsImlhdCI6MTcyNTY4OTI5NSwiZXhwIjoxNzU3MjI1Mjk1fQ.VLJ5uIe_BPwe5qBlif5UPOoUEFAbxZo2kDsEbuYUle8&t=2024-09-07T06%3A08%3A14.950Z" 
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZS5wbmciLCJpYXQiOjE3MjYyODcwNTgsImV4cCI6MTc1NzgyMzA1OH0.xrZjohfSzIw2U4K5b0qizFsvYF8GHgoRN2nMWKRN9kI&t=2024-09-14T04%3A11%3A01.173Z" 
               alt="Daily Walk Challenge" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-left"
             />
           </div>
 
