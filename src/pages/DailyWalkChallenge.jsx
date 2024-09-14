@@ -44,20 +44,22 @@ const DailyWalkChallenge = () => {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
+      <div className="sticky top-0 z-10 bg-black p-4 flex justify-between items-center">
+        <button onClick={() => navigate(-1)} className="text-white">
+          <ArrowLeft className="h-6 w-6" />
+        </button>
+        <h1 className="text-lg font-semibold">{challengeData.title}</h1>
+        <button onClick={handleHistoryClick} className="text-white">
+          <History className="h-6 w-6" />
+        </button>
+      </div>
+
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="bg-gradient-to-t from-gray-900 to-black p-4 relative">
-          <button onClick={() => navigate(-1)} className="mb-4">
-            <ArrowLeft className="h-6 w-6" />
-          </button>
-
-          <div className="flex justify-between items-start mb-4">
+          <div className="flex justify-between items-center mb-4">
             <div>
               <p className="text-sm text-gray-400">{challengeData.month}</p>
-              <h1 className="text-2xl font-normal">{challengeData.title}</h1>
             </div>
-            <button onClick={handleHistoryClick} className="flex items-center">
-              <History className="h-7 w-7 text-white stroke-[1.5]" />
-            </button>
           </div>
 
           <div className="flex justify-between items-center">
@@ -79,7 +81,7 @@ const DailyWalkChallenge = () => {
         </div>
 
         <div className="max-w-md mx-auto p-4">
-          <div className="grid grid-cols-3 gap-2 text-xs mb-6">
+          <div className="grid grid-cols-3 gap-1 text-xs mb-6">
             <div>
               <p className="text-gray-400">START</p>
               <p>{challengeData.startDate}</p>
