@@ -53,7 +53,7 @@ const DailyWalkChallenge = () => {
           <div className="flex justify-between items-start mb-4">
             <div>
               <p className="text-sm text-gray-400">{challengeData.month}</p>
-              <h1 className="text-3xl font-bold">{challengeData.title}</h1>
+              <h1 className="text-2xl font-normal">{challengeData.title}</h1>
             </div>
             <button onClick={handleHistoryClick} className="flex items-center">
               <History className="h-7 w-7 text-white stroke-[1.5]" />

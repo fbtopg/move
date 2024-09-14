@@ -52,7 +52,7 @@ const DailyQuizChallenge = () => {
           <div className="flex justify-between items-start mb-4">
             <div>
               <p className="text-sm text-gray-400">{challengeData.month}</p>
-              <h1 className="text-3xl font-bold">{challengeData.title}</h1>
+              <h1 className="text-2xl font-normal">{challengeData.title}</h1>
             </div>
             <button onClick={handleHistoryClick} className="flex items-center">
               <History className="h-7 w-7 text-white stroke-[1.5]" />
@@ -62,7 +62,7 @@ const DailyQuizChallenge = () => {
           <div className="flex justify-between items-end">
             <div className="w-24 h-24 overflow-hidden">
               <img 
-                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailyquizimage5_square.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHlxdWl6aW1hZ2U1X3NxdWFyZS5wbmciLCJpYXQiOjE3MjYyODY5ODksImV4cCI6MTc1NzgyMjk4OX0.5cAAfAV8oHmx9xqqyD-XrdanaSHQVPld4Sn5B-MeieY&t=2024-09-14T04%3A09%3A51.789Z" 
+                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/quiz/Frame%2095.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcXVpei9GcmFtZSA5NS5wbmciLCJpYXQiOjE3MjYwMTc2MDksImV4cCI6MTc1NzU1MzYwOX0.XTT-akjESWwEYZAztIW2zMNgUPidhExbEfGjMl3F7oA&t=2024-09-11T01%3A20%3A09.296Z" 
                 alt="Daily Quiz Challenge" 
                 className="w-full h-full object-cover"
               />
