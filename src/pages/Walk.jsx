@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { MapContainer, TileLayer, Marker, useMap, Circle, CircleMarker } from 'react-leaflet';
-import { Locate, ArrowRight } from 'lucide-react';
+import { MapContainer, TileLayer, useMap, Circle, CircleMarker } from 'react-leaflet';
+import { Locate } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
 const Walk = () => {
@@ -14,12 +14,6 @@ const Walk = () => {
     distance: "56.7km",
     likes: "124",
     highestStreak: "7",
-  };
-
-  const activeChallenge = {
-    name: "Daily Walk",
-    image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/dailywalkimage5_square_small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvZGFpbHl3YWxraW1hZ2U1X3NxdWFyZV9zbWFsbC5wbmciLCJpYXQiOjE3MjU3NjM1MTgsImV4cCI6MTc1NzI5OTUxOH0.GLkQ1VOFZKx98eUHrlNTYxPi7lBaji1GVRee_iUDljs&t=2024-09-08T02%3A45%3A16.927Z",
-    date: "September 2024"
   };
 
   const LocationMarker = () => {
@@ -66,10 +60,6 @@ const Walk = () => {
     }
   };
 
-  const handleChallengeClick = () => {
-    navigate('/daily-walk-challenge');
-  };
-
   return (
     <div className="h-screen flex flex-col bg-black text-white">
       <div className="p-3 bg-black">
@@ -82,19 +72,6 @@ const Walk = () => {
           </button>
           <h1 className="text-base font-semibold">Walk</h1>
           <div className="w-12"></div>
-        </div>
-        <div 
-          className="flex items-center justify-between h-12 border border-gray-700 rounded-lg p-2 cursor-pointer"
-          onClick={handleChallengeClick}
-        >
-          <div>
-            <p className="text-sm">{activeChallenge.name}</p>
-            <p className="text-xs text-gray-400">{activeChallenge.date}</p>
-          </div>
-          <div className="flex items-center">
-            <img src={activeChallenge.image} alt={activeChallenge.name} className="w-8 h-8 rounded-lg mr-2" />
-            <ArrowRight className="h-4 w-4" />
-          </div>
         </div>
       </div>
 
