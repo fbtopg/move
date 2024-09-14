@@ -59,12 +59,12 @@ const Walk = () => {
         </MapContainer>
       </div>
       <div 
-        className="absolute bottom-16 left-0 right-0 h-32 pointer-events-none"
+        className="absolute bottom-16 left-0 right-0 h-32 pointer-events-none z-10"
         style={{
           background: 'linear-gradient(to top, #212124, transparent)',
         }}
       ></div>
-      <div className="h-16">
+      <div className="h-16 relative z-20">
         <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
     </div>
