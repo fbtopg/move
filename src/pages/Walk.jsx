@@ -75,16 +75,6 @@ const Walk = () => {
         </div>
       </div>
 
-      <div className="p-3 bg-black">
-        <div className="w-24 h-24 overflow-hidden">
-          <img 
-            src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z" 
-            alt="Daily Walk Challenge" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
-
       <div className="flex-grow relative">
         <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
           <TileLayer
