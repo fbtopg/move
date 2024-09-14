@@ -45,12 +45,12 @@ const DailyWalkChallenge = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
-        <div className="bg-gradient-to-b from-gray-900 to-black p-4">
+        <div className="bg-gradient-to-t from-gray-900 to-black p-4 relative">
           <button onClick={() => navigate(-1)} className="mb-4">
             <ArrowLeft className="h-6 w-6" />
           </button>
 
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-start mb-4">
             <div>
               <p className="text-sm text-gray-400">{challengeData.month}</p>
               <h1 className="text-3xl font-bold">{challengeData.title}</h1>
@@ -66,6 +66,14 @@ const DailyWalkChallenge = () => {
               alt="Daily Walk Challenge" 
               className="w-full h-full object-cover"
             />
+          </div>
+
+          <div className="absolute bottom-4 right-4 text-right">
+            <div className="text-4xl font-bold">
+              {challengeData.rank}
+              <span className="text-gray-400 text-2xl">/{challengeData.totalParticipants}</span>
+            </div>
+            <div className="text-sm text-gray-400">RANK</div>
           </div>
         </div>
 
@@ -88,14 +96,6 @@ const DailyWalkChallenge = () => {
           <p className="text-sm text-gray-400 mb-4 pr-8">
             Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. If you miss a day, just make up for it the next time. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
           </p>
-
-          <div className="mb-6">
-            <div className="text-4xl font-bold">
-              {challengeData.rank}
-              <span className="text-gray-400 text-2xl">/{challengeData.totalParticipants}</span>
-            </div>
-            <div className="text-sm text-gray-400">RANK</div>
-          </div>
 
           <div className="flex mb-6 space-x-8">
             <div>
