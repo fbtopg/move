@@ -82,9 +82,10 @@ const Walk = () => {
               </MapContainer>
             )}
           </div>
+          <div className="flex-grow"></div>
           <Button
             onClick={handleStartWalk}
-            className="bg-[#FFC700] text-black hover:bg-[#E6B300] font-semibold py-6 px-4 rounded-lg text-xl w-full poetsen-one-regular"
+            className="bg-[#FFC700] text-black hover:bg-[#E6B300] font-semibold py-6 px-4 rounded-lg text-xl w-full poetsen-one-regular mt-auto"
             style={{ fontFamily: '"Poetsen One", sans-serif', fontWeight: 400 }}
           >
             START
