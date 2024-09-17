@@ -29,7 +29,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
         className="w-[160px] h-[160px] flex-shrink-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${squareImageUrl})` }}
       ></div>
-      <div className="flex-grow p-4 text-white flex flex-col justify-between relative">
+      <div className="flex-grow pl-4 flex flex-col justify-between relative">
         <div className="flex flex-col">
           <p className="text-xs text-white/80">{date}</p>
           <h2 className="text-xl font-bold">{type}</h2>
