@@ -22,14 +22,14 @@ const ChallengeCard = ({ type, date, active, progress }) => {
 
   return (
     <div 
-      className="w-full max-w-md mx-auto overflow-hidden h-[160px] flex cursor-pointer"
+      className="w-full max-w-md mx-auto overflow-hidden h-[160px] flex cursor-pointer relative"
       onClick={handleClick}
     >
       <div 
         className="w-[160px] h-[160px] flex-shrink-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${squareImageUrl})` }}
       ></div>
-      <div className="flex-grow p-4 text-white flex flex-col justify-between">
+      <div className="flex-grow p-4 text-white flex flex-col justify-between relative">
         <div>
           <p className="text-xs text-white/80">{date}</p>
           <h2 className="text-xl font-bold mb-2">{type}</h2>
@@ -45,7 +45,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
             <span className="text-xs text-white/80">{active} active</span>
           </div>
         </div>
-        <div>
+        <div className="absolute bottom-4 right-4">
           <p className="text-xs text-white/80 mb-0.5">{isWalk ? 'RANK' : 'PROGRESS'}</p>
           <p className="text-base font-bold">{progress}</p>
         </div>
