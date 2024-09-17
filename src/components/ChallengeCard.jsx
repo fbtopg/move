@@ -30,10 +30,10 @@ const ChallengeCard = ({ type, date, active, progress }) => {
         style={{ backgroundImage: `url(${squareImageUrl})` }}
       ></div>
       <div className="flex-grow p-4 text-white flex flex-col justify-between relative">
-        <div>
+        <div className="flex flex-col">
           <p className="text-xs text-white/80">{date}</p>
-          <h2 className="text-xl font-bold mb-2">{type}</h2>
-          <div className="flex items-center space-x-2">
+          <h2 className="text-xl font-bold">{type}</h2>
+          <div className="flex items-center space-x-2 mt-1">
             <div className="flex -space-x-2">
               {[...Array(3)].map((_, index) => (
                 <Avatar key={index} className="w-5 h-5 border-2 border-black">
@@ -45,7 +45,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
             <span className="text-xs text-white/80">{active} active</span>
           </div>
         </div>
-        <div className="absolute bottom-4 right-4">
+        <div className="absolute bottom-4 right-4 text-right">
           <p className="text-xs text-white/80 mb-0.5">{isWalk ? 'RANK' : 'PROGRESS'}</p>
           <p className="text-base font-bold">{progress}</p>
         </div>
