@@ -61,45 +61,37 @@ const Walk = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-black text-white relative">
-      <div className="absolute inset-0" style={{ zIndex: 0 }}>
-        {position && (
-          <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }} zoomControl={false}>
-            <TileLayer
-              url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-              maxZoom={19}
-            />
-            <Circle 
-              center={position} 
-              radius={15} 
-              pathOptions={{ color: '#4a90e2', fillColor: '#4a90e2', fillOpacity: 0.3 }} 
-            />
-            <OrientationMarker position={position} />
-          </MapContainer>
-        )}
+    <div className="min-h-screen bg-black text-white flex flex-col">
+      <div className="flex-grow overflow-y-auto pb-20">
+        <div className="max-w-md mx-auto p-4">
+          <h1 className="text-2xl font-bold mb-4">Daily Walk</h1>
+          <div className="h-[400px] mb-6 relative rounded-lg overflow-hidden">
+            {position && (
+              <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }} zoomControl={false}>
+                <TileLayer
+                  url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                  maxZoom={19}
+                />
+                <Circle 
+                  center={position} 
+                  radius={15} 
+                  pathOptions={{ color: '#4a90e2', fillColor: '#4a90e2', fillOpacity: 0.3 }} 
+                />
+                <OrientationMarker position={position} />
+              </MapContainer>
+            )}
+          </div>
+          <Button
+            onClick={handleStartWalk}
+            className="bg-[#FFC700] text-black hover:bg-[#E6B300] font-semibold py-6 px-4 rounded-lg text-xl w-full poetsen-one-regular"
+            style={{ fontFamily: '"Poetsen One", sans-serif', fontWeight: 400 }}
+          >
+            START
+          </Button>
+        </div>
       </div>
-      <div className="relative flex-grow" style={{ zIndex: 1 }}>
-        {/* Content above the map can be added here */}
-      </div>
-      <div 
-        className="absolute bottom-0 left-0 right-0 h-64 flex items-center justify-center"
-        style={{
-          zIndex: 2,
-          background: 'linear-gradient(to top, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0.2) 100%)'
-        }}
-      >
-        <Button
-          onClick={handleStartWalk}
-          className="bg-[#FFC700] text-black hover:bg-[#E6B300] font-semibold py-7 px-4 rounded-lg text-xl w-[calc(100%-32px)] mx-4 mt-10 poetsen-one-regular"
-          style={{ fontFamily: '"Poetsen One", sans-serif', fontWeight: 400 }}
-        >
-          START
-        </Button>
-      </div>
-      <div className="relative" style={{ zIndex: 3 }}>
-        <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} backgroundColor="black" />
-      </div>
+      <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 };
