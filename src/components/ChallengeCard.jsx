@@ -20,6 +20,8 @@ const ChallengeCard = ({ type, date, active, progress }) => {
     ? "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z"
     : "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20104.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTA0LnBuZyIsImlhdCI6MTcyNjI4ODY3MCwiZXhwIjoxNzU3ODI0NjcwfQ.TdGTOMcfEw-wL-0ixshR_ckOzdkla8FJaSOymB8zA0M&t=2024-09-14T04%3A37%3A51.908Z";
 
+  const [progressBold, progressRest] = progress.split('/');
+
   return (
     <div 
       className="w-full max-w-md mx-auto overflow-hidden h-[160px] flex cursor-pointer relative"
@@ -47,7 +49,10 @@ const ChallengeCard = ({ type, date, active, progress }) => {
         </div>
         <div className="absolute bottom-4 right-4 text-right">
           <p className="text-xs text-white/80 mb-0.5">{isWalk ? 'RANK' : 'PROGRESS'}</p>
-          <p className="text-base font-bold">{progress}</p>
+          <p className="text-2xl font-bold">
+            <span className="text-white font-bold">{progressBold}</span>
+            <span className="text-white/80 font-normal">/{progressRest}</span>
+          </p>
           <p className="text-sm text-white/80">{isWalk ? '501/16.5k' : '17/30'}</p>
         </div>
       </div>
