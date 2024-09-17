@@ -31,8 +31,8 @@ const ChallengeCard = ({ type, date, active, progress }) => {
       ></div>
       <div className="flex-grow pl-4 flex flex-col justify-between relative">
         <div className="flex flex-col">
-          <p className="text-sm text-white font-medium">{date}</p>
-          <p className="text-sm text-white font-medium">{isWalk ? 'Daily Walk' : 'Daily Quiz'}</p>
+          <p className="text-xs text-white/80">{date}</p>
+          <p className="text-xs text-white/80">{isWalk ? 'Daily Walk' : 'Daily Quiz'}</p>
           <div className="flex items-center space-x-2 mt-1">
             <div className="flex -space-x-2">
               {[...Array(3)].map((_, index) => (
