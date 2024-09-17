@@ -65,7 +65,7 @@ const Walk = () => {
       <div className="flex-grow overflow-y-auto pb-28">
         <div className="max-w-md mx-auto p-4">
           <h1 className="text-2xl font-bold mb-4">Daily Walk</h1>
-          <div className="h-[400px] mb-6 relative rounded-lg overflow-hidden">
+          <div className="h-[500px] mb-6 relative rounded-lg overflow-hidden">
             {position && (
               <MapContainer center={position} zoom={16} style={{ height: '100%', width: '100%' }} zoomControl={false}>
                 <TileLayer
