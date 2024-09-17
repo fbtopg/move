@@ -62,7 +62,7 @@ const Walk = () => {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      <div className="flex-grow overflow-y-auto pb-20">
+      <div className="flex-grow overflow-y-auto pb-28">
         <div className="max-w-md mx-auto p-4">
           <h1 className="text-2xl font-bold mb-4">Daily Walk</h1>
           <div className="h-[400px] mb-6 relative rounded-lg overflow-hidden">
@@ -82,15 +82,16 @@ const Walk = () => {
               </MapContainer>
             )}
           </div>
-          <div className="flex-grow"></div>
-          <Button
-            onClick={handleStartWalk}
-            className="bg-[#FFC700] text-black hover:bg-[#E6B300] font-semibold py-6 px-4 rounded-lg text-xl w-full poetsen-one-regular mt-auto"
-            style={{ fontFamily: '"Poetsen One", sans-serif', fontWeight: 400 }}
-          >
-            START
-          </Button>
         </div>
+      </div>
+      <div className="fixed bottom-20 left-0 right-0 px-4 mb-4">
+        <Button
+          onClick={handleStartWalk}
+          className="bg-[#FFC700] text-black hover:bg-[#E6B300] font-semibold py-6 px-4 rounded-lg text-xl w-full poetsen-one-regular"
+          style={{ fontFamily: '"Poetsen One", sans-serif', fontWeight: 400 }}
+        >
+          START
+        </Button>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
