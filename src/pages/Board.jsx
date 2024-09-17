@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Globe, Zap, LayoutGrid, Bell } from 'lucide-react';
+import { Globe, Zap, Flame, Bell } from 'lucide-react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
 import NewsItems from '../components/NewsItems';
 import { Button } from "@/components/ui/button";
 
 const Board = () => {
-  const [activeTab, setActiveTab] = useState('board');
+  const [activeTab, setActiveTab] = useState('upcoming');
   const navigate = useNavigate();
 
   const [newsItems, setNewsItems] = useState([
@@ -44,7 +44,7 @@ const Board = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="sticky top-0 z-10 bg-black p-4 flex justify-between items-center">
-        <h1 className="text-lg font-semibold">Board</h1>
+        <h1 className="text-lg font-semibold">Upcoming</h1>
         <Button
           variant="ghost"
           size="icon"
