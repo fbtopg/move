@@ -49,7 +49,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
         </div>
         <div className="absolute bottom-0 right-4 text-right">
           <p className="text-xs text-white/80 mb-0.5">{isWalk ? 'RANK' : 'PROGRESS'}</p>
-          <p className="text-3xl font-bold">
+          <p className="text-3xl font-bold leading-none" style={{ marginTop: '-0.1em', marginBottom: '-0.1em' }}>
             <span className="text-white font-bold">{mainProgress}</span>
             <span className="text-gray-400 text-2xl">/{totalProgress}</span>
           </p>
