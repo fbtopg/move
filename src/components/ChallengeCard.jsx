@@ -20,8 +20,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
     ? "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z"
     : "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20104.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTA0LnBuZyIsImlhdCI6MTcyNjI4ODY3MCwiZXhwIjoxNzU3ODI0NjcwfQ.TdGTOMcfEw-wL-0ixshR_ckOzdkla8FJaSOymB8zA0M&t=2024-09-14T04%3A37%3A51.908Z";
 
-  // Remove the splitting of progress
-  const progressValue = progress;
+  const [mainProgress, totalProgress] = progress.split('/');
 
   return (
     <div 
@@ -51,7 +50,8 @@ const ChallengeCard = ({ type, date, active, progress }) => {
         <div className="absolute bottom-0 right-4 text-right">
           <p className="text-xs text-white/80 mb-0.5">{isWalk ? 'RANK' : 'PROGRESS'}</p>
           <p className="text-3xl font-bold">
-            <span className="text-white font-bold">{progressValue}</span>
+            <span className="text-white font-bold">{mainProgress}</span>
+            <span className="text-gray-400 text-2xl">/{totalProgress}</span>
           </p>
         </div>
       </div>
