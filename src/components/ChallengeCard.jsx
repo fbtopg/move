@@ -33,7 +33,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
       ></div>
       <div className="flex-grow pl-4 flex flex-col justify-between relative">
         <div className="flex flex-col">
-          <p className="text-xs text-white/80">{date}</p>
+          <p className="text-xs text-white/80 leading-none" style={{ marginTop: '-0.1em', marginBottom: '-0.1em' }}>{date}</p>
           <p className="text-xl font-semibold text-white">{isWalk ? 'Daily Walk' : 'Daily Quiz'}</p>
           <div className="flex items-center space-x-2 mt-1">
             <div className="flex -space-x-2">
