@@ -33,7 +33,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
         <div>
           <p className="text-xs text-white/80">{date}</p>
           <h2 className="text-xl font-bold mb-2">{type}</h2>
-          <div className="flex items-center space-x-2 mb-1">
+          <div className="flex items-center space-x-2">
             <div className="flex -space-x-2">
               {[...Array(3)].map((_, index) => (
                 <Avatar key={index} className="w-5 h-5 border-2 border-black">
