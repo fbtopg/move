@@ -37,12 +37,6 @@ const Friends = () => {
     { name: "Sarah", activity: "finished walking 800m and completed daily walk • just now", type: "walk" },
     { name: "John", activity: "finished walking 1km and completed daily walk • 3m", type: "walk" },
     { name: "Tate", activity: "finished walking 500m and completed daily walk • 4m", type: "walk" },
-    { name: "Aquafina", activity: "finished walking 1km and completed daily walk • 59m", type: "walk" },
-    { name: "Geonu", activity: "solved the quiz today and completed daily quiz • 1h", type: "quiz" },
-    { name: "Astrid", activity: "finished walking 1.5km and completed daily walk • 2h", type: "walk" },
-    { name: "Fitra", activity: "solved the quiz today and completed daily quiz • 3h", type: "quiz" },
-    { name: "Rissa", activity: "finished walking 800m and completed daily walk • 4h", type: "walk" },
-    { name: "Emma", activity: "solved the quiz today and completed daily quiz • 5h", type: "quiz" },
   ];
 
   const thisMonthActivities = [
@@ -50,10 +44,6 @@ const Friends = () => {
     { name: "Astrid", activity: "finished walking 2km and completed daily walk • 5d", type: "walk" },
     { name: "Fitra", activity: "solved the quiz today and completed daily quiz • 1w", type: "quiz" },
     { name: "Rissa", activity: "finished walking 1.2km and completed daily walk • 1w", type: "walk" },
-    { name: "John", activity: "solved the quiz today and completed daily quiz • 2w", type: "quiz" },
-    { name: "Tate", activity: "finished walking 900m and completed daily walk • 3w", type: "walk" },
-    { name: "Emma", activity: "finished walking 1.3km and completed daily walk • 3w", type: "walk" },
-    { name: "Aquafina", activity: "solved the quiz today and completed daily quiz • 4w", type: "quiz" },
   ];
 
   const earlierActivities = [
@@ -61,10 +51,6 @@ const Friends = () => {
     { name: "John", activity: "finished walking 1.5km and completed daily walk • 3w", type: "walk" },
     { name: "Tate", activity: "solved the quiz today and completed daily quiz • 1m", type: "quiz" },
     { name: "Aquafina", activity: "finished walking 2km and completed daily walk • 1m", type: "walk" },
-    { name: "Geonu", activity: "solved the quiz today and completed daily quiz • 2m", type: "quiz" },
-    { name: "Astrid", activity: "finished walking 1.8km and completed daily walk • 2m", type: "walk" },
-    { name: "Emma", activity: "solved the quiz today and completed daily quiz • 3m", type: "quiz" },
-    { name: "Fitra", activity: "finished walking 1.7km and completed daily walk • 3m", type: "walk" },
   ];
 
   const handleUserClick = (user) => {
