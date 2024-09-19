@@ -115,7 +115,7 @@ const Friends = () => {
       <div className="mb-6">
         <Button
           onClick={handleCreateGroup}
-          className="w-full bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-16 rounded-lg flex items-center justify-center"
+          className="w-full bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-20 rounded-lg flex items-center justify-center"
         >
           <Plus className="mr-2 h-5 w-5" />
           Create Group
