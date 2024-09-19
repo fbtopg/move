@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, ArrowRight, Trophy } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { handleImageUpload } from '../utils/imageUtils';
 
@@ -86,24 +86,6 @@ const Profile = () => {
             <div className="cursor-pointer" onClick={() => navigate('/follow', { state: { initialTab: 'following' } })}>
               <p className="text-sm text-white uppercase mb-1">Following</p>
               <p className="text-sm">{following}</p>
-            </div>
-          </div>
-
-          <div className="flex mb-8 space-x-8">
-            <div className="flex flex-col items-start">
-              <div 
-                className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
-                style={{
-                  background: 'radial-gradient(circle at center, #222222, #111111)',
-                }}
-                onClick={() => navigate('/achievements')}
-              >
-                <Trophy className="w-10 h-10 stroke-[0.5]" />
-              </div>
-              <div className="flex items-center mt-2">
-                <span className="text-xs">Achievements</span>
-                <ArrowRight className="w-3 h-3 ml-1" />
-              </div>
             </div>
           </div>
           
