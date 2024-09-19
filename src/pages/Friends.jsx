@@ -4,6 +4,7 @@ import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import UserProfilePopup from '../components/UserProfilePopup';
+import { Plus } from 'lucide-react';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
@@ -121,6 +122,14 @@ const Friends = () => {
       </div>
 
       <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] my-6"></div>
+
+      {/* New Create Group Box */}
+      <div className="flex justify-center mb-6">
+        <div className="w-24 h-24 bg-[#212124] rounded-lg flex flex-col items-center justify-center">
+          <Plus className="w-8 h-8 text-white mb-2" />
+          <span className="text-xs text-white">Create group</span>
+        </div>
+      </div>
 
       <section className="mt-4 pb-20 space-y-6">
         {renderActivitySection("TODAY", todayActivities)}
