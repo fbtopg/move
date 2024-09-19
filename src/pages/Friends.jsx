@@ -142,60 +142,62 @@ const Friends = () => {
       <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] mb-4" />
 
       <div className="relative mb-4">
-        <div 
-          ref={scrollContainerRef}
-          className="flex overflow-x-auto scrollbar-hide space-x-2 px-4"
-          style={{ scrollSnapType: 'x mandatory' }}
-        >
-          <div className="flex-shrink-0 w-20 h-20 bg-[#212124] rounded-lg flex flex-col items-center justify-center scroll-snap-align-start">
-            <Plus className="w-8 h-8 text-white mb-2" />
-            <span className="text-xs text-white">Create group</span>
-          </div>
-          {groupBoxes.map((group) => (
-            <div key={group.id} className="flex-shrink-0 w-20 scroll-snap-align-start">
-              <div 
-                className={`h-20 bg-[#212124] rounded-lg p-2 pt-3 cursor-pointer ${selectedGroup === group.id ? 'ring-2 ring-[#F7C100]' : ''}`}
-                onClick={() => setSelectedGroup(group.id)}
-              >
-                <div className="grid grid-cols-2 gap-1">
-                  {[...Array(Math.min(3, group.members))].map((_, index) => (
-                    <div key={index} className="w-7 h-7 bg-gray-600 rounded-sm overflow-hidden">
-                      <img
-                        src={getRandomProfilePicture()}
-                        alt={`Member ${index + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  ))}
-                  {group.members > 3 && (
-                    <div className="w-7 h-7 bg-gray-600 rounded-sm overflow-hidden flex items-center justify-center text-white text-xs font-bold">
-                      +{group.members - 3}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <p className="text-xs text-center mt-1 truncate" title={group.name}>
-                {group.name.length > 10 ? group.name.slice(0, 10) + '..' : group.name}
-              </p>
+        <div className="container mx-auto px-4">
+          <div 
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto scrollbar-hide space-x-2"
+            style={{ scrollSnapType: 'x mandatory' }}
+          >
+            <div className="flex-shrink-0 w-20 h-24 bg-[#212124] rounded-lg flex flex-col items-center justify-center scroll-snap-align-start">
+              <Plus className="w-8 h-8 text-white mb-2" />
+              <span className="text-xs text-white">Create group</span>
             </div>
-          ))}
+            {groupBoxes.map((group) => (
+              <div key={group.id} className="flex-shrink-0 w-20 scroll-snap-align-start">
+                <div 
+                  className={`h-24 bg-[#212124] rounded-lg p-2 pt-3 cursor-pointer ${selectedGroup === group.id ? 'ring-2 ring-[#F7C100]' : ''}`}
+                  onClick={() => setSelectedGroup(group.id)}
+                >
+                  <div className="grid grid-cols-2 gap-1">
+                    {[...Array(Math.min(3, group.members))].map((_, index) => (
+                      <div key={index} className="w-7 h-7 bg-gray-600 rounded-sm overflow-hidden">
+                        <img
+                          src={getRandomProfilePicture()}
+                          alt={`Member ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ))}
+                    {group.members > 3 && (
+                      <div className="w-7 h-7 bg-gray-600 rounded-sm overflow-hidden flex items-center justify-center text-white text-xs font-bold">
+                        +{group.members - 3}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <p className="text-xs text-center mt-1 truncate" title={group.name}>
+                  {group.name.length > 10 ? group.name.slice(0, 10) + '..' : group.name}
+                </p>
+              </div>
+            ))}
+          </div>
+          {showLeftArrow && (
+            <button 
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 rounded-full p-1"
+              onClick={() => scrollGroupBoxes('left')}
+            >
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+          )}
+          {showRightArrow && (
+            <button 
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 rounded-full p-1"
+              onClick={() => scrollGroupBoxes('right')}
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+          )}
         </div>
-        {showLeftArrow && (
-          <button 
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 rounded-full p-1"
-            onClick={() => scrollGroupBoxes('left')}
-          >
-            <ChevronLeft className="w-6 h-6 text-white" />
-          </button>
-        )}
-        {showRightArrow && (
-          <button 
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 rounded-full p-1"
-            onClick={() => scrollGroupBoxes('right')}
-          >
-            <ChevronRight className="w-6 h-6 text-white" />
-          </button>
-        )}
       </div>
 
       <section className="mt-2 pb-20 space-y-6">
