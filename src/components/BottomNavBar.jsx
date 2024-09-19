@@ -34,12 +34,12 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
               )}
             >
               {item.id === 'profile' ? (
-                <Avatar className="h-7 w-7 mb-1">
+                <Avatar className="h-6 w-6 mb-1">
                   <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL3NtYWxsLnBuZyIsImlhdCI6MTcyNTY5MjI1MywiZXhwIjoxNzU3MjI4MjUzfQ.N4lp3_t2Jjjxnaf5iVkUa67tVjxrYnuAzl5NEE5j65w&t=2024-09-07T06%3A57%3A33.339Z" />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               ) : (
-                <item.icon className="h-7 w-7 mb-1 stroke-1" />
+                <item.icon className="h-6 w-6 mb-1 stroke-1" />
               )}
               <span className="text-xs font-light">{item.label}</span>
             </button>
