@@ -139,9 +139,9 @@ const Friends = () => {
         ))}
       </div>
 
-      <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] my-6" />
+      <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] mb-4" />
 
-      <div className="relative mb-6">
+      <div className="relative mb-4">
         <div 
           ref={scrollContainerRef}
           className="flex overflow-x-auto scrollbar-hide space-x-2 px-4"
@@ -198,7 +198,7 @@ const Friends = () => {
         )}
       </div>
 
-      <section className="mt-4 pb-20 space-y-6">
+      <section className="mt-2 pb-20 space-y-6">
         {Object.entries(activities).map(([title, acts]) => (
           <React.Fragment key={title}>
             {renderActivitySection(title.toUpperCase(), acts)}
