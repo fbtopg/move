@@ -9,7 +9,6 @@ import { Plus, ChevronLeft, ChevronRight } from 'lucide-react';
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [selectedGroup, setSelectedGroup] = useState(null);
   const scrollContainerRef = useRef(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
@@ -33,14 +32,20 @@ const Friends = () => {
       { name: "Emma", activity: "finished walking 1.2km and completed daily walk • just now", type: "walk" },
       { name: "John", activity: "solved the quiz today and completed daily quiz • just now", type: "quiz" },
       { name: "Sarah", activity: "finished walking 800m and completed daily walk • just now", type: "walk" },
+      { name: "John", activity: "finished walking 1km and completed daily walk • 3m", type: "walk" },
+      { name: "Tate", activity: "finished walking 500m and completed daily walk • 4m", type: "walk" },
     ],
     thisMonth: [
       { name: "Geonu", activity: "finished walking 750m and completed daily walk • 2d", type: "walk" },
       { name: "Astrid", activity: "finished walking 2km and completed daily walk • 5d", type: "walk" },
+      { name: "Fitra", activity: "solved the quiz today and completed daily quiz • 1w", type: "quiz" },
+      { name: "Rissa", activity: "finished walking 1.2km and completed daily walk • 1w", type: "walk" },
     ],
     earlier: [
       { name: "Rissa", activity: "solved the quiz today and completed daily quiz • 2w", type: "quiz" },
       { name: "John", activity: "finished walking 1.5km and completed daily walk • 3w", type: "walk" },
+      { name: "Tate", activity: "solved the quiz today and completed daily quiz • 1m", type: "quiz" },
+      { name: "Aquafina", activity: "finished walking 2km and completed daily walk • 1m", type: "walk" },
     ],
   };
 
@@ -154,8 +159,7 @@ const Friends = () => {
           {groupBoxes.map((group) => (
             <div 
               key={group.id} 
-              className={`flex-shrink-0 w-20 h-20 bg-[#212124] rounded-lg p-2 scroll-snap-align-start cursor-pointer ${selectedGroup === group.id ? 'ring-2 ring-[#F7C100]' : ''}`}
-              onClick={() => setSelectedGroup(group.id)}
+              className="flex-shrink-0 w-20 h-20 bg-[#212124] rounded-lg p-2 scroll-snap-align-start"
             >
               <div className="grid grid-cols-2 gap-1">
                 {[...Array(Math.min(3, group.members))].map((_, index) => (
@@ -195,12 +199,11 @@ const Friends = () => {
       </div>
 
       <section className="mt-4 pb-20 space-y-6">
-        {Object.entries(activities).map(([title, acts]) => (
-          <React.Fragment key={title}>
-            {renderActivitySection(title.toUpperCase(), acts)}
-            {title !== 'earlier' && <div className="h-px bg-[#424245]" />}
-          </React.Fragment>
-        ))}
+        {renderActivitySection("TODAY", activities.today)}
+        <div className="h-px bg-[#424245]" />
+        {renderActivitySection("THIS MONTH", activities.thisMonth)}
+        <div className="h-px bg-[#424245]" />
+        {renderActivitySection("EARLIER", activities.earlier)}
       </section>
 
       {selectedUser && (
