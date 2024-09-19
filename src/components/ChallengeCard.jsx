@@ -22,38 +22,36 @@ const ChallengeCard = ({ type, date, active, progress }) => {
 
   const [mainProgress, totalProgress] = progress.split('/');
 
-  const pastelBackgroundColor = isWalk ? 'bg-blue-100' : 'bg-green-100';
-
   return (
     <div 
-      className={`w-full max-w-md mx-auto overflow-hidden h-[160px] flex cursor-pointer relative ${pastelBackgroundColor} rounded-lg p-4`}
+      className="w-full max-w-md mx-auto overflow-hidden h-[160px] flex cursor-pointer relative"
       onClick={handleClick}
     >
       <div 
-        className="w-[120px] h-[120px] flex-shrink-0 bg-cover bg-center rounded-lg mr-4"
+        className="w-[160px] h-[160px] flex-shrink-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${squareImageUrl})` }}
       ></div>
-      <div className="flex-grow flex flex-col justify-between relative">
+      <div className="flex-grow pl-4 flex flex-col justify-between relative">
         <div className="flex flex-col">
-          <p className="text-xs text-black/80 leading-none mb-1">{date}</p>
-          <p className="text-xl font-semibold text-black">{isWalk ? 'Daily Walk' : 'Daily Quiz'}</p>
-          <div className="flex items-center space-x-2 mt-2">
+          <p className="text-xs text-white/80 leading-none" style={{ marginTop: '-0.1em', marginBottom: '-0.1em' }}>{date}</p>
+          <p className="text-xl font-semibold text-white">{isWalk ? 'Daily Walk' : 'Daily Quiz'}</p>
+          <div className="flex items-center space-x-2 mt-1">
             <div className="flex -space-x-2">
               {[...Array(3)].map((_, index) => (
-                <Avatar key={index} className="w-5 h-5 border-2 border-white">
+                <Avatar key={index} className="w-5 h-5 border-2 border-black">
                   <AvatarImage src={getRandomProfilePicture()} />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               ))}
             </div>
-            <span className="text-xs text-black/80">{active} active</span>
+            <span className="text-xs text-white/80">{active} active</span>
           </div>
         </div>
-        <div className="text-right">
-          <p className="text-xs text-black/80 mb-0.5">{isWalk ? 'RANK' : 'PROGRESS'}</p>
-          <p className="text-2xl font-bold leading-none">
-            <span className="text-black font-bold">{mainProgress}</span>
-            <span className="text-gray-600 text-xl">/{totalProgress}</span>
+        <div className="absolute bottom-0 right-4 text-right">
+          <p className="text-xs text-white/80 mb-0.5">{isWalk ? 'RANK' : 'PROGRESS'}</p>
+          <p className="text-2xl font-bold leading-none" style={{ marginTop: '-0.1em', marginBottom: '-0.1em' }}>
+            <span className="text-white font-bold">{mainProgress}</span>
+            <span className="text-gray-400 text-xl">/{totalProgress}</span>
           </p>
         </div>
       </div>
