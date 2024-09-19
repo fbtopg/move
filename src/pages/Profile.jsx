@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, ArrowRight, Trophy, Gift } from "lucide-react";
+import { MoreHorizontal, ArrowRight, Trophy } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { handleImageUpload } from '../utils/imageUtils';
 
@@ -89,46 +89,7 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="mb-8 border border-gray-700 rounded-lg p-4 relative">
-            <div className="flex items-center mb-4">
-              <div className="w-14 h-14 mr-4 flex items-center justify-center">
-                <img 
-                  src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%206.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDYucG5nIiwiaWF0IjoxNzI2MTk0NjA1LCJleHAiOjE3NTc3MzA2MDV9.EkdEM-X2e2AC18wCrynOm6QUWdJItjaEBWfBtxAJIKY&t=2024-09-13T02%3A30%3A06.430Z"
-                  alt="Reward Icon"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-col items-end flex-grow">
-                <div className="flex items-center">
-                  <span className="text-white text-lg font-semibold">100,000 IDR</span>
-                </div>
-              </div>
-            </div>
-            <Button 
-              className="w-full bg-[#00AFD6] bg-opacity-50 text-white hover:bg-[#00AFD6] hover:bg-opacity-50 transition-colors h-10 rounded-lg flex justify-between items-center px-4 border border-[#00AFD6]"
-              onClick={() => navigate('/rewards')}
-            >
-              <span>Withdraw rewards</span>
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-          </div>
-          
           <div className="flex mb-8 space-x-8">
-            <div className="flex flex-col items-start">
-              <div 
-                className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
-                style={{
-                  background: 'radial-gradient(circle at center, #222222, #111111)',
-                }}
-                onClick={() => navigate('/rewards')}
-              >
-                <Gift className="w-10 h-10 stroke-[0.5]" />
-              </div>
-              <div className="flex items-center mt-2">
-                <span className="text-xs">Rewards</span>
-                <ArrowRight className="w-3 h-3 ml-1" />
-              </div>
-            </div>
             <div className="flex flex-col items-start">
               <div 
                 className="w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer"
