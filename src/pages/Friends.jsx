@@ -154,7 +154,7 @@ const Friends = () => {
           {groupBoxes.map((group) => (
             <div key={group.id} className="flex-shrink-0 w-20 flex flex-col items-center">
               <div 
-                className={`w-20 h-20 bg-[#212124] rounded-lg p-3 pt-4 scroll-snap-align-start cursor-pointer ${selectedGroup === group.id ? 'ring-2 ring-[#F7C100]' : ''}`}
+                className={`w-20 h-20 bg-[#212124] rounded-lg p-3 scroll-snap-align-start cursor-pointer ${selectedGroup === group.id ? 'ring-2 ring-[#F7C100]' : ''}`}
                 onClick={() => setSelectedGroup(group.id)}
               >
                 <div className="grid grid-cols-2 gap-1">
