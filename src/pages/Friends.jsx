@@ -139,15 +139,15 @@ const Friends = () => {
         ))}
       </div>
 
-      <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] mb-4" />
+      <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] mb-6" />
 
-      <div className="relative mb-4">
+      <div className="relative mb-6">
         <div 
           ref={scrollContainerRef}
           className="flex overflow-x-auto scrollbar-hide space-x-2 px-4"
           style={{ scrollSnapType: 'x mandatory' }}
         >
-          <div className="flex-shrink-0 w-20 h-20 bg-[#212124] rounded-lg flex flex-col items-center justify-center scroll-snap-align-start">
+          <div className="flex-shrink-0 w-20 h-24 bg-[#212124] rounded-lg flex flex-col items-center justify-center scroll-snap-align-start">
             <Plus className="w-8 h-8 text-white mb-2" />
             <span className="text-xs text-white">Create group</span>
           </div>
