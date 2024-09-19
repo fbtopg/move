@@ -139,12 +139,12 @@ const Friends = () => {
         ))}
       </div>
 
-      <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] mb-8" />
+      <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] mb-4" />
 
-      <div className="relative mb-8">
+      <div className="relative mb-4">
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto scrollbar-hide space-x-2"
+          className="flex overflow-x-auto scrollbar-hide space-x-2 px-4"
           style={{ scrollSnapType: 'x mandatory' }}
         >
           <div className="flex-shrink-0 w-20 h-20 bg-[#212124] rounded-lg flex flex-col items-center justify-center scroll-snap-align-start">
@@ -154,7 +154,7 @@ const Friends = () => {
           {groupBoxes.map((group) => (
             <div key={group.id} className="flex-shrink-0 w-20 scroll-snap-align-start">
               <div 
-                className={`h-20 bg-[#212124] rounded-lg p-2 cursor-pointer ${selectedGroup === group.id ? 'ring-2 ring-[#F7C100]' : ''}`}
+                className={`h-20 bg-[#212124] rounded-lg p-2 pt-3 cursor-pointer ${selectedGroup === group.id ? 'ring-2 ring-[#F7C100]' : ''}`}
                 onClick={() => setSelectedGroup(group.id)}
               >
                 <div className="grid grid-cols-2 gap-1">
