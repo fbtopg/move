@@ -4,7 +4,6 @@ import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Friends from './Friends';
-import Me from './Me';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { AnimatePresence } from 'framer-motion';
@@ -15,7 +14,6 @@ import DailyQuizChallenge from './DailyQuizChallenge';
 const Index = () => {
   const [activeTab, setActiveTab] = useState('community');
   const [isInviteOpen, setIsInviteOpen] = useState(false);
-  const [currentView, setCurrentView] = useState('friends');
   const [selectedUser, setSelectedUser] = useState(null);
   const location = useLocation();
 
@@ -33,20 +31,7 @@ const Index = () => {
     <div className="min-h-screen bg-black flex flex-col">
       <div className="sticky top-0 bg-black z-10 p-2">
         <div className="max-w-md mx-auto flex justify-between items-center">
-          <div className="flex space-x-4">
-            <button
-              className={`text-lg font-bold ${currentView === 'friends' ? 'text-white' : 'text-gray-400'}`}
-              onClick={() => setCurrentView('friends')}
-            >
-              Friends
-            </button>
-            <button
-              className={`text-lg font-bold ${currentView === 'me' ? 'text-white' : 'text-gray-400'}`}
-              onClick={() => setCurrentView('me')}
-            >
-              Me
-            </button>
-          </div>
+          <h1 className="text-lg font-bold text-white">Friends</h1>
           <Button 
             size="icon" 
             variant="ghost" 
@@ -61,7 +46,7 @@ const Index = () => {
         <div className="max-w-md mx-auto p-2">
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
-              <Route path="/" element={currentView === 'friends' ? <Friends onUserClick={handleUserClick} /> : <Me />} />
+              <Route path="/" element={<Friends onUserClick={handleUserClick} />} />
               <Route path="/daily-walk-challenge" element={<DailyWalkChallenge />} />
               <Route path="/daily-quiz-challenge" element={<DailyQuizChallenge />} />
             </Routes>
