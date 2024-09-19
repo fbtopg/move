@@ -130,7 +130,7 @@ const Friends = () => {
       <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] my-6"></div>
 
       {/* Group Boxes */}
-      <div className="flex justify-between mb-6 px-4">
+      <div className="flex justify-between mb-6">
         <div className="w-20 h-20 bg-[#212124] rounded-lg flex flex-col items-center justify-center">
           <Plus className="w-8 h-8 text-white mb-2" />
           <span className="text-xs text-white">Create group</span>
