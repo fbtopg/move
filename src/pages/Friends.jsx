@@ -21,37 +21,35 @@ const Friends = () => {
   const groupBoxes = [
     { id: 1, members: 3 },
     { id: 2, members: 4 },
-    { id: 3, members: 3 },
-    { id: 4, members: 4 },
+    { id: 3, members: 5 },
+    { id: 4, members: 6 },
     { id: 5, members: 3 },
     { id: 6, members: 4 },
   ];
 
-  const handleSwipe = (index) => {
-    setCurrentChallenge(index);
+  const activities = {
+    today: [
+      { name: "Emma", activity: "finished walking 1.2km and completed daily walk • just now", type: "walk" },
+      { name: "John", activity: "solved the quiz today and completed daily quiz • just now", type: "quiz" },
+      { name: "Sarah", activity: "finished walking 800m and completed daily walk • just now", type: "walk" },
+      { name: "John", activity: "finished walking 1km and completed daily walk • 3m", type: "walk" },
+      { name: "Tate", activity: "finished walking 500m and completed daily walk • 4m", type: "walk" },
+    ],
+    thisMonth: [
+      { name: "Geonu", activity: "finished walking 750m and completed daily walk • 2d", type: "walk" },
+      { name: "Astrid", activity: "finished walking 2km and completed daily walk • 5d", type: "walk" },
+      { name: "Fitra", activity: "solved the quiz today and completed daily quiz • 1w", type: "quiz" },
+      { name: "Rissa", activity: "finished walking 1.2km and completed daily walk • 1w", type: "walk" },
+    ],
+    earlier: [
+      { name: "Rissa", activity: "solved the quiz today and completed daily quiz • 2w", type: "quiz" },
+      { name: "John", activity: "finished walking 1.5km and completed daily walk • 3w", type: "walk" },
+      { name: "Tate", activity: "solved the quiz today and completed daily quiz • 1m", type: "quiz" },
+      { name: "Aquafina", activity: "finished walking 2km and completed daily walk • 1m", type: "walk" },
+    ],
   };
 
-  const todayActivities = [
-    { name: "Emma", activity: "finished walking 1.2km and completed daily walk • just now", type: "walk" },
-    { name: "John", activity: "solved the quiz today and completed daily quiz • just now", type: "quiz" },
-    { name: "Sarah", activity: "finished walking 800m and completed daily walk • just now", type: "walk" },
-    { name: "John", activity: "finished walking 1km and completed daily walk • 3m", type: "walk" },
-    { name: "Tate", activity: "finished walking 500m and completed daily walk • 4m", type: "walk" },
-  ];
-
-  const thisMonthActivities = [
-    { name: "Geonu", activity: "finished walking 750m and completed daily walk • 2d", type: "walk" },
-    { name: "Astrid", activity: "finished walking 2km and completed daily walk • 5d", type: "walk" },
-    { name: "Fitra", activity: "solved the quiz today and completed daily quiz • 1w", type: "quiz" },
-    { name: "Rissa", activity: "finished walking 1.2km and completed daily walk • 1w", type: "walk" },
-  ];
-
-  const earlierActivities = [
-    { name: "Rissa", activity: "solved the quiz today and completed daily quiz • 2w", type: "quiz" },
-    { name: "John", activity: "finished walking 1.5km and completed daily walk • 3w", type: "walk" },
-    { name: "Tate", activity: "solved the quiz today and completed daily quiz • 1m", type: "quiz" },
-    { name: "Aquafina", activity: "finished walking 2km and completed daily walk • 1m", type: "walk" },
-  ];
+  const handleSwipe = (index) => setCurrentChallenge(index);
 
   const handleUserClick = (user) => {
     setSelectedUser({
@@ -93,7 +91,7 @@ const Friends = () => {
     const scrollContainer = scrollContainerRef.current;
     if (scrollContainer) {
       scrollContainer.addEventListener('scroll', handleScroll);
-      handleScroll(); // Initial check
+      handleScroll();
     }
     return () => {
       if (scrollContainer) {
@@ -114,9 +112,7 @@ const Friends = () => {
       <motion.div
         className="overflow-hidden"
         onPanEnd={(e, { offset, velocity }) => {
-          if (Math.abs(velocity.x) > 500) {
-            handleSwipe(currentChallenge === 0 ? 1 : 0);
-          } else if (Math.abs(offset.x) > 50) {
+          if (Math.abs(velocity.x) > 500 || Math.abs(offset.x) > 50) {
             handleSwipe(currentChallenge === 0 ? 1 : 0);
           }
         }}
@@ -144,13 +140,12 @@ const Friends = () => {
               index === currentChallenge ? 'bg-white' : 'bg-gray-500'
             }`}
             onClick={() => handleSwipe(index)}
-          ></button>
+          />
         ))}
       </div>
 
-      <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] my-6"></div>
+      <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] my-6" />
 
-      {/* Group Boxes */}
       <div className="relative mb-6">
         <div 
           ref={scrollContainerRef}
@@ -167,7 +162,7 @@ const Friends = () => {
               className="flex-shrink-0 w-20 h-20 bg-[#212124] rounded-lg p-2 scroll-snap-align-start"
             >
               <div className="grid grid-cols-2 gap-1">
-                {[...Array(group.members)].map((_, index) => (
+                {[...Array(Math.min(3, group.members))].map((_, index) => (
                   <div key={index} className="w-8 h-8 bg-gray-600 rounded-sm overflow-hidden">
                     <img
                       src={getRandomProfilePicture()}
@@ -176,6 +171,11 @@ const Friends = () => {
                     />
                   </div>
                 ))}
+                {group.members > 3 && (
+                  <div className="w-8 h-8 bg-gray-600 rounded-sm overflow-hidden flex items-center justify-center text-white text-xs font-bold">
+                    +{group.members - 3}
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -199,11 +199,11 @@ const Friends = () => {
       </div>
 
       <section className="mt-4 pb-20 space-y-6">
-        {renderActivitySection("TODAY", todayActivities)}
-        <div className="h-px bg-[#424245]"></div>
-        {renderActivitySection("THIS MONTH", thisMonthActivities)}
-        <div className="h-px bg-[#424245]"></div>
-        {renderActivitySection("EARLIER", earlierActivities)}
+        {renderActivitySection("TODAY", activities.today)}
+        <div className="h-px bg-[#424245]" />
+        {renderActivitySection("THIS MONTH", activities.thisMonth)}
+        <div className="h-px bg-[#424245]" />
+        {renderActivitySection("EARLIER", activities.earlier)}
       </section>
 
       {selectedUser && (
