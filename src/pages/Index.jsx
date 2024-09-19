@@ -34,13 +34,13 @@ const Index = () => {
         <div className="max-w-md mx-auto flex justify-between items-center">
           <div className="flex">
             <button
-              className={`text-lg font-bold text-white mr-4 ${activeTopTab === 'all' ? 'opacity-100' : 'opacity-50'}`}
+              className={`text-lg font-bold mr-4 ${activeTopTab === 'all' ? 'text-white' : 'text-gray-400'}`}
               onClick={() => setActiveTopTab('all')}
             >
               All
             </button>
             <button
-              className={`text-lg font-bold text-white ${activeTopTab === 'friends' ? 'opacity-100' : 'opacity-50'}`}
+              className={`text-lg font-bold ${activeTopTab === 'friends' ? 'text-white' : 'text-gray-400'}`}
               onClick={() => setActiveTopTab('friends')}
             >
               Friends

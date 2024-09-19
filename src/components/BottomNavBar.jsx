@@ -1,5 +1,5 @@
 import React from 'react';
-import { Globe, Zap, Flame, LayoutGrid } from 'lucide-react';
+import { Globe, Zap, Flame, LayoutGrid, Users } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -8,6 +8,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
   const navigate = useNavigate();
   const navItems = [
     { id: 'community', icon: Globe, label: 'Community', route: '/' },
+    { id: 'group', icon: Users, label: 'Group', route: '/group' },
     { id: 'walk', icon: Zap, label: 'Walk', route: '/walk' },
     { id: 'upcoming', icon: Flame, label: 'Upcoming', route: '/board' },
     { id: 'profile', icon: Avatar, label: 'Profile', route: '/profile' },
