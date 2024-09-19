@@ -6,13 +6,14 @@ import { Plus } from "lucide-react";
 import Friends from './Friends';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { getRandomProfilePicture } from '../utils/profilePictures';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import DailyWalkChallenge from './DailyWalkChallenge';
 import DailyQuizChallenge from './DailyQuizChallenge';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('community');
+  const [activeTopTab, setActiveTopTab] = useState('all');
   const [isInviteOpen, setIsInviteOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const location = useLocation();
@@ -31,7 +32,20 @@ const Index = () => {
     <div className="min-h-screen bg-black flex flex-col">
       <div className="sticky top-0 bg-black z-10 p-2">
         <div className="max-w-md mx-auto flex justify-between items-center">
-          <h1 className="text-lg font-bold text-white">Friends</h1>
+          <div className="flex">
+            <button
+              className={`mr-4 text-sm ${activeTopTab === 'all' ? 'text-white' : 'text-gray-400'}`}
+              onClick={() => setActiveTopTab('all')}
+            >
+              All
+            </button>
+            <button
+              className={`text-sm ${activeTopTab === 'friends' ? 'text-white' : 'text-gray-400'}`}
+              onClick={() => setActiveTopTab('friends')}
+            >
+              Friends
+            </button>
+          </div>
           <Button 
             size="icon" 
             variant="ghost" 
