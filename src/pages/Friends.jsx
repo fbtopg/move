@@ -1,30 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import UserProfilePopup from '../components/UserProfilePopup';
-import { Plus, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Plus } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
-  const scrollContainerRef = useRef(null);
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
 
   const challenges = [
     { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
     { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
-  ];
-
-  const groupBoxes = [
-    { id: 1, members: 3 },
-    { id: 2, members: 4 },
-    { id: 3, members: 5 },
-    { id: 4, members: 6 },
-    { id: 5, members: 3 },
-    { id: 6, members: 4 },
   ];
 
   const activities = {
@@ -79,32 +68,9 @@ const Friends = () => {
     </>
   );
 
-  const handleScroll = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
-    }
-  };
-
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll);
-      handleScroll();
-    }
-    return () => {
-      if (scrollContainer) {
-        scrollContainer.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
-
-  const scrollGroupBoxes = (direction) => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = direction === 'left' ? -200 : 200;
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
+  const handleCreateGroup = () => {
+    console.log("Create group clicked");
+    // Implement group creation logic here
   };
 
   return (
@@ -146,57 +112,14 @@ const Friends = () => {
 
       <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6" />
 
-      <div className="relative mb-6">
-        <div 
-          ref={scrollContainerRef}
-          className="flex overflow-x-auto scrollbar-hide space-x-2 px-4"
-          style={{ scrollSnapType: 'x mandatory' }}
+      <div className="mb-6">
+        <Button
+          onClick={handleCreateGroup}
+          className="w-full bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-16 rounded-lg flex items-center justify-center"
         >
-          <div className="flex-shrink-0 w-24 h-24 bg-[#212124] rounded-lg flex flex-col items-center justify-center scroll-snap-align-start">
-            <Plus className="w-8 h-8 text-white mb-2" />
-            <span className="text-xs text-white">Create group</span>
-          </div>
-          {groupBoxes.map((group) => (
-            <div 
-              key={group.id} 
-              className="flex-shrink-0 w-24 h-24 bg-[#212124] rounded-lg p-2 pt-3 scroll-snap-align-start"
-            >
-              <div className="grid grid-cols-2 gap-1">
-                {[...Array(Math.min(3, group.members))].map((_, index) => (
-                  <div key={index} className="w-8 h-8 bg-gray-600 rounded-sm overflow-hidden">
-                    <img
-                      src={getRandomProfilePicture()}
-                      alt={`Member ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-                {group.members > 3 && (
-                  <div className="w-8 h-8 bg-gray-600 rounded-sm overflow-hidden flex items-center justify-center text-white text-xs font-bold">
-                    +{group.members - 3}
-                  </div>
-                )}
-              </div>
-              <p className="text-xs text-center mt-2">{group.members} members</p>
-            </div>
-          ))}
-        </div>
-        {showLeftArrow && (
-          <button 
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 rounded-full p-1"
-            onClick={() => scrollGroupBoxes('left')}
-          >
-            <ChevronLeft className="w-6 h-6 text-white" />
-          </button>
-        )}
-        {showRightArrow && (
-          <button 
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 rounded-full p-1"
-            onClick={() => scrollGroupBoxes('right')}
-          >
-            <ChevronRight className="w-6 h-6 text-white" />
-          </button>
-        )}
+          <Plus className="mr-2 h-5 w-5" />
+          Create Group
+        </Button>
       </div>
 
       <section className="mt-4 pb-20 space-y-6">
