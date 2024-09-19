@@ -154,12 +154,12 @@ const Friends = () => {
           {groupBoxes.map((group) => (
             <div key={group.id} className="flex-shrink-0 w-20 scroll-snap-align-start">
               <div 
-                className={`h-20 bg-[#212124] rounded-lg p-2 cursor-pointer ${selectedGroup === group.id ? 'ring-2 ring-[#F7C100]' : ''}`}
+                className={`h-20 bg-[#212124] rounded-lg p-2 pt-3 cursor-pointer ${selectedGroup === group.id ? 'ring-2 ring-[#F7C100]' : ''}`}
                 onClick={() => setSelectedGroup(group.id)}
               >
                 <div className="grid grid-cols-2 gap-1">
                   {[...Array(Math.min(3, group.members))].map((_, index) => (
-                    <div key={index} className="w-8 h-8 bg-gray-600 rounded-sm overflow-hidden">
+                    <div key={index} className="w-7 h-7 bg-gray-600 rounded-sm overflow-hidden">
                       <img
                         src={getRandomProfilePicture()}
                         alt={`Member ${index + 1}`}
@@ -168,7 +168,7 @@ const Friends = () => {
                     </div>
                   ))}
                   {group.members > 3 && (
-                    <div className="w-8 h-8 bg-gray-600 rounded-sm overflow-hidden flex items-center justify-center text-white text-xs font-bold">
+                    <div className="w-7 h-7 bg-gray-600 rounded-sm overflow-hidden flex items-center justify-center text-white text-xs font-bold">
                       +{group.members - 3}
                     </div>
                   )}
