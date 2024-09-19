@@ -15,6 +15,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState('community');
   const [isInviteOpen, setIsInviteOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [activeTopTab, setActiveTopTab] = useState('all');
   const location = useLocation();
 
   const handleUserClick = (user) => {
@@ -31,7 +32,20 @@ const Index = () => {
     <div className="min-h-screen bg-black flex flex-col">
       <div className="sticky top-0 bg-black z-10 p-2">
         <div className="max-w-md mx-auto flex justify-between items-center">
-          <h1 className="text-lg font-bold text-white">Friends</h1>
+          <div className="flex">
+            <button
+              className={`text-lg font-bold text-white mr-4 ${activeTopTab === 'all' ? 'opacity-100' : 'opacity-50'}`}
+              onClick={() => setActiveTopTab('all')}
+            >
+              All
+            </button>
+            <button
+              className={`text-lg font-bold text-white ${activeTopTab === 'friends' ? 'opacity-100' : 'opacity-50'}`}
+              onClick={() => setActiveTopTab('friends')}
+            >
+              Friends
+            </button>
+          </div>
           <Button 
             size="icon" 
             variant="ghost" 
