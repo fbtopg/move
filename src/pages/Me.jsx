@@ -109,13 +109,13 @@ const Me = () => {
         ))}
       </div>
 
-      <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#424245] my-6"></div>
+      <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6"></div>
 
       <section className="mt-4 pb-20 space-y-6">
         {renderActivitySection("TODAY", todayActivities)}
-        <div className="h-px bg-[#424245]"></div>
+        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6"></div>
         {renderActivitySection("THIS MONTH", thisMonthActivities)}
-        <div className="h-px bg-[#424245]"></div>
+        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6"></div>
         {renderActivitySection("EARLIER", earlierActivities)}
       </section>
     </>
