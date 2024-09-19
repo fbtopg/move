@@ -82,6 +82,12 @@ const Friends = () => {
     </>
   );
 
+  const groupBoxes = [
+    { id: 1, members: 3 },
+    { id: 2, members: 4 },
+    { id: 3, members: 3 },
+  ];
+
   return (
     <>
       <motion.div
@@ -123,11 +129,28 @@ const Friends = () => {
 
       <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] my-6"></div>
 
-      {/* New Create Group Box */}
-      <div className="flex justify-center mb-6">
-        <div className="w-24 h-24 bg-[#212124] rounded-lg flex flex-col items-center justify-center">
+      {/* Group Boxes */}
+      <div className="flex justify-between mb-6 px-4">
+        <div className="w-20 h-20 bg-[#212124] rounded-lg flex flex-col items-center justify-center">
           <Plus className="w-8 h-8 text-white mb-2" />
           <span className="text-xs text-white">Create group</span>
+        </div>
+        <div className="flex space-x-2">
+          {groupBoxes.map((group) => (
+            <div key={group.id} className="w-20 h-20 bg-[#212124] rounded-lg p-2">
+              <div className="grid grid-cols-2 gap-1">
+                {[...Array(group.members)].map((_, index) => (
+                  <div key={index} className="w-8 h-8 bg-gray-600 rounded-sm overflow-hidden">
+                    <img
+                      src={getRandomProfilePicture()}
+                      alt={`Member ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
