@@ -20,12 +20,12 @@ const Friends = () => {
   ];
 
   const groupBoxes = [
-    { id: 1, members: 3 },
-    { id: 2, members: 4 },
-    { id: 3, members: 5 },
-    { id: 4, members: 6 },
-    { id: 5, members: 3 },
-    { id: 6, members: 4 },
+    { id: 1, name: "Family", members: 3 },
+    { id: 2, name: "Work Friends", members: 4 },
+    { id: 3, name: "Gym Buddies", members: 5 },
+    { id: 4, name: "Book Club", members: 6 },
+    { id: 5, name: "Neighbors", members: 3 },
+    { id: 6, name: "College Alumni", members: 4 },
   ];
 
   const activities = {
@@ -152,27 +152,31 @@ const Friends = () => {
             <span className="text-xs text-white">Create group</span>
           </div>
           {groupBoxes.map((group) => (
-            <div 
-              key={group.id} 
-              className={`flex-shrink-0 w-20 h-20 bg-[#212124] rounded-lg p-2 scroll-snap-align-start cursor-pointer ${selectedGroup === group.id ? 'ring-2 ring-[#F7C100]' : ''}`}
-              onClick={() => setSelectedGroup(group.id)}
-            >
-              <div className="grid grid-cols-2 gap-1">
-                {[...Array(Math.min(3, group.members))].map((_, index) => (
-                  <div key={index} className="w-8 h-8 bg-gray-600 rounded-sm overflow-hidden">
-                    <img
-                      src={getRandomProfilePicture()}
-                      alt={`Member ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-                {group.members > 3 && (
-                  <div className="w-8 h-8 bg-gray-600 rounded-sm overflow-hidden flex items-center justify-center text-white text-xs font-bold">
-                    +{group.members - 3}
-                  </div>
-                )}
+            <div key={group.id} className="flex-shrink-0 w-20 scroll-snap-align-start">
+              <div 
+                className={`h-20 bg-[#212124] rounded-lg p-2 cursor-pointer ${selectedGroup === group.id ? 'ring-2 ring-[#F7C100]' : ''}`}
+                onClick={() => setSelectedGroup(group.id)}
+              >
+                <div className="grid grid-cols-2 gap-1">
+                  {[...Array(Math.min(3, group.members))].map((_, index) => (
+                    <div key={index} className="w-8 h-8 bg-gray-600 rounded-sm overflow-hidden">
+                      <img
+                        src={getRandomProfilePicture()}
+                        alt={`Member ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                  {group.members > 3 && (
+                    <div className="w-8 h-8 bg-gray-600 rounded-sm overflow-hidden flex items-center justify-center text-white text-xs font-bold">
+                      +{group.members - 3}
+                    </div>
+                  )}
+                </div>
               </div>
+              <p className="text-xs text-center mt-1 truncate" title={group.name}>
+                {group.name.length > 10 ? group.name.slice(0, 10) + '..' : group.name}
+              </p>
             </div>
           ))}
         </div>
