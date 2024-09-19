@@ -144,7 +144,7 @@ const Friends = () => {
         ))}
       </div>
 
-      <div className="relative w-screen left-1/2 -translate-x-1/2 h-2 bg-[#212124] my-6" />
+      <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6" />
 
       <div className="relative mb-6">
         <div 
@@ -152,14 +152,14 @@ const Friends = () => {
           className="flex overflow-x-auto scrollbar-hide space-x-2 px-4"
           style={{ scrollSnapType: 'x mandatory' }}
         >
-          <div className="flex-shrink-0 w-20 h-20 bg-[#212124] rounded-lg flex flex-col items-center justify-center scroll-snap-align-start">
+          <div className="flex-shrink-0 w-24 h-24 bg-[#212124] rounded-lg flex flex-col items-center justify-center scroll-snap-align-start">
             <Plus className="w-8 h-8 text-white mb-2" />
             <span className="text-xs text-white">Create group</span>
           </div>
           {groupBoxes.map((group) => (
             <div 
               key={group.id} 
-              className="flex-shrink-0 w-20 h-20 bg-[#212124] rounded-lg p-2 scroll-snap-align-start"
+              className="flex-shrink-0 w-24 h-24 bg-[#212124] rounded-lg p-2 pt-3 scroll-snap-align-start"
             >
               <div className="grid grid-cols-2 gap-1">
                 {[...Array(Math.min(3, group.members))].map((_, index) => (
@@ -177,6 +177,7 @@ const Friends = () => {
                   </div>
                 )}
               </div>
+              <p className="text-xs text-center mt-2">{group.members} members</p>
             </div>
           ))}
         </div>
