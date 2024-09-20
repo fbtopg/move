@@ -158,12 +158,12 @@ const ChallengeCalendar = () => {
         {days.map((day) => (
           <div
             key={day}
-            className={`w-8 h-8 flex items-center justify-center rounded-full border ${
+            className={`w-8 h-8 flex items-center justify-center rounded-full ${
               day === today.getDate()
-                ? 'border-blue-500 text-blue-500'
+                ? 'border-2 border-blue-500 text-blue-500'
                 : completedDays.includes(day)
-                ? 'border-green-500'
-                : 'border-gray-600'
+                ? 'bg-white'
+                : 'border border-gray-600'
             }`}
           >
             {completedDays.includes(day) ? (
