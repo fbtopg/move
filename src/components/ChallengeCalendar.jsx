@@ -35,11 +35,18 @@ const ChallengeCalendar = ({ challengeType }) => {
               <img
                 src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Christmas%20Gift%20Box%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0NocmlzdG1hcyBHaWZ0IEJveCAxLnBuZyIsImlhdCI6MTcyNjgwMzUwNSwiZXhwIjoxNzU4MzM5NTA1fQ.7546UPrpeOz72Qlu0dzZ7wPppxwo-dC_PtLO-A-xxAA&t=2024-09-20T03%3A38%3A25.769Z"
                 alt="Gift"
-                className="w-6 h-6 object-contain absolute -top-1 -right-1"
+                className="w-4 h-4 object-contain absolute top-0 right-0"
               />
             )}
           </div>
         ))}
+      </div>
+      <div className="mt-6 p-4 bg-gray-800 rounded-lg">
+        <ul className="text-sm text-gray-300 space-y-2">
+          <li>• Rewards can be claimed at the end of the challenge.</li>
+          <li>• Your final summary will determine the reward you receive.</li>
+          <li>• You can also check available rewards to claim on your profile page.</li>
+        </ul>
       </div>
     </div>
   );
