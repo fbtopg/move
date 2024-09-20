@@ -19,7 +19,7 @@ const ChallengeCalendar = ({ challengeType }) => {
 
   return (
     <div className="mb-6">
-      <h2 className="text-sm font-semibold mb-4">PROGRESS CALENDAR</h2>
+      <h2 className="text-sm font-semibold mb-4">CALENDAR</h2>
       <div className="grid grid-cols-7 gap-2 relative">
         {days.map((day, index) => (
           <div key={day} className={`relative ${index === 0 ? 'col-start-2' : ''}`}>
