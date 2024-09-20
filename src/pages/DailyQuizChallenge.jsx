@@ -32,8 +32,6 @@ const DailyQuizChallenge = () => {
     { id: 5, name: "Mike" },
   ];
 
-  const toggleFullImage = () => setShowFullImage(!showFullImage);
-
   return (
     <motion.div
       initial={{ x: '100%' }}
@@ -44,14 +42,15 @@ const DailyQuizChallenge = () => {
     >
       <Header title={challengeData.title} onBack={() => navigate(-1)} />
       <div className="flex-grow overflow-y-auto">
-        <ChallengeHeader challengeData={challengeData} onImageClick={toggleFullImage} />
+        <ChallengeHeader challengeData={challengeData} onImageClick={() => setShowFullImage(true)} />
         <div className="max-w-md mx-auto p-4">
+          <ChallengeDuration challengeData={challengeData} />
           <ChallengeDetails challengeData={challengeData} participants={participants} />
           <ChallengeCalendar />
           <InviteButton onInvite={shareInvite} />
         </div>
       </div>
-      {showFullImage && <FullImageView onClose={toggleFullImage} />}
+      {showFullImage && <FullImageView onClose={() => setShowFullImage(false)} />}
     </motion.div>
   );
 };
@@ -86,13 +85,23 @@ const ChallengeHeader = ({ challengeData, onImageClick }) => (
   </div>
 );
 
+const ChallengeDuration = ({ challengeData }) => (
+  <div className="grid grid-cols-3 gap-4 text-xs mb-6">
+    <DurationItem label="START" value={challengeData.startDate} />
+    <DurationItem label="END" value={challengeData.endDate} />
+    <DurationItem label="REMAINING" value={challengeData.remainingDays} />
+  </div>
+);
+
+const DurationItem = ({ label, value }) => (
+  <div className="text-left">
+    <p className="text-gray-400 text-[10px] mb-1">{label}</p>
+    <p className="text-sm">{value}</p>
+  </div>
+);
+
 const ChallengeDetails = ({ challengeData, participants }) => (
   <>
-    <div className="grid grid-cols-3 gap-1 text-xs mb-6">
-      <DetailItem label="START" value={challengeData.startDate} />
-      <DetailItem label="END" value={challengeData.endDate} />
-      <DetailItem label="REMAINING" value={challengeData.remainingDays} />
-    </div>
     <p className="text-xs text-gray-400 mb-4 pr-8">
       Engage your friends with the Daily Quiz Challenge! Compete, share answers, and earn rewards together as you tackle everyday quiz.
     </p>
