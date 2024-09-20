@@ -41,8 +41,8 @@ const ChallengeCalendar = ({ challengeType }) => {
           </div>
         ))}
       </div>
-      <div className="mt-6 p-4 bg-gray-800 rounded-lg">
-        <ul className="text-sm text-gray-300 space-y-2">
+      <div className="mt-6 p-4 bg-gray-800 rounded-none">
+        <ul className="text-xs text-gray-300 space-y-2">
           <li>• Rewards can be claimed at the end of the challenge.</li>
           <li>• Your final summary will determine the reward you receive.</li>
           <li>• You can also check available rewards to claim on your profile page.</li>
