@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
@@ -8,12 +8,31 @@ import { handleImageUpload } from '../utils/imageUtils';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = React.useState('profile');
+  const [greeting, setGreeting] = useState('');
   const displayName = "James";
   const username = "@username";
   const followers = 57;
   const following = 151;
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    const updateGreeting = () => {
+      const currentHour = new Date().getHours();
+      if (currentHour >= 5 && currentHour < 12) {
+        setGreeting('Good Morning');
+      } else if (currentHour >= 12 && currentHour < 18) {
+        setGreeting('Good Afternoon');
+      } else {
+        setGreeting('Good Evening');
+      }
+    };
+
+    updateGreeting();
+    const intervalId = setInterval(updateGreeting, 60000); // Update every minute
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   const handleAvatarClick = () => {
     fileInputRef.current.click();
@@ -49,7 +68,7 @@ const Profile = () => {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-4">
-          <div className="flex justify-end mb-8">
+          <div className="flex justify-end mb-4">
             <Button 
               variant="ghost" 
               size="icon"
@@ -60,9 +79,10 @@ const Profile = () => {
             </Button>
           </div>
           
+          <h2 className="text-2xl font-light mb-6">{greeting}, {displayName}</h2>
+          
           <div className="flex justify-between items-center mb-2">
             <div>
-              <h1 className="text-2xl font-light">{displayName}</h1>
               <p className="text-sm text-gray-400">{username}</p>
             </div>
             <Avatar className="w-20 h-20 rounded-full cursor-pointer" onClick={handleAvatarClick}>
