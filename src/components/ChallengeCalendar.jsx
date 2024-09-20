@@ -48,7 +48,7 @@ const ChallengeCalendar = ({ challengeType }) => {
               className="w-6 h-6 object-contain"
             />
           </div>
-          <div className="absolute left-0 top-1/2 w-4 h-0.5 bg-yellow-500 -translate-x-full"></div>
+          <div className="absolute left-0 top-1/2 w-4 h-0.5 bg-gray-600 -translate-x-full"></div>
         </div>
       </div>
       <Collapsible
