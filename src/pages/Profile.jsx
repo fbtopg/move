@@ -88,7 +88,7 @@ const Profile = () => {
         <div className="max-w-md mx-auto p-4">
           <Header />
           
-          <div className="flex justify-between items-center mb-2">
+          <div className="flex justify-between items-center mb-6">
             <div>
               <p className="text-2xl font-light mb-1">{displayName}</p>
               <p className="text-sm text-gray-400">{username}</p>
@@ -106,7 +106,7 @@ const Profile = () => {
             />
           </div>
           
-          <div className="flex mb-12">
+          <div className="flex mb-16">
             <div className="mr-24 cursor-pointer" onClick={() => navigate('/groups')}>
               <p className="text-sm text-white uppercase mb-1">Groups</p>
               <p className="text-sm">{groups}</p>
