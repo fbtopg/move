@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Share, X, Check } from 'lucide-react';
+import { ArrowLeft, Share, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 import { shareInvite } from '../utils/shareUtils';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { motion } from 'framer-motion';
+import ChallengeCalendar from '../components/ChallengeCalendar';
 
 const DailyQuizChallenge = () => {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const DailyQuizChallenge = () => {
         <div className="max-w-md mx-auto p-4">
           <ChallengeDuration challengeData={challengeData} />
           <ChallengeDetails challengeData={challengeData} participants={participants} />
-          <ChallengeCalendar />
+          <ChallengeCalendar challengeType="quiz" />
           <InviteButton onInvite={shareInvite} />
         </div>
       </div>
@@ -141,45 +142,6 @@ const ChallengeParticipants = ({ participants, activeParticipants }) => (
     </div>
   </div>
 );
-
-const ChallengeCalendar = () => {
-  const today = new Date();
-  const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-  const completedDays = [1, 3, 5, 7, 10, 12, 15];
-
-  return (
-    <div className="mb-6">
-      <h2 className="text-sm font-semibold mb-4">PROGRESS CALENDAR</h2>
-      <div className="grid grid-cols-7 gap-2">
-        {days.map((day, index) => (
-          <div
-            key={day}
-            className={`w-8 h-8 flex items-center justify-center rounded-full ${
-              day === today.getDate()
-                ? 'border-2 border-green-500 text-green-500'
-                : completedDays.includes(day)
-                ? 'bg-white'
-                : 'border border-gray-600'
-            }`}
-          >
-            {index === days.length - 1 ? (
-              <img
-                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Christmas%20Gift%20Box%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0NocmlzdG1hcyBHaWZ0IEJveCAxLnBuZyIsImlhdCI6MTcyNjgwMzUwNSwiZXhwIjoxNzU4MzM5NTA1fQ.7546UPrpeOz72Qlu0dzZ7wPppxwo-dC_PtLO-A-xxAA&t=2024-09-20T03%3A38%3A25.769Z"
-                alt="Gift"
-                className="w-6 h-6 object-contain"
-              />
-            ) : completedDays.includes(day) ? (
-              <Check className="w-4 h-4 text-green-500" />
-            ) : (
-              <span className={day === today.getDate() ? 'text-green-500' : ''}>{day}</span>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const InviteButton = ({ onInvite }) => (
   <Button 
