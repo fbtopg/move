@@ -53,22 +53,21 @@ const DailyWalkChallenge = () => {
       exit={{ x: '100%' }}
       transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
       className="fixed inset-0 bg-black text-white flex flex-col z-50"
-      style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
-      <div className="sticky top-0 z-10 bg-[#DBE9FE] p-4 pt-12 flex justify-between items-center">
-        <button onClick={() => navigate(-1)} className="text-black">
+      <div className="sticky top-0 z-10 bg-black p-4 flex justify-between items-center">
+        <button onClick={() => navigate(-1)} className="text-white">
           <ArrowLeft className="h-6 w-6" />
         </button>
-        <h1 className="text-lg font-semibold text-black">{challengeData.title}</h1>
-        <button onClick={handleHistoryClick} className="text-black">
+        <h1 className="text-lg font-semibold">{challengeData.title}</h1>
+        <button onClick={handleHistoryClick} className="text-white">
           <History className="h-6 w-6" />
         </button>
       </div>
 
       <div className="flex-grow overflow-y-auto pb-20">
-        <div className="bg-[#DBE9FE] p-4 relative">
+        <div className="bg-gradient-to-t from-gray-900 to-black p-4 relative">
           <div className="flex justify-between items-center mb-4">
-            <p className="text-sm text-gray-600">{challengeData.month}</p>
+            <p className="text-sm text-gray-400">{challengeData.month}</p>
           </div>
 
           <div className="flex justify-between items-center">
@@ -81,11 +80,11 @@ const DailyWalkChallenge = () => {
               />
             </div>
             <div className="text-right">
-              <div className="text-4xl font-bold text-black">
+              <div className="text-4xl font-bold">
                 {challengeData.rank}
-                <span className="text-gray-600 text-2xl">/{challengeData.totalParticipants}</span>
+                <span className="text-gray-400 text-2xl">/{challengeData.totalParticipants}</span>
               </div>
-              <div className="text-sm text-gray-600">RANK</div>
+              <div className="text-sm text-gray-400">RANK</div>
             </div>
           </div>
         </div>
@@ -95,7 +94,7 @@ const DailyWalkChallenge = () => {
           <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
           <ChallengeAchievements achievements={challengeData.achievements} />
           <Button 
-            className="w-full bg-transparent text-black border border-black hover:bg-black hover:text-white transition-colors h-16 rounded-full"
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full"
             onClick={shareInvite}
           >
             <Share className="mr-2 h-5 w-5" />
@@ -115,11 +114,11 @@ const ChallengeDetails = ({ challengeData }) => (
       <DetailItem label="END" value={challengeData.endDate} />
       <DetailItem label="REMAINING" value={challengeData.remainingDays} />
     </div>
-    <p className="text-xs text-gray-600 mb-4 pr-8">
+    <p className="text-xs text-gray-400 mb-4 pr-8">
       Build a routine with your friends in the Daily Walking Challenge! Walk together, share progress, and earn rewards along the way.
     </p>
-    <div className="h-px bg-gray-300 my-6"></div>
-    <h2 className="text-sm font-semibold mb-4 text-black">SUMMARY</h2>
+    <div className="h-px bg-gray-700 my-6"></div>
+    <h2 className="text-sm font-semibold mb-4">SUMMARY</h2>
     <div className="flex mb-6 space-x-8">
       <DetailItem label="DISTANCE" value={challengeData.distance} />
       <DetailItem label="LIKES" value={challengeData.likes} />
@@ -130,24 +129,24 @@ const ChallengeDetails = ({ challengeData }) => (
 
 const DetailItem = ({ label, value }) => (
   <div>
-    <p className="text-gray-600">{label}</p>
-    <p className="text-black">{value}</p>
+    <p className="text-gray-400">{label}</p>
+    <p>{value}</p>
   </div>
 );
 
 const ChallengeParticipants = ({ participants, activeParticipants }) => (
   <>
-    <div className="h-px bg-gray-300 my-4"></div>
+    <div className="h-px bg-gray-700 my-4"></div>
     <div className="flex items-center mb-4">
       <div className="flex flex-shrink-0">
         {participants.map((participant) => (
-          <Avatar key={participant.id} className="w-8 h-8 -ml-2 first:ml-0 border-2 border-white">
+          <Avatar key={participant.id} className="w-8 h-8 -ml-2 first:ml-0 border-2 border-black">
             <AvatarImage src={getRandomProfilePicture()} />
             <AvatarFallback>{participant.name[0]}</AvatarFallback>
           </Avatar>
         ))}
       </div>
-      <div className="ml-2 text-sm text-gray-600">
+      <div className="ml-2 text-sm text-gray-400">
         {activeParticipants} active
       </div>
     </div>
@@ -156,17 +155,20 @@ const ChallengeParticipants = ({ participants, activeParticipants }) => (
 
 const ChallengeAchievements = ({ achievements }) => (
   <>
-    <div className="h-px bg-gray-300 my-4"></div>
+    <div className="h-px bg-gray-700 my-4"></div>
     <div className="mb-6">
-      <h2 className="text-lg font-bold mb-4 text-black">ACHIEVEMENTS</h2>
+      <h2 className="text-lg font-bold mb-4">ACHIEVEMENTS</h2>
       <div className="grid grid-cols-2 gap-4">
         {achievements.map((achievement) => (
           <div 
             key={achievement.id} 
-            className="flex flex-col items-center justify-center w-full aspect-square rounded-lg bg-white"
+            className="flex flex-col items-center justify-center w-full aspect-square rounded-lg"
+            style={{
+              background: 'radial-gradient(circle at center, #222222, #111111)',
+            }}
           >
-            <achievement.icon className="h-24 w-24 text-black mb-2 stroke-[0.5]" />
-            <span className="text-sm text-center px-2 text-black">{achievement.name}</span>
+            <achievement.icon className="h-24 w-24 text-white mb-2 stroke-[0.5]" />
+            <span className="text-sm text-center px-2">{achievement.name}</span>
           </div>
         ))}
       </div>
