@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Share, X } from 'lucide-react';
+import { ArrowLeft, Share, X, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -44,9 +44,8 @@ const DailyWalkChallenge = () => {
       exit={{ x: '100%' }}
       transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
       className="fixed inset-0 bg-black text-white flex flex-col z-50"
-      style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
-      <div className="sticky top-0 z-10 bg-[#DBE9FE] text-black p-4 flex justify-between items-center" style={{ paddingTop: '2rem' }}>
+      <div className="sticky top-0 z-10 bg-[#DBE9FE] text-black p-4 flex justify-between items-center">
         <button onClick={() => navigate(-1)} className="text-black">
           <ArrowLeft className="h-6 w-6" />
         </button>
@@ -82,6 +81,7 @@ const DailyWalkChallenge = () => {
         <div className="max-w-md mx-auto p-4">
           <ChallengeDetails challengeData={challengeData} />
           <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
+          <ChallengeCalendar />
           <Button 
             className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full"
             onClick={shareInvite}
@@ -141,6 +141,41 @@ const ChallengeParticipants = ({ participants, activeParticipants }) => (
     </div>
   </>
 );
+
+const ChallengeCalendar = () => {
+  const today = new Date();
+  const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+
+  // Simulating completed days (you should replace this with actual data)
+  const completedDays = [1, 3, 5, 7, 10, 12, 15];
+
+  return (
+    <div className="mb-6">
+      <h2 className="text-sm font-semibold mb-4">PROGRESS CALENDAR</h2>
+      <div className="grid grid-cols-7 gap-2">
+        {days.map((day) => (
+          <div
+            key={day}
+            className={`w-8 h-8 flex items-center justify-center rounded-full border ${
+              day === today.getDate()
+                ? 'border-blue-500 text-blue-500'
+                : completedDays.includes(day)
+                ? 'border-green-500'
+                : 'border-gray-600'
+            }`}
+          >
+            {completedDays.includes(day) ? (
+              <Check className="w-4 h-4 text-green-500" />
+            ) : (
+              <span className={day === today.getDate() ? 'text-blue-500' : ''}>{day}</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const FullImageView = ({ toggleFullImage }) => (
   <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50" onClick={toggleFullImage}>
