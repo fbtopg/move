@@ -1,5 +1,10 @@
 import React from 'react';
-import { Check } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp } from 'lucide-react';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 const ChallengeCalendar = ({ challengeType }) => {
   const today = new Date();
@@ -9,6 +14,8 @@ const ChallengeCalendar = ({ challengeType }) => {
 
   const borderColor = challengeType === 'walk' ? 'border-blue-500' : 'border-green-500';
   const textColor = challengeType === 'walk' ? 'text-blue-500' : 'text-green-500';
+
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <div className="mb-6">
@@ -41,13 +48,23 @@ const ChallengeCalendar = ({ challengeType }) => {
           </div>
         ))}
       </div>
-      <div className="mt-6 p-4 bg-gray-800 rounded-lg">
-        <ul className="text-xs text-gray-300 space-y-2">
-          <li>• Rewards can be claimed at the end of the challenge.</li>
-          <li>• Your final summary will determine the reward you receive.</li>
-          <li>• You can also check available rewards to claim on your profile page.</li>
-        </ul>
-      </div>
+      <Collapsible
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        className="mt-6"
+      >
+        <CollapsibleTrigger className="flex items-center justify-between w-full text-sm text-gray-400 hover:text-white transition-colors">
+          More Info
+          {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+        </CollapsibleTrigger>
+        <CollapsibleContent className="mt-2">
+          <ul className="text-xs text-gray-300 space-y-2">
+            <li>• Rewards can be claimed at the end of the challenge.</li>
+            <li>• Your final summary will determine the reward you receive.</li>
+            <li>• You can also check available rewards to claim on your profile page.</li>
+          </ul>
+        </CollapsibleContent>
+      </Collapsible>
     </div>
   );
 };
