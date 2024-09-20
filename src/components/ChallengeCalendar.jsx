@@ -42,7 +42,7 @@ const ChallengeCalendar = ({ challengeType }) => {
             </div>
           </div>
         ))}
-        <div className="absolute -right-10 top-0 flex items-center">
+        <div className="relative">
           <div className="w-8 h-8 rounded-full border-2 border-yellow-500 flex items-center justify-center bg-black">
             <img
               src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Christmas%20Gift%20Box%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0NocmlzdG1hcyBHaWZ0IEJveCAxLnBuZyIsImlhdCI6MTcyNjgwMzUwNSwiZXhwIjoxNzU4MzM5NTA1fQ.7546UPrpeOz72Qlu0dzZ7wPppxwo-dC_PtLO-A-xxAA&t=2024-09-20T03%3A38%3A25.769Z"
@@ -50,7 +50,7 @@ const ChallengeCalendar = ({ challengeType }) => {
               className="w-6 h-6 object-contain"
             />
           </div>
-          <div className="w-4 h-0.5 bg-yellow-500 -ml-1"></div>
+          <div className="absolute left-0 top-1/2 w-4 h-0.5 bg-yellow-500 -translate-x-full"></div>
         </div>
       </div>
       <Collapsible
