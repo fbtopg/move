@@ -44,8 +44,9 @@ const DailyWalkChallenge = () => {
       exit={{ x: '100%' }}
       transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
       className="fixed inset-0 bg-black text-white flex flex-col z-50"
+      style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
-      <div className="sticky top-0 z-10 bg-[#DBE9FE] text-black p-4 flex justify-between items-center">
+      <div className="sticky top-0 z-10 bg-[#DBE9FE] text-black p-4 flex justify-between items-center" style={{ paddingTop: '2rem' }}>
         <button onClick={() => navigate(-1)} className="text-black">
           <ArrowLeft className="h-6 w-6" />
         </button>
