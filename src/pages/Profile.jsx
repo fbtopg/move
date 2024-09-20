@@ -6,15 +6,8 @@ import { MoreHorizontal } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { handleImageUpload } from '../utils/imageUtils';
 
-const Profile = () => {
-  const [activeTab, setActiveTab] = React.useState('profile');
+const Header = () => {
   const [greeting, setGreeting] = useState('');
-  const displayName = "James";
-  const username = "@username";
-  const followers = 57;
-  const following = 151;
-  const navigate = useNavigate();
-  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const updateGreeting = () => {
@@ -33,6 +26,20 @@ const Profile = () => {
 
     return () => clearInterval(intervalId);
   }, []);
+
+  return (
+    <h1 className="text-2xl font-bold mb-6">{greeting}</h1>
+  );
+};
+
+const Profile = () => {
+  const [activeTab, setActiveTab] = React.useState('profile');
+  const displayName = "James";
+  const username = "@username";
+  const followers = 57;
+  const following = 151;
+  const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
   const handleAvatarClick = () => {
     fileInputRef.current.click();
@@ -79,10 +86,11 @@ const Profile = () => {
             </Button>
           </div>
           
-          <h2 className="text-2xl font-light mb-6">{greeting}, {displayName}</h2>
+          <Header />
           
           <div className="flex justify-between items-center mb-2">
             <div>
+              <p className="text-2xl font-light mb-1">{displayName}</p>
               <p className="text-sm text-gray-400">{username}</p>
             </div>
             <Avatar className="w-20 h-20 rounded-full cursor-pointer" onClick={handleAvatarClick}>
