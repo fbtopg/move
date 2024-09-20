@@ -8,6 +8,7 @@ import { handleImageUpload } from '../utils/imageUtils';
 
 const Header = () => {
   const [greeting, setGreeting] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updateGreeting = () => {
@@ -28,7 +29,17 @@ const Header = () => {
   }, []);
 
   return (
-    <h1 className="text-2xl font-bold mb-6">{greeting}</h1>
+    <div className="flex justify-between items-center mb-6">
+      <h1 className="text-2xl font-bold">{greeting}</h1>
+      <Button 
+        variant="ghost" 
+        size="icon"
+        onClick={() => navigate('/settings')}
+        className="text-white hover:bg-transparent"
+      >
+        <MoreHorizontal className="h-6 w-6 stroke-[1]" />
+      </Button>
+    </div>
   );
 };
 
@@ -75,17 +86,6 @@ const Profile = () => {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-4">
-          <div className="flex justify-end mb-4">
-            <Button 
-              variant="ghost" 
-              size="icon"
-              onClick={() => navigate('/settings')}
-              className="text-white hover:bg-transparent"
-            >
-              <MoreHorizontal className="h-6 w-6 stroke-[1]" />
-            </Button>
-          </div>
-          
           <Header />
           
           <div className="flex justify-between items-center mb-2">
