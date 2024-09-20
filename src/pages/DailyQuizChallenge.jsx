@@ -107,11 +107,15 @@ const ChallengeDetails = ({ challengeData, participants }) => (
     <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
     <div className="h-px bg-gray-700 my-6"></div>
     <h2 className="text-sm font-semibold mb-4">SUMMARY</h2>
-    <div className="bg-[#212124] rounded-lg p-4 mb-6">
-      <div className="grid grid-cols-3 gap-4 text-center">
-        <DetailItem label="ANSWERS" value={challengeData.answers} centered labelClass="text-xs" />
-        <DetailItem label="LIKES" value={challengeData.likes} centered labelClass="text-xs" />
-        <DetailItem label="STREAK" value={challengeData.highestStreak} centered labelClass="text-xs" />
+    <div className="bg-[#212124] rounded-lg p-6 mb-6">
+      <div className="grid grid-cols-3 gap-4">
+        <DetailItem label="ANSWERS" value={challengeData.answers} centered labelClass="text-xs mb-2" />
+        <div className="w-px bg-gray-700 justify-self-center"></div>
+        <DetailItem label="LIKES" value={challengeData.likes} centered labelClass="text-xs mb-2" />
+        <div className="col-span-3 h-px bg-gray-700 my-4"></div>
+        <div></div>
+        <DetailItem label="STREAK" value={challengeData.highestStreak} centered labelClass="text-xs mb-2" />
+        <div></div>
       </div>
     </div>
   </>
@@ -120,7 +124,7 @@ const ChallengeDetails = ({ challengeData, participants }) => (
 const DetailItem = ({ label, value, centered = false, labelClass = "" }) => (
   <div className={centered ? "text-center" : ""}>
     <p className={`text-gray-400 ${labelClass}`}>{label}</p>
-    <p>{value}</p>
+    <p className="text-lg">{value}</p>
   </div>
 );
 
