@@ -79,8 +79,7 @@ const DailyWalkChallenge = () => {
         </div>
 
         <div className="max-w-md mx-auto p-4">
-          <ChallengeDetails challengeData={challengeData} />
-          <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
+          <ChallengeDetails challengeData={challengeData} participants={participants} />
           <div className="h-6"></div>
           <ChallengeCalendar />
           <Button 
@@ -97,7 +96,7 @@ const DailyWalkChallenge = () => {
   );
 };
 
-const ChallengeDetails = ({ challengeData }) => (
+const ChallengeDetails = ({ challengeData, participants }) => (
   <>
     <div className="grid grid-cols-3 gap-1 text-xs mb-6">
       <DetailItem label="START" value={challengeData.startDate} />
