@@ -113,7 +113,7 @@ const ChallengeDetails = ({ challengeData, participants }) => (
       <div className="grid grid-cols-3 gap-4 text-center">
         <DetailItem label="DISTANCE" value={challengeData.distance} centered labelClass="text-xs" />
         <DetailItem label="LIKES" value={challengeData.likes} centered labelClass="text-xs" />
-        <DetailItem label="HIGHEST STREAK" value={challengeData.highestStreak} centered labelClass="text-xs" />
+        <DetailItem label="STREAK" value={challengeData.highestStreak} centered labelClass="text-xs" />
       </div>
     </div>
   </>
