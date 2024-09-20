@@ -115,7 +115,7 @@ const ChallengeDetails = ({ challengeData }) => (
       <DetailItem label="REMAINING" value={challengeData.remainingDays} />
     </div>
     <p className="text-xs text-gray-400 mb-4 pr-8">
-      Build a consistent routine with the daily walking challenge. Whether it's a short walk around the block or a longer trek, every walk helps you move forward. Stay committed, and at the end of the challenge, you'll have not only built a habit but earned rewards to celebrate your progress!
+      Build a routine with your friends in the Daily Walking Challenge! Walk together, share progress, and earn rewards along the way.
     </p>
     <div className="h-px bg-gray-700 my-6"></div>
     <h2 className="text-sm font-semibold mb-4">SUMMARY</h2>

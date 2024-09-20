@@ -113,7 +113,7 @@ const ChallengeDetails = ({ challengeData }) => (
       <DetailItem label="REMAINING" value={challengeData.remainingDays} />
     </div>
     <p className="text-xs text-gray-400 mb-4 pr-8">
-      Engage your mind with the daily quiz challenge, designed to make you think more consciously about everyday topics. Each quiz encourages deeper reflection and awareness. By the end of the challenge, you'll have developed a habit of mindful thinking and earned rewards to celebrate your journey!
+      Engage your friends with the Daily Quiz Challenge! Compete, share answers, and earn rewards together as you tackle everyday quiz.
     </p>
     <div className="h-px bg-gray-700 my-6"></div>
     <h2 className="text-sm font-semibold mb-4">SUMMARY</h2>
