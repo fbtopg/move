@@ -47,8 +47,8 @@ const Profile = () => {
   const [activeTab, setActiveTab] = React.useState('profile');
   const displayName = "James";
   const username = "@username";
-  const followers = 57;
-  const following = 151;
+  const groups = 57;
+  const friends = 151;
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
@@ -107,13 +107,13 @@ const Profile = () => {
           </div>
           
           <div className="flex mb-12">
-            <div className="mr-24 cursor-pointer" onClick={() => navigate('/follow', { state: { initialTab: 'followers' } })}>
-              <p className="text-sm text-white uppercase mb-1">Followers</p>
-              <p className="text-sm">{followers}</p>
+            <div className="mr-24 cursor-pointer" onClick={() => navigate('/groups')}>
+              <p className="text-sm text-white uppercase mb-1">Groups</p>
+              <p className="text-sm">{groups}</p>
             </div>
-            <div className="cursor-pointer" onClick={() => navigate('/follow', { state: { initialTab: 'following' } })}>
-              <p className="text-sm text-white uppercase mb-1">Following</p>
-              <p className="text-sm">{following}</p>
+            <div className="cursor-pointer" onClick={() => navigate('/friends')}>
+              <p className="text-sm text-white uppercase mb-1">Friends</p>
+              <p className="text-sm">{friends}</p>
             </div>
           </div>
           
