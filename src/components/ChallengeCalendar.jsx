@@ -41,11 +41,11 @@ const ChallengeCalendar = ({ challengeType }) => {
           </div>
         ))}
         <div className="relative">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center bg-black">
+          <div className="w-8 h-8 rounded-full flex items-center justify-center">
             <img
-              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Christmas%20Gift%20Box%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0NocmlzdG1hcyBHaWZ0IEJveCAxLnBuZyIsImlhdCI6MTcyNjgwMzUwNSwiZXhwIjoxNzU4MzM5NTA1fQ.7546UPrpeOz72Qlu0dzZ7wPppxwo-dC_PtLO-A-xxAA&t=2024-09-20T03%3A38%3A25.769Z"
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%20178951.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDE3ODk1MS5wbmciLCJpYXQiOjE3MjY4MDc0NDYsImV4cCI6MTc1ODM0MzQ0Nn0.wK_z5aNyhuHOxdNDHsfdOQn5fI8VarXd2AFOcGH2cew&t=2024-09-20T04%3A44%3A06.424Z"
               alt="Gift"
-              className="w-6 h-6 object-contain"
+              className="w-8 h-8 object-contain"
             />
           </div>
         </div>
