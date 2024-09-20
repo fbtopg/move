@@ -42,7 +42,7 @@ const ChallengeCalendar = ({ challengeType }) => {
               <img
                 src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Christmas%20Gift%20Box%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0NocmlzdG1hcyBHaWZ0IEJveCAxLnBuZyIsImlhdCI6MTcyNjgwMzUwNSwiZXhwIjoxNzU4MzM5NTA1fQ.7546UPrpeOz72Qlu0dzZ7wPppxwo-dC_PtLO-A-xxAA&t=2024-09-20T03%3A38%3A25.769Z"
                 alt="Gift"
-                className="w-4 h-4 object-contain absolute top-0 right-0"
+                className="w-6 h-6 object-contain absolute -top-1 -right-1"
               />
             )}
           </div>
