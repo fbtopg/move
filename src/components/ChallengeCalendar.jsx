@@ -41,11 +41,11 @@ const ChallengeCalendar = ({ challengeType }) => {
           </div>
         ))}
         <div className="relative">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full flex items-center justify-center">
             <img
               src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%20178951.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDE3ODk1MS5wbmciLCJpYXQiOjE3MjY4MDc0NDYsImV4cCI6MTc1ODM0MzQ0Nn0.wK_z5aNyhuHOxdNDHsfdOQn5fI8VarXd2AFOcGH2cew&t=2024-09-20T04%3A44%3A06.424Z"
               alt="Gift"
-              className="w-8 h-8 object-contain"
+              className="w-10 h-10 object-contain"
             />
           </div>
         </div>
