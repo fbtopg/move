@@ -102,9 +102,9 @@ const ChallengeDetails = ({ challengeData, participants }) => (
     <div className="bg-[#212124] rounded-lg p-8 mb-6">
       <div className="flex justify-between items-center">
         <DetailItem label="ANSWERS" value={challengeData.answers} />
-        <div className="h-12 w-px bg-gray-700"></div>
+        <div className="h-16 w-px bg-gray-700"></div>
         <DetailItem label="LIKES" value={challengeData.likes} />
-        <div className="h-12 w-px bg-gray-700"></div>
+        <div className="h-16 w-px bg-gray-700"></div>
         <DetailItem label="STREAK" value={challengeData.streak} />
       </div>
     </div>
@@ -112,7 +112,7 @@ const ChallengeDetails = ({ challengeData, participants }) => (
 );
 
 const DetailItem = ({ label, value }) => (
-  <div className="text-center">
+  <div className="text-center flex flex-col items-center justify-between h-full">
     <p className="text-gray-400 text-xs mb-2">{label}</p>
     <p className="text-lg">{value}</p>
   </div>
@@ -144,7 +144,7 @@ const ChallengeCalendar = () => {
     <div className="mb-6">
       <h2 className="text-sm font-semibold mb-4">PROGRESS CALENDAR</h2>
       <div className="grid grid-cols-7 gap-2">
-        {days.map((day) => (
+        {days.map((day, index) => (
           <div
             key={day}
             className={`w-8 h-8 flex items-center justify-center rounded-full ${
@@ -155,7 +155,13 @@ const ChallengeCalendar = () => {
                 : 'border border-gray-600'
             }`}
           >
-            {completedDays.includes(day) ? (
+            {index === days.length - 1 ? (
+              <img
+                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Christmas%20Gift%20Box%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0NocmlzdG1hcyBHaWZ0IEJveCAxLnBuZyIsImlhdCI6MTcyNjgwMzUwNSwiZXhwIjoxNzU4MzM5NTA1fQ.7546UPrpeOz72Qlu0dzZ7wPppxwo-dC_PtLO-A-xxAA&t=2024-09-20T03%3A38%3A25.769Z"
+                alt="Gift"
+                className="w-6 h-6 object-contain"
+              />
+            ) : completedDays.includes(day) ? (
               <Check className="w-4 h-4 text-green-500" />
             ) : (
               <span className={day === today.getDate() ? 'text-green-500' : ''}>{day}</span>
