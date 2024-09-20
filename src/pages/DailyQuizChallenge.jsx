@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Flame, Brain, Heart, Share, History, X } from 'lucide-react';
+import { ArrowLeft, Share, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
@@ -22,11 +22,6 @@ const DailyQuizChallenge = () => {
     startDate: "Sep 1",
     endDate: "Sep 30",
     remainingDays: "24 days",
-    achievements: [
-      { id: 1, name: "5-day streak", icon: Flame },
-      { id: 2, name: "Conscious mind", icon: Brain },
-      { id: 3, name: "100 likes", icon: Heart },
-    ],
   };
 
   const participants = [
@@ -36,10 +31,6 @@ const DailyQuizChallenge = () => {
     { id: 4, name: "Sarah" },
     { id: 5, name: "Mike" },
   ];
-
-  const handleHistoryClick = () => {
-    navigate('/daily-quiz-history');
-  };
 
   const toggleFullImage = () => {
     setShowFullImage(!showFullImage);
@@ -59,9 +50,7 @@ const DailyQuizChallenge = () => {
           <ArrowLeft className="h-6 w-6" />
         </button>
         <h1 className="text-lg font-semibold">{challengeData.title}</h1>
-        <button onClick={handleHistoryClick} className="text-black">
-          <History className="h-6 w-6" />
-        </button>
+        <div className="w-6 h-6"></div>
       </div>
 
       <div className="flex-grow overflow-y-auto pb-20">
@@ -91,7 +80,6 @@ const DailyQuizChallenge = () => {
         <div className="max-w-md mx-auto p-4">
           <ChallengeDetails challengeData={challengeData} />
           <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
-          <ChallengeAchievements achievements={challengeData.achievements} />
           <Button 
             className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full"
             onClick={shareInvite}
@@ -147,29 +135,6 @@ const ChallengeParticipants = ({ participants, activeParticipants }) => (
       </div>
       <div className="ml-2 text-sm text-gray-400">
         {activeParticipants} active
-      </div>
-    </div>
-  </>
-);
-
-const ChallengeAchievements = ({ achievements }) => (
-  <>
-    <div className="h-px bg-gray-700 my-4"></div>
-    <div className="mb-6">
-      <h2 className="text-lg font-bold mb-4">ACHIEVEMENTS</h2>
-      <div className="grid grid-cols-2 gap-4">
-        {achievements.map((achievement) => (
-          <div 
-            key={achievement.id} 
-            className="flex flex-col items-center justify-center w-full aspect-square rounded-lg"
-            style={{
-              background: 'radial-gradient(circle at center, #222222, #111111)',
-            }}
-          >
-            <achievement.icon className="h-24 w-24 text-white mb-2 stroke-[0.5]" />
-            <span className="text-sm text-center px-2">{achievement.name}</span>
-          </div>
-        ))}
       </div>
     </div>
   </>
