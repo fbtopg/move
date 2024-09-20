@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Circle, CircleMarker, useMap } from 'react-leaflet';
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
+import { Footprints, Play, Pause } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
 const OrientationMarker = ({ position }) => {
@@ -40,10 +41,14 @@ const OrientationMarker = ({ position }) => {
 const Walk = () => {
   const [position, setPosition] = useState(null);
   const [activeTab, setActiveTab] = useState('walk');
+  const [isWalking, setIsWalking] = useState(false);
+  const [steps, setSteps] = useState(0);
+  const [distance, setDistance] = useState(0);
+  const [time, setTime] = useState(0);
 
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
+      navigator.geolocation.watchPosition(
         (position) => {
           setPosition([position.coords.latitude, position.coords.longitude]);
         },
@@ -55,9 +60,26 @@ const Walk = () => {
     }
   }, []);
 
-  const handleStartWalk = () => {
-    // Placeholder for start walk functionality
-    console.log("Start walk clicked");
+  useEffect(() => {
+    let interval;
+    if (isWalking) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 1);
+        setSteps((prevSteps) => prevSteps + Math.floor(Math.random() * 3) + 1);
+        setDistance((prevDistance) => prevDistance + Math.random() * 0.01);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isWalking]);
+
+  const handleStartStop = () => {
+    setIsWalking(!isWalking);
+  };
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   return (
@@ -82,15 +104,39 @@ const Walk = () => {
               </MapContainer>
             )}
           </div>
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            <div className="bg-gray-800 p-4 rounded-lg text-center">
+              <p className="text-sm text-gray-400">Steps</p>
+              <p className="text-2xl font-bold">{steps}</p>
+            </div>
+            <div className="bg-gray-800 p-4 rounded-lg text-center">
+              <p className="text-sm text-gray-400">Distance</p>
+              <p className="text-2xl font-bold">{distance.toFixed(2)} km</p>
+            </div>
+            <div className="bg-gray-800 p-4 rounded-lg text-center">
+              <p className="text-sm text-gray-400">Time</p>
+              <p className="text-2xl font-bold">{formatTime(time)}</p>
+            </div>
+          </div>
         </div>
       </div>
       <div className="fixed bottom-20 left-0 right-0 px-4 mb-4">
         <Button
-          onClick={handleStartWalk}
-          className="bg-[#DBE9FE] text-black hover:bg-[#C5D9F9] font-semibold py-6 px-4 rounded-lg text-xl w-full poetsen-one-regular"
+          onClick={handleStartStop}
+          className="bg-[#DBE9FE] text-black hover:bg-[#C5D9F9] font-semibold py-6 px-4 rounded-lg text-xl w-full poetsen-one-regular flex items-center justify-center"
           style={{ fontFamily: '"Poetsen One", sans-serif', fontWeight: 400 }}
         >
-          START
+          {isWalking ? (
+            <>
+              <Pause className="mr-2 h-6 w-6" />
+              PAUSE
+            </>
+          ) : (
+            <>
+              <Play className="mr-2 h-6 w-6" />
+              START
+            </>
+          )}
         </Button>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
