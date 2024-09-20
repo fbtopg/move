@@ -52,21 +52,22 @@ const DailyQuizChallenge = () => {
       exit={{ x: '100%' }}
       transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
       className="fixed inset-0 bg-black text-white flex flex-col z-50"
+      style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
-      <div className="sticky top-0 z-10 bg-black p-4 flex justify-between items-center">
-        <button onClick={() => navigate(-1)} className="text-white">
+      <div className="sticky top-0 z-10 bg-[#DCFCE7] text-black p-4 flex justify-between items-center" style={{ paddingTop: '2rem' }}>
+        <button onClick={() => navigate(-1)} className="text-black">
           <ArrowLeft className="h-6 w-6" />
         </button>
         <h1 className="text-lg font-semibold">{challengeData.title}</h1>
-        <button onClick={handleHistoryClick} className="text-white">
+        <button onClick={handleHistoryClick} className="text-black">
           <History className="h-6 w-6" />
         </button>
       </div>
 
       <div className="flex-grow overflow-y-auto pb-20">
-        <div className="bg-gradient-to-t from-gray-900 to-black p-4 relative">
+        <div className="bg-gradient-to-b from-[#DCFCE7] to-black p-4 relative">
           <div className="flex justify-between items-center mb-4">
-            <p className="text-sm text-gray-400">{challengeData.month}</p>
+            <p className="text-sm text-gray-600">{challengeData.month}</p>
           </div>
 
           <div className="flex justify-between items-center">
@@ -79,10 +80,10 @@ const DailyQuizChallenge = () => {
               />
             </div>
             <div className="text-right">
-              <div className="text-4xl font-bold">
+              <div className="text-4xl font-bold text-black">
                 {challengeData.progress}
               </div>
-              <div className="text-sm text-gray-400">PROGRESS</div>
+              <div className="text-sm text-gray-600">PROGRESS</div>
             </div>
           </div>
         </div>
