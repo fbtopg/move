@@ -43,7 +43,7 @@ const ChallengeCalendar = ({ challengeType }) => {
         <div className="relative">
           <div className="w-8 h-8 rounded-full flex items-center justify-center">
             <img
-              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Group%20178951.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dyb3VwIDE3ODk1MS5wbmciLCJpYXQiOjE3MjY4MDc0NDYsImV4cCI6MTc1ODM0MzQ0Nn0.wK_z5aNyhuHOxdNDHsfdOQn5fI8VarXd2AFOcGH2cew&t=2024-09-20T04%3A44%3A06.424Z"
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Giftbox%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0dpZnRib3ggMS5wbmciLCJpYXQiOjE3MjY4MDgwNzUsImV4cCI6MTc1ODM0NDA3NX0.R2L9dxvHlb0lYSqa8-OSRu25VADv92BNIz48USXz6W8&t=2024-09-20T04%3A54%3A35.193Z"
               alt="Gift"
               className="w-8 h-8 object-contain"
             />
