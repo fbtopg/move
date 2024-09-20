@@ -18,7 +18,7 @@ const DailyWalkChallenge = () => {
     totalParticipants: "16.5K",
     distance: "56.7km",
     likes: "124",
-    highestStreak: "7",
+    streak: "7",
     activeParticipants: "16.5k",
     startDate: "Sep 1",
     endDate: "Sep 30",
@@ -33,9 +33,7 @@ const DailyWalkChallenge = () => {
     { id: 5, name: "Mike" },
   ];
 
-  const toggleFullImage = () => {
-    setShowFullImage(!showFullImage);
-  };
+  const toggleFullImage = () => setShowFullImage(!showFullImage);
 
   return (
     <motion.div
@@ -45,56 +43,50 @@ const DailyWalkChallenge = () => {
       transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
       className="fixed inset-0 bg-black text-white flex flex-col z-50"
     >
-      <div className="bg-[#DBE9FE] text-black p-4 flex justify-between items-center">
-        <button onClick={() => navigate(-1)} className="text-black">
-          <ArrowLeft className="h-6 w-6" />
-        </button>
-        <h1 className="text-lg font-semibold">{challengeData.title}</h1>
-        <div className="w-6 h-6"></div>
-      </div>
-
+      <Header title={challengeData.title} onBack={() => navigate(-1)} />
       <div className="flex-grow overflow-y-auto">
-        <div className="bg-gradient-to-b from-[#DBE9FE] to-black p-4 relative">
-          <div className="flex justify-between items-center mb-4">
-            <p className="text-sm text-gray-600">{challengeData.month}</p>
-          </div>
-
-          <div className="flex justify-between items-center">
-            <div className="w-24 h-24 overflow-hidden">
-              <img 
-                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z" 
-                alt="Daily Walk Challenge" 
-                className="w-full h-full object-cover cursor-pointer"
-                onClick={toggleFullImage}
-              />
-            </div>
-            <div className="text-right">
-              <div className="text-4xl font-bold text-white">
-                {challengeData.rank}
-                <span className="text-gray-300 text-2xl">/{challengeData.totalParticipants}</span>
-              </div>
-              <div className="text-sm text-gray-300">RANK</div>
-            </div>
-          </div>
-        </div>
-
+        <ChallengeHeader challengeData={challengeData} onImageClick={toggleFullImage} />
         <div className="max-w-md mx-auto p-4">
           <ChallengeDetails challengeData={challengeData} participants={participants} />
-          <div className="h-6"></div>
           <ChallengeCalendar />
-          <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full mt-6"
-            onClick={shareInvite}
-          >
-            <Share className="mr-2 h-5 w-5" />
-            Invite Friends
-          </Button>
+          <InviteButton onInvite={shareInvite} />
         </div>
       </div>
-      {showFullImage && <FullImageView toggleFullImage={toggleFullImage} />}
+      {showFullImage && <FullImageView onClose={toggleFullImage} />}
     </motion.div>
   );
 };
+
+const Header = ({ title, onBack }) => (
+  <div className="bg-[#DBE9FE] text-black p-4 flex justify-between items-center">
+    <button onClick={onBack} className="text-black">
+      <ArrowLeft className="h-6 w-6" />
+    </button>
+    <h1 className="text-lg font-semibold">{title}</h1>
+    <div className="w-6 h-6"></div>
+  </div>
+);
+
+const ChallengeHeader = ({ challengeData, onImageClick }) => (
+  <div className="bg-gradient-to-b from-[#DBE9FE] to-black p-4 relative">
+    <p className="text-sm text-gray-600 mb-4">{challengeData.month}</p>
+    <div className="flex justify-between items-center">
+      <img 
+        src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z" 
+        alt="Daily Walk Challenge" 
+        className="w-24 h-24 object-cover cursor-pointer rounded-lg"
+        onClick={onImageClick}
+      />
+      <div className="text-right">
+        <div className="text-4xl font-bold text-white">
+          {challengeData.rank}
+          <span className="text-gray-300 text-2xl">/{challengeData.totalParticipants}</span>
+        </div>
+        <div className="text-sm text-gray-300">RANK</div>
+      </div>
+    </div>
+  </div>
+);
 
 const ChallengeDetails = ({ challengeData, participants }) => (
   <>
@@ -109,23 +101,21 @@ const ChallengeDetails = ({ challengeData, participants }) => (
     <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
     <div className="h-px bg-gray-700 my-6"></div>
     <h2 className="text-sm font-semibold mb-4">SUMMARY</h2>
-    <div className="bg-[#212124] rounded-lg p-6 mb-6">
-      <div className="grid grid-cols-3 gap-4">
-        <DetailItem label="DISTANCE" value={challengeData.distance} centered labelClass="text-xs mb-2" />
-        <div className="w-px bg-gray-700 justify-self-center"></div>
-        <DetailItem label="LIKES" value={challengeData.likes} centered labelClass="text-xs mb-2" />
-        <div className="col-span-3 h-px bg-gray-700 my-4"></div>
-        <div></div>
-        <DetailItem label="STREAK" value={challengeData.highestStreak} centered labelClass="text-xs mb-2" />
-        <div></div>
+    <div className="bg-[#212124] rounded-lg p-8 mb-6">
+      <div className="flex justify-between items-center">
+        <DetailItem label="DISTANCE" value={challengeData.distance} />
+        <div className="h-12 w-px bg-gray-700"></div>
+        <DetailItem label="LIKES" value={challengeData.likes} />
+        <div className="h-12 w-px bg-gray-700"></div>
+        <DetailItem label="STREAK" value={challengeData.streak} />
       </div>
     </div>
   </>
 );
 
-const DetailItem = ({ label, value, centered = false, labelClass = "" }) => (
-  <div className={centered ? "text-center" : ""}>
-    <p className={`text-gray-400 ${labelClass}`}>{label}</p>
+const DetailItem = ({ label, value }) => (
+  <div className="text-center">
+    <p className="text-gray-400 text-xs mb-2">{label}</p>
     <p className="text-lg">{value}</p>
   </div>
 );
@@ -150,8 +140,6 @@ const ChallengeCalendar = () => {
   const today = new Date();
   const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
   const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-
-  // Simulating completed days (you should replace this with actual data)
   const completedDays = [1, 3, 5, 7, 10, 12, 15];
 
   return (
@@ -181,8 +169,18 @@ const ChallengeCalendar = () => {
   );
 };
 
-const FullImageView = ({ toggleFullImage }) => (
-  <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50" onClick={toggleFullImage}>
+const InviteButton = ({ onInvite }) => (
+  <Button 
+    className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full mt-6"
+    onClick={onInvite}
+  >
+    <Share className="mr-2 h-5 w-5" />
+    Invite Friends
+  </Button>
+);
+
+const FullImageView = ({ onClose }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50" onClick={onClose}>
     <img 
       src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20102.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTAyLnBuZyIsImlhdCI6MTcyNjI4ODYyNCwiZXhwIjoxNzU3ODI0NjI0fQ.MsMvXioJ2mxlqql64hI_aFCKVuY4qVrQHbpUG-DTkLQ&t=2024-09-14T04%3A37%3A06.339Z" 
       alt="Daily Walk Challenge" 
@@ -190,7 +188,7 @@ const FullImageView = ({ toggleFullImage }) => (
     />
     <button 
       className="absolute top-4 right-4 text-white"
-      onClick={toggleFullImage}
+      onClick={onClose}
     >
       <X className="h-6 w-6" />
     </button>
