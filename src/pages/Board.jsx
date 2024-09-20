@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Globe, Zap, Flame, Bell } from 'lucide-react';
+import React, { useState } from 'react';
 import BottomNavBar from '../components/BottomNavBar';
 import { useNavigate } from 'react-router-dom';
 import NewsItems from '../components/NewsItems';
-import { Button } from "@/components/ui/button";
 
 const Board = () => {
   const [activeTab, setActiveTab] = useState('upcoming');
@@ -36,26 +34,11 @@ const Board = () => {
     }
   };
 
-  const handleNotificationClick = () => {
-    // Placeholder for notification functionality
-    console.log("Notification button clicked");
-  };
-
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      <div className="sticky top-0 z-10 bg-black p-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Upcoming</h1>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={handleNotificationClick}
-          className="text-white hover:bg-gray-800"
-        >
-          <Bell className="h-6 w-6" />
-        </Button>
-      </div>
-      <div className="flex-grow overflow-y-auto pb-20 pt-1">
+      <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-2">
+          <h1 className="text-2xl font-bold mb-6">Upcoming</h1>
           <NewsItems
             items={newsItems}
             onLike={handleLike}
