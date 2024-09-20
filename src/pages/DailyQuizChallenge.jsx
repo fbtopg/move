@@ -86,7 +86,7 @@ const ChallengeHeader = ({ challengeData, onImageClick }) => (
 );
 
 const ChallengeDuration = ({ challengeData }) => (
-  <div className="grid grid-cols-3 gap-4 text-xs mb-6">
+  <div className="flex justify-start space-x-8 mb-6">
     <DurationItem label="START" value={challengeData.startDate} />
     <DurationItem label="END" value={challengeData.endDate} />
     <DurationItem label="REMAINING" value={challengeData.remainingDays} />
@@ -96,7 +96,7 @@ const ChallengeDuration = ({ challengeData }) => (
 const DurationItem = ({ label, value }) => (
   <div className="text-left">
     <p className="text-gray-400 text-[10px] mb-1">{label}</p>
-    <p className="text-sm">{value}</p>
+    <p className="text-xs">{value}</p>
   </div>
 );
 
@@ -108,22 +108,21 @@ const ChallengeDetails = ({ challengeData, participants }) => (
     <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
     <div className="h-px bg-gray-700 my-6"></div>
     <h2 className="text-sm font-semibold mb-4">SUMMARY</h2>
-    <div className="bg-[#212124] rounded-lg p-8 mb-6">
-      <div className="flex justify-between items-center">
-        <DetailItem label="ANSWERS" value={challengeData.answers} />
-        <div className="h-16 w-px bg-gray-700"></div>
-        <DetailItem label="LIKES" value={challengeData.likes} />
-        <div className="h-16 w-px bg-gray-700"></div>
-        <DetailItem label="STREAK" value={challengeData.streak} />
+    <div className="bg-gradient-to-br from-green-900 to-green-700 rounded-lg p-6 mb-6 shadow-lg">
+      <div className="grid grid-cols-3 gap-4">
+        <DetailItem label="ANSWERS" value={challengeData.answers} icon="🧠" />
+        <DetailItem label="LIKES" value={challengeData.likes} icon="❤️" />
+        <DetailItem label="STREAK" value={challengeData.streak} icon="🔥" />
       </div>
     </div>
   </>
 );
 
-const DetailItem = ({ label, value }) => (
-  <div className="text-center flex flex-col items-center justify-between h-full">
-    <p className="text-gray-400 text-xs mb-2">{label}</p>
-    <p className="text-lg">{value}</p>
+const DetailItem = ({ label, value, icon }) => (
+  <div className="text-center flex flex-col items-center justify-between">
+    <div className="text-2xl mb-2">{icon}</div>
+    <p className="text-lg font-bold">{value}</p>
+    <p className="text-xs text-gray-300 mt-1">{label}</p>
   </div>
 );
 
