@@ -27,8 +27,6 @@ const ChallengeCalendar = ({ challengeType }) => {
               className={`w-8 h-8 flex items-center justify-center rounded-full ${
                 day === today.getDate()
                   ? `border-2 ${borderColor} ${textColor}`
-                  : day === daysInMonth
-                  ? 'border-2 border-yellow-500'
                   : completedDays.includes(day)
                   ? 'bg-white'
                   : 'border border-gray-600'
