@@ -81,7 +81,7 @@ const DailyWalkChallenge = () => {
         <div className="max-w-md mx-auto p-4">
           <ChallengeDetails challengeData={challengeData} />
           <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
-          <div className="h-6"></div> {/* Added gap */}
+          <div className="h-6"></div>
           <ChallengeCalendar />
           <Button 
             className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full mt-6"
@@ -107,6 +107,7 @@ const ChallengeDetails = ({ challengeData }) => (
     <p className="text-xs text-gray-400 mb-4 pr-8">
       Build a routine with your friends in the Daily Walking Challenge! Walk together, share progress, and earn rewards along the way.
     </p>
+    <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
     <div className="h-px bg-gray-700 my-6"></div>
     <h2 className="text-sm font-semibold mb-4">SUMMARY</h2>
     <div className="flex mb-6 space-x-8">
@@ -125,22 +126,19 @@ const DetailItem = ({ label, value }) => (
 );
 
 const ChallengeParticipants = ({ participants, activeParticipants }) => (
-  <>
-    <div className="h-px bg-gray-700 my-4"></div>
-    <div className="flex items-center mb-4">
-      <div className="flex flex-shrink-0">
-        {participants.map((participant) => (
-          <Avatar key={participant.id} className="w-8 h-8 -ml-2 first:ml-0 border-2 border-black">
-            <AvatarImage src={getRandomProfilePicture()} />
-            <AvatarFallback>{participant.name[0]}</AvatarFallback>
-          </Avatar>
-        ))}
-      </div>
-      <div className="ml-2 text-sm text-gray-400">
-        {activeParticipants} active
-      </div>
+  <div className="flex items-center mt-4 mb-2">
+    <div className="flex flex-shrink-0">
+      {participants.map((participant) => (
+        <Avatar key={participant.id} className="w-8 h-8 -ml-2 first:ml-0 border-2 border-black">
+          <AvatarImage src={getRandomProfilePicture()} />
+          <AvatarFallback>{participant.name[0]}</AvatarFallback>
+        </Avatar>
+      ))}
     </div>
-  </>
+    <div className="ml-2 text-sm text-gray-400">
+      {activeParticipants} active
+    </div>
+  </div>
 );
 
 const ChallengeCalendar = () => {
