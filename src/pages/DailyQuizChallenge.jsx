@@ -80,10 +80,10 @@ const DailyQuizChallenge = () => {
               />
             </div>
             <div className="text-right">
-              <div className="text-4xl font-bold text-black">
+              <div className="text-4xl font-bold text-white">
                 {challengeData.progress}
               </div>
-              <div className="text-sm text-gray-600">PROGRESS</div>
+              <div className="text-sm text-gray-300">PROGRESS</div>
             </div>
           </div>
         </div>

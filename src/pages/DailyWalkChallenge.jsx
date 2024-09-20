@@ -81,11 +81,11 @@ const DailyWalkChallenge = () => {
               />
             </div>
             <div className="text-right">
-              <div className="text-4xl font-bold text-black">
+              <div className="text-4xl font-bold text-white">
                 {challengeData.rank}
-                <span className="text-gray-600 text-2xl">/{challengeData.totalParticipants}</span>
+                <span className="text-gray-300 text-2xl">/{challengeData.totalParticipants}</span>
               </div>
-              <div className="text-sm text-gray-600">RANK</div>
+              <div className="text-sm text-gray-300">RANK</div>
             </div>
           </div>
         </div>
