@@ -45,7 +45,7 @@ const DailyWalkChallenge = () => {
       transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
       className="fixed inset-0 bg-black text-white flex flex-col z-50"
     >
-      <div className="sticky top-0 z-10 bg-[#DBE9FE] text-black p-4 flex justify-between items-center">
+      <div className="bg-[#DBE9FE] text-black p-4 flex justify-between items-center">
         <button onClick={() => navigate(-1)} className="text-black">
           <ArrowLeft className="h-6 w-6" />
         </button>
@@ -53,7 +53,7 @@ const DailyWalkChallenge = () => {
         <div className="w-6 h-6"></div>
       </div>
 
-      <div className="flex-grow overflow-y-auto pb-20">
+      <div className="flex-grow overflow-y-auto">
         <div className="bg-gradient-to-b from-[#DBE9FE] to-black p-4 relative">
           <div className="flex justify-between items-center mb-4">
             <p className="text-sm text-gray-600">{challengeData.month}</p>
@@ -81,9 +81,10 @@ const DailyWalkChallenge = () => {
         <div className="max-w-md mx-auto p-4">
           <ChallengeDetails challengeData={challengeData} />
           <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
+          <div className="h-6"></div> {/* Added gap */}
           <ChallengeCalendar />
           <Button 
-            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full"
+            className="w-full bg-transparent text-white border border-white hover:bg-white hover:text-black transition-colors h-16 rounded-full mt-6"
             onClick={shareInvite}
           >
             <Share className="mr-2 h-5 w-5" />
