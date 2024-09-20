@@ -20,9 +20,9 @@ const ChallengeCalendar = ({ challengeType }) => {
   return (
     <div className="mb-6">
       <h2 className="text-sm font-semibold mb-4">PROGRESS CALENDAR</h2>
-      <div className="grid grid-cols-7 gap-2">
-        {days.map((day) => (
-          <div key={day} className="relative">
+      <div className="grid grid-cols-7 gap-2 relative">
+        {days.map((day, index) => (
+          <div key={day} className={`relative ${index === 0 ? 'col-start-2' : ''}`}>
             <div
               className={`w-8 h-8 flex items-center justify-center rounded-full ${
                 day === today.getDate()
@@ -40,15 +40,18 @@ const ChallengeCalendar = ({ challengeType }) => {
                 <span className={day === today.getDate() ? textColor : ''}>{day}</span>
               )}
             </div>
-            {day === daysInMonth && (
-              <img
-                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Christmas%20Gift%20Box%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0NocmlzdG1hcyBHaWZ0IEJveCAxLnBuZyIsImlhdCI6MTcyNjgwMzUwNSwiZXhwIjoxNzU4MzM5NTA1fQ.7546UPrpeOz72Qlu0dzZ7wPppxwo-dC_PtLO-A-xxAA&t=2024-09-20T03%3A38%3A25.769Z"
-                alt="Gift"
-                className="w-6 h-6 object-contain absolute -top-1 -right-1"
-              />
-            )}
           </div>
         ))}
+        <div className="absolute -right-10 top-0 flex items-center">
+          <div className="w-8 h-8 rounded-full border-2 border-yellow-500 flex items-center justify-center bg-black">
+            <img
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/Christmas%20Gift%20Box%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL0NocmlzdG1hcyBHaWZ0IEJveCAxLnBuZyIsImlhdCI6MTcyNjgwMzUwNSwiZXhwIjoxNzU4MzM5NTA1fQ.7546UPrpeOz72Qlu0dzZ7wPppxwo-dC_PtLO-A-xxAA&t=2024-09-20T03%3A38%3A25.769Z"
+              alt="Gift"
+              className="w-6 h-6 object-contain"
+            />
+          </div>
+          <div className="w-4 h-0.5 bg-yellow-500 -ml-1"></div>
+        </div>
       </div>
       <Collapsible
         open={isOpen}
