@@ -107,16 +107,18 @@ const ChallengeDetails = ({ challengeData, participants }) => (
     <ChallengeParticipants participants={participants} activeParticipants={challengeData.activeParticipants} />
     <div className="h-px bg-gray-700 my-6"></div>
     <h2 className="text-sm font-semibold mb-4">SUMMARY</h2>
-    <div className="flex mb-6 space-x-8">
-      <DetailItem label="ANSWERS" value={challengeData.answers} />
-      <DetailItem label="LIKES" value={challengeData.likes} />
-      <DetailItem label="HIGHEST STREAK" value={challengeData.highestStreak} />
+    <div className="bg-[#212124] rounded-lg p-4 mb-6">
+      <div className="grid grid-cols-3 gap-4">
+        <DetailItem label="ANSWERS" value={challengeData.answers} centered />
+        <DetailItem label="LIKES" value={challengeData.likes} centered />
+        <DetailItem label="HIGHEST STREAK" value={challengeData.highestStreak} centered />
+      </div>
     </div>
   </>
 );
 
-const DetailItem = ({ label, value }) => (
-  <div>
+const DetailItem = ({ label, value, centered = false }) => (
+  <div className={centered ? "text-center" : ""}>
     <p className="text-gray-400">{label}</p>
     <p>{value}</p>
   </div>
