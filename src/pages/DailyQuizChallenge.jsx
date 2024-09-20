@@ -3,14 +3,12 @@ import { ArrowLeft, Flame, Brain, Heart, Share, History, X } from 'lucide-react'
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
-import BottomNavBar from '../components/BottomNavBar';
 import { shareInvite } from '../utils/shareUtils';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { motion } from 'framer-motion';
 
 const DailyQuizChallenge = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('community');
   const [showFullImage, setShowFullImage] = useState(false);
 
   const challengeData = {
@@ -102,7 +100,6 @@ const DailyQuizChallenge = () => {
           </Button>
         </div>
       </div>
-      <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       {showFullImage && <FullImageView toggleFullImage={toggleFullImage} />}
     </motion.div>
   );
