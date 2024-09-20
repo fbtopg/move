@@ -33,8 +33,6 @@ const DailyWalkChallenge = () => {
     { id: 5, name: "Mike" },
   ];
 
-  const toggleFullImage = () => setShowFullImage(!showFullImage);
-
   return (
     <motion.div
       initial={{ x: '100%' }}
@@ -45,14 +43,14 @@ const DailyWalkChallenge = () => {
     >
       <Header title={challengeData.title} onBack={() => navigate(-1)} />
       <div className="flex-grow overflow-y-auto">
-        <ChallengeHeader challengeData={challengeData} onImageClick={toggleFullImage} />
+        <ChallengeHeader challengeData={challengeData} onImageClick={() => setShowFullImage(true)} />
         <div className="max-w-md mx-auto p-4">
           <ChallengeDetails challengeData={challengeData} participants={participants} />
           <ChallengeCalendar />
           <InviteButton onInvite={shareInvite} />
         </div>
       </div>
-      {showFullImage && <FullImageView onClose={toggleFullImage} />}
+      {showFullImage && <FullImageView onClose={() => setShowFullImage(false)} />}
     </motion.div>
   );
 };
@@ -90,7 +88,7 @@ const ChallengeHeader = ({ challengeData, onImageClick }) => (
 
 const ChallengeDetails = ({ challengeData, participants }) => (
   <>
-    <div className="grid grid-cols-3 gap-1 text-xs mb-6">
+    <div className="flex flex-col space-y-2 mb-6">
       <DetailItem label="START" value={challengeData.startDate} />
       <DetailItem label="END" value={challengeData.endDate} />
       <DetailItem label="REMAINING" value={challengeData.remainingDays} />
@@ -114,9 +112,9 @@ const ChallengeDetails = ({ challengeData, participants }) => (
 );
 
 const DetailItem = ({ label, value }) => (
-  <div className="text-center flex flex-col items-center justify-between h-full">
-    <p className="text-gray-400 text-xs mb-2">{label}</p>
-    <p className="text-lg">{value}</p>
+  <div className="flex justify-between items-center">
+    <p className="text-gray-400 text-xs">{label}</p>
+    <p className="text-sm">{value}</p>
   </div>
 );
 
