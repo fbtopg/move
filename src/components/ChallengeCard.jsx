@@ -31,7 +31,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
         className="w-[120px] h-[120px] flex-shrink-0 bg-cover bg-center m-5"
         style={{ backgroundImage: `url(${squareImageUrl})` }}
       ></div>
-      <div className="flex-grow pl-1 flex flex-col justify-between relative py-5 pr-5">
+      <div className="flex-grow flex flex-col justify-between relative py-5 pr-5">
         <div className="flex flex-col">
           <p className="text-xs text-black/80 leading-none" style={{ marginTop: '-0.1em', marginBottom: '-0.1em' }}>{date}</p>
           <p className="text-xl font-semibold text-black">{isWalk ? 'Daily Walk' : 'Daily Quiz'}</p>
