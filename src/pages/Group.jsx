@@ -67,9 +67,6 @@ const Group = () => {
                   <h3 className="font-semibold">{group.name}</h3>
                   <p className="text-sm text-gray-400">{group.members} members</p>
                 </div>
-                <Button variant="outline" size="sm" className="rounded-full">
-                  View
-                </Button>
               </div>
             ))}
           </div>
