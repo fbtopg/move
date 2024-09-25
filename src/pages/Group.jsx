@@ -7,11 +7,20 @@ import BottomNavBar from '../components/BottomNavBar';
 const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeFilter, setActiveFilter] = useState('Popular');
 
   const handleCreateGroup = () => {
     console.log("Create group clicked");
     // Implement group creation logic here
   };
+
+  const filters = ['Popular', 'New', 'All Groups'];
+
+  const myGroups = [
+    { id: 1, name: 'My group 1', members: 5 },
+    { id: 2, name: 'My group 2', members: 8 },
+    { id: 3, name: 'My group 3', members: 3 },
+  ];
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -20,13 +29,31 @@ const Group = () => {
           <h1 className="text-2xl font-bold mb-4">Groups</h1>
           
           <div className="relative mb-6">
-            <Search className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <Input
-              className="pl-8 pr-2 py-2 bg-transparent border-b border-gray-700 text-white w-full focus:outline-none focus:border-white transition-colors"
+              className="pl-10 pr-2 py-2 bg-transparent border-b border-gray-700 text-white w-full focus:outline-none focus:border-white transition-colors rounded-none"
               placeholder="Search groups or users"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+          </div>
+
+          <div className="flex space-x-2 mb-6">
+            {filters.map((filter) => (
+              <Button
+                key={filter}
+                variant="outline"
+                size="sm"
+                onClick={() => setActiveFilter(filter)}
+                className={`rounded-full ${
+                  activeFilter === filter
+                    ? 'bg-white text-black'
+                    : 'bg-transparent text-white border-white'
+                }`}
+              >
+                {filter}
+              </Button>
+            ))}
           </div>
 
           <Button
@@ -37,7 +64,19 @@ const Group = () => {
             Create Group
           </Button>
 
-          {/* Add group list or search results here */}
+          <div className="space-y-4">
+            {myGroups.map((group) => (
+              <div key={group.id} className="flex items-center justify-between bg-[#212124] p-4 rounded-lg">
+                <div>
+                  <h3 className="font-semibold">{group.name}</h3>
+                  <p className="text-sm text-gray-400">{group.members} members</p>
+                </div>
+                <Button variant="outline" size="sm" className="rounded-full">
+                  View
+                </Button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
