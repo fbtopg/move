@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Search, Plus } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import BottomNavBar from '../components/BottomNavBar';
+import PopularGroupCard from '../components/PopularGroupCard';
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
   const [searchTerm, setSearchTerm] = useState('');
+  const scrollContainerRef = useRef(null);
 
   const handleCreateGroup = () => {
     console.log("Create group clicked");
@@ -18,6 +20,20 @@ const Group = () => {
     { id: 2, name: 'My group 2', members: 8 },
     { id: 3, name: 'My group 3', members: 3 },
   ];
+
+  const popularGroups = [
+    { id: 1, name: 'Fitness Enthusiasts', members: 1200, image: 'https://example.com/fitness.jpg' },
+    { id: 2, name: 'Book Club', members: 800, image: 'https://example.com/book-club.jpg' },
+    { id: 3, name: 'Tech Innovators', members: 1500, image: 'https://example.com/tech.jpg' },
+    { id: 4, name: 'Foodies United', members: 2000, image: 'https://example.com/food.jpg' },
+    { id: 5, name: 'Travel Adventurers', members: 1800, image: 'https://example.com/travel.jpg' },
+  ];
+
+  const handleScroll = (scrollOffset) => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: scrollOffset, behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -43,7 +59,8 @@ const Group = () => {
             Create Group
           </Button>
 
-          <div className="space-y-4">
+          <div className="space-y-4 mb-8">
+            <h2 className="text-xl font-semibold mb-2">My Groups</h2>
             {myGroups.map((group) => (
               <div key={group.id} className="flex items-center justify-between bg-[#212124] p-4 rounded-lg">
                 <div>
@@ -55,6 +72,32 @@ const Group = () => {
                 </Button>
               </div>
             ))}
+          </div>
+
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold mb-4">Popular</h2>
+            <div className="relative">
+              <div 
+                ref={scrollContainerRef}
+                className="flex overflow-x-auto space-x-4 scrollbar-hide pb-4"
+              >
+                {popularGroups.map((group) => (
+                  <PopularGroupCard key={group.id} group={group} />
+                ))}
+              </div>
+              <button 
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-2 rounded-full"
+                onClick={() => handleScroll(-200)}
+              >
+                &lt;
+              </button>
+              <button 
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-2 rounded-full"
+                onClick={() => handleScroll(200)}
+              >
+                &gt;
+              </button>
+            </div>
           </div>
         </div>
       </div>
