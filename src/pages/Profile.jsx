@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { handleImageUpload } from '../utils/imageUtils';
+import { toast } from 'sonner';
 
 const Header = () => {
   const [greeting, setGreeting] = useState('');
@@ -45,6 +46,7 @@ const Header = () => {
 
 const Profile = () => {
   const [activeTab, setActiveTab] = React.useState('profile');
+  const [avatarUrl, setAvatarUrl] = useState("https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z");
   const displayName = "James";
   const username = "@username";
   const groups = 57;
@@ -61,10 +63,11 @@ const Profile = () => {
     if (file) {
       try {
         const imageUrl = await handleImageUpload(file);
-        // TODO: Update user profile with new image URL
-        console.log('New profile picture URL:', imageUrl);
+        setAvatarUrl(imageUrl);
+        toast.success('Profile picture updated successfully');
       } catch (error) {
         console.error('Error uploading image:', error);
+        toast.error('Failed to update profile picture. Please try again.');
       }
     }
   };
@@ -81,7 +84,7 @@ const Profile = () => {
               <p className="text-sm text-gray-400">{username}</p>
             </div>
             <Avatar className="w-20 h-20 rounded-full cursor-pointer" onClick={handleAvatarClick}>
-              <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" />
+              <AvatarImage src={avatarUrl} />
               <AvatarFallback>PFP</AvatarFallback>
             </Avatar>
             <input
