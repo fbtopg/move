@@ -7,14 +7,11 @@ import BottomNavBar from '../components/BottomNavBar';
 const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeFilter, setActiveFilter] = useState('Popular');
 
   const handleCreateGroup = () => {
     console.log("Create group clicked");
     // Implement group creation logic here
   };
-
-  const filters = ['Popular', 'New', 'All Groups'];
 
   const myGroups = [
     { id: 1, name: 'My group 1', members: 5 },
@@ -36,24 +33,6 @@ const Group = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </div>
-
-          <div className="flex space-x-2 mb-6">
-            {filters.map((filter) => (
-              <Button
-                key={filter}
-                variant="outline"
-                size="sm"
-                onClick={() => setActiveFilter(filter)}
-                className={`rounded-full ${
-                  activeFilter === filter
-                    ? 'bg-white text-black'
-                    : 'bg-transparent text-white border-white'
-                }`}
-              >
-                {filter}
-              </Button>
-            ))}
           </div>
 
           <Button
