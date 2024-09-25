@@ -16,9 +16,9 @@ const Group = () => {
   };
 
   const myGroups = [
-    { id: 1, name: 'My group 1', members: 5 },
-    { id: 2, name: 'My group 2', members: 8 },
-    { id: 3, name: 'My group 3', members: 3 },
+    { id: 1, name: 'My group 1', members: 5, lastActivity: 5 },
+    { id: 2, name: 'My group 2', members: 8, lastActivity: 15 },
+    { id: 3, name: 'My group 3', members: 3, lastActivity: 30 },
   ];
 
   const popularGroups = [
@@ -66,6 +66,7 @@ const Group = () => {
                 <div>
                   <h3 className="font-semibold">{group.name}</h3>
                   <p className="text-sm text-gray-400">{group.members} members</p>
+                  <p className="text-xs text-gray-500">Last activity: {group.lastActivity} minutes ago</p>
                 </div>
               </div>
             ))}
