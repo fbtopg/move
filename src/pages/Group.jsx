@@ -26,7 +26,6 @@ const Group = () => {
               placeholder="Search groups or users"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              style={{ boxShadow: 'none' }}
             />
           </div>
 
