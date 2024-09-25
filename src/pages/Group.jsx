@@ -20,9 +20,9 @@ const Group = () => {
           <h1 className="text-2xl font-bold mb-4">Groups</h1>
           
           <div className="relative mb-6">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <Search className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <Input
-              className="pl-10 bg-gray-800 border-gray-700 text-white rounded-full"
+              className="pl-8 pr-2 py-2 bg-transparent border-b border-gray-700 text-white w-full focus:outline-none focus:border-white transition-colors"
               placeholder="Search groups or users"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
