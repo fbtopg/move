@@ -42,13 +42,15 @@ const Group = () => {
           <h1 className="text-2xl font-bold mb-4">Groups</h1>
           
           <div className="relative mb-6">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <Input
-              className="pl-10 pr-2 py-2 bg-transparent border-b border-gray-700 text-white w-full focus:outline-none focus:border-white transition-colors rounded-none"
-              placeholder="Search groups or users"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            <div className="relative">
+              <Input
+                className="w-full bg-gray-800 border-gray-700 rounded-full pl-10 pr-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Search groups or users"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+            </div>
           </div>
 
           <Button
