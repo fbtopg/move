@@ -5,6 +5,9 @@ import FriendActivity from '../components/FriendActivity';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
+import { Plus } from 'lucide-react'; // Import the Plus icon
+
+// ... (previous code remains unchanged)
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
@@ -49,6 +52,11 @@ const Friends = () => {
     });
   };
 
+  const handleCreateGroup = () => {
+    console.log("Create group clicked");
+    // Implement group creation logic here
+  };
+
   const renderActivitySection = (title, activities) => (
     <>
       <h2 className="text-xs font-semibold mb-3 text-gray-400">{title}</h2>
@@ -66,11 +74,6 @@ const Friends = () => {
       </div>
     </>
   );
-
-  const handleCreateGroup = () => {
-    console.log("Create group clicked");
-    // Implement group creation logic here
-  };
 
   return (
     <>
@@ -97,8 +100,9 @@ const Friends = () => {
         </motion.div>
         <Button
           onClick={handleCreateGroup}
-          className="absolute left-1/2 transform -translate-x-1/2 -bottom-8 w-11/12 bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-16 rounded-full flex items-center justify-center border-4 border-black"
+          className="absolute left-1/2 transform -translate-x-1/2 -bottom-8 w-[95%] bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-16 rounded-full flex items-center justify-center border-4 border-black"
         >
+          <Plus className="mr-2 h-5 w-5" /> {/* Add the Plus icon */}
           Create Group
         </Button>
       </div>
