@@ -5,8 +5,8 @@ import FriendActivity from '../components/FriendActivity';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
-import { Plus } from 'lucide-react';
-import GroupButton from '../components/GroupButton';
+import { Plus, Users } from 'lucide-react';
+import GroupCard from '../components/GroupCard';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
@@ -19,11 +19,11 @@ const Friends = () => {
   ];
 
   const groups = [
-    { name: "Fitness Buddies", members: 120 },
-    { name: "Book Club", members: 45 },
-    { name: "Tech Enthusiasts", members: 78 },
-    { name: "Foodies Unite", members: 92 },
-    { name: "Travel Explorers", members: 63 },
+    { id: 1, name: "Fitness Buddies", members: 120, icon: "🏋️‍♀️" },
+    { id: 2, name: "Book Club", members: 45, icon: "📚" },
+    { id: 3, name: "Tech Enthusiasts", members: 78, icon: "💻" },
+    { id: 4, name: "Foodies Unite", members: 92, icon: "🍔" },
+    { id: 5, name: "Travel Explorers", members: 63, icon: "✈️" },
   ];
 
   const handleNextChallenge = () => {
@@ -111,15 +111,15 @@ const Friends = () => {
         </Button>
       </div>
 
-      <div className="mb-4 mt-14 overflow-x-auto scrollbar-hide">
+      <div className="mb-4 mt-10 overflow-x-auto scrollbar-hide">
         <motion.div
-          className="flex space-x-2 pl-4"
+          className="flex space-x-4 pl-4"
           drag="x"
-          dragConstraints={{ right: 0, left: -((groups.length - 1) * 150) }}
+          dragConstraints={{ right: 0, left: -((groups.length - 1) * 180) }}
           onDrag={(e, { point }) => setScrollX(point.x)}
         >
-          {groups.map((group, index) => (
-            <GroupButton key={index} name={group.name} members={group.members} />
+          {groups.map((group) => (
+            <GroupCard key={group.id} group={group} />
           ))}
         </motion.div>
       </div>
