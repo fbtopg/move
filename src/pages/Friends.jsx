@@ -89,7 +89,7 @@ const Friends = () => {
 
   return (
     <>
-      <div className="relative mb-4">
+      <div className="relative mb-6">
         <motion.div
           className="overflow-hidden"
           animate={{ x: `${-currentChallenge * 100}%` }}
@@ -120,7 +120,7 @@ const Friends = () => {
         </div>
       </div>
 
-      <div className="mb-4 mt-10 overflow-x-auto scrollbar-hide">
+      <div className="mb-6 mt-6 overflow-x-auto scrollbar-hide">
         <motion.div
           className="flex space-x-2 pl-4"
           drag="x"
@@ -133,7 +133,7 @@ const Friends = () => {
         </motion.div>
       </div>
 
-      <section className="mt-4 pb-20 space-y-6 px-4">
+      <section className="mt-6 pb-20 space-y-6 px-4">
         {renderActivitySection("TODAY", activities.today)}
         <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6" />
         {renderActivitySection("THIS MONTH", activities.thisMonth)}
