@@ -103,8 +103,8 @@ const Friends = () => {
         </motion.div>
         <Button
           onClick={handleCreateGroup}
-          className="absolute left-1/2 transform -translate-x-1/2 -bottom-10 w-[96%] bg-[#212124] text-gray-400 hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center border-4 border-black text-lg"
-          style={{ borderWidth: '4px' }}
+          className="absolute left-1/2 transform -translate-x-1/2 -bottom-10 w-[96%] bg-[#212124] text-gray-400 hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center border-8 border-black text-lg"
+          style={{ borderWidth: '8px' }}
         >
           <Plus className="mr-2 h-5 w-5" />
           Create Group
@@ -113,7 +113,7 @@ const Friends = () => {
 
       <div className="mb-6 mt-14 overflow-x-auto scrollbar-hide">
         <motion.div
-          className="flex space-x-2 px-4"
+          className="flex space-x-2"
           drag="x"
           dragConstraints={{ right: 0, left: -((groups.length - 1) * 150) }}
           onDrag={(e, { point }) => setScrollX(point.x)}
