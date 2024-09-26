@@ -75,7 +75,7 @@ const Friends = () => {
 
   return (
     <>
-      <div className="relative mb-24"> {/* Increased bottom margin to accommodate the button */}
+      <div className="relative mb-24">
         <motion.div
           className="overflow-hidden"
           onPanEnd={(e, { offset, velocity }) => {
@@ -98,7 +98,7 @@ const Friends = () => {
         </motion.div>
         <Button
           onClick={handleCreateGroup}
-          className="absolute left-1/2 transform -translate-x-1/2 -bottom-10 w-[96%] bg-[#212124] text-gray-400 hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center border-4 border-black"
+          className="absolute left-1/2 transform -translate-x-1/2 -bottom-10 w-[96%] bg-[#212124] text-gray-400 hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center border-4 border-black text-lg"
         >
           <Plus className="mr-2 h-5 w-5" />
           Create Group
