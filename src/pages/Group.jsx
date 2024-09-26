@@ -4,12 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import BottomNavBar from '../components/BottomNavBar';
 import PopularGroupCard from '../components/PopularGroupCard';
-import { motion } from 'framer-motion';
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(0);
 
   const handleCreateGroup = () => {
     console.log("Create group clicked");
@@ -17,24 +15,17 @@ const Group = () => {
   };
 
   const myGroups = [
-    [
-      { id: 1, name: 'My group 1', members: 5, lastActivity: 5 },
-      { id: 2, name: 'My group 2', members: 8, lastActivity: 15 },
-      { id: 3, name: 'My group 3', members: 3, lastActivity: 30 },
-    ],
-    [
-      { id: 4, name: 'My group 4', members: 6, lastActivity: 10 },
-      { id: 5, name: 'My group 5', members: 4, lastActivity: 20 },
-      { id: 6, name: 'My group 6', members: 7, lastActivity: 25 },
-    ],
+    { id: 1, name: 'My group 1', members: 5, lastActivity: 5 },
+    { id: 2, name: 'My group 2', members: 8, lastActivity: 15 },
+    { id: 3, name: 'My group 3', members: 3, lastActivity: 30 },
   ];
 
   const popularGroups = [
-    { id: 1, name: 'Fitness Enthusiasts', members: 1200, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319181.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgxLnBuZyIsImlhdCI6MTcyNzIzNTY3OSwiZXhwIjoxNzU4NzcxNjc5fQ._npMOoWg2FhDDwkKmbQBJrdw1U6Z1A6UbOuM5tO4jt4&t=2024-09-25T03%3A41%3A19.419Z' },
-    { id: 2, name: 'Book Club', members: 800, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319182.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgyLnBuZyIsImlhdCI6MTcyNzIzNTcwOCwiZXhwIjoxNzU4NzcxNzA4fQ.EvAjjxeX3ab_wRmddaL647-NnNcSBOxguMPsLS6md3Q&t=2024-09-25T03%3A41%3A48.733Z' },
-    { id: 3, name: 'Tech Innovators', members: 1500, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319181.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgxLnBuZyIsImlhdCI6MTcyNzIzNTY3OSwiZXhwIjoxNzU4NzcxNjc5fQ._npMOoWg2FhDDwkKmbQBJrdw1U6Z1A6UbOuM5tO4jt4&t=2024-09-25T03%3A41%3A19.419Z' },
-    { id: 4, name: 'Foodies United', members: 2000, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319182.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgyLnBuZyIsImlhdCI6MTcyNzIzNTcwOCwiZXhwIjoxNzU4NzcxNzA4fQ.EvAjjxeX3ab_wRmddaL647-NnNcSBOxguMPsLS6md3Q&t=2024-09-25T03%3A41%3A48.733Z' },
-    { id: 5, name: 'Travel Adventurers', members: 1800, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319181.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgxLnBuZyIsImlhdCI6MTcyNzIzNTY3OSwiZXhwIjoxNzU4NzcxNjc5fQ._npMOoWg2FhDDwkKmbQBJrdw1U6Z1A6UbOuM5tO4jt4&t=2024-09-25T03%3A41%3A19.419Z' },
+    { id: 1, name: 'Fitness Enthusiasts', members: 1200, image: 'https://example.com/fitness.jpg' },
+    { id: 2, name: 'Book Club', members: 800, image: 'https://example.com/book-club.jpg' },
+    { id: 3, name: 'Tech Innovators', members: 1500, image: 'https://example.com/tech.jpg' },
+    { id: 4, name: 'Foodies United', members: 2000, image: 'https://example.com/food.jpg' },
+    { id: 5, name: 'Travel Adventurers', members: 1800, image: 'https://example.com/travel.jpg' },
   ];
 
   return (
@@ -65,38 +56,15 @@ const Group = () => {
 
           <div className="space-y-4 mb-8">
             <h2 className="text-xl font-semibold mb-2">My Groups</h2>
-            <div className="relative overflow-hidden">
-              <motion.div
-                className="flex"
-                animate={{ x: `${-currentPage * 90}%` }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              >
-                {myGroups.map((page, pageIndex) => (
-                  <div key={pageIndex} className="flex-shrink-0 w-[90%] mr-[10%]">
-                    {page.map((group) => (
-                      <div key={group.id} className="flex items-center justify-between bg-[#212124] p-4 rounded-lg mb-4">
-                        <div>
-                          <h3 className="font-semibold">{group.name}</h3>
-                          <p className="text-sm text-gray-400">{group.members} members</p>
-                          <p className="text-xs text-gray-500">Last activity: {group.lastActivity} minutes ago</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-            <div className="flex justify-center space-x-2 mt-4">
-              {myGroups.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-2 h-2 rounded-full ${
-                    index === currentPage ? 'bg-white' : 'bg-gray-500'
-                  }`}
-                  onClick={() => setCurrentPage(index)}
-                />
-              ))}
-            </div>
+            {myGroups.map((group) => (
+              <div key={group.id} className="flex items-center justify-between bg-[#212124] p-4 rounded-lg">
+                <div>
+                  <h3 className="font-semibold">{group.name}</h3>
+                  <p className="text-sm text-gray-400">{group.members} members</p>
+                  <p className="text-xs text-gray-500">Last activity: {group.lastActivity} minutes ago</p>
+                </div>
+              </div>
+            ))}
           </div>
 
           <div className="mb-8">
