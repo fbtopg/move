@@ -46,17 +46,15 @@ const Group = () => {
             </div>
           </div>
 
-          <div className="relative -mt-4 mb-6">
-            <Button
-              onClick={handleCreateGroup}
-              className="w-full bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-22 rounded-full flex items-center justify-center absolute -top-8"
-            >
-              <Plus className="mr-2 h-5 w-5" />
-              Create Group
-            </Button>
-          </div>
+          <Button
+            onClick={handleCreateGroup}
+            className="w-full bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center mb-6"
+          >
+            <Plus className="mr-2 h-5 w-5" />
+            Create Group
+          </Button>
 
-          <div className="space-y-4 mb-8 mt-16">
+          <div className="space-y-4 mb-8">
             <h2 className="text-xl font-semibold mb-2">My Groups</h2>
             {myGroups.map((group) => (
               <div key={group.id} className="flex items-center justify-between bg-[#212124] p-4 rounded-lg">
