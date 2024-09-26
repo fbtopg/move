@@ -35,7 +35,7 @@ const ChallengeCard = ({ type, onNextChallenge }) => {
           </Avatar>
         </div>
         <button 
-          className="w-12 h-12 bg-[#212124] rounded-full flex items-center justify-center shadow-md self-end mt-auto mb-8"
+          className="w-12 h-12 bg-[#212124] rounded-full flex items-center justify-center shadow-md self-end mt-auto mb-12"
           onClick={(e) => {
             e.stopPropagation();
             onNextChallenge();
