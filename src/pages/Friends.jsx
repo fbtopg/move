@@ -111,7 +111,7 @@ const Friends = () => {
         </Button>
       </div>
 
-      <div className="mb-4 mt-14 overflow-x-auto scrollbar-hide">
+      <div className="mb-4 mt-8 overflow-x-auto scrollbar-hide">
         <motion.div
           className="flex space-x-2 pl-4"
           drag="x"
