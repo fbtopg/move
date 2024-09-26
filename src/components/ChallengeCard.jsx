@@ -29,23 +29,11 @@ const ChallengeCard = ({ type, progress }) => {
       onClick={handleClick}
     >
       <div className="flex-grow flex flex-col justify-between relative py-5 px-5">
-        <div className="flex flex-col">
-          <div className="flex justify-between items-start mb-2">
-            <Avatar className="w-8 h-8 cursor-pointer" onClick={handleProfileClick}>
-              <AvatarImage src={profilePicture} alt="Profile" />
-              <AvatarFallback>PFP</AvatarFallback>
-            </Avatar>
-          </div>
-          <div className="flex items-center space-x-2 mt-1">
-            <div className="flex -space-x-2">
-              {[...Array(3)].map((_, index) => (
-                <Avatar key={index} className="w-5 h-5 border-2 border-white">
-                  <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=User${index}`} />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-              ))}
-            </div>
-          </div>
+        <div className="flex justify-end">
+          <Avatar className="w-8 h-8 cursor-pointer" onClick={handleProfileClick}>
+            <AvatarImage src={profilePicture} alt="Profile" />
+            <AvatarFallback>PFP</AvatarFallback>
+          </Avatar>
         </div>
         <div className="absolute bottom-5 right-5 text-right">
           <p className="text-2xl font-bold leading-none flex items-baseline" style={{ marginTop: '-0.1em', marginBottom: '-0.1em' }}>
