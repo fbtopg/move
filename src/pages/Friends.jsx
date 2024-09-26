@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
+import { StatusBar } from 'react-native';
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import { getRandomProfilePicture } from '../utils/profilePictures';
@@ -89,6 +90,7 @@ const Friends = () => {
 
   return (
     <>
+      <StatusBar hidden={true} />
       <div className="relative mb-4">
         <motion.div
           className="overflow-hidden"
