@@ -1,6 +1,7 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 
 const ChallengeCard = ({ type, progress }) => {
   const isWalk = type === 'Daily Walk';
@@ -29,11 +30,21 @@ const ChallengeCard = ({ type, progress }) => {
       onClick={handleClick}
     >
       <div className="flex-grow flex flex-col justify-between relative py-5 px-5">
-        <div className="flex justify-end">
+        <div className="flex justify-between items-start">
           <Avatar className="w-8 h-8 cursor-pointer" onClick={handleProfileClick}>
             <AvatarImage src={profilePicture} alt="Profile" />
             <AvatarFallback>PFP</AvatarFallback>
           </Avatar>
+          <button 
+            className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md"
+            onClick={(e) => {
+              e.stopPropagation();
+              // Add functionality for the next button here
+              console.log('Next button clicked');
+            }}
+          >
+            <ChevronRight className="w-5 h-5 text-gray-600" />
+          </button>
         </div>
         <div className="absolute bottom-5 right-5 text-right">
           <p className="text-2xl font-bold leading-none flex items-baseline" style={{ marginTop: '-0.1em', marginBottom: '-0.1em' }}>
