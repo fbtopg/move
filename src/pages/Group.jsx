@@ -3,7 +3,7 @@ import { Search, Plus } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import BottomNavBar from '../components/BottomNavBar';
-import PopularGroupCard from '../components/PopularGroupCard';
+import GroupButton from '../components/GroupButton';
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
@@ -14,18 +14,12 @@ const Group = () => {
     // Implement group creation logic here
   };
 
-  const myGroups = [
-    { id: 1, name: 'My group 1', members: 5, lastActivity: 5 },
-    { id: 2, name: 'My group 2', members: 8, lastActivity: 15 },
-    { id: 3, name: 'My group 3', members: 3, lastActivity: 30 },
-  ];
-
-  const popularGroups = [
-    { id: 1, name: 'Fitness Enthusiasts', members: 1200, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319181.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgxLnBuZyIsImlhdCI6MTcyNzIzNTY3OSwiZXhwIjoxNzU4NzcxNjc5fQ._npMOoWg2FhDDwkKmbQBJrdw1U6Z1A6UbOuM5tO4jt4&t=2024-09-25T03%3A41%3A19.419Z' },
-    { id: 2, name: 'Book Club', members: 800, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319182.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgyLnBuZyIsImlhdCI6MTcyNzIzNTcwOCwiZXhwIjoxNzU4NzcxNzA4fQ.EvAjjxeX3ab_wRmddaL647-NnNcSBOxguMPsLS6md3Q&t=2024-09-25T03%3A41%3A48.733Z' },
-    { id: 3, name: 'Tech Innovators', members: 1500, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319181.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgxLnBuZyIsImlhdCI6MTcyNzIzNTY3OSwiZXhwIjoxNzU4NzcxNjc5fQ._npMOoWg2FhDDwkKmbQBJrdw1U6Z1A6UbOuM5tO4jt4&t=2024-09-25T03%3A41%3A19.419Z' },
-    { id: 4, name: 'Foodies United', members: 2000, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319182.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgyLnBuZyIsImlhdCI6MTcyNzIzNTcwOCwiZXhwIjoxNzU4NzcxNzA4fQ.EvAjjxeX3ab_wRmddaL647-NnNcSBOxguMPsLS6md3Q&t=2024-09-25T03%3A41%3A48.733Z' },
-    { id: 5, name: 'Travel Adventurers', members: 1800, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319181.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgxLnBuZyIsImlhdCI6MTcyNzIzNTY3OSwiZXhwIjoxNzU4NzcxNjc5fQ._npMOoWg2FhDDwkKmbQBJrdw1U6Z1A6UbOuM5tO4jt4&t=2024-09-25T03%3A41%3A19.419Z' },
+  const groups = [
+    { name: 'Fitness Buddies', members: 120 },
+    { name: 'Book Club', members: 45 },
+    { name: 'Tech Enthusiasts', members: 78 },
+    { name: 'Foodies Unite', members: 92 },
+    { name: 'Travel Explorers', members: 63 },
   ];
 
   return (
@@ -48,32 +42,16 @@ const Group = () => {
 
           <Button
             onClick={handleCreateGroup}
-            className="w-full bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center mb-6"
+            className="w-full bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center mb-4 border-2 border-gray-600"
           >
             <Plus className="mr-2 h-5 w-5" />
             Create Group
           </Button>
 
-          <div className="space-y-4 mb-8">
-            <h2 className="text-xl font-semibold mb-2">My Groups</h2>
-            {myGroups.map((group) => (
-              <div key={group.id} className="flex items-center justify-between bg-[#212124] p-4 rounded-lg">
-                <div>
-                  <h3 className="font-semibold">{group.name}</h3>
-                  <p className="text-sm text-gray-400">{group.members} members</p>
-                  <p className="text-xs text-gray-500">Last activity: {group.lastActivity} minutes ago</p>
-                </div>
-              </div>
+          <div className="flex overflow-x-auto space-x-2 pb-4 scrollbar-hide">
+            {groups.map((group, index) => (
+              <GroupButton key={index} name={group.name} members={group.members} />
             ))}
-          </div>
-
-          <div className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">Popular</h2>
-            <div className="flex overflow-x-auto space-x-4 scrollbar-hide pb-4">
-              {popularGroups.map((group) => (
-                <PopularGroupCard key={group.id} group={group} />
-              ))}
-            </div>
           </div>
         </div>
       </div>
