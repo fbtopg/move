@@ -109,11 +109,11 @@ const Friends = () => {
             placeholder="Search groups or challenges"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-transparent border-none text-gray-400 placeholder-gray-400 flex-grow h-24 rounded-full pl-6"
+            className="bg-transparent border-none text-gray-400 placeholder-gray-400 flex-grow h-16 rounded-full pl-6"
           />
           <Button
             onClick={handleCreateGroup}
-            className="bg-transparent hover:bg-[#2c2c2f] transition-colors h-24 rounded-full flex items-center justify-center text-gray-400 px-6"
+            className="bg-transparent hover:bg-[#2c2c2f] transition-colors h-16 rounded-full flex items-center justify-center text-gray-400 px-6"
           >
             <Plus className="h-5 w-5" />
           </Button>
