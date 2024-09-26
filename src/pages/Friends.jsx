@@ -16,6 +16,25 @@ const Friends = () => {
     { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
   ];
 
+  const handleNextChallenge = () => {
+    setCurrentChallenge((prev) => (prev + 1) % challenges.length);
+  };
+
+  const handleUserClick = (user) => {
+    setSelectedUser({
+      username: user.name,
+      handle: `@${user.name.toLowerCase()}`,
+      avatarUrl: getRandomProfilePicture(),
+      followers: Math.floor(Math.random() * 1000),
+      following: Math.floor(Math.random() * 1000),
+    });
+  };
+
+  const handleCreateGroup = () => {
+    console.log("Create group clicked");
+    // Implement group creation logic here
+  };
+
   const activities = {
     today: [
       { name: "Emma", activity: "finished walking 1.2km and completed daily walk • just now", type: "walk" },
@@ -36,25 +55,6 @@ const Friends = () => {
       { name: "Tate", activity: "solved the quiz today and completed daily quiz • 1m", type: "quiz" },
       { name: "Aquafina", activity: "finished walking 2km and completed daily walk • 1m", type: "walk" },
     ],
-  };
-
-  const handleNextChallenge = () => {
-    setCurrentChallenge((prev) => (prev + 1) % challenges.length);
-  };
-
-  const handleUserClick = (user) => {
-    setSelectedUser({
-      username: user.name,
-      handle: `@${user.name.toLowerCase()}`,
-      avatarUrl: getRandomProfilePicture(),
-      followers: Math.floor(Math.random() * 1000),
-      following: Math.floor(Math.random() * 1000),
-    });
-  };
-
-  const handleCreateGroup = () => {
-    console.log("Create group clicked");
-    // Implement group creation logic here
   };
 
   const renderActivitySection = (title, activities) => (
