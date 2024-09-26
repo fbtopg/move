@@ -22,9 +22,18 @@ const ChallengeCard = ({ type, onNextChallenge }) => {
     navigate('/profile');
   };
 
+  const backgroundStyle = isWalk
+    ? {
+        backgroundImage: `url(https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/jellywalk_inflatable_font_text_Daily_Walk_Challenge._--ar_32__f41053c9-cfbe-41f3-bd32-fd72a81e9f65_0%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvamVsbHl3YWxrX2luZmxhdGFibGVfZm9udF90ZXh0X0RhaWx5X1dhbGtfQ2hhbGxlbmdlLl8tLWFyXzMyX19mNDEwNTNjOS1jZmJlLTQxZjMtYmQzMi1mZDcyYTgxZTlmNjVfMCAxLnBuZyIsImlhdCI6MTcyNzMyNDA5NCwiZXhwIjoxNzU4ODYwMDk0fQ.QgGW11MY27XSN8eopytTJe-b1dTLFnwChRS94vvuu_0&t=2024-09-26T04%3A14%3A54.095Z)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
+    : { backgroundColor: '#DCFCE7' };
+
   return (
     <div 
-      className={`w-full overflow-hidden h-[240px] flex flex-col cursor-pointer relative ${isWalk ? 'bg-blue-100' : 'bg-green-100'}`}
+      className={`w-full overflow-hidden h-[240px] flex flex-col cursor-pointer relative`}
+      style={backgroundStyle}
       onClick={handleClick}
     >
       <div className="flex-grow flex flex-col justify-between relative py-5 px-5">
