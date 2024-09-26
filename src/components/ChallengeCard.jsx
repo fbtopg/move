@@ -29,7 +29,7 @@ const ChallengeCard = ({ type, onNextChallenge }) => {
     >
       <div className="flex-grow flex flex-col justify-between relative py-5 px-5">
         <div className="flex flex-col items-end space-y-3">
-          <Avatar className="w-12 h-12 cursor-pointer" onClick={handleProfileClick}>
+          <Avatar className="w-12 h-12 cursor-pointer border-2 border-gray-300" onClick={handleProfileClick}>
             <AvatarImage src={profilePicture} alt="Profile" />
             <AvatarFallback>PFP</AvatarFallback>
           </Avatar>
