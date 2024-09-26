@@ -97,7 +97,7 @@ const Friends = () => {
         </motion.div>
         <Button
           onClick={handleCreateGroup}
-          className="absolute left-1/2 transform -translate-x-1/2 -bottom-8 w-5/6 bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-16 rounded-full flex items-center justify-center"
+          className="absolute left-1/2 transform -translate-x-1/2 -bottom-8 w-11/12 bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-16 rounded-full flex items-center justify-center border-4 border-black"
         >
           Create Group
         </Button>
