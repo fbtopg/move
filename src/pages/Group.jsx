@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import BottomNavBar from '../components/BottomNavBar';
 import PopularGroupCard from '../components/PopularGroupCard';
-import ChallengeCard from '../components/ChallengeCard';
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
@@ -47,18 +46,15 @@ const Group = () => {
             </div>
           </div>
 
-          <div className="relative mb-10">
-            <ChallengeCard type="Daily Walk" date="SEPTEMBER 2024" active="16.5k" progress="501/16.5K" />
-            <Button
-              onClick={handleCreateGroup}
-              className="absolute left-1/2 transform -translate-x-1/2 -bottom-8 w-3/4 bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-16 rounded-full flex items-center justify-center"
-            >
-              <Plus className="mr-2 h-5 w-5" />
-              Create Group
-            </Button>
-          </div>
+          <Button
+            onClick={handleCreateGroup}
+            className="w-full bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center mb-6"
+          >
+            <Plus className="mr-2 h-5 w-5" />
+            Create Group
+          </Button>
 
-          <div className="space-y-4 mb-8 mt-12">
+          <div className="space-y-4 mb-8">
             <h2 className="text-xl font-semibold mb-2">My Groups</h2>
             {myGroups.map((group) => (
               <div key={group.id} className="flex items-center justify-between bg-[#212124] p-4 rounded-lg">
