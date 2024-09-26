@@ -74,31 +74,30 @@ const Friends = () => {
 
   return (
     <>
-      <motion.div
-        className="overflow-hidden"
-        onPanEnd={(e, { offset, velocity }) => {
-          if (Math.abs(velocity.x) > 500 || Math.abs(offset.x) > 50) {
-            handleSwipe(currentChallenge === 0 ? 1 : 0);
-          }
-        }}
-      >
+      <div className="relative mb-16">
         <motion.div
-          className="flex"
-          animate={{ x: `${-currentChallenge * 100}%` }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          className="overflow-hidden"
+          onPanEnd={(e, { offset, velocity }) => {
+            if (Math.abs(velocity.x) > 500 || Math.abs(offset.x) > 50) {
+              handleSwipe(currentChallenge === 0 ? 1 : 0);
+            }
+          }}
         >
-          {challenges.map((challenge, index) => (
-            <div key={index} className="flex-shrink-0 w-full">
-              <ChallengeCard {...challenge} />
-            </div>
-          ))}
+          <motion.div
+            className="flex"
+            animate={{ x: `${-currentChallenge * 100}%` }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          >
+            {challenges.map((challenge, index) => (
+              <div key={index} className="flex-shrink-0 w-full">
+                <ChallengeCard {...challenge} />
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
-      </motion.div>
-
-      <div className="mb-6">
         <Button
           onClick={handleCreateGroup}
-          className="w-full bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-20 rounded-lg flex items-center justify-center"
+          className="absolute left-1/2 transform -translate-x-1/2 -bottom-8 w-5/6 bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-16 rounded-full flex items-center justify-center"
         >
           Create Group
         </Button>
