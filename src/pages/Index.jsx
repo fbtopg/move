@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import InviteFriends from '../components/InviteFriends';
 import BottomNavBar from '../components/BottomNavBar';
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import Friends from './Friends';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { getRandomProfilePicture } from '../utils/profilePictures';
@@ -13,9 +10,7 @@ import DailyQuizChallenge from './DailyQuizChallenge';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('community');
-  const [isInviteOpen, setIsInviteOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [activeTopTab, setActiveTopTab] = useState('all');
   const location = useLocation();
 
   const handleUserClick = (user) => {
@@ -30,34 +25,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black flex flex-col">
-      <div className="sticky top-0 bg-black z-10 p-2">
-        <div className="max-w-md mx-auto flex justify-between items-center">
-          <div className="flex">
-            <button
-              className={`text-lg font-bold mr-4 ${activeTopTab === 'all' ? 'text-white' : 'text-gray-400'}`}
-              onClick={() => setActiveTopTab('all')}
-            >
-              All
-            </button>
-            <button
-              className={`text-lg font-bold ${activeTopTab === 'friends' ? 'text-white' : 'text-gray-400'}`}
-              onClick={() => setActiveTopTab('friends')}
-            >
-              Friends
-            </button>
-          </div>
-          <Button 
-            size="icon" 
-            variant="ghost" 
-            onClick={() => setIsInviteOpen(true)}
-            className="hover:bg-transparent p-1.5"
-          >
-            <Plus className="h-6 w-6 text-white" />
-          </Button>
-        </div>
-      </div>
       <div className="flex-grow overflow-y-auto scrollbar-hide">
-        <div className="max-w-md mx-auto p-2">
+        <div className="max-w-md mx-auto">
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Friends onUserClick={handleUserClick} />} />
@@ -67,7 +36,6 @@ const Index = () => {
           </AnimatePresence>
         </div>
       </div>
-      <InviteFriends isOpen={isInviteOpen} onClose={() => setIsInviteOpen(false)} />
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
       {selectedUser && (
         <UserProfilePopup

@@ -20,7 +20,7 @@ const ChallengeCard = ({ type, date, active, progress }) => {
 
   return (
     <div 
-      className={`w-full max-w-md mx-auto overflow-hidden h-[160px] flex cursor-pointer relative ${isWalk ? 'bg-blue-100' : 'bg-green-100'}`}
+      className={`w-full overflow-hidden h-[160px] flex cursor-pointer relative ${isWalk ? 'bg-blue-100' : 'bg-green-100'}`}
       onClick={handleClick}
     >
       <div className="flex-grow flex flex-col justify-between relative py-5 px-5">

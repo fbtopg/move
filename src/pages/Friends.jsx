@@ -4,7 +4,6 @@ import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import UserProfilePopup from '../components/UserProfilePopup';
-import { Plus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const Friends = () => {
@@ -90,34 +89,17 @@ const Friends = () => {
         >
           {challenges.map((challenge, index) => (
             <div key={index} className="flex-shrink-0 w-full">
-              <div className="mb-4">
-                <ChallengeCard {...challenge} />
-              </div>
+              <ChallengeCard {...challenge} />
             </div>
           ))}
         </motion.div>
       </motion.div>
-
-      <div className="flex justify-center space-x-2 mb-4">
-        {challenges.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full ${
-              index === currentChallenge ? 'bg-white' : 'bg-gray-500'
-            }`}
-            onClick={() => handleSwipe(index)}
-          />
-        ))}
-      </div>
-
-      <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6" />
 
       <div className="mb-6">
         <Button
           onClick={handleCreateGroup}
           className="w-full bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-20 rounded-lg flex items-center justify-center"
         >
-          <Plus className="mr-2 h-5 w-5" />
           Create Group
         </Button>
       </div>
