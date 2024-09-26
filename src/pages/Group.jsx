@@ -65,21 +65,14 @@ const Group = () => {
 
           <div className="space-y-4 mb-8">
             <h2 className="text-xl font-semibold mb-2">My Groups</h2>
-            <motion.div
-              className="overflow-hidden"
-              onPanEnd={(e, { offset, velocity }) => {
-                if (Math.abs(velocity.x) > 500 || Math.abs(offset.x) > 50) {
-                  setCurrentPage(currentPage === 0 ? 1 : 0);
-                }
-              }}
-            >
+            <div className="relative overflow-hidden">
               <motion.div
                 className="flex"
-                animate={{ x: `${-currentPage * 100}%` }}
+                animate={{ x: `${-currentPage * 90}%` }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
                 {myGroups.map((page, pageIndex) => (
-                  <div key={pageIndex} className="flex-shrink-0 w-full">
+                  <div key={pageIndex} className="flex-shrink-0 w-[90%] mr-[10%]">
                     {page.map((group) => (
                       <div key={group.id} className="flex items-center justify-between bg-[#212124] p-4 rounded-lg mb-4">
                         <div>
@@ -92,7 +85,7 @@ const Group = () => {
                   </div>
                 ))}
               </motion.div>
-            </motion.div>
+            </div>
             <div className="flex justify-center space-x-2 mt-4">
               {myGroups.map((_, index) => (
                 <button
