@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
@@ -111,7 +111,7 @@ const Friends = () => {
         </Button>
       </div>
 
-      <div className="mb-4 mt-14 overflow-x-auto scrollbar-hide">
+      <div className="mb-4 mt-12 overflow-x-auto scrollbar-hide">
         <motion.div
           className="flex space-x-2 pl-4"
           drag="x"
