@@ -32,6 +32,10 @@ const Friends = () => {
     setCurrentChallenge((prev) => (prev + 1) % challenges.length);
   };
 
+  const handlePreviousChallenge = () => {
+    setCurrentChallenge((prev) => (prev - 1 + challenges.length) % challenges.length);
+  };
+
   const handleUserClick = (user) => {
     setSelectedUser({
       username: user.name,
@@ -98,7 +102,11 @@ const Friends = () => {
           <div className="flex">
             {challenges.map((challenge, index) => (
               <div key={index} className="flex-shrink-0 w-full">
-                <ChallengeCard {...challenge} onNextChallenge={handleNextChallenge} />
+                <ChallengeCard 
+                  {...challenge} 
+                  onNextChallenge={handleNextChallenge}
+                  onPreviousChallenge={handlePreviousChallenge}
+                />
               </div>
             ))}
           </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 
-const ChallengeCard = ({ type, onNextChallenge }) => {
+const ChallengeCard = ({ type, onNextChallenge, onPreviousChallenge }) => {
   const isWalk = type === 'Daily Walk';
   const navigate = useNavigate();
 
@@ -38,19 +38,30 @@ const ChallengeCard = ({ type, onNextChallenge }) => {
           <img
             src={profilePicture}
             alt="Profile"
-            className="w-12 h-12 rounded-full cursor-pointer border-2 border-[#212124]"
+            className="w-12 h-12 rounded-full cursor-pointer border-2 border-[#212124] z-10"
             onClick={handleProfileClick}
           />
         </div>
-        <button 
-          className="w-12 h-12 bg-[#212124] rounded-full flex items-center justify-center shadow-md self-end mt-auto mb-16"
-          onClick={(e) => {
-            e.stopPropagation();
-            onNextChallenge();
-          }}
-        >
-          <ChevronRight className="w-6 h-6 text-white" />
-        </button>
+        <div className="flex justify-between mt-auto mb-16">
+          <button 
+            className="w-12 h-12 bg-[#212124] rounded-full flex items-center justify-center shadow-md"
+            onClick={(e) => {
+              e.stopPropagation();
+              onPreviousChallenge();
+            }}
+          >
+            <ChevronLeft className="w-6 h-6 text-white" />
+          </button>
+          <button 
+            className="w-12 h-12 bg-[#212124] rounded-full flex items-center justify-center shadow-md"
+            onClick={(e) => {
+              e.stopPropagation();
+              onNextChallenge();
+            }}
+          >
+            <ChevronRight className="w-6 h-6 text-white" />
+          </button>
+        </div>
       </div>
     </div>
   );
