@@ -6,14 +6,24 @@ import { getRandomProfilePicture } from '../utils/profilePictures';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
 import { Plus } from 'lucide-react';
+import GroupButton from '../components/GroupButton';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [scrollX, setScrollX] = useState(0);
 
   const challenges = [
     { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
     { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
+  ];
+
+  const groups = [
+    { name: "Fitness Buddies", members: 120 },
+    { name: "Book Club", members: 45 },
+    { name: "Tech Enthusiasts", members: 78 },
+    { name: "Foodies Unite", members: 92 },
+    { name: "Travel Explorers", members: 63 },
   ];
 
   const handleNextChallenge = () => {
@@ -94,10 +104,24 @@ const Friends = () => {
         <Button
           onClick={handleCreateGroup}
           className="absolute left-1/2 transform -translate-x-1/2 -bottom-10 w-[96%] bg-[#212124] text-gray-400 hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center border-4 border-black text-lg"
+          style={{ borderWidth: '3px' }}
         >
           <Plus className="mr-2 h-5 w-5" />
           Create Group
         </Button>
+      </div>
+
+      <div className="mb-6 px-4">
+        <motion.div
+          className="flex space-x-2 overflow-x-auto scrollbar-hide"
+          drag="x"
+          dragConstraints={{ right: 0, left: -((groups.length - 1) * 150) }}
+          onDrag={(e, { point }) => setScrollX(point.x)}
+        >
+          {groups.map((group, index) => (
+            <GroupButton key={index} name={group.name} members={group.members} />
+          ))}
+        </motion.div>
       </div>
 
       <section className="mt-4 pb-20 space-y-6 px-4">
