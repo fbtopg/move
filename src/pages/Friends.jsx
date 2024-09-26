@@ -38,7 +38,9 @@ const Friends = () => {
     ],
   };
 
-  const handleSwipe = (index) => setCurrentChallenge(index);
+  const handleNextChallenge = () => {
+    setCurrentChallenge((prev) => (prev + 1) % challenges.length);
+  };
 
   const handleUserClick = (user) => {
     setSelectedUser({
@@ -78,23 +80,16 @@ const Friends = () => {
       <div className="relative mb-24">
         <motion.div
           className="overflow-hidden"
-          onPanEnd={(e, { offset, velocity }) => {
-            if (Math.abs(velocity.x) > 500 || Math.abs(offset.x) > 50) {
-              handleSwipe(currentChallenge === 0 ? 1 : 0);
-            }
-          }}
+          animate={{ x: `${-currentChallenge * 100}%` }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
-          <motion.div
-            className="flex"
-            animate={{ x: `${-currentChallenge * 100}%` }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          >
+          <div className="flex">
             {challenges.map((challenge, index) => (
               <div key={index} className="flex-shrink-0 w-full">
-                <ChallengeCard {...challenge} />
+                <ChallengeCard {...challenge} onNextChallenge={handleNextChallenge} />
               </div>
             ))}
-          </motion.div>
+          </div>
         </motion.div>
         <Button
           onClick={handleCreateGroup}
