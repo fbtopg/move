@@ -75,7 +75,7 @@ const Friends = () => {
 
   return (
     <>
-      <div className="relative mb-16">
+      <div className="relative mb-24"> {/* Increased bottom margin to accommodate the button */}
         <motion.div
           className="overflow-hidden"
           onPanEnd={(e, { offset, velocity }) => {
@@ -98,14 +98,14 @@ const Friends = () => {
         </motion.div>
         <Button
           onClick={handleCreateGroup}
-          className="absolute left-1/2 transform -translate-x-1/2 -bottom-8 w-[96%] bg-[#212124] text-gray-400 hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center border-4 border-black"
+          className="absolute left-1/2 transform -translate-x-1/2 -bottom-10 w-[96%] bg-[#212124] text-gray-400 hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center border-4 border-black"
         >
           <Plus className="mr-2 h-5 w-5" />
           Create Group
         </Button>
       </div>
 
-      <section className="mt-4 pb-20 space-y-6 px-4"> {/* Added px-4 for horizontal padding */}
+      <section className="mt-4 pb-20 space-y-6 px-4">
         {renderActivitySection("TODAY", activities.today)}
         <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6" />
         {renderActivitySection("THIS MONTH", activities.thisMonth)}
