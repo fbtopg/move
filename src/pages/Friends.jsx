@@ -113,7 +113,7 @@ const Friends = () => {
 
       <div className="mb-6 mt-14 overflow-x-auto scrollbar-hide">
         <motion.div
-          className="flex space-x-2"
+          className="flex space-x-2 pl-4" // Added pl-4 for left padding
           drag="x"
           dragConstraints={{ right: 0, left: -((groups.length - 1) * 150) }}
           onDrag={(e, { point }) => setScrollX(point.x)}
