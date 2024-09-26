@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { motion, useAnimation } from "framer-motion";
+import React, { useState } from 'react';
+import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import { getRandomProfilePicture } from '../utils/profilePictures';
@@ -8,16 +8,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus, Search } from 'lucide-react';
 import GroupButton from '../components/GroupButton';
-import SearchPage from '../components/SearchPage';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
   const [scrollX, setScrollX] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const searchInputRef = useRef(null);
-  const searchAnimationControls = useAnimation();
 
   const challenges = [
     { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
@@ -48,24 +44,7 @@ const Friends = () => {
 
   const handleCreateGroup = () => {
     console.log("Create group clicked");
-  };
-
-  const handleSearchClick = async () => {
-    const inputRect = searchInputRef.current.getBoundingClientRect();
-    const targetY = 16; // 16px from the top of the screen
-    const distance = inputRect.top - targetY;
-
-    await searchAnimationControls.start({
-      y: -distance,
-      transition: { type: 'spring', damping: 25, stiffness: 500 },
-    });
-
-    setIsSearchOpen(true);
-  };
-
-  const handleCloseSearch = async () => {
-    setIsSearchOpen(false);
-    await searchAnimationControls.start({ y: 0 });
+    // Implement group creation logic here
   };
 
   const activities = {
@@ -124,20 +103,13 @@ const Friends = () => {
             ))}
           </div>
         </motion.div>
-        <motion.div
-          className="absolute left-1/2 transform -translate-x-1/2 -bottom-10 w-[96%] bg-[#212124] rounded-full flex items-center justify-between border-8 border-black"
-          style={{ borderWidth: '8px', marginTop: '-12px', height: '80px' }}
-          animate={searchAnimationControls}
-        >
+        <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-10 w-[96%] bg-[#212124] rounded-full flex items-center justify-between border-8 border-black" style={{ borderWidth: '8px', marginTop: '-12px', height: '80px' }}>
           <Input
-            ref={searchInputRef}
             type="text"
             placeholder="Search groups or challenges"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="bg-transparent border-none text-gray-400 placeholder-gray-400 flex-grow h-20 rounded-full pl-6"
-            onClick={handleSearchClick}
-            readOnly
           />
           <Button
             onClick={handleCreateGroup}
@@ -145,7 +117,7 @@ const Friends = () => {
           >
             <Plus className="h-5 w-5" />
           </Button>
-        </motion.div>
+        </div>
       </div>
 
       <div className="mb-4 mt-12 overflow-x-auto scrollbar-hide">
@@ -176,13 +148,6 @@ const Friends = () => {
           user={selectedUser}
         />
       )}
-
-      <SearchPage
-        isOpen={isSearchOpen}
-        onClose={handleCloseSearch}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-      />
     </>
   );
 };
