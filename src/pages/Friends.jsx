@@ -105,7 +105,7 @@ const Friends = () => {
         </Button>
       </div>
 
-      <section className="mt-4 pb-20 space-y-6">
+      <section className="mt-4 pb-20 space-y-6 px-4"> {/* Added px-4 for horizontal padding */}
         {renderActivitySection("TODAY", activities.today)}
         <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6" />
         {renderActivitySection("THIS MONTH", activities.thisMonth)}
