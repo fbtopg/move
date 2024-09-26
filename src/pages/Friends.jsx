@@ -5,14 +5,11 @@ import FriendActivity from '../components/FriendActivity';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
-import { Plus, User } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Plus } from 'lucide-react';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
-  const navigate = useNavigate();
 
   const challenges = [
     { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
@@ -78,9 +75,6 @@ const Friends = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-4 px-4 pt-4">
-        <h1 className="text-2xl font-bold">Friends</h1>
-      </div>
       <div className="relative mb-16">
         <motion.div
           className="overflow-hidden"
@@ -97,27 +91,14 @@ const Friends = () => {
           >
             {challenges.map((challenge, index) => (
               <div key={index} className="flex-shrink-0 w-full">
-                <div className="relative">
-                  <ChallengeCard {...challenge} />
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="absolute top-4 right-4 rounded-full"
-                    onClick={() => navigate('/profile')}
-                  >
-                    <Avatar className="w-10 h-10">
-                      <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" />
-                      <AvatarFallback><User className="h-6 w-6" /></AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </div>
+                <ChallengeCard {...challenge} />
               </div>
             ))}
           </motion.div>
         </motion.div>
         <Button
           onClick={handleCreateGroup}
-          className="absolute left-1/2 transform -translate-x-1/2 -bottom-8 w-[96%] bg-[#212124] text-gray-400 hover:bg-[#2c2c2f] transition-colors h-24 rounded-full flex items-center justify-center border-4 border-black"
+          className="absolute left-1/2 transform -translate-x-1/2 -bottom-8 w-[96%] bg-[#212124] text-gray-400 hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center border-4 border-black"
         >
           <Plus className="mr-2 h-5 w-5" />
           Create Group
