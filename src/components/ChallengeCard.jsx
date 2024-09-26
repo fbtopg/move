@@ -29,20 +29,20 @@ const ChallengeCard = ({ type, onNextChallenge }) => {
     >
       <div className="flex-grow flex flex-col justify-between relative py-5 px-5">
         <div className="flex flex-col items-end space-y-3">
-          <Avatar className="w-10 h-10 cursor-pointer" onClick={handleProfileClick}>
+          <Avatar className="w-12 h-12 cursor-pointer" onClick={handleProfileClick}>
             <AvatarImage src={profilePicture} alt="Profile" />
             <AvatarFallback>PFP</AvatarFallback>
           </Avatar>
-          <button 
-            className="w-10 h-10 bg-[#212124] rounded-full flex items-center justify-center shadow-md"
-            onClick={(e) => {
-              e.stopPropagation();
-              onNextChallenge();
-            }}
-          >
-            <ChevronRight className="w-6 h-6 text-white" />
-          </button>
         </div>
+        <button 
+          className="w-12 h-12 bg-[#212124] rounded-full flex items-center justify-center shadow-md self-end mt-auto"
+          onClick={(e) => {
+            e.stopPropagation();
+            onNextChallenge();
+          }}
+        >
+          <ChevronRight className="w-8 h-8 text-white" />
+        </button>
       </div>
     </div>
   );
