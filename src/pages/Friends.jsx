@@ -5,13 +5,15 @@ import FriendActivity from '../components/FriendActivity';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
-import { Plus } from 'lucide-react';
+import { Input } from "@/components/ui/input";
+import { Plus, Search } from 'lucide-react';
 import GroupButton from '../components/GroupButton';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
   const [scrollX, setScrollX] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const challenges = [
     { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
@@ -101,14 +103,21 @@ const Friends = () => {
             ))}
           </div>
         </motion.div>
-        <Button
-          onClick={handleCreateGroup}
-          className="absolute left-1/2 transform -translate-x-1/2 -bottom-12 w-[96%] bg-[#212124] text-gray-400 hover:bg-[#2c2c2f] transition-colors h-24 rounded-full flex items-center justify-center border-8 border-black text-lg"
-          style={{ borderWidth: '8px', marginTop: '-12px' }}
-        >
-          <Plus className="mr-2 h-5 w-5" />
-          Create Group
-        </Button>
+        <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-12 w-[96%] bg-[#212124] rounded-full flex items-center justify-between border-8 border-black" style={{ borderWidth: '8px', marginTop: '-12px' }}>
+          <Input
+            type="text"
+            placeholder="Search groups or challenges"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="bg-transparent border-none text-gray-400 placeholder-gray-400 flex-grow h-24 rounded-full pl-6"
+          />
+          <Button
+            onClick={handleCreateGroup}
+            className="bg-transparent hover:bg-[#2c2c2f] transition-colors h-24 rounded-full flex items-center justify-center text-gray-400 px-6"
+          >
+            <Plus className="h-5 w-5" />
+          </Button>
+        </div>
       </div>
 
       <div className="mb-4 mt-14 overflow-x-auto scrollbar-hide">
