@@ -24,7 +24,7 @@ const ChallengeCard = ({ type, onNextChallenge }) => {
 
   const backgroundStyle = isWalk
     ? {
-        backgroundImage: `url(https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/jellywalk_inflatable_font_text_Daily_Walk_Challenge._--ar_32__f41053c9-cfbe-41f3-bd32-fd72a81e9f65_0%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvamVsbHl3YWxrX2luZmxhdGFibGVfZm9udF90ZXh0X0RhaWx5X1dhbGtfQ2hhbGxlbmdlLl8tLWFyXzMyX19mNDEwNTNjOS1jZmJlLTQxZjMtYmQzMi1mZDcyYTgxZTlmNjVfMCAxLnBuZyIsImlhdCI6MTcyNzMyNDA5NCwiZXhwIjoxNzU4ODYwMDk0fQ.QgGW11MY27XSN8eopytTJe-b1dTLFnwChRS94vvuu_0&t=2024-09-26T04%3A14%3A54.095Z)`,
+        backgroundImage: `url(https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/jellywalk_inflatable_font_text_Daily_Walk_Challenge%20(1)._--ar_32__f41053c9-cfbe-41f3-bd32-fd72a81e9f65_0%201?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvamVsbHl3YWxrX2luZmxhdGFibGVfZm9udF90ZXh0X0RhaWx5X1dhbGtfQ2hhbGxlbmdlICgxKS5fLS1hcl8zMl9fZjQxMDUzYzktY2ZiZS00MWYzLWJkMzItZmQ3MmE4MWU5ZjY1XzAgMSIsImlhdCI6MTcyNzMyNTE1OSwiZXhwIjoxNzU4ODYxMTU5fQ.6Q0I38POMCJB4iDpCiGTMad8mDGqEezsE2svJF5Rl_o&t=2024-09-26T04%3A32%3A38.890Z)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }
