@@ -103,17 +103,17 @@ const Friends = () => {
             ))}
           </div>
         </motion.div>
-        <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-12 w-[96%] bg-[#212124] rounded-full flex items-center justify-between border-8 border-black" style={{ borderWidth: '8px', marginTop: '-12px' }}>
+        <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-10 w-[96%] bg-[#212124] rounded-full flex items-center justify-between border-8 border-black" style={{ borderWidth: '8px', marginTop: '-12px', height: '80px' }}>
           <Input
             type="text"
             placeholder="Search groups or challenges"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-transparent border-none text-gray-400 placeholder-gray-400 flex-grow h-16 rounded-full pl-6"
+            className="bg-transparent border-none text-gray-400 placeholder-gray-400 flex-grow h-20 rounded-full pl-6"
           />
           <Button
             onClick={handleCreateGroup}
-            className="bg-transparent hover:bg-[#2c2c2f] transition-colors h-16 rounded-full flex items-center justify-center text-gray-400 px-6"
+            className="bg-transparent hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center text-gray-400 px-6"
           >
             <Plus className="h-5 w-5" />
           </Button>
