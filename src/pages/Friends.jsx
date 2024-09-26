@@ -87,7 +87,7 @@ const Friends = () => {
 
   return (
     <>
-      <div className="relative mb-24">
+      <div className="relative mb-4">
         <motion.div
           className="overflow-hidden"
           animate={{ x: `${-currentChallenge * 100}%` }}
@@ -111,7 +111,7 @@ const Friends = () => {
         </Button>
       </div>
 
-      <div className="mb-6 px-4">
+      <div className="mb-6 px-4 mt-14">
         <motion.div
           className="flex space-x-2 overflow-x-auto scrollbar-hide"
           drag="x"
