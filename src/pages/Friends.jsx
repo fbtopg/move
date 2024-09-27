@@ -5,7 +5,7 @@ import FriendActivity from '../components/FriendActivity';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Search } from 'lucide-react';
+import { Plus, Search, MoreHorizontal } from 'lucide-react';
 import FilterButton from '../components/FilterButton';
 import { useNavigate } from 'react-router-dom';
 
@@ -127,7 +127,7 @@ const Friends = () => {
       </div>
 
       <div className="mb-4 mt-12 overflow-x-auto scrollbar-hide">
-        <div className="flex space-x-2 pl-4">
+        <div className="flex space-x-2 pl-4 items-center">
           {filters.map((filter, index) => (
             <FilterButton key={index} name={filter.name} emoji={filter.emoji} color={filter.color} />
           ))}
@@ -140,6 +140,12 @@ const Friends = () => {
               isGroup={true} 
             />
           ))}
+          <Button
+            onClick={() => navigate('/group')}
+            className="bg-gray-700 hover:bg-gray-600 transition-colors h-12 w-12 rounded-full flex items-center justify-center"
+          >
+            <MoreHorizontal className="h-5 w-5 text-gray-300" />
+          </Button>
         </div>
       </div>
 
