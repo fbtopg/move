@@ -7,7 +7,7 @@ import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus, Search } from 'lucide-react';
-import GroupButton from '../components/GroupButton';
+import FilterButton from '../components/FilterButton';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
@@ -20,12 +20,9 @@ const Friends = () => {
     { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
   ];
 
-  const groups = [
-    { name: "Fitness Buddies", members: 120 },
-    { name: "Book Club", members: 45 },
-    { name: "Tech Enthusiasts", members: 78 },
-    { name: "Foodies Unite", members: 92 },
-    { name: "Travel Explorers", members: 63 },
+  const filters = [
+    { name: "Hot", emoji: "🔥", color: "bg-green-500" },
+    { name: "New", emoji: "✨", color: "bg-blue-500" },
   ];
 
   const handleNextChallenge = () => {
@@ -124,11 +121,11 @@ const Friends = () => {
         <motion.div
           className="flex space-x-2 pl-4"
           drag="x"
-          dragConstraints={{ right: 0, left: -((groups.length - 1) * 150) }}
+          dragConstraints={{ right: 0, left: -((filters.length - 1) * 150) }}
           onDrag={(e, { point }) => setScrollX(point.x)}
         >
-          {groups.map((group, index) => (
-            <GroupButton key={index} name={group.name} members={group.members} />
+          {filters.map((filter, index) => (
+            <FilterButton key={index} name={filter.name} emoji={filter.emoji} color={filter.color} />
           ))}
         </motion.div>
       </div>
