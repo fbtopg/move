@@ -7,7 +7,7 @@ const FilterButton = ({ name, emoji, color, members, isGroup = false }) => {
         <div className="text-sm font-semibold text-white">
           {name}
         </div>
-        <div className="text-[10px] text-gray-500 mt-1">
+        <div className="text-[10px] text-gray-500 -mt-0.5">
           {members}
         </div>
       </button>
