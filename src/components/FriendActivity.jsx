@@ -88,8 +88,9 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
           isOpen={isProfileOpen}
           onClose={() => setIsProfileOpen(false)}
           user={{
-            ...selectedUser,
-            avatarUrl: getRandomProfilePicture(),
+            username: name,
+            handle: `@${name.toLowerCase()}`,
+            avatarUrl: profilePicture,
             followers: Math.floor(Math.random() * 1000),
             following: Math.floor(Math.random() * 1000),
           }}
