@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
+import { useNavigate } from 'react-router-dom';
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Search } from 'lucide-react';
+import { Plus, Search, ChevronRight } from 'lucide-react';
 import FilterButton from '../components/FilterButton';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const challenges = [
     { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
@@ -137,7 +139,7 @@ const Friends = () => {
             <FilterButton key={index} name={filter.name} emoji={filter.emoji} color={filter.color} />
           ))}
           <div className="h-8 w-px bg-gray-600 mx-2 self-center"></div>
-          {userGroups.map((group, index) => (
+          {userGroups.slice(0, 3).map((group, index) => (
             <FilterButton 
               key={`group-${index}`} 
               name={group.name} 
@@ -145,6 +147,14 @@ const Friends = () => {
               isGroup={true} 
             />
           ))}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => navigate('/group')}
+            className="flex items-center justify-center px-4 py-2 bg-[#212124] text-white rounded-full hover:bg-[#2c2c2f] transition-colors"
+          >
+            More <ChevronRight className="ml-1 h-4 w-4" />
+          </Button>
         </div>
       </div>
 
