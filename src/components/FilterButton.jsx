@@ -10,9 +10,9 @@ const FilterButton = ({ name, emoji, color, members, isGroup = false }) => {
         <div className="text-sm font-semibold text-white">
           {name}
         </div>
-        <div className="text-xs text-gray-400 mt-1">
+        <div className="text-[10px] text-gray-500 mt-1">
           {firstMember}, {secondMember},{' '}
-          <span className="inline-flex items-center justify-center w-4 h-4 bg-gray-600 rounded-full">
+          <span>
             +{remainingMembers}
           </span>
         </div>
