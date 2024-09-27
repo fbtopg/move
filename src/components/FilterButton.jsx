@@ -7,7 +7,7 @@ const FilterButton = ({ name, emoji, color, members, isGroup = false }) => {
         {isGroup ? (
           <>
             <span className="mr-2">{name}</span>
-            <span className="text-xs text-gray-400">{members} members</span>
+            <span className="text-xs text-gray-400">{members}</span>
           </>
         ) : (
           <>

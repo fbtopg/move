@@ -24,9 +24,9 @@ const Friends = () => {
   ];
 
   const userGroups = [
-    { name: "Fitness Buddies", members: 15 },
-    { name: "Book Club", members: 8 },
-    { name: "Tech Enthusiasts", members: 20 },
+    { name: "Fitness Buddies", members: 1500 },
+    { name: "Book Club", members: 800 },
+    { name: "Tech Enthusiasts", members: 20000 },
   ];
 
   const handleNextChallenge = () => {
@@ -46,6 +46,13 @@ const Friends = () => {
   const handleCreateGroup = () => {
     console.log("Create group clicked");
     // Implement group creation logic here
+  };
+
+  const formatMemberCount = (count) => {
+    if (count >= 1000) {
+      return `+${(count / 1000).toFixed(1)}k`;
+    }
+    return `+${count}`;
   };
 
   const activities = {
@@ -131,7 +138,12 @@ const Friends = () => {
           ))}
           <div className="h-8 w-px bg-gray-600 mx-2 self-center"></div>
           {userGroups.map((group, index) => (
-            <FilterButton key={`group-${index}`} name={group.name} members={group.members} isGroup={true} />
+            <FilterButton 
+              key={`group-${index}`} 
+              name={group.name} 
+              members={formatMemberCount(group.members)} 
+              isGroup={true} 
+            />
           ))}
         </div>
       </div>
