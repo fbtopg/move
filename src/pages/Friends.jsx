@@ -25,6 +25,12 @@ const Friends = () => {
     { name: "New", emoji: "✨", color: "bg-blue-500" },
   ];
 
+  const userGroups = [
+    { name: "Fitness Buddies", members: 15 },
+    { name: "Book Club", members: 8 },
+    { name: "Tech Enthusiasts", members: 20 },
+  ];
+
   const handleNextChallenge = () => {
     setCurrentChallenge((prev) => (prev + 1) % challenges.length);
   };
@@ -124,11 +130,14 @@ const Friends = () => {
         <motion.div
           className="flex space-x-2 pl-4"
           drag="x"
-          dragConstraints={{ right: 0, left: -((filters.length - 1) * 150) }}
+          dragConstraints={{ right: 0, left: -((filters.length + userGroups.length - 1) * 150) }}
           onDrag={(e, { point }) => setScrollX(point.x)}
         >
           {filters.map((filter, index) => (
             <FilterButton key={index} name={filter.name} emoji={filter.emoji} color={filter.color} />
+          ))}
+          {userGroups.map((group, index) => (
+            <FilterButton key={`group-${index}`} name={group.name} members={group.members} isGroup={true} />
           ))}
         </motion.div>
       </div>
