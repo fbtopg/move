@@ -151,7 +151,7 @@ const Friends = () => {
             variant="ghost"
             size="sm"
             onClick={() => navigate('/group')}
-            className="flex items-center justify-center px-4 py-2 bg-[#212124] text-white rounded-full hover:bg-[#2c2c2f] transition-colors"
+            className="flex items-center justify-center px-4 py-2 bg-[#212124] text-gray-400 rounded-full hover:bg-[#2c2c2f] transition-colors min-w-[120px]"
           >
             More <ChevronRight className="ml-1 h-4 w-4" />
           </Button>
