@@ -26,9 +26,9 @@ const Friends = () => {
   ];
 
   const userGroups = [
-    { name: "Fitness Buddies", members: "Minsu, Rissa, +5" },
-    { name: "LFG", members: "Emma, John, +3" },
-    { name: "1990's runners", members: "Alex, Sarah, +8" },
+    { name: "Fitness Buddies", members: "Minsu, Rissa, +5", hasActivity: true },
+    { name: "LFG", members: "Emma, John, +3", hasActivity: false },
+    { name: "1990's runners", members: "Alex, Sarah, +8", hasActivity: true },
   ];
 
   const handleNextChallenge = () => {
@@ -138,6 +138,7 @@ const Friends = () => {
               name={group.name} 
               members={group.members} 
               isGroup={true} 
+              hasActivity={group.hasActivity}
             />
           ))}
         </div>
