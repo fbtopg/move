@@ -27,8 +27,8 @@ const Friends = () => {
 
   const userGroups = [
     { name: "Fitness Buddies", members: "Minsu, Rissa, +5" },
-    { name: "Book Club", members: "Emma, John, +3" },
-    { name: "Tech Enthusiasts", members: "Alex, Sarah, +8" },
+    { name: "LFG", members: "Emma, John, +3" },
+    { name: "1990's runners", members: "Alex, Sarah, +8" },
   ];
 
   const handleNextChallenge = () => {
