@@ -1,20 +1,30 @@
 import React from 'react';
 
 const FilterButton = ({ name, emoji, color, members, isGroup = false }) => {
+  if (isGroup) {
+    const [firstMember, secondMember] = members.split(',');
+    const remainingMembers = parseInt(members.split('+')[1]) || 0;
+
+    return (
+      <button className={`${color} bg-opacity-20 rounded-full py-3 px-4 flex-shrink-0 min-w-[100px] border border-gray-600 text-left`}>
+        <div className="text-sm font-semibold text-white">
+          {name}
+        </div>
+        <div className="text-xs text-gray-400 mt-1">
+          {firstMember}, {secondMember},{' '}
+          <span className="inline-flex items-center justify-center w-4 h-4 bg-gray-600 rounded-full">
+            +{remainingMembers}
+          </span>
+        </div>
+      </button>
+    );
+  }
+
   return (
-    <button className={`${color} bg-opacity-20 rounded-full py-3 px-4 flex-shrink-0 min-w-[100px] ${isGroup ? 'border border-gray-600' : ''}`}>
+    <button className={`${color} bg-opacity-20 rounded-full py-3 px-4 flex-shrink-0 min-w-[100px]`}>
       <div className={`text-sm font-semibold flex items-center justify-center ${name === 'New' ? 'text-blue-500' : 'text-white'}`}>
-        {isGroup ? (
-          <>
-            <span className="mr-2">{name}</span>
-            <span className="text-xs text-gray-400">{members}</span>
-          </>
-        ) : (
-          <>
-            <span className="mr-2">{emoji}</span>
-            {name}
-          </>
-        )}
+        <span className="mr-2">{emoji}</span>
+        {name}
       </div>
     </button>
   );

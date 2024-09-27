@@ -7,11 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus, Search } from 'lucide-react';
 import FilterButton from '../components/FilterButton';
+import { useNavigate } from 'react-router-dom';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const challenges = [
     { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
@@ -24,9 +26,9 @@ const Friends = () => {
   ];
 
   const userGroups = [
-    { name: "Fitness Buddies", members: 1500 },
-    { name: "Book Club", members: 800 },
-    { name: "Tech Enthusiasts", members: 20000 },
+    { name: "Fitness Buddies", members: "Minsu, Rissa, +5" },
+    { name: "Book Club", members: "Emma, John, +3" },
+    { name: "Tech Enthusiasts", members: "Alex, Sarah, +8" },
   ];
 
   const handleNextChallenge = () => {
@@ -48,11 +50,8 @@ const Friends = () => {
     // Implement group creation logic here
   };
 
-  const formatMemberCount = (count) => {
-    if (count >= 1000) {
-      return `+${(count / 1000).toFixed(1)}k`;
-    }
-    return `+${count}`;
+  const handleMoreGroups = () => {
+    navigate('/group');
   };
 
   const activities = {
@@ -137,14 +136,21 @@ const Friends = () => {
             <FilterButton key={index} name={filter.name} emoji={filter.emoji} color={filter.color} />
           ))}
           <div className="h-8 w-px bg-gray-600 mx-2 self-center"></div>
-          {userGroups.map((group, index) => (
+          {userGroups.slice(0, 3).map((group, index) => (
             <FilterButton 
               key={`group-${index}`} 
               name={group.name} 
-              members={formatMemberCount(group.members)} 
+              members={group.members} 
               isGroup={true} 
             />
           ))}
+          <Button
+            variant="outline"
+            className="bg-opacity-20 rounded-full py-3 px-4 flex-shrink-0 min-w-[100px] border border-gray-600 text-gray-400"
+            onClick={handleMoreGroups}
+          >
+            More
+          </Button>
         </div>
       </div>
 
