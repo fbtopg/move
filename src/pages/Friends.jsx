@@ -50,10 +50,6 @@ const Friends = () => {
     // Implement group creation logic here
   };
 
-  const handleMoreGroups = () => {
-    navigate('/group');
-  };
-
   const activities = {
     today: [
       { name: "Emma", activity: "finished walking 1.2km and completed daily walk • just now", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTEucG5nIiwiaWF0IjoxNzI1NzE3Mjg1LCJleHAiOjE3NTcyNTMyODV9.qVjtzjCu_bW-iEyzul3BjNeCwoMS6prEcNFETCCBzrs&t=2024-09-07T13%3A54%3A44.233Z" },
@@ -136,7 +132,7 @@ const Friends = () => {
             <FilterButton key={index} name={filter.name} emoji={filter.emoji} color={filter.color} />
           ))}
           <div className="h-8 w-px bg-gray-600 mx-2 self-center"></div>
-          {userGroups.slice(0, 3).map((group, index) => (
+          {userGroups.map((group, index) => (
             <FilterButton 
               key={`group-${index}`} 
               name={group.name} 
@@ -144,13 +140,6 @@ const Friends = () => {
               isGroup={true} 
             />
           ))}
-          <Button
-            variant="outline"
-            className="bg-opacity-20 rounded-full py-3 px-4 flex-shrink-0 min-w-[100px] border border-gray-600 text-gray-400"
-            onClick={handleMoreGroups}
-          >
-            More
-          </Button>
         </div>
       </div>
 
