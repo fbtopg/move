@@ -61,7 +61,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
               <span className="break-words">{content}</span>
             </p>
             {timestamp && (
-              <p className="text-xs text-gray-600 mt-1">{timestamp}</p>
+              <p className="text-xs text-gray-800 mt-1">{timestamp}</p>
             )}
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
@@ -75,8 +75,8 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"} bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent`}
               onClick={() => setLiked(!liked)}
+              className={`w-10 h-10 ${liked ? "text-white" : "text-gray-500"} bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent`}
             >
               <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
             </Button>
@@ -88,9 +88,8 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
           isOpen={isProfileOpen}
           onClose={() => setIsProfileOpen(false)}
           user={{
-            username: name,
-            handle: `@${name.toLowerCase()}`,
-            avatarUrl: profilePicture,
+            ...selectedUser,
+            avatarUrl: getRandomProfilePicture(),
             followers: Math.floor(Math.random() * 1000),
             following: Math.floor(Math.random() * 1000),
           }}
