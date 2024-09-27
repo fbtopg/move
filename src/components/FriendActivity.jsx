@@ -40,7 +40,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
   };
 
   // Split the activity string into content and timestamp
-  const [content, timestamp] = activity.split(' ');
+  const [content, timestamp] = activity.split(' • ');
 
   return (
     <div className="flex items-start space-x-3">
@@ -60,7 +60,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
               <span className="font-semibold text-white">{name}</span>{' '}
               <span className="break-words">{content}</span>
               {timestamp && (
-                <span className="text-gray-600 ml-1">{timestamp}</span>
+                <span className="text-gray-500 ml-1">{timestamp}</span>
               )}
             </p>
           </div>
