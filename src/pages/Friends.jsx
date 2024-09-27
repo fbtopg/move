@@ -136,6 +136,7 @@ const Friends = () => {
           {filters.map((filter, index) => (
             <FilterButton key={index} name={filter.name} emoji={filter.emoji} color={filter.color} />
           ))}
+          <div className="h-8 w-px bg-gray-600 mx-2 self-center"></div>
           {userGroups.map((group, index) => (
             <FilterButton key={`group-${index}`} name={group.name} members={group.members} isGroup={true} />
           ))}
