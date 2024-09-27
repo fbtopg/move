@@ -23,33 +23,6 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
       : "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/dailychallenge/Frame%20104.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZGFpbHljaGFsbGVuZ2UvRnJhbWUgMTA0LnBuZyIsImlhdCI6MTcyNjI4ODY3MCwiZXhwIjoxNzU3ODI0NjcwfQ.TdGTOMcfEw-wL-0ixshR_ckOzdkla8FJaSOymB8zA0M&t=2024-09-14T04%3A37%3A51.908Z";
   };
 
-  const parseActivity = (activity) => {
-    if (!activity) return { activityText: '', activityTime: '' };
-
-    const parts = activity.split('•');
-    let activityText = parts[0] ? parts[0].trim() : '';
-    let activityTime = parts[1] ? parts[1].trim() : '';
-
-    activityText = activityText.replace(/\b(walk|quiz)/g, '$1');
-
-    const timeMatch = activityText.match(/(\d+[mhdw])$/);
-    if (timeMatch) {
-      activityTime = timeMatch[1];
-      activityText = activityText.replace(/\s+\d+[mhdw]$/, '');
-    }
-
-    if (activityText.includes('solved the quiz')) {
-      const quizNumber = ' #' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
-      activityText = activityText.replace('solved the quiz', `solved the quiz${quizNumber}`);
-    }
-
-    activityText = activityText.replace(/\./g, '').trim() + '.';
-
-    return { activityText, activityTime };
-  };
-
-  const { activityText, activityTime } = parseActivity(activity);
-
   const handleImageClick = () => {
     if (type === 'walk') {
       navigate('/daily-walk-challenge');
@@ -82,10 +55,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
           <div className="flex-grow min-w-0 pr-2">
             <p className="text-sm text-gray-400">
               <span className="font-semibold text-white">{name}</span>{' '}
-              <span className="break-words">{activityText}</span>
-              {activityTime && (
-                <span className="text-[#73777F] ml-1">{activityTime}</span>
-              )}
+              <span className="break-words">{activity}</span>
             </p>
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
