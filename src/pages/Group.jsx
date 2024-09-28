@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Search, Plus } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import BottomNavBar from '../components/BottomNavBar';
 import PopularGroupCard from '../components/PopularGroupCard';
 
@@ -9,15 +8,13 @@ const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleCreateGroup = () => {
-    console.log("Create group clicked");
-    // Implement group creation logic here
-  };
-
   const myGroups = [
-    { id: 1, name: 'My group 1', members: 5, lastActivity: 5 },
-    { id: 2, name: 'My group 2', members: 8, lastActivity: 15 },
-    { id: 3, name: 'My group 3', members: 3, lastActivity: 30 },
+    { id: 1, name: 'My group 1', members: 5, image: 'https://picsum.photos/200?random=1' },
+    { id: 2, name: 'My group 2', members: 8, image: 'https://picsum.photos/200?random=2' },
+    { id: 3, name: 'My group 3', members: 3, image: 'https://picsum.photos/200?random=3' },
+    { id: 4, name: 'My group 4', members: 6, image: 'https://picsum.photos/200?random=4' },
+    { id: 5, name: 'My group 5', members: 4, image: 'https://picsum.photos/200?random=5' },
+    { id: 6, name: 'My group 6', members: 7, image: 'https://picsum.photos/200?random=6' },
   ];
 
   const popularGroups = [
@@ -46,25 +43,19 @@ const Group = () => {
             </div>
           </div>
 
-          <Button
-            onClick={handleCreateGroup}
-            className="w-full bg-[#212124] text-white hover:bg-[#2c2c2f] transition-colors h-20 rounded-full flex items-center justify-center mb-6"
-          >
-            <Plus className="mr-2 h-5 w-5" />
-            Create Group
-          </Button>
-
           <div className="space-y-4 mb-8">
             <h2 className="text-xl font-semibold mb-2">My Groups</h2>
-            {myGroups.map((group) => (
-              <div key={group.id} className="flex items-center justify-between bg-[#212124] p-4 rounded-lg">
-                <div>
-                  <h3 className="font-semibold">{group.name}</h3>
-                  <p className="text-sm text-gray-400">{group.members} members</p>
-                  <p className="text-xs text-gray-500">Last activity: {group.lastActivity} minutes ago</p>
+            <div className="grid grid-cols-3 gap-4">
+              {myGroups.map((group) => (
+                <div key={group.id} className="flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full overflow-hidden mb-2">
+                    <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+                  </div>
+                  <h3 className="text-sm font-semibold text-center">{group.name}</h3>
+                  <p className="text-xs text-gray-400">{group.members} members</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div className="mb-8">
