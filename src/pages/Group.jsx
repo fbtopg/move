@@ -61,7 +61,7 @@ const Group = () => {
 
           <div className="space-y-4 mb-8">
             <div className="flex justify-between items-center mb-2">
-              <h2 className="text-sm font-semibold text-gray-400">My Groups</h2>
+              <h2 className="text-sm font-semibold text-gray-300">My Groups</h2>
               <button
                 className="text-[#3C82F6] text-xs font-semibold opacity-60"
                 onClick={() => handleViewMore('My Groups')}
@@ -69,7 +69,7 @@ const Group = () => {
                 View ({myGroups.length}) &gt;
               </button>
             </div>
-            <div className="grid grid-cols-3 gap-3 px-4">
+            <div className="grid grid-cols-3 gap-4 px-4">
               <div 
                 className="flex flex-col items-center justify-center cursor-pointer"
                 onClick={handleCreateGroup}
@@ -87,7 +87,7 @@ const Group = () => {
 
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-sm font-semibold text-gray-400">Recent Activity</h2>
+              <h2 className="text-sm font-semibold text-gray-300">Recent Activity</h2>
               <button
                 className="text-[#3C82F6] text-xs font-semibold opacity-60"
                 onClick={() => handleViewMore('Recent Activity')}
@@ -111,7 +111,7 @@ const Group = () => {
 
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-sm font-semibold text-gray-400">Popular</h2>
+              <h2 className="text-sm font-semibold text-gray-300">Popular</h2>
               <button
                 className="text-[#3C82F6] text-xs font-semibold opacity-60"
                 onClick={() => handleViewMore('Popular')}
