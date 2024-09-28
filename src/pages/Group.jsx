@@ -35,11 +35,6 @@ const Group = () => {
     { name: "Sarah", activity: "finished walking 1km and completed daily walk. • just now", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-3.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTMucG5nIiwiaWF0IjoxNzI1NzE3MzExLCJleHAiOjE3NTcyNTMzMTF9.ghhBkpc92hU749PoU_fV_q0HSHBg4SZw8FVeNDsa8J0&t=2024-09-07T13%3A55%3A10.841Z" },
   ];
 
-  const handleCreateGroup = () => {
-    console.log("Create group clicked");
-    // Implement group creation logic here
-  };
-
   const handleViewMore = (section) => {
     if (section === 'My Groups') {
       navigate('/my-groups');
@@ -88,14 +83,7 @@ const Group = () => {
               </button>
             </div>
             <div className="overflow-x-auto scrollbar-hide" ref={myGroupsRef}>
-              <div className="flex space-x-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
-                <div className="flex-shrink-0 w-40">
-                  <GroupCard
-                    group={{ name: 'New group', members: 0 }}
-                    onClick={handleCreateGroup}
-                    isNewGroup={true}
-                  />
-                </div>
+              <div className="flex space-x-4" style={{ width: `${myGroups.length * 180}px` }}>
                 {myGroups.map((group) => (
                   <div key={group.id} className="flex-shrink-0 w-40">
                     <GroupCard group={group} hasActivity={group.hasActivity} gradient={group.gradient} />
