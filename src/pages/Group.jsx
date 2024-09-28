@@ -35,19 +35,15 @@ const Group = () => {
     { name: "Sarah", activity: "finished walking 1km and completed daily walk. • just now", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-3.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTMucG5nIiwiaWF0IjoxNzI1NzE3MzExLCJleHAiOjE3NTcyNTMzMTF9.ghhBkpc92hU749PoU_fV_q0HSHBg4SZw8FVeNDsa8J0&t=2024-09-07T13%3A55%3A10.841Z" },
   ];
 
-  const handleViewMore = (section) => {
-    if (section === 'My Groups') {
-      navigate('/my-groups');
-    } else {
-      console.log(`View more clicked for ${section}`);
-      // Implement view more logic for other sections here
-    }
+  const handleCreateGroup = () => {
+    console.log("Create group clicked");
+    // Implement group creation logic here
   };
 
   const ViewAllButton = () => (
     <div className="flex-shrink-0 w-40 flex flex-col items-center justify-center">
       <Button
-        onClick={() => handleViewMore('Popular')}
+        onClick={() => console.log('View all popular groups')}
         className="bg-[#212124] text-white rounded-full w-12 h-12 flex items-center justify-center mb-2"
       >
         <ChevronRight className="w-6 h-6" />
@@ -75,12 +71,12 @@ const Group = () => {
           <div className="space-y-4 mb-8">
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-base font-semibold text-gray-200">My Groups</h2>
-              <button
-                className="text-[#3C82F6] text-xs font-semibold opacity-60"
-                onClick={() => navigate('/my-groups')}
+              <Button
+                onClick={handleCreateGroup}
+                className="bg-transparent hover:bg-[#3c3c3f] transition-colors rounded-full flex items-center justify-center text-white p-2"
               >
-                View ({myGroups.length}) &gt;
-              </button>
+                <Plus className="h-5 w-5" />
+              </Button>
             </div>
             <div className="overflow-x-auto scrollbar-hide" ref={myGroupsRef}>
               <div className="flex space-x-4" style={{ width: `${myGroups.length * 180}px` }}>
@@ -98,7 +94,7 @@ const Group = () => {
               <h2 className="text-base font-semibold text-gray-200">Recent Activity</h2>
               <button
                 className="text-[#3C82F6] text-xs font-semibold opacity-60"
-                onClick={() => handleViewMore('Recent Activity')}
+                onClick={() => console.log('View all recent activity')}
               >
                 View &gt;
               </button>
