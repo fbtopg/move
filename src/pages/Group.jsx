@@ -49,7 +49,7 @@ const Group = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
-        <div className="max-w-md mx-auto px-4 mt-8"> {/* Increased top margin */}
+        <div className="max-w-md mx-auto px-4 mt-8">
           <div className="relative mb-6">
             <div className="relative">
               <Input
@@ -96,7 +96,7 @@ const Group = () => {
             </div>
             <div className="space-y-2">
               {recentActivities.map((activity, index) => (
-                <div key={index} className="bg-[#161618] rounded-lg p-3"> {/* Added padding here */}
+                <div key={index} className="bg-[#161618] rounded-lg p-3">
                   <FriendActivity
                     name={activity.name}
                     activity={activity.activity}
@@ -118,11 +118,9 @@ const Group = () => {
                 View &gt;
               </button>
             </div>
-            <div className="flex overflow-x-auto space-x-4 -mx-4 px-4 scrollbar-hide">
+            <div className="grid grid-cols-2 gap-4">
               {popularGroups.map((group) => (
-                <div key={group.id} className="flex-shrink-0 w-64">
-                  <GroupCard group={group} />
-                </div>
+                <GroupCard key={group.id} group={group} />
               ))}
             </div>
           </div>
