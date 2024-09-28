@@ -39,8 +39,6 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
     }
   };
 
-  const [content, timestamp] = activity.split(' • ');
-
   return (
     <div className="flex items-start space-x-3">
       <Avatar className="w-10 h-10 mt-1 flex-shrink-0 cursor-pointer" onClick={handleAvatarClick}>
@@ -57,11 +55,8 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
           <div className="flex-grow min-w-0 pr-2">
             <p className="text-sm text-gray-400">
               <span className="font-semibold text-white">{name}</span>{' '}
-              <span className="break-words">{content}</span>
+              <span className="break-words">{activity}</span>
             </p>
-            {timestamp && (
-              <p className="text-xs" style={{ color: '#50545B' }}>{timestamp}</p>
-            )}
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
             <div 
