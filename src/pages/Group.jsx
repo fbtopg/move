@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Search, Plus } from 'lucide-react';
+import { Search, Plus, ChevronRight } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
 import GroupCard from '../components/GroupCard';
@@ -47,6 +47,17 @@ const Group = () => {
       // Implement view more logic for other sections here
     }
   };
+
+  const ViewAllButton = () => (
+    <div className="flex-shrink-0 w-40 flex items-center justify-center">
+      <Button
+        onClick={() => handleViewMore('Popular')}
+        className="bg-[#212124] text-white rounded-full w-12 h-12 flex items-center justify-center"
+      >
+        <ChevronRight className="w-6 h-6" />
+      </Button>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -113,20 +124,15 @@ const Group = () => {
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-sm font-semibold text-gray-200">Popular</h2>
-              <button
-                className="text-[#3C82F6] text-xs font-semibold opacity-60"
-                onClick={() => handleViewMore('Popular')}
-              >
-                View &gt;
-              </button>
             </div>
             <div className="overflow-x-auto scrollbar-hide" ref={popularGroupsRef}>
-              <div className="flex space-x-4" style={{ width: `${popularGroups.length * 180}px` }}>
+              <div className="flex space-x-4" style={{ width: `${(popularGroups.length + 1) * 180}px` }}>
                 {popularGroups.map((group) => (
                   <div key={group.id} className="flex-shrink-0 w-40">
                     <GroupCard group={group} />
                   </div>
                 ))}
+                <ViewAllButton />
               </div>
             </div>
           </div>
