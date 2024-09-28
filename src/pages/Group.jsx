@@ -51,7 +51,7 @@ const Group = () => {
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-sm font-semibold text-gray-400">My Groups</h2>
               <button
-                className="text-blue-500 text-xs font-semibold opacity-60"
+                className="text-[#3C82F6] text-xs font-semibold opacity-60"
               >
                 View ({myGroups.length}) &gt;
               </button>
@@ -62,7 +62,7 @@ const Group = () => {
                 onClick={handleCreateGroup}
               >
                 <div className="w-20 h-20 rounded-full flex items-center justify-center bg-transparent border border-gray-600 mb-2 -mt-5">
-                  <Plus className="h-8 w-8 text-white mt-1 stroke-[1]" />
+                  <Plus className="h-8 w-8 text-white mt-1 stroke-[0.5]" />
                 </div>
                 <span className="text-xs font-semibold text-white">New group</span>
               </div>
@@ -76,7 +76,7 @@ const Group = () => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-sm font-semibold text-gray-400">Popular</h2>
               <button
-                className="text-blue-500 text-xs font-semibold opacity-60"
+                className="text-[#3C82F6] text-xs font-semibold opacity-60"
               >
                 View &gt;
               </button>
