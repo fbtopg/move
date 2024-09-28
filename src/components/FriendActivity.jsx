@@ -58,10 +58,10 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
             <p className="text-sm text-gray-400">
               <span className="font-semibold text-white">{name}</span>{' '}
               <span className="break-words">{content}</span>
+              {timestamp && (
+                <span className="text-xs ml-1" style={{ color: '#50545B' }}>{timestamp}</span>
+              )}
             </p>
-            {timestamp && (
-              <p className="text-xs" style={{ color: '#50545B' }}>{timestamp}</p>
-            )}
           </div>
           <div className="flex items-center space-x-2 flex-shrink-0">
             <div 
