@@ -43,7 +43,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
 
   return (
     <div className="flex items-start space-x-3">
-      <Avatar className="w-10 h-10 mt-1 flex-shrink-0 cursor-pointer" onClick={handleAvatarClick}>
+      <Avatar className="w-8 h-8 mt-1 flex-shrink-0 cursor-pointer" onClick={handleAvatarClick}>
         {profilePicture ? (
           <AvatarImage src={profilePicture} alt={name} />
         ) : (
