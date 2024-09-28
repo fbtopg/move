@@ -49,13 +49,14 @@ const Group = () => {
   };
 
   const ViewAllButton = () => (
-    <div className="flex-shrink-0 w-40 flex items-center justify-center">
+    <div className="flex-shrink-0 w-40 flex flex-col items-center justify-center">
       <Button
         onClick={() => handleViewMore('Popular')}
-        className="bg-[#212124] text-white rounded-full w-12 h-12 flex items-center justify-center"
+        className="bg-[#212124] text-white rounded-full w-12 h-12 flex items-center justify-center mb-2"
       >
         <ChevronRight className="w-6 h-6" />
       </Button>
+      <span className="text-xs text-gray-400">View all</span>
     </div>
   );
 
