@@ -51,7 +51,7 @@ const Group = () => {
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-sm font-semibold text-gray-400">My Groups</h2>
               <button
-                className="text-blue-500 text-xs opacity-20"
+                className="text-blue-500 text-xs font-medium opacity-60"
               >
                 View ({myGroups.length}) &gt;
               </button>
@@ -76,7 +76,7 @@ const Group = () => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-sm font-semibold text-gray-400">Popular</h2>
               <button
-                className="text-blue-500 text-xs opacity-20"
+                className="text-blue-500 text-xs font-medium opacity-60"
               >
                 View &gt;
               </button>
