@@ -12,11 +12,11 @@ const GroupCard = ({ group, hasActivity = false, gradient }) => {
 
   return (
     <motion.div
-      className="flex-shrink-0 w-24 rounded-lg overflow-hidden relative"
+      className="flex-shrink-0 w-24 rounded-lg overflow-hidden relative bg-gray-800 p-2"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
-      <div className="p-2 text-center">
+      <div className="text-center">
         <div className="w-20 h-20 rounded-full overflow-hidden mb-2 mx-auto relative" style={backgroundStyle}>
           {!gradient && <img src={group.image} alt={group.name} className="w-full h-full object-cover" />}
         </div>
