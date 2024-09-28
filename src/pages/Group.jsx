@@ -50,12 +50,11 @@ const Group = () => {
           <div className="space-y-4 mb-8">
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-sm font-semibold text-gray-400">My Groups</h2>
-              <Button
-                variant="link"
-                className="text-blue-500 bg-blue-500 bg-opacity-20 text-xs px-2 py-1 rounded"
+              <button
+                className="text-blue-500 text-xs opacity-20"
               >
                 View ({myGroups.length}) &gt;
-              </Button>
+              </button>
             </div>
             <div className="grid grid-cols-3 gap-2">
               <div 
@@ -76,12 +75,11 @@ const Group = () => {
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-sm font-semibold text-gray-400">Popular</h2>
-              <Button
-                variant="link"
-                className="text-blue-500 bg-blue-500 bg-opacity-20 text-xs px-2 py-1 rounded"
+              <button
+                className="text-blue-500 text-xs opacity-20"
               >
                 View &gt;
-              </Button>
+              </button>
             </div>
             <div className="flex overflow-x-auto space-x-2 scrollbar-hide pb-4">
               {popularGroups.map((group) => (
