@@ -4,11 +4,11 @@ const FilterButton = ({ name, emoji, color, members, isGroup = false, hasActivit
   if (isGroup) {
     return (
       <button className={`${color} bg-opacity-20 rounded-full py-3 px-4 flex-shrink-0 min-w-[100px] border border-gray-600 text-left relative`}>
-        {hasActivity && (
-          <span className="absolute top-1/2 -left-1 transform -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full"></span>
-        )}
-        <div className="text-sm font-semibold text-white">
+        <div className="text-sm font-semibold text-white flex items-start">
           {name}
+          {hasActivity && (
+            <span className="w-2 h-2 bg-red-500 rounded-full ml-1 mt-1"></span>
+          )}
         </div>
         <div className="text-[10px] text-gray-500 -mt-0.5">
           {members}
