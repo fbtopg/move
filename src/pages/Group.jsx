@@ -3,6 +3,7 @@ import { Search, Plus } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
 import GroupCard from '../components/GroupCard';
+import { Button } from "@/components/ui/button";
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
@@ -47,16 +48,24 @@ const Group = () => {
           </div>
 
           <div className="space-y-4 mb-8">
-            <h2 className="text-sm font-semibold text-gray-400 mb-2">My Groups</h2>
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="text-sm font-semibold text-gray-400">My Groups</h2>
+              <Button
+                variant="link"
+                className="text-blue-500 bg-blue-500 bg-opacity-20 text-xs px-2 py-1 rounded"
+              >
+                View ({myGroups.length}) &gt;
+              </Button>
+            </div>
             <div className="grid grid-cols-3 gap-2">
               <div 
                 className="flex flex-col items-center justify-center cursor-pointer"
                 onClick={handleCreateGroup}
               >
-                <div className="w-20 h-20 rounded-full flex items-center justify-center bg-gray-800">
-                  <Plus className="h-8 w-8 text-white" />
+                <div className="w-20 h-20 rounded-full flex flex-col items-center justify-center bg-transparent border border-gray-600">
+                  <Plus className="h-8 w-8 text-white mb-1" />
+                  <span className="text-xs">Create</span>
                 </div>
-                <span className="mt-2 text-xs text-center">Create</span>
               </div>
               {myGroups.map((group) => (
                 <GroupCard key={group.id} group={group} />
@@ -65,7 +74,15 @@ const Group = () => {
           </div>
 
           <div className="mb-8">
-            <h2 className="text-sm font-semibold text-gray-400 mb-4">Popular</h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-sm font-semibold text-gray-400">Popular</h2>
+              <Button
+                variant="link"
+                className="text-blue-500 bg-blue-500 bg-opacity-20 text-xs px-2 py-1 rounded"
+              >
+                View &gt;
+              </Button>
+            </div>
             <div className="flex overflow-x-auto space-x-2 scrollbar-hide pb-4">
               {popularGroups.map((group) => (
                 <GroupCard key={group.id} group={group} />
