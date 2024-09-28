@@ -49,7 +49,7 @@ const Group = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
-        <div className="max-w-md mx-auto px-4 mt-6"> {/* Added mt-6 here for top margin */}
+        <div className="max-w-md mx-auto px-4 mt-8"> {/* Increased top margin */}
           <div className="relative mb-6">
             <div className="relative">
               <Input
@@ -96,7 +96,7 @@ const Group = () => {
             </div>
             <div className="space-y-2">
               {recentActivities.map((activity, index) => (
-                <div key={index} className="bg-[#161618] rounded-lg p-2">
+                <div key={index} className="bg-[#161618] rounded-lg p-3"> {/* Added padding here */}
                   <FriendActivity
                     name={activity.name}
                     activity={activity.activity}
