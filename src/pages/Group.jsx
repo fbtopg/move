@@ -70,15 +70,11 @@ const Group = () => {
               </button>
             </div>
             <div className="grid grid-cols-3 gap-3">
-              <div 
-                className="flex flex-col items-center justify-center cursor-pointer bg-gray-800 rounded-lg p-2"
+              <GroupCard
+                group={{ name: 'New group', members: 0 }}
                 onClick={handleCreateGroup}
-              >
-                <div className="w-20 h-20 rounded-full flex items-center justify-center bg-transparent border border-gray-600 mb-2">
-                  <Plus className="h-8 w-8 text-white stroke-[0.5]" />
-                </div>
-                <span className="text-xs font-semibold text-white">New group</span>
-              </div>
+                isNewGroup={true}
+              />
               {myGroups.map((group) => (
                 <GroupCard key={group.id} group={group} hasActivity={group.hasActivity} gradient={group.gradient} />
               ))}
