@@ -46,7 +46,7 @@ const Group = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
-        <div className="max-w-md mx-auto p-4">
+        <div className="max-w-md mx-auto px-4">
           <div className="relative mb-6">
             <div className="relative">
               <Input
@@ -61,7 +61,7 @@ const Group = () => {
 
           <div className="space-y-4 mb-8">
             <div className="flex justify-between items-center mb-2">
-              <h2 className="text-sm font-semibold text-gray-300">My Groups</h2>
+              <h2 className="text-sm font-semibold text-gray-200">My Groups</h2>
               <button
                 className="text-[#3C82F6] text-xs font-semibold opacity-60"
                 onClick={() => handleViewMore('My Groups')}
@@ -69,13 +69,13 @@ const Group = () => {
                 View ({myGroups.length}) &gt;
               </button>
             </div>
-            <div className="grid grid-cols-3 gap-6 px-4">
+            <div className="grid grid-cols-3 gap-4">
               <div 
                 className="flex flex-col items-center justify-center cursor-pointer"
                 onClick={handleCreateGroup}
               >
-                <div className="w-20 h-20 rounded-full flex items-center justify-center bg-transparent border border-gray-600 mb-2 -mt-5">
-                  <Plus className="h-8 w-8 text-white mt-1 stroke-[0.5]" />
+                <div className="w-20 h-20 rounded-full flex items-center justify-center bg-transparent border border-gray-600 mb-2">
+                  <Plus className="h-8 w-8 text-white stroke-[0.5]" />
                 </div>
                 <span className="text-xs font-semibold text-white">New group</span>
               </div>
@@ -87,7 +87,7 @@ const Group = () => {
 
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-sm font-semibold text-gray-300">Recent Activity</h2>
+              <h2 className="text-sm font-semibold text-gray-200">Recent Activity</h2>
               <button
                 className="text-[#3C82F6] text-xs font-semibold opacity-60"
                 onClick={() => handleViewMore('Recent Activity')}
@@ -111,7 +111,7 @@ const Group = () => {
 
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-sm font-semibold text-gray-300">Popular</h2>
+              <h2 className="text-sm font-semibold text-gray-200">Popular</h2>
               <button
                 className="text-[#3C82F6] text-xs font-semibold opacity-60"
                 onClick={() => handleViewMore('Popular')}
@@ -119,7 +119,7 @@ const Group = () => {
                 View &gt;
               </button>
             </div>
-            <div className="flex overflow-x-auto space-x-2 -mx-4 pl-4">
+            <div className="flex overflow-x-auto space-x-4 -mx-4 px-4">
               {popularGroups.map((group) => (
                 <GroupCard key={group.id} group={group} />
               ))}
