@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
-import PopularGroupCard from '../components/PopularGroupCard';
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
@@ -25,6 +24,16 @@ const Group = () => {
     { id: 5, name: 'Travel Adventurers', members: 1800, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319181.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgxLnBuZyIsImlhdCI6MTcyNzIzNTY3OSwiZXhwIjoxNzU4NzcxNjc5fQ._npMOoWg2FhDDwkKmbQBJrdw1U6Z1A6UbOuM5tO4jt4&t=2024-09-25T03%3A41%3A19.419Z' },
   ];
 
+  const GroupCard = ({ group }) => (
+    <div className="flex flex-col items-center">
+      <div className="w-20 h-20 rounded-full overflow-hidden mb-2">
+        <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+      </div>
+      <h3 className="text-sm font-semibold text-center">{group.name}</h3>
+      <p className="text-xs text-gray-400">{group.members} members</p>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
@@ -45,13 +54,7 @@ const Group = () => {
             <h2 className="text-xl font-semibold mb-2">My Groups</h2>
             <div className="grid grid-cols-3 gap-4">
               {myGroups.map((group) => (
-                <div key={group.id} className="flex flex-col items-center">
-                  <div className="w-20 h-20 rounded-full overflow-hidden mb-2">
-                    <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-center">{group.name}</h3>
-                  <p className="text-xs text-gray-400">{group.members} members</p>
-                </div>
+                <GroupCard key={group.id} group={group} />
               ))}
             </div>
           </div>
@@ -60,7 +63,9 @@ const Group = () => {
             <h2 className="text-xl font-semibold mb-4">Popular</h2>
             <div className="flex overflow-x-auto space-x-4 scrollbar-hide pb-4">
               {popularGroups.map((group) => (
-                <PopularGroupCard key={group.id} group={group} />
+                <div key={group.id} className="flex-shrink-0">
+                  <GroupCard group={group} />
+                </div>
               ))}
             </div>
           </div>
