@@ -11,11 +11,11 @@ const Group = () => {
 
   const myGroups = [
     { id: 1, name: 'My group 1', members: 5, image: 'https://picsum.photos/200?random=1', hasActivity: true },
-    { id: 2, name: 'My group 2', members: 8, image: 'https://picsum.photos/200?random=2', hasActivity: false },
+    { id: 2, name: 'My group 2', members: 8, image: 'https://picsum.photos/200?random=2', hasActivity: true },
     { id: 3, name: 'My group 3', members: 3, image: 'https://picsum.photos/200?random=3', hasActivity: true },
-    { id: 4, name: 'My group 4', members: 6, image: 'https://picsum.photos/200?random=4', hasActivity: false },
+    { id: 4, name: 'My group 4', members: 6, image: 'https://picsum.photos/200?random=4', hasActivity: true },
     { id: 5, name: 'My group 5', members: 4, image: 'https://picsum.photos/200?random=5', hasActivity: true },
-    { id: 6, name: 'My group 6', members: 7, image: 'https://picsum.photos/200?random=6', hasActivity: false },
+    { id: 6, name: 'My group 6', members: 7, image: 'https://picsum.photos/200?random=6', hasActivity: true },
   ];
 
   const popularGroups = [
