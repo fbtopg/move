@@ -10,12 +10,12 @@ const Group = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const myGroups = [
-    { id: 1, name: 'My group 1', members: 5, image: 'https://picsum.photos/200?random=1' },
-    { id: 2, name: 'My group 2', members: 8, image: 'https://picsum.photos/200?random=2' },
-    { id: 3, name: 'My group 3', members: 3, image: 'https://picsum.photos/200?random=3' },
-    { id: 4, name: 'My group 4', members: 6, image: 'https://picsum.photos/200?random=4' },
-    { id: 5, name: 'My group 5', members: 4, image: 'https://picsum.photos/200?random=5' },
-    { id: 6, name: 'My group 6', members: 7, image: 'https://picsum.photos/200?random=6' },
+    { id: 1, name: 'My group 1', members: 5, image: 'https://picsum.photos/200?random=1', hasActivity: true },
+    { id: 2, name: 'My group 2', members: 8, image: 'https://picsum.photos/200?random=2', hasActivity: false },
+    { id: 3, name: 'My group 3', members: 3, image: 'https://picsum.photos/200?random=3', hasActivity: true },
+    { id: 4, name: 'My group 4', members: 6, image: 'https://picsum.photos/200?random=4', hasActivity: false },
+    { id: 5, name: 'My group 5', members: 4, image: 'https://picsum.photos/200?random=5', hasActivity: true },
+    { id: 6, name: 'My group 6', members: 7, image: 'https://picsum.photos/200?random=6', hasActivity: false },
   ];
 
   const popularGroups = [
@@ -38,7 +38,7 @@ const Group = () => {
           <div className="relative mb-6">
             <div className="relative">
               <Input
-                className="w-full bg-[#1c1c1f] border-none text-gray-400 placeholder-gray-400 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full bg-[#212124] border-none text-gray-400 placeholder-gray-400 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Search groups or users"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -67,7 +67,7 @@ const Group = () => {
                 </div>
               </div>
               {myGroups.map((group) => (
-                <GroupCard key={group.id} group={group} />
+                <GroupCard key={group.id} group={group} hasActivity={group.hasActivity} />
               ))}
             </div>
           </div>
