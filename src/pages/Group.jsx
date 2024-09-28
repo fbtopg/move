@@ -69,7 +69,7 @@ const Group = () => {
                 View ({myGroups.length}) &gt;
               </button>
             </div>
-            <div className="grid grid-cols-3 gap-4 px-4">
+            <div className="grid grid-cols-3 gap-6 px-4">
               <div 
                 className="flex flex-col items-center justify-center cursor-pointer"
                 onClick={handleCreateGroup}
