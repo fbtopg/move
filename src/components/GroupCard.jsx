@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const GroupCard = ({ group }) => {
   return (
     <motion.div
-      className="flex-shrink-0 w-24 bg-[#212124] rounded-lg overflow-hidden shadow-lg"
+      className="flex-shrink-0 w-24 rounded-lg overflow-hidden shadow-lg"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
