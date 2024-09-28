@@ -92,7 +92,7 @@ const Group = () => {
                 <div className="flex-shrink-0 w-40">
                   <GroupCard
                     group={{ name: 'New group', members: 0 }}
-                    onClick={() => console.log("Create group clicked")}
+                    onClick={handleCreateGroup}
                     isNewGroup={true}
                   />
                 </div>
