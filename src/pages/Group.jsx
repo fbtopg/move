@@ -38,6 +38,11 @@ const Group = () => {
     // Implement group creation logic here
   };
 
+  const truncateActivity = (activity, maxLength = 60) => {
+    if (activity.length <= maxLength) return activity;
+    return activity.slice(0, maxLength) + '...';
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
@@ -83,10 +88,10 @@ const Group = () => {
             <h2 className="text-sm font-semibold text-gray-400 mb-4">Recent Activity</h2>
             <div className="space-y-2">
               {recentActivities.map((activity, index) => (
-                <div key={index} className="bg-[#212124] rounded-lg p-2">
+                <div key={index} className="bg-[#212124] rounded-lg p-1">
                   <FriendActivity
                     name={activity.name}
-                    activity={activity.activity}
+                    activity={truncateActivity(activity.activity)}
                     type={activity.type}
                     profilePicture={activity.profilePicture}
                   />
