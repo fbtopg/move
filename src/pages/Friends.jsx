@@ -29,7 +29,7 @@ const Friends = () => {
     { name: "Fitness Buddies", members: "Minsu, Rissa, +5", hasActivity: true },
     { name: "LFG", members: "Emma, John, +3", hasActivity: false },
     { name: "1990's runners", members: "Alex, Sarah, +8", hasActivity: true },
-  ];
+  ].sort((a, b) => (b.hasActivity ? 1 : 0) - (a.hasActivity ? 1 : 0));
 
   const handleNextChallenge = () => {
     setCurrentChallenge((prev) => (prev + 1) % challenges.length);
