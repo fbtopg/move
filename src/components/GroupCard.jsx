@@ -11,11 +11,13 @@ const GroupCard = ({ group, hasActivity = false }) => {
       <div className="p-2 text-center">
         <div className="w-20 h-20 rounded-full overflow-hidden mb-2 mx-auto relative">
           <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+        </div>
+        <div className="flex items-start justify-center">
+          <h3 className="font-semibold text-xs mb-1 truncate">{group.name}</h3>
           {hasActivity && (
-            <div className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-black"></div>
+            <div className="w-1.5 h-1.5 bg-red-500 rounded-full ml-1 mt-1"></div>
           )}
         </div>
-        <h3 className="font-semibold text-xs mb-1 truncate">{group.name}</h3>
         <p className="text-[10px] text-gray-400">{group.members} members</p>
       </div>
     </motion.div>
