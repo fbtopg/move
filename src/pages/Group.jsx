@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Search, Plus } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
@@ -6,11 +6,13 @@ import GroupCard from '../components/GroupCard';
 import { Button } from "@/components/ui/button";
 import FriendActivity from '../components/FriendActivity';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
+  const popularGroupsRef = useRef(null);
 
   const myGroups = [
     { id: 1, name: 'My group 1', members: 5, gradient: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)', hasActivity: true },
@@ -94,9 +96,9 @@ const Group = () => {
                 View &gt;
               </button>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {recentActivities.map((activity, index) => (
-                <div key={index} className="bg-[#161618] rounded-lg p-3">
+                <div key={index} className="bg-[#161618] rounded-lg p-4">
                   <FriendActivity
                     name={activity.name}
                     activity={activity.activity}
@@ -118,10 +120,14 @@ const Group = () => {
                 View &gt;
               </button>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {popularGroups.map((group) => (
-                <GroupCard key={group.id} group={group} />
-              ))}
+            <div className="overflow-x-auto scrollbar-hide" ref={popularGroupsRef}>
+              <div className="flex space-x-4" style={{ width: `${popularGroups.length * 180}px` }}>
+                {popularGroups.map((group) => (
+                  <div key={group.id} className="flex-shrink-0 w-40">
+                    <GroupCard group={group} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
