@@ -69,7 +69,7 @@ const Group = () => {
                 View ({myGroups.length}) &gt;
               </button>
             </div>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               <GroupCard
                 group={{ name: 'New group', members: 0 }}
                 onClick={handleCreateGroup}
