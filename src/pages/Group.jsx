@@ -85,7 +85,7 @@ const Group = () => {
                     <GroupCard group={group} hasActivity={group.hasActivity} gradient={group.gradient} />
                   </div>
                 ))}
-                <ViewAllButton onClick={() => console.log('View all my groups')} />
+                <ViewAllButton onClick={() => navigate('/my-groups')} />
               </div>
             </div>
           </div>
