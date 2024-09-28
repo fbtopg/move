@@ -23,13 +23,13 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
 
   return (
     <nav className={`fixed bottom-0 left-0 right-0 text-white`} style={{ backgroundColor, borderTop: backgroundColor === '#212124' ? '1px solid #424245' : 'none' }}>
-      <ul className="flex justify-around items-start h-16">
+      <ul className="flex justify-around items-start h-20"> {/* Increased height from h-16 to h-20 */}
         {navItems.map((item) => (
           <li key={item.id} className="flex-1">
             <button
               onClick={() => handleNavigation(item)}
               className={cn(
-                "w-full h-full flex flex-col items-center justify-start pt-2",
+                "w-full h-full flex flex-col items-center justify-start pt-3", // Increased top padding
                 activeTab === item.id ? "text-white" : "text-gray-400"
               )}
             >
@@ -41,6 +41,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
               ) : (
                 <item.icon className="h-6 w-6 stroke-1" />
               )}
+              <span className="text-xs mt-1">{item.label}</span> {/* Added label text */}
             </button>
           </li>
         ))}
