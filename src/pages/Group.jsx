@@ -62,7 +62,7 @@ const Group = () => {
                 onClick={handleCreateGroup}
               >
                 <div className="w-20 h-20 rounded-full flex items-center justify-center bg-transparent border border-gray-600 mb-2 -mt-5">
-                  <Plus className="h-8 w-8 text-white mt-1" />
+                  <Plus className="h-8 w-8 text-white mt-1 stroke-[1.5]" />
                 </div>
                 <span className="text-xs font-semibold text-white">New group</span>
               </div>
