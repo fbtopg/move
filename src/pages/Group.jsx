@@ -38,6 +38,11 @@ const Group = () => {
     // Implement group creation logic here
   };
 
+  const handleViewMore = (section) => {
+    console.log(`View more clicked for ${section}`);
+    // Implement view more logic here
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
@@ -59,6 +64,7 @@ const Group = () => {
               <h2 className="text-sm font-semibold text-gray-400">My Groups</h2>
               <button
                 className="text-[#3C82F6] text-xs font-semibold opacity-60"
+                onClick={() => handleViewMore('My Groups')}
               >
                 View ({myGroups.length}) &gt;
               </button>
@@ -80,7 +86,15 @@ const Group = () => {
           </div>
 
           <div className="mb-8">
-            <h2 className="text-sm font-semibold text-gray-400 mb-4">Recent Activity</h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-sm font-semibold text-gray-400">Recent Activity</h2>
+              <button
+                className="text-[#3C82F6] text-xs font-semibold opacity-60"
+                onClick={() => handleViewMore('Recent Activity')}
+              >
+                View &gt;
+              </button>
+            </div>
             <div className="space-y-2">
               {recentActivities.map((activity, index) => (
                 <div key={index} className="bg-[#212124] rounded-lg p-2">
@@ -100,6 +114,7 @@ const Group = () => {
               <h2 className="text-sm font-semibold text-gray-400">Popular</h2>
               <button
                 className="text-[#3C82F6] text-xs font-semibold opacity-60"
+                onClick={() => handleViewMore('Popular')}
               >
                 View &gt;
               </button>
