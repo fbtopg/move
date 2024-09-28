@@ -118,9 +118,11 @@ const Group = () => {
                 View &gt;
               </button>
             </div>
-            <div className="flex overflow-x-auto space-x-4 -mx-4 px-4">
+            <div className="flex overflow-x-auto space-x-4 -mx-4 px-4 scrollbar-hide">
               {popularGroups.map((group) => (
-                <GroupCard key={group.id} group={group} />
+                <div key={group.id} className="flex-shrink-0 w-64">
+                  <GroupCard group={group} />
+                </div>
               ))}
             </div>
           </div>
