@@ -81,9 +81,9 @@ const Group = () => {
 
           <div className="mb-8">
             <h2 className="text-sm font-semibold text-gray-400 mb-4">Recent Activity</h2>
-            <div className="space-y-4">
+            <div className="space-y-2">
               {recentActivities.map((activity, index) => (
-                <div key={index} className="bg-[#212124] rounded-lg p-4">
+                <div key={index} className="bg-[#212124] rounded-lg p-2">
                   <FriendActivity
                     name={activity.name}
                     activity={activity.activity}
