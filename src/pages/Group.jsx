@@ -69,7 +69,7 @@ const Group = () => {
                 View ({myGroups.length}) &gt;
               </button>
             </div>
-            <div className="grid grid-cols-3 gap-2 px-4">
+            <div className="grid grid-cols-3 gap-3 px-4">
               <div 
                 className="flex flex-col items-center justify-center cursor-pointer"
                 onClick={handleCreateGroup}
@@ -119,7 +119,7 @@ const Group = () => {
                 View &gt;
               </button>
             </div>
-            <div className="flex overflow-x-auto space-x-2 pl-4 -mx-4">
+            <div className="flex overflow-x-auto space-x-2 -mx-4 pl-4">
               {popularGroups.map((group) => (
                 <GroupCard key={group.id} group={group} />
               ))}
