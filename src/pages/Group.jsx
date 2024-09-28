@@ -5,18 +5,17 @@ import BottomNavBar from '../components/BottomNavBar';
 import GroupCard from '../components/GroupCard';
 import { Button } from "@/components/ui/button";
 import FriendActivity from '../components/FriendActivity';
+import { useNavigate } from 'react-router-dom';
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const myGroups = [
     { id: 1, name: 'My group 1', members: 5, gradient: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)', hasActivity: true },
     { id: 2, name: 'My group 2', members: 8, gradient: 'linear-gradient(135deg, #FFD93D, #6A5ACD)', hasActivity: true },
     { id: 3, name: 'My group 3', members: 3, gradient: 'linear-gradient(135deg, #FF8C00, #40E0D0)', hasActivity: true },
-    { id: 4, name: 'My group 4', members: 6, gradient: 'linear-gradient(135deg, #FF1493, #00CED1)', hasActivity: true },
-    { id: 5, name: 'My group 5', members: 4, gradient: 'linear-gradient(135deg, #32CD32, #4169E1)', hasActivity: true },
-    { id: 6, name: 'My group 6', members: 7, gradient: 'linear-gradient(135deg, #FF4500, #00FA9A)', hasActivity: true },
   ];
 
   const popularGroups = [
@@ -39,8 +38,12 @@ const Group = () => {
   };
 
   const handleViewMore = (section) => {
-    console.log(`View more clicked for ${section}`);
-    // Implement view more logic here
+    if (section === 'My Groups') {
+      navigate('/my-groups');
+    } else {
+      console.log(`View more clicked for ${section}`);
+      // Implement view more logic for other sections here
+    }
   };
 
   return (
@@ -75,7 +78,7 @@ const Group = () => {
                 onClick={handleCreateGroup}
                 isNewGroup={true}
               />
-              {myGroups.map((group) => (
+              {myGroups.slice(0, 3).map((group) => (
                 <GroupCard key={group.id} group={group} hasActivity={group.hasActivity} gradient={group.gradient} />
               ))}
             </div>
