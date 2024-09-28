@@ -11,12 +11,12 @@ const Group = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const myGroups = [
-    { id: 1, name: 'My group 1', members: 5, image: 'https://picsum.photos/200?random=1', hasActivity: true },
-    { id: 2, name: 'My group 2', members: 8, image: 'https://picsum.photos/200?random=2', hasActivity: true },
-    { id: 3, name: 'My group 3', members: 3, image: 'https://picsum.photos/200?random=3', hasActivity: true },
-    { id: 4, name: 'My group 4', members: 6, image: 'https://picsum.photos/200?random=4', hasActivity: true },
-    { id: 5, name: 'My group 5', members: 4, image: 'https://picsum.photos/200?random=5', hasActivity: true },
-    { id: 6, name: 'My group 6', members: 7, image: 'https://picsum.photos/200?random=6', hasActivity: true },
+    { id: 1, name: 'My group 1', members: 5, gradient: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)', hasActivity: true },
+    { id: 2, name: 'My group 2', members: 8, gradient: 'linear-gradient(135deg, #FFD93D, #6A5ACD)', hasActivity: true },
+    { id: 3, name: 'My group 3', members: 3, gradient: 'linear-gradient(135deg, #FF8C00, #40E0D0)', hasActivity: true },
+    { id: 4, name: 'My group 4', members: 6, gradient: 'linear-gradient(135deg, #FF1493, #00CED1)', hasActivity: true },
+    { id: 5, name: 'My group 5', members: 4, gradient: 'linear-gradient(135deg, #32CD32, #4169E1)', hasActivity: true },
+    { id: 6, name: 'My group 6', members: 7, gradient: 'linear-gradient(135deg, #FF4500, #00FA9A)', hasActivity: true },
   ];
 
   const popularGroups = [
@@ -80,7 +80,7 @@ const Group = () => {
                 <span className="text-xs font-semibold text-white">New group</span>
               </div>
               {myGroups.map((group) => (
-                <GroupCard key={group.id} group={group} hasActivity={group.hasActivity} />
+                <GroupCard key={group.id} group={group} hasActivity={group.hasActivity} gradient={group.gradient} />
               ))}
             </div>
           </div>

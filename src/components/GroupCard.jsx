@@ -1,10 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const GroupCard = ({ group, hasActivity = false }) => {
+const GroupCard = ({ group, hasActivity = false, gradient }) => {
   const formatMemberCount = (count) => {
     return count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count;
   };
+
+  const backgroundStyle = gradient
+    ? { background: gradient }
+    : { backgroundImage: `url(${group.image})`, backgroundSize: 'cover', backgroundPosition: 'center' };
 
   return (
     <motion.div
@@ -13,8 +17,8 @@ const GroupCard = ({ group, hasActivity = false }) => {
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
       <div className="p-2 text-center">
-        <div className="w-20 h-20 rounded-full overflow-hidden mb-2 mx-auto relative">
-          <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+        <div className="w-20 h-20 rounded-full overflow-hidden mb-2 mx-auto relative" style={backgroundStyle}>
+          {!gradient && <img src={group.image} alt={group.name} className="w-full h-full object-cover" />}
         </div>
         <div className="flex items-start justify-center">
           <h3 className="font-semibold text-xs mb-1 truncate">{group.name}</h3>
