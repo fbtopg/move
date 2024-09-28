@@ -40,10 +40,10 @@ const Group = () => {
     // Implement group creation logic here
   };
 
-  const ViewAllButton = () => (
+  const ViewAllButton = ({ onClick }) => (
     <div className="flex-shrink-0 w-40 flex flex-col items-center justify-center">
       <Button
-        onClick={() => console.log('View all popular groups')}
+        onClick={onClick}
         className="bg-[#212124] text-white rounded-full w-12 h-12 flex items-center justify-center mb-2"
       >
         <ChevronRight className="w-6 h-6" />
@@ -79,12 +79,13 @@ const Group = () => {
               </Button>
             </div>
             <div className="overflow-x-auto scrollbar-hide" ref={myGroupsRef}>
-              <div className="flex space-x-4" style={{ width: `${myGroups.length * 180}px` }}>
+              <div className="flex space-x-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
                 {myGroups.map((group) => (
                   <div key={group.id} className="flex-shrink-0 w-40">
                     <GroupCard group={group} hasActivity={group.hasActivity} gradient={group.gradient} />
                   </div>
                 ))}
+                <ViewAllButton onClick={() => console.log('View all my groups')} />
               </div>
             </div>
           </div>
@@ -124,7 +125,7 @@ const Group = () => {
                     <GroupCard group={group} />
                   </div>
                 ))}
-                <ViewAllButton />
+                <ViewAllButton onClick={() => console.log('View all popular groups')} />
               </div>
             </div>
           </div>
