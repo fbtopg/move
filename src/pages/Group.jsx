@@ -38,7 +38,7 @@ const Group = () => {
           <div className="relative mb-6">
             <div className="relative">
               <Input
-                className="w-full bg-gray-800 border-gray-700 rounded-full pl-10 pr-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full bg-[#1c1c1f] border-none text-gray-400 placeholder-gray-400 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Search groups or users"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -51,7 +51,7 @@ const Group = () => {
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-sm font-semibold text-gray-400">My Groups</h2>
               <button
-                className="text-blue-500 text-xs font-medium opacity-60"
+                className="text-blue-500 text-xs font-semibold opacity-60"
               >
                 View ({myGroups.length}) &gt;
               </button>
@@ -76,7 +76,7 @@ const Group = () => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-sm font-semibold text-gray-400">Popular</h2>
               <button
-                className="text-blue-500 text-xs font-medium opacity-60"
+                className="text-blue-500 text-xs font-semibold opacity-60"
               >
                 View &gt;
               </button>
