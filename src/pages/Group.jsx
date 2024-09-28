@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+import { Search, Plus } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
 import GroupCard from '../components/GroupCard';
@@ -25,6 +25,11 @@ const Group = () => {
     { id: 5, name: 'Travel Adventurers', members: 1800, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319181.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTgxLnBuZyIsImlhdCI6MTcyNzIzNTY3OSwiZXhwIjoxNzU4NzcxNjc5fQ._npMOoWg2FhDDwkKmbQBJrdw1U6Z1A6UbOuM5tO4jt4&t=2024-09-25T03%3A41%3A19.419Z' },
   ];
 
+  const handleCreateGroup = () => {
+    console.log("Create group clicked");
+    // Implement group creation logic here
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
@@ -44,6 +49,15 @@ const Group = () => {
           <div className="space-y-4 mb-8">
             <h2 className="text-sm font-semibold text-gray-400 mb-2">My Groups</h2>
             <div className="grid grid-cols-3 gap-2">
+              <div 
+                className="flex flex-col items-center justify-center cursor-pointer"
+                onClick={handleCreateGroup}
+              >
+                <div className="w-20 h-20 rounded-full flex items-center justify-center bg-gray-800">
+                  <Plus className="h-8 w-8 text-white" />
+                </div>
+                <span className="mt-2 text-xs text-center">Create</span>
+              </div>
               {myGroups.map((group) => (
                 <GroupCard key={group.id} group={group} />
               ))}
