@@ -7,25 +7,21 @@ const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup =
     return count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count;
   };
 
-  const backgroundStyle = gradient
-    ? { background: gradient }
-    : { backgroundImage: `url(${group.image})`, backgroundSize: 'cover', backgroundPosition: 'center' };
-
   return (
     <motion.div
-      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-gray-800 p-4"
+      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1c1c1f] p-4" // Changed background color to #1c1c1f
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={onClick}
     >
       <div className="text-center">
-        <div className="w-24 h-24 rounded-full overflow-hidden mb-3 mx-auto relative" style={backgroundStyle}>
+        <div className="w-24 h-24 rounded-full overflow-hidden mb-3 mx-auto relative" style={gradient ? { background: gradient } : {}}>
           {isNewGroup ? (
             <div className="w-full h-full flex items-center justify-center">
               <Plus className="h-10 w-10 text-white" />
             </div>
           ) : (
-            !gradient && <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+            !gradient && group.image && <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
           )}
         </div>
         <div className="flex items-start justify-center">

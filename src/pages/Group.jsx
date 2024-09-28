@@ -53,7 +53,7 @@ const Group = () => {
           <div className="relative mb-6">
             <div className="relative">
               <Input
-                className="w-full bg-[#212124] border-none text-gray-400 placeholder-gray-400 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full bg-[#1c1c1f] border-none text-gray-400 placeholder-gray-400 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Search groups or users"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -67,7 +67,7 @@ const Group = () => {
               <h2 className="text-sm font-semibold text-gray-200">My Groups</h2>
               <button
                 className="text-[#3C82F6] text-xs font-semibold opacity-60"
-                onClick={() => handleViewMore('My Groups')}
+                onClick={() => navigate('/my-groups')}
               >
                 View ({myGroups.length}) &gt;
               </button>
@@ -75,7 +75,7 @@ const Group = () => {
             <div className="grid grid-cols-2 gap-4">
               <GroupCard
                 group={{ name: 'New group', members: 0 }}
-                onClick={handleCreateGroup}
+                onClick={() => console.log("Create group clicked")}
                 isNewGroup={true}
               />
               {myGroups.slice(0, 3).map((group) => (
