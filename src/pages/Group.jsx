@@ -13,6 +13,7 @@ const Group = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const popularGroupsRef = useRef(null);
+  const myGroupsRef = useRef(null);
 
   const myGroups = [
     { id: 1, name: 'My group 1', members: 5, gradient: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)', hasActivity: true },
@@ -86,15 +87,21 @@ const Group = () => {
                 View ({myGroups.length}) &gt;
               </button>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <GroupCard
-                group={{ name: 'New group', members: 0 }}
-                onClick={() => console.log("Create group clicked")}
-                isNewGroup={true}
-              />
-              {myGroups.slice(0, 3).map((group) => (
-                <GroupCard key={group.id} group={group} hasActivity={group.hasActivity} gradient={group.gradient} />
-              ))}
+            <div className="overflow-x-auto scrollbar-hide" ref={myGroupsRef}>
+              <div className="flex space-x-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
+                <div className="flex-shrink-0 w-40">
+                  <GroupCard
+                    group={{ name: 'New group', members: 0 }}
+                    onClick={() => console.log("Create group clicked")}
+                    isNewGroup={true}
+                  />
+                </div>
+                {myGroups.map((group) => (
+                  <div key={group.id} className="flex-shrink-0 w-40">
+                    <GroupCard group={group} hasActivity={group.hasActivity} gradient={group.gradient} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
