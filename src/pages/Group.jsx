@@ -42,7 +42,7 @@ const Group = () => {
           </div>
 
           <div className="space-y-4 mb-8">
-            <h2 className="text-sm font-light text-gray-400 mb-2">My Groups</h2>
+            <h2 className="text-sm font-medium text-gray-300 mb-2">My Groups</h2>
             <div className="grid grid-cols-3 gap-2">
               {myGroups.map((group) => (
                 <GroupCard key={group.id} group={group} />
@@ -51,7 +51,7 @@ const Group = () => {
           </div>
 
           <div className="mb-8">
-            <h2 className="text-sm font-light text-gray-400 mb-4">Popular</h2>
+            <h2 className="text-sm font-medium text-gray-300 mb-4">Popular</h2>
             <div className="flex overflow-x-auto space-x-2 scrollbar-hide pb-4">
               {popularGroups.map((group) => (
                 <GroupCard key={group.id} group={group} />
