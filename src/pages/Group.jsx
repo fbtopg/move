@@ -29,8 +29,6 @@ const Group = () => {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-4">
-          <h1 className="text-2xl font-bold mb-4">Groups</h1>
-          
           <div className="relative mb-6">
             <div className="relative">
               <Input
