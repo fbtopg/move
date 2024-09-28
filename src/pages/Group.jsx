@@ -80,22 +80,6 @@ const Group = () => {
           </div>
 
           <div className="mb-8">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-sm font-semibold text-gray-400">Popular</h2>
-              <button
-                className="text-[#3C82F6] text-xs font-semibold opacity-60"
-              >
-                View &gt;
-              </button>
-            </div>
-            <div className="flex overflow-x-auto space-x-2 scrollbar-hide pb-4">
-              {popularGroups.map((group) => (
-                <GroupCard key={group.id} group={group} />
-              ))}
-            </div>
-          </div>
-
-          <div className="mb-8">
             <h2 className="text-sm font-semibold text-gray-400 mb-4">Recent Activity</h2>
             <div className="space-y-4">
               {recentActivities.map((activity, index) => (
@@ -107,6 +91,22 @@ const Group = () => {
                     profilePicture={activity.profilePicture}
                   />
                 </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-8">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-sm font-semibold text-gray-400">Popular</h2>
+              <button
+                className="text-[#3C82F6] text-xs font-semibold opacity-60"
+              >
+                View &gt;
+              </button>
+            </div>
+            <div className="flex overflow-x-auto space-x-2 scrollbar-hide pb-4">
+              {popularGroups.map((group) => (
+                <GroupCard key={group.id} group={group} />
               ))}
             </div>
           </div>
