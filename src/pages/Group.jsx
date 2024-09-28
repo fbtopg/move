@@ -110,7 +110,7 @@ const Group = () => {
             </div>
             <div className="space-y-3">
               {recentActivities.map((activity, index) => (
-                <div key={index} className="bg-[#161618] rounded-lg p-4">
+                <div key={index} className="bg-[#161618] rounded-xl p-4">
                   <FriendActivity
                     name={activity.name}
                     activity={activity.activity}
