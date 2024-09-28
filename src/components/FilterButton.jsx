@@ -7,7 +7,7 @@ const FilterButton = ({ name, emoji, color, members, isGroup = false, hasActivit
         <div className="text-sm font-semibold text-white flex items-start">
           {name}
           {hasActivity && (
-            <span className="w-2 h-2 bg-red-500 rounded-full ml-1 mt-1"></span>
+            <span className="w-1.5 h-1.5 bg-red-500 rounded-full ml-1 mt-1"></span>
           )}
         </div>
         <div className="text-[10px] text-gray-500 -mt-0.5">
