@@ -2,6 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const GroupCard = ({ group, hasActivity = false }) => {
+  const formatMemberCount = (count) => {
+    return count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count;
+  };
+
   return (
     <motion.div
       className="flex-shrink-0 w-24 rounded-lg overflow-hidden relative"
@@ -18,7 +22,7 @@ const GroupCard = ({ group, hasActivity = false }) => {
             <div className="w-1.5 h-1.5 bg-red-500 rounded-full ml-1 mt-1"></div>
           )}
         </div>
-        <p className="text-[10px] text-gray-400">{group.members} members</p>
+        <p className="text-[10px] text-gray-400">{formatMemberCount(group.members)} members</p>
       </div>
     </motion.div>
   );
