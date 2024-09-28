@@ -75,7 +75,7 @@ const Friends = () => {
   const renderActivitySection = (title, activities) => (
     <>
       <h2 className="text-xs font-semibold mb-3 text-gray-400">{title}</h2>
-      <div className="space-y-4">
+      <div className="space-y-4 pr-2"> {/* Changed from pr-4 to pr-2 */}
         {activities.map((activity, index) => (
           <FriendActivity
             key={index}
