@@ -39,22 +39,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
     }
   };
 
-  // Format the activity string based on the type
-  const formatActivity = () => {
-    const [content, timestamp] = activity.split(' • ');
-    if (type === 'walk') {
-      const distance = content.match(/\d+(\.\d+)?/)[0];
-      const unit = parseFloat(distance) >= 1 ? 'km' : 'm';
-      return `${name} finished walking ${distance}${unit} and completed daily walk. • ${timestamp}`;
-    } else if (type === 'quiz') {
-      const quizNumber = content.match(/#\d+/)[0];
-      return `${name} solved ${quizNumber} and completed daily quiz. • ${timestamp}`;
-    }
-    return activity;
-  };
-
-  const formattedActivity = formatActivity();
-  const [content, timestamp] = formattedActivity.split(' • ');
+  const [content, timestamp] = activity.split(' • ');
 
   return (
     <div className="flex items-start space-x-3">
