@@ -45,7 +45,7 @@ const Group = () => {
     // Implement group creation logic here
   };
 
-  const ViewAllButton = ({ onClick, totalGroups }) => (
+  const ViewAllButton = ({ onClick }) => (
     <div className="flex-shrink-0 w-40 flex flex-col items-center justify-center">
       <Button
         onClick={onClick}
@@ -53,7 +53,7 @@ const Group = () => {
       >
         <ChevronRight className="w-6 h-6" />
       </Button>
-      <span className="text-xs text-gray-400">View ({totalGroups})</span>
+      <span className="text-xs text-gray-400">View all</span>
     </div>
   );
 
@@ -95,7 +95,7 @@ const Group = () => {
                     />
                   </div>
                 ))}
-                <ViewAllButton onClick={() => navigate('/my-groups')} totalGroups={myGroups.length} />
+                <ViewAllButton onClick={() => navigate('/my-groups')} />
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@ const Group = () => {
                     <GroupCard group={group} />
                   </div>
                 ))}
-                <ViewAllButton onClick={() => console.log('View all popular groups')} totalGroups={popularGroups.length} />
+                <ViewAllButton onClick={() => console.log('View all popular groups')} />
               </div>
             </div>
           </div>
