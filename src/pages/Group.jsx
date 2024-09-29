@@ -100,7 +100,7 @@ const Group = () => {
               <h2 className="text-base font-semibold text-gray-200">Recent Activity</h2>
               <button
                 className="text-white text-xs font-semibold"
-                onClick={() => console.log('View all recent activity')}
+                onClick={() => navigate('/recent-activity')}
               >
                 View ({recentActivities.length}) &gt;
               </button>

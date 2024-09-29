@@ -16,6 +16,7 @@ import Walk from "./pages/Walk";
 import Board from "./pages/Board";
 import Group from "./pages/Group";
 import MyGroups from "./pages/MyGroups";
+import RecentActivity from "./pages/RecentActivity";
 import SplashScreen from "./components/SplashScreen";
 
 const queryClient = new QueryClient();
@@ -61,6 +62,7 @@ const App = () => {
               <Route path="/board" element={<Board />} />
               <Route path="/group" element={<Group />} />
               <Route path="/my-groups" element={<MyGroups />} />
+              <Route path="/recent-activity" element={<RecentActivity />} />
             </Routes>
           </BrowserRouter>
         )}
