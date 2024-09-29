@@ -79,7 +79,7 @@ const Group = () => {
             </div>
             <div className="overflow-x-auto scrollbar-hide -mx-4" ref={myGroupsRef}>
               <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 2) * 180}px` }}>
-                <div className="flex-shrink-0 w-40 h-48"> {/* Increased height here */}
+                <div className="flex-shrink-0 w-40">
                   <GroupCard
                     group={{ name: 'New group', members: 0 }}
                     onClick={handleCreateGroup}
