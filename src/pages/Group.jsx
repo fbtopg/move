@@ -76,6 +76,12 @@ const Group = () => {
           <div className="space-y-4 mb-8">
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-base font-semibold text-gray-200">My Groups</h2>
+              <button
+                className="text-white text-xs font-semibold"
+                onClick={() => navigate('/my-groups')}
+              >
+                View ({myGroups.length}) &gt;
+              </button>
             </div>
             <div className="overflow-x-auto scrollbar-hide -mx-4" ref={myGroupsRef}>
               <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 2) * 180}px` }}>
