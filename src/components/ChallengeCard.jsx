@@ -27,7 +27,7 @@ const ChallengeCard = ({ type, currentChallenge, totalChallenges }) => {
               className="w-12 h-12 rounded-full border-2 border-[#212124]"
             />
           </div>
-          <div className="flex justify-center space-x-2 mt-auto">
+          <div className="flex justify-center space-x-2 mt-auto mb-4"> {/* Added mb-4 to move dots upwards */}
             {Array.from({ length: totalChallenges }).map((_, index) => (
               <div
                 key={index}
