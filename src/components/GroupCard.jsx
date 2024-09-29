@@ -21,7 +21,13 @@ const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup =
               <Plus className="h-10 w-10 text-white" />
             </div>
           ) : (
-            !gradient && group.image && <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+            <>
+              {!gradient && group.image && (
+                <div className="w-full h-full rounded-full border-4 border-white overflow-hidden">
+                  <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+                </div>
+              )}
+            </>
           )}
         </div>
         <div className="flex items-start justify-center">
