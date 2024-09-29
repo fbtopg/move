@@ -13,7 +13,7 @@ const ChallengeProgress = () => {
   };
 
   return (
-    <div className="mb-6">
+    <div className="mb-4">
       <motion.div
         className="overflow-hidden"
         onPanEnd={(e, { offset, velocity }) => {
@@ -31,11 +31,11 @@ const ChallengeProgress = () => {
         >
           {challenges.map((challenge, index) => (
             <div key={index} className="flex-shrink-0 w-full">
-              <div className="border border-gray-700 rounded-lg p-3 w-48 h-24"> {/* Reduced width and height */}
-                <p className="text-xs text-gray-400">{challenge.type}</p>
-                <p className="text-sm font-semibold">{challenge.date}</p>
-                <p className="text-xs">Rank: {challenge.progress}</p>
-                <p className="text-xs text-gray-400">{challenge.active} active</p>
+              <div className="border border-gray-700 rounded-lg p-2 w-32 h-20"> {/* Reduced width and height */}
+                <p className="text-[8px] text-gray-400">{challenge.type}</p> {/* Reduced font size */}
+                <p className="text-[10px] font-semibold">{challenge.date}</p> {/* Reduced font size */}
+                <p className="text-[8px]">Rank: {challenge.progress}</p> {/* Reduced font size */}
+                <p className="text-[8px] text-gray-400">{challenge.active} active</p> {/* Reduced font size */}
               </div>
             </div>
           ))}
