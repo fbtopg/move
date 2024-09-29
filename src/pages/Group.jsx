@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import FriendActivity from '../components/FriendActivity';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('group');
@@ -16,9 +17,9 @@ const Group = () => {
   const myGroupsRef = useRef(null);
 
   const myGroups = [
-    { id: 1, name: 'My group 1', members: 5, gradient: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)', hasActivity: true, lastActivity: 'Just now' },
-    { id: 2, name: 'My group 2', members: 8, gradient: 'linear-gradient(135deg, #FFD93D, #6A5ACD)', hasActivity: true, lastActivity: '5m ago' },
-    { id: 3, name: 'My group 3', members: 3, gradient: 'linear-gradient(135deg, #FF8C00, #40E0D0)', hasActivity: true, lastActivity: '2h ago' },
+    { id: 1, name: 'My group 1', members: 5, gradient: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)', hasActivity: true, lastActivity: 'Just now', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()] },
+    { id: 2, name: 'My group 2', members: 8, gradient: 'linear-gradient(135deg, #FFD93D, #6A5ACD)', hasActivity: true, lastActivity: '5m ago', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()] },
+    { id: 3, name: 'My group 3', members: 3, gradient: 'linear-gradient(135deg, #FF8C00, #40E0D0)', hasActivity: true, lastActivity: '2h ago', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()] },
   ];
 
   const popularGroups = [

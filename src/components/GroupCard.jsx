@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup = false, lastActivity }) => {
   const formatMemberCount = (count) => {
@@ -42,6 +44,16 @@ const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup =
             <p className="text-xs text-gray-400">{formatMemberCount(group.members)} members</p>
             {lastActivity && (
               <p className="text-xs text-yellow-400 mt-1">Last activity: {lastActivity}</p>
+            )}
+            {group.memberProfiles && (
+              <div className="flex justify-center mt-2">
+                {group.memberProfiles.slice(0, 3).map((profile, index) => (
+                  <Avatar key={index} className="w-6 h-6 -ml-1 first:ml-0 border border-gray-800">
+                    <AvatarImage src={profile} alt={`Member ${index + 1}`} />
+                    <AvatarFallback>{index + 1}</AvatarFallback>
+                  </Avatar>
+                ))}
+              </div>
             )}
           </>
         )}
