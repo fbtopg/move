@@ -46,7 +46,7 @@ const Group = () => {
   };
 
   const ViewAllButton = ({ onClick }) => (
-    <div className="flex-shrink-0 w-40 flex flex-col items-center justify-center">
+    <div className="flex-shrink-0 w-40 flex flex-col items-center justify-center h-48"> {/* Added fixed height here */}
       <Button
         onClick={onClick}
         className="bg-[#212124] text-white rounded-full w-12 h-12 flex items-center justify-center mb-2"
