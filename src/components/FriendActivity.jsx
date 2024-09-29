@@ -39,7 +39,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
               )}
             </p>
           </div>
-          <div className="flex items-center space-x-2 flex-shrink-0">
+          <div className="flex items-center space-x-1 flex-shrink-0">
             <div 
               className="w-10 h-10 rounded-lg bg-cover bg-center"
               style={{
@@ -51,12 +51,12 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
               size="icon" 
               onClick={handleLike}
               className={cn(
-                "w-10 h-10 p-0",
+                "w-8 h-8 p-0",
                 liked ? "text-white" : "text-gray-500",
                 "bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent"
               )}
             >
-              <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
+              <Heart className={`h-5 w-5 ${liked ? "fill-current" : ""}`} />
             </Button>
           </div>
         </div>
