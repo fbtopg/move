@@ -31,15 +31,6 @@ const MyGroups = () => {
 
   return (
     <div className="mb-6">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-base font-semibold text-gray-200">My Groups</h2>
-        <button
-          className="text-white text-xs font-semibold"
-          onClick={() => navigate('/my-groups')}
-        >
-          View ({myGroups.length}) &gt;
-        </button>
-      </div>
       <div className="overflow-x-auto scrollbar-hide -mx-4" ref={groupsRef}>
         <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
           {myGroups.map((group) => (
