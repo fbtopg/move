@@ -53,7 +53,7 @@ const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup =
               <p className="text-xs text-gray-400">{formatMemberCount(group.members)} members</p>
             </div>
             {lastActivity && (
-              <p className="text-xs text-yellow-400 mt-1">Last activity: {lastActivity}</p>
+              <p className="text-[10px] text-yellow-400 mt-1">Last activity: {lastActivity}</p>
             )}
           </>
         )}
