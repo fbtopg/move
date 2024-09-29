@@ -29,12 +29,7 @@ const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, la
             </div>
           )}
         </div>
-        <div className="flex items-start justify-center">
-          <h3 className="font-semibold text-sm mb-1 truncate text-white">{truncateName(group.name)}</h3>
-          {hasActivity && (
-            <div className="w-1.5 h-1.5 bg-red-500 rounded-full ml-1 mt-1"></div>
-          )}
-        </div>
+        <h3 className="font-semibold text-sm mb-1 truncate text-gray-200">{truncateName(group.name)}</h3>
         {!isNewGroup && (
           <>
             <div className="flex items-center justify-center mt-2">

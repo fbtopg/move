@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Plus, Search } from 'lucide-react';
 import FilterButton from '../components/FilterButton';
 import { useNavigate } from 'react-router-dom';
-import MyGroups from '../components/MyGroups';
+import CommunityGroupCard from '../components/CommunityGroupCard';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
@@ -46,6 +46,12 @@ const Friends = () => {
     console.log("Create group clicked");
     // Implement group creation logic here
   };
+
+  const myGroups = [
+    { id: 1, name: 'Morning chill', members: 5, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767726000373871/KakaoTalk_20240929_105444000.jpg?ex=66fa054c&is=66f8b3cc&hm=e90d37ad3b96dd8bd0e80febba1744f732f4fb0f6e23e9c2b4502f49f446e25b&', hasActivity: true, lastActivity: 'Just now', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()] },
+    { id: 2, name: 'Climbing bros', members: 8, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767726835044392/KakaoTalk_20240929_105444000_01.jpg?ex=66fa054c&is=66f8b3cc&hm=f08aa4c188ead47c135fa4806063a3d91464afec7975387ce7f541ba100e842a&', hasActivity: true, lastActivity: '5m ago', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()] },
+    { id: 3, name: 'Trip', members: 3, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767727749398618/KakaoTalk_20240929_105444000_02.jpg?ex=66fa054d&is=66f8b3cd&hm=c87306c053f5fee8f50fd4acc6363526eba0e50b6547667fd683092e4e032cdc&', hasActivity: true, lastActivity: '2h ago', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()] },
+  ];
 
   const activities = {
     today: [
@@ -132,7 +138,20 @@ const Friends = () => {
       </div>
 
       <div className="px-4">
-        <MyGroups />
+        <div className="mb-6">
+          <div className="overflow-x-auto scrollbar-hide -mx-4">
+            <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
+              {myGroups.map((group) => (
+                <div key={group.id} className="flex-shrink-0 w-40">
+                  <CommunityGroupCard 
+                    group={group} 
+                    hasActivity={group.hasActivity}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       <section className="mt-4 pb-20 space-y-6 px-4">
