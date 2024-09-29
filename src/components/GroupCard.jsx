@@ -11,12 +11,12 @@ const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, la
 
   return (
     <motion.div
-      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 h-48" // Added fixed height h-48 here
+      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 h-64" // Increased height to h-64 (16rem or 256px)
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={onClick}
     >
-      <div className="text-center">
+      <div className="text-center h-full flex flex-col justify-between">
         <div className="w-24 h-24 rounded-full overflow-hidden mb-3 mx-auto relative">
           <div className="absolute inset-0 border-4 border-gray-800 rounded-full"></div>
           {isNewGroup ? (
@@ -29,14 +29,14 @@ const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, la
             </div>
           )}
         </div>
-        <div className="flex items-start justify-center">
+        <div className="flex flex-col items-center flex-grow justify-center">
           <h3 className="font-semibold text-sm mb-1 truncate">{group.name}</h3>
           {hasActivity && (
-            <div className="w-1.5 h-1.5 bg-red-500 rounded-full ml-1 mt-1"></div>
+            <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-1"></div>
           )}
         </div>
         {!isNewGroup && (
-          <>
+          <div className="mt-auto">
             <div className="flex items-center justify-center mt-2">
               <div className="flex -space-x-2 mr-2">
                 {(group.memberProfiles || [1, 2, 3]).slice(0, 3).map((profile, index) => (
@@ -49,9 +49,9 @@ const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, la
               <p className="text-xs text-gray-400">{formatMemberCount(group.members)} members</p>
             </div>
             {lastActivity && (
-              <p className="text-[10px] text-yellow-400 mt-1">Last activity: {lastActivity}</p>
+              <p className="text-[10px] text-yellow-400 mt-1">{lastActivity}</p>
             )}
-          </>
+          </div>
         )}
       </div>
     </motion.div>
