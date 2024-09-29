@@ -4,12 +4,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const CommunityGroupCard = ({ group, onClick }) => {
   const truncateName = (name) => {
-    return name.length > 20 ? name.slice(0, 20) + '...' : name;
+    return name.length > 14 ? name.slice(0, 14) + '...' : name;
   };
 
   return (
     <motion.div
-      className="w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 h-24"
+      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 h-24"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={onClick}
@@ -18,7 +18,7 @@ const CommunityGroupCard = ({ group, onClick }) => {
         <div className="w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0">
           <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
         </div>
-        <div className="flex flex-col justify-center flex-grow">
+        <div className="flex flex-col justify-center">
           <h3 className="font-semibold text-sm mb-1 truncate text-white">{truncateName(group.name)}</h3>
           <p className="text-xs text-gray-400">{group.members} members</p>
         </div>
