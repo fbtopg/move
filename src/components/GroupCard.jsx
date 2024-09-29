@@ -2,14 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 
-const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup = false }) => {
+const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup = false, lastActivity }) => {
   const formatMemberCount = (count) => {
     return count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count;
   };
 
   return (
     <motion.div
-      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#2c2c2f] p-4" // Changed from #1c1c1f to #2c2c2f
+      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#3c3c3f] p-4" // Changed from #2c2c2f to #3c3c3f for a brighter background
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={onClick}
@@ -31,7 +31,12 @@ const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup =
           )}
         </div>
         {!isNewGroup && (
-          <p className="text-xs text-gray-400">{formatMemberCount(group.members)} members</p>
+          <>
+            <p className="text-xs text-gray-400">{formatMemberCount(group.members)} members</p>
+            {lastActivity && (
+              <p className="text-xs text-yellow-400 mt-1">Last activity: {lastActivity}</p>
+            )}
+          </>
         )}
       </div>
     </motion.div>

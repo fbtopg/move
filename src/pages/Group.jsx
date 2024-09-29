@@ -16,9 +16,9 @@ const Group = () => {
   const myGroupsRef = useRef(null);
 
   const myGroups = [
-    { id: 1, name: 'My group 1', members: 5, gradient: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)', hasActivity: true },
-    { id: 2, name: 'My group 2', members: 8, gradient: 'linear-gradient(135deg, #FFD93D, #6A5ACD)', hasActivity: true },
-    { id: 3, name: 'My group 3', members: 3, gradient: 'linear-gradient(135deg, #FF8C00, #40E0D0)', hasActivity: true },
+    { id: 1, name: 'My group 1', members: 5, gradient: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)', hasActivity: true, lastActivity: 'Just now' },
+    { id: 2, name: 'My group 2', members: 8, gradient: 'linear-gradient(135deg, #FFD93D, #6A5ACD)', hasActivity: true, lastActivity: '5m ago' },
+    { id: 3, name: 'My group 3', members: 3, gradient: 'linear-gradient(135deg, #FF8C00, #40E0D0)', hasActivity: true, lastActivity: '2h ago' },
   ];
 
   const popularGroups = [
@@ -82,7 +82,12 @@ const Group = () => {
               <div className="flex space-x-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
                 {myGroups.map((group) => (
                   <div key={group.id} className="flex-shrink-0 w-40">
-                    <GroupCard group={group} hasActivity={group.hasActivity} gradient={group.gradient} />
+                    <GroupCard 
+                      group={group} 
+                      hasActivity={group.hasActivity} 
+                      gradient={group.gradient} 
+                      lastActivity={group.lastActivity}
+                    />
                   </div>
                 ))}
                 <ViewAllButton onClick={() => navigate('/my-groups')} />
