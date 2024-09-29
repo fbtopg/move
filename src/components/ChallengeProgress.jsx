@@ -14,7 +14,6 @@ const ChallengeProgress = () => {
 
   return (
     <div className="mb-6">
-      <h2 className="text-sm font-semibold mb-3 text-gray-400">CHALLENGE PROGRESS</h2>
       <motion.div
         className="overflow-hidden"
         onPanEnd={(e, { offset, velocity }) => {
@@ -42,17 +41,6 @@ const ChallengeProgress = () => {
           ))}
         </motion.div>
       </motion.div>
-      <div className="flex justify-center space-x-2 mt-2">
-        {challenges.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full ${
-              index === currentChallenge ? 'bg-white' : 'bg-gray-500'
-            }`}
-            onClick={() => handleSwipe(index)}
-          ></button>
-        ))}
-      </div>
     </div>
   );
 };
