@@ -33,7 +33,7 @@ const ChallengeProgress = () => {
             <div key={index} className="flex-shrink-0 w-full">
               <div className="border border-gray-700 rounded-lg p-2 w-32 h-16">
                 <p className="text-[8px] text-gray-400">{challenge.type}</p>
-                <p className="text-[10px] font-semibold">{challenge.rank}</p>
+                <p className="text-[10px] font-bold text-white">{challenge.rank}</p>
               </div>
             </div>
           ))}
