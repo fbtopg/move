@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Plus, Search } from 'lucide-react';
 import FilterButton from '../components/FilterButton';
 import { useNavigate } from 'react-router-dom';
-import ChallengeProgress from '../components/ChallengeProgress';
+import MyGroups from '../components/MyGroups';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
@@ -132,7 +132,7 @@ const Friends = () => {
       </div>
 
       <div className="px-4">
-        <ChallengeProgress />
+        <MyGroups />
       </div>
 
       <section className="mt-4 pb-20 space-y-6 px-4">
