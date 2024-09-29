@@ -56,7 +56,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
                 "bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent"
               )}
             >
-              <Heart className={`h-5 w-5 ${liked ? "fill-current" : ""}`} />
+              <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
             </Button>
           </div>
         </div>
