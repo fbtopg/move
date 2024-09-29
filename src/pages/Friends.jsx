@@ -23,6 +23,7 @@ const Friends = () => {
   const filters = [
     { name: "Popular", emoji: "🔥", color: "bg-purple-500" },
     { name: "New", emoji: "✨", color: "bg-blue-500" },
+    { name: "Challenge", emoji: "🏆", color: "bg-green-500" },
   ];
 
   const userGroups = [
