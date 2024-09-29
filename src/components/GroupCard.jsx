@@ -11,7 +11,7 @@ const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, la
 
   return (
     <motion.div
-      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 h-48" // Added fixed height h-48 here
+      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 h-52" // Increased height to h-52 (208px)
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={onClick}
