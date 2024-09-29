@@ -29,6 +29,10 @@ const Friends = () => {
     { name: "Reward", emoji: "🎁", color: "bg-yellow-500" },
   ];
 
+  const handleNextChallenge = () => {
+    setCurrentChallenge((prev) => (prev + 1) % challenges.length);
+  };
+
   const handleUserClick = (user) => {
     setSelectedUser({
       username: user.name,
@@ -101,11 +105,7 @@ const Friends = () => {
           <div className="flex">
             {challenges.map((challenge, index) => (
               <div key={index} className="flex-shrink-0 w-full">
-                <ChallengeCard 
-                  {...challenge} 
-                  currentChallenge={currentChallenge}
-                  totalChallenges={challenges.length}
-                />
+                <ChallengeCard {...challenge} onNextChallenge={handleNextChallenge} />
               </div>
             ))}
           </div>
