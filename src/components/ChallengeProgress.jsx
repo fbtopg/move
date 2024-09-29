@@ -31,10 +31,10 @@ const ChallengeProgress = () => {
         >
           {challenges.map((challenge, index) => (
             <div key={index} className="flex-shrink-0 w-full">
-              <div className="border border-gray-700 rounded-lg p-4">
-                <p className="text-sm text-gray-400">{challenge.type}</p>
-                <p className="text-lg font-semibold">{challenge.date}</p>
-                <p className="text-sm">Rank: {challenge.progress}</p>
+              <div className="border border-gray-700 rounded-lg p-3 w-48 h-24"> {/* Reduced width and height */}
+                <p className="text-xs text-gray-400">{challenge.type}</p>
+                <p className="text-sm font-semibold">{challenge.date}</p>
+                <p className="text-xs">Rank: {challenge.progress}</p>
                 <p className="text-xs text-gray-400">{challenge.active} active</p>
               </div>
             </div>
