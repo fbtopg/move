@@ -99,23 +99,6 @@ const Group = () => {
             </div>
           </div>
 
-          {/* Updated banner section with increased height and new text */}
-          <div className="relative w-screen left-1/2 -translate-x-1/2 h-80 mb-8" style={{
-            backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1289781137362784297/Frame_114.png?ex=66fa11ca&is=66f8c04a&hm=af84e535da1462f24ea72c19d7d177918d51d6b409ea43a1e4f58c2f8c3f6297&')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <h2 className="text-3xl font-bold text-white mb-4">Join Together</h2>
-              <Button
-                onClick={handleCreateGroup}
-                className="bg-transparent text-white hover:bg-white hover:bg-opacity-20 transition-colors rounded-full px-6 py-2 font-semibold border border-white"
-              >
-                Create group
-              </Button>
-            </div>
-          </div>
-
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-base font-semibold text-gray-200">Recent Activity</h2>
@@ -137,6 +120,23 @@ const Group = () => {
                   />
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Banner moved here */}
+          <div className="relative h-80 mb-8 rounded-lg overflow-hidden" style={{
+            backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1289781137362784297/Frame_114.png?ex=66fa11ca&is=66f8c04a&hm=af84e535da1462f24ea72c19d7d177918d51d6b409ea43a1e4f58c2f8c3f6297&')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <h2 className="text-3xl font-bold text-white mb-4">Join Together</h2>
+              <Button
+                onClick={handleCreateGroup}
+                className="bg-transparent text-white hover:bg-white hover:bg-opacity-20 transition-colors rounded-full px-6 py-2 font-semibold border border-white"
+              >
+                Create group
+              </Button>
             </div>
           </div>
 
