@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
 
-const ChallengeCard = ({ type, onNextChallenge }) => {
+const ChallengeCard = ({ type, currentChallenge, totalChallenges }) => {
   const isWalk = type === 'Daily Walk';
   const navigate = useNavigate();
 
@@ -42,15 +41,16 @@ const ChallengeCard = ({ type, onNextChallenge }) => {
             onClick={handleProfileClick}
           />
         </div>
-        <button 
-          className="w-12 h-12 bg-[#212124] rounded-full flex items-center justify-center shadow-md self-end mt-auto mb-16"
-          onClick={(e) => {
-            e.stopPropagation();
-            onNextChallenge();
-          }}
-        >
-          <ChevronRight className="w-6 h-6 text-white" />
-        </button>
+        <div className="flex justify-center space-x-2 mt-auto">
+          {Array.from({ length: totalChallenges }).map((_, index) => (
+            <div
+              key={index}
+              className={`w-2 h-2 rounded-full ${
+                index === currentChallenge ? 'bg-white' : 'bg-gray-400'
+              }`}
+            ></div>
+          ))}
+        </div>
       </div>
     </div>
   );
