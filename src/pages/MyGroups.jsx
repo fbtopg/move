@@ -1,18 +1,16 @@
 import React from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import GroupCard from '../components/GroupCard';
+import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const MyGroups = () => {
   const navigate = useNavigate();
 
   const myGroups = [
-    { id: 1, name: 'My group 1', members: 5, gradient: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)', hasActivity: true },
-    { id: 2, name: 'My group 2', members: 8, gradient: 'linear-gradient(135deg, #FFD93D, #6A5ACD)', hasActivity: true },
-    { id: 3, name: 'My group 3', members: 3, gradient: 'linear-gradient(135deg, #FF8C00, #40E0D0)', hasActivity: true },
-    { id: 4, name: 'My group 4', members: 6, gradient: 'linear-gradient(135deg, #FF1493, #00CED1)', hasActivity: true },
-    { id: 5, name: 'My group 5', members: 4, gradient: 'linear-gradient(135deg, #32CD32, #4169E1)', hasActivity: true },
-    { id: 6, name: 'My group 6', members: 7, gradient: 'linear-gradient(135deg, #FF4500, #00FA9A)', hasActivity: true },
+    { id: 1, name: 'My group 1', members: 5, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767726000373871/KakaoTalk_20240929_105444000.jpg?ex=66fa054c&is=66f8b3cc&hm=e90d37ad3b96dd8bd0e80febba1744f732f4fb0f6e23e9c2b4502f49f446e25b&', hasActivity: true, lastActivity: 'Just now', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()] },
+    { id: 2, name: 'My group 2', members: 8, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767726835044392/KakaoTalk_20240929_105444000_01.jpg?ex=66fa054c&is=66f8b3cc&hm=f08aa4c188ead47c135fa4806063a3d91464afec7975387ce7f541ba100e842a&', hasActivity: true, lastActivity: '5m ago', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()] },
+    { id: 3, name: 'My group 3', members: 3, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767727749398618/KakaoTalk_20240929_105444000_02.jpg?ex=66fa054d&is=66f8b3cd&hm=c87306c053f5fee8f50fd4acc6363526eba0e50b6547667fd683092e4e032cdc&', hasActivity: true, lastActivity: '2h ago', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()] },
   ];
 
   const handleCreateGroup = () => {
@@ -34,7 +32,12 @@ const MyGroups = () => {
             isNewGroup={true}
           />
           {myGroups.map((group) => (
-            <GroupCard key={group.id} group={group} hasActivity={group.hasActivity} gradient={group.gradient} />
+            <GroupCard 
+              key={group.id} 
+              group={group} 
+              hasActivity={group.hasActivity} 
+              lastActivity={group.lastActivity}
+            />
           ))}
         </div>
       </div>
