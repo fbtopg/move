@@ -9,18 +9,18 @@ const CommunityGroupCard = ({ group, onClick }) => {
 
   return (
     <motion.div
-      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 h-24"
+      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-3 h-20"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={onClick}
     >
       <div className="flex items-center h-full">
-        <div className="w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0">
+        <div className="w-12 h-12 rounded-full overflow-hidden mr-3 flex-shrink-0">
           <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
         </div>
         <div className="flex flex-col justify-center">
-          <h3 className="font-semibold text-sm mb-1 truncate text-white">{truncateName(group.name)}</h3>
-          <p className="text-xs text-gray-400">{group.members} members</p>
+          <h3 className="font-semibold text-xs mb-1 truncate text-white">{truncateName(group.name)}</h3>
+          <p className="text-[10px] text-gray-400">{group.members} members</p>
         </div>
       </div>
     </motion.div>
