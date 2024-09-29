@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getRandomProfilePicture } from '../utils/profilePictures';
+import { Plus } from 'lucide-react';
 
 const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, lastActivity }) => {
   const formatMemberCount = (count) => {
