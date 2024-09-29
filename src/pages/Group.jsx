@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Search, Plus, ChevronRight } from 'lucide-react';
+import { Search, Plus, ChevronRight, ArrowRight } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
 import GroupCard from '../components/GroupCard';
@@ -133,9 +133,10 @@ const Group = () => {
               <h2 className="text-3xl font-bold text-white mb-4">Join Together</h2>
               <Button
                 onClick={handleCreateGroup}
-                className="bg-transparent text-white hover:bg-white hover:bg-opacity-20 transition-colors rounded-full px-6 py-2 font-semibold border border-white"
+                className="bg-transparent text-white hover:bg-white hover:bg-opacity-20 transition-colors rounded-full px-6 py-2 font-semibold border border-white flex items-center"
               >
                 Create group
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
           </div>
