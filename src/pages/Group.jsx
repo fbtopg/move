@@ -76,15 +76,16 @@ const Group = () => {
           <div className="space-y-4 mb-8">
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-base font-semibold text-gray-200">My Groups</h2>
-              <Button
-                onClick={handleCreateGroup}
-                className="bg-transparent hover:bg-[#3c3c3f] transition-colors rounded-full flex items-center justify-center text-white p-2"
-              >
-                <Plus className="h-5 w-5" />
-              </Button>
             </div>
             <div className="overflow-x-auto scrollbar-hide -mx-4" ref={myGroupsRef}>
-              <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
+              <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 2) * 180}px` }}>
+                <div className="flex-shrink-0 w-40">
+                  <GroupCard
+                    group={{ name: 'New group', members: 0 }}
+                    onClick={handleCreateGroup}
+                    isNewGroup={true}
+                  />
+                </div>
                 {myGroups.map((group) => (
                   <div key={group.id} className="flex-shrink-0 w-40">
                     <GroupCard 
