@@ -4,7 +4,7 @@ import { Plus } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomProfilePicture } from '../utils/profilePictures';
 
-const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup = false, lastActivity }) => {
+const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, lastActivity }) => {
   const formatMemberCount = (count) => {
     return count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count;
   };
@@ -17,20 +17,16 @@ const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup =
       onClick={onClick}
     >
       <div className="text-center">
-        <div className="w-24 h-24 rounded-full overflow-hidden mb-3 mx-auto relative" style={gradient ? { background: gradient } : {}}>
+        <div className="w-24 h-24 rounded-full overflow-hidden mb-3 mx-auto relative">
           <div className="absolute inset-0 border-4 border-gray-800 rounded-full"></div>
           {isNewGroup ? (
-            <div className="w-full h-full flex items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center bg-gray-700">
               <Plus className="h-10 w-10 text-white" />
             </div>
           ) : (
-            <>
-              {!gradient && group.image && (
-                <div className="w-full h-full rounded-full overflow-hidden">
-                  <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
-                </div>
-              )}
-            </>
+            <div className="w-full h-full rounded-full overflow-hidden">
+              <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+            </div>
           )}
         </div>
         <div className="flex items-start justify-center">
