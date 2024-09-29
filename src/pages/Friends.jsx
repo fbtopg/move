@@ -21,7 +21,7 @@ const Friends = () => {
   ];
 
   const filters = [
-    { name: "Hot", emoji: "🔥", color: "bg-green-500" },
+    { name: "Popular", emoji: "🔥", color: "bg-purple-500" },
     { name: "New", emoji: "✨", color: "bg-blue-500" },
   ];
 
