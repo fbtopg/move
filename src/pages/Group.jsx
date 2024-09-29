@@ -99,13 +99,14 @@ const Group = () => {
             </div>
           </div>
 
-          {/* Updated banner section with increased height */}
-          <div className="relative w-screen left-1/2 -translate-x-1/2 h-60 mb-8" style={{
-            backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1289776476425555999/Frame_114.png?ex=66fa0d72&is=66f8bbf2&hm=3aa5ca0dfd26aedb4f40850ef67e6b6501d8bd1f08a777a7fab6f4cdbf3e6b88&')",
+          {/* Updated banner section with increased height and new text */}
+          <div className="relative w-screen left-1/2 -translate-x-1/2 h-80 mb-8" style={{
+            backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1289781137362784297/Frame_114.png?ex=66fa11ca&is=66f8c04a&hm=af84e535da1462f24ea72c19d7d177918d51d6b409ea43a1e4f58c2f8c3f6297&')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}>
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <h2 className="text-3xl font-bold text-white mb-4">Join Together</h2>
               <Button
                 onClick={handleCreateGroup}
                 className="bg-white text-black hover:bg-gray-200 transition-colors rounded-full px-6 py-2 font-semibold"
