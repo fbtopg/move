@@ -123,8 +123,8 @@ const Group = () => {
             </div>
           </div>
 
-          {/* Banner moved here */}
-          <div className="relative h-80 mb-8 rounded-lg overflow-hidden" style={{
+          {/* Full-width banner */}
+          <div className="relative h-80 mb-8 w-screen -mx-4" style={{
             backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1289781137362784297/Frame_114.png?ex=66fa11ca&is=66f8c04a&hm=af84e535da1462f24ea72c19d7d177918d51d6b409ea43a1e4f58c2f8c3f6297&')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
