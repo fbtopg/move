@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const ChallengeProgress = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
   const challenges = [
-    { type: "Daily Walk", rank: "1st/120.6k" },
+    { type: "September walk challenge", rank: "1st/120.6k" },
     { type: "Daily Quiz", rank: "11th/120.6k" },
   ];
 
