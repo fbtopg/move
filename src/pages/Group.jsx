@@ -70,7 +70,7 @@ const Group = () => {
           </div>
 
           <div className="space-y-4 mb-8">
-            <div className="flex justify-between items-center mb-2 px-4">
+            <div className="flex justify-between items-center mb-2">
               <h2 className="text-base font-semibold text-gray-200">My Groups</h2>
               <Button
                 onClick={handleCreateGroup}
@@ -99,7 +99,7 @@ const Group = () => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-base font-semibold text-gray-200">Recent Activity</h2>
               <button
-                className="text-[#3C82F6] text-xs font-semibold"
+                className="text-white text-xs font-semibold"
                 onClick={() => console.log('View all recent activity')}
               >
                 View ({recentActivities.length}) &gt;
@@ -123,8 +123,8 @@ const Group = () => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-base font-semibold text-gray-200">Popular</h2>
             </div>
-            <div className="overflow-x-auto scrollbar-hide" ref={popularGroupsRef}>
-              <div className="flex space-x-4" style={{ width: `${(popularGroups.length + 1) * 180}px` }}>
+            <div className="overflow-x-auto scrollbar-hide -mx-4" ref={popularGroupsRef}>
+              <div className="flex space-x-4 px-4" style={{ width: `${(popularGroups.length + 1) * 180}px` }}>
                 {popularGroups.map((group) => (
                   <div key={group.id} className="flex-shrink-0 w-40">
                     <GroupCard group={group} />
