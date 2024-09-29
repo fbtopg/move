@@ -11,18 +11,18 @@ const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, la
 
   return (
     <motion.div
-      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#161618] p-4 h-48" // Added fixed height here
+      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#161618] h-48" // Fixed height added here
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={onClick}
     >
       <div className="text-center h-full flex flex-col justify-between">
         <div className="flex-grow flex flex-col items-center justify-center">
-          <div className="w-20 h-20 rounded-full overflow-hidden mb-3 relative">
+          <div className="w-28 h-28 rounded-full overflow-hidden mb-3 relative"> // Increased size here
             <div className="absolute inset-0 border-4 border-gray-800 rounded-full"></div>
             {isNewGroup ? (
               <div className="w-full h-full flex items-center justify-center bg-gray-700">
-                <Plus className="h-8 w-8 text-white" />
+                <Plus className="h-12 w-12 text-white" /> // Increased icon size
               </div>
             ) : (
               <div className="w-full h-full rounded-full overflow-hidden">
@@ -38,7 +38,7 @@ const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, la
           </div>
         </div>
         {!isNewGroup && (
-          <div className="mt-auto">
+          <div className="mt-auto pb-3"> // Added padding at the bottom
             <div className="flex items-center justify-center mt-2">
               <div className="flex -space-x-2 mr-2">
                 {(group.memberProfiles || [1, 2, 3]).slice(0, 3).map((profile, index) => (
