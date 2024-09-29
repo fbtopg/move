@@ -70,7 +70,7 @@ const Group = () => {
           </div>
 
           <div className="space-y-4 mb-8">
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-between items-center mb-2 px-4">
               <h2 className="text-base font-semibold text-gray-200">My Groups</h2>
               <Button
                 onClick={handleCreateGroup}
@@ -79,8 +79,8 @@ const Group = () => {
                 <Plus className="h-5 w-5" />
               </Button>
             </div>
-            <div className="overflow-x-auto scrollbar-hide" ref={myGroupsRef}>
-              <div className="flex space-x-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
+            <div className="overflow-x-auto scrollbar-hide -mx-4" ref={myGroupsRef}>
+              <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
                 {myGroups.map((group) => (
                   <div key={group.id} className="flex-shrink-0 w-40">
                     <GroupCard 
