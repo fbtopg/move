@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Plus, Search } from 'lucide-react';
 import FilterButton from '../components/FilterButton';
 import { useNavigate } from 'react-router-dom';
+import ChallengeProgress from '../components/ChallengeProgress';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
@@ -128,6 +129,10 @@ const Friends = () => {
             <FilterButton key={index} name={filter.name} emoji={filter.emoji} color={filter.color} />
           ))}
         </div>
+      </div>
+
+      <div className="px-4">
+        <ChallengeProgress />
       </div>
 
       <section className="mt-4 pb-20 space-y-6 px-4">
