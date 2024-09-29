@@ -99,10 +99,10 @@ const Group = () => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-base font-semibold text-gray-200">Recent Activity</h2>
               <button
-                className="text-[#3C82F6] text-xs font-semibold opacity-60"
+                className="text-[#3C82F6] text-xs font-semibold"
                 onClick={() => console.log('View all recent activity')}
               >
-                View &gt;
+                View ({recentActivities.length}) &gt;
               </button>
             </div>
             <div className="space-y-3">
