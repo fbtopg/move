@@ -9,6 +9,7 @@ import { Plus, Search } from 'lucide-react';
 import FilterButton from '../components/FilterButton';
 import { useNavigate } from 'react-router-dom';
 import CommunityGroupCard from '../components/CommunityGroupCard';
+import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
