@@ -26,12 +26,6 @@ const Friends = () => {
     { name: "Challenge", emoji: "🏆", color: "bg-green-500" },
   ];
 
-  const userGroups = [
-    { name: "Fitness Buddies", members: "Minsu, Rissa, +5", hasActivity: true },
-    { name: "LFG", members: "Emma, John, +3", hasActivity: false },
-    { name: "1990's runners", members: "Alex, Sarah, +8", hasActivity: true },
-  ].sort((a, b) => (b.hasActivity ? 1 : 0) - (a.hasActivity ? 1 : 0));
-
   const handleNextChallenge = () => {
     setCurrentChallenge((prev) => (prev + 1) % challenges.length);
   };
@@ -131,16 +125,6 @@ const Friends = () => {
         <div className="flex space-x-2 pl-4">
           {filters.map((filter, index) => (
             <FilterButton key={index} name={filter.name} emoji={filter.emoji} color={filter.color} />
-          ))}
-          <div className="h-8 w-px bg-gray-600 mx-2 self-center"></div>
-          {userGroups.map((group, index) => (
-            <FilterButton 
-              key={`group-${index}`} 
-              name={group.name} 
-              members={group.members} 
-              isGroup={true} 
-              hasActivity={group.hasActivity}
-            />
           ))}
         </div>
       </div>
