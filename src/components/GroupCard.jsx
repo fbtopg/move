@@ -5,13 +5,13 @@ import { Plus } from 'lucide-react';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, lastActivity }) => {
-  const formatMemberCount = (count) => {
-    return count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count;
+  const truncateName = (name) => {
+    return name.length > 14 ? name.slice(0, 14) + '...' : name;
   };
 
   return (
     <motion.div
-      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 h-52" // Increased height to h-52 (208px)
+      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 h-52"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={onClick}
@@ -30,7 +30,7 @@ const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, la
           )}
         </div>
         <div className="flex items-start justify-center">
-          <h3 className="font-semibold text-sm mb-1 truncate">{group.name}</h3>
+          <h3 className="font-semibold text-sm mb-1 truncate text-white">{truncateName(group.name)}</h3>
           {hasActivity && (
             <div className="w-1.5 h-1.5 bg-red-500 rounded-full ml-1 mt-1"></div>
           )}
@@ -46,7 +46,7 @@ const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, la
                   </Avatar>
                 ))}
               </div>
-              <p className="text-xs text-gray-400">{formatMemberCount(group.members)} members</p>
+              <p className="text-xs text-gray-400">{group.members} members</p>
             </div>
             {lastActivity && (
               <p className="text-[10px] text-yellow-400 mt-1">Last activity: {lastActivity}</p>
