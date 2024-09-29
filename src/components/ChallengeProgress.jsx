@@ -31,9 +31,9 @@ const ChallengeProgress = () => {
         >
           {challenges.map((challenge, index) => (
             <div key={index} className="flex-shrink-0 w-full">
-              <div className="border border-gray-700 rounded-lg p-2 w-32 h-16">
+              <div className="border border-gray-700 rounded-lg p-2 w-32 h-16 flex flex-col justify-between">
                 <p className="text-[10px] text-gray-400">{challenge.type}</p>
-                <p className="text-sm font-bold text-white">{challenge.rank}</p>
+                <p className="text-sm font-bold text-white mt-auto">{challenge.rank}</p>
               </div>
             </div>
           ))}
