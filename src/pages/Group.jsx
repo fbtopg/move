@@ -99,8 +99,8 @@ const Group = () => {
             </div>
           </div>
 
-          {/* New banner section */}
-          <div className="relative w-screen left-1/2 -translate-x-1/2 h-40 mb-8" style={{
+          {/* Updated banner section with increased height */}
+          <div className="relative w-screen left-1/2 -translate-x-1/2 h-60 mb-8" style={{
             backgroundImage: "url('https://cdn.discordapp.com/attachments/1057996608261869689/1289776476425555999/Frame_114.png?ex=66fa0d72&is=66f8bbf2&hm=3aa5ca0dfd26aedb4f40850ef67e6b6501d8bd1f08a777a7fab6f4cdbf3e6b88&')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
