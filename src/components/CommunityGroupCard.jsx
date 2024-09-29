@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const CommunityGroupCard = ({ group, onClick }) => {
   const truncateName = (name) => {
-    return name.length > 14 ? name.slice(0, 14) + '...' : name;
+    return name.length > 20 ? name.slice(0, 20) + '...' : name;
   };
 
   return (
@@ -18,7 +18,7 @@ const CommunityGroupCard = ({ group, onClick }) => {
         <div className="w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0">
           <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
         </div>
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center flex-grow">
           <h3 className="font-semibold text-sm mb-1 truncate text-white">{truncateName(group.name)}</h3>
           <p className="text-xs text-gray-400">{group.members} members</p>
         </div>

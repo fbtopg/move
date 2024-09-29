@@ -3,6 +3,7 @@ import { Search, Plus, ChevronRight, ArrowRight } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
 import GroupCard from '../components/GroupCard';
+import CommunityGroupCard from '../components/CommunityGroupCard';
 import { Button } from "@/components/ui/button";
 import FriendActivity from '../components/FriendActivity';
 import { useNavigate } from 'react-router-dom';
@@ -152,15 +153,11 @@ const Group = () => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-base font-semibold text-gray-200">Popular</h2>
             </div>
-            <div className="overflow-x-auto scrollbar-hide -mx-4" ref={popularGroupsRef}>
-              <div className="flex space-x-4 px-4" style={{ width: `${(popularGroups.length + 1) * 180}px` }}>
-                {popularGroups.map((group) => (
-                  <div key={group.id} className="flex-shrink-0 w-40">
-                    <GroupCard group={group} />
-                  </div>
-                ))}
-                <ViewAllButton onClick={() => console.log('View all popular groups')} />
-              </div>
+            <div className="space-y-4">
+              {popularGroups.map((group) => (
+                <CommunityGroupCard key={group.id} group={group} />
+              ))}
+              <ViewAllButton onClick={() => console.log('View all popular groups')} />
             </div>
           </div>
         </div>
