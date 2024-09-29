@@ -13,7 +13,7 @@ const ChallengeProgress = () => {
   };
 
   return (
-    <div className="mb-4 w-full">
+    <div className="mb-4">
       <motion.div
         className="overflow-hidden"
         onPanEnd={(e, { offset, velocity }) => {
@@ -25,15 +25,15 @@ const ChallengeProgress = () => {
         }}
       >
         <motion.div
-          className="flex w-[200%]"
+          className="flex"
           animate={{ x: `${-currentChallenge * 100}%` }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
           {challenges.map((challenge, index) => (
-            <div key={index} className="w-full px-4">
-              <div className="border border-gray-700 rounded-lg p-4 w-full h-20 flex flex-col justify-between">
-                <p className="text-xs text-gray-400">{challenge.type}</p>
-                <p className="text-lg font-bold text-white">{challenge.rank}</p>
+            <div key={index} className="flex-shrink-0 w-full">
+              <div className="border border-gray-700 rounded-lg p-2 w-36 h-16 flex flex-col justify-between">
+                <p className="text-[10px] text-gray-400">{challenge.type}</p>
+                <p className="text-sm font-bold text-white mt-auto">{challenge.rank}</p>
               </div>
             </div>
           ))}
