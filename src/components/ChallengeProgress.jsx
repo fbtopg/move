@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 const ChallengeProgress = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
   const challenges = [
-    { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
-    { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
+    { type: "Daily Walk", rank: "1st/120.6k" },
+    { type: "Daily Quiz", rank: "11th/120.6k" },
   ];
 
   const handleSwipe = (index) => {
@@ -31,11 +31,9 @@ const ChallengeProgress = () => {
         >
           {challenges.map((challenge, index) => (
             <div key={index} className="flex-shrink-0 w-full">
-              <div className="border border-gray-700 rounded-lg p-2 w-32 h-20"> {/* Reduced width and height */}
-                <p className="text-[8px] text-gray-400">{challenge.type}</p> {/* Reduced font size */}
-                <p className="text-[10px] font-semibold">{challenge.date}</p> {/* Reduced font size */}
-                <p className="text-[8px]">Rank: {challenge.progress}</p> {/* Reduced font size */}
-                <p className="text-[8px] text-gray-400">{challenge.active} active</p> {/* Reduced font size */}
+              <div className="border border-gray-700 rounded-lg p-2 w-32 h-20">
+                <p className="text-[8px] text-gray-400">{challenge.type}</p>
+                <p className="text-[10px] font-semibold">{challenge.rank}</p>
               </div>
             </div>
           ))}
