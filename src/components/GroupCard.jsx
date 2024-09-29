@@ -41,19 +41,19 @@ const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup =
         </div>
         {!isNewGroup && (
           <>
-            <p className="text-xs text-gray-400">{formatMemberCount(group.members)} members</p>
-            {lastActivity && (
-              <p className="text-xs text-yellow-400 mt-1">Last activity: {lastActivity}</p>
-            )}
-            {group.memberProfiles && (
-              <div className="flex justify-center mt-2">
-                {group.memberProfiles.slice(0, 3).map((profile, index) => (
-                  <Avatar key={index} className="w-6 h-6 -ml-1 first:ml-0 border border-gray-800">
+            <div className="flex items-center justify-center mt-2">
+              <div className="flex -space-x-2 mr-2">
+                {group.memberProfiles && group.memberProfiles.slice(0, 3).map((profile, index) => (
+                  <Avatar key={index} className="w-4 h-4 border border-gray-800">
                     <AvatarImage src={profile} alt={`Member ${index + 1}`} />
                     <AvatarFallback>{index + 1}</AvatarFallback>
                   </Avatar>
                 ))}
               </div>
+              <p className="text-xs text-gray-400">{formatMemberCount(group.members)} members</p>
+            </div>
+            {lastActivity && (
+              <p className="text-xs text-yellow-400 mt-1">Last activity: {lastActivity}</p>
             )}
           </>
         )}
