@@ -9,7 +9,7 @@ const GroupCard = ({ group, hasActivity = false, gradient, onClick, isNewGroup =
 
   return (
     <motion.div
-      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1c1c1f] p-4"
+      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#2c2c2f] p-4" // Changed from #1c1c1f to #2c2c2f
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={onClick}
