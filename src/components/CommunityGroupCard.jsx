@@ -25,7 +25,17 @@ const CommunityGroupCard = ({ group, onClick }) => {
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1"></span>
             )}
           </div>
-          <p className="text-[10px] text-gray-400">{group.members} members</p>
+          <div className="flex items-center">
+            <div className="flex -space-x-2 mr-2">
+              {group.memberProfiles.slice(0, 3).map((profile, index) => (
+                <Avatar key={index} className="w-4 h-4 border border-[#1a1a1d]">
+                  <AvatarImage src={profile} alt={`Member ${index + 1}`} />
+                  <AvatarFallback>{index + 1}</AvatarFallback>
+                </Avatar>
+              ))}
+            </div>
+            <p className="text-[10px] text-gray-400">{group.members} members</p>
+          </div>
         </div>
       </div>
     </motion.div>
