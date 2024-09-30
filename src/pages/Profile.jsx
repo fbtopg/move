@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
@@ -25,31 +25,31 @@ const Profile = () => {
               onClick={() => navigate('/settings')}
               className="text-white hover:bg-transparent"
             >
-              <Settings className="h-6 w-6" />
+              <Settings className="h-5 w-5" />
             </Button>
           </div>
           
           <div className="flex flex-col items-center text-center">
-            <Avatar className="w-32 h-32 mb-4">
+            <Avatar className="w-24 h-24 mb-3">
               <AvatarImage src={avatarUrl} />
-              <AvatarFallback className="text-4xl bg-blue-600">{displayName[0]}</AvatarFallback>
+              <AvatarFallback className="text-3xl bg-blue-600">{displayName[0]}</AvatarFallback>
             </Avatar>
-            <h1 className="text-3xl font-bold mb-2">{displayName}</h1>
-            <p className="text-gray-400 mb-8">Member since {memberSince}</p>
+            <h1 className="text-2xl font-bold mb-1">{displayName}</h1>
+            <p className="text-sm text-gray-400 mb-6">Member since {memberSince}</p>
             
-            <div className="flex justify-center w-full mb-8">
-              <div className="text-center mr-16">
-                <p className="text-4xl font-bold">{titles}</p>
-                <p className="text-gray-400">Titles</p>
+            <div className="flex justify-center w-full mb-6">
+              <div className="text-center mr-12">
+                <p className="text-3xl font-bold">{titles}</p>
+                <p className="text-xs text-gray-400">Titles</p>
               </div>
               <div className="text-center">
-                <p className="text-4xl font-bold">{badges}</p>
-                <p className="text-gray-400">Badges</p>
+                <p className="text-3xl font-bold">{badges}</p>
+                <p className="text-xs text-gray-400">Badges</p>
               </div>
             </div>
           </div>
           
-          <div className="h-px bg-gray-800 w-full my-8"></div>
+          <div className="h-px bg-gray-800 w-full my-6"></div>
           
           {/* Add more profile content here */}
         </div>
