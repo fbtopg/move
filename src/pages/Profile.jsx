@@ -16,12 +16,12 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const featureButtons = [
-    { icon: Sparkles, label: "Gemini" },
-    { icon: Beaker, label: "Search Labs" },
-    { icon: FileSearch, label: "Search text in an image" },
-    { icon: Music, label: "Song Search" },
-    { icon: Smartphone, label: "Change app icon" },
-    { icon: LayoutGrid, label: "Add Search widget" },
+    { icon: Sparkles, label: "Button 1" },
+    { icon: Beaker, label: "Button 2" },
+    { icon: FileSearch, label: "Button 3" },
+    { icon: Music, label: "Button 4" },
+    { icon: Smartphone, label: "Button 5" },
+    { icon: LayoutGrid, label: "Button 6" },
   ];
 
   return (
