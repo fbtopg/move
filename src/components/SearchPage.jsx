@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Input } from "@/components/ui/input";
-import { X } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 const SearchPage = ({ isOpen, onClose, searchTerm, setSearchTerm }) => {
   return (
@@ -13,22 +13,21 @@ const SearchPage = ({ isOpen, onClose, searchTerm, setSearchTerm }) => {
     >
       <div className="p-4">
         <div className="flex items-center mb-4">
+          <button onClick={onClose} className="text-white mr-2">
+            <ArrowLeft className="h-6 w-6" />
+          </button>
           <Input
             type="text"
             placeholder="Search groups or challenges"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="flex-grow bg-[#212124] border-none text-white placeholder-gray-400 rounded-full pl-6"
+            className="flex-grow bg-[#212124] border-none text-white placeholder-gray-400 rounded-full pl-4"
             autoFocus
           />
-          <button onClick={onClose} className="ml-2 text-white">
-            <X className="h-6 w-6" />
-          </button>
         </div>
         {/* Add search results here */}
         <div className="text-white">
           {/* Placeholder for search results */}
-          <p>Search results will appear here</p>
         </div>
       </div>
     </motion.div>
