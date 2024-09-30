@@ -183,7 +183,7 @@ const Friends = () => {
 
       {/* Updated QuickStart button */}
       <button
-        className="fixed bottom-20 right-4 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg z-50"
+        className="fixed bottom-20 right-4 w-16 h-16 bg-[#43A543] rounded-full flex items-center justify-center shadow-lg z-50"
         onClick={() => console.log("Lightning button clicked")}
       >
         <span role="img" aria-label="lightning" className="text-3xl">⚡️</span>
