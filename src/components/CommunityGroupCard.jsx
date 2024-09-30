@@ -19,10 +19,10 @@ const CommunityGroupCard = ({ group, onClick }) => {
           <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
         </div>
         <div className="flex flex-col justify-center flex-grow">
-          <div className="flex items-center">
+          <div className="flex items-start">
             <h3 className="font-semibold text-xs mb-1 truncate text-white mr-2">{truncateName(group.name)}</h3>
             {group.hasActivity && (
-              <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+              <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1"></span>
             )}
           </div>
           <p className="text-[10px] text-gray-400">{group.members} members</p>
