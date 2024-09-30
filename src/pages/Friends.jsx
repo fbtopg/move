@@ -10,11 +10,13 @@ import FilterButton from '../components/FilterButton';
 import { useNavigate } from 'react-router-dom';
 import CommunityGroupCard from '../components/CommunityGroupCard';
 import { getRandomProfilePicture } from '../utils/profilePictures';
+import SearchPage from '../components/SearchPage';
 
 const Friends = () => {
   const [currentChallenge, setCurrentChallenge] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const navigate = useNavigate();
 
   const challenges = [
@@ -119,6 +121,7 @@ const Friends = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="bg-transparent border-none text-gray-400 placeholder-gray-400 h-20 rounded-full pl-14 pr-6 w-full"
+              onFocus={() => setIsSearchOpen(true)}
             />
           </div>
           <Button
@@ -170,6 +173,13 @@ const Friends = () => {
           user={selectedUser}
         />
       )}
+
+      <SearchPage
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
     </>
   );
 };
