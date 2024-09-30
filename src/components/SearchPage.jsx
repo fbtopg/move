@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { ArrowLeft } from 'lucide-react';
 
 const SearchPage = ({ isOpen, onClose, searchTerm, setSearchTerm }) => {
+  useEffect(() => {
+    if (isOpen) {
+      // Add meta tag to prevent zooming
+      const metaTag = document.createElement('meta');
+      metaTag.name = 'viewport';
+      metaTag.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+      document.head.appendChild(metaTag);
+
+      // Remove meta tag when component unmounts or closes
+      return () => {
+        document.head.removeChild(metaTag);
+      };
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
