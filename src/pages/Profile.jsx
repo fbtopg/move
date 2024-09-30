@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { Settings } from "lucide-react";
+import { Settings, Sparkles, Flask, FileSearch, Music, Smartphone, LayoutGrid } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
+import FeatureButton from '../components/FeatureButton';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -13,6 +14,15 @@ const Profile = () => {
   const titles = 29;
   const badges = 3;
   const navigate = useNavigate();
+
+  const featureButtons = [
+    { icon: Sparkles, label: "Gemini" },
+    { icon: Flask, label: "Search Labs" },
+    { icon: FileSearch, label: "Search text in an image" },
+    { icon: Music, label: "Song Search" },
+    { icon: Smartphone, label: "Change app icon" },
+    { icon: LayoutGrid, label: "Add Search widget" },
+  ];
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -51,7 +61,11 @@ const Profile = () => {
           
           <div className="h-px bg-gray-800 w-full my-4"></div>
           
-          {/* Add more profile content here */}
+          <div className="grid grid-cols-2 gap-4 mt-6">
+            {featureButtons.map((button, index) => (
+              <FeatureButton key={index} icon={button.icon} label={button.label} />
+            ))}
+          </div>
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
