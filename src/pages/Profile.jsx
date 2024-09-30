@@ -1,111 +1,57 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { Settings } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
-import { handleImageUpload } from '../utils/imageUtils';
-import { toast } from 'sonner';
-
-const Header = () => {
-  const [greeting, setGreeting] = useState('');
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const updateGreeting = () => {
-      const currentHour = new Date().getHours();
-      if (currentHour >= 5 && currentHour < 12) {
-        setGreeting('Good Morning');
-      } else if (currentHour >= 12 && currentHour < 18) {
-        setGreeting('Good Afternoon');
-      } else {
-        setGreeting('Good Evening');
-      }
-    };
-
-    updateGreeting();
-    const intervalId = setInterval(updateGreeting, 60000); // Update every minute
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  return (
-    <div className="flex justify-between items-center mb-6">
-      <h1 className="text-2xl font-bold">{greeting}</h1>
-      <Button 
-        variant="ghost" 
-        size="icon"
-        onClick={() => navigate('/settings')}
-        className="text-white hover:bg-transparent"
-      >
-        <MoreHorizontal className="h-6 w-6 stroke-[1]" />
-      </Button>
-    </div>
-  );
-};
 
 const Profile = () => {
-  const [activeTab, setActiveTab] = React.useState('profile');
+  const [activeTab, setActiveTab] = useState('profile');
   const [avatarUrl, setAvatarUrl] = useState("https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z");
-  const displayName = "James";
-  const username = "@username";
-  const groups = 57;
-  const friends = 151;
+  const displayName = "GeonuBae";
+  const memberSince = "2023";
+  const titles = 29;
+  const badges = 3;
   const navigate = useNavigate();
-  const fileInputRef = useRef(null);
-
-  const handleAvatarClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleFileChange = async (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      try {
-        const imageUrl = await handleImageUpload(file);
-        setAvatarUrl(imageUrl);
-        toast.success('Profile picture updated successfully');
-      } catch (error) {
-        console.error('Error uploading image:', error);
-        toast.error('Failed to update profile picture. Please try again.');
-      }
-    }
-  };
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-4">
-          <Header />
+          <div className="flex justify-end mb-4">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => navigate('/settings')}
+              className="text-white hover:bg-transparent"
+            >
+              <Settings className="h-6 w-6" />
+            </Button>
+          </div>
           
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <p className="text-2xl font-light mb-1">{displayName}</p>
-              <p className="text-sm text-gray-400">{username}</p>
-            </div>
-            <Avatar className="w-20 h-20 rounded-full cursor-pointer" onClick={handleAvatarClick}>
+          <div className="flex flex-col items-center text-center">
+            <Avatar className="w-32 h-32 mb-4">
               <AvatarImage src={avatarUrl} />
-              <AvatarFallback>PFP</AvatarFallback>
+              <AvatarFallback className="text-4xl bg-blue-600">{displayName[0]}</AvatarFallback>
             </Avatar>
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              accept="image/*"
-              className="hidden"
-            />
+            <h1 className="text-3xl font-bold mb-2">{displayName}</h1>
+            <p className="text-gray-400 mb-8">Member since {memberSince}</p>
+            
+            <div className="flex justify-center w-full mb-8">
+              <div className="text-center mr-16">
+                <p className="text-4xl font-bold">{titles}</p>
+                <p className="text-gray-400">Titles</p>
+              </div>
+              <div className="text-center">
+                <p className="text-4xl font-bold">{badges}</p>
+                <p className="text-gray-400">Badges</p>
+              </div>
+            </div>
           </div>
           
-          <div className="flex mb-16">
-            <div className="mr-24 cursor-pointer" onClick={() => navigate('/groups')}>
-              <p className="text-sm text-white uppercase mb-1">Groups</p>
-              <p className="text-sm">{groups}</p>
-            </div>
-            <div className="cursor-pointer" onClick={() => navigate('/friends')}>
-              <p className="text-sm text-white uppercase mb-1">Friends</p>
-              <p className="text-sm">{friends}</p>
-            </div>
-          </div>
+          <div className="h-px bg-gray-800 w-full my-8"></div>
+          
+          {/* Add more profile content here */}
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
