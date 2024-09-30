@@ -180,6 +180,14 @@ const Friends = () => {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
       />
+
+      {/* New green circle button with yellow lightning emoji */}
+      <button
+        className="fixed bottom-20 right-4 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg z-50"
+        onClick={() => console.log("Lightning button clicked")}
+      >
+        <span role="img" aria-label="lightning" className="text-2xl">⚡️</span>
+      </button>
     </>
   );
 };
