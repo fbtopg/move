@@ -143,7 +143,7 @@ const Friends = () => {
           <div className="overflow-x-auto scrollbar-hide -mx-4">
             <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
               {myGroups.map((group) => (
-                <div key={group.id} className="flex-shrink-0 w-40">
+                <div key={group.id} className="flex-shrink-0 w-full max-w-[180px]">
                   <CommunityGroupCard 
                     group={group} 
                     hasActivity={group.hasActivity}
