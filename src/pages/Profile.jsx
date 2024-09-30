@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { Settings, Sparkles, Flask, FileSearch, Music, Smartphone, LayoutGrid } from "lucide-react";
+import { Settings, Sparkles, Beaker, FileSearch, Music, Smartphone, LayoutGrid } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import FeatureButton from '../components/FeatureButton';
 
@@ -17,7 +17,7 @@ const Profile = () => {
 
   const featureButtons = [
     { icon: Sparkles, label: "Gemini" },
-    { icon: Flask, label: "Search Labs" },
+    { icon: Beaker, label: "Search Labs" },
     { icon: FileSearch, label: "Search text in an image" },
     { icon: Music, label: "Song Search" },
     { icon: Smartphone, label: "Change app icon" },
