@@ -34,22 +34,22 @@ const Profile = () => {
               <AvatarImage src={avatarUrl} />
               <AvatarFallback className="text-3xl bg-blue-600">{displayName[0]}</AvatarFallback>
             </Avatar>
-            <h1 className="text-2xl font-bold mb-1">{displayName}</h1>
-            <p className="text-sm text-gray-400 mb-6">Member since {memberSince}</p>
+            <h1 className="text-xl font-bold mb-1">{displayName}</h1>
+            <p className="text-xs text-gray-400 mb-4">Member since {memberSince}</p>
             
-            <div className="flex justify-center w-full mb-6">
+            <div className="flex justify-center w-full mb-4">
               <div className="text-center mr-12">
-                <p className="text-3xl font-bold">{titles}</p>
+                <p className="text-2xl font-bold">{titles}</p>
                 <p className="text-xs text-gray-400">Titles</p>
               </div>
               <div className="text-center">
-                <p className="text-3xl font-bold">{badges}</p>
+                <p className="text-2xl font-bold">{badges}</p>
                 <p className="text-xs text-gray-400">Badges</p>
               </div>
             </div>
           </div>
           
-          <div className="h-px bg-gray-800 w-full my-6"></div>
+          <div className="h-px bg-gray-800 w-full my-4"></div>
           
           {/* Add more profile content here */}
         </div>
