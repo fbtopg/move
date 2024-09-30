@@ -78,7 +78,7 @@ const Friends = () => {
 
   const renderActivitySection = (title, activities) => (
     <>
-      <h2 className="text-xs font-semibold mb-3 text-gray-400">{title}</h2>
+      <h2 className="text-xs font-semibold mb-2 text-gray-400">{title}</h2>
       <div className="space-y-4">
         {activities.map((activity, index) => (
           <FriendActivity
@@ -155,7 +155,7 @@ const Friends = () => {
         </div>
       </div>
 
-      <section className="mt-4 pb-20 space-y-6 px-4">
+      <section className="mt-4 pb-20 space-y-4 px-4">
         {renderActivitySection("Recent Activity", activities.today)}
         <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6" />
         {renderActivitySection("THIS MONTH", activities.thisMonth)}
