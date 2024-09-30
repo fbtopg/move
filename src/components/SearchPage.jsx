@@ -1,24 +1,14 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Input } from "@/components/ui/input";
 import { ArrowLeft } from 'lucide-react';
 
 const SearchPage = ({ isOpen, onClose, searchTerm, setSearchTerm }) => {
+  if (!isOpen) return null;
+
   return (
-    <motion.div
-      initial={{ y: '100%' }}
-      animate={{ y: isOpen ? 0 : '100%' }}
-      transition={{ type: 'spring', damping: 25, stiffness: 500 }}
-      className="fixed inset-0 bg-black z-50"
-    >
+    <div className="fixed inset-0 bg-black z-50">
       <div className="p-4">
         <div className="relative flex items-center mb-4">
-          <button 
-            onClick={onClose} 
-            className="absolute left-4 text-gray-400 z-10"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </button>
           <Input
             type="text"
             placeholder="Search groups or challenges"
@@ -27,12 +17,18 @@ const SearchPage = ({ isOpen, onClose, searchTerm, setSearchTerm }) => {
             className="flex-grow bg-[#212124] border-none text-white placeholder-gray-400 rounded-full pl-12 pr-4"
             autoFocus
           />
+          <button 
+            onClick={onClose} 
+            className="absolute left-4 text-gray-400 z-10"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
         </div>
         <div className="text-white">
           {/* Placeholder for search results */}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
