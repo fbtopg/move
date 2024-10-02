@@ -1,11 +1,11 @@
 import React from 'react';
-import { Users, Walk, Trophy } from 'lucide-react';
+import { Users, Footprints, Trophy } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const QuickstartMenu = ({ onClose }) => {
   const options = [
     { label: 'New Group', icon: Users, action: () => console.log('New Group') },
-    { label: 'Walk', icon: Walk, action: () => console.log('Walk') },
+    { label: 'Walk', icon: Footprints, action: () => console.log('Walk') },
     { label: 'Challenge', icon: Trophy, action: () => console.log('Challenge') },
   ];
 
