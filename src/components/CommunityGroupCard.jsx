@@ -2,7 +2,18 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const CommunityGroupCard = ({ group, onClick }) => {
+const getGradientColor = (index) => {
+  const gradients = [
+    'from-blue-400 to-purple-500',
+    'from-green-400 to-blue-500',
+    'from-yellow-400 to-red-500',
+    'from-pink-400 to-red-500',
+    'from-indigo-400 to-purple-500'
+  ];
+  return gradients[index % gradients.length];
+};
+
+const CommunityGroupCard = ({ group, onClick, index }) => {
   const truncateName = (name) => {
     return name.length > 14 ? name.slice(0, 14) + '...' : name;
   };
@@ -15,9 +26,7 @@ const CommunityGroupCard = ({ group, onClick }) => {
       onClick={onClick}
     >
       <div className="flex items-center h-full">
-        <div className="w-12 h-12 rounded-full overflow-hidden mr-3 flex-shrink-0">
-          <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
-        </div>
+        <div className={`w-12 h-12 rounded-full overflow-hidden mr-3 flex-shrink-0 bg-gradient-to-br ${getGradientColor(index)}`} />
         <div className="flex flex-col justify-center flex-grow">
           <div className="flex items-start">
             <h3 className="font-semibold text-xs mb-1 truncate text-white mr-2">{truncateName(group.name)}</h3>

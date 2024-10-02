@@ -4,7 +4,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Plus } from 'lucide-react';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 
-const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, lastActivity }) => {
+const getGradientColor = (index) => {
+  const gradients = [
+    'from-blue-400 to-purple-500',
+    'from-green-400 to-blue-500',
+    'from-yellow-400 to-red-500',
+    'from-pink-400 to-red-500',
+    'from-indigo-400 to-purple-500'
+  ];
+  return gradients[index % gradients.length];
+};
+
+const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, lastActivity, index }) => {
   const truncateName = (name) => {
     return name.length > 14 ? name.slice(0, 14) + '...' : name;
   };
@@ -24,9 +35,7 @@ const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, la
               <Plus className="h-10 w-10 text-white" />
             </div>
           ) : (
-            <div className="w-full h-full rounded-full overflow-hidden">
-              <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
-            </div>
+            <div className={`w-full h-full rounded-full overflow-hidden bg-gradient-to-br ${getGradientColor(index)}`} />
           )}
         </div>
         <h3 className="font-semibold text-sm mb-1 truncate text-gray-200">{truncateName(group.name)}</h3>
