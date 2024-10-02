@@ -1,27 +1,23 @@
 import React from 'react';
-import { Globe, Users, Zap, Flame } from 'lucide-react';
+import { Globe, Zap, Flame, LayoutGrid, Users } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const BottomNavBar = ({ activeTab, setActiveTab, onQuickstartClick, backgroundColor = '#212124' }) => {
+const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) => {
   const navigate = useNavigate();
   const navItems = [
     { id: 'community', icon: Globe, label: 'Community', route: '/' },
     { id: 'group', icon: Users, label: 'Group', route: '/group' },
-    { id: 'quickstart', icon: Zap, label: 'Quickstart', action: onQuickstartClick },
+    { id: 'walk', icon: Zap, label: 'Walk', route: '/walk' },
     { id: 'upcoming', icon: Flame, label: 'Upcoming', route: '/board' },
     { id: 'profile', icon: Avatar, label: 'Profile', route: '/profile' },
   ];
 
   const handleNavigation = (item) => {
-    if (item.action) {
-      item.action();
-    } else {
-      setActiveTab(item.id);
-      if (item.route) {
-        navigate(item.route);
-      }
+    setActiveTab(item.id);
+    if (item.route) {
+      navigate(item.route);
     }
   };
 
@@ -31,7 +27,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, onQuickstartClick, backgroundCo
         {navItems.map((item, index) => (
           <li key={item.id} className={cn(
             "flex-1",
-            item.id === 'quickstart' ? "absolute left-1/2 transform -translate-x-1/2 -top-5" : "",
+            item.id === 'walk' ? "absolute left-1/2 transform -translate-x-1/2 -top-5" : "",
             index === 1 ? "mr-6" : "",
             index === 3 ? "ml-6" : ""
           )}>
@@ -39,7 +35,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, onQuickstartClick, backgroundCo
               onClick={() => handleNavigation(item)}
               className={cn(
                 "w-full h-full flex flex-col items-center justify-center",
-                item.id === 'quickstart'
+                item.id === 'walk'
                   ? "bg-blue-500 rounded-full w-14 h-14 shadow-lg"
                   : "",
                 activeTab === item.id ? "text-white" : "text-gray-400"
@@ -51,9 +47,9 @@ const BottomNavBar = ({ activeTab, setActiveTab, onQuickstartClick, backgroundCo
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               ) : (
-                <item.icon className={cn("h-5 w-5 mb-1", item.id === 'quickstart' ? "stroke-2" : "stroke-1")} />
+                <item.icon className={cn("h-5 w-5 mb-1", item.id === 'walk' ? "stroke-2" : "stroke-1")} />
               )}
-              {item.id !== 'quickstart' && (
+              {item.id !== 'walk' && (
                 <span className="text-[10px]">{item.label}</span>
               )}
             </button>
