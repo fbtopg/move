@@ -11,8 +11,15 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
     setLiked(!liked);
   };
 
-  const getActivityImage = () => {
-    return "https://cdn.discordapp.com/attachments/1057996608261869689/1290150604097978398/Frame_115.png?ex=66fb69e1&is=66fa1861&hm=4fcb702fd10072483f6a0363f452f4c923ad099c7bd67e8735df63e4b74fa417&";
+  const getActivityGradient = () => {
+    switch (type) {
+      case 'walk':
+        return 'bg-gradient-to-br from-blue-400 to-blue-600';
+      case 'quiz':
+        return 'bg-gradient-to-br from-yellow-400 to-yellow-600';
+      default:
+        return 'bg-gradient-to-br from-gray-400 to-gray-600';
+    }
   };
 
   const [content, timestamp] = activity.split(' • ');
@@ -39,10 +46,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
           </div>
           <div className="flex items-center space-x-1 flex-shrink-0">
             <div 
-              className="w-10 h-10 rounded-lg bg-cover bg-center"
-              style={{
-                backgroundImage: `url(${getActivityImage()})`,
-              }}
+              className={`w-10 h-10 rounded-lg ${getActivityGradient()}`}
             ></div>
             <Button 
               variant="ghost" 
