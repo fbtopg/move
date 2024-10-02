@@ -23,12 +23,11 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
 
   return (
     <nav className={`fixed bottom-0 left-0 right-0 text-white`} style={{ backgroundColor, borderTop: backgroundColor === '#212124' ? '1px solid #424245' : 'none' }}>
-      <ul className="flex justify-around items-end h-16 relative">
+      <ul className="flex justify-around items-end h-20 relative"> {/* Increased height from h-16 to h-20 */}
         {navItems.map((item, index) => (
           <li key={item.id} className={cn(
             "flex-1",
-            item.id === 'walk' ? "absolute left-1/2 transform -translate-x-1/2 -top-8" : "",
-            // Add margin to create space between 'group' and 'upcoming'
+            item.id === 'walk' ? "absolute left-1/2 transform -translate-x-1/2 -top-10" : "", // Adjusted top position
             index === 1 ? "mr-8" : "",
             index === 3 ? "ml-8" : ""
           )}>
@@ -37,21 +36,21 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
               className={cn(
                 "w-full h-full flex flex-col items-center justify-center",
                 item.id === 'walk'
-                  ? "bg-blue-500 rounded-full w-16 h-16 shadow-lg"
+                  ? "bg-blue-500 rounded-full w-20 h-20 shadow-lg" // Increased size from w-16 h-16 to w-20 h-20
                   : "pt-2",
                 activeTab === item.id ? "text-white" : "text-gray-400"
               )}
             >
               {item.id === 'profile' ? (
-                <Avatar className="h-6 w-6">
+                <Avatar className="h-8 w-8"> {/* Increased size from h-6 w-6 to h-8 w-8 */}
                   <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL3NtYWxsLnBuZyIsImlhdCI6MTcyNTY5MjI1MywiZXhwIjoxNzU3MjI4MjUzfQ.N4lp3_t2Jjjxnaf5iVkUa67tVjxrYnuAzl5NEE5j65w&t=2024-09-07T06%3A57%3A33.339Z" />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               ) : (
-                <item.icon className={cn("h-6 w-6 stroke-1", item.id === 'walk' ? "stroke-2" : "")} />
+                <item.icon className={cn("h-8 w-8 stroke-1", item.id === 'walk' ? "stroke-2" : "")} /> // Increased size from h-6 w-6 to h-8 w-8
               )}
               {item.id !== 'walk' && (
-                <span className="text-xs mt-1">{item.label}</span>
+                <span className="text-sm mt-1">{item.label}</span> // Increased text size from text-xs to text-sm
               )}
             </button>
           </li>
