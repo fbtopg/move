@@ -24,10 +24,13 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
   return (
     <nav className={`fixed bottom-0 left-0 right-0 text-white`} style={{ backgroundColor, borderTop: backgroundColor === '#212124' ? '1px solid #424245' : 'none' }}>
       <ul className="flex justify-around items-end h-16 relative">
-        {navItems.map((item) => (
+        {navItems.map((item, index) => (
           <li key={item.id} className={cn(
             "flex-1",
-            item.id === 'walk' ? "absolute left-1/2 transform -translate-x-1/2 -top-8" : ""
+            item.id === 'walk' ? "absolute left-1/2 transform -translate-x-1/2 -top-8" : "",
+            // Add margin to create space between 'group' and 'upcoming'
+            index === 1 ? "mr-8" : "",
+            index === 3 ? "ml-8" : ""
           )}>
             <button
               onClick={() => handleNavigation(item)}
