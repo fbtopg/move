@@ -9,7 +9,6 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
   const navItems = [
     { id: 'community', icon: Globe, label: 'Community', route: '/' },
     { id: 'group', icon: Users, label: 'Group', route: '/group' },
-    { id: 'walk', icon: Zap, label: 'Walk', route: '/walk' },
     { id: 'upcoming', icon: Flame, label: 'Upcoming', route: '/board' },
     { id: 'profile', icon: Avatar, label: 'Profile', route: '/profile' },
   ];
@@ -23,9 +22,9 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
 
   return (
     <nav className={`fixed bottom-0 left-0 right-0 text-white`} style={{ backgroundColor, borderTop: backgroundColor === '#212124' ? '1px solid #424245' : 'none' }}>
-      <ul className="flex justify-around items-start h-16">
-        {navItems.map((item) => (
-          <li key={item.id} className="flex-1">
+      <ul className="flex justify-around items-start h-16 relative">
+        {navItems.map((item, index) => (
+          <li key={item.id} className={`flex-1 ${index === 2 ? 'flex-grow-0 w-16' : ''}`}>
             <button
               onClick={() => handleNavigation(item)}
               className={cn(
@@ -44,6 +43,20 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
             </button>
           </li>
         ))}
+        <li className="absolute left-1/2 -translate-x-1/2 -top-8">
+          <button
+            onClick={() => {
+              setActiveTab('walk');
+              navigate('/walk');
+            }}
+            className={cn(
+              "w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center shadow-lg",
+              activeTab === 'walk' ? "bg-blue-600" : "bg-blue-500"
+            )}
+          >
+            <Zap className="h-8 w-8 text-white" />
+          </button>
+        </li>
       </ul>
     </nav>
   );
