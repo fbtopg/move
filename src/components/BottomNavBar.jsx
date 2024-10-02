@@ -23,19 +23,13 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
 
   return (
     <nav className={`fixed bottom-0 left-0 right-0 text-white`} style={{ backgroundColor, borderTop: backgroundColor === '#212124' ? '1px solid #424245' : 'none' }}>
-      <ul className="flex justify-around items-end h-16 relative">
+      <ul className="flex justify-around items-start h-16">
         {navItems.map((item) => (
-          <li key={item.id} className={cn(
-            "flex-1",
-            item.id === 'walk' ? "absolute left-1/2 transform -translate-x-1/2 -top-8" : ""
-          )}>
+          <li key={item.id} className="flex-1">
             <button
               onClick={() => handleNavigation(item)}
               className={cn(
-                "w-full h-full flex flex-col items-center justify-center",
-                item.id === 'walk'
-                  ? "bg-blue-500 rounded-full w-16 h-16 shadow-lg"
-                  : "pt-2",
+                "w-full h-full flex flex-col items-center justify-start pt-2",
                 activeTab === item.id ? "text-white" : "text-gray-400"
               )}
             >
@@ -45,10 +39,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               ) : (
-                <item.icon className={cn("h-6 w-6 stroke-1", item.id === 'walk' ? "stroke-2" : "")} />
-              )}
-              {item.id !== 'walk' && (
-                <span className="text-xs mt-1">{item.label}</span>
+                <item.icon className="h-6 w-6 stroke-1" />
               )}
             </button>
           </li>
