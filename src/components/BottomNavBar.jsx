@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, Users, Zap, LayoutGrid } from 'lucide-react';
+import { Globe, Users, Trophy, LayoutGrid } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,7 +11,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-backgroun
   const navItems = [
     { id: 'community', icon: Globe, label: 'Community', route: '/' },
     { id: 'group', icon: Users, label: 'Group', route: '/group' },
-    { id: 'upcoming', icon: LayoutGrid, label: 'Upcoming', route: '/board' },
+    { id: 'challenge', icon: Trophy, label: 'Challenge', route: '/board' },
     { id: 'profile', icon: Avatar, label: 'Profile', route: '/profile' },
   ];
 
