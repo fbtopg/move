@@ -4,9 +4,11 @@ import { cn } from "@/lib/utils";
 import { useNavigate } from 'react-router-dom';
 import QuickstartMenu from './QuickstartMenu';
 
-const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-background' }) => {
+const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab, backgroundColor = 'bg-background' }) => {
   const navigate = useNavigate();
+  const [localActiveTab, setLocalActiveTab] = useState(propActiveTab || 'community');
   const [showQuickstartMenu, setShowQuickstartMenu] = useState(false);
+  
   const navItems = [
     { id: 'community', icon: Globe, label: 'Community', route: '/' },
     { id: 'group', icon: Users, label: 'Group', route: '/group' },
@@ -16,7 +18,11 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-backgroun
 
   const handleNavigation = (item) => {
     if (item.route) {
-      setActiveTab(item.id);
+      if (typeof propSetActiveTab === 'function') {
+        propSetActiveTab(item.id);
+      } else {
+        setLocalActiveTab(item.id);
+      }
       navigate(item.route);
     }
   };
@@ -24,6 +30,8 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-backgroun
   const toggleQuickstartMenu = () => {
     setShowQuickstartMenu(!showQuickstartMenu);
   };
+
+  const currentActiveTab = propActiveTab || localActiveTab;
 
   return (
     <>
@@ -39,7 +47,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-backgroun
                 onClick={() => handleNavigation(item)}
                 className={cn(
                   "w-full h-full flex flex-col items-center justify-start pt-1",
-                  activeTab === item.id ? "text-primary" : "text-muted-foreground"
+                  currentActiveTab === item.id ? "text-primary" : "text-muted-foreground"
                 )}
               >
                 <item.icon className="h-6 w-6 mb-1 stroke-1" />

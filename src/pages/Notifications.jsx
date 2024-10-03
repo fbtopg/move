@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import BottomNavBar from '../components/BottomNavBar';
 
 const Notifications = () => {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('notification');
 
   // Sample notifications data
   const notifications = [
@@ -40,7 +41,7 @@ const Notifications = () => {
           )}
         </div>
       </div>
-      <BottomNavBar activeTab="notification" />
+      <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 };
