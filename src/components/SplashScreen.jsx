@@ -4,16 +4,16 @@ import { motion } from 'framer-motion';
 const SplashScreen = ({ onAnimationComplete }) => {
   return (
     <motion.div
-      className="fixed inset-0 bg-black flex items-center justify-center z-50"
+      className="fixed inset-0 bg-[#FEF8F3] flex items-center justify-center z-50"
       initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
       transition={{ duration: 0.5, delay: 2 }}
       onAnimationComplete={onAnimationComplete}
     >
       <motion.img
-        src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/Frame%20427319176.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL0ZyYW1lIDQyNzMxOTE3Ni5wbmciLCJpYXQiOjE3MjcwNzA4MDcsImV4cCI6MTc1ODYwNjgwN30.j1xZArO1o2zvw7BC4ndlplw90aPpVbbTgG6_-8XrHDE&t=2024-09-23T05%3A53%3A28.124Z"
+        src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/Frame%20427319177%20(1).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL0ZyYW1lIDQyNzMxOTE3NyAoMSkucG5nIiwiaWF0IjoxNzI3OTIyMTIxLCJleHAiOjE3NTk0NTgxMjF9.b0B7TbEMMsFUPjDE1HzWFjykB9sMUh2vganwl4zBfJY&t=2024-10-03T02%3A22%3A02.360Z"
         alt="Move Logo"
-        className="w-20 h-20 object-contain mb-16" // Added mb-16 to push the logo upwards
+        className="w-20 h-20 object-contain mb-16"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 10 }}
