@@ -11,7 +11,7 @@ import { getRandomProfilePicture } from '../utils/profilePictures';
 import SearchPage from '../components/SearchPage';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const Friends = () => {
+const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -45,7 +45,6 @@ const Friends = () => {
       following: Math.floor(Math.random() * 1000),
     });
   };
-
 
   const handleCreateGroup = () => {
     console.log("Create group clicked");
@@ -118,7 +117,7 @@ const Friends = () => {
               <div className="flex-shrink-0 w-56 h-24">
                 <Button
                   onClick={handleCreateGroup}
-                  className="w-full h-full bg-[#1a1a1d] text-white flex flex-col items-center justify-center rounded-lg"
+                  className="w-full h-full bg-[#3B72EC] text-white flex flex-col items-center justify-center rounded-lg"
                 >
                   <Plus className="w-6 h-6 mb-1" />
                   <span className="text-sm font-semibold">Create Group</span>
@@ -160,4 +159,4 @@ const Friends = () => {
   );
 };
 
-export default Friends;
+export default Community;
