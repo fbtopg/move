@@ -114,17 +114,17 @@ const Friends = () => {
           <div className="overflow-x-auto scrollbar-hide -mx-4">
             <div className="flex space-x-4 px-4">
               {/* Create Group Button Card */}
-              <div className="flex-shrink-0 w-40 h-20">
+              <div className="flex-shrink-0 w-56 h-24">
                 <Button
                   onClick={handleCreateGroup}
                   className="w-full h-full bg-[#1a1a1d] text-white flex flex-col items-center justify-center rounded-lg"
                 >
-                  <Plus className="w-5 h-5 mb-1" />
-                  <span className="text-xs font-semibold">Create Group</span>
+                  <Plus className="w-6 h-6 mb-1" />
+                  <span className="text-sm font-semibold">Create Group</span>
                 </Button>
               </div>
               {myGroups.map((group, index) => (
-                <div key={group.id} className="flex-shrink-0 w-40">
+                <div key={group.id} className="flex-shrink-0 w-56">
                   <CommunityGroupCard group={group} index={index} />
                 </div>
               ))}
