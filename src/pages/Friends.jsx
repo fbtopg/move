@@ -110,34 +110,22 @@ const Friends = () => {
         
         <div className="h-px bg-border w-full mt-1 mb-2"></div>
         
-        <div className="relative flex-grow mb-4">
-          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
-          <Input
-            type="text"
-            placeholder="Search groups or challenges"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-secondary border-none text-foreground placeholder-muted-foreground h-10 rounded-lg pl-14 pr-6 w-full"
-            onFocus={() => setIsSearchOpen(true)}
-          />
-        </div>
-
         <div className="mt-8 mb-6">
           <div className="overflow-x-auto scrollbar-hide -mx-4">
-            <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 2) * 180}px` }}>
+            <div className="flex space-x-4 px-4">
               {/* Create Group Button Card */}
-              <div className="flex-shrink-0 w-32 h-20"> {/* Fixed height to match CommunityGroupCard */}
+              <div className="flex-shrink-0 w-40 h-20">
                 <Button
                   onClick={handleCreateGroup}
                   className="w-full h-full bg-[#1a1a1d] text-white flex flex-col items-center justify-center rounded-lg"
                 >
-                  <Plus className="w-5 h-5 mb-1" /> {/* Reduced icon size */}
+                  <Plus className="w-5 h-5 mb-1" />
                   <span className="text-xs font-semibold">Create Group</span>
                 </Button>
               </div>
-              {myGroups.map((group) => (
+              {myGroups.map((group, index) => (
                 <div key={group.id} className="flex-shrink-0 w-40">
-                  <CommunityGroupCard group={group} />
+                  <CommunityGroupCard group={group} index={index} />
                 </div>
               ))}
             </div>

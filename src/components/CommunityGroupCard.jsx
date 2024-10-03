@@ -20,7 +20,7 @@ const CommunityGroupCard = ({ group, onClick, index }) => {
 
   return (
     <motion.div
-      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-3 h-20"
+      className="w-40 h-20 rounded-lg overflow-hidden relative bg-[#1a1a1d] p-3"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={onClick}
