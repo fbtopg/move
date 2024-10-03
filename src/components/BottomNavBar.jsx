@@ -42,7 +42,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
                   "w-full h-full flex flex-col items-center justify-center",
                   item.id === 'walk'
                     ? "bg-blue-500 rounded-full w-16 h-16 shadow-lg"
-                    : "",
+                    : "pt-2", // Add padding-top to move items upwards
                   activeTab === item.id ? "text-white" : "text-gray-400"
                 )}
               >
