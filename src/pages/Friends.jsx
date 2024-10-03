@@ -124,13 +124,20 @@ const Friends = () => {
 
         <div className="mt-8 mb-6">
           <div className="overflow-x-auto scrollbar-hide -mx-4">
-            <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
+            <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 2) * 180}px` }}>
+              {/* Create Group Button Card */}
+              <div className="flex-shrink-0 w-40 h-40">
+                <Button
+                  onClick={handleCreateGroup}
+                  className="w-full h-full bg-[#1a1a1d] text-white flex flex-col items-center justify-center rounded-lg"
+                >
+                  <Plus className="w-8 h-8 mb-2" />
+                  <span className="text-sm font-semibold">Create Group</span>
+                </Button>
+              </div>
               {myGroups.map((group) => (
-                <div key={group.id} className="flex-shrink-0 w-full max-w-[180px]">
-                  <CommunityGroupCard 
-                    group={group} 
-                    hasActivity={group.hasActivity}
-                  />
+                <div key={group.id} className="flex-shrink-0 w-40">
+                  <CommunityGroupCard group={group} />
                 </div>
               ))}
             </div>
