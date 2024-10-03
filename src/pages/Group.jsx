@@ -75,6 +75,7 @@ const Group = () => {
 
           <div className="space-y-4 mb-8">
             <div className="flex justify-between items-center mb-2">
+              <h2 className="text-base font-semibold text-gray-200">My Groups</h2>
               <button
                 className="text-white text-xs font-semibold"
                 onClick={() => navigate('/my-groups')}
@@ -86,7 +87,7 @@ const Group = () => {
               <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 2) * 180}px` }}>
                 <div className="flex-shrink-0 w-40">
                   <GroupCard
-                    group={{ name: 'Create group', members: 0 }}
+                    group={{ name: 'New group', members: 0 }}
                     onClick={handleCreateGroup}
                     isNewGroup={true}
                   />
