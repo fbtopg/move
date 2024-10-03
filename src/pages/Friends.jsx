@@ -97,6 +97,12 @@ const Friends = () => {
     </>
   );
 
+  const swipeableBoxes = [
+    { id: 1, title: "Daily Walk", description: "Complete your daily walk challenge" },
+    { id: 2, title: "Daily Quiz", description: "Test your knowledge with a daily quiz" },
+    { id: 3, title: "Group Challenge", description: "Join a group challenge" },
+  ];
+
   return (
     <>
       <div className="px-4 mt-4">
@@ -122,9 +128,24 @@ const Friends = () => {
             placeholder="Search groups or challenges"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-[#1c1c1f] border-none text-gray-400 placeholder-gray-400 h-12 rounded-lg pl-14 pr-6 w-full"
+            className="bg-[#1c1c1f] border-none text-gray-400 placeholder-gray-400 h-10 rounded-lg pl-14 pr-6 w-full"
             onFocus={() => setIsSearchOpen(true)}
           />
+        </div>
+
+        <div className="mt-4 overflow-x-auto scrollbar-hide -mx-4">
+          <div className="flex space-x-4 px-4" style={{ width: `${swipeableBoxes.length * 280}px` }}>
+            {swipeableBoxes.map((box) => (
+              <motion.div
+                key={box.id}
+                className="flex-shrink-0 w-64 h-32 bg-[#1c1c1f] rounded-xl border border-blue-500 p-4 flex flex-col justify-between"
+                whileTap={{ scale: 0.95 }}
+              >
+                <h3 className="text-lg font-semibold text-white">{box.title}</h3>
+                <p className="text-sm text-gray-400">{box.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         <div className="mb-6">
