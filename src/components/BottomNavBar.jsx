@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, Users, Trophy, LayoutGrid } from 'lucide-react';
+import { Globe, Users, Trophy, LayoutGrid, Zap } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
