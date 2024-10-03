@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import BottomNavBar from '../components/BottomNavBar';
-import Friends from './Friends';
+import Community from './Community';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { AnimatePresence } from 'framer-motion';
@@ -29,7 +29,7 @@ const Index = () => {
         <div className="max-w-md mx-auto">
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<Friends onUserClick={handleUserClick} />} />
+              <Route path="/" element={<Community onUserClick={handleUserClick} />} />
               <Route path="/daily-walk-challenge" element={<DailyWalkChallenge />} />
               <Route path="/daily-quiz-challenge" element={<DailyQuizChallenge />} />
             </Routes>
