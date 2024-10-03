@@ -123,15 +123,6 @@ const Friends = () => {
         </div>
 
         <div className="mt-8 mb-6">
-          <div className="flex justify-between items-center mb-4">
-            <Button
-              onClick={handleCreateGroup}
-              className="bg-primary text-white hover:bg-primary-dark transition-colors rounded-full px-4 py-2 flex items-center"
-            >
-              <Plus className="mr-2 h-4 w-4" />
-              Create Group
-            </Button>
-          </div>
           <div className="overflow-x-auto scrollbar-hide -mx-4">
             <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
               {myGroups.map((group) => (
