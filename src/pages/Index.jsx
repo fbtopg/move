@@ -24,7 +24,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col">
+    <div className="min-h-screen bg-[#FEF8F3] flex flex-col">
       <div className="flex-grow overflow-y-auto scrollbar-hide">
         <div className="max-w-md mx-auto">
           <AnimatePresence mode="wait">
