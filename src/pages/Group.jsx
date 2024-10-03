@@ -58,7 +58,7 @@ const Group = () => {
   );
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto px-4 mt-8">
           <div className="relative mb-6">

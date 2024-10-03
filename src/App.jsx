@@ -18,15 +18,11 @@ import Group from "./pages/Group";
 import MyGroups from "./pages/MyGroups";
 import RecentActivity from "./pages/RecentActivity";
 import SplashScreen from "./components/SplashScreen";
-import BottomNavBar from "./components/BottomNavBar";
-import QuickstartMenu from "./components/QuickstartMenu";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);
-  const [activeTab, setActiveTab] = useState('community');
-  const [showQuickstartMenu, setShowQuickstartMenu] = useState(false);
 
   useEffect(() => {
     // Preload the main app content
@@ -42,10 +38,6 @@ const App = () => {
     setShowSplash(false);
   };
 
-  const handleQuickstartClick = () => {
-    setShowQuickstartMenu(true);
-  };
-
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -54,34 +46,24 @@ const App = () => {
           <SplashScreen onAnimationComplete={handleSplashComplete} />
         ) : (
           <BrowserRouter>
-            <div className="min-h-screen bg-black text-white">
-              <Routes>
-                {navItems.map(({ to, page }) => (
-                  <Route key={to} path={to} element={page} />
-                ))}
-                <Route path="/daily-walk-challenge" element={<DailyWalkChallenge />} />
-                <Route path="/daily-quiz-challenge" element={<DailyQuizChallenge />} />
-                <Route path="/daily-walk-history" element={<DailyWalkHistory />} />
-                <Route path="/daily-quiz-history" element={<DailyQuizHistory />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/rewards" element={<Rewards />} />
-                <Route path="/achievements" element={<Achievements />} />
-                <Route path="/follow" element={<Follow />} />
-                <Route path="/walk" element={<Walk />} />
-                <Route path="/board" element={<Board />} />
-                <Route path="/group" element={<Group />} />
-                <Route path="/my-groups" element={<MyGroups />} />
-                <Route path="/recent-activity" element={<RecentActivity />} />
-              </Routes>
-              <BottomNavBar
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-                onQuickstartClick={handleQuickstartClick}
-              />
-              {showQuickstartMenu && (
-                <QuickstartMenu onClose={() => setShowQuickstartMenu(false)} />
-              )}
-            </div>
+            <Routes>
+              {navItems.map(({ to, page }) => (
+                <Route key={to} path={to} element={page} />
+              ))}
+              <Route path="/daily-walk-challenge" element={<DailyWalkChallenge />} />
+              <Route path="/daily-quiz-challenge" element={<DailyQuizChallenge />} />
+              <Route path="/daily-walk-history" element={<DailyWalkHistory />} />
+              <Route path="/daily-quiz-history" element={<DailyQuizHistory />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/rewards" element={<Rewards />} />
+              <Route path="/achievements" element={<Achievements />} />
+              <Route path="/follow" element={<Follow />} />
+              <Route path="/walk" element={<Walk />} />
+              <Route path="/board" element={<Board />} />
+              <Route path="/group" element={<Group />} />
+              <Route path="/my-groups" element={<MyGroups />} />
+              <Route path="/recent-activity" element={<RecentActivity />} />
+            </Routes>
           </BrowserRouter>
         )}
       </TooltipProvider>
