@@ -100,34 +100,31 @@ const Friends = () => {
   return (
     <>
       <div className="px-4 mt-4">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-white">{greeting}</h1>
-          <div className="relative flex-grow mx-4">
-            <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-            <Input
-              type="text"
-              placeholder="Search groups or challenges"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-[#1c1c1f] border-none text-gray-400 placeholder-gray-400 h-20 rounded-full pl-14 pr-6 w-full"
-              onFocus={() => setIsSearchOpen(true)}
-            />
-          </div>
-          <Button
-            onClick={handleCreateGroup}
-            className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-20 rounded-full flex items-center justify-center text-gray-400 px-6 ml-2"
-          >
-            <Plus className="h-5 w-5" />
-          </Button>
+        <div className="flex flex-col items-end mb-6">
           <Button
             onClick={() => navigate('/profile')}
-            className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-20 w-20 rounded-full flex items-center justify-center ml-2"
+            className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-20 w-20 rounded-full flex items-center justify-center mb-4"
           >
             <Avatar className="h-12 w-12">
               <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" alt="Profile" />
               <AvatarFallback>PF</AvatarFallback>
             </Avatar>
           </Button>
+          <h1 className="text-2xl font-bold text-white self-start">{greeting}</h1>
+        </div>
+        
+        <div className="h-px bg-gray-800 w-full my-4"></div>
+        
+        <div className="relative flex-grow">
+          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+          <Input
+            type="text"
+            placeholder="Search groups or challenges"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="bg-[#1c1c1f] border-none text-gray-400 placeholder-gray-400 h-20 rounded-full pl-14 pr-6 w-full"
+            onFocus={() => setIsSearchOpen(true)}
+          />
         </div>
 
         <div className="mb-6">
