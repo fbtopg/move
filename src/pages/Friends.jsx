@@ -98,9 +98,9 @@ const Friends = () => {
   );
 
   const swipeableBoxes = [
-    { id: 1, title: "Daily Walk", description: "Complete your daily walk challenge" },
-    { id: 2, title: "Daily Quiz", description: "Test your knowledge with a daily quiz" },
-    { id: 3, title: "Group Challenge", description: "Join a group challenge" },
+    { id: 1, title: "Daily Walk", description: "Complete your daily walk challenge", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzEucG5nIiwiaWF0IjoxNzI3OTIwMTI0LCJleHAiOjE3NTk0NTYxMjR9.3HL4NbXeHos98ks7vATfqt6UtQt5egRoHfThwBNusOw&t=2024-10-03T01%3A48%3A45.833Z" },
+    { id: 2, title: "Daily Quiz", description: "Test your knowledge with a daily quiz", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzEucG5nIiwiaWF0IjoxNzI3OTIwMTI0LCJleHAiOjE3NTk0NTYxMjR9.3HL4NbXeHos98ks7vATfqt6UtQt5egRoHfThwBNusOw&t=2024-10-03T01%3A48%3A45.833Z" },
+    { id: 3, title: "Group Challenge", description: "Join a group challenge", image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzEucG5nIiwiaWF0IjoxNzI3OTIwMTI0LCJleHAiOjE3NTk0NTYxMjR9.3HL4NbXeHos98ks7vATfqt6UtQt5egRoHfThwBNusOw&t=2024-10-03T01%3A48%3A45.833Z" },
   ];
 
   return (
@@ -140,6 +140,7 @@ const Friends = () => {
               className="flex-shrink-0 w-20 h-24 bg-[#1c1c1f] rounded-xl border border-blue-500 p-2 flex flex-col justify-between"
               whileTap={{ scale: 0.95 }}
             >
+              <img src={box.image} alt={box.title} className="w-full h-12 object-cover rounded-lg mb-1" />
               <h3 className="text-xs font-semibold text-white">{box.title}</h3>
               <p className="text-[8px] text-gray-400">{box.description}</p>
             </motion.div>
