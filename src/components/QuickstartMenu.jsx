@@ -17,7 +17,7 @@ const QuickstartMenu = ({ onClose }) => {
       <div className="fixed inset-x-0 bottom-20 flex justify-center items-end z-50">
         <div className="relative w-64 h-48">
           {options.map((option, index) => {
-            const angle = Math.PI + (index / (options.length - 1)) * Math.PI;
+            const angle = (index / (options.length - 1)) * Math.PI;
             const x = 32 + Math.cos(angle) * 80; // 80 is the radius of the arc
             const y = Math.sin(angle) * 80;
 
@@ -27,8 +27,8 @@ const QuickstartMenu = ({ onClose }) => {
                 className="absolute w-12 h-12 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center"
                 style={{
                   left: `${x}px`,
-                  bottom: `${y}px`,
-                  transform: 'translate(-50%, 50%)'
+                  top: `${y}px`,
+                  transform: 'translate(-50%, -50%)'
                 }}
                 onClick={option.action}
               >
