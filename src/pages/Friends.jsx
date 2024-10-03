@@ -59,23 +59,18 @@ const Friends = () => {
 
   const activities = {
     today: [
-      { name: "Emma", activity: "finished walking 1km and completed daily walk. • just now", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTEucG5nIiwiaWF0IjoxNzI1NzE3Mjg1LCJleHAiOjE3NTcyNTMyODV9.qVjtzjCu_bW-iEyzul3BjNeCwoMS6prEcNFETCCBzrs&t=2024-09-07T13%3A54%3A44.233Z" },
-      { name: "John", activity: "solved quiz #089 and completed daily quiz. • just now", type: "quiz", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTIucG5nIiwiaWF0IjoxNzI1NzE3Mjk1LCJleHAiOjE3NTcyNTMyOTV9.ZggcfcQRRTSdDHtyXr8Opujx6iGlBEISYrW-scvSMik&t=2024-09-07T13%3A54%3A54.988Z" },
-      { name: "Sarah", activity: "finished walking 1km and completed daily walk. • just now", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-3.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTMucG5nIiwiaWF0IjoxNzI1NzE3MzExLCJleHAiOjE3NTcyNTMzMTF9.ghhBkpc92hU749PoU_fV_q0HSHBg4SZw8FVeNDsa8J0&t=2024-09-07T13%3A55%3A10.841Z" },
-      { name: "John", activity: "finished walking 1km and completed daily walk. • 3m", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTIucG5nIiwiaWF0IjoxNzI1NzE3Mjk1LCJleHAiOjE3NTcyNTMyOTV9.ZggcfcQRRTSdDHtyXr8Opujx6iGlBEISYrW-scvSMik&t=2024-09-07T13%3A54%3A54.988Z" },
-      { name: "Tate", activity: "finished walking 1km and completed daily walk. • 4m", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-4.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTQucG5nIiwiaWF0IjoxNzI1NzE3MzE4LCJleHAiOjE3NTcyNTMzMTh9.UcjJ_L92gDVmyvTu_i6hyw0kgw1Y9PUTj4kQrgid-Lg&t=2024-09-07T13%3A55%3A17.985Z" },
+      { name: "Emma", activity: "finished walking 1km and completed daily walk. • just now", type: "walk", profilePicture: getRandomProfilePicture() },
+      { name: "John", activity: "solved quiz #089 and completed daily quiz. • just now", type: "quiz", profilePicture: getRandomProfilePicture() },
+      { name: "Sarah", activity: "finished walking 1km and completed daily walk. • just now", type: "walk", profilePicture: getRandomProfilePicture() },
     ],
     thisMonth: [
-      { name: "Geonu", activity: "finished walking 1km and completed daily walk. • 2d", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-5.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTUucG5nIiwiaWF0IjoxNzI1NzE3MzI1LCJleHAiOjE3NTcyNTMzMjV9.e5H4nq1qEjoOIcShw-3CyS_5GieWWhI4cp85LjjW2vo&t=2024-09-07T13%3A55%3A25.054Z" },
-      { name: "Astrid", activity: "finished walking 1km and completed daily walk. • 5d", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-6.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTYucG5nIiwiaWF0IjoxNzI1NzE3MzMzLCJleHAiOjE3NTcyNTMzMzN9.RiJUsoSrAUSfqa5YLk4XeYYD2SNed4GWzNkaDB1E7RA&t=2024-09-07T13%3A55%3A32.546Z" },
-      { name: "Fitra", activity: "solved quiz #089 and completed daily quiz. • 1w", type: "quiz", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-7.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTcucG5nIiwiaWF0IjoxNzI1NzE3MzQxLCJleHAiOjE3NTcyNTMzNDF9.DGxJJSl_dcl5oFnugAAI_1sbi0Sio-KovJJ0ehhTlCk&t=2024-09-07T13%3A55%3A40.342Z" },
-      { name: "Rissa", activity: "finished walking 1km and completed daily walk. • 1w", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-8.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTgucG5nIiwiaWF0IjoxNzI1NzE3MzQ3LCJleHAiOjE3NTcyNTMzNDd9.sLzx_coIRMJcVQqxPoJEd8GP06ZTD6COBjlO4XY4UkA&t=2024-09-07T13%3A55%3A46.800Z" },
+      { name: "Geonu", activity: "finished walking 1km and completed daily walk. • 2d", type: "walk", profilePicture: getRandomProfilePicture() },
+      { name: "Astrid", activity: "finished walking 1km and completed daily walk. • 5d", type: "walk", profilePicture: getRandomProfilePicture() },
+      { name: "Fitra", activity: "solved quiz #089 and completed daily quiz. • 1w", type: "quiz", profilePicture: getRandomProfilePicture() },
     ],
     earlier: [
-      { name: "Rissa", activity: "solved quiz #089 and completed daily quiz. • 2w", type: "quiz", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-8.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTgucG5nIiwiaWF0IjoxNzI1NzE3MzQ3LCJleHAiOjE3NTcyNTMzNDd9.sLzx_coIRMJcVQqxPoJEd8GP06ZTD6COBjlO4XY4UkA&t=2024-09-07T13%3A55%3A46.800Z" },
-      { name: "John", activity: "finished walking 1km and completed daily walk. • 3w", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTIucG5nIiwiaWF0IjoxNzI1NzE3Mjk1LCJleHAiOjE3NTcyNTMyOTV9.ZggcfcQRRTSdDHtyXr8Opujx6iGlBEISYrW-scvSMik&t=2024-09-07T13%3A54%3A54.988Z" },
-      { name: "Tate", activity: "solved quiz #089 and completed daily quiz. • 1m", type: "quiz", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-4.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTQucG5nIiwiaWF0IjoxNzI1NzE3MzE4LCJleHAiOjE3NTcyNTMzMTh9.UcjJ_L92gDVmyvTu_i6hyw0kgw1Y9PUTj4kQrgid-Lg&t=2024-09-07T13%3A55%3A17.985Z" },
-      { name: "Aquafina", activity: "finished walking 1km and completed daily walk. • 1m", type: "walk", profilePicture: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/image-1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL2ltYWdlLTEucG5nIiwiaWF0IjoxNzI1NzE3Mjg1LCJleHAiOjE3NTcyNTMyODV9.qVjtzjCu_bW-iEyzul3BjNeCwoMS6prEcNFETCCBzrs&t=2024-09-07T13%3A54%3A44.233Z" },
+      { name: "Rissa", activity: "solved quiz #089 and completed daily quiz. • 2w", type: "quiz", profilePicture: getRandomProfilePicture() },
+      { name: "John", activity: "finished walking 1km and completed daily walk. • 3w", type: "walk", profilePicture: getRandomProfilePicture() },
     ],
   };
 
@@ -97,55 +92,37 @@ const Friends = () => {
     </>
   );
 
-  const swipeableBoxes = [
-    { id: 1, image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzIucG5nIiwiaWF0IjoxNzI3OTIwNzEwLCJleHAiOjE3NTk0NTY3MTB9.CQiHz9ip-0sOYSHVfFvKpJADoXi-6eO83Ia-3pawQw8&t=2024-10-03T01%3A58%3A31.696Z" },
-    { id: 2, image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzIucG5nIiwiaWF0IjoxNzI3OTIwNzEwLCJleHAiOjE3NTk0NTY3MTB9.CQiHz9ip-0sOYSHVfFvKpJADoXi-6eO83Ia-3pawQw8&t=2024-10-03T01%3A58%3A31.696Z" },
-    { id: 3, image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzIucG5nIiwiaWF0IjoxNzI3OTIwNzEwLCJleHAiOjE3NTk0NTY3MTB9.CQiHz9ip-0sOYSHVfFvKpJADoXi-6eO83Ia-3pawQw8&t=2024-10-03T01%3A58%3A31.696Z" },
-  ];
-
   return (
     <>
       <div className="px-4 mt-4">
         <div className="flex flex-col items-end mb-1">
           <Button
             onClick={() => navigate('/profile')}
-            className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-10 w-10 rounded-full flex items-center justify-center mb-1"
+            className="bg-transparent hover:bg-secondary transition-colors h-10 w-10 rounded-full flex items-center justify-center mb-1"
           >
             <Avatar className="h-8 w-8">
               <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" alt="Profile" />
               <AvatarFallback>PF</AvatarFallback>
             </Avatar>
           </Button>
-          <h1 className="text-2xl font-bold text-white self-start">{greeting}</h1>
+          <h1 className="text-2xl font-bold text-foreground self-start">{greeting}</h1>
         </div>
         
-        <div className="h-px bg-gray-800 w-full mt-1 mb-2"></div>
+        <div className="h-px bg-border w-full mt-1 mb-2"></div>
         
         <div className="relative flex-grow mb-4">
-          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
           <Input
             type="text"
             placeholder="Search groups or challenges"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-[#1c1c1f] border-none text-gray-400 placeholder-gray-400 h-10 rounded-lg pl-14 pr-6 w-full"
+            className="bg-secondary border-none text-foreground placeholder-muted-foreground h-10 rounded-lg pl-14 pr-6 w-full"
             onFocus={() => setIsSearchOpen(true)}
           />
         </div>
 
-        <div className="mt-4 flex space-x-3 overflow-x-auto scrollbar-hide -mx-4 px-4">
-          {swipeableBoxes.map((box) => (
-            <motion.div
-              key={box.id}
-              className="flex-shrink-0 w-20 h-24 bg-[#1c1c1f] rounded-xl border border-blue-500 flex items-center justify-center overflow-hidden"
-              whileTap={{ scale: 0.95 }}
-            >
-              <img src={box.image} alt="Shortcut" className="w-full h-full object-cover" />
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mb-6 mt-8">
+        <div className="mt-8 mb-6">
           <div className="overflow-x-auto scrollbar-hide -mx-4">
             <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
               {myGroups.map((group) => (
@@ -163,9 +140,9 @@ const Friends = () => {
 
       <section className="mt-4 pb-20 space-y-4 px-4">
         {renderActivitySection("Recent Activity", activities.today)}
-        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6" />
+        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-border my-6" />
         {renderActivitySection("THIS MONTH", activities.thisMonth)}
-        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6" />
+        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-border my-6" />
         {renderActivitySection("EARLIER", activities.earlier)}
       </section>
 

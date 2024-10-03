@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import QuickstartMenu from './QuickstartMenu';
 
-const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) => {
+const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-background' }) => {
   const navigate = useNavigate();
   const [showQuickstartMenu, setShowQuickstartMenu] = useState(false);
   const navItems = [
@@ -24,7 +24,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
 
   return (
     <>
-      <nav className={`fixed bottom-0 left-0 right-0 text-white h-20`} style={{ backgroundColor, borderTop: backgroundColor === '#212124' ? '1px solid #424245' : 'none' }}>
+      <nav className={`fixed bottom-0 left-0 right-0 text-foreground h-20 ${backgroundColor}`} style={{ borderTop: '1px solid var(--border)' }}>
         <ul className="flex justify-around items-start h-full relative pt-2">
           {navItems.map((item, index) => (
             <li key={item.id} className={cn(
@@ -36,7 +36,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
                 onClick={() => handleNavigation(item)}
                 className={cn(
                   "w-full h-full flex flex-col items-center justify-start pt-1",
-                  activeTab === item.id ? "text-white" : "text-gray-400"
+                  activeTab === item.id ? "text-primary" : "text-muted-foreground"
                 )}
               >
                 {item.id === 'profile' ? (
@@ -54,9 +54,9 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
           <li className="absolute left-1/2 transform -translate-x-1/2 -top-6">
             <button
               onClick={() => setShowQuickstartMenu(true)}
-              className="bg-blue-500 rounded-full w-16 h-16 shadow-lg flex items-center justify-center"
+              className="bg-primary rounded-full w-16 h-16 shadow-lg flex items-center justify-center"
             >
-              <Zap className="h-8 w-8 text-white stroke-2" />
+              <Zap className="h-8 w-8 text-primary-foreground stroke-2" />
             </button>
           </li>
         </ul>
