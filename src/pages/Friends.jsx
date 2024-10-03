@@ -133,7 +133,7 @@ const Friends = () => {
           />
         </div>
 
-        <div className="mt-4 flex space-x-2 overflow-x-auto scrollbar-hide -mx-4 px-4">
+        <div className="mt-4 flex space-x-3 overflow-x-auto scrollbar-hide -mx-4 px-4">
           {swipeableBoxes.map((box) => (
             <motion.div
               key={box.id}
