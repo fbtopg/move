@@ -22,6 +22,10 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-backgroun
     }
   };
 
+  const toggleQuickstartMenu = () => {
+    setShowQuickstartMenu(!showQuickstartMenu);
+  };
+
   return (
     <>
       <nav className={`fixed bottom-0 left-0 right-0 text-foreground h-20 ${backgroundColor}`} style={{ borderTop: '1px solid var(--border)' }}>
@@ -53,7 +57,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-backgroun
           ))}
           <li className="absolute left-1/2 transform -translate-x-1/2 -top-6">
             <button
-              onClick={() => setShowQuickstartMenu(true)}
+              onClick={toggleQuickstartMenu}
               className="bg-primary rounded-full w-16 h-16 shadow-lg flex items-center justify-center"
             >
               <Zap className="h-8 w-8 text-primary-foreground stroke-2" />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, Footprints, Trophy } from 'lucide-react';
+import { Users, Footprints, Trophy, X, Zap } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const QuickstartMenu = ({ onClose }) => {
@@ -7,30 +7,21 @@ const QuickstartMenu = ({ onClose }) => {
     { label: 'New Group', icon: Users, action: () => console.log('New Group') },
     { label: 'Walk', icon: Footprints, action: () => console.log('Walk') },
     { label: 'Challenge', icon: Trophy, action: () => console.log('Challenge') },
+    { label: 'Close', icon: X, action: onClose },
   ];
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-[#212124] rounded-lg p-4 w-64">
+    <div className="fixed inset-x-0 bottom-20 flex justify-center items-end z-50">
+      <div className="flex space-x-4 mb-4">
         {options.map((option, index) => (
           <Button
             key={index}
-            className="w-full mb-2 flex items-center justify-start bg-[#2c2c30] hover:bg-[#3c3c40] text-white"
-            onClick={() => {
-              option.action();
-              onClose();
-            }}
+            className="w-12 h-12 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center"
+            onClick={option.action}
           >
-            <option.icon className="mr-2" size={18} />
-            {option.label}
+            <option.icon className="h-6 w-6" />
           </Button>
         ))}
-        <Button
-          className="w-full mt-2 bg-[#3c3c40] hover:bg-[#4c4c50] text-white"
-          onClick={onClose}
-        >
-          Cancel
-        </Button>
       </div>
     </div>
   );
