@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, Users, Flame, LayoutGrid } from 'lucide-react';
+import { Globe, Users, Lightning, LayoutGrid } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,7 +11,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
   const navItems = [
     { id: 'community', icon: Globe, label: 'Community', route: '/' },
     { id: 'group', icon: Users, label: 'Group', route: '/group' },
-    { id: 'upcoming', icon: Flame, label: 'Upcoming', route: '/board' },
+    { id: 'upcoming', icon: LayoutGrid, label: 'Upcoming', route: '/board' },
     { id: 'profile', icon: Avatar, label: 'Profile', route: '/profile' },
   ];
 
@@ -56,7 +56,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = '#212124' }) 
               onClick={() => setShowQuickstartMenu(true)}
               className="bg-blue-500 rounded-full w-16 h-16 shadow-lg flex items-center justify-center"
             >
-              <Flame className="h-8 w-8 text-white stroke-2" />
+              <Lightning className="h-8 w-8 text-white stroke-2" />
             </button>
           </li>
         </ul>
