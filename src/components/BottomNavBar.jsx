@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, Users, Zap, LayoutGrid } from 'lucide-react';
+import { Globe, Users, LayoutGrid } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -55,17 +55,13 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-backgroun
               </button>
             </li>
           ))}
-          <li className="absolute left-1/2 transform -translate-x-1/2 -top-6">
-            <button
-              onClick={toggleQuickstartMenu}
-              className="bg-primary rounded-full w-16 h-16 shadow-lg flex items-center justify-center"
-            >
-              <Zap className="h-8 w-8 text-primary-foreground stroke-2" />
-            </button>
-          </li>
         </ul>
       </nav>
-      {showQuickstartMenu && <QuickstartMenu onClose={() => setShowQuickstartMenu(false)} />}
+      <QuickstartMenu 
+        isOpen={showQuickstartMenu} 
+        onClose={() => setShowQuickstartMenu(false)} 
+        onOpen={() => setShowQuickstartMenu(true)}
+      />
     </>
   );
 };
