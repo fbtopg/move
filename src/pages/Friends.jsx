@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import CommunityGroupCard from '../components/CommunityGroupCard';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import SearchPage from '../components/SearchPage';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Friends = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -80,7 +81,7 @@ const Friends = () => {
   return (
     <>
       <div className="px-4 mt-4">
-        <div className="relative mb-6">
+        <div className="flex justify-between items-center mb-6">
           <div className="relative flex-grow">
             <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
             <Input
@@ -94,9 +95,18 @@ const Friends = () => {
           </div>
           <Button
             onClick={handleCreateGroup}
-            className="absolute right-0 top-0 bg-transparent hover:bg-[#3c3c3f] transition-colors h-20 rounded-full flex items-center justify-center text-gray-400 px-6"
+            className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-20 rounded-full flex items-center justify-center text-gray-400 px-6 ml-2"
           >
             <Plus className="h-5 w-5" />
+          </Button>
+          <Button
+            onClick={() => navigate('/profile')}
+            className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-20 w-20 rounded-full flex items-center justify-center ml-2"
+          >
+            <Avatar className="h-12 w-12">
+              <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" alt="Profile" />
+              <AvatarFallback>PF</AvatarFallback>
+            </Avatar>
           </Button>
         </div>
 
