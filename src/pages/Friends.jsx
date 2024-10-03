@@ -106,10 +106,10 @@ const Friends = () => {
   return (
     <>
       <div className="px-4 mt-4">
-        <div className="flex flex-col items-end mb-2">
+        <div className="flex flex-col items-end mb-1">
           <Button
             onClick={() => navigate('/profile')}
-            className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-10 w-10 rounded-full flex items-center justify-center mb-2"
+            className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-10 w-10 rounded-full flex items-center justify-center mb-1"
           >
             <Avatar className="h-8 w-8">
               <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" alt="Profile" />
@@ -133,19 +133,17 @@ const Friends = () => {
           />
         </div>
 
-        <div className="mt-4 overflow-x-auto scrollbar-hide -mx-4">
-          <div className="flex space-x-4 px-4" style={{ width: `${swipeableBoxes.length * 180}px` }}>
-            {swipeableBoxes.map((box) => (
-              <motion.div
-                key={box.id}
-                className="flex-shrink-0 w-40 h-24 bg-[#1c1c1f] rounded-xl border border-blue-500 p-3 flex flex-col justify-between"
-                whileTap={{ scale: 0.95 }}
-              >
-                <h3 className="text-sm font-semibold text-white">{box.title}</h3>
-                <p className="text-xs text-gray-400">{box.description}</p>
-              </motion.div>
-            ))}
-          </div>
+        <div className="mt-4 flex space-x-2 overflow-x-auto scrollbar-hide -mx-4 px-4">
+          {swipeableBoxes.map((box) => (
+            <motion.div
+              key={box.id}
+              className="flex-shrink-0 w-24 h-32 bg-[#1c1c1f] rounded-xl border border-blue-500 p-3 flex flex-col justify-between"
+              whileTap={{ scale: 0.95 }}
+            >
+              <h3 className="text-xs font-semibold text-white">{box.title}</h3>
+              <p className="text-[10px] text-gray-400">{box.description}</p>
+            </motion.div>
+          ))}
         </div>
 
         <div className="mb-6">
