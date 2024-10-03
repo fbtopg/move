@@ -98,9 +98,9 @@ const Friends = () => {
   );
 
   const swipeableBoxes = [
-    { id: 1, image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzEucG5nIiwiaWF0IjoxNzI3OTIwMTI0LCJleHAiOjE3NTk0NTYxMjR9.3HL4NbXeHos98ks7vATfqt6UtQt5egRoHfThwBNusOw&t=2024-10-03T01%3A48%3A45.833Z" },
-    { id: 2, image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzEucG5nIiwiaWF0IjoxNzI3OTIwMTI0LCJleHAiOjE3NTk0NTYxMjR9.3HL4NbXeHos98ks7vATfqt6UtQt5egRoHfThwBNusOw&t=2024-10-03T01%3A48%3A45.833Z" },
-    { id: 3, image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzEucG5nIiwiaWF0IjoxNzI3OTIwMTI0LCJleHAiOjE3NTk0NTYxMjR9.3HL4NbXeHos98ks7vATfqt6UtQt5egRoHfThwBNusOw&t=2024-10-03T01%3A48%3A45.833Z" },
+    { id: 1, image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzIucG5nIiwiaWF0IjoxNzI3OTIwNzEwLCJleHAiOjE3NTk0NTY3MTB9.CQiHz9ip-0sOYSHVfFvKpJADoXi-6eO83Ia-3pawQw8&t=2024-10-03T01%3A58%3A31.696Z" },
+    { id: 2, image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzIucG5nIiwiaWF0IjoxNzI3OTIwNzEwLCJleHAiOjE3NTk0NTY3MTB9.CQiHz9ip-0sOYSHVfFvKpJADoXi-6eO83Ia-3pawQw8&t=2024-10-03T01%3A58%3A31.696Z" },
+    { id: 3, image: "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzIucG5nIiwiaWF0IjoxNzI3OTIwNzEwLCJleHAiOjE3NTk0NTY3MTB9.CQiHz9ip-0sOYSHVfFvKpJADoXi-6eO83Ia-3pawQw8&t=2024-10-03T01%3A58%3A31.696Z" },
   ];
 
   return (
