@@ -1,68 +1,66 @@
-import React, { useState } from 'react';
-import { Globe, Users, Zap, LayoutGrid } from 'lucide-react';
+import React from 'react';
+import { Globe, Users, Zap, Flame } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import QuickstartMenu from './QuickstartMenu';
 
-const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-background' }) => {
+const BottomNavBar = ({ activeTab, setActiveTab, onQuickstartClick, backgroundColor = '#212124' }) => {
   const navigate = useNavigate();
-  const [showQuickstartMenu, setShowQuickstartMenu] = useState(false);
   const navItems = [
     { id: 'community', icon: Globe, label: 'Community', route: '/' },
     { id: 'group', icon: Users, label: 'Group', route: '/group' },
-    { id: 'upcoming', icon: LayoutGrid, label: 'Upcoming', route: '/board' },
+    { id: 'quickstart', icon: Zap, label: 'Quickstart', action: onQuickstartClick },
+    { id: 'upcoming', icon: Flame, label: 'Upcoming', route: '/board' },
     { id: 'profile', icon: Avatar, label: 'Profile', route: '/profile' },
   ];
 
   const handleNavigation = (item) => {
-    if (item.route) {
+    if (item.action) {
+      item.action();
+    } else {
       setActiveTab(item.id);
-      navigate(item.route);
+      if (item.route) {
+        navigate(item.route);
+      }
     }
   };
 
   return (
-    <>
-      <nav className={`fixed bottom-0 left-0 right-0 text-foreground h-20 ${backgroundColor}`} style={{ borderTop: '1px solid var(--border)' }}>
-        <ul className="flex justify-around items-start h-full relative pt-2">
-          {navItems.map((item, index) => (
-            <li key={item.id} className={cn(
-              "flex-1",
-              index === 1 ? "mr-6" : "",
-              index === 2 ? "ml-6" : ""
-            )}>
-              <button
-                onClick={() => handleNavigation(item)}
-                className={cn(
-                  "w-full h-full flex flex-col items-center justify-start pt-1",
-                  activeTab === item.id ? "text-primary" : "text-muted-foreground"
-                )}
-              >
-                {item.id === 'profile' ? (
-                  <Avatar className="h-6 w-6 mb-1">
-                    <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL3NtYWxsLnBuZyIsImlhdCI6MTcyNTY5MjI1MywiZXhwIjoxNzU3MjI4MjUzfQ.N4lp3_t2Jjjxnaf5iVkUa67tVjxrYnuAzl5NEE5j65w&t=2024-09-07T06%3A57%3A33.339Z" />
-                    <AvatarFallback>U</AvatarFallback>
-                  </Avatar>
-                ) : (
-                  <item.icon className="h-6 w-6 mb-1 stroke-1" />
-                )}
-                <span className="text-xs">{item.label}</span>
-              </button>
-            </li>
-          ))}
-          <li className="absolute left-1/2 transform -translate-x-1/2 -top-6">
+    <nav className={`fixed bottom-0 left-0 right-0 text-white h-16`} style={{ backgroundColor, borderTop: backgroundColor === '#212124' ? '1px solid #424245' : 'none' }}>
+      <ul className="flex justify-around items-center h-full relative">
+        {navItems.map((item, index) => (
+          <li key={item.id} className={cn(
+            "flex-1",
+            item.id === 'quickstart' ? "absolute left-1/2 transform -translate-x-1/2 -top-5" : "",
+            index === 1 ? "mr-6" : "",
+            index === 3 ? "ml-6" : ""
+          )}>
             <button
-              onClick={() => setShowQuickstartMenu(true)}
-              className="bg-primary rounded-full w-16 h-16 shadow-lg flex items-center justify-center"
+              onClick={() => handleNavigation(item)}
+              className={cn(
+                "w-full h-full flex flex-col items-center justify-center",
+                item.id === 'quickstart'
+                  ? "bg-blue-500 rounded-full w-14 h-14 shadow-lg"
+                  : "",
+                activeTab === item.id ? "text-white" : "text-gray-400"
+              )}
             >
-              <Zap className="h-8 w-8 text-primary-foreground stroke-2" />
+              {item.id === 'profile' ? (
+                <Avatar className="h-5 w-5 mb-1">
+                  <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL3NtYWxsLnBuZyIsImlhdCI6MTcyNTY5MjI1MywiZXhwIjoxNzU3MjI4MjUzfQ.N4lp3_t2Jjjxnaf5iVkUa67tVjxrYnuAzl5NEE5j65w&t=2024-09-07T06%3A57%3A33.339Z" />
+                  <AvatarFallback>U</AvatarFallback>
+                </Avatar>
+              ) : (
+                <item.icon className={cn("h-5 w-5 mb-1", item.id === 'quickstart' ? "stroke-2" : "stroke-1")} />
+              )}
+              {item.id !== 'quickstart' && (
+                <span className="text-[10px]">{item.label}</span>
+              )}
             </button>
           </li>
-        </ul>
-      </nav>
-      {showQuickstartMenu && <QuickstartMenu onClose={() => setShowQuickstartMenu(false)} />}
-    </>
+        ))}
+      </ul>
+    </nav>
   );
 };
 
