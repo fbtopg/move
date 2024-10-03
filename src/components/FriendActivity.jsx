@@ -54,7 +54,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
               onClick={handleLike}
               className={cn(
                 "w-8 h-8 p-0",
-                liked ? "text-white" : "text-gray-500",
+                liked ? "text-red-500" : "text-gray-500",
                 "bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent"
               )}
             >
