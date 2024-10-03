@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Globe, Users, Trophy, Bell, Zap } from 'lucide-react';
+import { Globe, Users, Trophy, LayoutGrid, Zap } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate } from 'react-router-dom';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import QuickstartMenu from './QuickstartMenu';
 
 const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-background' }) => {
@@ -11,7 +12,7 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-backgroun
     { id: 'community', icon: Globe, label: 'Community', route: '/' },
     { id: 'group', icon: Users, label: 'Group', route: '/group' },
     { id: 'challenge', icon: Trophy, label: 'Challenge', route: '/board' },
-    { id: 'notification', icon: Bell, label: 'Notification', route: '/notifications' },
+    { id: 'profile', icon: Avatar, label: 'Profile', route: '/profile' },
   ];
 
   const handleNavigation = (item) => {
@@ -42,7 +43,14 @@ const BottomNavBar = ({ activeTab, setActiveTab, backgroundColor = 'bg-backgroun
                   activeTab === item.id ? "text-primary" : "text-muted-foreground"
                 )}
               >
-                <item.icon className="h-6 w-6 mb-1 stroke-1" />
+                {item.id === 'profile' ? (
+                  <Avatar className="h-6 w-6 mb-1">
+                    <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/small.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL3NtYWxsLnBuZyIsImlhdCI6MTcyNTY5MjI1MywiZXhwIjoxNzU3MjI4MjUzfQ.N4lp3_t2Jjjxnaf5iVkUa67tVjxrYnuAzl5NEE5j65w&t=2024-09-07T06%3A57%3A33.339Z" />
+                    <AvatarFallback>U</AvatarFallback>
+                  </Avatar>
+                ) : (
+                  <item.icon className="h-6 w-6 mb-1 stroke-1" />
+                )}
                 <span className="text-xs">{item.label}</span>
               </button>
             </li>
