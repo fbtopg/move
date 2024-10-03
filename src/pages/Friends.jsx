@@ -105,19 +105,19 @@ const Friends = () => {
               <AvatarFallback>PF</AvatarFallback>
             </Avatar>
           </Button>
-          <h1 className="text-2xl font-bold text-foreground self-start">{greeting}</h1>
+          <h1 className="text-2xl font-bold text-gray-800 self-start">{greeting}</h1>
         </div>
         
-        <div className="h-px bg-border w-full mt-1 mb-2"></div>
+        <div className="h-px bg-gray-200 w-full mt-1 mb-2"></div>
         
         <div className="relative flex-grow mb-4">
-          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <Input
             type="text"
             placeholder="Search groups or challenges"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-secondary border-none text-foreground placeholder-muted-foreground h-10 rounded-lg pl-14 pr-6 w-full"
+            className="bg-gray-100 border-none text-gray-800 placeholder-gray-400 h-10 rounded-lg pl-14 pr-6 w-full"
             onFocus={() => setIsSearchOpen(true)}
           />
         </div>
@@ -140,9 +140,9 @@ const Friends = () => {
 
       <section className="mt-4 pb-20 space-y-4 px-4">
         {renderActivitySection("Recent Activity", activities.today)}
-        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-border my-6" />
+        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-gray-200 my-6" />
         {renderActivitySection("THIS MONTH", activities.thisMonth)}
-        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-border my-6" />
+        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-gray-200 my-6" />
         {renderActivitySection("EARLIER", activities.earlier)}
       </section>
 
