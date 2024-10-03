@@ -122,7 +122,7 @@ const Friends = () => {
             placeholder="Search groups or challenges"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-[#1c1c1f] border-none text-gray-400 placeholder-gray-400 h-20 rounded-lg pl-14 pr-6 w-full"
+            className="bg-[#1c1c1f] border-none text-gray-400 placeholder-gray-400 h-12 rounded-lg pl-14 pr-6 w-full"
             onFocus={() => setIsSearchOpen(true)}
           />
         </div>
