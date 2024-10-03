@@ -46,6 +46,7 @@ const Friends = () => {
     });
   };
 
+
   const handleCreateGroup = () => {
     console.log("Create group clicked");
     // Implement group creation logic here
