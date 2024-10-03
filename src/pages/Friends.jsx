@@ -137,10 +137,10 @@ const Friends = () => {
           {swipeableBoxes.map((box) => (
             <motion.div
               key={box.id}
-              className="flex-shrink-0 w-20 h-24 bg-[#1c1c1f] rounded-xl border border-blue-500 p-2 flex items-center justify-center"
+              className="flex-shrink-0 w-20 h-24 bg-[#1c1c1f] rounded-xl border border-blue-500 flex items-center justify-center overflow-hidden"
               whileTap={{ scale: 0.95 }}
             >
-              <img src={box.image} alt="Shortcut" className="w-full h-full object-cover rounded-lg" />
+              <img src={box.image} alt="Shortcut" className="w-full h-full object-cover" />
             </motion.div>
           ))}
         </div>
