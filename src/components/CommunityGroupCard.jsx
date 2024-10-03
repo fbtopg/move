@@ -20,7 +20,7 @@ const CommunityGroupCard = ({ group, onClick, index }) => {
 
   return (
     <motion.div
-      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-3 h-20"
+      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-gray-100 p-3 h-20" // Changed bg-[#1a1a1d] to bg-gray-100
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={onClick}
@@ -29,7 +29,7 @@ const CommunityGroupCard = ({ group, onClick, index }) => {
         <div className={`w-12 h-12 rounded-full overflow-hidden mr-3 flex-shrink-0 bg-gradient-to-br ${getGradientColor(index)}`} />
         <div className="flex flex-col justify-center flex-grow">
           <div className="flex items-start">
-            <h3 className="font-semibold text-xs mb-1 truncate text-white mr-2">{truncateName(group.name)}</h3>
+            <h3 className="font-semibold text-xs mb-1 truncate text-gray-800 mr-2">{truncateName(group.name)}</h3> // Changed text-white to text-gray-800
             {group.hasActivity && (
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1"></span>
             )}
@@ -37,13 +37,13 @@ const CommunityGroupCard = ({ group, onClick, index }) => {
           <div className="flex items-center">
             <div className="flex -space-x-2 mr-2">
               {group.memberProfiles.slice(0, 3).map((profile, index) => (
-                <Avatar key={index} className="w-4 h-4 border border-[#1a1a1d]">
+                <Avatar key={index} className="w-4 h-4 border border-gray-100"> // Changed border-[#1a1a1d] to border-gray-100
                   <AvatarImage src={profile} alt={`Member ${index + 1}`} />
                   <AvatarFallback>{index + 1}</AvatarFallback>
                 </Avatar>
               ))}
             </div>
-            <p className="text-[10px] text-gray-400">{group.members} members</p>
+            <p className="text-[10px] text-gray-600">{group.members} members</p> // Changed text-gray-400 to text-gray-600
           </div>
         </div>
       </div>
