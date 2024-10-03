@@ -4,7 +4,7 @@ import FriendActivity from '../components/FriendActivity';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Search } from 'lucide-react';
+import { Search, Plus, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import CommunityGroupCard from '../components/CommunityGroupCard';
 import { getRandomProfilePicture } from '../utils/profilePictures';
@@ -100,17 +100,17 @@ const Friends = () => {
   return (
     <>
       <div className="px-4 mt-4">
-        <div className="flex flex-col items-end mb-6">
+        <div className="flex flex-col items-end mb-4">
           <Button
             onClick={() => navigate('/profile')}
-            className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-12 w-12 rounded-full flex items-center justify-center mb-2"
+            className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-10 w-10 rounded-full flex items-center justify-center mb-2"
           >
             <Avatar className="h-8 w-8">
               <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" alt="Profile" />
               <AvatarFallback>PF</AvatarFallback>
             </Avatar>
           </Button>
-          <h1 className="text-2xl font-bold text-white self-start">{greeting}</h1>
+          <h1 className="text-2xl font-bold text-white self-start py-1">{greeting}</h1>
         </div>
         
         <div className="h-px bg-gray-800 w-full my-4"></div>
