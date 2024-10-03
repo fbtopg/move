@@ -107,7 +107,12 @@
     left: 0;
     right: 0;
     height: env(safe-area-inset-top);
-    background-color: #000;
+    background-color: var(--status-bar-color, #000);
     z-index: 9999;
+    transition: opacity 0.3s ease;
+  }
+
+  .dimmed-status-bar::before {
+    opacity: 0.5;
   }
 }
