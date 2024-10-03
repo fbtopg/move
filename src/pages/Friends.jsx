@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
@@ -6,7 +6,6 @@ import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus, Search } from 'lucide-react';
-import FilterButton from '../components/FilterButton';
 import { useNavigate } from 'react-router-dom';
 import CommunityGroupCard from '../components/CommunityGroupCard';
 import { getRandomProfilePicture } from '../utils/profilePictures';
@@ -22,13 +21,6 @@ const Friends = () => {
   const challenges = [
     { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
     { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
-  ];
-
-  const filters = [
-    { name: "Popular", emoji: "🔥", color: "bg-purple-500" },
-    { name: "New", emoji: "✨", color: "bg-blue-500" },
-    { name: "Challenge", emoji: "🏆", color: "bg-green-500" },
-    { name: "Reward", emoji: "🎁", color: "bg-yellow-500" },
   ];
 
   const handleNextChallenge = () => {
@@ -133,15 +125,7 @@ const Friends = () => {
         </div>
       </div>
 
-      <div className="mb-4 mt-12 overflow-x-auto scrollbar-hide">
-        <div className="flex space-x-2 pl-4">
-          {filters.map((filter, index) => (
-            <FilterButton key={index} name={filter.name} emoji={filter.emoji} color={filter.color} />
-          ))}
-        </div>
-      </div>
-
-      <div className="px-4">
+      <div className="px-4 mt-12">
         <div className="mb-6">
           <div className="overflow-x-auto scrollbar-hide -mx-4">
             <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
