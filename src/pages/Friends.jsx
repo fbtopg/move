@@ -126,13 +126,13 @@ const Friends = () => {
           <div className="overflow-x-auto scrollbar-hide -mx-4">
             <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 2) * 180}px` }}>
               {/* Create Group Button Card */}
-              <div className="flex-shrink-0 w-40 h-40">
+              <div className="flex-shrink-0 w-32 h-40"> {/* Reduced width from w-40 to w-32 */}
                 <Button
                   onClick={handleCreateGroup}
                   className="w-full h-full bg-[#1a1a1d] text-white flex flex-col items-center justify-center rounded-lg"
                 >
-                  <Plus className="w-8 h-8 mb-2" />
-                  <span className="text-sm font-semibold">Create Group</span>
+                  <Plus className="w-6 h-6 mb-2" /> {/* Reduced icon size from w-8 h-8 to w-6 h-6 */}
+                  <span className="text-xs font-semibold">Create Group</span> {/* Reduced text size from text-sm to text-xs */}
                 </Button>
               </div>
               {myGroups.map((group) => (
