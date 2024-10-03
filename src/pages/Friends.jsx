@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from "framer-motion";
 import FriendActivity from '../components/FriendActivity';
 import UserProfilePopup from '../components/UserProfilePopup';
@@ -15,7 +15,26 @@ const Friends = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [greeting, setGreeting] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const updateGreeting = () => {
+      const currentHour = new Date().getHours();
+      if (currentHour >= 5 && currentHour < 12) {
+        setGreeting('Good Morning');
+      } else if (currentHour >= 12 && currentHour < 18) {
+        setGreeting('Good Afternoon');
+      } else {
+        setGreeting('Good Evening');
+      }
+    };
+
+    updateGreeting();
+    const intervalId = setInterval(updateGreeting, 60000); // Update every minute
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   const handleUserClick = (user) => {
     setSelectedUser({
@@ -82,7 +101,8 @@ const Friends = () => {
     <>
       <div className="px-4 mt-4">
         <div className="flex justify-between items-center mb-6">
-          <div className="relative flex-grow">
+          <h1 className="text-2xl font-bold text-white">{greeting}</h1>
+          <div className="relative flex-grow mx-4">
             <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
             <Input
               type="text"
