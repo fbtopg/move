@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import BottomNavBar from '../components/BottomNavBar';
 
 const Notifications = () => {
-  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('notification');
 
   // Sample notifications data
@@ -20,9 +17,6 @@ const Notifications = () => {
     <div className="min-h-screen bg-[#FEF8F3] flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-4">
-          <button onClick={() => navigate(-1)} className="mb-6">
-            <ArrowLeft className="h-6 w-6" />
-          </button>
           <h1 className="text-2xl font-bold mb-6">Notifications</h1>
           {notifications.length > 0 ? (
             <ul className="space-y-4">
