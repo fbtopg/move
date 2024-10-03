@@ -145,7 +145,7 @@ const Friends = () => {
           ))}
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 mt-8">
           <div className="overflow-x-auto scrollbar-hide -mx-4">
             <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
               {myGroups.map((group) => (
