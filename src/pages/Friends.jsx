@@ -106,7 +106,7 @@ const Friends = () => {
   return (
     <>
       <div className="px-4 mt-4">
-        <div className="flex flex-col items-end mb-2"> {/* Changed mb-4 to mb-2 */}
+        <div className="flex flex-col items-end mb-2">
           <Button
             onClick={() => navigate('/profile')}
             className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-10 w-10 rounded-full flex items-center justify-center mb-2"
@@ -116,12 +116,12 @@ const Friends = () => {
               <AvatarFallback>PF</AvatarFallback>
             </Avatar>
           </Button>
-          <h1 className="text-2xl font-bold text-white self-start py-1">{greeting}</h1>
+          <h1 className="text-2xl font-bold text-white self-start">{greeting}</h1>
         </div>
         
-        <div className="h-px bg-gray-800 w-full my-2"></div> {/* Changed my-4 to my-2 */}
+        <div className="h-px bg-gray-800 w-full mt-1 mb-2"></div>
         
-        <div className="relative flex-grow">
+        <div className="relative flex-grow mb-4">
           <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <Input
             type="text"
@@ -134,15 +134,15 @@ const Friends = () => {
         </div>
 
         <div className="mt-4 overflow-x-auto scrollbar-hide -mx-4">
-          <div className="flex space-x-4 px-4" style={{ width: `${swipeableBoxes.length * 280}px` }}>
+          <div className="flex space-x-4 px-4" style={{ width: `${swipeableBoxes.length * 180}px` }}>
             {swipeableBoxes.map((box) => (
               <motion.div
                 key={box.id}
-                className="flex-shrink-0 w-64 h-32 bg-[#1c1c1f] rounded-xl border border-blue-500 p-4 flex flex-col justify-between"
+                className="flex-shrink-0 w-40 h-24 bg-[#1c1c1f] rounded-xl border border-blue-500 p-3 flex flex-col justify-between"
                 whileTap={{ scale: 0.95 }}
               >
-                <h3 className="text-lg font-semibold text-white">{box.title}</h3>
-                <p className="text-sm text-gray-400">{box.description}</p>
+                <h3 className="text-sm font-semibold text-white">{box.title}</h3>
+                <p className="text-xs text-gray-400">{box.description}</p>
               </motion.div>
             ))}
           </div>
