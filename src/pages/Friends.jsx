@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from "framer-motion";
-import ChallengeCard from '../components/ChallengeCard';
 import FriendActivity from '../components/FriendActivity';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
@@ -12,20 +11,10 @@ import { getRandomProfilePicture } from '../utils/profilePictures';
 import SearchPage from '../components/SearchPage';
 
 const Friends = () => {
-  const [currentChallenge, setCurrentChallenge] = useState(0);
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const navigate = useNavigate();
-
-  const challenges = [
-    { type: "Daily Walk", date: "SEPTEMBER 2024", active: "16.5k", progress: "501/16.5K" },
-    { type: "Daily Quiz", date: "SEPTEMBER 2024", active: "16.5k", progress: "11/30" },
-  ];
-
-  const handleNextChallenge = () => {
-    setCurrentChallenge((prev) => (prev + 1) % challenges.length);
-  };
 
   const handleUserClick = (user) => {
     setSelectedUser({
@@ -90,21 +79,8 @@ const Friends = () => {
 
   return (
     <>
-      <div className="relative mb-4">
-        <motion.div
-          className="overflow-hidden"
-          animate={{ x: `${-currentChallenge * 100}%` }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        >
-          <div className="flex">
-            {challenges.map((challenge, index) => (
-              <div key={index} className="flex-shrink-0 w-full">
-                <ChallengeCard {...challenge} onNextChallenge={handleNextChallenge} />
-              </div>
-            ))}
-          </div>
-        </motion.div>
-        <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-10 w-[96%] bg-[#1c1c1f] rounded-full flex items-center justify-between border-8 border-black" style={{ borderWidth: '8px', marginTop: '-12px', height: '80px' }}>
+      <div className="px-4 mt-4">
+        <div className="relative mb-6">
           <div className="relative flex-grow">
             <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
             <Input
@@ -112,20 +88,18 @@ const Friends = () => {
               placeholder="Search groups or challenges"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-transparent border-none text-gray-400 placeholder-gray-400 h-20 rounded-full pl-14 pr-6 w-full"
+              className="bg-[#1c1c1f] border-none text-gray-400 placeholder-gray-400 h-20 rounded-full pl-14 pr-6 w-full"
               onFocus={() => setIsSearchOpen(true)}
             />
           </div>
           <Button
             onClick={handleCreateGroup}
-            className="bg-transparent hover:bg-[#3c3c3f] transition-colors h-20 rounded-full flex items-center justify-center text-gray-400 px-6"
+            className="absolute right-0 top-0 bg-transparent hover:bg-[#3c3c3f] transition-colors h-20 rounded-full flex items-center justify-center text-gray-400 px-6"
           >
             <Plus className="h-5 w-5" />
           </Button>
         </div>
-      </div>
 
-      <div className="px-4 mt-12">
         <div className="mb-6">
           <div className="overflow-x-auto scrollbar-hide -mx-4">
             <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
