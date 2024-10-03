@@ -36,11 +36,11 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
       <div className="flex-grow min-w-0">
         <div className="flex items-start justify-between">
           <div className="flex-grow min-w-0 pr-2">
-            <p className="text-sm text-gray-400">
-              <span className="font-semibold text-white">{name}</span>{' '}
+            <p className="text-sm text-gray-700">
+              <span className="font-semibold text-gray-900">{name}</span>{' '}
               <span className="break-words">{content}</span>
               {timestamp && (
-                <span className="text-xs ml-1" style={{ color: '#50545B' }}>{timestamp}</span>
+                <span className="text-xs ml-1 text-gray-500">{timestamp}</span>
               )}
             </p>
           </div>
