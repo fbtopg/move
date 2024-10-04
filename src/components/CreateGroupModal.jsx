@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
-import { X, Upload, UserPlus, Link } from 'lucide-react';
+import { X, Upload, UserPlus, Link, Lock } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
 import { handleImageUpload } from '../utils/imageUtils';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupName, setGroupName] = useState('');
   const [groupImage, setGroupImage] = useState(null);
   const [groupDescription, setGroupDescription] = useState('');
+  const [isPrivate, setIsPrivate] = useState(false);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -25,7 +27,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
 
   const handleCreateGroup = () => {
     // Implement group creation logic here
-    console.log('Creating group:', { groupName, groupImage, groupDescription });
+    console.log('Creating group:', { groupName, groupImage, groupDescription, isPrivate });
     onClose();
   };
 
@@ -90,6 +92,17 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             onChange={(e) => setGroupDescription(e.target.value)}
             rows={4}
           />
+          <div className="flex items-center space-x-2">
+            <Switch
+              id="private-mode"
+              checked={isPrivate}
+              onCheckedChange={setIsPrivate}
+            />
+            <label htmlFor="private-mode" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+              <Lock className="inline-block mr-2 h-4 w-4" />
+              Private Group
+            </label>
+          </div>
         </div>
         <Button className="mt-4" onClick={handleCreateGroup}>Create Group</Button>
       </div>
