@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Bell, User } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
 
@@ -10,14 +10,8 @@ const Group = () => {
     <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto px-4 mt-8">
-          {/* Title and icons */}
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-bold">Group</h1>
-            <div className="flex space-x-4">
-              <Bell className="w-6 h-6" />
-              <User className="w-6 h-6" />
-            </div>
-          </div>
+          {/* Centered title */}
+          <h1 className="text-2xl font-bold text-center mb-6">Group</h1>
 
           {/* Tabs */}
           <div className="flex mb-6 border-b border-gray-300">
