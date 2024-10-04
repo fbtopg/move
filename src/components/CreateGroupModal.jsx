@@ -7,20 +7,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { handleImageUpload } from '../utils/imageUtils';
 import Cropper from 'react-easy-crop';
-import { shareInvite } from '../utils/shareUtils';
+import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
+import { initialGroupData, validateForm, renderConfirmationStep } from '../utils/createGroupUtils';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
-  const [groupData, setGroupData] = useState({
-    name: '',
-    image: null,
-    description: '',
-    isPrivate: false
-  });
+  const [groupData, setGroupData] = useState(initialGroupData);
   const [errors, setErrors] = useState({});
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [isConfirmationStep, setIsConfirmationStep] = useState(false);
+  const [showCloseConfirmation, setShowCloseConfirmation] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -28,10 +25,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
+    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
   const handleImageChange = async (e) => {
@@ -40,10 +34,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
       try {
         const imageUrl = await handleImageUpload(file);
         setGroupData(prev => ({ ...prev, image: imageUrl }));
-        // Clear error when image is uploaded
-        if (errors.image) {
-          setErrors(prev => ({ ...prev, image: '' }));
-        }
+        if (errors.image) setErrors(prev => ({ ...prev, image: '' }));
       } catch (error) {
         console.error('Error uploading image:', error);
       }
@@ -54,28 +45,21 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!groupData.name.trim()) {
-      newErrors.name = 'Group name is required';
-    }
-    if (!groupData.image) {
-      newErrors.image = 'Group image is required';
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleCreateGroup = () => {
-    if (validateForm()) {
+    const newErrors = validateForm(groupData);
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
       console.log('Creating group:', groupData, 'Cropped area:', croppedAreaPixels);
       setIsConfirmationStep(true);
     }
   };
 
-  const handleConfirmation = () => {
-    console.log('Group creation confirmed');
-    onClose();
+  const handleClose = () => {
+    if (groupData.name || groupData.image || groupData.description) {
+      setShowCloseConfirmation(true);
+    } else {
+      onClose();
+    }
   };
 
   const renderCreateGroupForm = () => (
@@ -143,64 +127,54 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
         </label>
       </div>
 
-      <Button 
-        type="submit"
-        className="w-full"
-      >
+      <Button type="submit" className="w-full">
         Create Group <Sparkles className="ml-2 h-4 w-4" />
       </Button>
     </form>
   );
 
-  const renderConfirmationStep = () => (
-    <div className="text-center">
-      <h3 className="text-xl font-semibold mb-4">Group Created Successfully!</h3>
-      <div className="mb-4">
-        {groupData.image && (
-          <img src={groupData.image} alt="Group" className="w-32 h-32 rounded-full mx-auto mb-2" />
-        )}
-        <p className="font-medium">{groupData.name}</p>
-      </div>
-      <Button 
-        onClick={shareInvite}
-        className="w-full mb-4"
-      >
-        Share Invite Link <Share className="ml-2 h-4 w-4" />
-      </Button>
-      <Button 
-        onClick={handleConfirmation}
-        className="w-full"
-      >
-        Done
-      </Button>
-    </div>
-  );
-
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ y: "100%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "100%" }}
-          transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="fixed inset-x-0 bottom-0 bg-background text-foreground z-50 rounded-t-3xl shadow-lg"
-        >
-          <div className="p-6 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold">
-                {isConfirmationStep ? 'Group Created' : 'Create Group'}
-              </h2>
-              <Button variant="ghost" size="icon" onClick={onClose}>
-                <X className="h-6 w-6" />
-              </Button>
-            </div>
+    <>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="fixed inset-x-0 bottom-0 bg-background text-foreground z-50 rounded-t-3xl shadow-lg"
+          >
+            <div className="p-6 max-h-[90vh] overflow-y-auto">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold">
+                  {isConfirmationStep ? 'Group Created' : 'Create Group'}
+                </h2>
+                <Button variant="ghost" size="icon" onClick={handleClose}>
+                  <X className="h-6 w-6" />
+                </Button>
+              </div>
 
-            {isConfirmationStep ? renderConfirmationStep() : renderCreateGroupForm()}
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+              {isConfirmationStep ? renderConfirmationStep(groupData, onClose) : renderCreateGroupForm()}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AlertDialog open={showCloseConfirmation} onOpenChange={setShowCloseConfirmation}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure you want to close?</AlertDialogTitle>
+            <AlertDialogDescription>
+              You have unsaved changes. Closing will discard these changes.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={onClose}>Close</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 };
 
