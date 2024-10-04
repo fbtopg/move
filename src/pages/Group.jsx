@@ -22,13 +22,13 @@ const Group = () => {
           {/* Tabs */}
           <div className="flex mb-6 border-b border-gray-300">
             <button
-              className={`pb-2 px-4 ${activeTab === 'discover' ? 'text-purple-600 border-b-2 border-purple-600 font-semibold' : 'text-gray-500'}`}
+              className={`pb-2 px-4 ${activeTab === 'discover' ? 'text-blue-500 border-b-2 border-blue-500 font-semibold' : 'text-gray-500'}`}
               onClick={() => setActiveTab('discover')}
             >
               Discover
             </button>
             <button
-              className={`pb-2 px-4 ${activeTab === 'comingSoon' ? 'text-purple-600 border-b-2 border-purple-600 font-semibold' : 'text-gray-500'}`}
+              className={`pb-2 px-4 ${activeTab === 'comingSoon' ? 'text-blue-500 border-b-2 border-blue-500 font-semibold' : 'text-gray-500'}`}
               onClick={() => setActiveTab('comingSoon')}
             >
               Coming Soon
@@ -38,7 +38,7 @@ const Group = () => {
           {/* Search bar */}
           <div className="relative mb-6">
             <Input
-              className="w-full bg-white border-none text-gray-900 placeholder-gray-500 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full bg-white border-none text-gray-900 placeholder-gray-500 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="Search groups or users"
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
