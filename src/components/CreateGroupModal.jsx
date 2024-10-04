@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Camera, Lock, Sparkles } from 'lucide-react';
 import { Input } from "@/components/ui/input";
@@ -18,25 +18,6 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-
-  useEffect(() => {
-    if (isOpen) {
-      // Add meta tag to prevent zooming
-      const metaTag = document.createElement('meta');
-      metaTag.name = 'viewport';
-      metaTag.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0';
-      document.head.appendChild(metaTag);
-
-      // Add class to body to prevent zoom on input focus
-      document.body.classList.add('no-zoom');
-
-      // Remove meta tag and body class when component unmounts or closes
-      return () => {
-        document.head.removeChild(metaTag);
-        document.body.classList.remove('no-zoom');
-      };
-    }
-  }, [isOpen]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -63,6 +44,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   }, []);
 
   const handleCreateGroup = () => {
+    // Here you would typically send the cropped image data to your server
     console.log('Creating group:', groupData, 'Cropped area:', croppedAreaPixels);
     onClose();
   };
@@ -85,7 +67,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
               </Button>
             </div>
 
-            <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="no-zoom">
+            <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }}>
               <Input
                 name="name"
                 placeholder="Group Name"
