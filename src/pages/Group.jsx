@@ -10,7 +10,6 @@ const Group = () => {
   const navigate = useNavigate();
 
   const handleCreateGroup = () => {
-    // Navigate to the create group page or open a modal
     navigate('/my-groups');
   };
 
@@ -20,7 +19,8 @@ const Group = () => {
         <div className="max-w-md mx-auto px-4 mt-4">
           {/* Title and Create Group button */}
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-xl font-semibold">Group</h1>
+            <div className="flex-grow"></div>
+            <h1 className="text-xl font-semibold text-center flex-grow">Group</h1>
             <Button
               onClick={handleCreateGroup}
               className="p-0 bg-transparent hover:bg-transparent"
