@@ -10,14 +10,12 @@ import CommunityGroupCard from '../components/CommunityGroupCard';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import SearchPage from '../components/SearchPage';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import CreateGroupModal from '../components/CreateGroupModal';
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [greeting, setGreeting] = useState('');
-  const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,7 +47,8 @@ const Community = () => {
   };
 
   const handleCreateGroup = () => {
-    setIsCreateGroupModalOpen(true);
+    console.log("Create group clicked");
+    // Implement group creation logic here
   };
 
   const myGroups = [
@@ -57,6 +56,41 @@ const Community = () => {
     { id: 2, name: 'Climbing bros', members: 8, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767726835044392/KakaoTalk_20240929_105444000_01.jpg?ex=66faae0c&is=66f95c8c&hm=88ffad286207907d124033282f6a7b23834433bf82fc746a53cc22e8b287f92c&', hasActivity: true, lastActivity: '5m ago', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()] },
     { id: 3, name: 'Trip', members: 3, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767727749398618/KakaoTalk_20240929_105444000_02.jpg?ex=66faae0d&is=66f95c8d&hm=9fb35fec57376e16e7ea9b24ecc907d4497951154ee066a727496112edc8a048&', hasActivity: true, lastActivity: '2h ago', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()] },
   ];
+
+  const activities = {
+    today: [
+      { name: "Emma", activity: "finished walking 1km and completed daily walk. • just now", type: "walk", profilePicture: getRandomProfilePicture() },
+      { name: "John", activity: "solved quiz #089 and completed daily quiz. • just now", type: "quiz", profilePicture: getRandomProfilePicture() },
+      { name: "Sarah", activity: "finished walking 1km and completed daily walk. • just now", type: "walk", profilePicture: getRandomProfilePicture() },
+    ],
+    thisMonth: [
+      { name: "Geonu", activity: "finished walking 1km and completed daily walk. • 2d", type: "walk", profilePicture: getRandomProfilePicture() },
+      { name: "Astrid", activity: "finished walking 1km and completed daily walk. • 5d", type: "walk", profilePicture: getRandomProfilePicture() },
+      { name: "Fitra", activity: "solved quiz #089 and completed daily quiz. • 1w", type: "quiz", profilePicture: getRandomProfilePicture() },
+    ],
+    earlier: [
+      { name: "Rissa", activity: "solved quiz #089 and completed daily quiz. • 2w", type: "quiz", profilePicture: getRandomProfilePicture() },
+      { name: "John", activity: "finished walking 1km and completed daily walk. • 3w", type: "walk", profilePicture: getRandomProfilePicture() },
+    ],
+  };
+
+  const renderActivitySection = (title, activities) => (
+    <>
+      <h2 className="text-xs font-semibold mb-2 text-gray-400">{title}</h2>
+      <div className="space-y-4">
+        {activities.map((activity, index) => (
+          <FriendActivity
+            key={index}
+            name={activity.name}
+            activity={activity.activity}
+            type={activity.type}
+            profilePicture={activity.profilePicture}
+            onUserClick={() => handleUserClick(activity)}
+          />
+        ))}
+      </div>
+    </>
+  );
 
   return (
     <>
@@ -99,6 +133,14 @@ const Community = () => {
         </div>
       </div>
 
+      <section className="mt-4 pb-20 space-y-4 px-4">
+        {renderActivitySection("Recent Activity", activities.today)}
+        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-border my-6" />
+        {renderActivitySection("THIS MONTH", activities.thisMonth)}
+        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-border my-6" />
+        {renderActivitySection("EARLIER", activities.earlier)}
+      </section>
+
       {selectedUser && (
         <UserProfilePopup
           isOpen={!!selectedUser}
@@ -112,11 +154,6 @@ const Community = () => {
         onClose={() => setIsSearchOpen(false)}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-      />
-
-      <CreateGroupModal
-        isOpen={isCreateGroupModalOpen}
-        onClose={() => setIsCreateGroupModalOpen(false)}
       />
     </>
   );

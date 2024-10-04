@@ -5,15 +5,13 @@ import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import GroupCard from '../components/GroupCard';
-import CreateGroupModal from '../components/CreateGroupModal';
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('discover');
-  const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleCreateGroup = () => {
-    setIsCreateGroupModalOpen(true);
+    navigate('/my-groups');
   };
 
   // Sample group data (replace with actual data fetching logic)
@@ -87,10 +85,6 @@ const Group = () => {
         </div>
       </div>
       <BottomNavBar activeTab="group" />
-      <CreateGroupModal
-        isOpen={isCreateGroupModalOpen}
-        onClose={() => setIsCreateGroupModalOpen(false)}
-      />
     </div>
   );
 };
