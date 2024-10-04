@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Camera, Lock, Sparkles } from 'lucide-react';
 import { Input } from "@/components/ui/input";
@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { handleImageUpload } from '../utils/imageUtils';
+import Cropper from 'react-easy-crop';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupData, setGroupData] = useState({
@@ -14,6 +15,9 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     description: '',
     isPrivate: false
   });
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -35,8 +39,13 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     }
   };
 
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, []);
+
   const handleCreateGroup = () => {
-    console.log('Creating group:', groupData);
+    // Here you would typically send the cropped image data to your server
+    console.log('Creating group:', groupData, 'Cropped area:', croppedAreaPixels);
     onClose();
   };
 
@@ -67,7 +76,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                 className="mb-4"
               />
 
-              <div className="relative mb-4">
+              <div className="relative mb-4 h-60">
                 <input
                   type="file"
                   accept="image/*"
@@ -75,19 +84,27 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                   className="hidden"
                   id="groupImageUpload"
                 />
-                <label
-                  htmlFor="groupImageUpload"
-                  className="flex items-center justify-center w-full h-40 border-2 border-dashed border-input rounded-lg cursor-pointer hover:border-primary transition-colors overflow-hidden"
-                >
-                  {groupData.image ? (
-                    <img src={groupData.image} alt="Group" className="w-full h-full object-cover" />
-                  ) : (
+                {groupData.image ? (
+                  <Cropper
+                    image={groupData.image}
+                    crop={crop}
+                    zoom={zoom}
+                    aspect={1}
+                    onCropChange={setCrop}
+                    onCropComplete={onCropComplete}
+                    onZoomChange={setZoom}
+                  />
+                ) : (
+                  <label
+                    htmlFor="groupImageUpload"
+                    className="flex items-center justify-center w-full h-full border-2 border-dashed border-input rounded-lg cursor-pointer hover:border-primary transition-colors"
+                  >
                     <div className="text-center">
                       <Camera className="mx-auto h-12 w-12 text-muted-foreground mb-2" />
                       <p className="text-sm text-muted-foreground">Upload Group Image</p>
                     </div>
-                  )}
-                </label>
+                  </label>
+                )}
               </div>
 
               <Textarea
