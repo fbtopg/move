@@ -19,7 +19,7 @@ const Group = () => {
         <div className="max-w-md mx-auto px-4 mt-4">
           {/* Title and Create Group button */}
           <div className="flex justify-between items-center mb-6">
-            <div className="flex-grow"></div>
+            <div className="w-6"></div>
             <h1 className="text-xl font-semibold text-center flex-grow">Group</h1>
             <Button
               onClick={handleCreateGroup}
