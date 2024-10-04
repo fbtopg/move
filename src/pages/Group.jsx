@@ -9,7 +9,7 @@ const Group = () => {
   return (
     <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
-        <div className="max-w-md mx-auto px-4 mt-8">
+        <div className="max-w-md mx-auto px-4 mt-4"> {/* Changed from mt-8 to mt-4 */}
           {/* Smaller centered title */}
           <h1 className="text-xl font-semibold text-center mb-6">Group</h1>
 
