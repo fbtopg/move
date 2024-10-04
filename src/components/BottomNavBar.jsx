@@ -35,7 +35,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
 
   return (
     <>
-      <nav className="fixed bottom-0 left-0 right-0 text-foreground h-20 bg-[#FEF8F3]" style={{ borderTop: '1px solid var(--border)' }}>
+      <nav className="fixed bottom-0 left-0 right-0 text-foreground h-20 bg-white" style={{ borderTop: '1px solid var(--border)' }}>
         <ul className="flex justify-around items-start h-full relative pt-2">
           {navItems.map((item, index) => (
             <li key={item.id} className={cn(
