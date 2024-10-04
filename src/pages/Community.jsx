@@ -10,12 +10,14 @@ import CommunityGroupCard from '../components/CommunityGroupCard';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import SearchPage from '../components/SearchPage';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import CreateGroupModal from '../components/CreateGroupModal';
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [greeting, setGreeting] = useState('');
+  const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,8 +49,7 @@ const Community = () => {
   };
 
   const handleCreateGroup = () => {
-    console.log("Create group clicked");
-    // Implement group creation logic here
+    setIsCreateGroupModalOpen(true);
   };
 
   const myGroups = [
@@ -154,6 +155,11 @@ const Community = () => {
         onClose={() => setIsSearchOpen(false)}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
+      />
+
+      <CreateGroupModal
+        isOpen={isCreateGroupModalOpen}
+        onClose={() => setIsCreateGroupModalOpen(false)}
       />
     </>
   );
