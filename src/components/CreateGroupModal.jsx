@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Upload, Link, Lock, Camera, Sparkles } from 'lucide-react';
+import { X, Upload, Link, Lock, Camera, Sparkles, Check } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -28,7 +28,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
 
   const handleCreateGroup = () => {
     console.log('Creating group:', { groupName, groupImage, groupDescription, isPrivate });
-    onClose();
+    setStep(3); // Move to the confirmation page
   };
 
   const handleInviteLink = () => {
@@ -46,6 +46,36 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
     exit: { opacity: 0, x: -50, transition: { duration: 0.3 } }
   };
+
+  const ConfirmationPage = () => (
+    <motion.div
+      key="confirmation"
+      variants={stepVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="text-center"
+    >
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ type: "spring", stiffness: 260, damping: 20 }}
+        className="mb-6"
+      >
+        <div className="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+          <Check className="text-white w-12 h-12" />
+        </div>
+      </motion.div>
+      <h3 className="text-2xl font-bold mb-4">Group Created!</h3>
+      <p className="text-gray-600 mb-6">Your group "{groupName}" has been successfully created.</p>
+      <Button 
+        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+        onClick={onClose}
+      >
+        Done
+      </Button>
+    </motion.div>
+  );
 
   return (
     <AnimatePresence>
@@ -68,7 +98,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                     className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
                     layoutId="modal-title"
                   >
-                    Create Group
+                    {step === 3 ? "Congratulations!" : "Create Group"}
                   </motion.h2>
                   <Button variant="ghost" size="icon" onClick={onClose}>
                     <X className="h-6 w-6" />
@@ -76,13 +106,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                 </div>
                 <AnimatePresence mode="wait">
                   {step === 1 && (
-                    <motion.div
-                      key="step1"
-                      variants={stepVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="exit"
-                    >
+                    <>
                       <Input
                         placeholder="Group Name"
                         value={groupName}
@@ -117,16 +141,10 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                       >
                         Next <Sparkles className="ml-2 h-4 w-4" />
                       </Button>
-                    </motion.div>
+                    </>
                   )}
                   {step === 2 && (
-                    <motion.div
-                      key="step2"
-                      variants={stepVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="exit"
-                    >
+                    <>
                       <Textarea
                         placeholder="Group Description"
                         value={groupDescription}
@@ -158,8 +176,9 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                       >
                         <Link className="mr-2 h-4 w-4" /> Generate Invite Link
                       </Button>
-                    </motion.div>
+                    </>
                   )}
+                  {step === 3 && <ConfirmationPage />}
                 </AnimatePresence>
               </div>
             </motion.div>
