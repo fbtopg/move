@@ -10,8 +10,8 @@ const Group = () => {
     <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto px-4 mt-8">
-          {/* Centered title */}
-          <h1 className="text-2xl font-bold text-center mb-6">Group</h1>
+          {/* Smaller centered title */}
+          <h1 className="text-xl font-semibold text-center mb-6">Group</h1>
 
           {/* Tabs */}
           <div className="flex mb-6 border-b border-gray-300">
