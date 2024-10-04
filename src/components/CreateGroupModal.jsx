@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Camera, Lock, Sparkles } from 'lucide-react';
+import { X, Camera, Lock, Sparkles, Link } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { handleImageUpload } from '../utils/imageUtils';
+import { shareInvite } from '../utils/shareUtils';
 import Cropper from 'react-easy-crop';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
@@ -47,6 +48,10 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     // Here you would typically send the cropped image data to your server
     console.log('Creating group:', groupData, 'Cropped area:', croppedAreaPixels);
     onClose();
+  };
+
+  const handleInviteLink = () => {
+    shareInvite();
   };
 
   return (
@@ -129,12 +134,22 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                 </label>
               </div>
 
-              <Button 
-                type="submit"
-                className="w-full"
-              >
-                Create Group <Sparkles className="ml-2 h-4 w-4" />
-              </Button>
+              <div className="flex space-x-2 mb-4">
+                <Button 
+                  type="submit"
+                  className="flex-1"
+                >
+                  Create Group <Sparkles className="ml-2 h-4 w-4" />
+                </Button>
+                <Button 
+                  type="button"
+                  variant="outline"
+                  onClick={handleInviteLink}
+                  className="flex-1"
+                >
+                  Invite Link <Link className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
             </form>
           </div>
         </motion.div>
