@@ -1,64 +1,22 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Plus } from 'lucide-react';
-import { getRandomProfilePicture } from '../utils/profilePictures';
 
-const getGradientColor = (index) => {
-  const gradients = [
-    'from-blue-400 to-purple-500',
-    'from-green-400 to-blue-500',
-    'from-yellow-400 to-red-500',
-    'from-pink-400 to-red-500',
-    'from-indigo-400 to-purple-500'
-  ];
-  return gradients[index % gradients.length];
-};
-
-const GroupCard = ({ group, hasActivity = false, onClick, isNewGroup = false, lastActivity, index }) => {
-  const truncateName = (name) => {
-    return name.length > 14 ? name.slice(0, 14) + '...' : name;
-  };
-
+const GroupCard = ({ group }) => {
   return (
-    <motion.div
-      className="flex-shrink-0 w-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 h-52"
-      whileHover={{ scale: 1.05 }}
-      transition={{ type: "spring", stiffness: 400, damping: 10 }}
-      onClick={onClick}
-    >
-      <div className="text-center">
-        <div className="w-24 h-24 rounded-full overflow-hidden mb-3 mx-auto relative">
-          <div className="absolute inset-0 border-4 border-gray-800 rounded-full"></div>
-          {isNewGroup ? (
-            <div className="w-full h-full flex items-center justify-center bg-gray-700">
-              <Plus className="h-10 w-10 text-white" />
-            </div>
-          ) : (
-            <div className={`w-full h-full rounded-full overflow-hidden bg-gradient-to-br ${getGradientColor(index)}`} />
-          )}
-        </div>
-        <h3 className="font-semibold text-sm mb-1 truncate text-gray-200">{truncateName(group.name)}</h3>
-        {!isNewGroup && (
-          <>
-            <div className="flex items-center justify-center mt-2">
-              <div className="flex -space-x-2 mr-2">
-                {(group.memberProfiles || [1, 2, 3]).slice(0, 3).map((profile, index) => (
-                  <Avatar key={index} className="w-4 h-4 border border-gray-800">
-                    <AvatarImage src={typeof profile === 'string' ? profile : getRandomProfilePicture()} alt={`Member ${index + 1}`} />
-                    <AvatarFallback>{index + 1}</AvatarFallback>
-                  </Avatar>
-                ))}
-              </div>
-              <p className="text-xs text-gray-400">{group.members} members</p>
-            </div>
-            {lastActivity && (
-              <p className="text-[10px] text-yellow-400 mt-1">Last activity: {lastActivity}</p>
-            )}
-          </>
-        )}
+    <div className="bg-white rounded-lg shadow-md p-4 mb-4">
+      <div className="flex items-center mb-2">
+        <Avatar className="h-10 w-10 mr-2">
+          <AvatarImage src={group.image} alt={group.name} />
+          <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
+        </Avatar>
+        <h3 className="text-lg font-semibold">{group.name}</h3>
       </div>
-    </motion.div>
+      <p className="text-sm text-gray-600 mb-2">{group.description}</p>
+      <div className="flex justify-between items-center">
+        <span className="text-sm text-gray-500">{group.members} members</span>
+        <button className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">Join</button>
+      </div>
+    </div>
   );
 };
 

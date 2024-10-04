@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
+import GroupCard from '../components/GroupCard';
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('discover');
@@ -12,6 +13,13 @@ const Group = () => {
   const handleCreateGroup = () => {
     navigate('/my-groups');
   };
+
+  // Sample group data (replace with actual data fetching logic)
+  const groups = [
+    { id: 1, name: 'Fitness Enthusiasts', description: 'A group for fitness lovers', members: 150, image: 'https://example.com/fitness.jpg' },
+    { id: 2, name: 'Book Club', description: 'Discuss your favorite books', members: 75, image: 'https://example.com/books.jpg' },
+    { id: 3, name: 'Tech Innovators', description: 'For tech enthusiasts and innovators', members: 200, image: 'https://example.com/tech.jpg' },
+  ];
 
   return (
     <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
@@ -63,7 +71,7 @@ const Group = () => {
           {/* Content area */}
           <div className="space-y-4">
             {activeTab === 'discover' ? (
-              <p>Discover content goes here</p>
+              groups.map(group => <GroupCard key={group.id} group={group} />)
             ) : (
               <p>My Group content goes here</p>
             )}
