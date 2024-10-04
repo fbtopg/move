@@ -15,10 +15,16 @@ const Group = () => {
   };
 
   // Sample group data (replace with actual data fetching logic)
-  const groups = [
+  const discoverGroups = [
     { id: 1, name: 'Fitness Enthusiasts', description: 'A group for fitness lovers', members: 150, image: 'https://example.com/fitness.jpg' },
     { id: 2, name: 'Book Club', description: 'Discuss your favorite books', members: 75, image: 'https://example.com/books.jpg' },
     { id: 3, name: 'Tech Innovators', description: 'For tech enthusiasts and innovators', members: 200, image: 'https://example.com/tech.jpg' },
+  ];
+
+  // Sample user's groups (replace with actual user's groups data)
+  const myGroups = [
+    { id: 4, name: 'My Fitness Group', description: 'Personal fitness journey', members: 10, image: 'https://example.com/my-fitness.jpg' },
+    { id: 5, name: 'Local Book Club', description: 'Our neighborhood book discussions', members: 15, image: 'https://example.com/local-books.jpg' },
   ];
 
   return (
@@ -71,9 +77,9 @@ const Group = () => {
           {/* Content area */}
           <div className="space-y-4">
             {activeTab === 'discover' ? (
-              groups.map(group => <GroupCard key={group.id} group={group} />)
+              discoverGroups.map(group => <GroupCard key={group.id} group={group} />)
             ) : (
-              <p>My Group content goes here</p>
+              myGroups.map(group => <GroupCard key={group.id} group={group} />)
             )}
           </div>
         </div>
