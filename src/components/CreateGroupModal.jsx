@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
-import { X, Upload, UserPlus, Link, Lock } from 'lucide-react';
+import { X, Upload, Link, Lock } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -78,14 +78,9 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
               )}
             </label>
           </div>
-          <div className="flex space-x-2">
-            <Button className="flex-1" onClick={() => console.log('Add members')}>
-              <UserPlus className="mr-2 h-4 w-4" /> Add Members
-            </Button>
-            <Button className="flex-1" variant="outline" onClick={handleInviteLink}>
-              <Link className="mr-2 h-4 w-4" /> Invite Link
-            </Button>
-          </div>
+          <Button className="w-full" variant="outline" onClick={handleInviteLink}>
+            <Link className="mr-2 h-4 w-4" /> Generate Invite Link
+          </Button>
           <Textarea
             placeholder="Group Description"
             value={groupDescription}
