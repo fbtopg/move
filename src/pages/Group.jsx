@@ -44,10 +44,10 @@ const Group = () => {
               Discover
             </button>
             <button
-              className={`pb-2 px-4 ${activeTab === 'comingSoon' ? 'text-blue-500 border-b-2 border-blue-500 font-semibold' : 'text-gray-500'}`}
-              onClick={() => setActiveTab('comingSoon')}
+              className={`pb-2 px-4 ${activeTab === 'myGroup' ? 'text-blue-500 border-b-2 border-blue-500 font-semibold' : 'text-gray-500'}`}
+              onClick={() => setActiveTab('myGroup')}
             >
-              Coming Soon
+              My Group
             </button>
           </div>
 
@@ -65,7 +65,7 @@ const Group = () => {
             {activeTab === 'discover' ? (
               <p>Discover content goes here</p>
             ) : (
-              <p>Coming Soon content goes here</p>
+              <p>My Group content goes here</p>
             )}
           </div>
         </div>
