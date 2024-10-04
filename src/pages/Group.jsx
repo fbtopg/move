@@ -15,24 +15,26 @@ const Group = () => {
 
   return (
     <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
-      <div className="flex-grow overflow-y-auto pb-20">
-        <div className="max-w-md mx-auto px-4 mt-4">
-          {/* Title and Create Group button */}
-          <div className="flex justify-between items-center mb-6">
-            <div className="w-6"></div>
-            <h1 className="text-xl font-semibold text-center flex-grow">Group</h1>
-            <Button
-              onClick={handleCreateGroup}
-              className="p-0 bg-transparent hover:bg-transparent"
-            >
-              <img
-                src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/add-group.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2FkZC1ncm91cC5wbmciLCJpYXQiOjE3MjgwMDg0NTQsImV4cCI6MTc1OTU0NDQ1NH0.60sDT6jS_yDXTsWSTYM6RpaNqtw9xyoNI9AOQG24EBw&t=2024-10-04T02%3A20%3A53.816Z"
-                alt="Create Group"
-                className="w-6 h-6"
-              />
-            </Button>
-          </div>
+      <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 pt-4 pb-2">
+        {/* Title and Create Group button */}
+        <div className="flex justify-between items-center mb-6">
+          <div className="w-6"></div>
+          <h1 className="text-xl font-semibold text-center flex-grow">Group</h1>
+          <Button
+            onClick={handleCreateGroup}
+            className="p-0 bg-transparent hover:bg-transparent"
+          >
+            <img
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/add-group.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2FkZC1ncm91cC5wbmciLCJpYXQiOjE3MjgwMDg0NTQsImV4cCI6MTc1OTU0NDQ1NH0.60sDT6jS_yDXTsWSTYM6RpaNqtw9xyoNI9AOQG24EBw&t=2024-10-04T02%3A20%3A53.816Z"
+              alt="Create Group"
+              className="w-6 h-6"
+            />
+          </Button>
+        </div>
+      </div>
 
+      <div className="flex-grow overflow-y-auto pb-20">
+        <div className="max-w-md mx-auto px-4">
           {/* Tabs */}
           <div className="flex mb-6 border-b border-gray-300">
             <button
