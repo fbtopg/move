@@ -6,12 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { handleImageUpload } from '../utils/imageUtils';
+import AddMembersModal from './AddMembersModal';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupName, setGroupName] = useState('');
   const [groupImage, setGroupImage] = useState(null);
   const [groupDescription, setGroupDescription] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
+  const [isAddMembersOpen, setIsAddMembersOpen] = useState(false);
+  const [selectedMembers, setSelectedMembers] = useState([]);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -36,6 +39,15 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     console.log('Generate and share invite link');
   };
 
+  const handleAddMembers = () => {
+    setIsAddMembersOpen(true);
+  };
+
+  const handleMembersSelected = (members) => {
+    setSelectedMembers(members);
+    setIsAddMembersOpen(false);
+  };
+
   return (
     <motion.div
       initial={{ y: "100%" }}
@@ -56,6 +68,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             value={groupName}
             onChange={(e) => setGroupName(e.target.value)}
           />
+        <div className="space-y-4 flex-grow">
           <div className="relative">
             <input
               type="file"
@@ -79,13 +92,25 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             </label>
           </div>
           <div className="flex space-x-2">
-            <Button className="flex-1" onClick={() => console.log('Add members')}>
+            <Button className="flex-1" onClick={handleAddMembers}>
               <UserPlus className="mr-2 h-4 w-4" /> Add Members
             </Button>
             <Button className="flex-1" variant="outline" onClick={handleInviteLink}>
               <Link className="mr-2 h-4 w-4" /> Invite Link
             </Button>
           </div>
+          {selectedMembers.length > 0 && (
+            <div className="mt-2">
+              <p className="text-sm font-semibold">Selected Members:</p>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {selectedMembers.map(member => (
+                  <span key={member.id} className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full">
+                    {member.username}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
           <Textarea
             placeholder="Group Description"
             value={groupDescription}
@@ -105,7 +130,14 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           </div>
         </div>
         <Button className="mt-4" onClick={handleCreateGroup}>Create Group</Button>
+        </div>
       </div>
+      <AddMembersModal
+        isOpen={isAddMembersOpen}
+        onClose={() => setIsAddMembersOpen(false)}
+        onMembersSelected={handleMembersSelected}
+        selectedMembers={selectedMembers}
+      />
     </motion.div>
   );
 };
