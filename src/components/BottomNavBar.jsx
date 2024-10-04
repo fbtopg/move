@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Globe, Users, Trophy, Bell, Zap } from 'lucide-react';
 import { cn } from "@/lib/utils";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import QuickstartMenu from './QuickstartMenu';
 
 const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [localActiveTab, setLocalActiveTab] = useState(propActiveTab || 'community');
   const [showQuickstartMenu, setShowQuickstartMenu] = useState(false);
   
@@ -15,6 +16,17 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
     { id: 'challenge', icon: Trophy, label: 'Challenge', route: '/board' },
     { id: 'notification', icon: Bell, label: 'Notification', route: '/notifications' },
   ];
+
+  useEffect(() => {
+    const currentRoute = navItems.find(item => item.route === location.pathname);
+    if (currentRoute) {
+      if (typeof propSetActiveTab === 'function') {
+        propSetActiveTab(currentRoute.id);
+      } else {
+        setLocalActiveTab(currentRoute.id);
+      }
+    }
+  }, [location.pathname, propSetActiveTab]);
 
   const handleNavigation = (item) => {
     if (item.route) {
