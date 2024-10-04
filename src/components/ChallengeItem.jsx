@@ -16,13 +16,13 @@ const ChallengeItem = ({ challenge }) => {
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4 flex items-center space-x-4">
+    <div className="bg-white rounded-lg p-4 flex items-center space-x-4 shadow-md">
       <div className="flex-shrink-0">
         {getIcon()}
       </div>
       <div className="flex-grow">
-        <h3 className="text-lg font-semibold">{title}</h3>
-        <p className="text-sm text-gray-400">
+        <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+        <p className="text-sm text-gray-500">
           {new Date(startDate).toLocaleDateString()} - {new Date(endDate).toLocaleDateString()}
         </p>
       </div>
