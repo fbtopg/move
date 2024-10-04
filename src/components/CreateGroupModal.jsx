@@ -8,7 +8,7 @@ import { Switch } from "@/components/ui/switch";
 import { handleImageUpload } from '../utils/imageUtils';
 import Cropper from 'react-easy-crop';
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
-import { initialGroupData, validateForm, renderConfirmationStep } from '../utils/createGroupUtils';
+import { initialGroupData, validateForm, renderConfirmationStep } from '../utils/createGroupUtils.jsx';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupData, setGroupData] = useState(initialGroupData);
