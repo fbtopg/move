@@ -15,11 +15,11 @@ const Group = () => {
 
   return (
     <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
-      <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 pt-4 pb-2">
+      <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 py-2">
         {/* Title and Create Group button */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center">
           <div className="w-6"></div>
-          <h1 className="text-xl font-semibold text-center flex-grow">Group</h1>
+          <h1 className="text-lg font-semibold text-center flex-grow">Group</h1>
           <Button
             onClick={handleCreateGroup}
             className="p-0 bg-transparent hover:bg-transparent"
@@ -27,7 +27,7 @@ const Group = () => {
             <img
               src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/add-group.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2FkZC1ncm91cC5wbmciLCJpYXQiOjE3MjgwMDg0NTQsImV4cCI6MTc1OTU0NDQ1NH0.60sDT6jS_yDXTsWSTYM6RpaNqtw9xyoNI9AOQG24EBw&t=2024-10-04T02%3A20%3A53.816Z"
               alt="Create Group"
-              className="w-6 h-6"
+              className="w-5 h-5"
             />
           </Button>
         </div>
