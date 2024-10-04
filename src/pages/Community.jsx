@@ -10,14 +10,12 @@ import CommunityGroupCard from '../components/CommunityGroupCard';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import SearchPage from '../components/SearchPage';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import CreateGroupModal from '../components/CreateGroupModal';
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [greeting, setGreeting] = useState('');
-  const [isCreateGroupOpen, setIsCreateGroupOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,7 +47,8 @@ const Community = () => {
   };
 
   const handleCreateGroup = () => {
-    setIsCreateGroupOpen(true);
+    console.log("Create group clicked");
+    // Implement group creation logic here
   };
 
   const myGroups = [
@@ -98,10 +97,13 @@ const Community = () => {
       <div className="px-4 mt-4">
         <div className="flex flex-col items-end mb-1">
           <Button
-            onClick={handleCreateGroup}
-            className="bg-[#3B72EC] text-white flex items-center justify-center rounded-lg h-10 w-10 mb-1"
+            onClick={() => navigate('/profile')}
+            className="bg-transparent hover:bg-secondary transition-colors h-10 w-10 rounded-full flex items-center justify-center mb-1"
           >
-            <Plus className="h-6 w-6" />
+            <Avatar className="h-8 w-8">
+              <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" alt="Profile" />
+              <AvatarFallback>PF</AvatarFallback>
+            </Avatar>
           </Button>
           <h1 className="text-2xl font-bold text-foreground self-start">{greeting}</h1>
         </div>
@@ -111,6 +113,16 @@ const Community = () => {
         <div className="mt-8 mb-6">
           <div className="overflow-x-auto scrollbar-hide -mx-4">
             <div className="flex space-x-4 px-4">
+              {/* Create Group Button Card */}
+              <div className="flex-shrink-0 w-56 h-24">
+                <Button
+                  onClick={handleCreateGroup}
+                  className="w-full h-full bg-[#3B72EC] text-white flex flex-col items-center justify-center rounded-lg"
+                >
+                  <Plus className="w-6 h-6 mb-1" />
+                  <span className="text-sm font-semibold">Create Group</span>
+                </Button>
+              </div>
               {myGroups.map((group, index) => (
                 <div key={group.id} className="flex-shrink-0 w-56">
                   <CommunityGroupCard group={group} index={index} />
@@ -142,11 +154,6 @@ const Community = () => {
         onClose={() => setIsSearchOpen(false)}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-      />
-
-      <CreateGroupModal
-        isOpen={isCreateGroupOpen}
-        onClose={() => setIsCreateGroupOpen(false)}
       />
     </>
   );
