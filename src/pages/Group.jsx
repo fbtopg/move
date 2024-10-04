@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+import { Search, Bell, User } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
 
@@ -10,19 +10,25 @@ const Group = () => {
     <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto px-4 mt-8">
-          {/* Centered title */}
-          <h1 className="text-2xl font-bold text-center mb-6">Group</h1>
+          {/* Title and icons */}
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold">Group</h1>
+            <div className="flex space-x-4">
+              <Bell className="w-6 h-6" />
+              <User className="w-6 h-6" />
+            </div>
+          </div>
 
           {/* Tabs */}
           <div className="flex mb-6 border-b border-gray-300">
             <button
-              className={`pb-2 px-4 flex-1 ${activeTab === 'discover' ? 'text-blue-500 border-b-2 border-blue-500 font-semibold' : 'text-gray-500'}`}
+              className={`pb-2 px-4 ${activeTab === 'discover' ? 'text-blue-500 border-b-2 border-blue-500 font-semibold' : 'text-gray-500'}`}
               onClick={() => setActiveTab('discover')}
             >
               Discover
             </button>
             <button
-              className={`pb-2 px-4 flex-1 ${activeTab === 'comingSoon' ? 'text-blue-500 border-b-2 border-blue-500 font-semibold' : 'text-gray-500'}`}
+              className={`pb-2 px-4 ${activeTab === 'comingSoon' ? 'text-blue-500 border-b-2 border-blue-500 font-semibold' : 'text-gray-500'}`}
               onClick={() => setActiveTab('comingSoon')}
             >
               Coming Soon
