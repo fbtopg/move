@@ -16,6 +16,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     description: '',
     isPrivate: false
   });
+  const [errors, setErrors] = useState({});
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
@@ -27,6 +28,10 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
   const handleImageChange = async (e) => {
@@ -35,6 +40,10 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
       try {
         const imageUrl = await handleImageUpload(file);
         setGroupData(prev => ({ ...prev, image: imageUrl }));
+        // Clear error when image is uploaded
+        if (errors.image) {
+          setErrors(prev => ({ ...prev, image: '' }));
+        }
       } catch (error) {
         console.error('Error uploading image:', error);
       }
@@ -45,14 +54,26 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
+  const validateForm = () => {
+    const newErrors = {};
+    if (!groupData.name.trim()) {
+      newErrors.name = 'Group name is required';
+    }
+    if (!groupData.image) {
+      newErrors.image = 'Group image is required';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleCreateGroup = () => {
-    // Here you would typically send the cropped image data to your server
-    console.log('Creating group:', groupData, 'Cropped area:', croppedAreaPixels);
-    setIsConfirmationStep(true);
+    if (validateForm()) {
+      console.log('Creating group:', groupData, 'Cropped area:', croppedAreaPixels);
+      setIsConfirmationStep(true);
+    }
   };
 
   const handleConfirmation = () => {
-    // Here you would finalize the group creation
     console.log('Group creation confirmed');
     onClose();
   };
@@ -64,10 +85,11 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
         placeholder="Group Name"
         value={groupData.name}
         onChange={handleInputChange}
-        className="mb-4"
+        className={`mb-1 ${errors.name ? 'border-red-500' : ''}`}
       />
+      {errors.name && <p className="text-red-500 text-xs mb-4">{errors.name}</p>}
 
-      <div className="relative mb-4 h-60">
+      <div className="relative mb-1 h-60">
         <input
           type="file"
           accept="image/*"
@@ -88,7 +110,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
         ) : (
           <label
             htmlFor="groupImageUpload"
-            className="flex items-center justify-center w-full h-full border-2 border-dashed border-input rounded-lg cursor-pointer hover:border-primary transition-colors"
+            className={`flex items-center justify-center w-full h-full border-2 border-dashed rounded-lg cursor-pointer hover:border-primary transition-colors ${errors.image ? 'border-red-500' : 'border-input'}`}
           >
             <div className="text-center">
               <Camera className="mx-auto h-12 w-12 text-muted-foreground mb-2" />
@@ -97,6 +119,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           </label>
         )}
       </div>
+      {errors.image && <p className="text-red-500 text-xs mb-4">{errors.image}</p>}
 
       <Textarea
         name="description"
