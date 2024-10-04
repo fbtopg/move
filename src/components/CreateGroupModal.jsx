@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { handleImageUpload } from '../utils/imageUtils';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupName, setGroupName] = useState('');
@@ -13,6 +14,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupDescription, setGroupDescription] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
   const [step, setStep] = useState(1);
+  const [showCloseConfirmation, setShowCloseConfirmation] = useState(false);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -33,6 +35,23 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
 
   const handleInviteLink = () => {
     console.log('Generate and share invite link');
+  };
+
+  const handleClose = () => {
+    if (step === 2) {
+      setShowCloseConfirmation(true);
+    } else {
+      onClose();
+    }
+  };
+
+  const confirmClose = () => {
+    setShowCloseConfirmation(false);
+    onClose();
+  };
+
+  const cancelClose = () => {
+    setShowCloseConfirmation(false);
   };
 
   const modalVariants = {
@@ -100,7 +119,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                   >
                     {step === 3 ? "Congratulations!" : "Create Group"}
                   </motion.h2>
-                  <Button variant="ghost" size="icon" onClick={onClose}>
+                  <Button variant="ghost" size="icon" onClick={handleClose}>
                     <X className="h-6 w-6" />
                   </Button>
                 </div>
@@ -183,6 +202,21 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
               </div>
             </motion.div>
           </div>
+
+          <AlertDialog open={showCloseConfirmation} onOpenChange={setShowCloseConfirmation}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you sure you want to close?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Your progress in creating the group will be lost.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel onClick={cancelClose}>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={confirmClose}>Close</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </motion.div>
       )}
     </AnimatePresence>
