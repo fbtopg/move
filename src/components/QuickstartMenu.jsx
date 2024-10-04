@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { Users, Footprints, Trophy, X } from 'lucide-react';
+import { Footprints, Trophy, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const QuickstartMenu = ({ onClose }) => {
   const options = [
-    { label: 'New Group', icon: Users, action: () => console.log('New Group') },
+    { label: 'New Group', icon: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/add-group.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2FkZC1ncm91cC5wbmciLCJpYXQiOjE3MjgwMDg0NTQsImV4cCI6MTc1OTU0NDQ1NH0.60sDT6jS_yDXTsWSTYM6RpaNqtw9xyoNI9AOQG24EBw&t=2024-10-04T02%3A20%3A53.816Z', action: () => console.log('New Group') },
     { label: 'Walk', icon: Footprints, action: () => console.log('Walk') },
     { label: 'Challenge', icon: Trophy, action: () => console.log('Challenge') },
     { label: 'Close', icon: X, action: onClose },
@@ -35,7 +35,11 @@ const QuickstartMenu = ({ onClose }) => {
               className="w-16 h-16 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center"
               onClick={option.action}
             >
-              <option.icon className="h-8 w-8" />
+              {typeof option.icon === 'string' ? (
+                <img src={option.icon} alt={option.label} className="h-8 w-8" />
+              ) : (
+                <option.icon className="h-8 w-8" />
+              )}
             </Button>
           ))}
         </div>
