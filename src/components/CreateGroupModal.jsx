@@ -62,14 +62,14 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
         className="mb-6"
       >
-        <div className="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-          <Check className="text-white w-12 h-12" />
+        <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto">
+          <Check className="text-primary-foreground w-12 h-12" />
         </div>
       </motion.div>
       <h3 className="text-2xl font-bold mb-4">Group Created!</h3>
-      <p className="text-gray-600 mb-6">Your group "{groupName}" has been successfully created.</p>
+      <p className="text-muted-foreground mb-6">Your group "{groupName}" has been successfully created.</p>
       <Button 
-        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+        className="w-full"
         onClick={onClose}
       >
         Done
@@ -89,13 +89,13 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
         >
           <div className="min-h-screen flex items-center justify-center p-4">
             <motion.div 
-              className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden"
+              className="w-full max-w-md bg-card rounded-2xl shadow-xl overflow-hidden"
               layoutId="modal-container"
             >
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
                   <motion.h2 
-                    className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+                    className="text-3xl font-bold text-foreground"
                     layoutId="modal-title"
                   >
                     {step === 3 ? "Congratulations!" : "Create Group"}
@@ -123,20 +123,20 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                         />
                         <label
                           htmlFor="groupImageUpload"
-                          className="flex items-center justify-center w-full h-40 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition-colors overflow-hidden group"
+                          className="flex items-center justify-center w-full h-40 border-2 border-dashed border-input rounded-lg cursor-pointer hover:border-primary transition-colors overflow-hidden group"
                         >
                           {groupImage ? (
                             <img src={groupImage} alt="Group" className="w-full h-full object-cover group-hover:opacity-75 transition-opacity" />
                           ) : (
                             <div className="text-center">
-                              <Camera className="mx-auto h-12 w-12 text-gray-400 mb-2" />
-                              <p className="text-sm text-gray-600">Upload Group Image</p>
+                              <Camera className="mx-auto h-12 w-12 text-muted-foreground mb-2" />
+                              <p className="text-sm text-muted-foreground">Upload Group Image</p>
                             </div>
                           )}
                         </label>
                       </div>
                       <Button 
-                        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                        className="w-full"
                         onClick={() => setStep(2)}
                       >
                         Next <Sparkles className="ml-2 h-4 w-4" />
@@ -164,7 +164,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                         </label>
                       </div>
                       <Button 
-                        className="w-full mb-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                        className="w-full mb-2"
                         onClick={handleCreateGroup}
                       >
                         Create Group <Sparkles className="ml-2 h-4 w-4" />
