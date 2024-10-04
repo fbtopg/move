@@ -44,7 +44,7 @@ const QuickstartMenu = ({ onClose }) => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
-              className="mb-4 max-h-60 overflow-y-auto"
+              className="mb-4 max-h-60 overflow-y-auto absolute bottom-full left-4"
             >
               {myGroups.map((group) => (
                 <Button
