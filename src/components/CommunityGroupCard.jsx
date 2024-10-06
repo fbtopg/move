@@ -25,7 +25,7 @@ const CommunityGroupCard = ({ group, index }) => {
 
   return (
     <motion.div
-      className="w-full h-24 rounded-lg overflow-hidden relative bg-white shadow-md p-3 cursor-pointer"
+      className="w-full h-24 rounded-lg overflow-hidden relative bg-white p-3 cursor-pointer"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={handleClick}
