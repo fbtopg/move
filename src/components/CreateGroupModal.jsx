@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Camera, Lock, Sparkles, Share } from 'lucide-react';
+import { X, Camera, Lock, Sparkles } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,7 +8,8 @@ import { Switch } from "@/components/ui/switch";
 import { handleImageUpload } from '../utils/imageUtils';
 import Cropper from 'react-easy-crop';
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
-import { initialGroupData, validateForm, renderConfirmationStep } from '../utils/createGroupUtils.jsx';
+import { initialGroupData, validateForm } from '../utils/createGroupUtils.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupData, setGroupData] = useState(initialGroupData);
@@ -18,6 +19,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [isConfirmationStep, setIsConfirmationStep] = useState(false);
   const [showCloseConfirmation, setShowCloseConfirmation] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -50,7 +52,12 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       console.log('Creating group:', groupData, 'Cropped area:', croppedAreaPixels);
+      // Simulate group creation and getting an ID
+      const newGroupId = Date.now().toString();
       setIsConfirmationStep(true);
+      // Navigate to the new group page
+      navigate(`/group/${newGroupId}`);
+      onClose();
     }
   };
 
@@ -146,15 +153,13 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           >
             <div className="p-6 max-h-[90vh] overflow-y-auto">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold">
-                  {isConfirmationStep ? 'Group Created' : 'Create Group'}
-                </h2>
+                <h2 className="text-2xl font-bold">Create Group</h2>
                 <Button variant="ghost" size="icon" onClick={handleClose}>
                   <X className="h-6 w-6" />
                 </Button>
               </div>
 
-              {isConfirmationStep ? renderConfirmationStep(groupData, onClose) : renderCreateGroupForm()}
+              {renderCreateGroupForm()}
             </div>
           </motion.div>
         )}

@@ -18,7 +18,8 @@ import Group from "./pages/Group";
 import MyGroups from "./pages/MyGroups";
 import RecentActivity from "./pages/RecentActivity";
 import SplashScreen from "./components/SplashScreen";
-import Notifications from "./pages/Notifications"; // Add this import
+import Notifications from "./pages/Notifications";
+import GroupDetails from "./pages/GroupDetails";
 
 const queryClient = new QueryClient();
 
@@ -62,9 +63,10 @@ const App = () => {
               <Route path="/walk" element={<Walk />} />
               <Route path="/board" element={<Board />} />
               <Route path="/group" element={<Group />} />
+              <Route path="/group/:groupId" element={<GroupDetails />} />
               <Route path="/my-groups" element={<MyGroups />} />
               <Route path="/recent-activity" element={<RecentActivity />} />
-              <Route path="/notifications" element={<Notifications />} /> {/* Add this route */}
+              <Route path="/notifications" element={<Notifications />} />
             </Routes>
           </BrowserRouter>
         )}
