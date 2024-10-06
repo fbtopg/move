@@ -1,5 +1,6 @@
 import React from 'react';
-import { Heart } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const getGradientColor = (index) => {
@@ -13,38 +14,54 @@ const getGradientColor = (index) => {
   return colors[index % colors.length];
 };
 
-const ActivityItem = ({ name, activity, time, index }) => (
-  <div className="flex items-start space-x-3 mb-4">
-    <Avatar className="w-10 h-10">
-      <AvatarImage src={`https://api.dicebear.com/6.x/initials/svg?seed=${name}`} />
-      <AvatarFallback>{name[0]}</AvatarFallback>
-    </Avatar>
-    <div className="flex-grow">
-      <p className="text-sm">
-        <span className="font-semibold">{name}</span> {activity}
-      </p>
-      <p className="text-xs text-gray-400">{time}</p>
+const ActivityItem = ({ activity, index }) => (
+  <motion.div
+    className="bg-white rounded-lg shadow-md p-4 mb-4"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: index * 0.1 }}
+  >
+    <div className="flex items-start space-x-3">
+      <Avatar className="w-10 h-10">
+        <AvatarImage src={activity.userAvatar} alt={activity.userName} />
+        <AvatarFallback>{activity.userName[0]}</AvatarFallback>
+      </Avatar>
+      <div className="flex-grow">
+        <p className="text-sm font-semibold">{activity.userName}</p>
+        <p className="text-xs text-gray-500">{activity.time}</p>
+      </div>
     </div>
-    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${getGradientColor(index)}`}></div>
-    <Heart className="w-5 h-5 text-gray-400" />
-  </div>
+    <p className="mt-2 text-sm">{activity.content}</p>
+    {activity.image && (
+      <img src={activity.image} alt="Activity" className="mt-2 rounded-lg w-full object-cover h-48" />
+    )}
+    <div className="flex justify-between mt-4">
+      <button className="flex items-center text-gray-500 hover:text-red-500 transition-colors">
+        <Heart className="w-4 h-4 mr-1" />
+        <span className="text-xs">{activity.likes}</span>
+      </button>
+      <button className="flex items-center text-gray-500 hover:text-blue-500 transition-colors">
+        <MessageCircle className="w-4 h-4 mr-1" />
+        <span className="text-xs">{activity.comments}</span>
+      </button>
+      <button className="flex items-center text-gray-500 hover:text-green-500 transition-colors">
+        <Share2 className="w-4 h-4 mr-1" />
+        <span className="text-xs">Share</span>
+      </button>
+    </div>
+  </motion.div>
 );
 
-const ActivitySection = () => {
-  const activities = [
-    { name: "Emma", activity: "finished walking 12km and completed daily walk.", time: "just now" },
-    { name: "John", activity: "solved the quiz #838 today and completed daily quiz.", time: "just now" },
-    { name: "Sarah", activity: "finished walking 800m and completed daily walk.", time: "just now" },
-    { name: "John", activity: "finished walking 1km and completed daily walk.", time: "3m" },
-    { name: "Tate", activity: "finished walking 500m and completed daily walk.", time: "4m" },
-  ];
-
+const ActivitySection = ({ activities }) => {
   return (
-    <div>
-      <h2 className="text-lg font-semibold mb-4">TODAY</h2>
-      {activities.map((activity, index) => (
-        <ActivityItem key={index} {...activity} index={index} />
-      ))}
+    <div className="space-y-4">
+      {activities && activities.length > 0 ? (
+        activities.map((activity, index) => (
+          <ActivityItem key={activity.id} activity={activity} index={index} />
+        ))
+      ) : (
+        <p className="text-center text-gray-500">No recent activities</p>
+      )}
     </div>
   );
 };
