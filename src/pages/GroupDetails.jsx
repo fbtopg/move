@@ -35,14 +35,17 @@ const GroupDetails = () => {
 
   const [group, setGroup] = useState({
     id: groupId,
-    name: location.state?.groupName || 'Loading...',
-    image: location.state?.groupImage || 'https://example.com/default-group-image.jpg',
+    name: location.state?.name || 'Loading...',
+    image: location.state?.image || 'https://example.com/default-group-image.jpg',
     bannerImage: location.state?.bannerImage || defaultBannerImage,
-    description: location.state?.groupDescription || 'Loading...',
+    description: location.state?.description || 'Loading...',
     isPrivate: location.state?.isPrivate || false,
-    members: sampleMembers, // Initialize with sample members
+    members: sampleMembers,
     challenges: [],
     activities: [],
+    lastActivity: location.state?.lastActivity || '',
+    hasActivity: location.state?.hasActivity || false,
+    memberProfiles: location.state?.memberProfiles || [],
   });
 
   const [editedGroup, setEditedGroup] = useState({ ...group });
