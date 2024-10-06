@@ -3,10 +3,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Crown, Search } from 'lucide-react';
 
-const GroupMembers = ({ members, currentUser }) => {
+const GroupMembers = ({ members = [], currentUser }) => {
   const [searchTerm, setSearchTerm] = useState('');
   
-  const allMembers = [currentUser, ...members].filter(Boolean);
+  const allMembers = [currentUser, ...(Array.isArray(members) ? members : [])].filter(Boolean);
 
   const filteredMembers = allMembers.filter(member => 
     member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -29,8 +29,8 @@ const GroupMembers = ({ members, currentUser }) => {
         <p className="text-sm text-gray-500 text-center py-8">No members found.</p>
       ) : (
         <ul className="space-y-4">
-          {filteredMembers.map(member => (
-            <li key={member.id} className="flex items-center space-x-3">
+          {filteredMembers.map((member, index) => (
+            <li key={member.id || index} className="flex items-center space-x-3">
               <Avatar>
                 <AvatarImage src={member.avatar} alt={member.name} />
                 <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
