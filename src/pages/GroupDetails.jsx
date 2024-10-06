@@ -25,6 +25,14 @@ const GroupDetails = () => {
     avatar: 'https://example.com/current-user-avatar.jpg'
   };
 
+  // Sample members data
+  const sampleMembers = [
+    { id: '1', name: 'Alice Johnson', avatar: 'https://example.com/alice-avatar.jpg', username: 'alice_j' },
+    { id: '2', name: 'Bob Smith', avatar: 'https://example.com/bob-avatar.jpg', username: 'bob_smith' },
+    { id: '3', name: 'Carol White', avatar: 'https://example.com/carol-avatar.jpg', username: 'carol_w' },
+    { id: '4', name: 'David Brown', avatar: 'https://example.com/david-avatar.jpg', username: 'david_b' },
+  ];
+
   const [group, setGroup] = useState({
     id: groupId,
     name: location.state?.groupName || 'Loading...',
@@ -32,7 +40,7 @@ const GroupDetails = () => {
     bannerImage: location.state?.bannerImage || defaultBannerImage,
     description: location.state?.groupDescription || 'Loading...',
     isPrivate: location.state?.isPrivate || false,
-    members: [],
+    members: sampleMembers, // Initialize with sample members
     challenges: [],
     activities: [],
   });
@@ -44,14 +52,14 @@ const GroupDetails = () => {
       setGroup(prevGroup => ({
         ...prevGroup,
         ...location.state,
-        members: location.state.members || [],
+        members: sampleMembers, // Always use sample members for this example
         challenges: location.state.challenges || [],
         activities: location.state.activities || [],
       }));
       setEditedGroup(prevGroup => ({
         ...prevGroup,
         ...location.state,
-        members: location.state.members || [],
+        members: sampleMembers, // Always use sample members for this example
         challenges: location.state.challenges || [],
         activities: location.state.activities || [],
       }));
