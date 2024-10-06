@@ -55,7 +55,11 @@ const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInv
 
 const BannerImage = ({ isEditing, bannerImage, gradientClass, onInputChange }) => (
   <div className={`absolute inset-0 ${bannerImage ? '' : `bg-gradient-to-r ${gradientClass}`}`}>
-    {bannerImage && <img src={bannerImage} alt="Banner" className="w-full h-full object-cover" />}
+    {bannerImage ? (
+      <img src={bannerImage} alt="Banner" className="w-full h-full object-cover" />
+    ) : (
+      <div className={`w-full h-full bg-gradient-to-r ${gradientClass}`}></div>
+    )}
     <div className="absolute inset-0 bg-black bg-opacity-30"></div>
     {isEditing && (
       <Button
