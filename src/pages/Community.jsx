@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from 'react-router-dom';
+import { Button } from "@/components/ui/button";
+import { Plus, Users, Trophy } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import FriendActivity from '../components/FriendActivity';
 import UserProfilePopup from '../components/UserProfilePopup';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Search, Plus, ChevronRight, Users, Trophy } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import CommunityGroupCard from '../components/CommunityGroupCard';
-import { getRandomProfilePicture } from '../utils/profilePictures';
 import SearchPage from '../components/SearchPage';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import CreateGroupModal from '../components/CreateGroupModal';
+import SwipeableGroupCards from '../components/SwipeableGroupCards';
+import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [greeting, setGreeting] = useState('');
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
@@ -23,18 +21,11 @@ const Community = () => {
   useEffect(() => {
     const updateGreeting = () => {
       const currentHour = new Date().getHours();
-      if (currentHour >= 5 && currentHour < 12) {
-        setGreeting('Good Morning');
-      } else if (currentHour >= 12 && currentHour < 18) {
-        setGreeting('Good Afternoon');
-      } else {
-        setGreeting('Good Evening');
-      }
+      setGreeting(currentHour >= 5 && currentHour < 12 ? 'Good Morning' : 
+                  currentHour >= 12 && currentHour < 18 ? 'Good Afternoon' : 'Good Evening');
     };
-
     updateGreeting();
-    const intervalId = setInterval(updateGreeting, 60000); // Update every minute
-
+    const intervalId = setInterval(updateGreeting, 60000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -46,10 +37,6 @@ const Community = () => {
       followers: Math.floor(Math.random() * 1000),
       following: Math.floor(Math.random() * 1000),
     });
-  };
-
-  const handleCreateGroup = () => {
-    setIsCreateGroupModalOpen(true);
   };
 
   const myGroups = [
@@ -132,7 +119,7 @@ const Community = () => {
         >
           <div className="flex space-x-4 overflow-x-auto scrollbar-hide py-2">
             <Button
-              onClick={handleCreateGroup}
+              onClick={() => setIsCreateGroupModalOpen(true)}
               className="flex-shrink-0 bg-[#3B72EC] text-white hover:bg-[#3B72EC]/90 transition-colors px-6 py-3 rounded-full flex items-center space-x-2"
             >
               <Plus className="w-5 h-5" />
@@ -162,18 +149,7 @@ const Community = () => {
           className="mb-8"
         >
           <h2 className="text-xl font-semibold mb-4">My Groups</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {myGroups.map((group, index) => (
-              <motion.div
-                key={group.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-              >
-                <CommunityGroupCard group={group} index={index} />
-              </motion.div>
-            ))}
-          </div>
+          <SwipeableGroupCards groups={myGroups} />
         </motion.div>
 
         <div className="space-y-8">
@@ -202,8 +178,8 @@ const Community = () => {
       <SearchPage
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
+        searchTerm=""
+        setSearchTerm={() => {}}
       />
 
       <CreateGroupModal
