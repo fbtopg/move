@@ -26,33 +26,35 @@ const CommunityGroupCard = ({ group, index }) => {
 
   return (
     <motion.div
-      className="w-full h-24 rounded-lg overflow-hidden relative bg-white shadow-md p-3 cursor-pointer"
+      className="w-full py-2 px-1" // Added padding to prevent shadow cutoff
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
       onClick={handleClick}
     >
-      <div className="flex items-center h-full">
-        <div className={`w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0 bg-gradient-to-br ${getGradientColor(index)}`}>
-          <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
-        </div>
-        <div className="flex flex-col justify-center flex-grow">
-          <div className="flex items-start">
-            <h3 className="font-semibold text-sm mb-1 truncate text-gray-800 mr-2">{truncateName(group.name)}</h3>
-            {group.hasActivity && (
-              <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1"></span>
-            )}
+      <div className="h-24 rounded-lg overflow-visible relative bg-white shadow-md p-3 cursor-pointer">
+        <div className="flex items-center h-full">
+          <div className={`w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0 bg-gradient-to-br ${getGradientColor(index)}`}>
+            <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
           </div>
-          <p className="text-xs text-gray-600 mb-1 line-clamp-2">{group.description}</p>
-          <div className="flex items-center">
-            <div className="flex -space-x-2 mr-2">
-              {group.memberProfiles.slice(0, 3).map((profile, index) => (
-                <Avatar key={index} className="w-5 h-5 border border-white">
-                  <AvatarImage src={profile} alt={`Member ${index + 1}`} />
-                  <AvatarFallback>{index + 1}</AvatarFallback>
-                </Avatar>
-              ))}
+          <div className="flex flex-col justify-center flex-grow">
+            <div className="flex items-start">
+              <h3 className="font-semibold text-sm mb-1 truncate text-gray-800 mr-2">{truncateName(group.name)}</h3>
+              {group.hasActivity && (
+                <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1"></span>
+              )}
             </div>
-            <p className="text-xs text-gray-500">{group.members} members</p>
+            <p className="text-xs text-gray-600 mb-1 line-clamp-2">{group.description}</p>
+            <div className="flex items-center">
+              <div className="flex -space-x-2 mr-2">
+                {group.memberProfiles.slice(0, 3).map((profile, index) => (
+                  <Avatar key={index} className="w-5 h-5 border border-white">
+                    <AvatarImage src={profile} alt={`Member ${index + 1}`} />
+                    <AvatarFallback>{index + 1}</AvatarFallback>
+                  </Avatar>
+                ))}
+              </div>
+              <p className="text-xs text-gray-500">{group.members} members</p>
+            </div>
           </div>
         </div>
       </div>
