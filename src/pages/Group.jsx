@@ -103,3 +103,5 @@ const Group = () => {
     </div>
   );
 };
+
+export default Group;
