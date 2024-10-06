@@ -49,7 +49,7 @@ const GroupDetails = () => {
     }
   }, [location.state]);
 
-  const handleEdit = () => setIsEditing(!isEditing);
+  const handleEdit = () => setIsEditing(true);
   
   const handleSave = () => {
     setGroup(editedGroup);
@@ -119,7 +119,10 @@ const GroupDetails = () => {
       >
         <GroupHeader
           group={isEditing ? editedGroup : group}
+          isEditing={isEditing}
           onEdit={handleEdit}
+          onSave={handleSave}
+          onCancel={handleCancel}
           onBack={() => navigate(-1)}
           onInvite={handleInvite}
           onDelete={handleDelete}
