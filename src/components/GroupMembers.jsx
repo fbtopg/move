@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { UserPlus, Crown, Search } from 'lucide-react';
+import { Share, Crown, Search } from 'lucide-react';
 
 const GroupMembers = ({ members, currentUser, onInvite }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -32,8 +32,8 @@ const GroupMembers = ({ members, currentUser, onInvite }) => {
         <div className="flex flex-col items-center justify-center py-8">
           <p className="text-sm text-gray-500 mb-4">No members found.</p>
           <Button onClick={onInvite} className="flex items-center">
-            <UserPlus className="mr-2 h-4 w-4" />
-            Invite Friends
+            <Share className="mr-2 h-4 w-4" />
+            Share Invite Link
           </Button>
         </div>
       ) : (
@@ -57,8 +57,8 @@ const GroupMembers = ({ members, currentUser, onInvite }) => {
             ))}
           </ul>
           <Button onClick={onInvite} className="w-full flex items-center justify-center">
-            <UserPlus className="mr-2 h-4 w-4" />
-            Invite More Friends
+            <Share className="mr-2 h-4 w-4" />
+            Share Invite Link
           </Button>
         </>
       )}
