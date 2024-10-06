@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Plus } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
@@ -7,10 +7,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import CreateGroupModal from '../components/CreateGroupModal';
 import CommunityGroupCard from '../components/CommunityGroupCard';
 import { getRandomProfilePicture } from '../utils/profilePictures';
+import { useLocation } from 'react-router-dom';
 
 const Group = () => {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState('discover');
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (location.state && location.state.activeTab) {
+      setActiveTab(location.state.activeTab);
+    }
+  }, [location]);
 
   const handleCreateGroup = () => {
     setIsCreateGroupModalOpen(true);

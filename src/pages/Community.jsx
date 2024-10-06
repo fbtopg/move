@@ -126,14 +126,14 @@ const Community = () => {
               <span>Create Group</span>
             </Button>
             <Button
-              onClick={() => navigate('/groups')}
+              onClick={() => navigate('/group', { state: { activeTab: 'myGroup' } })}
               className="flex-shrink-0 bg-white text-[#3B72EC] hover:bg-gray-100 transition-colors px-6 py-3 rounded-full flex items-center space-x-2"
             >
               <Users className="w-5 h-5" />
               <span>My Groups</span>
             </Button>
             <Button
-              onClick={() => navigate('/challenges')}
+              onClick={() => navigate('/board')}
               className="flex-shrink-0 bg-white text-[#3B72EC] hover:bg-gray-100 transition-colors px-6 py-3 rounded-full flex items-center space-x-2"
             >
               <Trophy className="w-5 h-5" />
