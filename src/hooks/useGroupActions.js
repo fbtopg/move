@@ -1,6 +1,9 @@
 import { useState } from 'react';
 
-export const useGroupActions = (group, editedGroup, setEditedGroup, setIsEditing, navigate) => {
+export const useGroupActions = (group, editedGroup, setEditedGroup, setGroup, setIsEditing, navigate) => {
+  const [showCancelDialog, setShowCancelDialog] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
   const handleEdit = () => setIsEditing(true);
   
   const handleSave = () => {
@@ -60,6 +63,10 @@ export const useGroupActions = (group, editedGroup, setEditedGroup, setIsEditing
     handleDelete,
     confirmDelete,
     handleLeaderboard,
-    handleJoin
+    handleJoin,
+    showCancelDialog,
+    setShowCancelDialog,
+    showDeleteDialog,
+    setShowDeleteDialog
   };
 };

@@ -20,8 +20,8 @@ const GroupDetails = () => {
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [activeTab, setActiveTab] = useState('info');
 
-  const { group, editedGroup, setEditedGroup } = useGroupData(groupId, location.state);
-  const { handleEdit, handleSave, handleCancel, handleRemoveMember, handleInputChange, handleDelete, handleLeaderboard, handleJoin } = useGroupActions(group, editedGroup, setEditedGroup, setIsEditing, navigate);
+  const { group, setGroup, editedGroup, setEditedGroup } = useGroupData(groupId, location.state);
+  const { handleEdit, handleSave, handleCancel, handleRemoveMember, handleInputChange, handleDelete, handleLeaderboard, handleJoin } = useGroupActions(group, editedGroup, setEditedGroup, setGroup, setIsEditing, navigate);
 
   const handleInvite = () => setShowInviteModal(true);
   const handleShare = () => shareInvite(group.name);
