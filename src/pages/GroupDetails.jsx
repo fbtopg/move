@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { handleImageUpload } from '../utils/imageUtils';
 import GroupHeader from '../components/GroupHeader';
 import GroupContentTabs from '../components/GroupContentTabs';
 import { shareInvite } from '../utils/shareUtils';
+import { useGroupData } from '../hooks/useGroupData';
+import { useGroupActions } from '../hooks/useGroupActions';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
@@ -16,135 +17,11 @@ const GroupDetails = () => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [animateEntry, setAnimateEntry] = useState(location.state?.animateEntry || false);
 
-  const defaultBannerImage = 'linear-gradient(to right, #2193b0, #6dd5ed)';
+  const { group, editedGroup, setEditedGroup } = useGroupData(groupId, location.state);
+  const { handleEdit, handleSave, handleCancel, handleConfirmCancel, handleRemoveMember, handleInputChange, handleDelete, confirmDelete, handleLeaderboard, handleJoin } = useGroupActions(group, editedGroup, setEditedGroup, setIsEditing, navigate);
 
-  // Mock current user data (replace with actual user data in a real app)
-  const currentUser = {
-    id: 'current-user-id',
-    name: 'Current User',
-    avatar: 'https://example.com/current-user-avatar.jpg'
-  };
-
-  // Sample members data
-  const sampleMembers = [
-    { id: '1', name: 'Alice Johnson', avatar: 'https://example.com/alice-avatar.jpg', username: 'alice_j' },
-    { id: '2', name: 'Bob Smith', avatar: 'https://example.com/bob-avatar.jpg', username: 'bob_smith' },
-    { id: '3', name: 'Carol White', avatar: 'https://example.com/carol-avatar.jpg', username: 'carol_w' },
-    { id: '4', name: 'David Brown', avatar: 'https://example.com/david-avatar.jpg', username: 'david_b' },
-  ];
-
-  const [group, setGroup] = useState({
-    id: groupId,
-    name: location.state?.name || 'Loading...',
-    image: location.state?.image || 'https://example.com/default-group-image.jpg',
-    bannerImage: location.state?.bannerImage || defaultBannerImage,
-    description: location.state?.description || 'Loading...',
-    isPrivate: location.state?.isPrivate || false,
-    members: sampleMembers,
-    challenges: [],
-    activities: [],
-    lastActivity: location.state?.lastActivity || '',
-    hasActivity: location.state?.hasActivity || false,
-    memberProfiles: location.state?.memberProfiles || [],
-    isJoined: location.state?.isJoined ?? true,
-  });
-
-  const [editedGroup, setEditedGroup] = useState({ ...group });
-
-  useEffect(() => {
-    if (location.state) {
-      setGroup(prevGroup => ({
-        ...prevGroup,
-        ...location.state,
-        members: sampleMembers,
-        challenges: location.state.challenges || [],
-        activities: location.state.activities || [],
-        isJoined: location.state.isJoined ?? true,
-      }));
-      setEditedGroup(prevGroup => ({
-        ...prevGroup,
-        ...location.state,
-        members: sampleMembers,
-        challenges: location.state.challenges || [],
-        activities: location.state.activities || [],
-        isJoined: location.state.isJoined ?? true,
-      }));
-    }
-  }, [location.state]);
-
-  const handleEdit = () => setIsEditing(true);
-  
-  const handleSave = () => {
-    setGroup(editedGroup);
-    setIsEditing(false);
-  };
-
-  const handleCancel = () => {
-    if (JSON.stringify(group) !== JSON.stringify(editedGroup)) {
-      setShowCancelDialog(true);
-    } else {
-      setIsEditing(false);
-    }
-  };
-
-  const handleConfirmCancel = () => {
-    setEditedGroup({ ...group });
-    setIsEditing(false);
-    setShowCancelDialog(false);
-  };
-
-  const handleRemoveMember = (memberId) => {
-    setGroup(prevGroup => ({
-      ...prevGroup,
-      members: prevGroup.members.filter(member => member.id !== memberId)
-    }));
-    setEditedGroup(prevGroup => ({
-      ...prevGroup,
-      members: prevGroup.members.filter(member => member.id !== memberId)
-    }));
-  };
-
-  const handleImageChange = async (e, type) => {
-    const file = e.target.files[0];
-    if (file) {
-      try {
-        const imageUrl = await handleImageUpload(file);
-        setEditedGroup(prev => ({ ...prev, [type]: imageUrl }));
-      } catch (error) {
-        console.error('Error uploading image:', error);
-      }
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setEditedGroup(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
-  };
-
-  const handleInvite = () => {
-    shareInvite(group.name);
-  };
-
-  const handleDelete = () => {
-    setShowDeleteDialog(true);
-  };
-
-  const confirmDelete = () => {
-    // Implement group deletion logic here
-    console.log('Group deleted');
-    navigate('/groups');
-  };
-
-  const handleLeaderboard = () => {
-    // Implement leaderboard navigation or display logic here
-    console.log('Navigate to leaderboard');
-  };
-
-  const handleJoin = () => {
-    setGroup(prevGroup => ({ ...prevGroup, isJoined: true }));
-    setEditedGroup(prevGroup => ({ ...prevGroup, isJoined: true }));
-    console.log('Joined group:', groupId);
-  };
+  const handleInvite = () => shareInvite(group.name);
+  const handleShare = () => shareInvite(group.name);
 
   return (
     <AnimatePresence>
@@ -166,46 +43,54 @@ const GroupDetails = () => {
           onDelete={handleDelete}
           onLeaderboard={handleLeaderboard}
           onJoin={handleJoin}
+          onShare={handleShare}
         />
         <GroupContentTabs
           group={isEditing ? editedGroup : group}
           isEditing={isEditing}
           onInputChange={handleInputChange}
           onRemoveMember={handleRemoveMember}
-          onInvite={handleInvite}
-          currentUser={currentUser}
+          currentUser={group.currentUser}
         />
-        <AlertDialog open={showCancelDialog} onOpenChange={setShowCancelDialog}>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Discard changes?</AlertDialogTitle>
-              <AlertDialogDescription>
-                You have unsaved changes. Are you sure you want to discard them?
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Continue Editing</AlertDialogCancel>
-              <AlertDialogAction onClick={handleConfirmCancel}>Discard Changes</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-        <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Delete Group</AlertDialogTitle>
-              <AlertDialogDescription>
-                Are you sure you want to delete this group? This action cannot be undone.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={confirmDelete} className="bg-red-500 hover:bg-red-600">Delete</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        <CancelDialog open={showCancelDialog} onOpenChange={setShowCancelDialog} onConfirm={handleConfirmCancel} />
+        <DeleteDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog} onConfirm={confirmDelete} />
       </motion.div>
     </AnimatePresence>
   );
 };
+
+const CancelDialog = ({ open, onOpenChange, onConfirm }) => (
+  <AlertDialog open={open} onOpenChange={onOpenChange}>
+    <AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle>Discard changes?</AlertDialogTitle>
+        <AlertDialogDescription>
+          You have unsaved changes. Are you sure you want to discard them?
+        </AlertDialogDescription>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel>Continue Editing</AlertDialogCancel>
+        <AlertDialogAction onClick={onConfirm}>Discard Changes</AlertDialogAction>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+);
+
+const DeleteDialog = ({ open, onOpenChange, onConfirm }) => (
+  <AlertDialog open={open} onOpenChange={onOpenChange}>
+    <AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle>Delete Group</AlertDialogTitle>
+        <AlertDialogDescription>
+          Are you sure you want to delete this group? This action cannot be undone.
+        </AlertDialogDescription>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel>Cancel</AlertDialogCancel>
+        <AlertDialogAction onClick={onConfirm} className="bg-red-500 hover:bg-red-600">Delete</AlertDialogAction>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+);
 
 export default GroupDetails;
