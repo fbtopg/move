@@ -19,23 +19,14 @@ const GroupDetails = () => {
 
   const [group, setGroup] = useState({
     id: groupId,
-    name: location.state?.groupName || 'Group Name',
-    image: location.state?.groupImage || 'https://example.com/default-group-image.jpg',
-    bannerImage: location.state?.bannerImage || 'https://example.com/default-banner-image.jpg',
-    description: location.state?.groupDescription || 'This is a group description.',
-    isPrivate: location.state?.isPrivate || false,
-    members: [
-      { id: 1, name: 'John Doe', avatar: 'https://example.com/avatar1.jpg' },
-      { id: 2, name: 'Jane Smith', avatar: 'https://example.com/avatar2.jpg' },
-    ],
-    challenges: [
-      { id: 1, name: 'Daily Walk Challenge', participants: 5 },
-      { id: 2, name: 'Weekly Quiz', participants: 8 },
-    ],
-    activities: [
-      { id: 1, user: 'John Doe', action: 'completed a challenge', time: '2 hours ago' },
-      { id: 2, user: 'Jane Smith', action: 'joined the group', time: '1 day ago' },
-    ],
+    name: 'Loading...',
+    image: 'https://example.com/default-group-image.jpg',
+    bannerImage: 'https://example.com/default-banner-image.jpg',
+    description: 'Loading...',
+    isPrivate: false,
+    members: [],
+    challenges: [],
+    activities: [],
   });
 
   const [editedGroup, setEditedGroup] = useState({ ...group });
@@ -44,10 +35,15 @@ const GroupDetails = () => {
     if (location.state) {
       setGroup(prevGroup => ({
         ...prevGroup,
-        name: location.state.groupName || prevGroup.name,
-        description: location.state.groupDescription || prevGroup.description,
-        isPrivate: location.state.isPrivate || prevGroup.isPrivate,
-        bannerImage: location.state.bannerImage || prevGroup.bannerImage,
+        ...location.state,
+        challenges: location.state.challenges || [],
+        activities: location.state.activities || [],
+      }));
+      setEditedGroup(prevGroup => ({
+        ...prevGroup,
+        ...location.state,
+        challenges: location.state.challenges || [],
+        activities: location.state.activities || [],
       }));
     }
   }, [location.state]);

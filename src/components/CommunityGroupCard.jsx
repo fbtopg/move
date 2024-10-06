@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useNavigate } from 'react-router-dom';
 
 const getGradientColor = (index) => {
   const gradients = [
@@ -13,17 +14,22 @@ const getGradientColor = (index) => {
   return gradients[index % gradients.length];
 };
 
-const CommunityGroupCard = ({ group, onClick, index }) => {
+const CommunityGroupCard = ({ group, index }) => {
+  const navigate = useNavigate();
   const truncateName = (name) => {
     return name.length > 20 ? name.slice(0, 20) + '...' : name;
   };
 
+  const handleClick = () => {
+    navigate(`/group/${group.id}`, { state: { ...group } });
+  };
+
   return (
     <motion.div
-      className="w-56 h-24 rounded-lg overflow-hidden relative bg-[#1a1a1d] p-3"
+      className="w-56 h-24 rounded-lg overflow-hidden relative bg-[#1a1a1d] p-3 cursor-pointer"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
-      onClick={onClick}
+      onClick={handleClick}
     >
       <div className="flex items-center h-full">
         <div className={`w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0 bg-gradient-to-br ${getGradientColor(index)}`} />
