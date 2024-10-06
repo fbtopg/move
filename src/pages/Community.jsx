@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
 import FriendActivity from '../components/FriendActivity';
 import UserProfilePopup from '../components/UserProfilePopup';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Plus, ChevronRight } from 'lucide-react';
+import { Search, Plus, ChevronRight, Users, Trophy } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import CommunityGroupCard from '../components/CommunityGroupCard';
 import { getRandomProfilePicture } from '../utils/profilePictures';
@@ -76,79 +76,128 @@ const Community = () => {
   };
 
   const renderActivitySection = (title, activities) => (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <h2 className="text-xs font-semibold mb-2 text-gray-400">{title}</h2>
       <div className="space-y-4">
         {activities.map((activity, index) => (
-          <FriendActivity
+          <motion.div
             key={index}
-            name={activity.name}
-            activity={activity.activity}
-            type={activity.type}
-            profilePicture={activity.profilePicture}
-            onUserClick={() => handleUserClick(activity)}
-          />
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
+          >
+            <FriendActivity
+              name={activity.name}
+              activity={activity.activity}
+              type={activity.type}
+              profilePicture={activity.profilePicture}
+              onUserClick={() => handleUserClick(activity)}
+            />
+          </motion.div>
         ))}
       </div>
-    </>
+    </motion.div>
   );
 
   return (
-    <>
-      <div className="px-4 mt-4">
-        <div className="flex flex-col items-end mb-1">
+    <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
+      <div className="px-4 pt-8 pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex justify-between items-center mb-6"
+        >
+          <h1 className="text-3xl font-bold text-foreground">{greeting}</h1>
           <Button
             onClick={() => navigate('/profile')}
-            className="bg-transparent hover:bg-secondary transition-colors h-10 w-10 rounded-full flex items-center justify-center mb-1"
+            className="bg-white hover:bg-gray-100 transition-colors h-12 w-12 rounded-full flex items-center justify-center shadow-md"
           >
-            <Avatar className="h-8 w-8">
+            <Avatar className="h-10 w-10">
               <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" alt="Profile" />
               <AvatarFallback>PF</AvatarFallback>
             </Avatar>
           </Button>
-          <h1 className="text-2xl font-bold text-foreground self-start">{greeting}</h1>
-        </div>
+        </motion.div>
         
-        <div className="h-px bg-border w-full mt-1 mb-2"></div>
-        
-        <div className="mt-8 mb-6">
-          <div className="overflow-x-auto scrollbar-hide -mx-4">
-            <div className="flex space-x-4 px-4">
-              {/* Create Group Button Card */}
-              <div className="flex-shrink-0 w-56 h-24">
-                <Button
-                  onClick={handleCreateGroup}
-                  className="w-full h-full bg-[#3B72EC] text-white flex flex-col items-center justify-center rounded-lg"
-                >
-                  <Plus className="w-6 h-6 mb-1" />
-                  <span className="text-sm font-semibold">Create Group</span>
-                </Button>
-              </div>
-              {myGroups.map((group, index) => (
-                <div key={group.id} className="flex-shrink-0 w-56">
-                  <CommunityGroupCard group={group} index={index} />
-                </div>
-              ))}
-            </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-8"
+        >
+          <div className="flex space-x-4 overflow-x-auto scrollbar-hide py-2">
+            <Button
+              onClick={handleCreateGroup}
+              className="flex-shrink-0 bg-[#3B72EC] text-white hover:bg-[#3B72EC]/90 transition-colors px-6 py-3 rounded-full flex items-center space-x-2"
+            >
+              <Plus className="w-5 h-5" />
+              <span>Create Group</span>
+            </Button>
+            <Button
+              onClick={() => navigate('/groups')}
+              className="flex-shrink-0 bg-white text-[#3B72EC] hover:bg-gray-100 transition-colors px-6 py-3 rounded-full flex items-center space-x-2"
+            >
+              <Users className="w-5 h-5" />
+              <span>My Groups</span>
+            </Button>
+            <Button
+              onClick={() => navigate('/challenges')}
+              className="flex-shrink-0 bg-white text-[#3B72EC] hover:bg-gray-100 transition-colors px-6 py-3 rounded-full flex items-center space-x-2"
+            >
+              <Trophy className="w-5 h-5" />
+              <span>Challenges</span>
+            </Button>
           </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mb-8"
+        >
+          <h2 className="text-xl font-semibold mb-4">My Groups</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {myGroups.map((group, index) => (
+              <motion.div
+                key={group.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <CommunityGroupCard group={group} index={index} />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        <div className="space-y-8">
+          {renderActivitySection("Recent Activity", activities.today)}
+          {renderActivitySection("THIS MONTH", activities.thisMonth)}
+          {renderActivitySection("EARLIER", activities.earlier)}
         </div>
       </div>
 
-      <section className="mt-4 pb-20 space-y-4 px-4">
-        {renderActivitySection("Recent Activity", activities.today)}
-        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-border my-6" />
-        {renderActivitySection("THIS MONTH", activities.thisMonth)}
-        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-border my-6" />
-        {renderActivitySection("EARLIER", activities.earlier)}
-      </section>
-
-      {selectedUser && (
-        <UserProfilePopup
-          isOpen={!!selectedUser}
-          onClose={() => setSelectedUser(null)}
-          user={selectedUser}
-        />
-      )}
+      <AnimatePresence>
+        {selectedUser && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <UserProfilePopup
+              isOpen={!!selectedUser}
+              onClose={() => setSelectedUser(null)}
+              user={selectedUser}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <SearchPage
         isOpen={isSearchOpen}
@@ -161,7 +210,7 @@ const Community = () => {
         isOpen={isCreateGroupModalOpen}
         onClose={() => setIsCreateGroupModalOpen(false)}
       />
-    </>
+    </div>
   );
 };
 

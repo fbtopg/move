@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
-import { Crown } from 'lucide-react';
+import { Crown, Users } from 'lucide-react';
 
 const getGradientColor = (index) => {
   const gradients = [
@@ -25,36 +25,39 @@ const CommunityGroupCard = ({ group, index }) => {
 
   return (
     <motion.div
-      className="w-full h-24 rounded-lg overflow-hidden relative bg-white p-3 cursor-pointer"
-      whileHover={{ scale: 1.05 }}
-      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      className="w-full rounded-xl overflow-hidden relative bg-white shadow-lg cursor-pointer"
+      whileHover={{ scale: 1.03, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleClick}
     >
-      <div className="flex items-center h-full">
-        <div className={`w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0 bg-gradient-to-br ${getGradientColor(index)}`}>
-          <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
-        </div>
-        <div className="flex flex-col justify-center flex-grow">
-          <div className="flex items-start">
-            <h3 className="font-semibold text-sm mb-1 truncate text-gray-800 mr-2">{truncateName(group.name)}</h3>
-            {group.hasActivity && (
-              <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1"></span>
-            )}
-            {group.isOwner && (
-              <Crown className="w-4 h-4 text-yellow-500 ml-1" />
-            )}
+      <div className={`h-24 bg-gradient-to-r ${getGradientColor(index)} relative`}>
+        <img src={group.image} alt={group.name} className="w-full h-full object-cover mix-blend-overlay" />
+        {group.isOwner && (
+          <div className="absolute top-2 right-2 bg-yellow-400 rounded-full p-1">
+            <Crown className="w-4 h-4 text-white" />
           </div>
-          <p className="text-xs text-gray-600 mb-1 line-clamp-2">{group.description}</p>
+        )}
+      </div>
+      <div className="p-4">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="font-semibold text-lg text-gray-800">{truncateName(group.name)}</h3>
+          {group.hasActivity && (
+            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+          )}
+        </div>
+        <p className="text-sm text-gray-600 mb-3 line-clamp-2">{group.description}</p>
+        <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <div className="flex -space-x-2 mr-2">
-              {group.memberProfiles.slice(0, 3).map((profile, index) => (
-                <Avatar key={index} className="w-5 h-5 border border-white">
-                  <AvatarImage src={profile} alt={`Member ${index + 1}`} />
-                  <AvatarFallback>{index + 1}</AvatarFallback>
-                </Avatar>
-              ))}
-            </div>
-            <p className="text-xs text-gray-500">{group.members} members</p>
+            <Users className="w-4 h-4 text-gray-400 mr-1" />
+            <p className="text-sm text-gray-500">{group.members} members</p>
+          </div>
+          <div className="flex -space-x-2">
+            {group.memberProfiles.slice(0, 3).map((profile, index) => (
+              <Avatar key={index} className="w-6 h-6 border-2 border-white">
+                <AvatarImage src={profile} alt={`Member ${index + 1}`} />
+                <AvatarFallback>{index + 1}</AvatarFallback>
+              </Avatar>
+            ))}
           </div>
         </div>
       </div>
