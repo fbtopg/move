@@ -19,39 +19,41 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
 
   return (
     <div className="space-y-6">
-      {isEditing ? (
-        <Input
-          name="name"
-          value={group.name}
-          onChange={onInputChange}
-          className="text-2xl font-bold mb-1 text-center"
-        />
-      ) : (
-        <h2 className="text-2xl font-bold mb-1 text-center">{group.name}</h2>
-      )}
-
-      <div className="flex items-center justify-center space-x-2">
-        {group.isPrivate ? (
-          <Lock className="w-4 h-4 text-red-500" />
+      <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-md">
+        {isEditing ? (
+          <Input
+            name="name"
+            value={group.name}
+            onChange={onInputChange}
+            className="text-2xl font-bold mb-1 text-center"
+          />
         ) : (
-          <Unlock className="w-4 h-4 text-green-500" />
+          <h2 className="text-2xl font-bold mb-1 text-center">{group.name}</h2>
         )}
-        <span className="text-sm font-medium">
-          {group.isPrivate ? 'Private Group' : 'Public Group'}
-        </span>
-      </div>
 
-      {isEditing ? (
-        <Textarea
-          name="description"
-          value={group.description}
-          onChange={onInputChange}
-          className="mt-2 mb-4"
-          rows={4}
-        />
-      ) : (
-        <p className="text-sm text-muted-foreground mt-2 mb-4">{group.description}</p>
-      )}
+        <div className="flex items-center justify-center space-x-2 mt-2">
+          {group.isPrivate ? (
+            <Lock className="w-4 h-4 text-red-500" />
+          ) : (
+            <Unlock className="w-4 h-4 text-green-500" />
+          )}
+          <span className="text-sm font-medium">
+            {group.isPrivate ? 'Private Group' : 'Public Group'}
+          </span>
+        </div>
+
+        {isEditing ? (
+          <Textarea
+            name="description"
+            value={group.description}
+            onChange={onInputChange}
+            className="mt-4"
+            rows={4}
+          />
+        ) : (
+          <p className="text-sm text-muted-foreground mt-4">{group.description}</p>
+        )}
+      </div>
 
       <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-md">
         <h3 className="font-semibold mb-3">Active Challenges</h3>
@@ -66,7 +68,7 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
         )}
       </div>
 
-      <div className="mt-6">
+      <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-md">
         <h3 className="font-semibold mb-3">Group Images</h3>
         <div className="grid grid-cols-3 gap-2">
           {groupImages.map((image, index) => (
