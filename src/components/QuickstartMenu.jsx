@@ -21,59 +21,106 @@ const QuickstartMenu = ({ onClose }) => {
   ];
 
   useEffect(() => {
-    // Set status bar color to #FEF8F3 and dim it when QuickstartMenu is open
     document.body.style.setProperty('--status-bar-color', '#FEF8F3');
     document.body.classList.add('dimmed-status-bar');
-
     return () => {
-      // Reset status bar color and remove dimming effect when QuickstartMenu is closed
       document.body.style.removeProperty('--status-bar-color');
       document.body.classList.remove('dimmed-status-bar');
     };
   }, []);
 
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
+  const menuVariants = {
+    hidden: { y: 100, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 300, damping: 30 } },
+  };
+
+  const buttonVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: (i) => ({
+      scale: 1,
+      opacity: 1,
+      transition: { delay: i * 0.1, type: "spring", stiffness: 300, damping: 20 },
+    }),
+  };
+
+  const groupVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+  };
+
+  const groupItemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <>
-      {/* Dimming overlay */}
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={onClose}></div>
+      <motion.div
+        className="fixed inset-0 bg-black bg-opacity-50 z-40"
+        onClick={onClose}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        variants={overlayVariants}
+      />
       
-      <div className="fixed inset-x-0 bottom-20 flex flex-col items-center z-50">
+      <motion.div
+        className="fixed inset-x-0 bottom-20 flex flex-col items-center z-50"
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        variants={menuVariants}
+      >
         <AnimatePresence>
           {showGroups && (
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={groupVariants}
               className="mb-4 max-h-60 overflow-y-auto absolute bottom-full left-4"
             >
-              {myGroups.map((group) => (
-                <Button
-                  key={group.id}
-                  className="w-16 h-16 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center mb-2"
-                  onClick={() => console.log(`Clicked ${group.name}`)}
-                >
-                  <img src={group.image} alt={group.name} className="w-full h-full object-cover rounded-full" />
-                </Button>
+              {myGroups.map((group, index) => (
+                <motion.div key={group.id} variants={groupItemVariants}>
+                  <Button
+                    className="w-16 h-16 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center mb-2"
+                    onClick={() => console.log(`Clicked ${group.name}`)}
+                  >
+                    <img src={group.image} alt={group.name} className="w-full h-full object-cover rounded-full" />
+                  </Button>
+                </motion.div>
               ))}
             </motion.div>
           )}
         </AnimatePresence>
-        <div className="flex space-x-6 mb-4">
+        <motion.div className="flex space-x-6 mb-4">
           {options.map((option, index) => (
-            <Button
+            <motion.div
               key={index}
-              className="w-16 h-16 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center"
-              onClick={option.action}
+              variants={buttonVariants}
+              custom={index}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {index === 0 && showGroups ? (
-                <ChevronDown className="h-8 w-8" />
-              ) : (
-                <option.icon className="h-8 w-8" />
-              )}
-            </Button>
+              <Button
+                className="w-16 h-16 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 flex items-center justify-center"
+                onClick={option.action}
+              >
+                {index === 0 && showGroups ? (
+                  <ChevronDown className="h-8 w-8" />
+                ) : (
+                  <option.icon className="h-8 w-8" />
+                )}
+              </Button>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>
   );
 };
