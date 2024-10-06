@@ -3,6 +3,7 @@ import { Heart } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from 'framer-motion';
 
 const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = false }) => {
   const [liked, setLiked] = useState(false);
@@ -58,6 +59,20 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
                 "bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent"
               )}
             >
+              <AnimatePresence>
+                {liked && (
+                  <motion.div
+                    key="heart"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute"
+                  >
+                    <Heart className="h-6 w-6 fill-current" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
               <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
             </Button>
           </div>
