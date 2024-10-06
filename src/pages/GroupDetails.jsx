@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { ArrowLeft, Edit2, Users, Info, X, Camera } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -12,12 +12,12 @@ import EditGroupMembers from '../components/EditGroupMembers';
 const GroupDetails = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
+  const location = useLocation();
   const [isEditing, setIsEditing] = useState(false);
   const [group, setGroup] = useState({
     id: groupId,
     name: 'Group Name',
-    image: 'https://example.com/group-image.jpg',
-    banner: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319178.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTc4LnBuZyIsImlhdCI6MTcyODE4MDM2MSwiZXhwIjoxNzU5NzE2MzYxfQ.PSxa6BBMUuxAdVHsXlJCivWEUNE3HXjGcIl3EkfUmFA&t=2024-10-06T02%3A06%3A02.233Z',
+    image: location.state?.groupImage || 'https://example.com/default-group-image.jpg',
     description: 'This is a group description.',
     isPrivate: false,
     members: [
@@ -79,7 +79,6 @@ const GroupDetails = () => {
 const GroupHeader = ({ group, onEdit, onBack, isEditing, onImageChange }) => (
   <div className="relative h-48">
     <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600">
-      <img src={group.banner} alt="Banner" className="w-full h-full object-cover" />
       {isEditing && (
         <label htmlFor="banner-upload" className="absolute bottom-2 right-2 bg-black/50 p-2 rounded-full cursor-pointer">
           <Camera className="text-white h-5 w-5" />
@@ -153,6 +152,5 @@ const GroupContent = ({ group, isEditing, onSave, onRemoveMember }) => (
       </TabsContent>
     </Tabs>
   </div>
-);
 
 export default GroupDetails;
