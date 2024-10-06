@@ -8,12 +8,12 @@
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/logo.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2xvZ28ucG5nIiwiaWF0IjoxNzI4MTc4MjY0LCJleHAiOjE3NTk3MTQyNjR9.WH_nRhTuVk11a0R_kGF_1ulFdWFn5blT15u-e9eAEFQ&t=2024-10-06T01%3A31%3A05.237Z",
+      "src": "/move-app-icon-gradient.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/logo.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2xvZ28ucG5nIiwiaWF0IjoxNzI4MTc4MjY0LCJleHAiOjE3NTk3MTQyNjR9.WH_nRhTuVk11a0R_kGF_1ulFdWFn5blT15u-e9eAEFQ&t=2024-10-06T01%3A31%3A05.237Z",
+      "src": "/move-app-icon-gradient.png",
       "sizes": "512x512",
       "type": "image/png"
     }

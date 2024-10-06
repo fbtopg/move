@@ -1,0 +1,9 @@
+This is a placeholder for the gradient app icon. To create the actual icon:
+
+1. Start with the original app icon image from https://cdn.midjourney.com/c5cdbe2a-8d65-4eae-a252-4db3a6b23553/0_0.png
+2. Open the image in an image editing software like Photoshop or GIMP.
+3. Add a new layer on top of the icon.
+4. Create a gradient overlay using colors similar to those used in the group cards (e.g., from blue to purple, or from green to blue).
+5. Set the blend mode of the gradient layer to "Overlay" or "Soft Light" to allow the original icon details to show through.
+6. Adjust the opacity of the gradient layer to achieve the desired effect (around 50-70% usually works well).
+7. Export the image as a PNG file named "move-app-icon-gradient.png" and replace this placeholder file.
