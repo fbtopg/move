@@ -60,17 +60,26 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
-  const handleCreateGroup = () => {
-    const newErrors = validateForm(groupData);
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) {
-      console.log('Creating group:', groupData, 'Cropped area:', croppedAreaPixels);
-      const newGroupId = Date.now().toString();
-      setIsConfirmationStep(true);
-      navigate(`/group/${newGroupId}`, { state: { groupImage: groupData.image } });
-      onClose();
-    }
-  };
+
+const handleCreateGroup = () => {
+  const newErrors = validateForm(groupData);
+  setErrors(newErrors);
+  if (Object.keys(newErrors).length === 0) {
+    console.log('Creating group:', groupData, 'Cropped area:', croppedAreaPixels);
+    const newGroupId = Date.now().toString();
+    setIsConfirmationStep(true);
+    navigate(`/group/${newGroupId}`, { 
+      state: { 
+        groupImage: groupData.image,
+        groupName: groupData.name,
+        groupDescription: groupData.description,
+        isPrivate: groupData.isPrivate
+      } 
+    });
+    onClose();
+  }
+};
+
 
   const handleClose = () => {
     if (groupData.name || groupData.image || groupData.description) {
@@ -195,3 +204,4 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
 };
 
 export default CreateGroupModal;
+

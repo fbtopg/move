@@ -1,19 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { ArrowLeft, Edit2, Users, Info, X, Camera, Check, Lock, Unlock } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import GroupInfo from '../components/GroupInfo';
-import GroupMembers from '../components/GroupMembers';
-import EditGroupMembers from '../components/EditGroupMembers';
 import { handleImageUpload } from '../utils/imageUtils';
 import GroupHeader from '../components/GroupHeader';
 import GroupContentTabs from '../components/GroupContentTabs';
+import { shareInvite } from '../utils/shareUtils';
+import { UserPlus } from 'lucide-react';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
@@ -23,10 +16,10 @@ const GroupDetails = () => {
   const [showCancelDialog, setShowCancelDialog] = useState(false);
   const [group, setGroup] = useState({
     id: groupId,
-    name: 'Group Name',
+    name: location.state?.groupName || 'Group Name',
     image: location.state?.groupImage || 'https://example.com/default-group-image.jpg',
-    description: 'This is a group description.',
-    isPrivate: false,
+    description: location.state?.groupDescription || 'This is a group description.',
+    isPrivate: location.state?.isPrivate || false,
     members: [
       { id: 1, name: 'John Doe', avatar: 'https://example.com/avatar1.jpg' },
       { id: 2, name: 'Jane Smith', avatar: 'https://example.com/avatar2.jpg' },
@@ -42,6 +35,18 @@ const GroupDetails = () => {
   });
 
   const [editedGroup, setEditedGroup] = useState({ ...group });
+
+  useEffect(() => {
+    // This effect will run when the component mounts and whenever location.state changes
+    if (location.state) {
+      setGroup(prevGroup => ({
+        ...prevGroup,
+        name: location.state.groupName || prevGroup.name,
+        description: location.state.groupDescription || prevGroup.description,
+        isPrivate: location.state.isPrivate || prevGroup.isPrivate,
+      }));
+    }
+  }, [location.state]);
 
   const handleEdit = () => setIsEditing(!isEditing);
   
@@ -88,6 +93,10 @@ const GroupDetails = () => {
     setEditedGroup(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
+  const handleInvite = () => {
+    shareInvite(group.name);
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <GroupHeader
@@ -99,6 +108,12 @@ const GroupDetails = () => {
         isEditing={isEditing}
         onImageChange={handleImageChange}
       />
+      <div className="flex justify-end px-4 mt-2">
+        <Button onClick={handleInvite} className="bg-primary text-primary-foreground">
+          <UserPlus className="mr-2 h-4 w-4" />
+          Invite
+        </Button>
+      </div>
       <GroupContentTabs
         group={isEditing ? editedGroup : group}
         isEditing={isEditing}
