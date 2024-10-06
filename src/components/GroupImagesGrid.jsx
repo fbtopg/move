@@ -29,7 +29,7 @@ const GroupImagesGrid = () => {
         <ArrowLeft className="mr-2 h-4 w-4" /> Back to Group
       </Button>
       <h1 className="text-2xl font-bold mb-4">Group Images</h1>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-3 gap-2 mx-0">
         {groupImages.map((image, index) => (
           <img
             key={index}
