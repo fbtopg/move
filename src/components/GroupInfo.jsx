@@ -7,43 +7,47 @@ import GroupImages from './GroupImages';
 
 const GroupInfo = ({ group, isEditing, onInputChange }) => {
   return (
-    <div className="space-y-6">
-      {isEditing ? (
-        <Input
-          name="name"
-          value={group.name}
-          onChange={onInputChange}
-          className="text-2xl font-bold mb-1 text-center"
-        />
-      ) : (
-        <h2 className="text-2xl font-bold mb-1 text-center">{group.name}</h2>
-      )}
-
-      <div className="flex items-center justify-center space-x-2">
-        {group.isPrivate ? (
-          <Lock className="w-4 h-4 text-red-500" />
+    <div className="space-y-8">
+      {/* Block 1: Group Name, Visibility, and Description */}
+      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow">
+        {isEditing ? (
+          <Input
+            name="name"
+            value={group.name}
+            onChange={onInputChange}
+            className="text-2xl font-bold mb-2 text-center"
+          />
         ) : (
-          <Unlock className="w-4 h-4 text-green-500" />
+          <h2 className="text-2xl font-bold mb-2 text-center">{group.name}</h2>
         )}
-        <span className="text-sm font-medium">
-          {group.isPrivate ? 'Private Group' : 'Public Group'}
-        </span>
+
+        <div className="flex items-center justify-center space-x-2 mb-4">
+          {group.isPrivate ? (
+            <Lock className="w-4 h-4 text-red-500" />
+          ) : (
+            <Unlock className="w-4 h-4 text-green-500" />
+          )}
+          <span className="text-sm font-medium">
+            {group.isPrivate ? 'Private Group' : 'Public Group'}
+          </span>
+        </div>
+
+        {isEditing ? (
+          <Textarea
+            name="description"
+            value={group.description}
+            onChange={onInputChange}
+            className="mt-2"
+            rows={4}
+          />
+        ) : (
+          <p className="text-sm text-muted-foreground mt-2">{group.description}</p>
+        )}
       </div>
 
-      {isEditing ? (
-        <Textarea
-          name="description"
-          value={group.description}
-          onChange={onInputChange}
-          className="mt-2 mb-4"
-          rows={4}
-        />
-      ) : (
-        <p className="text-sm text-muted-foreground mt-2 mb-4">{group.description}</p>
-      )}
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Active Challenges</h3>
+      {/* Block 2: Active Challenges */}
+      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow">
+        <h3 className="font-semibold mb-4">Active Challenges</h3>
         {group.challenges && group.challenges.length > 0 ? (
           <div className="space-y-2">
             {group.challenges.map(challenge => (
@@ -55,7 +59,10 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
         )}
       </div>
 
-      <GroupImages />
+      {/* Block 3: Group Images */}
+      <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 shadow">
+        <GroupImages />
+      </div>
     </div>
   );
 };
