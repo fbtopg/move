@@ -1,9 +1,12 @@
 import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
-const GroupImages = ({ groupId }) => {
+const GroupImagesGrid = () => {
+  const { groupId } = useParams();
   const navigate = useNavigate();
+
   const groupImages = [
     "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/groupimage/KakaoTalk_20241006_170019686_01.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvZ3JvdXBpbWFnZS9LYWthb1RhbGtfMjAyNDEwMDZfMTcwMDE5Njg2XzAxLnBuZyIsImlhdCI6MTcyODIwMTczMCwiZXhwIjoxNzU5NzM3NzMwfQ.2ysY_1uubl9YPf3wIMyJDyEqVLnDz-Hv3IEvyTBsMDg&t=2024-10-06T08%3A02%3A12.141Z",
     "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/groupimage/KakaoTalk_20241006_170019686_02.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvZ3JvdXBpbWFnZS9LYWthb1RhbGtfMjAyNDEwMDZfMTcwMDE5Njg2XzAyLnBuZyIsImlhdCI6MTcyODIwMTc0MCwiZXhwIjoxNzU5NzM3NzQwfQ.9g3jxRi7TvLP9JqtrygRspEn3W-N6CFA9sNHScB753M&t=2024-10-06T08%3A02%3A21.066Z",
@@ -16,23 +19,23 @@ const GroupImages = ({ groupId }) => {
     "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/groupimage/KakaoTalk_20241006_170019686.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvZ3JvdXBpbWFnZS9LYWthb1RhbGtfMjAyNDEwMDZfMTcwMDE5Njg2LnBuZyIsImlhdCI6MTcyODIwMTc4OCwiZXhwIjoxNzU5NzM3Nzg4fQ.0uzkuZcTKuBSGS4Jjm6DcTFKI9QxIFKAe-bVT13wdME&t=2024-10-06T08%3A03%3A09.896Z"
   ];
 
-  const handleViewAll = () => {
-    navigate(`/group/${groupId}/images`);
-  };
-
   return (
-    <div className="mt-6">
-      <div className="flex justify-between items-center mb-3">
-        <h3 className="font-semibold">Images</h3>
-        <Button variant="link" onClick={handleViewAll}>View All</Button>
-      </div>
-      <div className="grid grid-cols-3 gap-2">
-        {groupImages.slice(0, 6).map((image, index) => (
+    <div className="min-h-screen bg-[#FEF8F3] p-4">
+      <Button
+        variant="ghost"
+        onClick={() => navigate(`/group/${groupId}`)}
+        className="mb-4"
+      >
+        <ArrowLeft className="mr-2 h-4 w-4" /> Back to Group
+      </Button>
+      <h1 className="text-2xl font-bold mb-4">Group Images</h1>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        {groupImages.map((image, index) => (
           <img
             key={index}
             src={image}
             alt={`Group image ${index + 1}`}
-            className="w-full h-24 object-cover rounded-lg"
+            className="w-full aspect-square object-cover rounded-lg"
           />
         ))}
       </div>
@@ -40,4 +43,4 @@ const GroupImages = ({ groupId }) => {
   );
 };
 
-export default GroupImages;
+export default GroupImagesGrid;

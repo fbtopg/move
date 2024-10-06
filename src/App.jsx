@@ -20,6 +20,7 @@ import RecentActivity from "./pages/RecentActivity";
 import SplashScreen from "./components/SplashScreen";
 import Notifications from "./pages/Notifications";
 import GroupDetails from "./pages/GroupDetails";
+import GroupImagesGrid from "./components/GroupImagesGrid";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +65,7 @@ const App = () => {
               <Route path="/board" element={<Board />} />
               <Route path="/group" element={<Group />} />
               <Route path="/group/:groupId" element={<GroupDetails />} />
+              <Route path="/group/:groupId/images" element={<GroupImagesGrid />} />
               <Route path="/my-groups" element={<MyGroups />} />
               <Route path="/recent-activity" element={<RecentActivity />} />
               <Route path="/notifications" element={<Notifications />} />
