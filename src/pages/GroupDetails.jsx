@@ -17,11 +17,13 @@ const GroupDetails = () => {
   const [showCancelDialog, setShowCancelDialog] = useState(false);
   const [animateEntry, setAnimateEntry] = useState(location.state?.animateEntry || false);
 
+  const defaultBannerImage = 'linear-gradient(to right, #2193b0, #6dd5ed)';
+
   const [group, setGroup] = useState({
     id: groupId,
     name: location.state?.groupName || 'Loading...',
     image: location.state?.groupImage || 'https://example.com/default-group-image.jpg',
-    bannerImage: 'https://example.com/default-banner-image.jpg',
+    bannerImage: location.state?.bannerImage || defaultBannerImage,
     description: location.state?.groupDescription || 'Loading...',
     isPrivate: location.state?.isPrivate || false,
     members: [],
@@ -114,6 +116,7 @@ const GroupDetails = () => {
           onBack={() => navigate(-1)}
           isEditing={isEditing}
           onImageChange={handleImageChange}
+          defaultBannerImage={defaultBannerImage}
         />
         <div className="flex justify-end px-4 mt-2">
           <Button onClick={handleInvite} className="bg-primary text-primary-foreground">

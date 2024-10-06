@@ -3,11 +3,11 @@ import { ArrowLeft, Edit2, X, Camera, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const GroupHeader = ({ group, onEdit, onSave, onCancel, onBack, isEditing, onImageChange }) => (
+const GroupHeader = ({ group, onEdit, onSave, onCancel, onBack, isEditing, onImageChange, defaultBannerImage }) => (
   <div className="relative h-48">
     <div 
       className="absolute inset-0 bg-cover bg-center"
-      style={{ backgroundImage: `url(${group.bannerImage})` }}
+      style={{ backgroundImage: group.bannerImage.startsWith('http') ? `url(${group.bannerImage})` : group.bannerImage }}
     >
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       <label htmlFor="banner-upload" className={`absolute bottom-2 right-2 bg-black/50 p-2 rounded-full cursor-pointer ${isEditing ? 'visible' : 'invisible'}`}>
