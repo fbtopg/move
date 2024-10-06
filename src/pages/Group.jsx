@@ -5,45 +5,8 @@ import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import CreateGroupModal from '../components/CreateGroupModal';
-
-const GroupCard = ({ group, onClick }) => (
-  <motion.div
-    layout
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
-    whileHover={{ scale: 1.05 }}
-    onClick={onClick}
-    className="bg-[#1a1a1d] rounded-lg shadow-lg p-4 mb-4 cursor-pointer"
-  >
-    <div className="flex items-center mb-2">
-      <Avatar className="h-12 w-12 mr-3 border-2 border-[#3B72EC]">
-        <AvatarImage src={group.image} alt={group.name} />
-        <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
-      </Avatar>
-      <div>
-        <h3 className="text-lg font-semibold text-white">{group.name}</h3>
-        <p className="text-sm text-gray-400">{group.members} members</p>
-      </div>
-    </div>
-    <p className="text-sm text-gray-400 mb-3 line-clamp-2">{group.description}</p>
-    <div className="flex justify-between items-center">
-      <div className="flex -space-x-2">
-        {group.memberAvatars.map((avatar, index) => (
-          <Avatar key={index} className="h-6 w-6 border border-[#1a1a1d]">
-            <AvatarImage src={avatar} />
-            <AvatarFallback>{index + 1}</AvatarFallback>
-          </Avatar>
-        ))}
-      </div>
-      <Button variant="outline" size="sm" className="text-[#3B72EC] border-[#3B72EC] hover:bg-[#3B72EC] hover:text-white transition-colors">
-        {group.isJoined ? 'Joined' : 'Join'}
-      </Button>
-    </div>
-  </motion.div>
-);
+import CommunityGroupCard from '../components/CommunityGroupCard';
 
 const Group = () => {
   const [activeTab, setActiveTab] = useState('discover');
@@ -56,14 +19,14 @@ const Group = () => {
 
   // Enhanced group data with more details and member avatars
   const discoverGroups = [
-    { id: 1, name: 'Fitness Enthusiasts', description: 'Join us for daily workouts, nutrition tips, and fitness challenges. Let\'s achieve our health goals together!', members: 150, image: 'https://example.com/fitness.jpg', memberAvatars: ['https://i.pravatar.cc/150?img=1', 'https://i.pravatar.cc/150?img=2', 'https://i.pravatar.cc/150?img=3'] },
-    { id: 2, name: 'Book Club', description: 'Dive into captivating stories, share your thoughts, and discover new literary worlds with fellow book lovers.', members: 75, image: 'https://example.com/books.jpg', memberAvatars: ['https://i.pravatar.cc/150?img=4', 'https://i.pravatar.cc/150?img=5', 'https://i.pravatar.cc/150?img=6'] },
-    { id: 3, name: 'Tech Innovators', description: 'Explore cutting-edge technologies, share your projects, and collaborate on innovative ideas with tech enthusiasts.', members: 200, image: 'https://example.com/tech.jpg', memberAvatars: ['https://i.pravatar.cc/150?img=7', 'https://i.pravatar.cc/150?img=8', 'https://i.pravatar.cc/150?img=9'] },
+    { id: 1, name: 'Fitness Enthusiasts', description: 'Join us for daily workouts, nutrition tips, and fitness challenges. Let\'s achieve our health goals together!', members: 150, image: 'https://example.com/fitness.jpg', memberProfiles: ['https://i.pravatar.cc/150?img=1', 'https://i.pravatar.cc/150?img=2', 'https://i.pravatar.cc/150?img=3'] },
+    { id: 2, name: 'Book Club', description: 'Dive into captivating stories, share your thoughts, and discover new literary worlds with fellow book lovers.', members: 75, image: 'https://example.com/books.jpg', memberProfiles: ['https://i.pravatar.cc/150?img=4', 'https://i.pravatar.cc/150?img=5', 'https://i.pravatar.cc/150?img=6'] },
+    { id: 3, name: 'Tech Innovators', description: 'Explore cutting-edge technologies, share your projects, and collaborate on innovative ideas with tech enthusiasts.', members: 200, image: 'https://example.com/tech.jpg', memberProfiles: ['https://i.pravatar.cc/150?img=7', 'https://i.pravatar.cc/150?img=8', 'https://i.pravatar.cc/150?img=9'] },
   ];
 
   const myGroups = [
-    { id: 4, name: 'My Fitness Journey', description: 'Track our personal fitness progress, share workout routines, and motivate each other to reach new heights.', members: 10, image: 'https://example.com/my-fitness.jpg', memberAvatars: ['https://i.pravatar.cc/150?img=10', 'https://i.pravatar.cc/150?img=11', 'https://i.pravatar.cc/150?img=12'], isJoined: true },
-    { id: 5, name: 'Local Book Club', description: 'Discuss our current read, vote on the next book, and organize local meetups for literary discussions.', members: 15, image: 'https://example.com/local-books.jpg', memberAvatars: ['https://i.pravatar.cc/150?img=13', 'https://i.pravatar.cc/150?img=14', 'https://i.pravatar.cc/150?img=15'], isJoined: true },
+    { id: 4, name: 'My Fitness Journey', description: 'Track our personal fitness progress, share workout routines, and motivate each other to reach new heights.', members: 10, image: 'https://example.com/my-fitness.jpg', memberProfiles: ['https://i.pravatar.cc/150?img=10', 'https://i.pravatar.cc/150?img=11', 'https://i.pravatar.cc/150?img=12'], isJoined: true },
+    { id: 5, name: 'Local Book Club', description: 'Discuss our current read, vote on the next book, and organize local meetups for literary discussions.', members: 15, image: 'https://example.com/local-books.jpg', memberProfiles: ['https://i.pravatar.cc/150?img=13', 'https://i.pravatar.cc/150?img=14', 'https://i.pravatar.cc/150?img=15'], isJoined: true },
   ];
 
   return (
@@ -111,9 +74,10 @@ const Group = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
             >
-              {discoverGroups.map(group => (
-                <GroupCard key={group.id} group={group} onClick={() => navigate(`/group/${group.id}`)} />
+              {discoverGroups.map((group, index) => (
+                <CommunityGroupCard key={group.id} group={group} index={index} />
               ))}
             </motion.div>
           ) : (
@@ -122,9 +86,10 @@ const Group = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
             >
-              {myGroups.map(group => (
-                <GroupCard key={group.id} group={group} onClick={() => navigate(`/group/${group.id}`)} />
+              {myGroups.map((group, index) => (
+                <CommunityGroupCard key={group.id} group={group} index={index} />
               ))}
             </motion.div>
           )}
