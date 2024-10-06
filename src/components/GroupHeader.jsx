@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, MoreVertical, Share, Check } from 'lucide-react';
+import { ArrowLeft, MoreVertical, Share, Check, UserPlus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -43,20 +43,30 @@ const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInv
     }
 
     return (
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute top-4 right-4 bg-black/50 text-white rounded-full"
-          >
-            <MoreVertical className="h-6 w-6" />
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="bottom" className="h-auto rounded-t-3xl">
-          <GroupMenu onInvite={onInvite} onLeaderboard={onLeaderboard} onEdit={onEdit} onDelete={onDelete} />
-        </SheetContent>
-      </Sheet>
+      <div className="absolute top-4 right-4 flex space-x-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="bg-black/50 text-white rounded-full"
+          onClick={onInvite}
+        >
+          <UserPlus className="h-6 w-6" />
+        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="bg-black/50 text-white rounded-full"
+            >
+              <MoreVertical className="h-6 w-6" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="bottom" className="h-auto rounded-t-3xl">
+            <GroupMenu onInvite={onInvite} onLeaderboard={onLeaderboard} onEdit={onEdit} onDelete={onDelete} />
+          </SheetContent>
+        </Sheet>
+      </div>
     );
   };
 

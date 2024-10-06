@@ -7,6 +7,7 @@ import GroupContentTabs from '../components/GroupContentTabs';
 import { shareInvite } from '../utils/shareUtils';
 import { useGroupData } from '../hooks/useGroupData';
 import { useGroupActions } from '../hooks/useGroupActions';
+import InviteFriends from '../components/InviteFriends';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
@@ -16,11 +17,12 @@ const GroupDetails = () => {
   const [showCancelDialog, setShowCancelDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [animateEntry, setAnimateEntry] = useState(location.state?.animateEntry || false);
+  const [showInviteModal, setShowInviteModal] = useState(false);
 
   const { group, editedGroup, setEditedGroup } = useGroupData(groupId, location.state);
   const { handleEdit, handleSave, handleCancel, handleConfirmCancel, handleRemoveMember, handleInputChange, handleDelete, confirmDelete, handleLeaderboard, handleJoin } = useGroupActions(group, editedGroup, setEditedGroup, setIsEditing, navigate);
 
-  const handleInvite = () => shareInvite(group.name);
+  const handleInvite = () => setShowInviteModal(true);
   const handleShare = () => shareInvite(group.name);
 
   return (
@@ -54,6 +56,7 @@ const GroupDetails = () => {
         />
         <CancelDialog open={showCancelDialog} onOpenChange={setShowCancelDialog} onConfirm={handleConfirmCancel} />
         <DeleteDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog} onConfirm={confirmDelete} />
+        <InviteFriends isOpen={showInviteModal} onClose={() => setShowInviteModal(false)} />
       </motion.div>
     </AnimatePresence>
   );
