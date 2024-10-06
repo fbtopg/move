@@ -10,6 +10,7 @@ import Cropper from 'react-easy-crop';
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 import { initialGroupData, validateForm } from '../utils/createGroupUtils.jsx';
 import { useNavigate } from 'react-router-dom';
+import { createGroupInSupabase } from '../utils/supabaseGroupUtils';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupData, setGroupData] = useState(initialGroupData);
@@ -17,22 +18,16 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const [isConfirmationStep, setIsConfirmationStep] = useState(false);
   const [showCloseConfirmation, setShowCloseConfirmation] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isOpen) {
-      // Add meta tag to prevent zooming
       const metaTag = document.createElement('meta');
       metaTag.name = 'viewport';
       metaTag.content = 'width=device-width, initial-scale=1, maximum-scale=1';
       document.head.appendChild(metaTag);
-
-      // Remove meta tag when component unmounts or closes
-      return () => {
-        document.head.removeChild(metaTag);
-      };
+      return () => document.head.removeChild(metaTag);
     }
   }, [isOpen]);
 
@@ -62,17 +57,19 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
-  const handleCreateGroup = () => {
+  const handleCreateGroup = async () => {
     const newErrors = validateForm(groupData);
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
-      console.log('Creating group:', groupData, 'Cropped area:', croppedAreaPixels);
-      // Simulate group creation and getting an ID
-      const newGroupId = Date.now().toString();
-      setIsConfirmationStep(true);
-      // Navigate to the new group page
-      navigate(`/group/${newGroupId}`);
-      onClose();
+      try {
+        const createdGroup = await createGroupInSupabase(groupData);
+        console.log('Group created:', createdGroup);
+        navigate(`/group/${createdGroup.id}`);
+        onClose();
+      } catch (error) {
+        console.error('Error creating group:', error);
+        // Handle error (e.g., show error message to user)
+      }
     }
   };
 
@@ -173,7 +170,6 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                   <X className="h-6 w-6" />
                 </Button>
               </div>
-
               {renderCreateGroupForm()}
             </div>
           </motion.div>
