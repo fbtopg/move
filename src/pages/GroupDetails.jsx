@@ -35,7 +35,6 @@ const GroupDetails = () => {
   ];
 
   const [group, setGroup] = useState({
-  const [group, setGroup] = useState({
     id: groupId,
     name: location.state?.name || 'Loading...',
     image: location.state?.image || 'https://example.com/default-group-image.jpg',
@@ -48,7 +47,6 @@ const GroupDetails = () => {
     lastActivity: location.state?.lastActivity || '',
     hasActivity: location.state?.hasActivity || false,
     memberProfiles: location.state?.memberProfiles || [],
-  });
     isJoined: location.state?.isJoined ?? true,
   });
 
