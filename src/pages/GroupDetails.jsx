@@ -40,7 +40,6 @@ const GroupDetails = () => {
         onLeaderboard={handleLeaderboard}
         onJoin={handleJoin}
         onShare={handleShare}
-        onInputChange={handleInputChange}
       />
       
       <div className="flex-1 overflow-y-auto p-4 pt-20">
@@ -49,10 +48,10 @@ const GroupDetails = () => {
             <TabsTrigger value="info" className="data-[state=active]:bg-white rounded-full transition-all duration-300">
               <Info className="w-4 h-4 mr-2" />Info
             </TabsTrigger>
-            <TabsTrigger value="members" className="data-[state=active]:bg-white rounded-full transition-all duration-300" disabled={isEditing}>
+            <TabsTrigger value="members" className="data-[state=active]:bg-white rounded-full transition-all duration-300">
               <Users className="w-4 h-4 mr-2" />Members
             </TabsTrigger>
-            <TabsTrigger value="activity" className="data-[state=active]:bg-white rounded-full transition-all duration-300" disabled={isEditing}>
+            <TabsTrigger value="activity" className="data-[state=active]:bg-white rounded-full transition-all duration-300">
               <MessageSquare className="w-4 h-4 mr-2" />Activity
             </TabsTrigger>
           </TabsList>
@@ -66,11 +65,7 @@ const GroupDetails = () => {
               className="bg-white/70 backdrop-blur-md rounded-3xl p-6 shadow-lg"
             >
               <TabsContent value="info">
-                <GroupInfo 
-                  group={isEditing ? editedGroup : group} 
-                  isEditing={isEditing}
-                  onInputChange={handleInputChange}
-                />
+                <GroupInfo group={isEditing ? editedGroup : group} />
               </TabsContent>
               <TabsContent value="members">
                 <GroupMembers 
@@ -87,23 +82,20 @@ const GroupDetails = () => {
         </Tabs>
       </div>
 
-      {!isEditing && (
-        <motion.div
-          className="fixed bottom-4 right-4"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          exit={{ scale: 0 }}
-          transition={{ delay: 0.5, type: 'spring' }}
+      <motion.div
+        className="fixed bottom-4 right-4"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.5, type: 'spring' }}
+      >
+        <button
+          className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
+          onClick={handleLeaderboard}
         >
-          <button
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
-            onClick={handleLeaderboard}
-          >
-            <Sparkles className="w-5 h-5" />
-            <span>Leaderboard</span>
-          </button>
-        </motion.div>
-      )}
+          <Sparkles className="w-5 h-5" />
+          <span>Leaderboard</span>
+        </button>
+      </motion.div>
 
       <InviteFriends isOpen={showInviteModal} onClose={() => setShowInviteModal(false)} groupName={group.name} />
     </div>

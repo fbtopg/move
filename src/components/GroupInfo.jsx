@@ -3,7 +3,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Lock, Unlock } from 'lucide-react';
 import { Separator } from "@/components/ui/separator";
-import { Switch } from "@/components/ui/switch";
 import ChallengeItem from './ChallengeItem';
 import GroupImages from './GroupImages';
 
@@ -22,13 +21,7 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
       )}
 
       <div className="flex items-center justify-center space-x-2">
-        {isEditing ? (
-          <Switch
-            name="isPrivate"
-            checked={group.isPrivate}
-            onCheckedChange={(checked) => onInputChange({ target: { name: 'isPrivate', value: checked } })}
-          />
-        ) : group.isPrivate ? (
+        {group.isPrivate ? (
           <Lock className="w-4 h-4 text-red-500" />
         ) : (
           <Unlock className="w-4 h-4 text-green-500" />
