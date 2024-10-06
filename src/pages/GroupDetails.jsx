@@ -46,9 +46,26 @@ const GroupDetails = () => {
     }));
   };
 
+  const handleImageChange = (e, type) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setGroup(prev => ({ ...prev, [type]: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <GroupHeader group={group} onEdit={handleEdit} onBack={() => navigate(-1)} isEditing={isEditing} />
+      <GroupHeader
+        group={group}
+        onEdit={handleEdit}
+        onBack={() => navigate(-1)}
+        isEditing={isEditing}
+        onImageChange={handleImageChange}
+      />
       <GroupContent
         group={group}
         isEditing={isEditing}
@@ -59,14 +76,19 @@ const GroupDetails = () => {
   );
 };
 
-const GroupHeader = ({ group, onEdit, onBack, isEditing }) => (
+const GroupHeader = ({ group, onEdit, onBack, isEditing, onImageChange }) => (
   <div className="relative h-48">
     <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600">
       <img src={group.banner} alt="Banner" className="w-full h-full object-cover" />
       {isEditing && (
         <label htmlFor="banner-upload" className="absolute bottom-2 right-2 bg-black/50 p-2 rounded-full cursor-pointer">
           <Camera className="text-white h-5 w-5" />
-          <input id="banner-upload" type="file" className="hidden" />
+          <input
+            id="banner-upload"
+            type="file"
+            className="hidden"
+            onChange={(e) => onImageChange(e, 'banner')}
+          />
         </label>
       )}
     </div>
@@ -95,7 +117,12 @@ const GroupHeader = ({ group, onEdit, onBack, isEditing }) => (
         {isEditing && (
           <label htmlFor="avatar-upload" className="absolute bottom-0 right-0 bg-black/50 p-2 rounded-full cursor-pointer">
             <Camera className="text-white h-5 w-5" />
-            <input id="avatar-upload" type="file" className="hidden" />
+            <input
+              id="avatar-upload"
+              type="file"
+              className="hidden"
+              onChange={(e) => onImageChange(e, 'image')}
+            />
           </label>
         )}
       </div>
