@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { ArrowLeft, Edit2, Users, Info, X, Camera } from 'lucide-react';
+import { ArrowLeft, Edit2, Users, Info, X, Camera, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import GroupInfo from '../components/GroupInfo';
 import GroupMembers from '../components/GroupMembers';
-import EditGroupInfo from '../components/EditGroupInfo';
 import EditGroupMembers from '../components/EditGroupMembers';
+import { handleImageUpload } from '../utils/imageUtils';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
   const location = useLocation();
   const [isEditing, setIsEditing] = useState(false);
+  const [showCancelDialog, setShowCancelDialog] = useState(false);
   const [group, setGroup] = useState({
     id: groupId,
     name: 'Group Name',
@@ -34,62 +38,101 @@ const GroupDetails = () => {
     ],
   });
 
+  const [editedGroup, setEditedGroup] = useState({ ...group });
+
   const handleEdit = () => setIsEditing(!isEditing);
-  const handleSave = (updatedGroup) => {
-    setGroup(updatedGroup);
+  
+  const handleSave = () => {
+    setGroup(editedGroup);
     setIsEditing(false);
   };
+
+  const handleCancel = () => {
+    if (JSON.stringify(group) !== JSON.stringify(editedGroup)) {
+      setShowCancelDialog(true);
+    } else {
+      setIsEditing(false);
+    }
+  };
+
+  const handleConfirmCancel = () => {
+    setEditedGroup({ ...group });
+    setIsEditing(false);
+    setShowCancelDialog(false);
+  };
+
   const handleRemoveMember = (memberId) => {
-    setGroup(prevGroup => ({
+    setEditedGroup(prevGroup => ({
       ...prevGroup,
       members: prevGroup.members.filter(member => member.id !== memberId)
     }));
   };
 
-  const handleImageChange = (e, type) => {
+  const handleImageChange = async (e, type) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setGroup(prev => ({ ...prev, [type]: reader.result }));
-      };
-      reader.readAsDataURL(file);
+      try {
+        const imageUrl = await handleImageUpload(file);
+        setEditedGroup(prev => ({ ...prev, [type]: imageUrl }));
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
     }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedGroup(prev => ({ ...prev, [name]: value }));
   };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <GroupHeader
-        group={group}
+        group={isEditing ? editedGroup : group}
         onEdit={handleEdit}
+        onSave={handleSave}
+        onCancel={handleCancel}
         onBack={() => navigate(-1)}
         isEditing={isEditing}
         onImageChange={handleImageChange}
       />
       <GroupContent
-        group={group}
+        group={isEditing ? editedGroup : group}
         isEditing={isEditing}
-        onSave={handleSave}
+        onInputChange={handleInputChange}
         onRemoveMember={handleRemoveMember}
       />
+      <AlertDialog open={showCancelDialog} onOpenChange={setShowCancelDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Discard changes?</AlertDialogTitle>
+            <AlertDialogDescription>
+              You have unsaved changes. Are you sure you want to discard them?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Continue Editing</AlertDialogCancel>
+            <AlertDialogAction onClick={handleConfirmCancel}>Discard Changes</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
 
-const GroupHeader = ({ group, onEdit, onBack, isEditing, onImageChange }) => (
+const GroupHeader = ({ group, onEdit, onSave, onCancel, onBack, isEditing, onImageChange }) => (
   <div className="relative h-48">
     <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600">
-      {isEditing && (
-        <label htmlFor="banner-upload" className="absolute bottom-2 right-2 bg-black/50 p-2 rounded-full cursor-pointer">
-          <Camera className="text-white h-5 w-5" />
-          <input
-            id="banner-upload"
-            type="file"
-            className="hidden"
-            onChange={(e) => onImageChange(e, 'banner')}
-          />
-        </label>
-      )}
+      <label htmlFor="banner-upload" className={`absolute bottom-2 right-2 bg-black/50 p-2 rounded-full cursor-pointer ${isEditing ? 'visible' : 'invisible'}`}>
+        <Camera className="text-white h-5 w-5" />
+        <input
+          id="banner-upload"
+          type="file"
+          className="hidden"
+          onChange={(e) => onImageChange(e, 'image')}
+          accept="image/*"
+        />
+      </label>
     </div>
     <Button
       variant="ghost"
@@ -99,39 +142,68 @@ const GroupHeader = ({ group, onEdit, onBack, isEditing, onImageChange }) => (
     >
       <ArrowLeft className="h-6 w-6" />
     </Button>
-    <Button
-      variant="ghost"
-      size="icon"
-      className="absolute top-4 right-4 bg-black/50 text-white rounded-full"
-      onClick={onEdit}
-    >
-      {isEditing ? <X className="h-6 w-6" /> : <Edit2 className="h-6 w-6" />}
-    </Button>
+    {isEditing ? (
+      <div className="absolute top-4 right-4 flex space-x-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="bg-green-500 text-white rounded-full"
+          onClick={onSave}
+        >
+          <Check className="h-6 w-6" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="bg-red-500 text-white rounded-full"
+          onClick={onCancel}
+        >
+          <X className="h-6 w-6" />
+        </Button>
+      </div>
+    ) : (
+      <Button
+        variant="ghost"
+        size="icon"
+        className="absolute top-4 right-4 bg-black/50 text-white rounded-full"
+        onClick={onEdit}
+      >
+        <Edit2 className="h-6 w-6" />
+      </Button>
+    )}
     <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
       <div className="relative">
         <Avatar className="w-32 h-32 border-4 border-background">
           <AvatarImage src={group.image} alt={group.name} />
           <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
         </Avatar>
-        {isEditing && (
-          <label htmlFor="avatar-upload" className="absolute bottom-0 right-0 bg-black/50 p-2 rounded-full cursor-pointer">
-            <Camera className="text-white h-5 w-5" />
-            <input
-              id="avatar-upload"
-              type="file"
-              className="hidden"
-              onChange={(e) => onImageChange(e, 'image')}
-            />
-          </label>
-        )}
+        <label htmlFor="avatar-upload" className={`absolute bottom-0 right-0 bg-black/50 p-2 rounded-full cursor-pointer ${isEditing ? 'visible' : 'invisible'}`}>
+          <Camera className="text-white h-5 w-5" />
+          <input
+            id="avatar-upload"
+            type="file"
+            className="hidden"
+            onChange={(e) => onImageChange(e, 'image')}
+            accept="image/*"
+          />
+        </label>
       </div>
     </div>
   </div>
 );
 
-const GroupContent = ({ group, isEditing, onSave, onRemoveMember }) => (
+const GroupContent = ({ group, isEditing, onInputChange, onRemoveMember }) => (
   <div className="flex-1 overflow-y-auto p-4 pt-20">
-    <h1 className="text-2xl font-bold mb-1 text-center">{group.name}</h1>
+    {isEditing ? (
+      <Input
+        name="name"
+        value={group.name}
+        onChange={onInputChange}
+        className="text-2xl font-bold mb-1 text-center"
+      />
+    ) : (
+      <h1 className="text-2xl font-bold mb-1 text-center">{group.name}</h1>
+    )}
     <span className={`text-sm block text-center ${group.isPrivate ? 'text-red-500' : 'text-green-500'}`}>
       {group.isPrivate ? 'Private' : 'Public'}
     </span>
@@ -141,7 +213,17 @@ const GroupContent = ({ group, isEditing, onSave, onRemoveMember }) => (
         <TabsTrigger value="members"><Users className="w-4 h-4 mr-2" />Members</TabsTrigger>
       </TabsList>
       <TabsContent value="info">
-        {isEditing ? <EditGroupInfo group={group} onSave={onSave} /> : <GroupInfo group={group} />}
+        {isEditing ? (
+          <Textarea
+            name="description"
+            value={group.description}
+            onChange={onInputChange}
+            className="mt-2"
+            rows={4}
+          />
+        ) : (
+          <GroupInfo group={group} />
+        )}
       </TabsContent>
       <TabsContent value="members">
         {isEditing ? (
