@@ -117,6 +117,13 @@ const GroupDetails = () => {
     navigate('/groups');
   };
 
+  const handleLeaderboard = () => {
+    // Implement leaderboard navigation or display logic here
+    console.log('Navigate to leaderboard');
+    // For example, you could navigate to a leaderboard page:
+    // navigate(`/groups/${groupId}/leaderboard`);
+  };
+
   return (
     <AnimatePresence>
       <motion.div
@@ -135,6 +142,7 @@ const GroupDetails = () => {
           onBack={() => navigate(-1)}
           onInvite={handleInvite}
           onDelete={handleDelete}
+          onLeaderboard={handleLeaderboard}
         />
         <GroupContentTabs
           group={isEditing ? editedGroup : group}

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { ArrowLeft, MoreVertical, UserPlus, Edit2, Trash2, X, Check } from 'lucide-react';
+import { ArrowLeft, MoreVertical, UserPlus, Edit2, Trash2, X, Check, Trophy } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInvite, onDelete }) => {
+const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInvite, onDelete, onLeaderboard }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -63,6 +63,14 @@ const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInv
                 >
                   <UserPlus className="mr-2 h-5 w-5" />
                   Invite Friends
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start text-left mb-2"
+                  onClick={() => { onLeaderboard(); setIsMenuOpen(false); }}
+                >
+                  <Trophy className="mr-2 h-5 w-5" />
+                  Leaderboard
                 </Button>
                 <Button
                   variant="ghost"
