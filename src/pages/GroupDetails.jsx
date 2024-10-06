@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { handleImageUpload } from '../utils/imageUtils';
@@ -14,6 +15,8 @@ const GroupDetails = () => {
   const location = useLocation();
   const [isEditing, setIsEditing] = useState(false);
   const [showCancelDialog, setShowCancelDialog] = useState(false);
+  const [animateEntry, setAnimateEntry] = useState(location.state?.animateEntry || false);
+
   const [group, setGroup] = useState({
     id: groupId,
     name: location.state?.groupName || 'Group Name',
@@ -99,43 +102,51 @@ const GroupDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <GroupHeader
-        group={isEditing ? editedGroup : group}
-        onEdit={handleEdit}
-        onSave={handleSave}
-        onCancel={handleCancel}
-        onBack={() => navigate(-1)}
-        isEditing={isEditing}
-        onImageChange={handleImageChange}
-      />
-      <div className="flex justify-end px-4 mt-2">
-        <Button onClick={handleInvite} className="bg-primary text-primary-foreground">
-          <UserPlus className="mr-2 h-4 w-4" />
-          Invite
-        </Button>
-      </div>
-      <GroupContentTabs
-        group={isEditing ? editedGroup : group}
-        isEditing={isEditing}
-        onInputChange={handleInputChange}
-        onRemoveMember={handleRemoveMember}
-      />
-      <AlertDialog open={showCancelDialog} onOpenChange={setShowCancelDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Discard changes?</AlertDialogTitle>
-            <AlertDialogDescription>
-              You have unsaved changes. Are you sure you want to discard them?
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Continue Editing</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmCancel}>Discard Changes</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>
+    <AnimatePresence>
+      <motion.div
+        className="min-h-screen bg-background flex flex-col"
+        initial={animateEntry ? { opacity: 0, y: 50 } : false}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        onAnimationComplete={() => setAnimateEntry(false)}
+      >
+        <GroupHeader
+          group={isEditing ? editedGroup : group}
+          onEdit={handleEdit}
+          onSave={handleSave}
+          onCancel={handleCancel}
+          onBack={() => navigate(-1)}
+          isEditing={isEditing}
+          onImageChange={handleImageChange}
+        />
+        <div className="flex justify-end px-4 mt-2">
+          <Button onClick={handleInvite} className="bg-primary text-primary-foreground">
+            <UserPlus className="mr-2 h-4 w-4" />
+            Invite
+          </Button>
+        </div>
+        <GroupContentTabs
+          group={isEditing ? editedGroup : group}
+          isEditing={isEditing}
+          onInputChange={handleInputChange}
+          onRemoveMember={handleRemoveMember}
+        />
+        <AlertDialog open={showCancelDialog} onOpenChange={setShowCancelDialog}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Discard changes?</AlertDialogTitle>
+              <AlertDialogDescription>
+                You have unsaved changes. Are you sure you want to discard them?
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Continue Editing</AlertDialogCancel>
+              <AlertDialogAction onClick={handleConfirmCancel}>Discard Changes</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
