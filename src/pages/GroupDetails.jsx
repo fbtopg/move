@@ -34,15 +34,11 @@ const GroupDetails = () => {
     ],
   });
 
-  const handleEdit = () => {
-    setIsEditing(!isEditing);
-  };
-
+  const handleEdit = () => setIsEditing(!isEditing);
   const handleSave = (updatedGroup) => {
     setGroup(updatedGroup);
     setIsEditing(false);
   };
-
   const handleRemoveMember = (memberId) => {
     setGroup(prevGroup => ({
       ...prevGroup,
@@ -52,66 +48,67 @@ const GroupDetails = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="relative h-48 bg-cover bg-center" style={{ backgroundImage: `url(${group.banner})` }}>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-4 left-4 bg-black/50 text-white rounded-full"
-          onClick={() => navigate(-1)}
-        >
-          <ArrowLeft className="h-6 w-6" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-4 right-4 bg-black/50 text-white rounded-full"
-          onClick={handleEdit}
-        >
-          {isEditing ? <X className="h-6 w-6" /> : <Edit2 className="h-6 w-6" />}
-        </Button>
-        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
-          <Avatar className="w-32 h-32 border-4 border-background">
-            <AvatarImage src={group.image} alt={group.name} />
-            <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
-          </Avatar>
-        </div>
-      </div>
-
-      <div className="flex-1 overflow-y-auto p-4 pt-20">
-        <h1 className="text-2xl font-bold mb-1 text-center">{group.name}</h1>
-        <span className={`text-sm block text-center ${group.isPrivate ? 'text-red-500' : 'text-green-500'}`}>
-          {group.isPrivate ? 'Private' : 'Public'}
-        </span>
-
-        <Tabs defaultValue="info" className="mt-4">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="info">
-              <Info className="w-4 h-4 mr-2" />
-              Info
-            </TabsTrigger>
-            <TabsTrigger value="members">
-              <Users className="w-4 h-4 mr-2" />
-              Members
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="info">
-            {isEditing ? (
-              <EditGroupInfo group={group} onSave={handleSave} />
-            ) : (
-              <GroupInfo group={group} />
-            )}
-          </TabsContent>
-          <TabsContent value="members">
-            {isEditing ? (
-              <EditGroupMembers members={group.members} onRemoveMember={handleRemoveMember} />
-            ) : (
-              <GroupMembers members={group.members} />
-            )}
-          </TabsContent>
-        </Tabs>
-      </div>
+      <GroupHeader group={group} onEdit={handleEdit} onBack={() => navigate(-1)} isEditing={isEditing} />
+      <GroupContent
+        group={group}
+        isEditing={isEditing}
+        onSave={handleSave}
+        onRemoveMember={handleRemoveMember}
+      />
     </div>
   );
 };
+
+const GroupHeader = ({ group, onEdit, onBack, isEditing }) => (
+  <div className="relative h-48 bg-cover bg-center" style={{ backgroundImage: `url(${group.banner})` }}>
+    <Button
+      variant="ghost"
+      size="icon"
+      className="absolute top-4 left-4 bg-black/50 text-white rounded-full"
+      onClick={onBack}
+    >
+      <ArrowLeft className="h-6 w-6" />
+    </Button>
+    <Button
+      variant="ghost"
+      size="icon"
+      className="absolute top-4 right-4 bg-black/50 text-white rounded-full"
+      onClick={onEdit}
+    >
+      {isEditing ? <X className="h-6 w-6" /> : <Edit2 className="h-6 w-6" />}
+    </Button>
+    <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
+      <Avatar className="w-32 h-32 border-4 border-background">
+        <AvatarImage src={group.image} alt={group.name} />
+        <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
+      </Avatar>
+    </div>
+  </div>
+);
+
+const GroupContent = ({ group, isEditing, onSave, onRemoveMember }) => (
+  <div className="flex-1 overflow-y-auto p-4 pt-20">
+    <h1 className="text-2xl font-bold mb-1 text-center">{group.name}</h1>
+    <span className={`text-sm block text-center ${group.isPrivate ? 'text-red-500' : 'text-green-500'}`}>
+      {group.isPrivate ? 'Private' : 'Public'}
+    </span>
+    <Tabs defaultValue="info" className="mt-4">
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger value="info"><Info className="w-4 h-4 mr-2" />Info</TabsTrigger>
+        <TabsTrigger value="members"><Users className="w-4 h-4 mr-2" />Members</TabsTrigger>
+      </TabsList>
+      <TabsContent value="info">
+        {isEditing ? <EditGroupInfo group={group} onSave={onSave} /> : <GroupInfo group={group} />}
+      </TabsContent>
+      <TabsContent value="members">
+        {isEditing ? (
+          <EditGroupMembers members={group.members} onRemoveMember={onRemoveMember} />
+        ) : (
+          <GroupMembers members={group.members} />
+        )}
+      </TabsContent>
+    </Tabs>
+  </div>
+);
 
 export default GroupDetails;

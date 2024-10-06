@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Camera } from 'lucide-react';
 
 const EditGroupInfo = ({ group, onSave }) => {
   const [editedGroup, setEditedGroup] = useState({ ...group });
@@ -30,13 +31,19 @@ const EditGroupInfo = ({ group, onSave }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <Label htmlFor="banner">Banner Image</Label>
-        <Input id="banner" type="file" onChange={(e) => handleImageChange(e, 'banner')} />
+      <div className="relative">
+        <img src={editedGroup.banner} alt="Banner" className="w-full h-32 object-cover rounded-lg" />
+        <label htmlFor="banner" className="absolute bottom-2 right-2 bg-black/50 p-2 rounded-full cursor-pointer">
+          <Camera className="text-white" />
+        </label>
+        <Input id="banner" type="file" className="hidden" onChange={(e) => handleImageChange(e, 'banner')} />
       </div>
-      <div>
-        <Label htmlFor="image">Group Image</Label>
-        <Input id="image" type="file" onChange={(e) => handleImageChange(e, 'image')} />
+      <div className="relative inline-block">
+        <img src={editedGroup.image} alt="Group" className="w-24 h-24 rounded-full object-cover" />
+        <label htmlFor="image" className="absolute bottom-0 right-0 bg-black/50 p-2 rounded-full cursor-pointer">
+          <Camera className="text-white" />
+        </label>
+        <Input id="image" type="file" className="hidden" onChange={(e) => handleImageChange(e, 'image')} />
       </div>
       <div>
         <Label htmlFor="name">Group Name</Label>
