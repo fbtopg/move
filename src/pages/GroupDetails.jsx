@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Users, Info, MessageSquare, Sparkles, Lock, Unlock } from 'lucide-react';
+import { Users, Info, MessageSquare, Sparkles } from 'lucide-react';
 import GroupHeader from '../components/GroupHeader';
 import { shareInvite } from '../utils/shareUtils';
 import { useGroupData } from '../hooks/useGroupData';
@@ -11,28 +11,40 @@ import InviteFriends from '../components/InviteFriends';
 import ActivitySection from '../components/ActivitySection';
 import GroupInfo from '../components/GroupInfo';
 import GroupMembers from '../components/GroupMembers';
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
+import { debounce } from 'lodash';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
   const location = useLocation();
-  const [isEditing, setIsEditing] = useState(false);
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [activeTab, setActiveTab] = useState('info');
 
-  const { group, setGroup, editedGroup, setEditedGroup } = useGroupData(groupId, location.state);
-  const { handleEdit, handleSave, handleCancel, handleRemoveMember, handleInputChange, handleDelete, handleLeaderboard, handleJoin } = useGroupActions(group, editedGroup, setEditedGroup, setGroup, setIsEditing, navigate);
+  const { group, setGroup } = useGroupData(groupId, location.state);
+  const { handleSave, handleRemoveMember, handleDelete, handleLeaderboard, handleJoin } = useGroupActions(group, setGroup, navigate);
 
   const handleInvite = () => setShowInviteModal(true);
   const handleShare = () => shareInvite(group.name);
 
+  const debouncedSave = useCallback(
+    debounce((newGroup) => {
+      handleSave(newGroup);
+    }, 500),
+    []
+  );
+
+  const handleInputChange = (field, value) => {
+    const newGroup = { ...group, [field]: value };
+    setGroup(newGroup);
+    debouncedSave(newGroup);
+  };
+
   const handleImageChange = (field, file) => {
     const reader = new FileReader();
     reader.onloadend = () => {
-      setEditedGroup(prev => ({ ...prev, [field]: reader.result }));
+      const newGroup = { ...group, [field]: reader.result };
+      setGroup(newGroup);
+      debouncedSave(newGroup);
     };
     reader.readAsDataURL(file);
   };
@@ -40,99 +52,56 @@ const GroupDetails = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FEF8F3] via-[#F0E7E0] to-[#E6D0C5] flex flex-col">
       <GroupHeader
-        group={isEditing ? editedGroup : group}
-        isEditing={isEditing}
-        onEdit={handleEdit}
-        onSave={handleSave}
-        onCancel={handleCancel}
+        group={group}
+        onInputChange={handleInputChange}
+        onImageChange={handleImageChange}
         onBack={() => navigate(-1)}
         onInvite={handleInvite}
         onDelete={handleDelete}
         onLeaderboard={handleLeaderboard}
         onJoin={handleJoin}
         onShare={handleShare}
-        onInputChange={handleInputChange}
-        onImageChange={handleImageChange}
       />
       
       <div className="flex-1 overflow-y-auto p-4 pt-20">
-        {isEditing ? (
-          <div className="space-y-4 bg-white/70 backdrop-blur-md rounded-3xl p-6 shadow-lg">
-            <Input
-              name="name"
-              value={editedGroup.name}
-              onChange={handleInputChange}
-              className="text-2xl font-bold"
-              placeholder="Group Name"
-            />
-            <div className="flex items-center space-x-2">
-              <Switch
-                id="group-visibility"
-                name="isPrivate"
-                checked={editedGroup.isPrivate}
-                onCheckedChange={(checked) => handleInputChange({ target: { name: 'isPrivate', type: 'checkbox', checked } })}
-              />
-              <label htmlFor="group-visibility" className="text-sm font-medium">
-                {editedGroup.isPrivate ? (
-                  <>
-                    <Lock className="inline-block mr-1 h-4 w-4" />
-                    Private
-                  </>
-                ) : (
-                  <>
-                    <Unlock className="inline-block mr-1 h-4 w-4" />
-                    Public
-                  </>
-                )}
-              </label>
-            </div>
-            <Textarea
-              name="description"
-              value={editedGroup.description}
-              onChange={handleInputChange}
-              rows={4}
-              placeholder="Group Description"
-            />
-          </div>
-        ) : (
-          <Tabs defaultValue="info" className="w-full" onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-3 mb-6 bg-white/30 backdrop-blur-sm rounded-full p-1">
-              <TabsTrigger value="info" className="data-[state=active]:bg-white rounded-full transition-all duration-300">
-                <Info className="w-4 h-4 mr-2" />Info
-              </TabsTrigger>
-              <TabsTrigger value="members" className="data-[state=active]:bg-white rounded-full transition-all duration-300">
-                <Users className="w-4 h-4 mr-2" />Members
-              </TabsTrigger>
-              <TabsTrigger value="activity" className="data-[state=active]:bg-white rounded-full transition-all duration-300">
-                <MessageSquare className="w-4 h-4 mr-2" />Activity
-              </TabsTrigger>
-            </TabsList>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
-                className="bg-white/70 backdrop-blur-md rounded-3xl p-6 shadow-lg"
-              >
-                <TabsContent value="info">
-                  <GroupInfo group={group} />
-                </TabsContent>
-                <TabsContent value="members">
-                  <GroupMembers 
-                    members={group.members} 
-                    currentUser={group.currentUser}
-                    onInvite={handleInvite}
-                  />
-                </TabsContent>
-                <TabsContent value="activity">
-                  <ActivitySection activities={group.activities} />
-                </TabsContent>
-              </motion.div>
-            </AnimatePresence>
-          </Tabs>
-        )}
+        <Tabs defaultValue="info" className="w-full" onValueChange={setActiveTab}>
+          <TabsList className="grid w-full grid-cols-3 mb-6 bg-white/30 backdrop-blur-sm rounded-full p-1">
+            <TabsTrigger value="info" className="data-[state=active]:bg-white rounded-full transition-all duration-300">
+              <Info className="w-4 h-4 mr-2" />Info
+            </TabsTrigger>
+            <TabsTrigger value="members" className="data-[state=active]:bg-white rounded-full transition-all duration-300">
+              <Users className="w-4 h-4 mr-2" />Members
+            </TabsTrigger>
+            <TabsTrigger value="activity" className="data-[state=active]:bg-white rounded-full transition-all duration-300">
+              <MessageSquare className="w-4 h-4 mr-2" />Activity
+            </TabsTrigger>
+          </TabsList>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white/70 backdrop-blur-md rounded-3xl p-6 shadow-lg"
+            >
+              <TabsContent value="info">
+                <GroupInfo group={group} onInputChange={handleInputChange} />
+              </TabsContent>
+              <TabsContent value="members">
+                <GroupMembers 
+                  members={group.members} 
+                  currentUser={group.currentUser}
+                  onInvite={handleInvite}
+                  onRemoveMember={handleRemoveMember}
+                />
+              </TabsContent>
+              <TabsContent value="activity">
+                <ActivitySection activities={group.activities} />
+              </TabsContent>
+            </motion.div>
+          </AnimatePresence>
+        </Tabs>
       </div>
 
       <motion.div
