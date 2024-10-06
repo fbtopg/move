@@ -12,7 +12,7 @@ const SwipeableGroupCards = ({ groups }) => {
 
   return (
     <div className="overflow-hidden" ref={emblaRef}>
-      <div className="flex">
+      <div className="flex pl-4">
         {groups.map((group, index) => (
           <motion.div
             key={group.id}

@@ -115,9 +115,9 @@ const Community = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-8"
+          className="mb-8 -mx-4"
         >
-          <div className="flex space-x-4 overflow-x-auto scrollbar-hide py-2">
+          <div className="flex space-x-4 overflow-x-auto scrollbar-hide py-2 px-4">
             <Button
               onClick={() => setIsCreateGroupModalOpen(true)}
               className="flex-shrink-0 bg-[#3B72EC] text-white hover:bg-[#3B72EC]/90 transition-colors px-6 py-3 rounded-full flex items-center space-x-2"
@@ -146,9 +146,9 @@ const Community = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mb-8"
+          className="mb-8 -mx-4"
         >
-          <h2 className="text-xl font-semibold mb-4">My Groups</h2>
+          <h2 className="text-xl font-semibold mb-4 px-4">My Groups</h2>
           <SwipeableGroupCards groups={myGroups} />
         </motion.div>
 
