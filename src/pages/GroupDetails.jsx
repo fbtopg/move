@@ -11,7 +11,7 @@ const GroupDetails = () => {
   const [group, setGroup] = useState({
     id: groupId,
     name: 'Group Name',
-    image: 'https://example.com/group-image.jpg',
+    image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319178.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTc4LnBuZyIsImlhdCI6MTcyODE4MDM2MSwiZXhwIjoxNzU5NzE2MzYxfQ.PSxa6BBMUuxAdVHsXlJCivWEUNE3HXjGcIl3EkfUmFA&t=2024-10-06T02%3A06%3A02.233Z',
     description: 'This is a group description.',
     isPrivate: false,
     members: [
@@ -34,9 +34,9 @@ const GroupDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="relative">
-        <img src={group.image} alt={group.name} className="w-full h-48 object-cover" />
+    <div className="min-h-screen bg-background flex flex-col">
+      <div className="relative h-64">
+        <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
         <Button
           variant="ghost"
           size="icon"
@@ -55,7 +55,7 @@ const GroupDetails = () => {
         </Button>
       </div>
 
-      <div className="p-4">
+      <div className="flex-1 overflow-y-auto p-4">
         <h1 className="text-2xl font-bold mb-1">{group.name}</h1>
         <span className={`text-sm ${group.isPrivate ? 'text-red-500' : 'text-green-500'}`}>
           {group.isPrivate ? 'Private' : 'Public'}
