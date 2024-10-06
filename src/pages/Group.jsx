@@ -26,7 +26,7 @@ const Group = () => {
   ];
 
   const myGroups = allGroups.slice(0, 3);
-  const discoverGroups = allGroups.slice(3).map(group => ({ ...group, isJoined: false }));
+  const discoverGroups = allGroups.slice(3);
 
   return (
     <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
@@ -76,7 +76,7 @@ const Group = () => {
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
             >
               {discoverGroups.map((group, index) => (
-                <CommunityGroupCard key={group.id} group={group} index={index} isDiscoverable={true} />
+                <CommunityGroupCard key={group.id} group={group} index={index} />
               ))}
             </motion.div>
           ) : (
@@ -88,7 +88,7 @@ const Group = () => {
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
             >
               {myGroups.map((group, index) => (
-                <CommunityGroupCard key={group.id} group={group} index={index} isDiscoverable={false} />
+                <CommunityGroupCard key={group.id} group={group} index={index} />
               ))}
             </motion.div>
           )}
