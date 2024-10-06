@@ -17,7 +17,6 @@ const GroupDetails = () => {
     id: groupId,
     name: 'Group Name',
     image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319178.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTc4LnBuZyIsImlhdCI6MTcyODE4MDM2MSwiZXhwIjoxNzU5NzE2MzYxfQ.PSxa6BBMUuxAdVHsXlJCivWEUNE3HXjGcIl3EkfUmFA&t=2024-10-06T02%3A06%3A02.233Z',
-    banner: 'https://example.com/banner.jpg',
     description: 'This is a group description.',
     isPrivate: false,
     members: [
@@ -60,7 +59,7 @@ const GroupDetails = () => {
 };
 
 const GroupHeader = ({ group, onEdit, onBack, isEditing }) => (
-  <div className="relative h-48 bg-cover bg-center" style={{ backgroundImage: `url(${group.banner})` }}>
+  <div className="relative h-48 bg-gradient-to-r from-blue-400 to-blue-600">
     <Button
       variant="ghost"
       size="icon"
