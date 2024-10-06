@@ -1,11 +1,16 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
-const FeatureButton = ({ icon: Icon, label }) => {
+const FeatureButton = ({ icon: Icon, label, gradientColors }) => {
   return (
-    <button className="bg-[#1c1c1f] text-white rounded-xl p-3 flex flex-col items-start w-full">
-      <Icon className="text-blue-400 mb-6" size={22} /> {/* Increased size from 18 to 22 */}
-      <span className="text-xs font-semibold">{label}</span>
-    </button>
+    <motion.button
+      className={`w-full p-4 rounded-xl text-white shadow-md flex flex-col items-center justify-center space-y-2 bg-gradient-to-br ${gradientColors}`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <Icon className="w-8 h-8" />
+      <span className="text-sm font-medium">{label}</span>
+    </motion.button>
   );
 };
 
