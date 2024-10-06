@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Edit2, Users, Info, X } from 'lucide-react';
+import { ArrowLeft, Edit2, Users, Info, X, Camera } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -16,7 +16,7 @@ const GroupDetails = () => {
   const [group, setGroup] = useState({
     id: groupId,
     name: 'Group Name',
-    image: 'https://example.com/group-image.jpg', // This should be the uploaded image URL
+    image: 'https://example.com/group-image.jpg',
     banner: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319178.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTc4LnBuZyIsImlhdCI6MTcyODE4MDM2MSwiZXhwIjoxNzU5NzE2MzYxfQ.PSxa6BBMUuxAdVHsXlJCivWEUNE3HXjGcIl3EkfUmFA&t=2024-10-06T02%3A06%3A02.233Z',
     description: 'This is a group description.',
     isPrivate: false,
@@ -60,7 +60,16 @@ const GroupDetails = () => {
 };
 
 const GroupHeader = ({ group, onEdit, onBack, isEditing }) => (
-  <div className="relative h-48 bg-gradient-to-r from-blue-400 to-blue-600">
+  <div className="relative h-48">
+    <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600">
+      <img src={group.banner} alt="Banner" className="w-full h-full object-cover" />
+      {isEditing && (
+        <label htmlFor="banner-upload" className="absolute bottom-2 right-2 bg-black/50 p-2 rounded-full cursor-pointer">
+          <Camera className="text-white h-5 w-5" />
+          <input id="banner-upload" type="file" className="hidden" />
+        </label>
+      )}
+    </div>
     <Button
       variant="ghost"
       size="icon"
@@ -78,10 +87,18 @@ const GroupHeader = ({ group, onEdit, onBack, isEditing }) => (
       {isEditing ? <X className="h-6 w-6" /> : <Edit2 className="h-6 w-6" />}
     </Button>
     <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
-      <Avatar className="w-32 h-32 border-4 border-background">
-        <AvatarImage src={group.image} alt={group.name} />
-        <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
-      </Avatar>
+      <div className="relative">
+        <Avatar className="w-32 h-32 border-4 border-background">
+          <AvatarImage src={group.image} alt={group.name} />
+          <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
+        </Avatar>
+        {isEditing && (
+          <label htmlFor="avatar-upload" className="absolute bottom-0 right-0 bg-black/50 p-2 rounded-full cursor-pointer">
+            <Camera className="text-white h-5 w-5" />
+            <input id="avatar-upload" type="file" className="hidden" />
+          </label>
+        )}
+      </div>
     </div>
   </div>
 );
