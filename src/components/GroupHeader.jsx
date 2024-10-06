@@ -4,19 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import GroupMenu from './GroupMenu';
+import InlineImageEdit from './InlineImageEdit';
+import { Input } from "@/components/ui/input";
 
-const getGradientColor = (index) => {
-  const gradients = [
-    'from-blue-400 to-purple-500',
-    'from-green-400 to-blue-500',
-    'from-yellow-400 to-red-500',
-    'from-pink-400 to-red-500',
-    'from-indigo-400 to-purple-500'
-  ];
-  return gradients[index % gradients.length];
-};
-
-const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInvite, onDelete, onLeaderboard, onJoin, onShare }) => {
+const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInvite, onDelete, onLeaderboard, onJoin, onShare, onInputChange, onImageChange }) => {
   const renderActionButtons = () => {
     if (isEditing) {
       return (
@@ -81,15 +72,22 @@ const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInv
     );
   };
 
-  const gradientClass = getGradientColor(group.id);
-
   return (
     <div className="relative h-48">
-      <div 
-        className={`absolute inset-0 bg-gradient-to-r ${gradientClass}`}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-      </div>
+      {isEditing ? (
+        <InlineImageEdit
+          currentImage={group.bannerImage}
+          onImageChange={(file) => onImageChange('bannerImage', file)}
+          className="absolute inset-0"
+        />
+      ) : (
+        <div 
+          className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500"
+          style={{ backgroundImage: `url(${group.bannerImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+        >
+          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+        </div>
+      )}
       <Button
         variant="ghost"
         size="icon"
@@ -100,10 +98,18 @@ const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInv
       </Button>
       {renderActionButtons()}
       <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
-        <Avatar className="w-32 h-32 border-4 border-background">
-          <AvatarImage src={group.image} alt={group.name} className="object-cover" />
-          <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
-        </Avatar>
+        {isEditing ? (
+          <InlineImageEdit
+            currentImage={group.image}
+            onImageChange={(file) => onImageChange('image', file)}
+            className="w-32 h-32 rounded-full border-4 border-background"
+          />
+        ) : (
+          <Avatar className="w-32 h-32 border-4 border-background">
+            <AvatarImage src={group.image} alt={group.name} className="object-cover" />
+            <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
+          </Avatar>
+        )}
       </div>
     </div>
   );
