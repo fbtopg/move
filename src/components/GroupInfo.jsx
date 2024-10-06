@@ -9,8 +9,6 @@ const EmptyState = ({ message }) => (
 const GroupInfo = ({ group }) => {
   return (
     <div className="space-y-4">
-      <p className="text-sm text-muted-foreground">{group.description}</p>
-      
       <h3 className="font-semibold">Active Challenges</h3>
       {group.challenges && group.challenges.length > 0 ? (
         <ul className="space-y-2">
