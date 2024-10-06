@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { UserPlus, Crown } from 'lucide-react';
 
 const GroupMembers = ({ members, currentUser, onInvite }) => {
-  const allMembers = [currentUser, ...members].filter(Boolean);
+  // Ensure members is an array, if not, default to an empty array
+  const memberArray = Array.isArray(members) ? members : [];
+  const allMembers = [currentUser, ...memberArray].filter(Boolean);
 
   if (allMembers.length === 0) {
     return (

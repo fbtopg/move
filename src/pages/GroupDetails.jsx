@@ -44,12 +44,14 @@ const GroupDetails = () => {
       setGroup(prevGroup => ({
         ...prevGroup,
         ...location.state,
+        members: location.state.members || [],
         challenges: location.state.challenges || [],
         activities: location.state.activities || [],
       }));
       setEditedGroup(prevGroup => ({
         ...prevGroup,
         ...location.state,
+        members: location.state.members || [],
         challenges: location.state.challenges || [],
         activities: location.state.activities || [],
       }));
