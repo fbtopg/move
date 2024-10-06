@@ -1,38 +1,43 @@
 import React from 'react';
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import ChallengeItem from './ChallengeItem';
 
-const EmptyState = ({ message }) => (
-  <div className="flex justify-center items-center h-16">
-    <p className="text-sm text-gray-500">{message}</p>
-  </div>
-);
-
-const GroupInfo = ({ group }) => {
+const GroupInfo = ({ group, isEditing, onInputChange }) => {
   return (
     <div className="space-y-4">
-      <h3 className="font-semibold">Active Challenges</h3>
-      {group.challenges && group.challenges.length > 0 ? (
-        <ul className="space-y-2">
-          {group.challenges.map(challenge => (
-            <li key={challenge.id} className="text-sm">
-              {challenge.name} - {challenge.participants} participants
-            </li>
-          ))}
-        </ul>
+      {isEditing ? (
+        <Input
+          name="name"
+          value={group.name}
+          onChange={onInputChange}
+          className="text-2xl font-bold mb-1"
+        />
       ) : (
-        <EmptyState message="No active challenges" />
+        <h2 className="text-2xl font-bold mb-1">{group.name}</h2>
       )}
 
-      <h3 className="font-semibold">Recent Activities</h3>
-      {group.activities && group.activities.length > 0 ? (
-        <ul className="space-y-2">
-          {group.activities.map(activity => (
-            <li key={activity.id} className="text-sm">
-              <span className="font-medium">{activity.user}</span> {activity.action} - {activity.time}
-            </li>
-          ))}
-        </ul>
+      {isEditing ? (
+        <Textarea
+          name="description"
+          value={group.description}
+          onChange={onInputChange}
+          className="mt-2 mb-4"
+          rows={4}
+        />
       ) : (
-        <EmptyState message="No recent activities" />
+        <p className="text-sm text-muted-foreground mt-2 mb-4">{group.description}</p>
+      )}
+
+      <h3 className="font-semibold">Active Challenges</h3>
+      {group.challenges && group.challenges.length > 0 ? (
+        <div className="space-y-2">
+          {group.challenges.map(challenge => (
+            <ChallengeItem key={challenge.id} challenge={challenge} />
+          ))}
+        </div>
+      ) : (
+        <p className="text-sm text-gray-500">No active challenges</p>
       )}
     </div>
   );

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { Crown, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 
-const GroupMembers = ({ members = [], currentUser }) => {
+const GroupMembers = ({ members = [], currentUser, onInvite }) => {
   const [searchTerm, setSearchTerm] = useState('');
   
   const allMembers = [currentUser, ...(Array.isArray(members) ? members : [])].filter(Boolean);
@@ -36,12 +36,6 @@ const GroupMembers = ({ members = [], currentUser }) => {
                 <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <span>{member.name}</span>
-              {member.id === currentUser.id && (
-                <span className="text-xs bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full flex items-center">
-                  <Crown className="w-3 h-3 mr-1" />
-                  Owner
-                </span>
-              )}
               {member.id === currentUser.id && <span className="text-xs text-gray-500">(You)</span>}
             </li>
           ))}
