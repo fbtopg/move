@@ -18,6 +18,13 @@ const GroupDetails = () => {
 
   const defaultBannerImage = 'linear-gradient(to right, #2193b0, #6dd5ed)';
 
+  // Mock current user data (replace with actual user data in a real app)
+  const currentUser = {
+    id: 'current-user-id',
+    name: 'Current User',
+    avatar: 'https://example.com/current-user-avatar.jpg'
+  };
+
   const [group, setGroup] = useState({
     id: groupId,
     name: location.state?.groupName || 'Loading...',
@@ -133,6 +140,7 @@ const GroupDetails = () => {
           onInputChange={handleInputChange}
           onRemoveMember={handleRemoveMember}
           onInvite={handleInvite}
+          currentUser={currentUser}
         />
         <AlertDialog open={showCancelDialog} onOpenChange={setShowCancelDialog}>
           <AlertDialogContent>
