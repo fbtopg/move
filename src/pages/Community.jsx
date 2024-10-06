@@ -114,7 +114,7 @@ const Community = () => {
         <div className="mt-8 mb-6">
           <div className="overflow-x-auto scrollbar-hide -mx-4">
             <div className="flex space-x-4 px-4">
-              {/* Create Group Button */}
+              {/* Create Group Button Card */}
               <div className="flex-shrink-0 w-56 h-24">
                 <Button
                   onClick={handleCreateGroup}
@@ -124,9 +124,8 @@ const Community = () => {
                   <span className="text-sm font-semibold">Create Group</span>
                 </Button>
               </div>
-              {/* CommunityGroupCards */}
               {myGroups.map((group, index) => (
-                <div key={group.id} className="flex-shrink-0 w-56 h-24">
+                <div key={group.id} className="flex-shrink-0 w-56">
                   <CommunityGroupCard group={group} index={index} />
                 </div>
               ))}
