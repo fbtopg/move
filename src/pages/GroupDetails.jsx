@@ -123,6 +123,7 @@ const GroupDetails = () => {
           isEditing={isEditing}
           onInputChange={handleInputChange}
           onRemoveMember={handleRemoveMember}
+          onInvite={handleInvite}
         />
         <AlertDialog open={showCancelDialog} onOpenChange={setShowCancelDialog}>
           <AlertDialogContent>

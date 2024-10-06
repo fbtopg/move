@@ -8,7 +8,7 @@ import GroupInfo from './GroupInfo';
 import GroupMembers from './GroupMembers';
 import EditGroupMembers from './EditGroupMembers';
 
-const GroupContentTabs = ({ group, isEditing, onInputChange, onRemoveMember }) => (
+const GroupContentTabs = ({ group, isEditing, onInputChange, onRemoveMember, onInvite }) => (
   <div className="flex-1 overflow-y-auto p-4 pt-20">
     {isEditing ? (
       <Input
@@ -69,7 +69,7 @@ const GroupContentTabs = ({ group, isEditing, onInputChange, onRemoveMember }) =
         {isEditing ? (
           <EditGroupMembers members={group.members} onRemoveMember={onRemoveMember} />
         ) : (
-          <GroupMembers members={group.members} />
+          <GroupMembers members={group.members} onInvite={onInvite} />
         )}
       </TabsContent>
     </Tabs>
