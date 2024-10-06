@@ -31,9 +31,33 @@ const Group = () => {
   ];
 
   const discoverGroups = [
-    { id: 4, name: 'Fitness Enthusiasts', description: 'Join us for daily workouts, nutrition tips, and fitness challenges. Let\'s achieve our health goals together!', members: 150, image: 'https://example.com/fitness.jpg', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], isOwner: false },
-    { id: 5, name: 'Book Club', description: 'Dive into captivating stories, share your thoughts, and discover new literary worlds with fellow book lovers.', members: 75, image: 'https://example.com/books.jpg', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], isOwner: false },
-    { id: 6, name: 'Tech Innovators', description: 'Explore cutting-edge technologies, share your projects, and collaborate on innovative ideas with tech enthusiasts.', members: 200, image: 'https://example.com/tech.jpg', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], isOwner: false },
+    { 
+      id: 4, 
+      name: 'Fitness Enthusiasts', 
+      description: 'Join us for daily workouts, nutrition tips, and fitness challenges. Let\'s achieve our health goals together!', 
+      members: 150, 
+      image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/andrealaureati_anime_style_illustration_of_landscape_with_petun_0054dceb-c7d7-4664-87c0-d82dbf362529%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvYW5kcmVhbGF1cmVhdGlfYW5pbWVfc3R5bGVfaWxsdXN0cmF0aW9uX29mX2xhbmRzY2FwZV93aXRoX3BldHVuXzAwNTRkY2ViLWM3ZDctNDY2NC04N2MwLWQ4MmRiZjM2MjUyOSAxLnBuZyIsImlhdCI6MTcyODE5OTk5MywiZXhwIjoxNzU5NzM1OTkzfQ.iyYf_zneUEnJKV_EELBpgE4woCebOzaAoHKwnGkiXvU&t=2024-10-06T07%3A33%3A14.727Z', 
+      memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], 
+      isOwner: false 
+    },
+    { 
+      id: 5, 
+      name: 'Book Club', 
+      description: 'Dive into captivating stories, share your thoughts, and discover new literary worlds with fellow book lovers.', 
+      members: 75, 
+      image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/mgmattractingwealth_fileCUsersHPDownloadsScreenshot2046.png_A_c_62b30d39-e139-44e7-aa5c-3a074a2588de%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvbWdtYXR0cmFjdGluZ3dlYWx0aF9maWxlQ1VzZXJzSFBEb3dubG9hZHNTY3JlZW5zaG90MjA0Ni5wbmdfQV9jXzYyYjMwZDM5LWUxMzktNDRlNy1hYTVjLTNhMDc0YTI1ODhkZSAxLnBuZyIsImlhdCI6MTcyODIwMDAyMCwiZXhwIjoxNzU5NzM2MDIwfQ.qcGtNMQVOz_G3I67gm8x--EAKdpR5bGKMD9UxFWZdyc&t=2024-10-06T07%3A33%3A41.601Z', 
+      memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], 
+      isOwner: false 
+    },
+    { 
+      id: 6, 
+      name: 'Tech Innovators', 
+      description: 'Explore cutting-edge technologies, share your projects, and collaborate on innovative ideas with tech enthusiasts.', 
+      members: 200, 
+      image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/mgmattractingwealth_fileCUsersHPDownloadsScreenshot2046.png_A_c_62b30d39-e139-44e7-aa5c-3a074a2588de%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvbWdtYXR0cmFjdGluZ3dlYWx0aF9maWxlQ1VzZXJzSFBEb3dubG9hZHNTY3JlZW5zaG90MjA0Ni5wbmdfQV9jXzYyYjMwZDM5LWUxMzktNDRlNy1hYTVjLTNhMDc0YTI1ODhkZSAxLnBuZyIsImlhdCI6MTcyODIwMDAyMCwiZXhwIjoxNzU5NzM2MDIwfQ.qcGtNMQVOz_G3I67gm8x--EAKdpR5bGKMD9UxFWZdyc&t=2024-10-06T07%3A33%3A41.601Z', 
+      memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], 
+      isOwner: false 
+    },
   ].map(group => ({ ...group, isJoined: false }));
 
   const renderGroups = (groups) => (
