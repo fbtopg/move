@@ -53,8 +53,8 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
         <p className="text-sm text-muted-foreground mt-2 mb-4">{group.description}</p>
       )}
 
-      <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-md">
-        <h3 className="font-semibold mb-3">Active Challenges</h3>
+      <div className="space-y-4">
+        <h3 className="font-semibold">Active Challenges</h3>
         {group.challenges && group.challenges.length > 0 ? (
           <div className="space-y-2">
             {group.challenges.map(challenge => (
