@@ -6,7 +6,6 @@ import { handleImageUpload } from '../utils/imageUtils';
 import GroupHeader from '../components/GroupHeader';
 import GroupContentTabs from '../components/GroupContentTabs';
 import { shareInvite } from '../utils/shareUtils';
-import { UserPlus } from 'lucide-react';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
@@ -14,6 +13,7 @@ const GroupDetails = () => {
   const location = useLocation();
   const [isEditing, setIsEditing] = useState(false);
   const [showCancelDialog, setShowCancelDialog] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [animateEntry, setAnimateEntry] = useState(location.state?.animateEntry || false);
 
   const defaultBannerImage = 'linear-gradient(to right, #2193b0, #6dd5ed)';
@@ -98,6 +98,16 @@ const GroupDetails = () => {
     shareInvite(group.name);
   };
 
+  const handleDelete = () => {
+    setShowDeleteDialog(true);
+  };
+
+  const confirmDelete = () => {
+    // Implement group deletion logic here
+    console.log('Group deleted');
+    navigate('/groups');
+  };
+
   return (
     <AnimatePresence>
       <motion.div
@@ -110,13 +120,9 @@ const GroupDetails = () => {
         <GroupHeader
           group={isEditing ? editedGroup : group}
           onEdit={handleEdit}
-          onSave={handleSave}
-          onCancel={handleCancel}
           onBack={() => navigate(-1)}
-          isEditing={isEditing}
-          onImageChange={handleImageChange}
-          defaultBannerImage={defaultBannerImage}
           onInvite={handleInvite}
+          onDelete={handleDelete}
         />
         <GroupContentTabs
           group={isEditing ? editedGroup : group}
@@ -136,6 +142,20 @@ const GroupDetails = () => {
             <AlertDialogFooter>
               <AlertDialogCancel>Continue Editing</AlertDialogCancel>
               <AlertDialogAction onClick={handleConfirmCancel}>Discard Changes</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+        <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Delete Group</AlertDialogTitle>
+              <AlertDialogDescription>
+                Are you sure you want to delete this group? This action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={confirmDelete} className="bg-red-500 hover:bg-red-600">Delete</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
