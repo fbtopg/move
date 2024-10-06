@@ -118,10 +118,14 @@ const GroupDetails = () => {
           onImageChange={handleImageChange}
           defaultBannerImage={defaultBannerImage}
         />
-        <div className="flex justify-end px-4 mt-2">
-          <Button onClick={handleInvite} className="bg-primary text-primary-foreground">
-            <UserPlus className="mr-2 h-4 w-4" />
-            Invite
+        <div className="flex justify-center -mt-6 mb-4 z-10">
+          <Button 
+            onClick={handleInvite} 
+            className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 shadow-lg"
+            size="lg"
+          >
+            <UserPlus className="mr-2 h-5 w-5" />
+            Invite Friends
           </Button>
         </div>
         <GroupContentTabs
