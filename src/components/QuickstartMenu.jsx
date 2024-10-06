@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { UserPlus, Footprints, Trophy, X, ChevronUp, ChevronDown } from 'lucide-react';
+import { UserPlus, Footprints, Trophy, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import CreateGroupModal from './CreateGroupModal';
 
 const QuickstartMenu = ({ onClose }) => {
-  const [showGroups, setShowGroups] = useState(false);
+  const [showCreateGroupModal, setShowCreateGroupModal] = useState(false);
 
   const options = [
-    { label: 'Create Group', icon: UserPlus, action: () => console.log('Create Group') },
+    { 
+      label: 'Create Group', 
+      icon: UserPlus, 
+      action: () => setShowCreateGroupModal(true)
+    },
     { label: 'Walk', icon: Footprints, action: () => console.log('Walk') },
     { label: 'Challenge', icon: Trophy, action: () => console.log('Challenge') },
     { label: 'Close', icon: X, action: onClose },
-  ];
-
-  const myGroups = [
-    { id: 1, name: 'Morning chill', image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767726000373871/KakaoTalk_20240929_105444000.jpg?ex=66faae0c&is=66f95c8c&hm=3ae40a6ce831ca6992a2655792e403e571651bae6ce97e02ff481af050edf101&' },
-    { id: 2, name: 'Climbing bros', image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767726835044392/KakaoTalk_20240929_105444000_01.jpg?ex=66faae0c&is=66f95c8c&hm=88ffad286207907d124033282f6a7b23834433bf82fc746a53cc22e8b287f92c&' },
-    { id: 3, name: 'Trip', image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767727749398618/KakaoTalk_20240929_105444000_02.jpg?ex=66faae0d&is=66f95c8d&hm=9fb35fec57376e16e7ea9b24ecc907d4497951154ee066a727496112edc8a048&' },
   ];
 
   useEffect(() => {
@@ -45,16 +44,6 @@ const QuickstartMenu = ({ onClose }) => {
       opacity: 1,
       transition: { delay: i * 0.1, type: "spring", stiffness: 300, damping: 20 },
     }),
-  };
-
-  const groupVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
-  };
-
-  const groupItemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
   };
 
   return (
@@ -94,6 +83,11 @@ const QuickstartMenu = ({ onClose }) => {
           ))}
         </motion.div>
       </motion.div>
+
+      <CreateGroupModal
+        isOpen={showCreateGroupModal}
+        onClose={() => setShowCreateGroupModal(false)}
+      />
     </>
   );
 };
