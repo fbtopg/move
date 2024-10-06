@@ -44,53 +44,55 @@ const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInv
           >
             <ArrowLeft className="h-6 w-6" />
           </Button>
-          <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-4 right-4 bg-black/50 text-white rounded-full"
-              >
-                <MoreVertical className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="bottom" className="h-auto rounded-t-3xl">
-              <div className="py-4">
+          {group.isJoined && (
+            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+              <SheetTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-left mb-2"
-                  onClick={() => { onInvite(); setIsMenuOpen(false); }}
+                  size="icon"
+                  className="absolute top-4 right-4 bg-black/50 text-white rounded-full"
                 >
-                  <UserPlus className="mr-2 h-5 w-5" />
-                  Invite Friends
+                  <MoreVertical className="h-6 w-6" />
                 </Button>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start text-left mb-2"
-                  onClick={() => { onLeaderboard(); setIsMenuOpen(false); }}
-                >
-                  <Trophy className="mr-2 h-5 w-5" />
-                  Leaderboard
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start text-left mb-2"
-                  onClick={() => { onEdit(); setIsMenuOpen(false); }}
-                >
-                  <Edit2 className="mr-2 h-5 w-5" />
-                  Edit Group
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start text-left text-red-500"
-                  onClick={() => { onDelete(); setIsMenuOpen(false); }}
-                >
-                  <Trash2 className="mr-2 h-5 w-5" />
-                  Delete Group
-                </Button>
-              </div>
-            </SheetContent>
-          </Sheet>
+              </SheetTrigger>
+              <SheetContent side="bottom" className="h-auto rounded-t-3xl">
+                <div className="py-4">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-left mb-2"
+                    onClick={() => { onInvite(); setIsMenuOpen(false); }}
+                  >
+                    <UserPlus className="mr-2 h-5 w-5" />
+                    Invite Friends
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-left mb-2"
+                    onClick={() => { onLeaderboard(); setIsMenuOpen(false); }}
+                  >
+                    <Trophy className="mr-2 h-5 w-5" />
+                    Leaderboard
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-left mb-2"
+                    onClick={() => { onEdit(); setIsMenuOpen(false); }}
+                  >
+                    <Edit2 className="mr-2 h-5 w-5" />
+                    Edit Group
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-left text-red-500"
+                    onClick={() => { onDelete(); setIsMenuOpen(false); }}
+                  >
+                    <Trash2 className="mr-2 h-5 w-5" />
+                    Delete Group
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
+          )}
         </>
       )}
       <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">

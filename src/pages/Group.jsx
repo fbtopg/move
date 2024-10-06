@@ -26,7 +26,20 @@ const Group = () => {
   ];
 
   const myGroups = allGroups.slice(0, 3);
-  const discoverGroups = allGroups.slice(3);
+  const discoverGroups = allGroups.slice(3).map(group => ({ ...group, isJoined: false }));
+
+  const renderGroups = (groups) => (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+    >
+      {groups.map((group, index) => (
+        <CommunityGroupCard key={group.id} group={group} index={index} />
+      ))}
+    </motion.div>
+  );
 
   return (
     <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
@@ -67,31 +80,7 @@ const Group = () => {
 
       <div className="flex-grow overflow-y-auto pb-20 px-4">
         <AnimatePresence mode="wait">
-          {activeTab === 'discover' ? (
-            <motion.div
-              key="discover"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-            >
-              {discoverGroups.map((group, index) => (
-                <CommunityGroupCard key={group.id} group={group} index={index} />
-              ))}
-            </motion.div>
-          ) : (
-            <motion.div
-              key="myGroup"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-            >
-              {myGroups.map((group, index) => (
-                <CommunityGroupCard key={group.id} group={group} index={index} />
-              ))}
-            </motion.div>
-          )}
+          {activeTab === 'discover' ? renderGroups(discoverGroups) : renderGroups(myGroups)}
         </AnimatePresence>
       </div>
       <BottomNavBar activeTab="group" />
