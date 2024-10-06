@@ -1,7 +1,9 @@
 import React from 'react';
 
 const EmptyState = ({ message }) => (
-  <p className="text-sm text-gray-500">{message}</p>
+  <div className="flex justify-center items-center h-16">
+    <p className="text-sm text-gray-500">{message}</p>
+  </div>
 );
 
 const GroupInfo = ({ group }) => {
