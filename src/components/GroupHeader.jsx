@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import GroupMenu from './GroupMenu';
+import InlineImageEdit from './InlineImageEdit';
 
 const getGradientColor = (index) => {
   const gradients = [
@@ -16,7 +17,7 @@ const getGradientColor = (index) => {
   return gradients[index % gradients.length];
 };
 
-const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInvite, onDelete, onLeaderboard, onJoin, onShare }) => {
+const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInvite, onDelete, onLeaderboard, onJoin, onShare, onInputChange }) => {
   const renderActionButtons = () => {
     if (isEditing) {
       return (
@@ -85,11 +86,17 @@ const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInv
 
   return (
     <div className="relative h-48">
-      <div 
-        className={`absolute inset-0 bg-gradient-to-r ${gradientClass}`}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-      </div>
+      {isEditing ? (
+        <InlineImageEdit
+          currentImage={group.bannerImage}
+          onImageChange={(file) => onInputChange({ target: { name: 'bannerImage', value: file } })}
+          className="absolute inset-0"
+        />
+      ) : (
+        <div className={`absolute inset-0 bg-gradient-to-r ${gradientClass}`}>
+          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+        </div>
+      )}
       <Button
         variant="ghost"
         size="icon"
@@ -100,10 +107,18 @@ const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInv
       </Button>
       {renderActionButtons()}
       <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
-        <Avatar className="w-32 h-32 border-4 border-background">
-          <AvatarImage src={group.image} alt={group.name} className="object-cover" />
-          <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
-        </Avatar>
+        {isEditing ? (
+          <InlineImageEdit
+            currentImage={group.image}
+            onImageChange={(file) => onInputChange({ target: { name: 'image', value: file } })}
+            className="w-32 h-32 rounded-full"
+          />
+        ) : (
+          <Avatar className="w-32 h-32 border-4 border-background">
+            <AvatarImage src={group.image} alt={group.name} className="object-cover" />
+            <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
+          </Avatar>
+        )}
       </div>
     </div>
   );
