@@ -88,6 +88,10 @@ const GroupDetails = () => {
   };
 
   const handleRemoveMember = (memberId) => {
+    setGroup(prevGroup => ({
+      ...prevGroup,
+      members: prevGroup.members.filter(member => member.id !== memberId)
+    }));
     setEditedGroup(prevGroup => ({
       ...prevGroup,
       members: prevGroup.members.filter(member => member.id !== memberId)

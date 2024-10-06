@@ -3,19 +3,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Search } from 'lucide-react';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 const EditGroupMembers = ({ members, onRemoveMember }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [memberToRemove, setMemberToRemove] = useState(null);
 
-  // Check if members is an array and has items
-  const hasMembers = Array.isArray(members) && members.length > 0;
+  // Ensure members is an array, if not, default to an empty array
+  const memberArray = Array.isArray(members) ? members : [];
+  const allMembers = memberArray.filter(Boolean);
 
-  const filteredMembers = hasMembers
-    ? members.filter(member =>
-        member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (member.username && member.username.toLowerCase().includes(searchTerm.toLowerCase()))
-      )
-    : [];
+  const filteredMembers = allMembers.filter(member => 
+    member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (member.username && member.username.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  const handleRemoveClick = (member) => {
+    setMemberToRemove(member);
+  };
+
+  const confirmRemove = () => {
+    if (memberToRemove) {
+      onRemoveMember(memberToRemove.id);
+      setMemberToRemove(null);
+    }
+  };
 
   return (
     <div>
@@ -40,7 +52,7 @@ const EditGroupMembers = ({ members, onRemoveMember }) => {
                 </Avatar>
                 <span>{member.name}</span>
               </div>
-              <Button variant="destructive" size="sm" onClick={() => onRemoveMember(member.id)}>
+              <Button variant="destructive" size="sm" onClick={() => handleRemoveClick(member)}>
                 Remove
               </Button>
             </li>
@@ -49,6 +61,21 @@ const EditGroupMembers = ({ members, onRemoveMember }) => {
       ) : (
         <p>No members found.</p>
       )}
+
+      <AlertDialog open={!!memberToRemove} onOpenChange={() => setMemberToRemove(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Remove Member</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to remove {memberToRemove?.name} from the group? This action is effective immediately.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmRemove}>Remove</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
