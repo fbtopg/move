@@ -22,7 +22,9 @@ const GroupDetails = () => {
   const { group, editedGroup, setEditedGroup } = useGroupData(groupId, location.state);
   const { handleEdit, handleSave, handleCancel, handleConfirmCancel, handleRemoveMember, handleInputChange, handleDelete, confirmDelete, handleLeaderboard, handleJoin } = useGroupActions(group, editedGroup, setEditedGroup, setIsEditing, navigate);
 
-  const handleInvite = () => setShowInviteModal(true);
+  const handleInvite = () => {
+    shareInvite(group.name);
+  };
   const handleShare = () => shareInvite(group.name);
 
   return (
@@ -56,7 +58,6 @@ const GroupDetails = () => {
         />
         <CancelDialog open={showCancelDialog} onOpenChange={setShowCancelDialog} onConfirm={handleConfirmCancel} />
         <DeleteDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog} onConfirm={confirmDelete} />
-        <InviteFriends isOpen={showInviteModal} onClose={() => setShowInviteModal(false)} />
       </motion.div>
     </AnimatePresence>
   );
