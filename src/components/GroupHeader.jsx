@@ -1,9 +1,9 @@
 import React from 'react';
-import { ArrowLeft, Edit2, X, Camera, Check } from 'lucide-react';
+import { ArrowLeft, Edit2, X, Camera, Check, UserPlus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const GroupHeader = ({ group, onEdit, onSave, onCancel, onBack, isEditing, onImageChange, defaultBannerImage }) => (
+const GroupHeader = ({ group, onEdit, onSave, onCancel, onBack, isEditing, onImageChange, defaultBannerImage, onInvite }) => (
   <div className="relative h-48">
     <div 
       className="absolute inset-0 bg-cover bg-center"
@@ -49,14 +49,24 @@ const GroupHeader = ({ group, onEdit, onSave, onCancel, onBack, isEditing, onIma
         </Button>
       </div>
     ) : (
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute top-4 right-4 bg-black/50 text-white rounded-full"
-        onClick={onEdit}
-      >
-        <Edit2 className="h-6 w-6" />
-      </Button>
+      <div className="absolute top-4 right-4 flex space-x-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="bg-primary text-white rounded-full"
+          onClick={onInvite}
+        >
+          <UserPlus className="h-6 w-6" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="bg-black/50 text-white rounded-full"
+          onClick={onEdit}
+        >
+          <Edit2 className="h-6 w-6" />
+        </Button>
+      </div>
     )}
     <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
       <div className="relative">

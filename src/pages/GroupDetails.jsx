@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from "@/components/ui/button";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { handleImageUpload } from '../utils/imageUtils';
 import GroupHeader from '../components/GroupHeader';
@@ -117,17 +116,8 @@ const GroupDetails = () => {
           isEditing={isEditing}
           onImageChange={handleImageChange}
           defaultBannerImage={defaultBannerImage}
+          onInvite={handleInvite}
         />
-        <div className="flex justify-center -mt-6 mb-4 z-10">
-          <Button 
-            onClick={handleInvite} 
-            className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200 shadow-lg"
-            size="lg"
-          >
-            <UserPlus className="mr-2 h-5 w-5" />
-            Invite Friends
-          </Button>
-        </div>
         <GroupContentTabs
           group={isEditing ? editedGroup : group}
           isEditing={isEditing}
