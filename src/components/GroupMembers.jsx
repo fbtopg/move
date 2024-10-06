@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Search } from 'lucide-react';
@@ -6,6 +6,19 @@ import { Search } from 'lucide-react';
 const GroupMembers = ({ members = [], currentUser, onInvite }) => {
   const [searchTerm, setSearchTerm] = useState('');
   
+  useEffect(() => {
+    // Add meta tag to prevent zooming
+    const metaTag = document.createElement('meta');
+    metaTag.name = 'viewport';
+    metaTag.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+    document.head.appendChild(metaTag);
+
+    // Remove meta tag when component unmounts
+    return () => {
+      document.head.removeChild(metaTag);
+    };
+  }, []);
+
   const allMembers = [currentUser, ...(Array.isArray(members) ? members : [])].filter(Boolean);
 
   const filteredMembers = allMembers.filter(member => 
