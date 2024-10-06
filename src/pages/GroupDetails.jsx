@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -11,50 +11,29 @@ import InviteFriends from '../components/InviteFriends';
 import ActivitySection from '../components/ActivitySection';
 import GroupInfo from '../components/GroupInfo';
 import GroupMembers from '../components/GroupMembers';
-import { debounce } from 'lodash';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
   const location = useLocation();
+  const [isEditing, setIsEditing] = useState(false);
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [activeTab, setActiveTab] = useState('info');
 
-  const { group, setGroup } = useGroupData(groupId, location.state);
-  const { handleSave, handleRemoveMember, handleDelete, handleLeaderboard, handleJoin } = useGroupActions(group, setGroup, navigate);
+  const { group, setGroup, editedGroup, setEditedGroup } = useGroupData(groupId, location.state);
+  const { handleEdit, handleSave, handleCancel, handleRemoveMember, handleInputChange, handleDelete, handleLeaderboard, handleJoin } = useGroupActions(group, editedGroup, setEditedGroup, setGroup, setIsEditing, navigate);
 
   const handleInvite = () => setShowInviteModal(true);
   const handleShare = () => shareInvite(group.name);
 
-  const debouncedSave = useCallback(
-    debounce((newGroup) => {
-      handleSave(newGroup);
-    }, 500),
-    []
-  );
-
-  const handleInputChange = (field, value) => {
-    const newGroup = { ...group, [field]: value };
-    setGroup(newGroup);
-    debouncedSave(newGroup);
-  };
-
-  const handleImageChange = (field, file) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const newGroup = { ...group, [field]: reader.result };
-      setGroup(newGroup);
-      debouncedSave(newGroup);
-    };
-    reader.readAsDataURL(file);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FEF8F3] via-[#F0E7E0] to-[#E6D0C5] flex flex-col">
       <GroupHeader
-        group={group}
-        onInputChange={handleInputChange}
-        onImageChange={handleImageChange}
+        group={isEditing ? editedGroup : group}
+        isEditing={isEditing}
+        onEdit={handleEdit}
+        onSave={handleSave}
+        onCancel={handleCancel}
         onBack={() => navigate(-1)}
         onInvite={handleInvite}
         onDelete={handleDelete}
@@ -86,14 +65,13 @@ const GroupDetails = () => {
               className="bg-white/70 backdrop-blur-md rounded-3xl p-6 shadow-lg"
             >
               <TabsContent value="info">
-                <GroupInfo group={group} onInputChange={handleInputChange} />
+                <GroupInfo group={isEditing ? editedGroup : group} />
               </TabsContent>
               <TabsContent value="members">
                 <GroupMembers 
                   members={group.members} 
                   currentUser={group.currentUser}
                   onInvite={handleInvite}
-                  onRemoveMember={handleRemoveMember}
                 />
               </TabsContent>
               <TabsContent value="activity">

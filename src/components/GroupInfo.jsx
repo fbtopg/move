@@ -3,37 +3,45 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Lock, Unlock } from 'lucide-react';
 import { Separator } from "@/components/ui/separator";
-import { Switch } from "@/components/ui/switch";
 import ChallengeItem from './ChallengeItem';
 import GroupImages from './GroupImages';
 
-const GroupInfo = ({ group, onInputChange }) => {
+const GroupInfo = ({ group, isEditing, onInputChange }) => {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-2">
-          <Switch
-            checked={group.isPrivate}
-            onCheckedChange={(checked) => onInputChange('isPrivate', checked)}
-          />
-          {group.isPrivate ? (
-            <Lock className="w-4 h-4 text-red-500" />
-          ) : (
-            <Unlock className="w-4 h-4 text-green-500" />
-          )}
-          <span className="text-sm font-medium">
-            {group.isPrivate ? 'Private Group' : 'Public Group'}
-          </span>
-        </div>
+      {isEditing ? (
+        <Input
+          name="name"
+          value={group.name}
+          onChange={onInputChange}
+          className="text-2xl font-bold mb-1 text-center"
+        />
+      ) : (
+        <h2 className="text-2xl font-bold mb-1 text-center">{group.name}</h2>
+      )}
+
+      <div className="flex items-center justify-center space-x-2">
+        {group.isPrivate ? (
+          <Lock className="w-4 h-4 text-red-500" />
+        ) : (
+          <Unlock className="w-4 h-4 text-green-500" />
+        )}
+        <span className="text-sm font-medium">
+          {group.isPrivate ? 'Private Group' : 'Public Group'}
+        </span>
       </div>
 
-      <Textarea
-        value={group.description}
-        onChange={(e) => onInputChange('description', e.target.value)}
-        className="mt-2 mb-4"
-        rows={4}
-        placeholder="Group Description"
-      />
+      {isEditing ? (
+        <Textarea
+          name="description"
+          value={group.description}
+          onChange={onInputChange}
+          className="mt-2 mb-4"
+          rows={4}
+        />
+      ) : (
+        <p className="text-sm text-muted-foreground mt-2 mb-4">{group.description}</p>
+      )}
 
       <Separator className="my-4" />
 
@@ -52,7 +60,7 @@ const GroupInfo = ({ group, onInputChange }) => {
 
       <Separator className="my-4" />
 
-      <GroupImages groupId={group.id} />
+      <GroupImages />
     </div>
   );
 };

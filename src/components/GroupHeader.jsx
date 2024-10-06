@@ -1,14 +1,36 @@
 import React from 'react';
-import { ArrowLeft, MoreVertical, Share, UserPlus } from 'lucide-react';
+import { ArrowLeft, MoreVertical, Share, Check, UserPlus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import GroupMenu from './GroupMenu';
-import InlineImageEdit from './InlineImageEdit';
-import { Input } from "@/components/ui/input";
 
-const GroupHeader = ({ group, onInputChange, onImageChange, onBack, onInvite, onDelete, onLeaderboard, onJoin, onShare }) => {
+const getGradientColor = (index) => {
+  const gradients = [
+    'from-blue-400 to-purple-500',
+    'from-green-400 to-blue-500',
+    'from-yellow-400 to-red-500',
+    'from-pink-400 to-red-500',
+    'from-indigo-400 to-purple-500'
+  ];
+  return gradients[index % gradients.length];
+};
+
+const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInvite, onDelete, onLeaderboard, onJoin, onShare }) => {
   const renderActionButtons = () => {
+    if (isEditing) {
+      return (
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute top-4 right-4 bg-black/50 text-white rounded-full"
+          onClick={onSave}
+        >
+          <Check className="h-6 w-6" />
+        </Button>
+      );
+    }
+
     if (!group.isJoined) {
       return (
         <div className="absolute top-4 right-4 flex space-x-2">
@@ -52,41 +74,37 @@ const GroupHeader = ({ group, onInputChange, onImageChange, onBack, onInvite, on
             </Button>
           </SheetTrigger>
           <SheetContent side="bottom" className="h-auto rounded-t-3xl">
-            <GroupMenu onInvite={onInvite} onLeaderboard={onLeaderboard} onDelete={onDelete} />
+            <GroupMenu onInvite={onInvite} onLeaderboard={onLeaderboard} onEdit={onEdit} onDelete={onDelete} />
           </SheetContent>
         </Sheet>
       </div>
     );
   };
 
+  const gradientClass = getGradientColor(group.id);
+
   return (
     <div className="relative h-48">
-      <InlineImageEdit
-        currentImage={group.bannerImage}
-        onImageChange={(file) => onImageChange('bannerImage', file)}
-        className="absolute inset-0"
-      />
+      <div 
+        className={`absolute inset-0 bg-gradient-to-r ${gradientClass}`}
+      >
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+      </div>
       <Button
         variant="ghost"
         size="icon"
         className="absolute top-4 left-4 bg-black/50 text-white rounded-full"
-        onClick={onBack}
+        onClick={isEditing ? onCancel : onBack}
       >
         <ArrowLeft className="h-6 w-6" />
       </Button>
       {renderActionButtons()}
       <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
-        <InlineImageEdit
-          currentImage={group.image}
-          onImageChange={(file) => onImageChange('image', file)}
-          className="w-32 h-32 rounded-full border-4 border-background"
-        />
+        <Avatar className="w-32 h-32 border-4 border-background">
+          <AvatarImage src={group.image} alt={group.name} className="object-cover" />
+          <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
+        </Avatar>
       </div>
-      <Input
-        value={group.name}
-        onChange={(e) => onInputChange('name', e.target.value)}
-        className="absolute bottom-4 left-4 right-4 bg-transparent text-white text-2xl font-bold border-none focus:ring-0"
-      />
     </div>
   );
 };
