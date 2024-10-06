@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Edit2, Users, Info } from 'lucide-react';
+import { ArrowLeft, Edit2, Users, Info, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import GroupInfo from '../components/GroupInfo';
 import GroupMembers from '../components/GroupMembers';
+import EditGroupInfo from '../components/EditGroupInfo';
+import EditGroupMembers from '../components/EditGroupMembers';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
+  const [isEditing, setIsEditing] = useState(false);
   const [group, setGroup] = useState({
     id: groupId,
     name: 'Group Name',
     image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319178.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTc4LnBuZyIsImlhdCI6MTcyODE4MDM2MSwiZXhwIjoxNzU5NzE2MzYxfQ.PSxa6BBMUuxAdVHsXlJCivWEUNE3HXjGcIl3EkfUmFA&t=2024-10-06T02%3A06%3A02.233Z',
+    banner: 'https://example.com/banner.jpg',
     description: 'This is a group description.',
     isPrivate: false,
     members: [
@@ -31,12 +35,24 @@ const GroupDetails = () => {
   });
 
   const handleEdit = () => {
-    console.log('Edit group');
+    setIsEditing(!isEditing);
+  };
+
+  const handleSave = (updatedGroup) => {
+    setGroup(updatedGroup);
+    setIsEditing(false);
+  };
+
+  const handleRemoveMember = (memberId) => {
+    setGroup(prevGroup => ({
+      ...prevGroup,
+      members: prevGroup.members.filter(member => member.id !== memberId)
+    }));
   };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="relative h-48 bg-gradient-to-r from-blue-400 to-blue-600">
+      <div className="relative h-48 bg-cover bg-center" style={{ backgroundImage: `url(${group.banner})` }}>
         <Button
           variant="ghost"
           size="icon"
@@ -51,7 +67,7 @@ const GroupDetails = () => {
           className="absolute top-4 right-4 bg-black/50 text-white rounded-full"
           onClick={handleEdit}
         >
-          <Edit2 className="h-6 w-6" />
+          {isEditing ? <X className="h-6 w-6" /> : <Edit2 className="h-6 w-6" />}
         </Button>
         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
           <Avatar className="w-32 h-32 border-4 border-background">
@@ -79,10 +95,18 @@ const GroupDetails = () => {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="info">
-            <GroupInfo group={group} />
+            {isEditing ? (
+              <EditGroupInfo group={group} onSave={handleSave} />
+            ) : (
+              <GroupInfo group={group} />
+            )}
           </TabsContent>
           <TabsContent value="members">
-            <GroupMembers members={group.members} />
+            {isEditing ? (
+              <EditGroupMembers members={group.members} onRemoveMember={handleRemoveMember} />
+            ) : (
+              <GroupMembers members={group.members} />
+            )}
           </TabsContent>
         </Tabs>
       </div>
