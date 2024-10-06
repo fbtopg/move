@@ -19,11 +19,11 @@ const GroupDetails = () => {
 
   const [group, setGroup] = useState({
     id: groupId,
-    name: 'Loading...',
-    image: 'https://example.com/default-group-image.jpg',
+    name: location.state?.groupName || 'Loading...',
+    image: location.state?.groupImage || 'https://example.com/default-group-image.jpg',
     bannerImage: 'https://example.com/default-banner-image.jpg',
-    description: 'Loading...',
-    isPrivate: false,
+    description: location.state?.groupDescription || 'Loading...',
+    isPrivate: location.state?.isPrivate || false,
     members: [],
     challenges: [],
     activities: [],

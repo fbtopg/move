@@ -17,7 +17,6 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const [isConfirmationStep, setIsConfirmationStep] = useState(false);
   const [showCloseConfirmation, setShowCloseConfirmation] = useState(false);
   const navigate = useNavigate();
 
@@ -65,7 +64,6 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       const newGroupId = Date.now().toString();
-      setIsConfirmationStep(true);
       navigate(`/group/${newGroupId}`, { 
         state: { 
           groupImage: groupData.image,
