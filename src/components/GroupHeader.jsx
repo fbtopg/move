@@ -89,7 +89,7 @@ const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInv
       {renderActionButtons()}
       <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
         <Avatar className="w-32 h-32 border-4 border-background">
-          <AvatarImage src={group.image} alt={group.name} />
+          <AvatarImage src={group.image} alt={group.name} className="object-cover" />
           <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
         </Avatar>
       </div>
