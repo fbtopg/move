@@ -23,13 +23,11 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen) {
-      // Add meta tag to prevent zooming
       const metaTag = document.createElement('meta');
       metaTag.name = 'viewport';
       metaTag.content = 'width=device-width, initial-scale=1, maximum-scale=1';
       document.head.appendChild(metaTag);
 
-      // Remove meta tag when component unmounts or closes
       return () => {
         document.head.removeChild(metaTag);
       };
@@ -67,11 +65,9 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       console.log('Creating group:', groupData, 'Cropped area:', croppedAreaPixels);
-      // Simulate group creation and getting an ID
       const newGroupId = Date.now().toString();
       setIsConfirmationStep(true);
-      // Navigate to the new group page
-      navigate(`/group/${newGroupId}`);
+      navigate(`/group/${newGroupId}`, { state: { groupImage: groupData.image } });
       onClose();
     }
   };
