@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 import { handleImageUpload } from '../utils/imageUtils';
 import GroupHeader from '../components/GroupHeader';
 import GroupContentTabs from '../components/GroupContentTabs';
@@ -139,14 +138,11 @@ const GroupDetails = () => {
   const handleLeaderboard = () => {
     // Implement leaderboard navigation or display logic here
     console.log('Navigate to leaderboard');
-    // For example, you could navigate to a leaderboard page:
-    // navigate(`/groups/${groupId}/leaderboard`);
   };
 
   const handleJoin = () => {
     setGroup(prevGroup => ({ ...prevGroup, isJoined: true }));
     setEditedGroup(prevGroup => ({ ...prevGroup, isJoined: true }));
-    // Here you would typically make an API call to join the group
     console.log('Joined group:', groupId);
   };
 
@@ -169,14 +165,8 @@ const GroupDetails = () => {
           onInvite={handleInvite}
           onDelete={handleDelete}
           onLeaderboard={handleLeaderboard}
+          onJoin={handleJoin}
         />
-        {!group.isJoined && (
-          <div className="px-4 py-2">
-            <Button onClick={handleJoin} className="w-full bg-[#3B72EC] hover:bg-[#3B72EC]/90">
-              Join Group
-            </Button>
-          </div>
-        )}
         <GroupContentTabs
           group={isEditing ? editedGroup : group}
           isEditing={isEditing}
