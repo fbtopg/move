@@ -2,6 +2,7 @@ import React from 'react';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Lock, Unlock } from 'lucide-react';
+import { Separator } from "@/components/ui/separator";
 import ChallengeItem from './ChallengeItem';
 import GroupImages from './GroupImages';
 
@@ -42,6 +43,8 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
         <p className="text-sm text-muted-foreground mt-2 mb-4">{group.description}</p>
       )}
 
+      <Separator className="my-4" />
+
       <div className="space-y-4">
         <h3 className="font-semibold">Active Challenges</h3>
         {group.challenges && group.challenges.length > 0 ? (
@@ -54,6 +57,8 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
           <p className="text-sm text-gray-500">No active challenges</p>
         )}
       </div>
+
+      <Separator className="my-4" />
 
       <GroupImages />
     </div>
