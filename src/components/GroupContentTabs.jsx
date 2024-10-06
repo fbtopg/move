@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
+import { Separator } from "@/components/ui/separator";
 import GroupInfo from './GroupInfo';
 import GroupMembers from './GroupMembers';
 import EditGroupMembers from './EditGroupMembers';
@@ -48,23 +49,27 @@ const GroupContentTabs = ({ group, isEditing, onInputChange, onRemoveMember, onI
       </span>
     )}
 
+    {isEditing ? (
+      <Textarea
+        name="description"
+        value={group.description}
+        onChange={onInputChange}
+        className="mt-2 mb-4"
+        rows={4}
+      />
+    ) : (
+      <p className="text-sm text-muted-foreground mt-2 mb-4">{group.description}</p>
+    )}
+
+    <Separator className="my-4" />
+
     <Tabs defaultValue="info" className="mt-4">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="info"><Info className="w-4 h-4 mr-2" />Info</TabsTrigger>
         <TabsTrigger value="members"><Users className="w-4 h-4 mr-2" />Members</TabsTrigger>
       </TabsList>
       <TabsContent value="info">
-        {isEditing ? (
-          <Textarea
-            name="description"
-            value={group.description}
-            onChange={onInputChange}
-            className="mt-2"
-            rows={4}
-          />
-        ) : (
-          <GroupInfo group={group} />
-        )}
+        <GroupInfo group={group} />
       </TabsContent>
       <TabsContent value="members">
         {isEditing ? (
