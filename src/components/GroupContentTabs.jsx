@@ -47,6 +47,7 @@ const GroupContentTabs = ({ group, isEditing, onInputChange, onRemoveMember, onI
         {group.isPrivate ? 'Private' : 'Public'}
       </span>
     )}
+
     <Tabs defaultValue="info" className="mt-4">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="info"><Info className="w-4 h-4 mr-2" />Info</TabsTrigger>
