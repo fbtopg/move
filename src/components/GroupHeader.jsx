@@ -5,6 +5,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import GroupMenu from './GroupMenu';
 
+const getGradientColor = (index) => {
+  const gradients = [
+    'from-blue-400 to-purple-500',
+    'from-green-400 to-blue-500',
+    'from-yellow-400 to-red-500',
+    'from-pink-400 to-red-500',
+    'from-indigo-400 to-purple-500'
+  ];
+  return gradients[index % gradients.length];
+};
+
 const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInvite, onDelete, onLeaderboard, onJoin, onShare }) => {
   const renderActionButtons = () => {
     if (isEditing) {
@@ -70,13 +81,14 @@ const GroupHeader = ({ group, isEditing, onEdit, onSave, onCancel, onBack, onInv
     );
   };
 
+  const gradientClass = getGradientColor(group.id);
+
   return (
     <div className="relative h-48">
       <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: group.bannerImage.startsWith('http') ? `url(${group.bannerImage})` : group.bannerImage }}
+        className={`absolute inset-0 bg-gradient-to-r ${gradientClass}`}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
       </div>
       <Button
         variant="ghost"
