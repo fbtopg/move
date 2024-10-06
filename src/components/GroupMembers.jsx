@@ -12,24 +12,30 @@ const GroupMembers = ({ members, onInvite }) => {
         <p className="text-sm text-gray-500 mb-4">No members in this group yet.</p>
         <Button onClick={onInvite} className="flex items-center">
           <UserPlus className="mr-2 h-4 w-4" />
-          Invite Members
+          Invite Friends
         </Button>
       </div>
     );
   }
 
   return (
-    <ul className="space-y-4">
-      {members.map(member => (
-        <li key={member.id} className="flex items-center space-x-3">
-          <Avatar>
-            <AvatarImage src={member.avatar} alt={member.name} />
-            <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-          </Avatar>
-          <span>{member.name}</span>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <ul className="space-y-4 mb-4">
+        {members.map(member => (
+          <li key={member.id} className="flex items-center space-x-3">
+            <Avatar>
+              <AvatarImage src={member.avatar} alt={member.name} />
+              <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
+            </Avatar>
+            <span>{member.name}</span>
+          </li>
+        ))}
+      </ul>
+      <Button onClick={onInvite} className="w-full flex items-center justify-center">
+        <UserPlus className="mr-2 h-4 w-4" />
+        Invite More Friends
+      </Button>
+    </div>
   );
 };
 
