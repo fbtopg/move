@@ -13,13 +13,13 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
           name="name"
           value={group.name}
           onChange={onInputChange}
-          className="text-2xl font-bold mb-2"
+          className="text-2xl font-bold mb-1 text-center"
         />
       ) : (
-        <h2 className="text-2xl font-bold mb-2">{group.name}</h2>
+        <h2 className="text-2xl font-bold mb-1 text-center">{group.name}</h2>
       )}
 
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center justify-center space-x-2">
         {group.isPrivate ? (
           <Lock className="w-4 h-4 text-red-500" />
         ) : (
@@ -35,15 +35,15 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
           name="description"
           value={group.description}
           onChange={onInputChange}
-          className="mt-2"
+          className="mt-2 mb-4"
           rows={4}
         />
       ) : (
-        <p className="text-sm text-muted-foreground mt-2">{group.description}</p>
+        <p className="text-sm text-muted-foreground mt-2 mb-4">{group.description}</p>
       )}
 
-      <div>
-        <h3 className="font-semibold mb-2">Active Challenges</h3>
+      <div className="space-y-4">
+        <h3 className="font-semibold">Active Challenges</h3>
         {group.challenges && group.challenges.length > 0 ? (
           <div className="space-y-2">
             {group.challenges.map(challenge => (
