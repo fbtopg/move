@@ -5,14 +5,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const GroupHeader = ({ group, onEdit, onSave, onCancel, onBack, isEditing, onImageChange }) => (
   <div className="relative h-48">
-    <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600">
+    <div 
+      className="absolute inset-0 bg-cover bg-center"
+      style={{ backgroundImage: `url(${group.bannerImage})` }}
+    >
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       <label htmlFor="banner-upload" className={`absolute bottom-2 right-2 bg-black/50 p-2 rounded-full cursor-pointer ${isEditing ? 'visible' : 'invisible'}`}>
         <Camera className="text-white h-5 w-5" />
         <input
           id="banner-upload"
           type="file"
           className="hidden"
-          onChange={(e) => onImageChange(e, 'image')}
+          onChange={(e) => onImageChange(e, 'bannerImage')}
           accept="image/*"
         />
       </label>

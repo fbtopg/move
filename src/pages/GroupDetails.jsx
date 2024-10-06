@@ -18,6 +18,7 @@ const GroupDetails = () => {
     id: groupId,
     name: location.state?.groupName || 'Group Name',
     image: location.state?.groupImage || 'https://example.com/default-group-image.jpg',
+    bannerImage: location.state?.bannerImage || 'https://example.com/default-banner-image.jpg',
     description: location.state?.groupDescription || 'This is a group description.',
     isPrivate: location.state?.isPrivate || false,
     members: [
@@ -37,13 +38,13 @@ const GroupDetails = () => {
   const [editedGroup, setEditedGroup] = useState({ ...group });
 
   useEffect(() => {
-    // This effect will run when the component mounts and whenever location.state changes
     if (location.state) {
       setGroup(prevGroup => ({
         ...prevGroup,
         name: location.state.groupName || prevGroup.name,
         description: location.state.groupDescription || prevGroup.description,
         isPrivate: location.state.isPrivate || prevGroup.isPrivate,
+        bannerImage: location.state.bannerImage || prevGroup.bannerImage,
       }));
     }
   }, [location.state]);
