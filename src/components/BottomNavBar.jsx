@@ -70,11 +70,9 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
           <li className="absolute left-1/2 transform -translate-x-1/2 -top-6">
             <button
               onClick={toggleQuickstartMenu}
-              className="bg-primary rounded-full w-16 h-16 shadow-lg flex items-center justify-center relative overflow-hidden"
+              className="bg-primary rounded-full w-16 h-16 shadow-lg flex items-center justify-center"
             >
-              <div className="absolute inset-0 bg-primary opacity-75 animate-pulse"></div>
-              <div className="absolute inset-0 bg-gradient-radial from-white/20 to-transparent opacity-75 animate-ping"></div>
-              <Zap className="h-8 w-8 text-primary-foreground stroke-2 relative z-10" />
+              <Zap className="h-8 w-8 text-primary-foreground stroke-2" />
             </button>
           </li>
         </ul>
