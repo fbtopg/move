@@ -152,5 +152,6 @@ const GroupContent = ({ group, isEditing, onSave, onRemoveMember }) => (
       </TabsContent>
     </Tabs>
   </div>
+);
 
 export default GroupDetails;
