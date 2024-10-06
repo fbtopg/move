@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
+import { Crown } from 'lucide-react';
 
 const getGradientColor = (index) => {
   const gradients = [
@@ -16,9 +17,7 @@ const getGradientColor = (index) => {
 
 const CommunityGroupCard = ({ group, index }) => {
   const navigate = useNavigate();
-  const truncateName = (name) => {
-    return name.length > 20 ? name.slice(0, 20) + '...' : name;
-  };
+  const truncateName = (name) => name.length > 20 ? name.slice(0, 20) + '...' : name;
 
   const handleClick = () => {
     navigate(`/group/${group.id}`, { state: { ...group } });
@@ -40,6 +39,9 @@ const CommunityGroupCard = ({ group, index }) => {
             <h3 className="font-semibold text-sm mb-1 truncate text-gray-800 mr-2">{truncateName(group.name)}</h3>
             {group.hasActivity && (
               <span className="w-1.5 h-1.5 bg-green-500 rounded-full mt-1"></span>
+            )}
+            {group.isOwner && (
+              <Crown className="w-4 h-4 text-yellow-500 ml-1" />
             )}
           </div>
           <p className="text-xs text-gray-600 mb-1 line-clamp-2">{group.description}</p>
