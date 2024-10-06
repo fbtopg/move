@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Camera, Lock, Sparkles } from 'lucide-react';
 import { Input } from "@/components/ui/input";
@@ -20,6 +20,21 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   const [isConfirmationStep, setIsConfirmationStep] = useState(false);
   const [showCloseConfirmation, setShowCloseConfirmation] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isOpen) {
+      // Add meta tag to prevent zooming
+      const metaTag = document.createElement('meta');
+      metaTag.name = 'viewport';
+      metaTag.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+      document.head.appendChild(metaTag);
+
+      // Remove meta tag when component unmounts or closes
+      return () => {
+        document.head.removeChild(metaTag);
+      };
+    }
+  }, [isOpen]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
