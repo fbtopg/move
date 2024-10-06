@@ -16,29 +16,29 @@ const GroupCard = ({ group, onClick }) => (
     exit={{ opacity: 0, y: -20 }}
     whileHover={{ scale: 1.05 }}
     onClick={onClick}
-    className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-lg p-4 mb-4 cursor-pointer"
+    className="bg-[#1a1a1d] rounded-lg shadow-lg p-4 mb-4 cursor-pointer"
   >
     <div className="flex items-center mb-2">
-      <Avatar className="h-12 w-12 mr-3 border-2 border-blue-400">
+      <Avatar className="h-12 w-12 mr-3 border-2 border-[#3B72EC]">
         <AvatarImage src={group.image} alt={group.name} />
         <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
       </Avatar>
       <div>
         <h3 className="text-lg font-semibold text-white">{group.name}</h3>
-        <p className="text-sm text-gray-300">{group.members} members</p>
+        <p className="text-sm text-gray-400">{group.members} members</p>
       </div>
     </div>
     <p className="text-sm text-gray-400 mb-3 line-clamp-2">{group.description}</p>
     <div className="flex justify-between items-center">
       <div className="flex -space-x-2">
         {group.memberAvatars.map((avatar, index) => (
-          <Avatar key={index} className="h-6 w-6 border border-gray-800">
+          <Avatar key={index} className="h-6 w-6 border border-[#1a1a1d]">
             <AvatarImage src={avatar} />
             <AvatarFallback>{index + 1}</AvatarFallback>
           </Avatar>
         ))}
       </div>
-      <Button variant="outline" size="sm" className="text-blue-400 border-blue-400 hover:bg-blue-400 hover:text-white transition-colors">
+      <Button variant="outline" size="sm" className="text-[#3B72EC] border-[#3B72EC] hover:bg-[#3B72EC] hover:text-white transition-colors">
         {group.isJoined ? 'Joined' : 'Join'}
       </Button>
     </div>
@@ -67,13 +67,13 @@ const Group = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col">
-      <div className="sticky top-0 z-10 bg-gray-900 px-4 py-2">
+    <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
+      <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 py-2">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Groups</h1>
           <Button
             onClick={handleCreateGroup}
-            className="bg-blue-500 hover:bg-blue-600 transition-colors"
+            className="bg-[#3B72EC] hover:bg-[#3B72EC]/90 transition-colors"
           >
             <Plus className="mr-2 h-4 w-4" /> Create
           </Button>
@@ -81,7 +81,7 @@ const Group = () => {
         
         <div className="relative mb-4">
           <Input
-            className="w-full bg-gray-800 border-gray-700 text-white placeholder-gray-400 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full bg-white border-none text-gray-900 placeholder-gray-500 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B72EC] focus:border-transparent"
             placeholder="Search groups"
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -89,13 +89,13 @@ const Group = () => {
 
         <div className="flex mb-4">
           <Button
-            className={`mr-2 ${activeTab === 'discover' ? 'bg-blue-500' : 'bg-gray-700'}`}
+            className={`mr-2 ${activeTab === 'discover' ? 'bg-[#3B72EC] text-white' : 'bg-gray-200 text-gray-700'}`}
             onClick={() => setActiveTab('discover')}
           >
             Discover
           </Button>
           <Button
-            className={`${activeTab === 'myGroup' ? 'bg-blue-500' : 'bg-gray-700'}`}
+            className={`${activeTab === 'myGroup' ? 'bg-[#3B72EC] text-white' : 'bg-gray-200 text-gray-700'}`}
             onClick={() => setActiveTab('myGroup')}
           >
             My Groups
