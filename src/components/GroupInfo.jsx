@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Lock, Unlock } from 'lucide-react';
 import ChallengeItem from './ChallengeItem';
 
 const GroupInfo = ({ group, isEditing, onInputChange }) => {
@@ -11,11 +12,22 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
           name="name"
           value={group.name}
           onChange={onInputChange}
-          className="text-2xl font-bold mb-1"
+          className="text-2xl font-bold mb-1 text-center"
         />
       ) : (
-        <h2 className="text-2xl font-bold mb-1">{group.name}</h2>
+        <h2 className="text-2xl font-bold mb-1 text-center">{group.name}</h2>
       )}
+
+      <div className="flex items-center justify-center space-x-2">
+        {group.isPrivate ? (
+          <Lock className="w-4 h-4 text-red-500" />
+        ) : (
+          <Unlock className="w-4 h-4 text-green-500" />
+        )}
+        <span className="text-sm font-medium">
+          {group.isPrivate ? 'Private Group' : 'Public Group'}
+        </span>
+      </div>
 
       {isEditing ? (
         <Textarea
