@@ -4,6 +4,8 @@ import { ArrowLeft, Edit2, Users, Info } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import GroupInfo from '../components/GroupInfo';
+import GroupMembers from '../components/GroupMembers';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
@@ -29,14 +31,12 @@ const GroupDetails = () => {
   });
 
   const handleEdit = () => {
-    // Implement edit functionality
     console.log('Edit group');
   };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="relative h-64">
-        <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+      <div className="relative h-48 bg-gradient-to-r from-blue-400 to-blue-600">
         <Button
           variant="ghost"
           size="icon"
@@ -53,11 +53,17 @@ const GroupDetails = () => {
         >
           <Edit2 className="h-6 w-6" />
         </Button>
+        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
+          <Avatar className="w-32 h-32 border-4 border-background">
+            <AvatarImage src={group.image} alt={group.name} />
+            <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
+          </Avatar>
+        </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4">
-        <h1 className="text-2xl font-bold mb-1">{group.name}</h1>
-        <span className={`text-sm ${group.isPrivate ? 'text-red-500' : 'text-green-500'}`}>
+      <div className="flex-1 overflow-y-auto p-4 pt-20">
+        <h1 className="text-2xl font-bold mb-1 text-center">{group.name}</h1>
+        <span className={`text-sm block text-center ${group.isPrivate ? 'text-red-500' : 'text-green-500'}`}>
           {group.isPrivate ? 'Private' : 'Public'}
         </span>
 
@@ -73,40 +79,10 @@ const GroupDetails = () => {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="info">
-            <div className="space-y-4">
-              <p className="text-sm text-muted-foreground">{group.description}</p>
-              
-              <h3 className="font-semibold">Active Challenges</h3>
-              <ul className="space-y-2">
-                {group.challenges.map(challenge => (
-                  <li key={challenge.id} className="text-sm">
-                    {challenge.name} - {challenge.participants} participants
-                  </li>
-                ))}
-              </ul>
-
-              <h3 className="font-semibold">Recent Activities</h3>
-              <ul className="space-y-2">
-                {group.activities.map(activity => (
-                  <li key={activity.id} className="text-sm">
-                    <span className="font-medium">{activity.user}</span> {activity.action} - {activity.time}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <GroupInfo group={group} />
           </TabsContent>
           <TabsContent value="members">
-            <ul className="space-y-4">
-              {group.members.map(member => (
-                <li key={member.id} className="flex items-center space-x-3">
-                  <Avatar>
-                    <AvatarImage src={member.avatar} alt={member.name} />
-                    <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <span>{member.name}</span>
-                </li>
-              ))}
-            </ul>
+            <GroupMembers members={group.members} />
           </TabsContent>
         </Tabs>
       </div>
