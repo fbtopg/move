@@ -19,7 +19,7 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-md">
+      <div className="bg-white rounded-lg p-4 shadow-md">
         {isEditing ? (
           <Input
             name="name"
@@ -55,7 +55,7 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
         )}
       </div>
 
-      <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-md">
+      <div className="bg-white rounded-lg p-4 shadow-md">
         <h3 className="font-semibold mb-3">Active Challenges</h3>
         {group.challenges && group.challenges.length > 0 ? (
           <div className="space-y-2">
@@ -68,7 +68,7 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
         )}
       </div>
 
-      <div className="bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-md">
+      <div className="bg-white rounded-lg p-4 shadow-md">
         <h3 className="font-semibold mb-3">Group Images</h3>
         <div className="grid grid-cols-3 gap-2">
           {groupImages.map((image, index) => (
