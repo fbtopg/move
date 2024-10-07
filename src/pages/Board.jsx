@@ -51,7 +51,9 @@ const Board = () => {
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
         </div>
+      </div>
 
+      <div className="px-4 py-2 bg-[#FEF8F3]">
         <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-white rounded-full p-1">
             <TabsTrigger value="discover" className="rounded-full data-[state=active]:bg-[#3B72EC] data-[state=active]:text-white">
