@@ -80,9 +80,9 @@ const Group = () => {
           <h1 className="text-2xl font-bold">Groups</h1>
           <Button
             onClick={handleCreateGroup}
-            className="bg-[#3B72EC] hover:bg-[#3B72EC]/90 transition-colors"
+            className="bg-[#3B72EC] hover:bg-[#3B72EC]/90 transition-colors rounded-full w-10 h-10 flex items-center justify-center"
           >
-            <Plus className="mr-2 h-4 w-4" /> Create
+            <Plus className="h-6 w-6" />
           </Button>
         </div>
         
