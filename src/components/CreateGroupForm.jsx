@@ -24,7 +24,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
     }
   };
 
-  const glassmorphicStyle = "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-30";
+  const glassmorphicStyle = "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg";
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="space-y-6 flex-grow">
