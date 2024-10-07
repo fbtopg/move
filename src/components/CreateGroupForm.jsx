@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Camera, Globe, MapPin } from 'lucide-react';
+import { Camera, Globe } from 'lucide-react';
 import { Separator } from "@/components/ui/separator";
-import LocationPopup from './LocationPopup';
 
 const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCreateGroup }) => {
-  const [showLocationPopup, setShowLocationPopup] = useState(false);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setGroupData(prev => ({ ...prev, [name]: value }));
@@ -28,14 +25,8 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
     }
   };
 
-  const handleLocationChange = (location) => {
-    setGroupData(prev => ({ ...prev, location }));
-    setShowLocationPopup(false);
-  };
-
   const glassmorphicStyle = "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg";
-  const placeholderStyle = "placeholder:text-white placeholder:text-opacity-60";
-  const descriptionPlaceholderStyle = "placeholder:text-white placeholder:text-opacity-60 placeholder:font-light";
+  const placeholderStyle = "placeholder:text-white placeholder:text-opacity-60 placeholder:font-bold";
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="flex flex-col h-full">
@@ -74,11 +65,11 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
         <div className={`${glassmorphicStyle} p-2`}>
           <Textarea
             name="description"
-            placeholder="Write about your group"
+            placeholder="Description"
             value={groupData.description}
             onChange={handleInputChange}
             rows={3}
-            className={`bg-transparent text-white ${descriptionPlaceholderStyle} border-none resize-none text-base h-24`}
+            className={`bg-transparent text-white ${placeholderStyle} border-none resize-none text-base h-24`}
           />
         </div>
 
@@ -104,30 +95,6 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
               </SelectContent>
             </Select>
           </div>
-          <div className={`flex items-center justify-between p-3 ${glassmorphicStyle}`}>
-            <div className="flex items-center">
-              <MapPin className="text-white h-4 w-4 mr-2" />
-              <span className="text-white text-sm">Location</span>
-            </div>
-            <Select
-              value={groupData.location ? 'choose' : 'anywhere'}
-              onValueChange={(value) => {
-                if (value === 'choose') {
-                  setShowLocationPopup(true);
-                } else {
-                  setGroupData(prev => ({ ...prev, location: null }));
-                }
-              }}
-            >
-              <SelectTrigger className={`bg-transparent border-none text-white w-36 h-10 ${placeholderStyle}`}>
-                <SelectValue placeholder="Anywhere" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="anywhere">Anywhere</SelectItem>
-                <SelectItem value="choose">Choose Location</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
         </div>
       </div>
 
@@ -139,12 +106,6 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
           Create Group
         </Button>
       </div>
-
-      <LocationPopup
-        isOpen={showLocationPopup}
-        onClose={() => setShowLocationPopup(false)}
-        onSelectLocation={handleLocationChange}
-      />
     </form>
   );
 };
