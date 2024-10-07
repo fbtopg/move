@@ -110,7 +110,7 @@ const Community = () => {
               </Avatar>
             </Button>
           </div>
-          <h1 className="text-3xl font-bold text-foreground gabriela-regular">{greeting}</h1>
+          <h1 className="text-3xl font-bold text-foreground libre-baskerville-bold">{greeting}</h1>
         </motion.div>
 
         <motion.div
