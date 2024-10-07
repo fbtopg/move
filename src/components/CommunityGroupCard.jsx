@@ -18,7 +18,7 @@ const getGradientColor = (index) => {
 const CommunityGroupCard = ({ group, index }) => {
   const navigate = useNavigate();
   const truncateName = (name) => name.length > 20 ? name.slice(0, 20) + '...' : name;
-  const truncateDescription = (desc) => desc.length > 30 ? desc.slice(0, 30) + '...' : desc;
+  const truncateDescription = (desc) => desc.length > 80 ? desc.slice(0, 80) + '...' : desc;
 
   const handleClick = () => {
     navigate(`/group/${group.id}`, { state: { ...group } });
@@ -26,7 +26,7 @@ const CommunityGroupCard = ({ group, index }) => {
 
   return (
     <motion.div
-      className="w-full h-64 rounded-xl overflow-hidden relative bg-white shadow-lg cursor-pointer"
+      className="w-full h-72 rounded-xl overflow-hidden relative bg-white shadow-lg cursor-pointer"
       whileHover={{ scale: 1.03, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleClick}
@@ -38,7 +38,7 @@ const CommunityGroupCard = ({ group, index }) => {
           </div>
         )}
       </div>
-      <div className="p-4 flex flex-col h-40 relative">
+      <div className="p-4 flex flex-col h-48 relative">
         <Avatar className="w-20 h-20 border-4 border-white absolute -top-10 left-4">
           <AvatarImage src={group.image} alt={group.name} className="object-cover" />
           <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
@@ -49,7 +49,9 @@ const CommunityGroupCard = ({ group, index }) => {
             <span className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
           )}
         </div>
-        <p className="text-sm text-gray-600 mb-2 truncate">{truncateDescription(group.description)}</p>
+        <p className="text-sm text-gray-600 mb-2 overflow-hidden line-clamp-3">
+          {truncateDescription(group.description)}
+        </p>
         <div className="flex items-center justify-between mt-auto">
           <div className="flex items-center">
             <Users className="w-4 h-4 text-gray-400 mr-1" />
