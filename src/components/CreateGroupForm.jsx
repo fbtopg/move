@@ -32,10 +32,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
   const groupNamePlaceholderStyle = "placeholder:font-semibold";
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 animate-gradient-x"></div>
-      <div className="relative z-10">
-        <form onSubmit={(e) => { e.preventDefault(); if (isFormValid) handleCreateGroup(); }} className="flex flex-col h-full p-6">
+    <form onSubmit={(e) => { e.preventDefault(); if (isFormValid) handleCreateGroup(); }} className="flex flex-col h-full">
       <div className="space-y-4 flex-grow overflow-y-auto pb-6">
         <div className={`relative w-48 h-48 mx-auto overflow-hidden ${glassmorphicStyle} mb-6`}>
           <input
@@ -117,9 +114,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
           Create Group
         </Button>
       </div>
-        </form>
-      </div>
-    </div>
+    </form>
   );
 };
 
