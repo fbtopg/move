@@ -47,7 +47,7 @@ const Group = () => {
       name: 'Fitness Enthusiasts', 
       description: 'Join us for daily workouts, nutrition tips, and fitness challenges. Let\'s achieve our health goals together!', 
       members: 150, 
-      image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/andrealaureati_anime_style_illustration_of_landscape_with_petun_0054dceb-c7d7-4664-87c0-d82dbf362529%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvYW5kcmVhbGF1cmVhdGlfYW5pbWVfc3R5bGVfaWxsdXN0cmF0aW9uX29mX2xhbmRzY2FwZV93aXRoX3BldHVuXzAwNTRkY2ViLWM3ZDctNDY2NC04N2MwLWQ4MmRiZjM2MjUyOSAxLnBuZyIsImlhdCI6MTcyODE5OTk5MywiZXhwIjoxNzU5NzM1OTkzfQ.iyYf_zQEnJKV_EELBpgE4woCebOzaAoHKwnGkiXvU&t=2024-10-06T07%3A33%3A14.727Z', 
+      image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/andrealaureati_anime_style_illustration_of_landscape_with_petun_0054dceb-c7d7-4664-87c0-d82dbf362529%201.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvYW5kcmVhbGF1cmVhdGlfYW5pbWVfc3R5bGVfaWxsdXN0cmF0aW9uX29mX2xhbmRzY2FwZV93aXRoX3BldHVuXzAwNTRkY2ViLWM3ZDctNDY2NC04N2MwLWQ4MmRiZjM2MjUyOSAxLnBuZyIsImlhdCI6MTcyODE5OTk5MywiZXhwIjoxNzU5NzM1OTkzfQ.iyYf_zneUEnJKV_EELBpgE4woCebOzaAoHKwnGkiXvU&t=2024-10-06T07%3A33%3A14.727Z', 
       memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], 
       isOwner: false 
     },
@@ -93,7 +93,7 @@ const Group = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground flex flex-col">
-      <div className="bg-[#FEF8F3] px-4 py-4">
+      <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 py-4 shadow-md">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Groups</h1>
           <Button
@@ -103,9 +103,7 @@ const Group = () => {
             <Plus className="mr-2 h-4 w-4" /> Create
           </Button>
         </div>
-      </div>
-      
-      <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 py-4 shadow-md">
+        
         <div className="relative mb-4">
           <Input
             className="w-full bg-white border-none text-gray-900 placeholder-gray-500 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B72EC] focus:border-transparent"
@@ -115,9 +113,7 @@ const Group = () => {
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
         </div>
-      </div>
 
-      <div className="px-4 py-2 bg-[#FEF8F3]">
         <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-white rounded-full p-1">
             <TabsTrigger value="discover" className="rounded-full data-[state=active]:bg-[#3B72EC] data-[state=active]:text-white">

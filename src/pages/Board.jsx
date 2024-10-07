@@ -33,15 +33,42 @@ const Board = () => {
     challenge.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const ChallengeCard = ({ challenge }) => (
+    <motion.div
+      className="bg-white rounded-lg overflow-hidden shadow-lg"
+      whileHover={{ scale: 1.03 }}
+      transition={{ type: "spring", stiffness: 300, damping: 10 }}
+      onClick={() => navigate(`/${challenge.type}-challenge`)}
+    >
+      <div className="relative h-48">
+        <img src={challenge.image} alt={challenge.title} className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
+          <h3 className="text-white text-xl font-bold">{challenge.title}</h3>
+        </div>
+      </div>
+      <div className="p-4">
+        <p className="text-gray-600 text-sm mb-2">
+          {new Date(challenge.startDate).toLocaleDateString()} - {new Date(challenge.endDate).toLocaleDateString()}
+        </p>
+        <div className="flex justify-between items-center">
+          <span className="text-blue-500 font-semibold">{challenge.participants.toLocaleString()} participants</span>
+          <Button
+            className="bg-[#3B72EC] hover:bg-[#3B72EC]/90 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors"
+          >
+            Join Now
+          </Button>
+        </div>
+      </div>
+    </motion.div>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground flex flex-col">
-      <div className="bg-[#FEF8F3] px-4 py-4">
+      <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 py-4 shadow-md">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Challenges</h1>
         </div>
-      </div>
-      
-      <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 py-4 shadow-md">
+        
         <div className="relative mb-4">
           <Input
             className="w-full bg-white border-none text-gray-900 placeholder-gray-500 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B72EC] focus:border-transparent"
@@ -51,9 +78,7 @@ const Board = () => {
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
         </div>
-      </div>
 
-      <div className="px-4 py-2 bg-[#FEF8F3]">
         <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-white rounded-full p-1">
             <TabsTrigger value="discover" className="rounded-full data-[state=active]:bg-[#3B72EC] data-[state=active]:text-white">
@@ -86,34 +111,5 @@ const Board = () => {
     </div>
   );
 };
-
-  const ChallengeCard = ({ challenge }) => (
-    <motion.div
-      className="bg-white rounded-lg overflow-hidden shadow-lg"
-      whileHover={{ scale: 1.03 }}
-      transition={{ type: "spring", stiffness: 300, damping: 10 }}
-      onClick={() => navigate(`/${challenge.type}-challenge`)}
-    >
-      <div className="relative h-48">
-        <img src={challenge.image} alt={challenge.title} className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
-          <h3 className="text-white text-xl font-bold">{challenge.title}</h3>
-        </div>
-      </div>
-      <div className="p-4">
-        <p className="text-gray-600 text-sm mb-2">
-          {new Date(challenge.startDate).toLocaleDateString()} - {new Date(challenge.endDate).toLocaleDateString()}
-        </p>
-        <div className="flex justify-between items-center">
-          <span className="text-blue-500 font-semibold">{challenge.participants.toLocaleString()} participants</span>
-          <Button
-            className="bg-[#3B72EC] hover:bg-[#3B72EC]/90 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors"
-          >
-            Join Now
-          </Button>
-        </div>
-      </div>
-    </motion.div>
-  );
 
 export default Board;
