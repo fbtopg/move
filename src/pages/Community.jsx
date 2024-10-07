@@ -45,21 +45,73 @@ const Community = () => {
     { id: 3, name: 'Trip', members: 3, image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/KakaoTalk_20240929_105444000_02.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvS2FrYW9UYWxrXzIwMjQwOTI5XzEwNTQ0NDAwMF8wMi5qcGciLCJpYXQiOjE3MjgxOTMwOTAsImV4cCI6MTc1OTcyOTA5MH0.KrJjSiUbjbCTdk5oyKozzdkrtb2ZpQkLcLcPXdIIBT8&t=2024-10-06T05%3A38%3A11.060Z', hasActivity: true, lastActivity: '2h ago', memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], description: 'Plan and share your travel experiences.' },
   ];
 
-  const WalkChallengeBanner = () => (
+  const activities = {
+    today: [
+      { name: "Emma", activity: "finished walking 1km and completed daily walk. • just now", type: "walk", profilePicture: getRandomProfilePicture() },
+      { name: "John", activity: "solved quiz #089 and completed daily quiz. • just now", type: "quiz", profilePicture: getRandomProfilePicture() },
+      { name: "Sarah", activity: "finished walking 1km and completed daily walk. • just now", type: "walk", profilePicture: getRandomProfilePicture() },
+    ],
+    thisMonth: [
+      { name: "Geonu", activity: "finished walking 1km and completed daily walk. • 2d", type: "walk", profilePicture: getRandomProfilePicture() },
+      { name: "Astrid", activity: "finished walking 1km and completed daily walk. • 5d", type: "walk", profilePicture: getRandomProfilePicture() },
+      { name: "Fitra", activity: "solved quiz #089 and completed daily quiz. • 1w", type: "quiz", profilePicture: getRandomProfilePicture() },
+    ],
+    earlier: [
+      { name: "Rissa", activity: "solved quiz #089 and completed daily quiz. • 2w", type: "quiz", profilePicture: getRandomProfilePicture() },
+      { name: "John", activity: "finished walking 1km and completed daily walk. • 3w", type: "walk", profilePicture: getRandomProfilePicture() },
+    ],
+  };
+
+  const renderActivitySection = (title, activities) => (
     <motion.div
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.3 }}
-      className="bg-blue-500 text-white p-4 mb-6 shadow-md w-screen -mx-4"
+      transition={{ duration: 0.5 }}
+      className="bg-white rounded-lg shadow-md p-4 mb-6"
     >
-      <h2 className="text-xl font-bold text-center">Daily Walk Challenge</h2>
-      <p className="text-center">Walk 10,000 steps every day for 30 days</p>
+      <h2 className="text-lg font-semibold mb-4 text-gray-800">{title}</h2>
+      <div className="space-y-4">
+        {activities.map((activity, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
+          >
+            <FriendActivity
+              name={activity.name}
+              activity={activity.activity}
+              type={activity.type}
+              profilePicture={activity.profilePicture}
+              onUserClick={() => handleUserClick(activity)}
+            />
+          </motion.div>
+        ))}
+      </div>
     </motion.div>
   );
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
       <div className="px-4 pt-8 pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex justify-between items-center mb-6"
+        >
+          <h1 className="text-3xl font-bold text-foreground">{greeting}</h1>
+          <Button
+            onClick={() => navigate('/profile')}
+            className="bg-white hover:bg-gray-100 transition-colors h-12 w-12 rounded-full flex items-center justify-center shadow-md"
+          >
+            <Avatar className="h-10 w-10">
+              <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" alt="Profile" />
+              <AvatarFallback>PF</AvatarFallback>
+            </Avatar>
+          </Button>
+        </motion.div>
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -91,8 +143,6 @@ const Community = () => {
           </div>
         </motion.div>
 
-        <WalkChallengeBanner />
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -103,34 +153,45 @@ const Community = () => {
           <SwipeableGroupCards groups={myGroups} />
         </motion.div>
 
-        <AnimatePresence>
-          {selectedUser && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <UserProfilePopup
-                isOpen={!!selectedUser}
-                onClose={() => setSelectedUser(null)}
-                user={selectedUser}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <SearchPage
-          isOpen={isSearchOpen}
-          onClose={() => setIsSearchOpen(false)}
-          searchTerm=""
-          setSearchTerm={() => {}}
-        />
-
-        <CreateGroupModal
-          isOpen={isCreateGroupModalOpen}
-          onClose={() => setIsCreateGroupModalOpen(false)}
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="space-y-6"
+        >
+          {renderActivitySection("Recent Activity", activities.today)}
+          {renderActivitySection("This Month", activities.thisMonth)}
+          {renderActivitySection("Earlier", activities.earlier)}
+        </motion.div>
       </div>
+
+      <AnimatePresence>
+        {selectedUser && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <UserProfilePopup
+              isOpen={!!selectedUser}
+              onClose={() => setSelectedUser(null)}
+              user={selectedUser}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <SearchPage
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        searchTerm=""
+        setSearchTerm={() => {}}
+      />
+
+      <CreateGroupModal
+        isOpen={isCreateGroupModalOpen}
+        onClose={() => setIsCreateGroupModalOpen(false)}
+      />
     </div>
   );
 };
