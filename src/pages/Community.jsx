@@ -97,18 +97,20 @@ const Community = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex justify-between items-center mb-6"
+          className="flex flex-col items-start mb-6"
         >
+          <div className="w-full flex justify-end mb-4">
+            <Button
+              onClick={() => navigate('/profile')}
+              className="bg-white hover:bg-gray-100 transition-colors h-12 w-12 rounded-full flex items-center justify-center shadow-md"
+            >
+              <Avatar className="h-10 w-10">
+                <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" alt="Profile" />
+                <AvatarFallback>PF</AvatarFallback>
+              </Avatar>
+            </Button>
+          </div>
           <h1 className="text-3xl font-bold text-foreground gabriela-regular">{greeting}</h1>
-          <Button
-            onClick={() => navigate('/profile')}
-            className="bg-white hover:bg-gray-100 transition-colors h-12 w-12 rounded-full flex items-center justify-center shadow-md"
-          >
-            <Avatar className="h-10 w-10">
-              <AvatarImage src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z" alt="Profile" />
-              <AvatarFallback>PF</AvatarFallback>
-            </Avatar>
-          </Button>
         </motion.div>
 
         <motion.div
