@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -6,12 +6,20 @@ import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, A
 import { initialGroupData, validateForm } from '../utils/createGroupUtils.jsx';
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
+import { getRandomGradient } from '../utils/gradientUtils';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupData, setGroupData] = useState(initialGroupData);
   const [errors, setErrors] = useState({});
   const [showCloseConfirmation, setShowCloseConfirmation] = useState(false);
+  const [backgroundGradient, setBackgroundGradient] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isOpen) {
+      setBackgroundGradient(getRandomGradient());
+    }
+  }, [isOpen]);
 
   const handleCreateGroup = () => {
     const newErrors = validateForm(groupData);
@@ -71,12 +79,12 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             animate="visible"
             exit="exit"
             variants={modalVariants}
-            className="fixed inset-0 bg-[#8B4513] text-white z-50 overflow-y-auto"
+            className={`fixed inset-0 text-white z-50 overflow-y-auto ${backgroundGradient}`}
           >
             <div className="min-h-screen p-6 flex flex-col">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-3xl font-bold">Create Group</h2>
-                <Button variant="ghost" size="icon" onClick={handleClose} className="text-white hover:bg-[#A0522D] rounded-full">
+                <Button variant="ghost" size="icon" onClick={handleClose} className="text-white hover:bg-white/20 rounded-full">
                   <X className="h-6 w-6" />
                 </Button>
               </div>
