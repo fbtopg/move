@@ -83,10 +83,11 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           >
             <div className="min-h-screen p-6 flex flex-col">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-3xl font-bold">Create Group</h2>
                 <Button variant="ghost" size="icon" onClick={handleClose} className="text-white hover:bg-white/20 rounded-full">
                   <X className="h-6 w-6" />
                 </Button>
+                <h2 className="text-2xl font-light text-center flex-grow">Create Group</h2>
+                <div className="w-10"></div> {/* This empty div balances the close button */}
               </div>
 
               <CreateGroupForm
