@@ -31,19 +31,19 @@ const CommunityGroupCard = ({ group, index }) => {
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleClick}
     >
-      <div className={`h-24 bg-gradient-to-r ${getGradientColor(index)} relative flex items-center justify-center`}>
-        <Avatar className="w-20 h-20 border-4 border-white">
-          <AvatarImage src={group.image} alt={group.name} className="object-cover" />
-          <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
-        </Avatar>
+      <div className={`h-24 bg-gradient-to-r ${getGradientColor(index)} relative`}>
         {group.isOwner && (
           <div className="absolute top-2 right-2 bg-yellow-400 rounded-full p-1">
             <Crown className="w-4 h-4 text-white" />
           </div>
         )}
       </div>
-      <div className="p-4 flex flex-col h-40">
-        <div className="flex items-center justify-between mb-2">
+      <div className="p-4 flex flex-col h-40 relative">
+        <Avatar className="w-20 h-20 border-4 border-white absolute -top-10 left-4">
+          <AvatarImage src={group.image} alt={group.name} className="object-cover" />
+          <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
+        </Avatar>
+        <div className="flex items-center justify-between mb-2 mt-12">
           <h3 className="font-semibold text-lg text-gray-800 truncate">{truncateName(group.name)}</h3>
           {group.hasActivity && (
             <span className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
