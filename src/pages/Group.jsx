@@ -93,7 +93,7 @@ const Group = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground flex flex-col">
-      <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 py-4 shadow-md">
+      <div className="bg-[#FEF8F3] px-4 py-4 shadow-md">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Groups</h1>
           <Button
