@@ -1,80 +1,115 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Lock, Sparkles, Camera } from 'lucide-react';
+import { handleImageUpload } from '../utils/imageUtils';
 import Cropper from 'react-easy-crop';
 
-const CreateGroupForm = ({ groupData, errors, handleInputChange, handleImageChange, crop, setCrop, zoom, setZoom, onCropComplete }) => (
-  <form onSubmit={(e) => { e.preventDefault(); }}>
-    <Input
-      name="name"
-      placeholder="Group Name"
-      value={groupData.name}
-      onChange={handleInputChange}
-      className={`mb-1 ${errors.name ? 'border-red-500' : ''}`}
-    />
-    {errors.name && <p className="text-red-500 text-xs mb-4">{errors.name}</p>}
+const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCreateGroup }) => {
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
 
-    <div className="relative mb-1 h-60">
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-        className="hidden"
-        id="groupImageUpload"
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setGroupData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
+  };
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        const imageUrl = await handleImageUpload(file);
+        setGroupData(prev => ({ ...prev, image: imageUrl }));
+        if (errors.image) setErrors(prev => ({ ...prev, image: '' }));
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+    }
+  };
+
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    // Handle crop complete
+  }, []);
+
+  return (
+    <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="space-y-6 flex-grow">
+      <Input
+        name="name"
+        placeholder="Group Name"
+        value={groupData.name}
+        onChange={handleInputChange}
+        className={`mb-1 bg-white border-gray-300 rounded-lg shadow-sm ${errors.name ? 'border-red-500' : ''}`}
       />
-      {groupData.image ? (
-        <Cropper
-          image={groupData.image}
-          crop={crop}
-          zoom={zoom}
-          aspect={1}
-          onCropChange={setCrop}
-          onCropComplete={onCropComplete}
-          onZoomChange={setZoom}
+      {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
+
+      <div className="relative h-60 bg-white rounded-lg border border-gray-300 shadow-sm overflow-hidden">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="hidden"
+          id="groupImageUpload"
         />
-      ) : (
-        <label
-          htmlFor="groupImageUpload"
-          className={`flex items-center justify-center w-full h-full border-2 border-dashed rounded-lg cursor-pointer hover:border-primary transition-colors ${errors.image ? 'border-red-500' : 'border-input'}`}
-        >
-          <div className="text-center">
-            <Camera className="mx-auto h-12 w-12 text-muted-foreground mb-2" />
-            <p className="text-sm text-muted-foreground">Upload Group Image</p>
-          </div>
-        </label>
-      )}
-    </div>
-    {errors.image && <p className="text-red-500 text-xs mb-4">{errors.image}</p>}
+        {groupData.image ? (
+          <Cropper
+            image={groupData.image}
+            crop={crop}
+            zoom={zoom}
+            aspect={1}
+            onCropChange={setCrop}
+            onCropComplete={onCropComplete}
+            onZoomChange={setZoom}
+          />
+        ) : (
+          <label
+            htmlFor="groupImageUpload"
+            className="flex items-center justify-center w-full h-full cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors"
+          >
+            <div className="text-center">
+              <Camera className="mx-auto h-12 w-12 text-gray-400 mb-2" />
+              <p className="text-sm text-gray-500">Upload Group Image</p>
+            </div>
+          </label>
+        )}
+      </div>
+      {errors.image && <p className="text-red-500 text-xs">{errors.image}</p>}
 
-    <Textarea
-      name="description"
-      placeholder="Group Description"
-      value={groupData.description}
-      onChange={handleInputChange}
-      rows={4}
-      className="mb-4"
-    />
-
-    <div className="flex items-center space-x-2 mb-6">
-      <Switch
-        id="private-mode"
-        name="isPrivate"
-        checked={groupData.isPrivate}
-        onCheckedChange={(checked) => handleInputChange({ target: { name: 'isPrivate', type: 'checkbox', checked } })}
+      <Textarea
+        name="description"
+        placeholder="Group Description"
+        value={groupData.description}
+        onChange={handleInputChange}
+        rows={4}
+        className="bg-white border-gray-300 rounded-lg shadow-sm resize-none"
       />
-      <label htmlFor="private-mode" className="text-sm font-medium leading-none">
-        <Lock className="inline-block mr-2 h-4 w-4" />
-        Private Group
-      </label>
-    </div>
 
-    <Button type="submit" className="w-full">
-      Create Group <Sparkles className="ml-2 h-4 w-4" />
-    </Button>
-  </form>
-);
+      <div className="flex items-center space-x-2 bg-white p-3 rounded-lg shadow-sm">
+        <Switch
+          id="private-mode"
+          name="isPrivate"
+          checked={groupData.isPrivate}
+          onCheckedChange={(checked) => setGroupData(prev => ({ ...prev, isPrivate: checked }))}
+        />
+        <label htmlFor="private-mode" className="text-sm font-medium text-gray-700 flex items-center">
+          <Lock className="inline-block mr-2 h-4 w-4" />
+          Private Group
+        </label>
+      </div>
+
+      <Button 
+        type="submit" 
+        className="w-full bg-[#3B72EC] hover:bg-[#3B72EC]/90 text-white rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105"
+      >
+        Create Group <Sparkles className="ml-2 h-4 w-4" />
+      </Button>
+    </form>
+  );
+};
 
 export default CreateGroupForm;
