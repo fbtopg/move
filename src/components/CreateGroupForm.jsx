@@ -48,29 +48,29 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
         )}
       </div>
 
-      <div className={glassmorphicStyle}>
+      <div className={`${glassmorphicStyle} p-2`}>
         <Input
           name="name"
           placeholder="Group Name"
           value={groupData.name}
           onChange={handleInputChange}
-          className={`mb-1 bg-transparent text-white placeholder-gray-300 border-none ${errors.name ? 'border-red-500' : ''}`}
+          className={`mb-1 bg-transparent text-white placeholder-gray-400 border-none text-lg h-14 ${errors.name ? 'border-red-500' : ''}`}
         />
       </div>
       {errors.name && <p className="text-red-300 text-xs">{errors.name}</p>}
 
-      <div className={glassmorphicStyle}>
+      <div className={`${glassmorphicStyle} p-2`}>
         <Textarea
           name="description"
           placeholder="Description"
           value={groupData.description}
           onChange={handleInputChange}
           rows={4}
-          className="bg-transparent text-white placeholder-gray-300 border-none resize-none"
+          className="bg-transparent text-white placeholder-gray-400 border-none resize-none text-lg h-32"
         />
       </div>
 
-      <div className={`flex items-center justify-between p-3 ${glassmorphicStyle}`}>
+      <div className={`flex items-center justify-between p-4 ${glassmorphicStyle}`}>
         <div className="flex items-center">
           <Globe className="text-white h-5 w-5 mr-2" />
           <span className="text-white">Visibility</span>
@@ -79,7 +79,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
           value={groupData.isPrivate ? 'private' : 'public'}
           onValueChange={(value) => setGroupData(prev => ({ ...prev, isPrivate: value === 'private' }))}
         >
-          <SelectTrigger className="bg-transparent border-none text-white w-24">
+          <SelectTrigger className="bg-transparent border-none text-white w-28 h-12">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -91,7 +91,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
 
       <Button 
         type="submit" 
-        className={`w-full text-white rounded-lg shadow-md transition-all duration-300 ease-in-out ${glassmorphicStyle}`}
+        className={`w-full text-white rounded-lg shadow-md transition-all duration-300 ease-in-out h-14 text-lg ${glassmorphicStyle}`}
       >
         Create Group
       </Button>
