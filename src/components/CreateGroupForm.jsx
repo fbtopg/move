@@ -26,7 +26,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
   };
 
   const glassmorphicStyle = "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg";
-  const placeholderStyle = "placeholder:text-white placeholder:text-opacity-60 placeholder:font-bold";
+  const placeholderStyle = "placeholder:text-white placeholder:text-opacity-60 placeholder:font-light";
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="flex flex-col h-full">
@@ -65,7 +65,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
         <div className={`${glassmorphicStyle} p-2`}>
           <Textarea
             name="description"
-            placeholder="Description"
+            placeholder="Write about your group"
             value={groupData.description}
             onChange={handleInputChange}
             rows={3}
