@@ -12,14 +12,14 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
     setLiked(!liked);
   };
 
-  const getActivityGradient = () => {
+  const getActivityIcon = () => {
     switch (type) {
       case 'walk':
-        return 'bg-gradient-to-br from-blue-400 to-blue-600';
+        return '🚶';
       case 'quiz':
-        return 'bg-gradient-to-br from-yellow-400 to-yellow-600';
+        return '🧠';
       default:
-        return 'bg-gradient-to-br from-gray-400 to-gray-600';
+        return '📅';
     }
   };
 
@@ -27,7 +27,7 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
 
   return (
     <motion.div 
-      className="bg-white rounded-lg shadow-sm p-4 mb-4"
+      className="py-4"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
@@ -51,10 +51,9 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
             </div>
           </div>
           <div className="flex justify-between items-center mt-3">
-            <div 
-              className={`w-8 h-8 rounded-full ${getActivityGradient()} flex items-center justify-center`}
-            >
-              {type === 'walk' ? '🚶' : '🧠'}
+            <div className="flex items-center space-x-2">
+              <span className="text-xl">{getActivityIcon()}</span>
+              <span className="text-sm text-gray-600">{type.charAt(0).toUpperCase() + type.slice(1)}</span>
             </div>
             <Button 
               variant="ghost" 

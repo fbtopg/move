@@ -55,16 +55,20 @@ const Me = () => {
   const renderActivitySection = (title, activities) => (
     <>
       <h2 className="text-xs font-semibold mb-3 text-gray-400">{title}</h2>
-      <div className="space-y-4">
+      <div className="space-y-0">
         {activities.map((activity, index) => (
-          <FriendActivity
-            key={index}
-            name={activity.name}
-            activity={activity.activity}
-            type={activity.type}
-            profilePicture={userProfilePicture}
-            isOwnActivity={true}
-          />
+          <React.Fragment key={index}>
+            <FriendActivity
+              name={activity.name}
+              activity={activity.activity}
+              type={activity.type}
+              profilePicture={userProfilePicture}
+              isOwnActivity={true}
+            />
+            {index < activities.length - 1 && (
+              <div className="h-px bg-gray-200 my-2" />
+            )}
+          </React.Fragment>
         ))}
       </div>
     </>
@@ -113,9 +117,9 @@ const Me = () => {
 
       <section className="mt-4 pb-20 space-y-6">
         {renderActivitySection("TODAY", todayActivities)}
-        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6"></div>
+        <div className="h-px bg-gray-300 my-6" />
         {renderActivitySection("THIS MONTH", thisMonthActivities)}
-        <div className="relative w-screen left-1/2 -translate-x-1/2 h-px bg-[#212124] my-6"></div>
+        <div className="h-px bg-gray-300 my-6" />
         {renderActivitySection("EARLIER", earlierActivities)}
       </section>
     </>
