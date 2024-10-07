@@ -116,3 +116,9 @@
     opacity: 0.5;
   }
 }
+
+.gabriela-regular {
+  font-family: "Gabriela", serif;
+  font-weight: 400;
+  font-style: normal;
+}

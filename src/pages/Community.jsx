@@ -100,7 +100,7 @@ const Community = () => {
           transition={{ duration: 0.5 }}
           className="flex justify-between items-center mb-6"
         >
-          <h1 className="text-3xl font-bold text-foreground">{greeting}</h1>
+          <h1 className="text-3xl font-bold text-foreground gabriela-regular">{greeting}</h1>
           <Button
             onClick={() => navigate('/profile')}
             className="bg-white hover:bg-gray-100 transition-colors h-12 w-12 rounded-full flex items-center justify-center shadow-md"
