@@ -25,6 +25,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
   };
 
   const glassmorphicStyle = "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg";
+  const placeholderStyle = "placeholder:text-white placeholder:text-opacity-60 placeholder:font-bold";
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="space-y-6 flex-grow">
@@ -54,7 +55,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
           placeholder="Group Name"
           value={groupData.name}
           onChange={handleInputChange}
-          className={`mb-1 bg-transparent text-white placeholder-gray-400 border-none text-lg h-14 ${errors.name ? 'border-red-500' : ''}`}
+          className={`mb-1 bg-transparent text-white ${placeholderStyle} border-none text-lg h-14 ${errors.name ? 'border-red-500' : ''}`}
         />
       </div>
       {errors.name && <p className="text-red-300 text-xs">{errors.name}</p>}
@@ -66,7 +67,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
           value={groupData.description}
           onChange={handleInputChange}
           rows={4}
-          className="bg-transparent text-white placeholder-gray-400 border-none resize-none text-lg h-32"
+          className={`bg-transparent text-white ${placeholderStyle} border-none resize-none text-lg h-32`}
         />
       </div>
 
@@ -79,7 +80,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
           value={groupData.isPrivate ? 'private' : 'public'}
           onValueChange={(value) => setGroupData(prev => ({ ...prev, isPrivate: value === 'private' }))}
         >
-          <SelectTrigger className="bg-transparent border-none text-white w-28 h-12">
+          <SelectTrigger className={`bg-transparent border-none text-white w-28 h-12 ${placeholderStyle}`}>
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
