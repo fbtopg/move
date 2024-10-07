@@ -18,7 +18,7 @@ const getGradientColor = (index) => {
 const CommunityGroupCard = ({ group, index }) => {
   const navigate = useNavigate();
   const truncateName = (name) => name.length > 20 ? name.slice(0, 20) + '...' : name;
-  const truncateDescription = (desc) => desc.length > 50 ? desc.slice(0, 50) + '...' : desc;
+  const truncateDescription = (desc) => desc.length > 30 ? desc.slice(0, 30) + '...' : desc;
 
   const handleClick = () => {
     navigate(`/group/${group.id}`, { state: { ...group } });
@@ -49,7 +49,7 @@ const CommunityGroupCard = ({ group, index }) => {
             <span className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
           )}
         </div>
-        <p className="text-sm text-gray-600 mb-2 line-clamp-2 flex-grow">{truncateDescription(group.description)}</p>
+        <p className="text-sm text-gray-600 mb-2 truncate">{truncateDescription(group.description)}</p>
         <div className="flex items-center justify-between mt-auto">
           <div className="flex items-center">
             <Users className="w-4 h-4 text-gray-400 mr-1" />
