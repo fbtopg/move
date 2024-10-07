@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import GroupCard from '../components/GroupCard';
 import { getRandomProfilePicture } from '../utils/profilePictures';
@@ -27,7 +27,7 @@ const MyGroups = () => {
         <h1 className="text-2xl font-bold mb-6">My Groups</h1>
         <div className="grid grid-cols-2 gap-4">
           <GroupCard
-            group={{ name: 'New group', members: 0, image: '' }}
+            group={{ name: 'New group', members: 0 }}
             onClick={handleCreateGroup}
             isNewGroup={true}
           />
