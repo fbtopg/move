@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import { initialGroupData, validateForm } from '../utils/createGroupUtils.jsx';
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
-import { getRandomGradient } from '../utils/gradientUtils';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupData, setGroupData] = useState(initialGroupData);
   const [errors, setErrors] = useState({});
-  const [backgroundGradient, setBackgroundGradient] = useState('');
   const navigate = useNavigate();
   const y = useMotionValue(0);
   const opacity = useTransform(y, [0, 200], [1, 0]);
-
-  useEffect(() => {
-    if (isOpen) {
-      setBackgroundGradient(getRandomGradient());
-    }
-  }, [isOpen]);
 
   const handleCreateGroup = () => {
     const newErrors = validateForm(groupData);
@@ -65,6 +57,8 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     }
   };
 
+  const backgroundImageUrl = "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/Frame%20427319179.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvRnJhbWUgNDI3MzE5MTc5LnBuZyIsImlhdCI6MTcyODI4OTY4NywiZXhwIjoxNzU5ODI1Njg3fQ.DpCu4UnA89z3qhs6M3U5fJRGC9Fs28cs0SeIXB5E5CY&t=2024-10-07T08%3A28%3A07.691Z";
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -78,9 +72,17 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           dragConstraints={{ top: 0, bottom: 0 }}
           onDragEnd={handleDragEnd}
           style={{ y, opacity }}
-          className={`fixed inset-0 text-white z-50 overflow-y-auto ${backgroundGradient}`}
+          className="fixed inset-0 text-white z-50 overflow-y-auto"
         >
-          <div className="min-h-screen p-6 flex flex-col">
+          <div 
+            className="min-h-screen p-6 flex flex-col"
+            style={{
+              backgroundImage: `url(${backgroundImageUrl})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
             <h2 className="text-lg font-light text-center mb-4">Create Group</h2>
 
             <CreateGroupForm
