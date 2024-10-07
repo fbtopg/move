@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { Settings, Sparkles, Beaker, FileSearch, Music, Smartphone, LayoutGrid, Trophy, Medal, Star } from "lucide-react";
+import { Settings, Trophy, Sparkles, Medal, Star, FileSearch, Smartphone } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import FeatureButton from '../components/FeatureButton';
 
