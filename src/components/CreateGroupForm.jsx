@@ -75,7 +75,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
       <Separator className="my-6 bg-white bg-opacity-20" />
 
       <div className="space-y-4">
-        <h3 className="text-white text-lg font-semibold">Advanced Options</h3>
+        <h3 className="text-white text-base font-semibold">Advanced Options</h3>
         <div className={`flex items-center justify-between p-3 ${glassmorphicStyle}`}>
           <div className="flex items-center">
             <Globe className="text-white h-4 w-4 mr-2" />
