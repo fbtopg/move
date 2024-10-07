@@ -24,9 +24,11 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
     }
   };
 
+  const glassmorphicStyle = "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-30 shadow-lg";
+
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="space-y-6 flex-grow">
-      <div className="relative w-48 h-48 mx-auto bg-[#A0522D] rounded-lg overflow-hidden">
+      <div className={`relative w-48 h-48 mx-auto overflow-hidden ${glassmorphicStyle}`}>
         <input
           type="file"
           accept="image/*"
@@ -46,25 +48,29 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
         )}
       </div>
 
-      <Input
-        name="name"
-        placeholder="Group Name"
-        value={groupData.name}
-        onChange={handleInputChange}
-        className={`mb-1 bg-[#A0522D] text-white placeholder-gray-300 border-none rounded-lg ${errors.name ? 'border-red-500' : ''}`}
-      />
+      <div className={glassmorphicStyle}>
+        <Input
+          name="name"
+          placeholder="Group Name"
+          value={groupData.name}
+          onChange={handleInputChange}
+          className={`mb-1 bg-transparent text-white placeholder-gray-300 border-none ${errors.name ? 'border-red-500' : ''}`}
+        />
+      </div>
       {errors.name && <p className="text-red-300 text-xs">{errors.name}</p>}
 
-      <Textarea
-        name="description"
-        placeholder="Description"
-        value={groupData.description}
-        onChange={handleInputChange}
-        rows={4}
-        className="bg-[#A0522D] text-white placeholder-gray-300 border-none rounded-lg resize-none"
-      />
+      <div className={glassmorphicStyle}>
+        <Textarea
+          name="description"
+          placeholder="Description"
+          value={groupData.description}
+          onChange={handleInputChange}
+          rows={4}
+          className="bg-transparent text-white placeholder-gray-300 border-none resize-none"
+        />
+      </div>
 
-      <div className="flex items-center justify-between bg-[#A0522D] p-3 rounded-lg">
+      <div className={`flex items-center justify-between p-3 ${glassmorphicStyle}`}>
         <div className="flex items-center">
           <Globe className="text-white h-5 w-5 mr-2" />
           <span className="text-white">Visibility</span>
@@ -85,7 +91,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
 
       <Button 
         type="submit" 
-        className="w-full bg-[#D2691E] hover:bg-[#CD853F] text-white rounded-lg shadow-md transition-all duration-300 ease-in-out"
+        className={`w-full text-white rounded-lg shadow-md transition-all duration-300 ease-in-out ${glassmorphicStyle}`}
       >
         Create Group
       </Button>

@@ -86,8 +86,8 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                 <Button variant="ghost" size="icon" onClick={handleClose} className="text-white hover:bg-white/20 rounded-full">
                   <X className="h-6 w-6" />
                 </Button>
-                <h2 className="text-2xl font-light text-center flex-grow">Create Group</h2>
-                <div className="w-10"></div> {/* This empty div balances the close button */}
+                <h2 className="text-xl font-light text-center flex-grow">Create Group</h2>
+                <div className="w-10"></div>
               </div>
 
               <CreateGroupForm
