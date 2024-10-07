@@ -72,22 +72,45 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     }
   };
 
+  const modalVariants = {
+    hidden: { y: "100%", opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { 
+        type: "spring",
+        damping: 25,
+        stiffness: 500
+      }
+    },
+    exit: { 
+      y: "100%", 
+      opacity: 0,
+      transition: { 
+        type: "spring",
+        damping: 25,
+        stiffness: 500
+      }
+    }
+  };
+
   return (
     <>
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
+            key="modal"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={modalVariants}
             className="fixed inset-0 bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground z-50 overflow-y-auto"
           >
             <div className="min-h-screen p-6 flex flex-col">
               <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
+                transition={{ delay: 0.2 }}
                 className="flex justify-between items-center mb-6"
               >
                 <h2 className="text-3xl font-bold text-gray-800">Create Group</h2>
@@ -99,7 +122,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
               <motion.form 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.3 }}
                 onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} 
                 className="space-y-6 flex-grow"
               >
