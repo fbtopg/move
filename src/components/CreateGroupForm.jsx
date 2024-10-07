@@ -25,7 +25,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
   };
 
   const glassmorphicStyle = "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg";
-  const placeholderStyle = "placeholder:text-white/60 placeholder:font-bold placeholder:text-lg placeholder:tracking-wide";
+  const placeholderStyle = "placeholder:text-white placeholder:text-opacity-60 placeholder:font-bold";
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="space-y-4 flex-grow">
@@ -49,29 +49,29 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
         )}
       </div>
 
-      <div className={`${glassmorphicStyle} p-2 rounded-lg`}>
+      <div className={`${glassmorphicStyle} p-2`}>
         <Input
           name="name"
-          placeholder="Name"
+          placeholder="Group Name"
           value={groupData.name}
           onChange={handleInputChange}
-          className={`mb-1 bg-transparent text-white ${placeholderStyle} border-none text-base h-12 rounded-lg ${errors.name ? 'border-red-500' : ''}`}
+          className={`mb-1 bg-transparent text-white ${placeholderStyle} border-none text-base h-12 ${errors.name ? 'border-red-500' : ''}`}
         />
       </div>
       {errors.name && <p className="text-red-300 text-xs">{errors.name}</p>}
 
-      <div className={`${glassmorphicStyle} p-2 rounded-lg`}>
+      <div className={`${glassmorphicStyle} p-2`}>
         <Textarea
           name="description"
           placeholder="Description"
           value={groupData.description}
           onChange={handleInputChange}
           rows={3}
-          className={`bg-transparent text-white ${placeholderStyle} border-none resize-none text-base h-24 rounded-lg`}
+          className={`bg-transparent text-white ${placeholderStyle} border-none resize-none text-base h-24`}
         />
       </div>
 
-      <div className={`flex items-center justify-between p-3 ${glassmorphicStyle} rounded-lg`}>
+      <div className={`flex items-center justify-between p-3 ${glassmorphicStyle}`}>
         <div className="flex items-center">
           <Globe className="text-white h-4 w-4 mr-2" />
           <span className="text-white text-sm">Visibility</span>
@@ -80,7 +80,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
           value={groupData.isPrivate ? 'private' : 'public'}
           onValueChange={(value) => setGroupData(prev => ({ ...prev, isPrivate: value === 'private' }))}
         >
-          <SelectTrigger className={`bg-transparent border-none text-white w-24 h-10 ${placeholderStyle} rounded-lg`}>
+          <SelectTrigger className={`bg-transparent border-none text-white w-24 h-10 ${placeholderStyle}`}>
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
