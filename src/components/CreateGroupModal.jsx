@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import { initialGroupData, validateForm } from '../utils/createGroupUtils.jsx';
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
+import { getRandomGradient } from '../utils/gradientUtils';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupData, setGroupData] = useState(initialGroupData);
   const [errors, setErrors] = useState({});
+  const [backgroundGradient, setBackgroundGradient] = useState('');
   const navigate = useNavigate();
   const y = useMotionValue(0);
   const opacity = useTransform(y, [0, 200], [1, 0]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setBackgroundGradient(getRandomGradient());
+    }
+  }, [isOpen]);
 
   const handleCreateGroup = () => {
     const newErrors = validateForm(groupData);
@@ -70,10 +78,10 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           dragConstraints={{ top: 0, bottom: 0 }}
           onDragEnd={handleDragEnd}
           style={{ y, opacity }}
-          className="fixed inset-0 z-50 overflow-y-auto bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0]"
+          className={`fixed inset-0 text-white z-50 overflow-y-auto ${backgroundGradient}`}
         >
           <div className="min-h-screen p-6 flex flex-col">
-            <h2 className="text-lg font-semibold text-center mb-4 text-gray-800">Create Group</h2>
+            <h2 className="text-lg font-light text-center mb-4">Create Group</h2>
 
             <CreateGroupForm
               groupData={groupData}
