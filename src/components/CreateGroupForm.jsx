@@ -56,7 +56,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
           placeholder="Group Name"
           value={groupData.name}
           onChange={handleInputChange}
-          className={`mb-1 bg-transparent text-white ${placeholderStyle} border-none text-base h-12 ${errors.name ? 'border-red-500' : ''}`}
+          className={`mb-1 bg-transparent text-white ${placeholderStyle} border-none text-base h-10 ${errors.name ? 'border-red-500' : ''}`}
         />
       </div>
       {errors.name && <p className="text-red-300 text-xs">{errors.name}</p>}
