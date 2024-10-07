@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Camera, Globe } from 'lucide-react';
+import { Separator } from "@/components/ui/separator";
 
 const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCreateGroup }) => {
   const handleInputChange = (e) => {
@@ -71,23 +72,28 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
         />
       </div>
 
-      <div className={`flex items-center justify-between p-3 ${glassmorphicStyle}`}>
-        <div className="flex items-center">
-          <Globe className="text-white h-4 w-4 mr-2" />
-          <span className="text-white text-sm">Visibility</span>
+      <Separator className="my-6 bg-white bg-opacity-20" />
+
+      <div className="space-y-4">
+        <h3 className="text-white text-lg font-semibold">Advanced Options</h3>
+        <div className={`flex items-center justify-between p-3 ${glassmorphicStyle}`}>
+          <div className="flex items-center">
+            <Globe className="text-white h-4 w-4 mr-2" />
+            <span className="text-white text-sm">Visibility</span>
+          </div>
+          <Select
+            value={groupData.isPrivate ? 'private' : 'public'}
+            onValueChange={(value) => setGroupData(prev => ({ ...prev, isPrivate: value === 'private' }))}
+          >
+            <SelectTrigger className={`bg-transparent border-none text-white w-24 h-10 ${placeholderStyle}`}>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="public">Public</SelectItem>
+              <SelectItem value="private">Private</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-        <Select
-          value={groupData.isPrivate ? 'private' : 'public'}
-          onValueChange={(value) => setGroupData(prev => ({ ...prev, isPrivate: value === 'private' }))}
-        >
-          <SelectTrigger className={`bg-transparent border-none text-white w-24 h-10 ${placeholderStyle}`}>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="public">Public</SelectItem>
-            <SelectItem value="private">Private</SelectItem>
-          </SelectContent>
-        </Select>
       </div>
 
       <Button 
