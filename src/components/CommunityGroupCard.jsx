@@ -18,6 +18,7 @@ const getGradientColor = (index) => {
 const CommunityGroupCard = ({ group, index }) => {
   const navigate = useNavigate();
   const truncateName = (name) => name.length > 20 ? name.slice(0, 20) + '...' : name;
+  const truncateDescription = (desc) => desc.length > 50 ? desc.slice(0, 50) + '...' : desc;
 
   const handleClick = () => {
     navigate(`/group/${group.id}`, { state: { ...group } });
@@ -25,7 +26,7 @@ const CommunityGroupCard = ({ group, index }) => {
 
   return (
     <motion.div
-      className="w-full rounded-xl overflow-hidden relative bg-white shadow-lg cursor-pointer"
+      className="w-full h-64 rounded-xl overflow-hidden relative bg-white shadow-lg cursor-pointer"
       whileHover={{ scale: 1.03, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleClick}
@@ -38,15 +39,15 @@ const CommunityGroupCard = ({ group, index }) => {
           </div>
         )}
       </div>
-      <div className="p-4">
+      <div className="p-4 flex flex-col h-40">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="font-semibold text-lg text-gray-800">{truncateName(group.name)}</h3>
+          <h3 className="font-semibold text-lg text-gray-800 truncate">{truncateName(group.name)}</h3>
           {group.hasActivity && (
-            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+            <span className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
           )}
         </div>
-        <p className="text-sm text-gray-600 mb-3 line-clamp-2">{group.description}</p>
-        <div className="flex items-center justify-between">
+        <p className="text-sm text-gray-600 mb-3 line-clamp-2 flex-grow">{truncateDescription(group.description)}</p>
+        <div className="flex items-center justify-between mt-auto">
           <div className="flex items-center">
             <Users className="w-4 h-4 text-gray-400 mr-1" />
             <p className="text-sm text-gray-500">{group.members} members</p>
