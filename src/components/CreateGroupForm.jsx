@@ -34,7 +34,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
   return (
     <form onSubmit={(e) => { e.preventDefault(); if (isFormValid) handleCreateGroup(); }} className="flex flex-col h-full">
       <div className="space-y-4 flex-grow overflow-y-auto pb-6">
-        <div className={`relative w-48 h-48 mx-auto overflow-hidden ${glassmorphicStyle}`}>
+        <div className={`relative w-48 h-48 mx-auto overflow-hidden ${glassmorphicStyle} mb-6`}>
           <input
             type="file"
             accept="image/*"
