@@ -71,12 +71,12 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             animate="visible"
             exit="exit"
             variants={modalVariants}
-            className="fixed inset-0 bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground z-50 overflow-y-auto"
+            className="fixed inset-0 bg-[#8B4513] text-white z-50 overflow-y-auto"
           >
             <div className="min-h-screen p-6 flex flex-col">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-3xl font-bold text-foreground">Create Group</h2>
-                <Button variant="ghost" size="icon" onClick={handleClose} className="text-foreground hover:bg-gray-200 rounded-full">
+                <h2 className="text-3xl font-bold">Create Group</h2>
+                <Button variant="ghost" size="icon" onClick={handleClose} className="text-white hover:bg-[#A0522D] rounded-full">
                   <X className="h-6 w-6" />
                 </Button>
               </div>
