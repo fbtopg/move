@@ -28,8 +28,8 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
   const placeholderStyle = "placeholder:text-white placeholder:text-opacity-60 placeholder:font-bold";
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="space-y-6 flex-grow">
-      <div className={`relative w-48 h-48 mx-auto overflow-hidden ${glassmorphicStyle}`}>
+    <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="space-y-4 flex-grow">
+      <div className={`relative w-40 h-40 mx-auto overflow-hidden ${glassmorphicStyle}`}>
         <input
           type="file"
           accept="image/*"
@@ -44,7 +44,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
             htmlFor="groupImageUpload"
             className="flex items-center justify-center w-full h-full cursor-pointer"
           >
-            <Camera className="h-12 w-12 text-white" />
+            <Camera className="h-10 w-10 text-white" />
           </label>
         )}
       </div>
@@ -55,7 +55,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
           placeholder="Group Name"
           value={groupData.name}
           onChange={handleInputChange}
-          className={`mb-1 bg-transparent text-white ${placeholderStyle} border-none text-lg h-14 ${errors.name ? 'border-red-500' : ''}`}
+          className={`mb-1 bg-transparent text-white ${placeholderStyle} border-none text-base h-12 ${errors.name ? 'border-red-500' : ''}`}
         />
       </div>
       {errors.name && <p className="text-red-300 text-xs">{errors.name}</p>}
@@ -66,21 +66,21 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
           placeholder="Description"
           value={groupData.description}
           onChange={handleInputChange}
-          rows={4}
-          className={`bg-transparent text-white ${placeholderStyle} border-none resize-none text-lg h-32`}
+          rows={3}
+          className={`bg-transparent text-white ${placeholderStyle} border-none resize-none text-base h-24`}
         />
       </div>
 
-      <div className={`flex items-center justify-between p-4 ${glassmorphicStyle}`}>
+      <div className={`flex items-center justify-between p-3 ${glassmorphicStyle}`}>
         <div className="flex items-center">
-          <Globe className="text-white h-5 w-5 mr-2" />
-          <span className="text-white">Visibility</span>
+          <Globe className="text-white h-4 w-4 mr-2" />
+          <span className="text-white text-sm">Visibility</span>
         </div>
         <Select
           value={groupData.isPrivate ? 'private' : 'public'}
           onValueChange={(value) => setGroupData(prev => ({ ...prev, isPrivate: value === 'private' }))}
         >
-          <SelectTrigger className={`bg-transparent border-none text-white w-28 h-12 ${placeholderStyle}`}>
+          <SelectTrigger className={`bg-transparent border-none text-white w-24 h-10 ${placeholderStyle}`}>
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -92,7 +92,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
 
       <Button 
         type="submit" 
-        className={`w-full text-white rounded-lg transition-all duration-300 ease-in-out h-14 text-lg ${glassmorphicStyle}`}
+        className={`w-full text-white rounded-lg transition-all duration-300 ease-in-out h-12 text-base ${glassmorphicStyle}`}
       >
         Create Group
       </Button>
