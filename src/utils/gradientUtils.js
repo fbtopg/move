@@ -1,12 +1,12 @@
 const gradients = [
-  'bg-gradient-to-r from-blue-400 to-purple-500',
-  'bg-gradient-to-r from-green-400 to-blue-500',
-  'bg-gradient-to-r from-yellow-400 to-red-500',
-  'bg-gradient-to-r from-pink-400 to-red-500',
-  'bg-gradient-to-r from-indigo-400 to-purple-500',
-  'bg-gradient-to-r from-teal-400 to-blue-500',
-  'bg-gradient-to-r from-orange-400 to-pink-500',
-  'bg-gradient-to-r from-purple-400 to-indigo-500'
+  'bg-gradient-to-r from-blue-300 to-purple-400',
+  'bg-gradient-to-r from-green-300 to-blue-400',
+  'bg-gradient-to-r from-yellow-300 to-red-400',
+  'bg-gradient-to-r from-pink-300 to-red-400',
+  'bg-gradient-to-r from-indigo-300 to-purple-400',
+  'bg-gradient-to-r from-teal-300 to-blue-400',
+  'bg-gradient-to-r from-orange-300 to-pink-400',
+  'bg-gradient-to-r from-purple-300 to-indigo-400'
 ];
 
 export const getRandomGradient = () => {
