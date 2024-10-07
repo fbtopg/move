@@ -128,3 +128,10 @@
   font-weight: 700;
   font-style: normal;
 }
+
+.space-grotesk-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
