@@ -25,12 +25,14 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
     }
   };
 
+  const isFormValid = groupData.image && groupData.name.trim() !== '';
+
   const glassmorphicStyle = "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg";
   const placeholderStyle = "placeholder:text-white placeholder:text-opacity-60";
   const groupNamePlaceholderStyle = "placeholder:font-semibold";
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="flex flex-col h-full">
+    <form onSubmit={(e) => { e.preventDefault(); if (isFormValid) handleCreateGroup(); }} className="flex flex-col h-full">
       <div className="space-y-4 flex-grow overflow-y-auto pb-6">
         <div className={`relative w-40 h-40 mx-auto overflow-hidden ${glassmorphicStyle}`}>
           <input
@@ -102,7 +104,12 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
       <div className="mt-auto pt-4">
         <Button 
           type="submit" 
-          className={`w-full text-white rounded-lg transition-all duration-300 ease-in-out h-12 text-base ${glassmorphicStyle}`}
+          className={`w-full text-white rounded-lg transition-all duration-300 ease-in-out h-12 text-base ${
+            isFormValid 
+              ? 'bg-white text-[#3B72EC] hover:bg-white/90' 
+              : `${glassmorphicStyle} opacity-50 cursor-not-allowed`
+          }`}
+          disabled={!isFormValid}
         >
           Create Group
         </Button>
