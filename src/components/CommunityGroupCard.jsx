@@ -31,8 +31,11 @@ const CommunityGroupCard = ({ group, index }) => {
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleClick}
     >
-      <div className={`h-24 bg-gradient-to-r ${getGradientColor(index)} relative`}>
-        <img src={group.image} alt={group.name} className="w-full h-full object-cover mix-blend-overlay" />
+      <div className={`h-24 bg-gradient-to-r ${getGradientColor(index)} relative flex items-center justify-center`}>
+        <Avatar className="w-20 h-20 border-4 border-white">
+          <AvatarImage src={group.image} alt={group.name} className="object-cover" />
+          <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
+        </Avatar>
         {group.isOwner && (
           <div className="absolute top-2 right-2 bg-yellow-400 rounded-full p-1">
             <Crown className="w-4 h-4 text-white" />
