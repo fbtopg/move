@@ -25,7 +25,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
   };
 
   const glassmorphicStyle = "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg";
-  const placeholderStyle = "placeholder:text-white placeholder:text-opacity-60 placeholder:font-bold";
+  const placeholderStyle = "placeholder:text-white/60 placeholder:font-bold placeholder:text-4xl placeholder:tracking-wide";
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="space-y-4 flex-grow">
@@ -52,7 +52,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
       <div className={`${glassmorphicStyle} p-2`}>
         <Input
           name="name"
-          placeholder="Group Name"
+          placeholder="Name"
           value={groupData.name}
           onChange={handleInputChange}
           className={`mb-1 bg-transparent text-white ${placeholderStyle} border-none text-base h-12 ${errors.name ? 'border-red-500' : ''}`}
