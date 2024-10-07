@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Sparkles } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 import { initialGroupData, validateForm } from '../utils/createGroupUtils.jsx';
@@ -71,13 +71,13 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             animate="visible"
             exit="exit"
             variants={modalVariants}
-            className="fixed inset-0 bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground z-50 overflow-y-auto"
+            className="fixed inset-0 bg-[#8B4513] text-white z-50 overflow-y-auto"
           >
             <div className="min-h-screen p-6 flex flex-col">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-3xl font-bold text-gray-800">Create Group</h2>
-                <Button variant="ghost" size="icon" onClick={handleClose} className="hover:bg-gray-200 rounded-full">
-                  <X className="h-6 w-6 text-gray-600" />
+                <h2 className="text-3xl font-bold">Create Group</h2>
+                <Button variant="ghost" size="icon" onClick={handleClose} className="text-white hover:bg-[#A0522D] rounded-full">
+                  <X className="h-6 w-6" />
                 </Button>
               </div>
 
