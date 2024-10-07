@@ -65,7 +65,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
         </div>
         {errors.name && <p className="text-red-300 text-xs">{errors.name}</p>}
 
-        <div className={`${glassmorphicStyle} p-2`}>
+        <div className={`${glassmorphicStyle} p-2 mt-4`}>
           <Textarea
             name="description"
             placeholder="Describe your group"
