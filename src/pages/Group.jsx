@@ -18,6 +18,17 @@ const Group = () => {
     if (location.state && location.state.activeTab) {
       setActiveTab(location.state.activeTab);
     }
+
+    // Add meta tag to prevent zooming
+    const metaTag = document.createElement('meta');
+    metaTag.name = 'viewport';
+    metaTag.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+    document.head.appendChild(metaTag);
+
+    // Remove meta tag when component unmounts
+    return () => {
+      document.head.removeChild(metaTag);
+    };
   }, [location]);
 
   const handleCreateGroup = () => {
