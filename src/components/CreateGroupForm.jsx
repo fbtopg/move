@@ -24,7 +24,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
     }
   };
 
-  const glassmorphicStyle = "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-30 shadow-lg";
+  const glassmorphicStyle = "bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg border border-white border-opacity-30";
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }} className="space-y-6 flex-grow">
@@ -91,7 +91,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
 
       <Button 
         type="submit" 
-        className={`w-full text-white rounded-lg shadow-md transition-all duration-300 ease-in-out h-14 text-lg ${glassmorphicStyle}`}
+        className={`w-full text-white rounded-lg transition-all duration-300 ease-in-out h-14 text-lg ${glassmorphicStyle}`}
       >
         Create Group
       </Button>
