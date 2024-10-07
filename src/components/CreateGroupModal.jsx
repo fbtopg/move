@@ -1,12 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from 'lucide-react';
+import { X, Camera, Lock, Sparkles } from 'lucide-react';
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import { handleImageUpload } from '../utils/imageUtils';
+import Cropper from 'react-easy-crop';
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 import { initialGroupData, validateForm } from '../utils/createGroupUtils.jsx';
-import { handleImageUpload } from '../utils/imageUtils';
 import { useNavigate } from 'react-router-dom';
-import CreateGroupForm from './CreateGroupForm';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const [groupData, setGroupData] = useState(initialGroupData);
@@ -23,13 +26,19 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
       metaTag.name = 'viewport';
       metaTag.content = 'width=device-width, initial-scale=1, maximum-scale=1';
       document.head.appendChild(metaTag);
-      return () => document.head.removeChild(metaTag);
+
+      return () => {
+        document.head.removeChild(metaTag);
+      };
     }
   }, [isOpen]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setGroupData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+    setGroupData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
     if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
@@ -76,6 +85,77 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     }
   };
 
+  const renderCreateGroupForm = () => (
+    <form onSubmit={(e) => { e.preventDefault(); handleCreateGroup(); }}>
+      <Input
+        name="name"
+        placeholder="Group Name"
+        value={groupData.name}
+        onChange={handleInputChange}
+        className={`mb-1 ${errors.name ? 'border-red-500' : ''}`}
+      />
+      {errors.name && <p className="text-red-500 text-xs mb-4">{errors.name}</p>}
+
+      <div className="relative mb-1 h-60">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="hidden"
+          id="groupImageUpload"
+        />
+        {groupData.image ? (
+          <Cropper
+            image={groupData.image}
+            crop={crop}
+            zoom={zoom}
+            aspect={1}
+            onCropChange={setCrop}
+            onCropComplete={onCropComplete}
+            onZoomChange={setZoom}
+          />
+        ) : (
+          <label
+            htmlFor="groupImageUpload"
+            className={`flex items-center justify-center w-full h-full border-2 border-dashed rounded-lg cursor-pointer hover:border-primary transition-colors ${errors.image ? 'border-red-500' : 'border-input'}`}
+          >
+            <div className="text-center">
+              <Camera className="mx-auto h-12 w-12 text-muted-foreground mb-2" />
+              <p className="text-sm text-muted-foreground">Upload Group Image</p>
+            </div>
+          </label>
+        )}
+      </div>
+      {errors.image && <p className="text-red-500 text-xs mb-4">{errors.image}</p>}
+
+      <Textarea
+        name="description"
+        placeholder="Group Description"
+        value={groupData.description}
+        onChange={handleInputChange}
+        rows={4}
+        className="mb-4"
+      />
+
+      <div className="flex items-center space-x-2 mb-6">
+        <Switch
+          id="private-mode"
+          name="isPrivate"
+          checked={groupData.isPrivate}
+          onCheckedChange={(checked) => setGroupData(prev => ({ ...prev, isPrivate: checked }))}
+        />
+        <label htmlFor="private-mode" className="text-sm font-medium leading-none">
+          <Lock className="inline-block mr-2 h-4 w-4" />
+          Private Group
+        </label>
+      </div>
+
+      <Button type="submit" className="w-full">
+        Create Group <Sparkles className="ml-2 h-4 w-4" />
+      </Button>
+    </form>
+  );
+
   return (
     <>
       <AnimatePresence>
@@ -95,17 +175,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                 </Button>
               </div>
 
-              <CreateGroupForm
-                groupData={groupData}
-                errors={errors}
-                handleInputChange={handleInputChange}
-                handleImageChange={handleImageChange}
-                crop={crop}
-                setCrop={setCrop}
-                zoom={zoom}
-                setZoom={setZoom}
-                onCropComplete={onCropComplete}
-              />
+              {renderCreateGroupForm()}
             </div>
           </motion.div>
         )}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search } from 'lucide-react';
+import { Search, Plus } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
@@ -80,13 +80,9 @@ const Group = () => {
           <h1 className="text-2xl font-bold">Groups</h1>
           <Button
             onClick={handleCreateGroup}
-            className="w-10 h-10 p-0 rounded-full overflow-hidden bg-transparent hover:bg-gray-100"
+            className="bg-[#3B72EC] hover:bg-[#3B72EC]/90 transition-colors"
           >
-            <img 
-              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/post.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL3Bvc3QucG5nIiwiaWF0IjoxNzI4MjY3OTUwLCJleHAiOjE3NTk4MDM5NTB9.Lzd9qjY7y7nqN-hjyZaYLQTm8aS4-9nLaePOWgBe5_c&t=2024-10-07T02%3A25%3A51.211Z" 
-              alt="Create Group"
-              className="w-full h-full object-cover"
-            />
+            <Plus className="mr-2 h-4 w-4" /> Create
           </Button>
         </div>
         
