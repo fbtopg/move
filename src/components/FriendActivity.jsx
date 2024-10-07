@@ -32,21 +32,21 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="flex flex-col items-center">
-        <Avatar className="w-16 h-16 mb-3">
+      <div className="flex items-start">
+        <Avatar className="w-10 h-10 mr-3 flex-shrink-0">
           {profilePicture ? (
             <AvatarImage src={profilePicture} alt={name} />
           ) : (
             <AvatarFallback>{name.slice(0, 2).toUpperCase()}</AvatarFallback>
           )}
         </Avatar>
-        <div className="w-full">
+        <div className="flex-grow">
           <div className="flex items-start justify-between">
             <div className="flex-grow min-w-0 pr-2">
-              <p className="text-sm font-semibold text-gray-900 text-center">{name}</p>
-              <p className="text-sm text-gray-700 break-words text-center mt-1">{content}</p>
+              <p className="text-sm font-semibold text-gray-900">{name}</p>
+              <p className="text-sm text-gray-700 break-words mt-1">{content}</p>
               {timestamp && (
-                <p className="text-xs text-gray-500 mt-1 text-center">{timestamp}</p>
+                <p className="text-xs text-gray-500 mt-1">{timestamp}</p>
               )}
             </div>
           </div>
