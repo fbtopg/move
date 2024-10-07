@@ -67,14 +67,17 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
         className="bg-[#A0522D] text-white placeholder-gray-300 border-none rounded-lg resize-none"
       />
 
-      <div className="flex items-center space-x-2 bg-[#A0522D] p-3 rounded-lg">
-        <Globe className="text-white h-5 w-5" />
+      <div className="flex items-center justify-between bg-[#A0522D] p-3 rounded-lg">
+        <div className="flex items-center">
+          <Globe className="text-white h-5 w-5 mr-2" />
+          <span className="text-white">Visibility</span>
+        </div>
         <Select
           value={groupData.isPrivate ? 'private' : 'public'}
           onValueChange={(value) => setGroupData(prev => ({ ...prev, isPrivate: value === 'private' }))}
         >
-          <SelectTrigger className="bg-transparent border-none text-white">
-            <SelectValue placeholder="Visibility" />
+          <SelectTrigger className="bg-transparent border-none text-white w-24">
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="public">Public</SelectItem>
