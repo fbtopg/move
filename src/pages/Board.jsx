@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Plus, Compass, Trophy } from 'lucide-react';
+import { Search, Compass, Trophy } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
-import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 
 const Board = () => {
   const [activeTab, setActiveTab] = useState('discover');
@@ -67,12 +67,6 @@ const Board = () => {
       <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 py-4 shadow-md">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Challenges</h1>
-          <Button
-            onClick={() => {/* TODO: Implement create challenge functionality */}}
-            className="bg-[#3B72EC] hover:bg-[#3B72EC]/90 transition-colors rounded-full"
-          >
-            <Plus className="mr-2 h-4 w-4" /> Create
-          </Button>
         </div>
         
         <div className="relative mb-4">
