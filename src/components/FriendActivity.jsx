@@ -26,59 +26,66 @@ const FriendActivity = ({ name, activity, type, profilePicture, isOwnActivity = 
   const [content, timestamp] = activity.split(' • ');
 
   return (
-    <div className="flex items-start space-x-3">
-      <Avatar className="w-8 h-8 mt-1 flex-shrink-0">
-        {profilePicture ? (
-          <AvatarImage src={profilePicture} alt={name} />
-        ) : (
-          <AvatarFallback>{name.slice(0, 2).toUpperCase()}</AvatarFallback>
-        )}
-      </Avatar>
-      <div className="flex-grow min-w-0">
-        <div className="flex items-start justify-between">
-          <div className="flex-grow min-w-0 pr-2">
-            <p className="text-sm text-gray-700">
-              <span className="font-semibold text-gray-900">{name}</span>{' '}
-              <span className="break-words">{content}</span>
+    <motion.div 
+      className="bg-white rounded-lg shadow-sm p-4 mb-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="flex items-start space-x-3">
+        <Avatar className="w-10 h-10">
+          {profilePicture ? (
+            <AvatarImage src={profilePicture} alt={name} />
+          ) : (
+            <AvatarFallback>{name.slice(0, 2).toUpperCase()}</AvatarFallback>
+          )}
+        </Avatar>
+        <div className="flex-grow min-w-0">
+          <div className="flex items-start justify-between">
+            <div className="flex-grow min-w-0 pr-2">
+              <p className="text-sm font-semibold text-gray-900">{name}</p>
+              <p className="text-sm text-gray-700 break-words">{content}</p>
               {timestamp && (
-                <span className="text-xs ml-1 text-gray-500">{timestamp}</span>
+                <p className="text-xs text-gray-500 mt-1">{timestamp}</p>
               )}
-            </p>
-          </div>
-          <div className="flex items-center space-x-1 flex-shrink-0">
-            <div 
-              className={`w-10 h-10 rounded-lg ${getActivityGradient()}`}
-            ></div>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={handleLike}
-              className={cn(
-                "w-8 h-8 p-0",
-                liked ? "text-red-500" : "text-gray-500",
-                "bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent"
-              )}
-            >
-              <AnimatePresence>
-                {liked && (
-                  <motion.div
-                    key="heart"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    exit={{ scale: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute"
-                  >
-                    <Heart className="h-6 w-6 fill-current" />
-                  </motion.div>
+            </div>
+            <div className="flex items-center space-x-2 flex-shrink-0">
+              <div 
+                className={`w-8 h-8 rounded-full ${getActivityGradient()} flex items-center justify-center`}
+              >
+                {type === 'walk' ? '🚶' : '🧠'}
+              </div>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={handleLike}
+                className={cn(
+                  "w-8 h-8 p-0",
+                  liked ? "text-red-500" : "text-gray-400",
+                  "bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent"
                 )}
-              </AnimatePresence>
-              <Heart className={`h-6 w-6 ${liked ? "fill-current" : ""}`} />
-            </Button>
+              >
+                <AnimatePresence>
+                  {liked && (
+                    <motion.div
+                      key="heart"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      exit={{ scale: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute"
+                    >
+                      <Heart className="h-5 w-5 fill-current" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <Heart className={`h-5 w-5 ${liked ? "fill-current" : ""}`} />
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

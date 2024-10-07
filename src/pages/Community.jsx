@@ -67,8 +67,9 @@ const Community = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      className="bg-white rounded-lg shadow-md p-4 mb-6"
     >
-      <h2 className="text-xs font-semibold mb-2 text-gray-400">{title}</h2>
+      <h2 className="text-lg font-semibold mb-4 text-gray-800">{title}</h2>
       <div className="space-y-4">
         {activities.map((activity, index) => (
           <motion.div
@@ -152,11 +153,16 @@ const Community = () => {
           <SwipeableGroupCards groups={myGroups} />
         </motion.div>
 
-        <div className="space-y-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="space-y-6"
+        >
           {renderActivitySection("Recent Activity", activities.today)}
-          {renderActivitySection("THIS MONTH", activities.thisMonth)}
-          {renderActivitySection("EARLIER", activities.earlier)}
-        </div>
+          {renderActivitySection("This Month", activities.thisMonth)}
+          {renderActivitySection("Earlier", activities.earlier)}
+        </motion.div>
       </div>
 
       <AnimatePresence>
