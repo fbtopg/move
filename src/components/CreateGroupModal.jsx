@@ -77,13 +77,13 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed inset-x-0 bottom-0 bg-[#FEF8F3] text-foreground z-50 rounded-t-3xl shadow-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-[#FEF8F3] text-foreground z-50 overflow-y-auto"
           >
-            <div className="p-6 max-h-[90vh] overflow-y-auto">
+            <div className="min-h-screen p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-gray-800">Create Group</h2>
                 <Button variant="ghost" size="icon" onClick={handleClose}>
