@@ -15,7 +15,17 @@ const GroupCard = ({ group }) => {
         </div>
       </div>
       <div className="flex justify-between items-center mt-4">
-        <span className="text-sm text-gray-500">{group.members} members</span>
+        <div className="flex items-center">
+          <span className="text-sm text-gray-500 mr-2">{group.members} members</span>
+          <div className="flex -space-x-2">
+            {group.memberProfiles && group.memberProfiles.slice(0, 3).map((profile, index) => (
+              <Avatar key={index} className="h-6 w-6 border-2 border-white">
+                <AvatarImage src={profile} alt={`Member ${index + 1}`} className="object-cover" />
+                <AvatarFallback>M</AvatarFallback>
+              </Avatar>
+            ))}
+          </div>
+        </div>
         <button className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">Join</button>
       </div>
     </div>
