@@ -19,13 +19,11 @@ const Group = () => {
       setActiveTab(location.state.activeTab);
     }
 
-    // Add meta tag to prevent zooming
     const metaTag = document.createElement('meta');
     metaTag.name = 'viewport';
     metaTag.content = 'width=device-width, initial-scale=1, maximum-scale=1';
     document.head.appendChild(metaTag);
 
-    // Remove meta tag when component unmounts
     return () => {
       document.head.removeChild(metaTag);
     };
@@ -76,7 +74,7 @@ const Group = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+      className="grid grid-cols-1 gap-4"
     >
       {groups.map((group, index) => (
         <CommunityGroupCard key={group.id} group={group} index={index} />
@@ -85,13 +83,13 @@ const Group = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground flex flex-col">
       <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 py-2">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Groups</h1>
           <Button
             onClick={handleCreateGroup}
-            className="bg-[#3B72EC] hover:bg-[#3B72EC]/90 transition-colors"
+            className="bg-[#3B72EC] hover:bg-[#3B72EC]/90 transition-colors rounded-full"
           >
             <Plus className="mr-2 h-4 w-4" /> Create
           </Button>
@@ -107,13 +105,13 @@ const Group = () => {
 
         <div className="flex mb-4">
           <Button
-            className={`mr-2 ${activeTab === 'discover' ? 'bg-[#3B72EC] text-white' : 'bg-gray-200 text-gray-700'}`}
+            className={`mr-2 rounded-full ${activeTab === 'discover' ? 'bg-[#3B72EC] text-white' : 'bg-white text-gray-700'}`}
             onClick={() => setActiveTab('discover')}
           >
             Discover
           </Button>
           <Button
-            className={`${activeTab === 'myGroup' ? 'bg-[#3B72EC] text-white' : 'bg-gray-200 text-gray-700'}`}
+            className={`rounded-full ${activeTab === 'myGroup' ? 'bg-[#3B72EC] text-white' : 'bg-white text-gray-700'}`}
             onClick={() => setActiveTab('myGroup')}
           >
             My Groups
