@@ -43,13 +43,13 @@ const CommunityGroupCard = ({ group, index }) => {
           <AvatarImage src={group.image} alt={group.name} className="object-cover" />
           <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
         </Avatar>
-        <div className="flex items-center justify-between mb-2 mt-12">
+        <div className="flex items-center justify-between mb-1 mt-8">
           <h3 className="font-semibold text-lg text-gray-800 truncate">{truncateName(group.name)}</h3>
           {group.hasActivity && (
             <span className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
           )}
         </div>
-        <p className="text-sm text-gray-600 mb-3 line-clamp-2 flex-grow">{truncateDescription(group.description)}</p>
+        <p className="text-sm text-gray-600 mb-2 line-clamp-2 flex-grow">{truncateDescription(group.description)}</p>
         <div className="flex items-center justify-between mt-auto">
           <div className="flex items-center">
             <Users className="w-4 h-4 text-gray-400 mr-1" />
