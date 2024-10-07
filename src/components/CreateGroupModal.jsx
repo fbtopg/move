@@ -6,7 +6,7 @@ import CreateGroupForm from './CreateGroupForm';
 import { getRandomGradient } from '../utils/gradientUtils';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
-  const [groupData, setGroupData] = useState(initialGroupData);
+  const [groupData, setGroupData] = useState({ ...initialGroupData, location: 'Anywhere' });
   const [errors, setErrors] = useState({});
   const [backgroundGradient, setBackgroundGradient] = useState('');
   const navigate = useNavigate();
@@ -30,6 +30,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           groupName: groupData.name,
           groupDescription: groupData.description,
           isPrivate: groupData.isPrivate,
+          location: groupData.location,
           animateEntry: true
         } 
       });

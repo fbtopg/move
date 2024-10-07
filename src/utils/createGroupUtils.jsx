@@ -4,7 +4,8 @@ export const initialGroupData = {
   name: '',
   image: null,
   description: '',
-  isPrivate: false
+  isPrivate: false,
+  location: 'Anywhere'
 };
 
 export const validateForm = (groupData) => {
@@ -27,6 +28,7 @@ export const renderConfirmationStep = (groupData, onClose) => (
         <img src={groupData.image} alt="Group" className="w-32 h-32 rounded-full mx-auto mb-2" />
       )}
       <p className="font-medium">{groupData.name}</p>
+      <p className="text-sm text-gray-600">{groupData.location}</p>
     </div>
     <Button 
       onClick={shareInvite}
