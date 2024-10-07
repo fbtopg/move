@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Plus } from 'lucide-react';
+import { Search, Plus, Compass, Users } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
@@ -8,11 +8,13 @@ import CreateGroupModal from '../components/CreateGroupModal';
 import CommunityGroupCard from '../components/CommunityGroupCard';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { useLocation } from 'react-router-dom';
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Group = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('discover');
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     if (location.state && location.state.activeTab) {
@@ -69,14 +71,21 @@ const Group = () => {
     },
   ].map(group => ({ ...group, isJoined: false }));
 
+  const filteredGroups = (groups) => {
+    return groups.filter(group => 
+      group.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      group.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  };
+
   const renderGroups = (groups) => (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="grid grid-cols-1 gap-4"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
     >
-      {groups.map((group, index) => (
+      {filteredGroups(groups).map((group, index) => (
         <CommunityGroupCard key={group.id} group={group} index={index} />
       ))}
     </motion.div>
@@ -84,7 +93,7 @@ const Group = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground flex flex-col">
-      <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 py-2">
+      <div className="sticky top-0 z-10 bg-[#FEF8F3] px-4 py-4 shadow-md">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Groups</h1>
           <Button
@@ -99,27 +108,27 @@ const Group = () => {
           <Input
             className="w-full bg-white border-none text-gray-900 placeholder-gray-500 rounded-full pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#3B72EC] focus:border-transparent"
             placeholder="Search groups"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
         </div>
 
-        <div className="flex mb-4">
-          <Button
-            className={`mr-2 rounded-full ${activeTab === 'discover' ? 'bg-[#3B72EC] text-white' : 'bg-white text-gray-700'}`}
-            onClick={() => setActiveTab('discover')}
-          >
-            Discover
-          </Button>
-          <Button
-            className={`rounded-full ${activeTab === 'myGroup' ? 'bg-[#3B72EC] text-white' : 'bg-white text-gray-700'}`}
-            onClick={() => setActiveTab('myGroup')}
-          >
-            My Groups
-          </Button>
-        </div>
+        <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-2 bg-white rounded-full p-1">
+            <TabsTrigger value="discover" className="rounded-full data-[state=active]:bg-[#3B72EC] data-[state=active]:text-white">
+              <Compass className="w-4 h-4 mr-2" />
+              Discover
+            </TabsTrigger>
+            <TabsTrigger value="myGroup" className="rounded-full data-[state=active]:bg-[#3B72EC] data-[state=active]:text-white">
+              <Users className="w-4 h-4 mr-2" />
+              My Groups
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
       </div>
 
-      <div className="flex-grow overflow-y-auto pb-20 px-4">
+      <div className="flex-grow overflow-y-auto pb-20 px-4 mt-4">
         <AnimatePresence mode="wait">
           {activeTab === 'discover' ? renderGroups(discoverGroups) : renderGroups(myGroups)}
         </AnimatePresence>
