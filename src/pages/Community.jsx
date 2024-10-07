@@ -50,16 +50,10 @@ const Community = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className="bg-blue-500 text-white p-4 rounded-lg mb-6 shadow-md"
+      className="bg-blue-500 text-white p-4 mb-6 shadow-md w-screen -mx-4"
     >
-      <h2 className="text-xl font-bold mb-2">Join the Daily Walk Challenge!</h2>
-      <p className="mb-3">Walk 10,000 steps every day for 30 days and win exciting prizes.</p>
-      <Button
-        onClick={() => navigate('/daily-walk-challenge')}
-        className="bg-white text-blue-500 hover:bg-blue-100 transition-colors"
-      >
-        Join Now
-      </Button>
+      <h2 className="text-xl font-bold text-center">Daily Walk Challenge</h2>
+      <p className="text-center">Walk 10,000 steps every day for 30 days</p>
     </motion.div>
   );
 
