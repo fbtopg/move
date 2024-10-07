@@ -43,7 +43,7 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
         <p className="text-sm text-muted-foreground mt-2 mb-4">{group.description}</p>
       )}
 
-      <Separator className="my-4" />
+      <Separator className="my-4 -mx-4" />
 
       <div className="space-y-4">
         <h3 className="font-semibold">Active Challenges</h3>
@@ -58,7 +58,7 @@ const GroupInfo = ({ group, isEditing, onInputChange }) => {
         )}
       </div>
 
-      <Separator className="my-4" />
+      <Separator className="my-4 -mx-4" />
 
       <GroupImages />
     </div>
