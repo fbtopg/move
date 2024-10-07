@@ -73,7 +73,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           className="fixed inset-0 z-50 overflow-y-auto bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0]"
         >
           <div className="min-h-screen p-6 flex flex-col">
-            <h2 className="text-lg font-light text-center mb-4 text-gray-800">Create Group</h2>
+            <h2 className="text-lg font-semibold text-center mb-4 text-gray-800">Create Group</h2>
 
             <CreateGroupForm
               groupData={groupData}
