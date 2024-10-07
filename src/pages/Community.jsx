@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Plus, Users, Trophy, ChevronRight } from 'lucide-react';
+import { Plus, Users, Trophy } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import FriendActivity from '../components/FriendActivity';
 import UserProfilePopup from '../components/UserProfilePopup';
@@ -143,26 +143,25 @@ const Community = () => {
           </div>
         </motion.div>
 
-        {/* Improved Walk Challenge Banner */}
+        {/* New Walk Challenge Banner */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mb-8 -mx-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-6 px-6 rounded-lg shadow-lg"
+          className="mb-8 -mx-4 bg-blue-500 text-white py-4 px-4"
         >
-          <div className="flex justify-between items-center">
-            <div>
-              <h2 className="text-2xl font-bold mb-2">Daily Walk Challenge</h2>
-              <p className="text-sm opacity-90">Join now and step towards a healthier you!</p>
-            </div>
-            <Button
-              onClick={() => navigate('/daily-walk-challenge')}
-              className="bg-white text-blue-600 hover:bg-blue-100 transition-colors px-4 py-2 rounded-full flex items-center space-x-2"
-            >
-              <span>View</span>
-              <ChevronRight className="w-4 h-4" />
-            </Button>
-          </div>
+          <h2 className="text-xl font-semibold mb-2">Daily Walk Challenge</h2>
+          <p className="text-sm">Join the challenge and walk your way to better health!</p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mb-8 -mx-4"
+        >
+          <h2 className="text-xl font-semibold mb-4 px-4">My Groups</h2>
+          <SwipeableGroupCards groups={myGroups} />
         </motion.div>
 
         <motion.div
