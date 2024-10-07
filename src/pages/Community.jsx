@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Plus, Users, Trophy } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import FriendActivity from '../components/FriendActivity';
 import UserProfilePopup from '../components/UserProfilePopup';
@@ -110,37 +109,6 @@ const Community = () => {
               <AvatarFallback>PF</AvatarFallback>
             </Avatar>
           </Button>
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-8 -mx-4"
-        >
-          <div className="flex space-x-4 overflow-x-auto scrollbar-hide py-2 px-4">
-            <Button
-              onClick={() => setIsCreateGroupModalOpen(true)}
-              className="flex-shrink-0 bg-[#3B72EC] text-white hover:bg-[#3B72EC]/90 transition-colors px-6 py-3 rounded-full flex items-center space-x-2"
-            >
-              <Plus className="w-5 h-5" />
-              <span>Create Group</span>
-            </Button>
-            <Button
-              onClick={() => navigate('/group', { state: { activeTab: 'myGroup' } })}
-              className="flex-shrink-0 bg-white text-[#3B72EC] hover:bg-gray-100 transition-colors px-6 py-3 rounded-full flex items-center space-x-2"
-            >
-              <Users className="w-5 h-5" />
-              <span>My Groups</span>
-            </Button>
-            <Button
-              onClick={() => navigate('/board')}
-              className="flex-shrink-0 bg-white text-[#3B72EC] hover:bg-gray-100 transition-colors px-6 py-3 rounded-full flex items-center space-x-2"
-            >
-              <Trophy className="w-5 h-5" />
-              <span>Challenges</span>
-            </Button>
-          </div>
         </motion.div>
 
         <motion.div
