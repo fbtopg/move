@@ -60,7 +60,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
                 className={cn(
                   "w-full h-full flex items-center justify-center",
                   currentActiveTab === item.id ? "text-primary" : "text-muted-foreground",
-                  "pb-2" // Add padding to the bottom to push icons upwards
+                  "pb-4" // Increased padding to push icons more upwards
                 )}
               >
                 <item.icon className="h-6 w-6 stroke-1" />
