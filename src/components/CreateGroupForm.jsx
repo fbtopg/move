@@ -34,7 +34,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
   return (
     <form onSubmit={(e) => { e.preventDefault(); if (isFormValid) handleCreateGroup(); }} className="flex flex-col h-full">
       <div className="space-y-4 flex-grow overflow-y-auto pb-6">
-        <div className={`relative w-40 h-40 mx-auto overflow-hidden ${glassmorphicStyle}`}>
+        <div className={`relative w-48 h-48 mx-auto overflow-hidden ${glassmorphicStyle}`}>
           <input
             type="file"
             accept="image/*"
@@ -49,7 +49,7 @@ const CreateGroupForm = ({ groupData, setGroupData, errors, setErrors, handleCre
               htmlFor="groupImageUpload"
               className="flex items-center justify-center w-full h-full cursor-pointer"
             >
-              <Camera className="h-10 w-10 text-white" />
+              <Camera className="h-12 w-12 text-white" />
             </label>
           )}
         </div>
