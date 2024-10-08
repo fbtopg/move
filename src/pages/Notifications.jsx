@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft, Bell, Trophy, Users, Gift } from 'lucide-react';
+import { ChevronLeft, Bell, Trophy, Users, Gift, Heart } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ const Notifications = () => {
     { id: 6, type: 'friend_join', username: 'Emma Watson', action: 'joined the app!', timestamp: '5d ago', avatar: 'https://i.pravatar.cc/150?img=2' },
     { id: 7, type: 'group_invite', title: 'Morning Joggers', action: 'You\'ve been invited to join', extra: 'a new group!', timestamp: '1w ago' },
     { id: 8, type: 'reward', title: 'Weekly Bonus', action: 'You\'ve received a reward:', extra: '50 points added!', timestamp: '1w ago' },
+    { id: 9, type: 'group_activity', username: 'Alex Johnson', groupName: 'Fitness Enthusiasts', action: 'just completed an activity!', extra: 'Give it a like!', timestamp: '2h ago', avatar: 'https://i.pravatar.cc/150?img=3' },
   ];
 
   const handleGoBack = () => {
@@ -30,6 +31,8 @@ const Notifications = () => {
         return <Users className="w-6 h-6 text-gray-500" />;
       case 'reward':
         return <Gift className="w-6 h-6 text-gray-500" />;
+      case 'group_activity':
+        return <Heart className="w-6 h-6 text-gray-500" />;
       default:
         return <Bell className="w-6 h-6 text-gray-500" />;
     }
@@ -49,7 +52,7 @@ const Notifications = () => {
           {notifications.map((notification, index) => (
             <li key={notification.id} className={`px-4 py-4 ${index !== 0 ? 'border-t border-gray-200' : ''}`}>
               <div className="flex items-start space-x-3">
-                {notification.type === 'like' || notification.type === 'friend_join' ? (
+                {notification.type === 'like' || notification.type === 'friend_join' || notification.type === 'group_activity' ? (
                   <Avatar className="w-10 h-10">
                     <AvatarImage src={notification.avatar} alt={notification.username} />
                     <AvatarFallback>{notification.username[0]}</AvatarFallback>
@@ -63,6 +66,8 @@ const Notifications = () => {
                   <p className="text-sm text-gray-900">
                     {notification.type === 'like' || notification.type === 'friend_join' ? (
                       <><span className="font-semibold">{notification.username}</span> {notification.action}</>
+                    ) : notification.type === 'group_activity' ? (
+                      <><span className="font-semibold">{notification.username}</span> from <span className="font-semibold">{notification.groupName}</span> {notification.action} {notification.extra}</>
                     ) : (
                       <><span className="font-semibold">{notification.title}</span> {notification.action} {notification.extra}</>
                     )}
