@@ -19,7 +19,7 @@ const CommunityGroupCard = ({ group, index }) => {
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleClick}
     >
-      <div className="h-[55%] relative">
+      <div className="h-24 relative">
         <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
         {group.isOwner && (
           <div className="absolute top-2 right-2 bg-yellow-400 rounded-full p-1">
@@ -27,7 +27,7 @@ const CommunityGroupCard = ({ group, index }) => {
           </div>
         )}
       </div>
-      <div className="p-4 flex flex-col h-[45%] relative">
+      <div className="p-4 flex flex-col h-32 relative">
         <div className="flex items-center justify-between mb-1">
           <h3 className="font-semibold text-lg text-gray-800 truncate">{truncateName(group.name)}</h3>
         </div>
