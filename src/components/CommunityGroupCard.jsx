@@ -35,7 +35,7 @@ const CommunityGroupCard = ({ group, index }) => {
           </div>
         )}
       </div>
-      <div className="p-3 flex flex-col h-[45%] justify-between">
+      <div className="p-3 flex flex-col h-[45%] justify-between border-t border-gray-200">
         <div>
           <h3 className="font-semibold text-base text-gray-800 truncate mb-1">{truncateName(group.name)}</h3>
           <p className="text-xs text-gray-600 truncate">{truncateDescription(group.description)}</p>
