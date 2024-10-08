@@ -64,7 +64,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
               </button>
             </li>
           ))}
-          <li className="absolute left-1/2 transform -translate-x-1/2 -top-8">
+          <li className="absolute left-1/2 transform -translate-x-1/2 -top-6">
             <div className="relative">
               <div className="absolute inset-0 bg-blue-500 rounded-full opacity-75 animate-ping"></div>
               <div className="absolute inset-0 bg-blue-500 rounded-full opacity-75 animate-pulse"></div>
