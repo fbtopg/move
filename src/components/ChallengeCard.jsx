@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const ChallengeCard = () => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center">
+    <div className="border-2 border-gray-300 rounded-lg p-6 flex flex-col items-center text-center">
       <Calendar className="w-16 h-16 text-purple-500 mb-4" />
       <h2 className="text-2xl font-bold mb-2">No appointments</h2>
       <p className="text-gray-600 mb-6">
