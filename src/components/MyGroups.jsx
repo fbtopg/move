@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Plus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { getRandomProfilePicture } from '../utils/profilePictures';
@@ -31,6 +31,17 @@ const MyGroups = () => {
 
   return (
     <div className="mb-6">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold">My Groups</h2>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="p-0"
+          onClick={() => console.log('Add group clicked')}
+        >
+          <Plus className="h-5 w-5 text-gray-500" strokeWidth={1.5} />
+        </Button>
+      </div>
       <div className="overflow-x-auto scrollbar-hide -mx-4" ref={groupsRef}>
         <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
           {myGroups.map((group) => (
