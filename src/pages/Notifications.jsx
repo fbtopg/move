@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft, Bell } from 'lucide-react';
+import { ChevronLeft, Bell, Trophy, Users, Gift } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 
@@ -11,10 +11,28 @@ const Notifications = () => {
     { id: 2, type: 'challenge_start', title: 'Daily Step Challenge', action: 'has started!', timestamp: '1d ago' },
     { id: 3, type: 'challenge_end', title: 'Quiz Master Challenge', action: 'has ended. Check your reward!', timestamp: '2d ago' },
     { id: 4, type: 'new_challenge', title: 'Fitness Frenzy', action: 'There is a new challenge', extra: 'available!', timestamp: '3d ago' },
+    { id: 5, type: 'achievement', title: 'Step Master', action: 'You\'ve earned a new achievement:', extra: 'Walk 10,000 steps in a day!', timestamp: '4d ago' },
+    { id: 6, type: 'friend_join', username: 'Emma Watson', action: 'joined the app!', timestamp: '5d ago', avatar: 'https://i.pravatar.cc/150?img=2' },
+    { id: 7, type: 'group_invite', title: 'Morning Joggers', action: 'You\'ve been invited to join', extra: 'a new group!', timestamp: '1w ago' },
+    { id: 8, type: 'reward', title: 'Weekly Bonus', action: 'You\'ve received a reward:', extra: '50 points added!', timestamp: '1w ago' },
   ];
 
   const handleGoBack = () => {
     navigate(-1);
+  };
+
+  const getNotificationIcon = (type) => {
+    switch (type) {
+      case 'achievement':
+        return <Trophy className="w-6 h-6 text-yellow-500" />;
+      case 'friend_join':
+      case 'group_invite':
+        return <Users className="w-6 h-6 text-green-500" />;
+      case 'reward':
+        return <Gift className="w-6 h-6 text-purple-500" />;
+      default:
+        return <Bell className="w-6 h-6 text-blue-500" />;
+    }
   };
 
   return (
@@ -31,19 +49,19 @@ const Notifications = () => {
           {notifications.map((notification, index) => (
             <li key={notification.id} className={`px-4 py-4 ${index !== 0 ? 'border-t border-gray-200' : ''}`}>
               <div className="flex items-start space-x-3">
-                {notification.type === 'like' ? (
+                {notification.type === 'like' || notification.type === 'friend_join' ? (
                   <Avatar className="w-10 h-10">
                     <AvatarImage src={notification.avatar} alt={notification.username} />
                     <AvatarFallback>{notification.username[0]}</AvatarFallback>
                   </Avatar>
                 ) : (
                   <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                    <Bell className="w-6 h-6 text-blue-500" />
+                    {getNotificationIcon(notification.type)}
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-gray-900">
-                    {notification.type === 'like' ? (
+                    {notification.type === 'like' || notification.type === 'friend_join' ? (
                       <><span className="font-semibold">{notification.username}</span> {notification.action}</>
                     ) : (
                       <><span className="font-semibold">{notification.title}</span> {notification.action} {notification.extra}</>
