@@ -12,9 +12,9 @@ const CommunityHeader = () => {
       <div className="w-full flex justify-end space-x-2">
         <Button
           onClick={() => navigate("/notifications")}
-          className="bg-white hover:bg-gray-100 transition-colors h-10 w-10 rounded-full flex items-center justify-center"
+          className="bg-white hover:bg-gray-100 transition-colors h-10 w-10 rounded-full flex items-center justify-center p-1" // Changed padding to p-1
         >
-          <Bell className="h-7 w-7 text-gray-600" /> {/* Increased size from h-6 w-6 to h-7 w-7 */}
+          <Bell className="h-7 w-7 text-gray-600" />
         </Button>
         <Button
           onClick={() => navigate("/profile")}
