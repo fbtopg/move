@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
@@ -7,17 +7,6 @@ import { Button } from "@/components/ui/button";
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.setProperty('--status-bar-color', '#FFFFFF');
-    } else {
-      document.body.style.removeProperty('--status-bar-color');
-    }
-    return () => {
-      document.body.style.removeProperty('--status-bar-color');
-    };
-  }, [isOpen]);
 
   const handleCreateGroup = (groupData) => {
     const newGroupId = Date.now().toString();
