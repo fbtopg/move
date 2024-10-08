@@ -3,17 +3,6 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Crown, Users } from 'lucide-react';
 
-const getGradientColor = (index) => {
-  const gradients = [
-    'from-blue-400 to-purple-500',
-    'from-green-400 to-blue-500',
-    'from-yellow-400 to-red-500',
-    'from-pink-400 to-red-500',
-    'from-indigo-400 to-purple-500'
-  ];
-  return gradients[index % gradients.length];
-};
-
 const CommunityGroupCard = ({ group, index }) => {
   const navigate = useNavigate();
   const truncateName = (name) => name.length > 20 ? name.slice(0, 20) + '...' : name;
@@ -25,19 +14,20 @@ const CommunityGroupCard = ({ group, index }) => {
 
   return (
     <motion.div
-      className="w-full h-64 rounded-xl overflow-hidden relative bg-white shadow-lg cursor-pointer"
-      whileHover={{ scale: 1.03, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
+      className="w-full max-w-[250px] h-56 rounded-xl overflow-hidden relative bg-white cursor-pointer"
+      whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleClick}
     >
-      <div className={`h-24 bg-gradient-to-r ${getGradientColor(index)} relative`}>
+      <div className="h-24 relative">
+        <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
         {group.isOwner && (
           <div className="absolute top-2 right-2 bg-yellow-400 rounded-full p-1">
             <Crown className="w-4 h-4 text-white" />
           </div>
         )}
       </div>
-      <div className="p-4 flex flex-col h-40 relative">
+      <div className="p-4 flex flex-col h-32 relative">
         <div className="flex items-center justify-between mb-1">
           <h3 className="font-semibold text-lg text-gray-800 truncate">{truncateName(group.name)}</h3>
         </div>
