@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
 import { ChevronLeft } from 'lucide-react';
-import { Button } from "@/components/ui/button";
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -54,15 +53,14 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           animate="visible"
           exit="exit"
           variants={modalVariants}
-          className="fixed inset-0 bg-background z-50 overflow-y-auto"
+          className="fixed inset-0 bg-white z-50 overflow-y-auto"
         >
           <div className="min-h-screen p-6 flex flex-col">
-            <div className="flex items-center justify-between mb-6">
-              <Button variant="ghost" onClick={onClose} className="p-0">
+            <div className="flex items-center mb-6">
+              <button onClick={onClose} className="mr-4">
                 <ChevronLeft className="h-6 w-6" />
-              </Button>
-              <h2 className="text-2xl font-bold text-center flex-grow">Create Group</h2>
-              <div className="w-6"></div> {/* Spacer for centering */}
+              </button>
+              <h2 className="text-2xl font-bold">Create Group</h2>
             </div>
 
             <CreateGroupForm handleCreateGroup={handleCreateGroup} />
