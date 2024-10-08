@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Globe, Users, Trophy, Bell, Zap } from 'lucide-react';
+import { Globe, Trophy, Zap } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate, useLocation } from 'react-router-dom';
 import QuickstartMenu from './QuickstartMenu';
@@ -12,9 +12,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
   
   const navItems = [
     { id: 'community', icon: Globe, route: '/' },
-    { id: 'group', icon: Users, route: '/group' },
     { id: 'challenge', icon: Trophy, route: '/board' },
-    { id: 'notification', icon: Bell, route: '/notifications' },
   ];
 
   useEffect(() => {
@@ -52,15 +50,14 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
           {navItems.map((item, index) => (
             <li key={item.id} className={cn(
               "flex-1",
-              index === 1 ? "mr-6" : "",
-              index === 2 ? "ml-6" : ""
+              index === 0 ? "mr-12" : "ml-12"
             )}>
               <button
                 onClick={() => handleNavigation(item)}
                 className={cn(
                   "w-full h-full flex items-center justify-center",
                   currentActiveTab === item.id ? "text-primary" : "text-muted-foreground",
-                  "pb-4" // Increased padding to push icons more upwards
+                  "pb-4"
                 )}
               >
                 <item.icon className="h-6 w-6 stroke-1" />

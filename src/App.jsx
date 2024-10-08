@@ -14,13 +14,8 @@ import Achievements from "./pages/Achievements";
 import Follow from "./pages/Follow";
 import Walk from "./pages/Walk";
 import Board from "./pages/Board";
-import Group from "./pages/Group";
-import MyGroups from "./pages/MyGroups";
 import RecentActivity from "./pages/RecentActivity";
 import SplashScreen from "./components/SplashScreen";
-import Notifications from "./pages/Notifications";
-import GroupDetails from "./pages/GroupDetails";
-import GroupImagesGrid from "./components/GroupImagesGrid";
 import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
@@ -64,12 +59,7 @@ const App = () => {
               <Route path="/follow" element={<Follow />} />
               <Route path="/walk" element={<Walk />} />
               <Route path="/board" element={<Board />} />
-              <Route path="/group" element={<Group />} />
-              <Route path="/group/:groupId" element={<GroupDetails />} />
-              <Route path="/group/:groupId/images" element={<GroupImagesGrid />} />
-              <Route path="/my-groups" element={<MyGroups />} />
               <Route path="/recent-activity" element={<RecentActivity />} />
-              <Route path="/notifications" element={<Notifications />} />
               <Route path="/settings" element={<Settings />} />
             </Routes>
           </BrowserRouter>
