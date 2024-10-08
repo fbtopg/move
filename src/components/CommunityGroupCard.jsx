@@ -31,7 +31,7 @@ const CommunityGroupCard = ({ group, index }) => {
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-base text-gray-800 truncate">{truncateName(group.name)}</h3>
         </div>
-        <p className="text-xs text-gray-600 mb-2 truncate">{truncateDescription(group.description)}</p>
+        <p className="text-xs text-gray-600 mb-1 truncate">{truncateDescription(group.description)}</p>
         <div className="flex items-center justify-between mt-auto">
           <div className="flex items-center">
             <Users className="w-4 h-4 text-gray-400 mr-1" />
