@@ -60,7 +60,7 @@ const Community = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mb-8 -mx-4"
         >
-          <h2 className="text-lg font-semibold mb-4 px-4 space-grotesk-title">Recommended Groups</h2>
+          <h2 className="text-lg font-semibold mb-4 px-4 space-grotesk-title">Recommended</h2>
           <SwipeableGroupCards groups={recommendedGroups.map(group => ({ ...group, isJoined: false }))} />
         </motion.div>
 
