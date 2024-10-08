@@ -16,7 +16,7 @@ export const renderActivitySection = (title, activities, onUserClick) => (
     transition={{ duration: 0.5 }}
     className="bg-white rounded-lg shadow-md p-4 mb-6"
   >
-    <h2 className="text-lg font-semibold mb-4 text-gray-800 space-grotesk-title">{title}</h2>
+    <h2 className="text-lg font-semibold mb-4 text-gray-800 roboto-medium">{title}</h2>
     <div className="space-y-4">
       {activities.map((activity, index) => (
         <motion.div
