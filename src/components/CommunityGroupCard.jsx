@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Crown, Users, Infinity } from 'lucide-react';
+import { Crown, Users } from 'lucide-react';
 
 const CommunityGroupCard = ({ group, index }) => {
   const navigate = useNavigate();
@@ -10,25 +10,6 @@ const CommunityGroupCard = ({ group, index }) => {
 
   const handleClick = () => {
     navigate(`/group/${group.id}`, { state: { ...group } });
-  };
-
-  const renderCapacity = () => {
-    if (group.capacity === 'unlimited') {
-      return (
-        <div className="flex items-center">
-          <Users className="w-4 h-4 text-gray-400 mr-1" />
-          <p className="text-xs text-gray-500 mr-1">{group.members}</p>
-          <Infinity className="w-4 h-4 text-gray-400" />
-        </div>
-      );
-    } else {
-      return (
-        <div className="flex items-center">
-          <Users className="w-4 h-4 text-gray-400 mr-1" />
-          <p className="text-xs text-gray-500">{group.members}/{group.capacity}</p>
-        </div>
-      );
-    }
   };
 
   return (
@@ -52,7 +33,10 @@ const CommunityGroupCard = ({ group, index }) => {
         </div>
         <p className="text-xs text-gray-600 mb-2 truncate">{truncateDescription(group.description)}</p>
         <div className="flex items-center justify-between mt-auto">
-          {renderCapacity()}
+          <div className="flex items-center">
+            <Users className="w-4 h-4 text-gray-400 mr-1" />
+            <p className="text-xs text-gray-500">{group.members} members</p>
+          </div>
         </div>
         <div className="absolute bottom-1 left-3 text-xs font-medium">
           {group.isOwner ? (
