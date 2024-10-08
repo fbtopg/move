@@ -17,6 +17,7 @@ import Board from "./pages/Board";
 import RecentActivity from "./pages/RecentActivity";
 import SplashScreen from "./components/SplashScreen";
 import Settings from "./pages/Settings";
+import Notifications from "./pages/Notifications";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +62,7 @@ const App = () => {
               <Route path="/board" element={<Board />} />
               <Route path="/recent-activity" element={<RecentActivity />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/notifications" element={<Notifications />} />
             </Routes>
           </BrowserRouter>
         )}
