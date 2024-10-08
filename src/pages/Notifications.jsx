@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, Bell, Trophy, Users, Gift, Heart } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 
 const Notifications = () => {
   const navigate = useNavigate();
-
-  const notifications = [
+  const [notifications, setNotifications] = useState([
     { id: 1, type: 'like', username: 'Benjamin Dizdarevic', action: 'liked your activity!', timestamp: '19 hours ago', avatar: 'https://i.pravatar.cc/150?img=1' },
     { id: 2, type: 'challenge_start', title: 'Daily Step Challenge', action: 'has started!', timestamp: '1d ago' },
     { id: 3, type: 'challenge_end', title: 'Quiz Master Challenge', action: 'has ended. Check your reward!', timestamp: '2d ago' },
@@ -15,8 +14,27 @@ const Notifications = () => {
     { id: 6, type: 'friend_join', username: 'Emma Watson', action: 'joined the app!', timestamp: '5d ago', avatar: 'https://i.pravatar.cc/150?img=2' },
     { id: 7, type: 'group_invite', title: 'Morning Joggers', action: 'You\'ve been invited to join', extra: 'a new group!', timestamp: '1w ago' },
     { id: 8, type: 'reward', title: 'Weekly Bonus', action: 'You\'ve received a reward:', extra: '50 points added!', timestamp: '1w ago' },
-    { id: 9, type: 'group_activity', username: 'Alex Johnson', groupName: 'Fitness Enthusiasts', action: 'just completed an activity!', extra: 'Give it a like!', timestamp: '2h ago', avatar: 'https://i.pravatar.cc/150?img=3' },
-  ];
+  ]);
+
+  useEffect(() => {
+    const checkForNewNotification = () => {
+      if (Notification.permission === 'granted') {
+        const newNotification = {
+          id: Date.now(),
+          type: 'group_activity',
+          username: 'Alex Johnson',
+          groupName: 'Fitness Enthusiasts',
+          action: 'just completed an activity!',
+          extra: 'Give it a like!',
+          timestamp: 'Just now',
+          avatar: 'https://i.pravatar.cc/150?img=3'
+        };
+        setNotifications(prevNotifications => [newNotification, ...prevNotifications]);
+      }
+    };
+
+    checkForNewNotification();
+  }, []);
 
   const handleGoBack = () => {
     navigate(-1);
