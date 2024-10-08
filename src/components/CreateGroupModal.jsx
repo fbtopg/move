@@ -1,52 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
-import { initialGroupData, validateForm } from '../utils/createGroupUtils.jsx';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
-import { getRandomGradient } from '../utils/gradientUtils';
+import { ChevronLeft } from 'lucide-react';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
-  const [groupData, setGroupData] = useState(initialGroupData);
-  const [errors, setErrors] = useState({});
-  const [backgroundGradient, setBackgroundGradient] = useState('');
   const navigate = useNavigate();
-  const y = useMotionValue(0);
-  const opacity = useTransform(y, [0, 200], [1, 0]);
 
-  useEffect(() => {
-    if (isOpen) {
-      setBackgroundGradient(getRandomGradient());
-    }
-  }, [isOpen]);
-
-  const handleCreateGroup = () => {
-    const newErrors = validateForm(groupData);
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) {
-      const newGroupId = Date.now().toString();
-      navigate(`/group/${newGroupId}`, { 
-        state: { 
-          groupImage: groupData.image,
-          groupName: groupData.name,
-          groupDescription: groupData.description,
-          isPrivate: groupData.isPrivate,
-          animateEntry: true
-        } 
-      });
-      onClose();
-    }
-  };
-
-  const handleDragEnd = (_, info) => {
-    if (info.offset.y > 100) {
-      onClose();
-    }
+  const handleCreateGroup = (groupData) => {
+    const newGroupId = Date.now().toString();
+    navigate(`/group/${newGroupId}`, { 
+      state: { 
+        groupImage: groupData.image,
+        groupName: groupData.name,
+        groupDescription: groupData.description,
+        isPrivate: groupData.isPrivate,
+        capacity: groupData.capacity,
+        animateEntry: true
+      } 
+    });
+    onClose();
   };
 
   const modalVariants = {
-    hidden: { y: "100%", opacity: 0 },
+    hidden: { x: "100%", opacity: 0 },
     visible: { 
-      y: 0, 
+      x: 0, 
       opacity: 1,
       transition: { 
         type: "spring",
@@ -55,7 +34,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
       }
     },
     exit: { 
-      y: "100%", 
+      x: "100%", 
       opacity: 0,
       transition: { 
         type: "spring",
@@ -74,22 +53,17 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           animate="visible"
           exit="exit"
           variants={modalVariants}
-          drag="y"
-          dragConstraints={{ top: 0, bottom: 0 }}
-          onDragEnd={handleDragEnd}
-          style={{ y, opacity }}
-          className={`fixed inset-0 text-white z-50 overflow-y-auto ${backgroundGradient}`}
+          className="fixed inset-0 bg-white z-50 overflow-y-auto"
         >
           <div className="min-h-screen p-6 flex flex-col">
-            <h2 className="text-lg font-light text-center mb-4">Create Group</h2>
+            <div className="flex items-center mb-6">
+              <button onClick={onClose} className="mr-4">
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+              <h2 className="text-2xl font-bold">Create Group</h2>
+            </div>
 
-            <CreateGroupForm
-              groupData={groupData}
-              setGroupData={setGroupData}
-              errors={errors}
-              setErrors={setErrors}
-              handleCreateGroup={handleCreateGroup}
-            />
+            <CreateGroupForm handleCreateGroup={handleCreateGroup} />
           </div>
         </motion.div>
       )}
