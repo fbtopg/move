@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import CommunityHeader from "../components/CommunityHeader";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import SwipeableGroupCards from "../components/SwipeableGroupCards";
 import { renderActivitySection, getGreeting } from "../utils/communityUtils.jsx";
 import { myGroups, activities, recommendedGroups } from "../utils/communityData";
-import CommunityHeader from '../components/CommunityHeader';
-import BottomNavBar from '../components/BottomNavBar';
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -33,43 +32,41 @@ const Community = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
       <CommunityHeader />
-      <div className="flex-grow overflow-y-auto">
-        <div className="px-4 pt-1 pb-20">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col items-start mb-6"
-          >
-            <h1 className="text-3xl font-bold text-foreground libre-baskerville-bold">{greeting}</h1>
-          </motion.div>
+      <div className="px-4 pt-1 pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-start mb-6" // Changed mb-4 to mb-6
+        >
+          <h1 className="text-3xl font-bold text-foreground libre-baskerville-bold">{greeting}</h1>
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mb-8 -mx-4"
-          >
-            <h2 className="text-lg font-semibold mb-4 px-4 space-grotesk-title">My Groups</h2>
-            <SwipeableGroupCards groups={myGroups.map(group => ({ ...group, isJoined: true }))} />
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mb-8 -mx-4"
+        >
+          <h2 className="text-lg font-semibold mb-4 px-4 space-grotesk-title">My Groups</h2>
+          <SwipeableGroupCards groups={myGroups.map(group => ({ ...group, isJoined: true }))} />
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="mb-8 -mx-4"
-          >
-            <h2 className="text-lg font-semibold mb-4 px-4 space-grotesk-title">Recommended</h2>
-            <SwipeableGroupCards groups={recommendedGroups.map(group => ({ ...group, isJoined: false }))} />
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mb-8 -mx-4"
+        >
+          <h2 className="text-lg font-semibold mb-4 px-4 space-grotesk-title">Recommended</h2>
+          <SwipeableGroupCards groups={recommendedGroups.map(group => ({ ...group, isJoined: false }))} />
+        </motion.div>
 
-          {renderActivitySection("Recent Activity", activities.today, handleUserClick)}
-          {renderActivitySection("This Month", activities.thisMonth, handleUserClick)}
-          {renderActivitySection("Earlier", activities.earlier, handleUserClick)}
-        </div>
+        {renderActivitySection("Recent Activity", activities.today, handleUserClick)}
+        {renderActivitySection("This Month", activities.thisMonth, handleUserClick)}
+        {renderActivitySection("Earlier", activities.earlier, handleUserClick)}
       </div>
 
       <AnimatePresence>
@@ -95,8 +92,6 @@ const Community = () => {
         isOpen={isCreateGroupModalOpen}
         onClose={() => setIsCreateGroupModalOpen(false)}
       />
-
-      <BottomNavBar activeTab="community" />
     </div>
   );
 };
