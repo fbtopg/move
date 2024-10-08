@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
 import { Image, Lock, Globe } from 'lucide-react';
 
 const CreateGroupForm = ({ handleCreateGroup }) => {
@@ -14,19 +13,8 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
     capacity: 'unlimited',
     image: null
   });
-  const [sliderValue, setSliderValue] = useState(0);
-  const sliderRef = useRef(null);
-
-  useEffect(() => {
-    const updateCapacity = () => {
-      if (sliderValue === 0) {
-        setGroupData(prev => ({ ...prev, capacity: 'unlimited' }));
-      } else {
-        setGroupData(prev => ({ ...prev, capacity: String(sliderValue + 1) }));
-      }
-    };
-    updateCapacity();
-  }, [sliderValue]);
+  const [selectedCapacity, setSelectedCapacity] = useState('∞');
+  const capacityRef = useRef(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -48,7 +36,14 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
     }
   };
 
+  const handleCapacityChange = (capacity) => {
+    setSelectedCapacity(capacity);
+    setGroupData(prev => ({ ...prev, capacity: capacity === '∞' ? 'unlimited' : capacity }));
+  };
+
   const isFormValid = groupData.name.trim() !== '';
+
+  const capacityOptions = ['∞', ...Array.from({ length: 99 }, (_, i) => (i + 2).toString())];
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); if (isFormValid) handleCreateGroup(groupData); }} className="space-y-6">
@@ -116,25 +111,23 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
 
       <div>
         <h3 className="text-sm font-medium text-muted-foreground mb-2">Group Capacity</h3>
-        <div className="relative pt-10 pb-6">
-          <Slider
-            ref={sliderRef}
-            min={0}
-            max={99}
-            step={1}
-            value={[sliderValue]}
-            onValueChange={([value]) => setSliderValue(value)}
-            className="w-full"
-          />
-          <div className="absolute top-0 left-0 right-0 flex justify-between">
-            {['∞', '25', '50', '75', '100'].map((label, index) => (
-              <div key={label} className="flex flex-col items-center">
-                <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${sliderValue === (index === 0 ? 0 : (index * 25) - 1) ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>
-                  {label === '∞' ? '∞' : label}
-                </div>
-              </div>
-            ))}
-          </div>
+        <div 
+          ref={capacityRef}
+          className="flex overflow-x-auto pb-4 scrollbar-hide"
+          style={{ scrollSnapType: 'x mandatory' }}
+        >
+          {capacityOptions.map((capacity) => (
+            <div
+              key={capacity}
+              className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mx-2 text-sm ${
+                selectedCapacity === capacity ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+              }`}
+              style={{ scrollSnapAlign: 'center' }}
+              onClick={() => handleCapacityChange(capacity)}
+            >
+              {capacity}
+            </div>
+          ))}
         </div>
         <p className="text-center text-sm text-muted-foreground mt-2">
           {groupData.capacity === 'unlimited' ? 'Unlimited' : `${groupData.capacity} members`}
