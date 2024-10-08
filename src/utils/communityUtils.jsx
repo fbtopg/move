@@ -3,7 +3,7 @@ import FriendActivity from '../components/FriendActivity';
 
 export const renderActivitySection = (title, activities, handleUserClick) => (
   <div className="mb-6">
-    <h2 className="text-lg font-semibold mb-4 roboto-medium">{title}</h2>
+    <h2 className="text-lg font-semibold mb-4 space-grotesk-title">{title}</h2>
     <div className="space-y-4">
       {activities.map((activity, index) => (
         <FriendActivity
