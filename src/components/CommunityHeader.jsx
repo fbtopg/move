@@ -14,7 +14,7 @@ const CommunityHeader = () => {
           onClick={() => navigate("/notifications")}
           className="bg-white hover:bg-gray-100 transition-colors h-10 w-10 rounded-full flex items-center justify-center"
         >
-          <Bell className="h-6 w-6 text-gray-600" /> {/* Increased size from h-5 w-5 to h-6 w-6 */}
+          <Bell className="h-7 w-7 text-gray-600" /> {/* Increased size from h-6 w-6 to h-7 w-7 */}
         </Button>
         <Button
           onClick={() => navigate("/profile")}
