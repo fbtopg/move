@@ -45,7 +45,6 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
 
   const capacityOptions = ['∞', ...Array.from({ length: 99 }, (_, i) => (i + 2).toString())];
 
-
   return (
     <form onSubmit={(e) => { e.preventDefault(); if (isFormValid) handleCreateGroup(groupData); }} className="space-y-6">
       <div className="bg-muted rounded-lg p-4 flex items-center justify-center h-40 mb-6">
@@ -125,7 +124,7 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
             {capacityOptions.map((capacity) => (
               <div
                 key={capacity}
-                className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mr-4 text-sm ${
+                className={`flex-shrink-0 w-16 h-16 rounded-full flex items-center justify-center mr-4 text-lg font-medium ${
                   selectedCapacity === capacity ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
                 }`}
                 onClick={() => handleCapacityChange(capacity)}
@@ -135,9 +134,6 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
             ))}
           </div>
         </div>
-        <p className="text-center text-sm text-muted-foreground mt-2">
-          {groupData.capacity === 'unlimited' ? 'Unlimited' : `${groupData.capacity} members`}
-        </p>
       </div>
 
       <Button 
