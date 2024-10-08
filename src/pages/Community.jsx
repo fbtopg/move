@@ -33,14 +33,14 @@ const Community = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
-      <div className="px-4 pt-8 pb-20">
+      <CommunityHeader />
+      <div className="px-4 pt-4 pb-20">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="flex flex-col items-start mb-6"
         >
-          <CommunityHeader />
           <h1 className="text-3xl font-bold text-foreground libre-baskerville-bold">{greeting}</h1>
         </motion.div>
 
