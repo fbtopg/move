@@ -12,7 +12,7 @@ const ChallengeCard = () => {
       </p>
       <Button 
         variant="outline" 
-        className="border-2 border-gray-300 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+        className="border-2 border-gray-300 text-gray-600 hover:bg-gray-100 hover:text-gray-800 bg-transparent rounded-full"
       >
         Turn on notification
       </Button>
