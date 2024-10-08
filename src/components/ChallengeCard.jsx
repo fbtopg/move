@@ -18,20 +18,10 @@ const ChallengeCard = () => {
         const permission = await Notification.requestPermission();
         if (permission === 'granted') {
           setNotificationStatus('granted');
-          sendTestNotification();
         }
       } catch (error) {
         console.error('Error requesting notification permission:', error);
       }
-    }
-  };
-
-  const sendTestNotification = () => {
-    if (Notification.permission === 'granted') {
-      new Notification('New Group Activity', {
-        body: 'Alex Johnson from Fitness Enthusiasts just completed an activity! Give it a like!',
-        icon: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/trophy%20(1).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL3Ryb3BoeSAoMSkucG5nIiwiaWF0IjoxNzI4MzU0NzQzLCJleHAiOjE3NTk4OTA3NDN9.x8tUTCKqSW8_VGjc0lUo7XQ6M9J9PGMbmLoTDB5rGoc&t=2024-10-08T02%3A32%3A24.480Z'
-      });
     }
   };
 
