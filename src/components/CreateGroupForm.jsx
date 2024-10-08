@@ -3,14 +3,15 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Image, Plus, Lock, Globe } from 'lucide-react';
+import { Slider } from "@/components/ui/slider";
+import { Image, Lock, Globe } from 'lucide-react';
 
 const CreateGroupForm = ({ handleCreateGroup }) => {
   const [groupData, setGroupData] = useState({
     name: '',
     description: '',
     isPrivate: false,
-    capacity: 'unlimited',
+    capacity: 10,
     image: null
   });
 
@@ -20,7 +21,7 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
   };
 
   const handleCapacityChange = (value) => {
-    setGroupData(prev => ({ ...prev, capacity: value }));
+    setGroupData(prev => ({ ...prev, capacity: value[0] }));
   };
 
   const handlePrivacyChange = (value) => {
@@ -106,18 +107,16 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
 
       <div>
         <h3 className="text-sm font-medium text-muted-foreground mb-2">Group Capacity</h3>
-        <div className="flex space-x-2">
-          {['unlimited', '2', '3', '4', '5'].map((value) => (
-            <Button
-              key={value}
-              type="button"
-              variant={groupData.capacity === value ? 'default' : 'outline'}
-              className={`rounded-full w-10 h-10 ${value === 'unlimited' ? 'text-xl' : ''}`}
-              onClick={() => handleCapacityChange(value)}
-            >
-              {value === 'unlimited' ? '∞' : value}
-            </Button>
-          ))}
+        <div className="flex items-center space-x-4">
+          <Slider
+            min={2}
+            max={100}
+            step={1}
+            value={[groupData.capacity]}
+            onValueChange={handleCapacityChange}
+            className="flex-grow"
+          />
+          <span className="font-medium">{groupData.capacity === 100 ? '100+' : groupData.capacity}</span>
         </div>
       </div>
 
