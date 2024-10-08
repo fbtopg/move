@@ -6,7 +6,7 @@ import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import SwipeableGroupCards from "../components/SwipeableGroupCards";
 import { renderActivitySection, getGreeting } from "../utils/communityUtils.jsx";
-import { myGroups, activities } from "../utils/communityData";
+import { myGroups, activities, recommendedGroups } from "../utils/communityData";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -52,6 +52,16 @@ const Community = () => {
         >
           <h2 className="text-lg font-semibold mb-4 px-4 space-grotesk-title">My Groups</h2>
           <SwipeableGroupCards groups={myGroups.map(group => ({ ...group, isJoined: true }))} />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mb-8 -mx-4"
+        >
+          <h2 className="text-lg font-semibold mb-4 px-4 space-grotesk-title">Recommended Groups</h2>
+          <SwipeableGroupCards groups={recommendedGroups.map(group => ({ ...group, isJoined: false }))} />
         </motion.div>
 
         {renderActivitySection("Recent Activity", activities.today, handleUserClick)}

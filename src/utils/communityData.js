@@ -112,3 +112,39 @@ export const activities = {
     },
   ],
 };
+
+export const recommendedGroups = [
+  { 
+    id: 7, 
+    name: 'Yoga Enthusiasts', 
+    members: 120, 
+    image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/yoga_group.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAveW9nYV9ncm91cC5qcGciLCJpYXQiOjE3MjgyMDAwMjAsImV4cCI6MTc1OTczNjAyMH0.qcGtNMQVOz_G3I67gm8x--EAKdpR5bGKMD9UxFWZdyc&t=2024-10-06T07%3A33%3A41.601Z', 
+    hasActivity: true, 
+    lastActivity: '1h ago', 
+    memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], 
+    description: 'Join us for daily yoga sessions and mindfulness practices.',
+    isOwner: false 
+  },
+  { 
+    id: 8, 
+    name: 'Foodies United', 
+    members: 85, 
+    image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/food_group.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvZm9vZF9ncm91cC5qcGciLCJpYXQiOjE3MjgyMDAwMjAsImV4cCI6MTc1OTczNjAyMH0.qcGtNMQVOz_G3I67gm8x--EAKdpR5bGKMD9UxFWZdyc&t=2024-10-06T07%3A33%3A41.601Z', 
+    hasActivity: true, 
+    lastActivity: '3h ago', 
+    memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], 
+    description: 'Discover new recipes, share food experiences, and connect with fellow food lovers.',
+    isOwner: false 
+  },
+  { 
+    id: 9, 
+    name: 'Language Exchange', 
+    members: 150, 
+    image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/language_group.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvbGFuZ3VhZ2VfZ3JvdXAuanBnIiwiaWF0IjoxNzI4MjAwMDIwLCJleHAiOjE3NTk3MzYwMjB9.qcGtNMQVOz_G3I67gm8x--EAKdpR5bGKMD9UxFWZdyc&t=2024-10-06T07%3A33%3A41.601Z', 
+    hasActivity: true, 
+    lastActivity: '2h ago', 
+    memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], 
+    description: 'Practice languages with native speakers and make friends from around the world.',
+    isOwner: false 
+  },
+];
