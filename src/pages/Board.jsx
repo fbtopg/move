@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import CommunityHeader from '../components/CommunityHeader';
 import BottomNavBar from '../components/BottomNavBar';
+import ChallengeCard from '../components/ChallengeCard';
 
 const Board = () => {
   return (
@@ -18,7 +19,13 @@ const Board = () => {
             Challenges
           </motion.h2>
           
-          {/* Content for the Challenge page will be added here */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <ChallengeCard />
+          </motion.div>
         </div>
       </div>
       <BottomNavBar activeTab="challenge" />
