@@ -45,7 +45,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
 
   return (
     <>
-      <nav className="fixed bottom-0 left-0 right-0 text-foreground h-16 bg-white" style={{ borderTop: '1px solid var(--border)' }}>
+      <nav className="fixed bottom-0 left-0 right-0 text-foreground h-20 bg-white" style={{ borderTop: '1px solid var(--border)' }}>
         <ul className="flex justify-around items-center h-full relative">
           {navItems.map((item, index) => (
             <li key={item.id} className={cn(
@@ -64,7 +64,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
               </button>
             </li>
           ))}
-          <li className="absolute left-1/2 transform -translate-x-1/2 -top-6">
+          <li className="absolute left-1/2 transform -translate-x-1/2 -top-8">
             <div className="relative">
               <div className="absolute inset-0 bg-blue-500 rounded-full opacity-75 animate-ping"></div>
               <div className="absolute inset-0 bg-blue-500 rounded-full opacity-75 animate-pulse"></div>
