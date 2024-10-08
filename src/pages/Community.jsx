@@ -34,7 +34,7 @@ const Community = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
       <CommunityHeader />
-      <div className="px-4 pt-2 pb-20">
+      <div className="px-4 pt-1 pb-20">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
