@@ -16,7 +16,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
         groupName: groupData.name,
         groupDescription: groupData.description,
         isPrivate: groupData.isPrivate,
-        capacity: groupData.capacity === 100 ? '100+' : groupData.capacity.toString(),
+        capacity: groupData.capacity,
         animateEntry: true
       } 
     });
