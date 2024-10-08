@@ -115,7 +115,7 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
       </Sheet>
 
       <div>
-        <h3 className="text-sm font-medium text-muted-foreground mb-2">Group Capacity</h3>
+        <h3 className="text-sm font-medium text-black mb-2">Group Capacity</h3>
         <div className="relative -mx-4 px-4">
           <div 
             ref={capacityRef}
