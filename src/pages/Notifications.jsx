@@ -37,14 +37,14 @@ const Notifications = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] flex flex-col">
-      <header className="sticky top-0 bg-transparent z-10 px-4 py-3 flex items-center">
+      <header className="sticky top-0 bg-[#FEF8F3] z-10 px-4 py-3 flex items-center shadow-sm">
         <button className="absolute left-4" onClick={handleGoBack}>
           <ChevronLeft className="w-6 h-6" />
         </button>
         <h1 className="text-xl font-semibold w-full text-center">Notifications</h1>
       </header>
       
-      <div className="flex-grow overflow-y-auto">
+      <div className="flex-grow overflow-y-auto pt-4">
         <ul>
           {notifications.map((notification, index) => (
             <li key={notification.id} className={`px-4 py-4 ${index !== 0 ? 'border-t border-gray-200' : ''}`}>
