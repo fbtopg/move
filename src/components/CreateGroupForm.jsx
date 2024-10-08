@@ -45,6 +45,7 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
 
   const capacityOptions = ['∞', ...Array.from({ length: 99 }, (_, i) => (i + 2).toString())];
 
+
   return (
     <form onSubmit={(e) => { e.preventDefault(); if (isFormValid) handleCreateGroup(groupData); }} className="space-y-6">
       <div className="bg-muted rounded-lg p-4 flex items-center justify-center h-40 mb-6">
@@ -119,8 +120,7 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
         <div className="relative -mx-4 px-4">
           <div 
             ref={capacityRef}
-            className="flex overflow-x-auto pb-4 scrollbar-hide"
-            style={{ scrollSnapType: 'x mandatory' }}
+            className="flex overflow-x-auto pb-4 scrollbar-hide capacity-scroll"
           >
             {capacityOptions.map((capacity) => (
               <div
@@ -128,7 +128,6 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
                 className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mr-4 text-sm ${
                   selectedCapacity === capacity ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
                 }`}
-                style={{ scrollSnapAlign: 'center' }}
                 onClick={() => handleCapacityChange(capacity)}
               >
                 {capacity}

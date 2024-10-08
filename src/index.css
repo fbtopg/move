@@ -84,6 +84,14 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+  .capacity-scroll {
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  .capacity-scroll > div {
+    scroll-snap-align: center;
+  }
 }
 
 @keyframes marquee {
@@ -172,3 +180,4 @@
   font-weight: 900;
   font-style: normal;
 }
+
