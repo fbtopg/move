@@ -24,14 +24,14 @@ const Notifications = () => {
   const getNotificationIcon = (type) => {
     switch (type) {
       case 'achievement':
-        return <Trophy className="w-6 h-6 text-yellow-500" />;
+        return <Trophy className="w-6 h-6 text-gray-500" />;
       case 'friend_join':
       case 'group_invite':
-        return <Users className="w-6 h-6 text-green-500" />;
+        return <Users className="w-6 h-6 text-gray-500" />;
       case 'reward':
-        return <Gift className="w-6 h-6 text-purple-500" />;
+        return <Gift className="w-6 h-6 text-gray-500" />;
       default:
-        return <Bell className="w-6 h-6 text-blue-500" />;
+        return <Bell className="w-6 h-6 text-gray-500" />;
     }
   };
 
@@ -55,7 +55,7 @@ const Notifications = () => {
                     <AvatarFallback>{notification.username[0]}</AvatarFallback>
                   </Avatar>
                 ) : (
-                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 flex items-center justify-center">
                     {getNotificationIcon(notification.type)}
                   </div>
                 )}
