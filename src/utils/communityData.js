@@ -116,35 +116,35 @@ export const activities = {
 export const recommendedGroups = [
   { 
     id: 7, 
-    name: 'Yoga Enthusiasts', 
-    members: 120, 
+    name: 'Nike+', 
+    members: 250, 
     image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/groupbanner/Frame%20427319183.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvZ3JvdXBiYW5uZXIvRnJhbWUgNDI3MzE5MTgzLnBuZyIsImlhdCI6MTcyODM1MDk2NSwiZXhwIjoxNzU5ODg2OTY1fQ.imrwDeU291zfEooKqgJPplZQoSnhlW_doW0bkcIbztE&t=2024-10-08T01%3A29%3A26.093Z', 
     hasActivity: true, 
-    lastActivity: '1h ago', 
+    lastActivity: '30m ago', 
     memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], 
-    description: 'Join us for daily yoga sessions and mindfulness practices.',
+    description: 'Connect with fellow Nike enthusiasts and track your fitness journey.',
     isOwner: false 
   },
   { 
     id: 8, 
-    name: 'Foodies United', 
-    members: 85, 
+    name: 'Hoka walkers', 
+    members: 180, 
     image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/groupbanner/Frame%20427319184.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvZ3JvdXBiYW5uZXIvRnJhbWUgNDI3MzE5MTg0LnBuZyIsImlhdCI6MTcyODM1MDk3MiwiZXhwIjoxNzU5ODg2OTcyfQ.1eocN8qPCXLJ-c8dS4AVnIrkxYaBaVA97wLJmHSiaHo&t=2024-10-08T01%3A29%3A33.850Z', 
     hasActivity: true, 
-    lastActivity: '3h ago', 
+    lastActivity: '1h ago', 
     memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], 
-    description: 'Discover new recipes, share food experiences, and connect with fellow food lovers.',
+    description: 'Join our community of Hoka enthusiasts for daily walks and running tips.',
     isOwner: false 
   },
   { 
     id: 9, 
-    name: 'Language Exchange', 
-    members: 150, 
+    name: 'Traveloka explorers', 
+    members: 320, 
     image: 'https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/group/groupbanner/Frame%20427319185.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZ3JvdXAvZ3JvdXBiYW5uZXIvRnJhbWUgNDI3MzE5MTg1LnBuZyIsImlhdCI6MTcyODM1MDk4MCwiZXhwIjoxNzU5ODg2OTgwfQ.cbkx3wDaUMWj_sEaAX-OVdJf3hK-6LOgyp5HQ0sTZg0&t=2024-10-08T01%3A29%3A41.320Z', 
     hasActivity: true, 
-    lastActivity: '2h ago', 
+    lastActivity: '45m ago', 
     memberProfiles: [getRandomProfilePicture(), getRandomProfilePicture(), getRandomProfilePicture()], 
-    description: 'Practice languages with native speakers and make friends from around the world.',
+    description: 'Discover new destinations and share travel experiences with fellow Traveloka users.',
     isOwner: false 
   },
 ];
