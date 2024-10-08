@@ -7,11 +7,10 @@ const Notifications = () => {
   const navigate = useNavigate();
 
   const notifications = [
-    { id: 1, type: 'like', username: 'Benjamin Dizdarevic', action: 'likes your discussion,', content: 'Enjoyed the content!', timestamp: '19 hours ago', avatar: 'https://i.pravatar.cc/150?img=1' },
-    { id: 2, type: 'reply', username: 'Benjamin Dizdarevic', action: 'replied on the discussion,', content: 'Enjoyed the content!', timestamp: '19 hours ago', avatar: 'https://i.pravatar.cc/150?img=1' },
-    { id: 3, type: 'challenge_start', title: 'Daily Walk Challenge', action: 'has started!', timestamp: '1d ago' },
-    { id: 4, type: 'challenge_end', title: 'Quiz Master Challenge', action: 'has ended, check your reward!', timestamp: '2d ago' },
-    { id: 5, type: 'new_challenge', title: 'Fitness Frenzy', action: 'There is a new challenge upcoming!', timestamp: '3d ago' },
+    { id: 1, type: 'like', username: 'Benjamin Dizdarevic', action: 'liked your activity!', timestamp: '19 hours ago', avatar: 'https://i.pravatar.cc/150?img=1' },
+    { id: 2, type: 'challenge_start', title: 'Daily Step Challenge', action: 'has started!', timestamp: '1d ago' },
+    { id: 3, type: 'challenge_end', title: 'Quiz Master Challenge', action: 'has ended. Check your reward!', timestamp: '2d ago' },
+    { id: 4, type: 'new_challenge', title: 'Fitness Frenzy', action: 'There is a new challenge', extra: 'available!', timestamp: '3d ago' },
   ];
 
   const handleGoBack = () => {
@@ -40,8 +39,12 @@ const Notifications = () => {
                 )}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-gray-900">
-                    <span className="font-semibold">{notification.username} </span>
-                    {notification.action} <span className="font-semibold">{notification.content}</span>
+                    {notification.type === 'like' && (
+                      <><span className="font-semibold">{notification.username}</span> {notification.action}</>
+                    )}
+                    {notification.type !== 'like' && (
+                      <><span className="font-semibold">{notification.title}</span> {notification.action} {notification.extra}</>
+                    )}
                   </p>
                   <p className="text-sm text-gray-500 mt-1">{notification.timestamp}</p>
                 </div>
