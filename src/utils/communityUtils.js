@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import FriendActivity from '../components/FriendActivity';
+import React from "react";
+import { motion } from "framer-motion";
+import FriendActivity from "../components/FriendActivity";
 
 export const getGreeting = () => {
   const currentHour = new Date().getHours();
@@ -9,7 +9,7 @@ export const getGreeting = () => {
   return "Good Evening";
 };
 
-export const renderActivitySection = (title, activities) => (
+export const renderActivitySection = (title, activities, onUserClick) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -30,7 +30,7 @@ export const renderActivitySection = (title, activities) => (
             activity={activity.activity}
             type={activity.type}
             profilePicture={activity.profilePicture}
-            onUserClick={() => handleUserClick(activity)}
+            onUserClick={() => onUserClick(activity)}
           />
         </motion.div>
       ))}
