@@ -5,7 +5,7 @@ import { Crown, Users } from 'lucide-react';
 
 const CommunityGroupCard = ({ group, index }) => {
   const navigate = useNavigate();
-  const truncateName = (name) => name.length > 20 ? name.slice(0, 20) + '...' : name;
+  const truncateName = (name) => name.length > 25 ? name.slice(0, 25) + '...' : name;
   const truncateDescription = (desc) => desc.length > 30 ? desc.slice(0, 30) + '...' : desc;
 
   const handleClick = () => {
@@ -27,21 +27,28 @@ const CommunityGroupCard = ({ group, index }) => {
           </div>
         )}
       </div>
-      <div className="p-4 flex flex-col h-[45%] relative">
-        <div className="flex items-center justify-between mb-1">
-          <h3 className="font-semibold text-lg text-gray-800 truncate">{truncateName(group.name)}</h3>
+      <div className="p-3 flex flex-col h-[45%] relative">
+        <div className="flex items-center justify-between">
+          <h3 className="font-semibold text-base text-gray-800 truncate">{truncateName(group.name)}</h3>
         </div>
-        <p className="text-sm text-gray-600 mb-2 truncate">{truncateDescription(group.description)}</p>
+        <p className="text-xs text-gray-600 mb-2 truncate">{truncateDescription(group.description)}</p>
         <div className="flex items-center justify-between mt-auto">
           <div className="flex items-center">
             <Users className="w-4 h-4 text-gray-400 mr-1" />
-            <p className="text-sm text-gray-500">{group.members} members</p>
+            <p className="text-xs text-gray-500">{group.members} members</p>
           </div>
           <div className="flex -space-x-2">
             {group.memberProfiles.slice(0, 3).map((profile, index) => (
               <div key={index} className="w-6 h-6 rounded-full bg-gray-200 border-2 border-white" />
             ))}
           </div>
+        </div>
+        <div className="absolute bottom-1 left-3 text-xs font-medium">
+          {group.isOwner ? (
+            <span className="text-yellow-600">Owner</span>
+          ) : group.isJoined ? (
+            <span className="text-green-600">Member</span>
+          ) : null}
         </div>
       </div>
     </motion.div>
