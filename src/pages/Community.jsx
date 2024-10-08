@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Plus } from "lucide-react"; // Import the Plus icon
 import CommunityHeader from "../components/CommunityHeader";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
@@ -8,7 +8,7 @@ import CreateGroupModal from "../components/CreateGroupModal";
 import SwipeableGroupCards from "../components/SwipeableGroupCards";
 import { renderActivitySection, getGreeting } from "../utils/communityUtils.jsx";
 import { myGroups, activities, recommendedGroups } from "../utils/communityData";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"; // Import the Button component
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
