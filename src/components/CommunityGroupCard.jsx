@@ -6,7 +6,7 @@ import { Crown, Users, Infinity } from 'lucide-react';
 const CommunityGroupCard = ({ group, index }) => {
   const navigate = useNavigate();
   const truncateName = (name) => name.length > 25 ? name.slice(0, 25) + '...' : name;
-  const truncateDescription = (desc) => desc.length > 30 ? desc.slice(0, 30) + '...' : desc;
+  const truncateDescription = (desc) => desc.length > 50 ? desc.slice(0, 50) + '...' : desc;
 
   const handleClick = () => {
     navigate(`/group/${group.id}`, { state: { ...group } });
@@ -44,23 +44,23 @@ const CommunityGroupCard = ({ group, index }) => {
           </div>
         )}
       </div>
-      <div className="p-3 flex flex-col h-[45%] relative">
-        <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-base text-gray-800 truncate">{truncateName(group.name)}</h3>
+      <div className="p-3 flex flex-col h-[45%] justify-between">
+        <div>
+          <h3 className="font-semibold text-base text-gray-800 truncate mb-1">{truncateName(group.name)}</h3>
+          <p className="text-xs text-gray-600 line-clamp-2">{truncateDescription(group.description)}</p>
         </div>
-        <p className="text-xs text-gray-600 mb-2 truncate">{truncateDescription(group.description)}</p>
-        <div className="flex items-center justify-between mt-auto">
+        <div className="flex items-center justify-between mt-2">
           <div className="flex items-center">
             <Users className="w-4 h-4 text-gray-400 mr-1" />
             {renderCapacity()}
           </div>
-        </div>
-        <div className="absolute bottom-1 left-3 text-xs font-medium">
-          {group.isOwner ? (
-            <span className="text-yellow-600">Owner</span>
-          ) : group.isJoined ? (
-            <span className="text-green-600">Member</span>
-          ) : null}
+          <div className="text-xs font-medium">
+            {group.isOwner ? (
+              <span className="text-yellow-600">Owner</span>
+            ) : group.isJoined ? (
+              <span className="text-green-600">Member</span>
+            ) : null}
+          </div>
         </div>
       </div>
     </motion.div>
