@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Plus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { getRandomProfilePicture } from '../utils/profilePictures';
@@ -29,8 +29,24 @@ const MyGroups = () => {
     { id: 3, name: 'Trip', members: 3, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767727749398618/KakaoTalk_20240929_105444000_02.jpg?ex=66fa054d&is=66f8b3cd&hm=c87306c053f5fee8f50fd4acc6363526eba0e50b6547667fd683092e4e032cdc&' },
   ];
 
+  const handleCreateGroup = () => {
+    console.log("Create group clicked");
+    // Implement group creation logic here
+  };
+
   return (
     <div className="mb-6">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold">My Groups</h2>
+        <Button
+          onClick={handleCreateGroup}
+          variant="ghost"
+          size="icon"
+          className="rounded-full"
+        >
+          <Plus className="h-5 w-5 stroke-[1.5]" />
+        </Button>
+      </div>
       <div className="overflow-x-auto scrollbar-hide -mx-4" ref={groupsRef}>
         <div className="flex space-x-4 px-4" style={{ width: `${(myGroups.length + 1) * 180}px` }}>
           {myGroups.map((group) => (
