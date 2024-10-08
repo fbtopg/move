@@ -37,11 +37,6 @@ const CommunityGroupCard = ({ group, index }) => {
             <Users className="w-4 h-4 text-gray-400 mr-1" />
             <p className="text-xs text-gray-500">{group.members} members</p>
           </div>
-          <div className="flex -space-x-2">
-            {group.memberProfiles.slice(0, 3).map((profile, index) => (
-              <div key={index} className="w-6 h-6 rounded-full bg-gray-200 border-2 border-white" />
-            ))}
-          </div>
         </div>
         <div className="absolute bottom-1 left-3 text-xs font-medium">
           {group.isOwner ? (
