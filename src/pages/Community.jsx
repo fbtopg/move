@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Plus } from "lucide-react"; // Import the Plus icon
 import CommunityHeader from "../components/CommunityHeader";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
@@ -7,6 +8,7 @@ import CreateGroupModal from "../components/CreateGroupModal";
 import SwipeableGroupCards from "../components/SwipeableGroupCards";
 import { renderActivitySection, getGreeting } from "../utils/communityUtils.jsx";
 import { myGroups, activities, recommendedGroups } from "../utils/communityData";
+import { Button } from "@/components/ui/button"; // Import the Button component
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -60,7 +62,17 @@ const Community = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mb-8 -mx-4"
         >
-          <h2 className="text-lg font-semibold mb-4 px-4 roboto-medium">My Groups</h2>
+          <div className="flex justify-between items-center px-4 mb-4">
+            <h2 className="text-lg font-semibold roboto-medium">My Groups</h2>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="p-0"
+              onClick={() => setIsCreateGroupModalOpen(true)}
+            >
+              <Plus className="h-5 w-5" />
+            </Button>
+          </div>
           <SwipeableGroupCards groups={myGroups.map(group => ({ ...group, isJoined: true }))} />
         </motion.div>
 
