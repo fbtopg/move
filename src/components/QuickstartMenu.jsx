@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { UserPlus, Footprints, Trophy, X } from 'lucide-react';
+import { Plus, Footprints, Trophy, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { motion } from 'framer-motion';
 import CreateGroupModal from './CreateGroupModal';
@@ -10,7 +10,7 @@ const QuickstartMenu = ({ onClose }) => {
   const options = [
     { 
       label: 'Create Group', 
-      icon: UserPlus, 
+      icon: Plus, 
       action: () => setShowCreateGroupModal(true)
     },
     { label: 'Walk', icon: Footprints, action: () => console.log('Walk') },
