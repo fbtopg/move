@@ -7,7 +7,7 @@ import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import SwipeableGroupCards from "../components/SwipeableGroupCards";
 import { getRandomProfilePicture } from "../utils/profilePictures";
-import { renderActivitySection, getGreeting } from "../utils/communityUtils";
+import { renderActivitySection, getGreeting } from "../utils/communityUtils.jsx";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
