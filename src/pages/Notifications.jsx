@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Bell } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 
@@ -31,18 +31,21 @@ const Notifications = () => {
           {notifications.map((notification, index) => (
             <li key={notification.id} className={`px-4 py-4 ${index !== 0 ? 'border-t border-gray-200' : ''}`}>
               <div className="flex items-start space-x-3">
-                {notification.avatar && (
+                {notification.type === 'like' ? (
                   <Avatar className="w-10 h-10">
                     <AvatarImage src={notification.avatar} alt={notification.username} />
                     <AvatarFallback>{notification.username[0]}</AvatarFallback>
                   </Avatar>
+                ) : (
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <Bell className="w-6 h-6 text-blue-500" />
+                  </div>
                 )}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-gray-900">
-                    {notification.type === 'like' && (
+                    {notification.type === 'like' ? (
                       <><span className="font-semibold">{notification.username}</span> {notification.action}</>
-                    )}
-                    {notification.type !== 'like' && (
+                    ) : (
                       <><span className="font-semibold">{notification.title}</span> {notification.action} {notification.extra}</>
                     )}
                   </p>
