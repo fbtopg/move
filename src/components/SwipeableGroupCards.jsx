@@ -5,11 +5,12 @@ import CommunityGroupCard from './CommunityGroupCard';
 
 const SwipeableGroupCards = ({ groups }) => {
   const [emblaRef] = useEmblaCarousel({ 
-    loop: true, 
+    loop: false, 
     align: 'start',
     dragFree: true,
     containScroll: 'trimSnaps',
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    inViewThreshold: 0.7,
   });
 
   return (
