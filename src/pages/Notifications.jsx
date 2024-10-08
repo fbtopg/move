@@ -1,8 +1,11 @@
 import React from 'react';
 import { ChevronLeft } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useNavigate } from 'react-router-dom';
 
 const Notifications = () => {
+  const navigate = useNavigate();
+
   const notifications = [
     { id: 1, type: 'like', username: 'Benjamin Dizdarevic', action: 'likes your discussion,', content: 'Enjoyed the content!', timestamp: '19 hours ago', avatar: 'https://i.pravatar.cc/150?img=1' },
     { id: 2, type: 'reply', username: 'Benjamin Dizdarevic', action: 'replied on the discussion,', content: 'Enjoyed the content!', timestamp: '19 hours ago', avatar: 'https://i.pravatar.cc/150?img=1' },
@@ -11,10 +14,14 @@ const Notifications = () => {
     { id: 5, type: 'new_challenge', title: 'Fitness Frenzy', action: 'There is a new challenge upcoming!', timestamp: '3d ago' },
   ];
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] flex flex-col">
       <header className="sticky top-0 bg-transparent z-10 px-4 py-3 flex items-center">
-        <button className="absolute left-4">
+        <button className="absolute left-4" onClick={handleGoBack}>
           <ChevronLeft className="w-6 h-6" />
         </button>
         <h1 className="text-xl font-semibold w-full text-center">Notifications</h1>
