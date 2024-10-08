@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CommunityHeader from "../components/CommunityHeader";
-import FriendActivity from "../components/FriendActivity";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import SwipeableGroupCards from "../components/SwipeableGroupCards";
-import { getRandomProfilePicture } from "../utils/profilePictures";
 import { renderActivitySection, getGreeting } from "../utils/communityUtils.jsx";
 import { myGroups, activities } from "../utils/communityData";
 
