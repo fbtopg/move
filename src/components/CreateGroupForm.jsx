@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Image, Lock, Globe } from 'lucide-react';
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const CreateGroupForm = ({ handleCreateGroup }) => {
   const [groupData, setGroupData] = useState({
@@ -84,30 +84,35 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
         className="w-full resize-none"
       />
 
-      <div className="flex justify-between items-center">
-        <Select
-          value={groupData.isPrivate ? 'private' : 'public'}
-          onValueChange={handlePrivacyChange}
-        >
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Privacy" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="public">
-              <div className="flex items-center">
-                <Globe className="mr-2 h-4 w-4" />
-                Public
-              </div>
-            </SelectItem>
-            <SelectItem value="private">
-              <div className="flex items-center">
-                <Lock className="mr-2 h-4 w-4" />
-                Private
-              </div>
-            </SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="outline" className="w-full justify-between">
+            <span>{groupData.isPrivate ? 'Private' : 'Public'}</span>
+            {groupData.isPrivate ? <Lock className="h-4 w-4" /> : <Globe className="h-4 w-4" />}
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="bottom" className="h-[30vh]">
+          <div className="space-y-4 pt-4">
+            <h3 className="text-lg font-semibold">Group Visibility</h3>
+            <Button
+              variant={groupData.isPrivate ? "outline" : "default"}
+              className="w-full justify-start"
+              onClick={() => handlePrivacyChange('public')}
+            >
+              <Globe className="mr-2 h-4 w-4" />
+              Public
+            </Button>
+            <Button
+              variant={groupData.isPrivate ? "default" : "outline"}
+              className="w-full justify-start"
+              onClick={() => handlePrivacyChange('private')}
+            >
+              <Lock className="mr-2 h-4 w-4" />
+              Private
+            </Button>
+          </div>
+        </SheetContent>
+      </Sheet>
 
       <div>
         <h3 className="text-sm font-medium text-muted-foreground mb-2">Group Capacity</h3>
