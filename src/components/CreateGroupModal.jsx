@@ -57,13 +57,10 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           className="fixed inset-0 bg-background z-50 overflow-y-auto"
         >
           <div className="min-h-screen p-6 flex flex-col">
-            <div className="flex items-center justify-between mb-6">
-              <Button variant="ghost" onClick={onClose} className="p-0">
-                <ChevronLeft className="h-6 w-6" />
-              </Button>
-              <h2 className="text-2xl font-bold text-center flex-grow">Create Group</h2>
-              <div className="w-6"></div> {/* Spacer for centering */}
-            </div>
+            <Button variant="ghost" onClick={onClose} className="p-0 w-fit">
+              <ChevronLeft className="h-6 w-6" />
+            </Button>
+            <h2 className="text-2xl font-bold mt-4 mb-6">Create Group</h2>
 
             <CreateGroupForm handleCreateGroup={handleCreateGroup} />
           </div>
