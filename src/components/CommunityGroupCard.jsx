@@ -6,7 +6,7 @@ import { Crown, Users, Infinity } from 'lucide-react';
 const CommunityGroupCard = ({ group, index }) => {
   const navigate = useNavigate();
   const truncateName = (name) => name.length > 25 ? name.slice(0, 25) + '...' : name;
-  const truncateDescription = (desc) => desc.length > 50 ? desc.slice(0, 50) + '...' : desc;
+  const truncateDescription = (desc) => desc.length > 40 ? desc.slice(0, 40) + '...' : desc;
 
   const handleClick = () => {
     navigate(`/group/${group.id}`, { state: { ...group } });
@@ -47,7 +47,7 @@ const CommunityGroupCard = ({ group, index }) => {
       <div className="p-3 flex flex-col h-[45%] justify-between">
         <div>
           <h3 className="font-semibold text-base text-gray-800 truncate mb-1">{truncateName(group.name)}</h3>
-          <p className="text-xs text-gray-600 line-clamp-2">{truncateDescription(group.description)}</p>
+          <p className="text-xs text-gray-600 truncate">{truncateDescription(group.description)}</p>
         </div>
         <div className="flex items-center justify-between mt-2">
           <div className="flex items-center">
