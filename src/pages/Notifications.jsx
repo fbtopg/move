@@ -1,57 +1,48 @@
 import React from 'react';
-import { Bell, Heart, MessageSquare, UserPlus } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import BottomNavBar from '../components/BottomNavBar';
 
 const Notifications = () => {
   const notifications = [
-    { id: 1, type: 'like', username: 'Emma', action: 'liked your post', timestamp: '2m ago', avatar: 'https://i.pravatar.cc/150?img=1' },
-    { id: 2, type: 'comment', username: 'John', action: 'commented on your activity', timestamp: '1h ago', avatar: 'https://i.pravatar.cc/150?img=2' },
-    { id: 3, type: 'like', username: 'Mike', action: 'liked your comment', timestamp: '1d ago', avatar: 'https://i.pravatar.cc/150?img=4' },
-    { id: 4, type: 'follow', username: 'Lisa', action: 'started following you', timestamp: '2d ago', avatar: 'https://i.pravatar.cc/150?img=5' },
+    { id: 1, type: 'like', username: 'Benjamin Dizdarevic', action: 'likes your discussion, Enjoyed the content!', timestamp: '19 hours ago', avatar: 'https://i.pravatar.cc/150?img=1' },
+    { id: 2, type: 'reply', username: 'Benjamin Dizdarevic', action: 'replied on the discussion, Enjoyed the content!', timestamp: '19 hours ago', avatar: 'https://i.pravatar.cc/150?img=1' },
+    { id: 3, type: 'challenge_start', title: 'Daily Walk Challenge', action: 'has started!', timestamp: '1d ago' },
+    { id: 4, type: 'challenge_end', title: 'Quiz Master Challenge', action: 'has ended, check your reward!', timestamp: '2d ago' },
+    { id: 5, type: 'new_challenge', title: 'Fitness Frenzy', action: 'There is a new challenge upcoming!', timestamp: '3d ago' },
   ];
 
-  const getIcon = (type) => {
-    switch (type) {
-      case 'like': return <Heart className="w-4 h-4 text-red-500" />;
-      case 'comment': return <MessageSquare className="w-4 h-4 text-blue-500" />;
-      case 'follow': return <UserPlus className="w-4 h-4 text-purple-500" />;
-      default: return <Bell className="w-4 h-4 text-gray-500" />;
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] flex flex-col">
-      <div className="flex-grow overflow-y-auto pb-20">
-        <div className="max-w-md mx-auto px-4 pt-8">
-          <h1 className="text-2xl font-bold text-foreground mb-6">Notifications</h1>
-          
-          <ul className="space-y-4">
-            {notifications.map((notification) => (
-              <li
-                key={notification.id}
-                className="bg-white rounded-lg shadow-md p-4 flex items-center space-x-4"
-              >
-                <Avatar className="h-12 w-12">
-                  <AvatarImage src={notification.avatar} alt={notification.username} />
-                  <AvatarFallback>{notification.username[0]}</AvatarFallback>
-                </Avatar>
-                <div className="flex-grow">
-                  <p className="text-sm font-medium">
-                    <span className="font-semibold">{notification.username}</span>{' '}
+    <div className="min-h-screen bg-white flex flex-col">
+      <header className="sticky top-0 bg-white z-10 px-4 py-3 flex items-center border-b">
+        <button className="mr-4">
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <h1 className="text-xl font-semibold">Activity</h1>
+      </header>
+      
+      <div className="flex-grow overflow-y-auto">
+        <ul className="divide-y divide-gray-200">
+          {notifications.map((notification) => (
+            <li key={notification.id} className="px-4 py-4">
+              <div className="flex items-center space-x-3">
+                {notification.avatar && (
+                  <Avatar className="w-10 h-10">
+                    <AvatarImage src={notification.avatar} alt={notification.username} />
+                    <AvatarFallback>{notification.username[0]}</AvatarFallback>
+                  </Avatar>
+                )}
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-gray-900">
+                    {notification.username && <span className="font-semibold">{notification.username} </span>}
                     {notification.action}
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">{notification.timestamp}</p>
+                  <p className="text-sm text-gray-500">{notification.timestamp}</p>
                 </div>
-                <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full">
-                  {getIcon(notification.type)}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-      <BottomNavBar activeTab="notification" />
     </div>
   );
 };
