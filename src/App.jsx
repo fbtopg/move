@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -31,7 +31,9 @@ const App = () => {
       await new Promise(resolve => setTimeout(resolve, 2000)); // Simulating content load
     };
 
-    preloadContent();
+    preloadContent().then(() => {
+      setShowSplash(false);
+    });
   }, []);
 
   const handleSplashComplete = () => {
@@ -39,35 +41,37 @@ const App = () => {
   };
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        {showSplash ? (
-          <SplashScreen onAnimationComplete={handleSplashComplete} />
-        ) : (
-          <BrowserRouter>
-            <Routes>
-              {navItems.map(({ to, page }) => (
-                <Route key={to} path={to} element={page} />
-              ))}
-              <Route path="/daily-walk-challenge" element={<DailyWalkChallenge />} />
-              <Route path="/daily-quiz-challenge" element={<DailyQuizChallenge />} />
-              <Route path="/daily-walk-history" element={<DailyWalkHistory />} />
-              <Route path="/daily-quiz-history" element={<DailyQuizHistory />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/rewards" element={<Rewards />} />
-              <Route path="/achievements" element={<Achievements />} />
-              <Route path="/follow" element={<Follow />} />
-              <Route path="/walk" element={<Walk />} />
-              <Route path="/board" element={<Board />} />
-              <Route path="/recent-activity" element={<RecentActivity />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/notifications" element={<Notifications />} />
-            </Routes>
-          </BrowserRouter>
-        )}
-      </TooltipProvider>
-    </QueryClientProvider>
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          {showSplash ? (
+            <SplashScreen onAnimationComplete={handleSplashComplete} />
+          ) : (
+            <BrowserRouter>
+              <Routes>
+                {navItems.map(({ to, page }) => (
+                  <Route key={to} path={to} element={page} />
+                ))}
+                <Route path="/daily-walk-challenge" element={<DailyWalkChallenge />} />
+                <Route path="/daily-quiz-challenge" element={<DailyQuizChallenge />} />
+                <Route path="/daily-walk-history" element={<DailyWalkHistory />} />
+                <Route path="/daily-quiz-history" element={<DailyQuizHistory />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/rewards" element={<Rewards />} />
+                <Route path="/achievements" element={<Achievements />} />
+                <Route path="/follow" element={<Follow />} />
+                <Route path="/walk" element={<Walk />} />
+                <Route path="/board" element={<Board />} />
+                <Route path="/recent-activity" element={<RecentActivity />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/notifications" element={<Notifications />} />
+              </Routes>
+            </BrowserRouter>
+          )}
+        </TooltipProvider>
+      </QueryClientProvider>
+    </React.StrictMode>
   );
 };
 
