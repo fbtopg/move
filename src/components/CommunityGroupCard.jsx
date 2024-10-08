@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
 import { Crown, Users } from 'lucide-react';
 
@@ -39,15 +38,8 @@ const CommunityGroupCard = ({ group, index }) => {
         )}
       </div>
       <div className="p-4 flex flex-col h-40 relative">
-        <Avatar className="w-20 h-20 border-4 border-white absolute -top-10 left-4">
-          <AvatarImage src={group.image} alt={group.name} className="object-cover" />
-          <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
-        </Avatar>
-        <div className="flex items-center justify-between mb-1 mt-8">
+        <div className="flex items-center justify-between mb-1">
           <h3 className="font-semibold text-lg text-gray-800 truncate">{truncateName(group.name)}</h3>
-          {group.hasActivity && (
-            <span className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
-          )}
         </div>
         <p className="text-sm text-gray-600 mb-2 truncate">{truncateDescription(group.description)}</p>
         <div className="flex items-center justify-between mt-auto">
@@ -57,10 +49,7 @@ const CommunityGroupCard = ({ group, index }) => {
           </div>
           <div className="flex -space-x-2">
             {group.memberProfiles.slice(0, 3).map((profile, index) => (
-              <Avatar key={index} className="w-6 h-6 border-2 border-white">
-                <AvatarImage src={profile} alt={`Member ${index + 1}`} />
-                <AvatarFallback>{index + 1}</AvatarFallback>
-              </Avatar>
+              <div key={index} className="w-6 h-6 rounded-full bg-gray-200 border-2 border-white" />
             ))}
           </div>
         </div>
