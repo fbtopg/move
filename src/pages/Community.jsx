@@ -197,7 +197,7 @@ const Community = () => {
           <div className="w-full flex justify-end mb-4">
             <Button
               onClick={() => navigate("/profile")}
-              className="bg-white hover:bg-gray-100 transition-colors h-10 w-10 rounded-full flex items-center justify-center border border-gray-200"
+              className="bg-white hover:bg-gray-100 transition-colors h-10 w-10 rounded-full flex items-center justify-center"
             >
               <Avatar className="h-8 w-8">
                 <AvatarImage
