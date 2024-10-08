@@ -111,23 +111,25 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
 
       <div>
         <h3 className="text-sm font-medium text-muted-foreground mb-2">Group Capacity</h3>
-        <div 
-          ref={capacityRef}
-          className="flex overflow-x-auto pb-4 scrollbar-hide"
-          style={{ scrollSnapType: 'x mandatory' }}
-        >
-          {capacityOptions.map((capacity) => (
-            <div
-              key={capacity}
-              className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mx-2 text-sm ${
-                selectedCapacity === capacity ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
-              }`}
-              style={{ scrollSnapAlign: 'center' }}
-              onClick={() => handleCapacityChange(capacity)}
-            >
-              {capacity}
-            </div>
-          ))}
+        <div className="relative -mx-4 px-4">
+          <div 
+            ref={capacityRef}
+            className="flex overflow-x-auto pb-4 scrollbar-hide"
+            style={{ scrollSnapType: 'x mandatory' }}
+          >
+            {capacityOptions.map((capacity) => (
+              <div
+                key={capacity}
+                className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center mr-4 text-sm ${
+                  selectedCapacity === capacity ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+                }`}
+                style={{ scrollSnapAlign: 'center' }}
+                onClick={() => handleCapacityChange(capacity)}
+              >
+                {capacity}
+              </div>
+            ))}
+          </div>
         </div>
         <p className="text-center text-sm text-muted-foreground mt-2">
           {groupData.capacity === 'unlimited' ? 'Unlimited' : `${groupData.capacity} members`}
