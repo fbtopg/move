@@ -15,7 +15,7 @@ const CommunityGroupCard = ({ group, index }) => {
   const renderCapacity = () => {
     return (
       <span className="text-xs text-gray-500">
-        {group.members}/20
+        {group.members}/1000
       </span>
     );
   };
