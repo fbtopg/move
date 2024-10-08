@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Image, Plus, Lock, Globe } from 'lucide-react';
+import { Slider } from "@/components/ui/slider";
+import { Image, Lock, Globe } from 'lucide-react';
 
 const CreateGroupForm = ({ handleCreateGroup }) => {
   const [groupData, setGroupData] = useState({
@@ -13,14 +14,23 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
     capacity: 'unlimited',
     image: null
   });
+  const [sliderValue, setSliderValue] = useState(0);
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const updateCapacity = () => {
+      if (sliderValue === 0) {
+        setGroupData(prev => ({ ...prev, capacity: 'unlimited' }));
+      } else {
+        setGroupData(prev => ({ ...prev, capacity: String(sliderValue + 1) }));
+      }
+    };
+    updateCapacity();
+  }, [sliderValue]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setGroupData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleCapacityChange = (value) => {
-    setGroupData(prev => ({ ...prev, capacity: value }));
   };
 
   const handlePrivacyChange = (value) => {
@@ -106,19 +116,29 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
 
       <div>
         <h3 className="text-sm font-medium text-muted-foreground mb-2">Group Capacity</h3>
-        <div className="flex space-x-2">
-          {['unlimited', '2', '3', '4', '5'].map((value) => (
-            <Button
-              key={value}
-              type="button"
-              variant={groupData.capacity === value ? 'default' : 'outline'}
-              className={`rounded-full w-10 h-10 ${value === 'unlimited' ? 'text-xl' : ''}`}
-              onClick={() => handleCapacityChange(value)}
-            >
-              {value === 'unlimited' ? '∞' : value}
-            </Button>
-          ))}
+        <div className="relative pt-10 pb-6">
+          <Slider
+            ref={sliderRef}
+            min={0}
+            max={99}
+            step={1}
+            value={[sliderValue]}
+            onValueChange={([value]) => setSliderValue(value)}
+            className="w-full"
+          />
+          <div className="absolute top-0 left-0 right-0 flex justify-between">
+            {['∞', '25', '50', '75', '100'].map((label, index) => (
+              <div key={label} className="flex flex-col items-center">
+                <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${sliderValue === (index === 0 ? 0 : (index * 25) - 1) ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>
+                  {label === '∞' ? '∞' : label}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+        <p className="text-center text-sm text-muted-foreground mt-2">
+          {groupData.capacity === 'unlimited' ? 'Unlimited' : `${groupData.capacity} members`}
+        </p>
       </div>
 
       <Button 

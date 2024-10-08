@@ -16,7 +16,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
         groupName: groupData.name,
         groupDescription: groupData.description,
         isPrivate: groupData.isPrivate,
-        capacity: groupData.capacity,
+        capacity: groupData.capacity === 'unlimited' ? 'Unlimited' : parseInt(groupData.capacity),
         animateEntry: true
       } 
     });
