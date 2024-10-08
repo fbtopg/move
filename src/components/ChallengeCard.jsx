@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 
 const ChallengeCard = () => {
   const [notificationStatus, setNotificationStatus] = useState('default');
@@ -19,13 +18,6 @@ const ChallengeCard = () => {
         const permission = await Notification.requestPermission();
         if (permission === 'granted') {
           setNotificationStatus('granted');
-          // Send a test notification after 2 seconds
-          setTimeout(() => {
-            toast("New Group Activity", {
-              description: "Alex Johnson from Fitness Enthusiasts just completed an activity!",
-              duration: 5000,
-            });
-          }, 2000);
         }
       } catch (error) {
         console.error('Error requesting notification permission:', error);

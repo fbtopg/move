@@ -2,7 +2,6 @@ import React from 'react';
 import { ChevronLeft, Bell, Trophy, Users, Gift, Heart } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from 'react-router-dom';
-import { Toaster } from 'sonner';
 
 const Notifications = () => {
   const navigate = useNavigate();
@@ -39,10 +38,8 @@ const Notifications = () => {
     }
   };
 
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] flex flex-col">
-      <Toaster />
       <header className="sticky top-0 bg-[#FEF8F3] z-10 px-4 py-3 flex items-center">
         <button className="absolute left-4" onClick={handleGoBack}>
           <ChevronLeft className="w-6 h-6" />
