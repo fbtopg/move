@@ -50,10 +50,10 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           animate="visible"
           exit="exit"
           variants={modalVariants}
-          className="fixed inset-0 bg-background z-50 overflow-y-auto"
+          className="fixed inset-0 bg-background z-50 overflow-hidden"
         >
-          <div className="min-h-screen p-6 flex flex-col">
-            <Button variant="ghost" onClick={onClose} className="p-0 w-fit">
+          <div className="h-full p-6 pb-20 flex flex-col">
+            <Button variant="ghost" onClick={onClose} className="p-0 w-fit mb-6">
               <ChevronLeft className="h-6 w-6" />
             </Button>
             <CreateGroupForm handleCreateGroup={handleCreateGroup} />

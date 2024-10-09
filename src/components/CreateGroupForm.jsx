@@ -24,15 +24,21 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
         placeholder="Enter text"
         value={groupName}
         onChange={handleInputChange}
-        className="w-full text-lg mb-auto"
+        className="w-full text-lg"
       />
-      <Button 
-        type="submit" 
-        className="w-full bg-primary text-primary-foreground mt-4"
-        disabled={!groupName.trim()}
-      >
-        Create
-      </Button>
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200">
+        <Button 
+          type="submit" 
+          className={`w-full rounded-full border ${
+            groupName.trim() 
+              ? 'bg-black text-white border-black' 
+              : 'bg-white text-gray-400 border-gray-300'
+          } transition-colors duration-300`}
+          disabled={!groupName.trim()}
+        >
+          Create
+        </Button>
+      </div>
     </form>
   );
 };
