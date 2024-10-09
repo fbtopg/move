@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
+import { createGroupInSupabase } from '../utils/supabaseGroupUtils';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -9,27 +10,32 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add('status-bar-hidden');
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
+      document.body.style.overflow = 'hidden';
     } else {
       document.body.classList.remove('status-bar-hidden');
-      document.body.style.overflow = ''; // Re-enable scrolling
+      document.body.style.overflow = '';
     }
 
     return () => {
       document.body.classList.remove('status-bar-hidden');
-      document.body.style.overflow = ''; // Ensure scrolling is re-enabled on unmount
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
-  const handleCreateGroup = (groupData) => {
-    const newGroupId = Date.now().toString();
-    navigate(`/group/${newGroupId}`, { 
-      state: { 
-        groupName: groupData.name,
-        animateEntry: true
-      } 
-    });
-    onClose();
+  const handleCreateGroup = async (groupData) => {
+    try {
+      const newGroup = await createGroupInSupabase(groupData);
+      navigate(`/group/${newGroup.id}`, { 
+        state: { 
+          group: newGroup,
+          animateEntry: true
+        } 
+      });
+      onClose();
+    } catch (error) {
+      console.error('Error creating group:', error);
+      // Handle error (e.g., show error message to user)
+    }
   };
 
   const modalVariants = {

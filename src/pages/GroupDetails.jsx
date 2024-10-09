@@ -9,8 +9,9 @@ const GroupDetails = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
   const location = useLocation();
+  const initialGroupData = location.state?.group;
 
-  const { group } = useGroupData(groupId, location.state);
+  const { group } = useGroupData(groupId, initialGroupData);
   const { handleJoin } = useGroupActions(group, null, null, null, null, navigate);
 
   const handleBack = () => navigate(-1);
@@ -18,6 +19,10 @@ const GroupDetails = () => {
     // Implement share functionality
     console.log('Share group');
   };
+
+  if (!group) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -58,9 +63,6 @@ const GroupDetails = () => {
       </div>
 
       <div className="p-4 border-t">
-        <p className="text-sm text-muted-foreground mb-2">
-          {group.members?.length || 0} Members
-        </p>
         <Button
           className="w-full bg-black text-white hover:bg-black/90"
           onClick={handleJoin}
