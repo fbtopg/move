@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import FriendActivity from "../components/FriendActivity";
+import { supabase } from '../integrations/supabase/supabase';
 
 export const getGreeting = () => {
   const currentHour = new Date().getHours();
@@ -37,3 +38,19 @@ export const renderActivitySection = (title, activities, onUserClick) => (
     </div>
   </motion.div>
 );
+
+export const fetchRecommendedGroups = async () => {
+  try {
+    const { data, error } = await supabase
+      .from('groups')
+      .select('*')
+      .eq('is_private', false)
+      .limit(10);
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error fetching recommended groups:', error);
+    return [];
+  }
+};

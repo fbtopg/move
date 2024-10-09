@@ -6,15 +6,21 @@ import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import SwipeableGroupCards from "../components/SwipeableGroupCards";
-import { renderActivitySection, getGreeting } from "../utils/communityUtils.jsx";
-import { myGroups, activities, recommendedGroups } from "../utils/communityData";
+import { renderActivitySection, getGreeting, fetchRecommendedGroups } from "../utils/communityUtils.jsx";
+import { myGroups, activities } from "../utils/communityData";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [greeting, setGreeting] = useState("");
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
+
+  const { data: recommendedGroups = [] } = useQuery({
+    queryKey: ['recommendedGroups'],
+    queryFn: fetchRecommendedGroups,
+  });
 
   useEffect(() => {
     const updateGreeting = () => setGreeting(getGreeting());
