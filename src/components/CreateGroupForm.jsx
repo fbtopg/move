@@ -29,7 +29,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           placeholder="Enter a unique name for your group"
           value={groupName}
           onChange={handleInputChange}
-          className="w-full text-lg border-0 border-b-2 border-white rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2 bg-transparent text-white placeholder-white/70"
+          className="w-full text-lg border-0 border-b-2 border-white rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2 bg-transparent text-white placeholder-white/90"
         />
       </div>
       <div className="flex-grow" />
