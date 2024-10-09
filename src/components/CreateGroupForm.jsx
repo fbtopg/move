@@ -28,7 +28,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       >
         <ArrowLeft className="h-6 w-6" />
       </Button>
-      <h2 className="text-2xl font-medium mb-8 text-center roboto-medium text-gray-900 mt-12">Let's create your group. Please choose a name for your group.</h2>
+      <h2 className="text-xl font-medium mb-6 text-center roboto-medium text-gray-900 mt-10">Let's create your group. Please choose a name for your group.</h2>
       <div className="mb-8 relative">
         <div className="relative">
           <Input
