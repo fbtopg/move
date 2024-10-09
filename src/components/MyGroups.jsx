@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
-import { getRandomProfilePicture } from '../utils/profilePictures';
 
 const GroupCard = ({ group }) => {
   return (
