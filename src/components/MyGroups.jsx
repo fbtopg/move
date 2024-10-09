@@ -39,12 +39,7 @@ const MyGroups = () => {
   }) : [];
 
   console.log('Original Groups:', groups);
-  console.log('Sorted Groups:', sortedGroups.map(g => ({
-    id: g.id,
-    name: g.name,
-    created_at: g.created_at,
-    parsed_date: new Date(g.created_at).toISOString()
-  })));
+  console.log('Sorted Groups:', sortedGroups);
 
   return (
     <div className="mb-6">
