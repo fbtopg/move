@@ -29,8 +29,8 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
         <ArrowLeft className="h-6 w-6" />
       </Button>
       <h2 className="text-xl font-medium mb-8 text-center roboto-medium text-gray-900 mt-16">Let's create your group. Please choose a name for your group.</h2>
-      <div className="mb-6 relative">
-        <div className="relative">
+      <div className="flex-grow flex items-center justify-center">
+        <div className="w-full max-w-xs relative">
           <Input
             id="groupName"
             name="name"
@@ -38,7 +38,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
             onChange={handleInputChange}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder="Enter text"
+            placeholder="Enter group name"
             className="w-full text-2xl border-0 border-b-2 border-gray-300 rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2 bg-transparent text-gray-900 text-center"
           />
           {isFocused && groupName.length === 0 && (
@@ -48,7 +48,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           )}
         </div>
       </div>
-      <div className="mt-10 px-6">
+      <div className="mt-auto mb-8 px-6">
         <Button 
           type="submit" 
           className={`w-full h-12 rounded-full text-lg font-semibold transition-all duration-300 ${
