@@ -35,7 +35,12 @@ const MyGroups = () => {
   return (
     <div className="mb-6">
       <div className="overflow-x-auto scrollbar-hide -mx-4" ref={groupsRef}>
-        <div className="flex flex-row-reverse space-x-4 space-x-reverse px-4" style={{ width: `${(sortedGroups.length + 1) * 180}px` }}>
+        <div className="flex space-x-4 px-4" style={{ width: `${(sortedGroups.length + 1) * 180}px` }}>
+          {sortedGroups.map((group) => (
+            <div key={group.id} className="flex-shrink-0 w-40 h-40">
+              <GroupCard group={group} />
+            </div>
+          ))}
           <div className="flex-shrink-0 w-40 flex flex-col items-center justify-center">
             <Button
               onClick={() => navigate('/my-groups')}
@@ -45,11 +50,6 @@ const MyGroups = () => {
             </Button>
             <span className="text-xs text-gray-400">View all</span>
           </div>
-          {sortedGroups.map((group) => (
-            <div key={group.id} className="flex-shrink-0 w-40 h-40">
-              <GroupCard group={group} />
-            </div>
-          ))}
         </div>
       </div>
     </div>
