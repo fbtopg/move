@@ -27,17 +27,19 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
         className="w-full text-lg"
       />
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200">
-        <Button 
-          type="submit" 
-          className={`w-full rounded-full border ${
-            groupName.trim() 
-              ? 'bg-black text-white border-black' 
-              : 'bg-white text-gray-400 border-gray-300'
-          } transition-colors duration-300`}
-          disabled={!groupName.trim()}
-        >
-          Create
-        </Button>
+        <div className="flex justify-end">
+          <Button 
+            type="submit" 
+            className={`w-32 rounded-full border ${
+              groupName.trim() 
+                ? 'bg-black text-white border-black' 
+                : 'bg-white text-gray-400 border-gray-300'
+            } transition-colors duration-300`}
+            disabled={!groupName.trim()}
+          >
+            Create
+          </Button>
+        </div>
       </div>
     </form>
   );
