@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
-import { createGroupInSupabase } from '../utils/supabaseGroupUtils';
+import { insertNewGroup } from '../utils/supabaseGroupUtils';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -22,9 +22,9 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
-  const handleCreateGroup = async (groupData) => {
+  const handleCreateGroup = async (groupName) => {
     try {
-      const newGroup = await createGroupInSupabase(groupData);
+      const newGroup = await insertNewGroup(groupName);
       onClose(); // Close the modal before navigation
       navigate(`/group/${newGroup.id}`, { 
         state: { 
@@ -32,9 +32,10 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           animateEntry: true
         } 
       });
+      return newGroup;
     } catch (error) {
       console.error('Error creating group:', error);
-      // Handle error (e.g., show error message to user)
+      throw error;
     }
   };
 

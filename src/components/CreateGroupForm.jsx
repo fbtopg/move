@@ -22,15 +22,16 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
     setGroupName(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (groupName.trim()) {
-      handleCreateGroup({
-        name: groupName.trim(),
-        description: null,
-        image: null,
-        isPrivate: true
-      });
+      try {
+        const newGroup = await handleCreateGroup(groupName.trim());
+        onClose();
+        // Navigation to the new group's detail page will be handled in CreateGroupModal
+      } catch (error) {
+        toast.error("Failed to create group. Please try again.");
+      }
     } else {
       toast.error("Please enter a group name");
     }
