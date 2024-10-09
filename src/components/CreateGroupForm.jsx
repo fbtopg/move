@@ -6,7 +6,6 @@ import { toast } from 'sonner';
 
 const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   const [groupName, setGroupName] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = (e) => {
     setGroupName(e.target.value);
@@ -42,18 +41,11 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
             name="name"
             value={groupName}
             onChange={handleInputChange}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
             className="w-full text-lg border border-black rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-300 px-3 py-2 bg-transparent text-gray-900"
           />
-          {isFocused && groupName.length === 0 && (
-            <div className="absolute inset-0 pointer-events-none flex justify-center items-center">
-              <div className="w-0.5 h-8 bg-gray-400 animate-pulse"></div>
-            </div>
-          )}
         </div>
       </div>
-      <div className="mt-auto pb-6">
+      <div className="mt-auto border-t border-gray-200 pt-4">
         <Button 
           type="submit" 
           className="w-full h-12 rounded-full text-lg font-light transition-all duration-300 bg-[#3B72EC] text-white hover:bg-[#3B72EC]/90"
