@@ -52,7 +52,7 @@ const GroupDetails = () => {
         <h1 className="text-2xl font-bold mb-1">{group.name}</h1>
         <p className="text-sm text-muted-foreground mb-2">
           <Users className="inline-block w-4 h-4 mr-1" />
-          {group.members?.length || 0} Members
+          {group.members} Members
         </p>
         <p className="text-sm text-muted-foreground mb-4">{group.description}</p>
         {group.isPrivate && (

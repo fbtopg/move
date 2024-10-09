@@ -9,7 +9,7 @@ const CommunityGroupCard = ({ group, index }) => {
   const truncateDescription = (desc) => desc.length > 40 ? desc.slice(0, 40) + '...' : desc;
 
   const handleClick = () => {
-    navigate(`/group/${group.id}`, { state: { ...group } });
+    navigate(`/group/${group.id}`, { state: { group } });
   };
 
   const renderMemberCount = () => {
