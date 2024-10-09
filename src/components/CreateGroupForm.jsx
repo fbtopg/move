@@ -17,8 +17,8 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col h-full pt-16"> {/* Added pt-16 here */}
-      <h2 className="text-3xl font-bold mb-8 text-left libre-baskerville-bold">Create Your Group</h2>
+    <form onSubmit={handleSubmit} className="flex flex-col h-full pt-16 bg-white/80 backdrop-blur-md rounded-lg p-6">
+      <h2 className="text-3xl font-bold mb-8 text-left libre-baskerville-bold text-gray-800">Create Your Group</h2>
       <div className="mb-8">
         <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2">
           Group Name
@@ -29,7 +29,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           placeholder="Enter a unique name for your group"
           value={groupName}
           onChange={handleInputChange}
-          className="w-full text-lg border-0 border-b-2 border-gray-300 rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2"
+          className="w-full text-lg border-0 border-b-2 border-gray-300 rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2 bg-transparent"
         />
       </div>
       <div className="flex-grow" />
