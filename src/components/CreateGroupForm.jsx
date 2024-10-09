@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ArrowLeft } from 'lucide-react';
 
 const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   const [groupName, setGroupName] = useState('');
@@ -18,10 +19,18 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col h-full">
-      <h2 className="text-2xl font-medium mb-8 text-left roboto-medium text-gray-900 mt-4">Let's create your group. Please choose a name for your group.</h2>
+    <form onSubmit={handleSubmit} className="flex flex-col h-full relative">
+      <Button
+        type="button"
+        onClick={onClose}
+        className="absolute top-0 left-0 p-2"
+        variant="ghost"
+      >
+        <ArrowLeft className="h-6 w-6" />
+      </Button>
+      <h2 className="text-2xl font-medium mb-8 text-center roboto-medium text-gray-900 mt-12">Let's create your group. Please choose a name for your group.</h2>
       <div className="mb-8 relative">
-        <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2 text-center">
           Group Name
         </label>
         <div className="relative">
@@ -45,7 +54,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white to-transparent">
         <Button 
           type="submit" 
-          className={`w-full h-12 rounded-full text-lg font-semibold transition-all duration-300 mb-4 ${
+          className={`w-full h-12 rounded-full text-lg font-semibold transition-all duration-300 ${
             groupName.trim() 
               ? 'bg-primary text-white hover:bg-primary/90' 
               : 'bg-gray-200 text-gray-400 cursor-not-allowed'
@@ -53,13 +62,6 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           disabled={!groupName.trim()}
         >
           Create Group
-        </Button>
-        <Button 
-          type="button" 
-          onClick={onClose}
-          className="w-full h-12 rounded-full text-lg font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all duration-300"
-        >
-          Close
         </Button>
       </div>
     </form>
