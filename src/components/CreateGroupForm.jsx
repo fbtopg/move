@@ -33,7 +33,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       </Button>
       <h2 className="text-3xl font-semibold mb-8 text-left roboto-medium text-gray-900 mt-16">Enter your group name</h2>
       <div className="mb-6 relative flex-grow">
-        <label htmlFor="groupName" className="block text-sm font-light text-gray-400 mb-2">
+        <label htmlFor="groupName" className="block text-sm roboto-thin text-black mb-2">
           Group name
         </label>
         <div className="relative">
@@ -44,7 +44,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
             onChange={handleInputChange}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            className="w-full text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-300 px-3 py-2 bg-transparent text-gray-900"
+            className="w-full text-lg border border-black rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-300 px-3 py-2 bg-transparent text-gray-900"
           />
           {isFocused && groupName.length === 0 && (
             <div className="absolute inset-0 pointer-events-none flex justify-center items-center">
