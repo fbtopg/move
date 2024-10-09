@@ -4,7 +4,6 @@ import { ArrowLeft, Share, Users } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useGroupData } from '../hooks/useGroupData';
 import { useGroupActions } from '../hooks/useGroupActions';
-import { supabase } from '../integrations/supabase/supabase';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
@@ -14,28 +13,6 @@ const GroupDetails = () => {
 
   const { group, setGroup, loading } = useGroupData(groupId, initialGroupData);
   const { handleJoin } = useGroupActions(group, setGroup, null, null, null, navigate);
-
-  useEffect(() => {
-    const fetchGroupData = async () => {
-      if (!initialGroupData) {
-        try {
-          const { data, error } = await supabase
-            .from('groups')
-            .select('*')
-            .eq('id', groupId)
-            .single();
-
-          if (error) throw error;
-          setGroup(data);
-        } catch (error) {
-          console.error('Error fetching group data:', error);
-          // Handle error (e.g., show error message to user)
-        }
-      }
-    };
-
-    fetchGroupData();
-  }, [groupId, initialGroupData, setGroup]);
 
   const handleBack = () => navigate(-1);
   const handleShare = () => {
@@ -82,7 +59,7 @@ const GroupDetails = () => {
           {group.members?.length || 0} Members
         </p>
         <p className="text-sm text-muted-foreground mb-4">{group.description}</p>
-        {group.is_private && (
+        {group.isPrivate && (
           <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
             Private
           </span>

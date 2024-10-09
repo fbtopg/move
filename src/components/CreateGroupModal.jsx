@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
 import { createGroupInSupabase } from '../utils/supabaseGroupUtils';
-import { toast } from 'sonner';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -26,7 +25,6 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   const handleCreateGroup = async (groupData) => {
     try {
       const newGroup = await createGroupInSupabase(groupData);
-
       onClose(); // Close the modal before navigation
       navigate(`/group/${newGroup.id}`, { 
         state: { 
@@ -34,10 +32,9 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           animateEntry: true
         } 
       });
-      toast.success('Group created successfully!');
     } catch (error) {
       console.error('Error creating group:', error);
-      toast.error('Failed to create group. Please try again.');
+      // Handle error (e.g., show error message to user)
     }
   };
 
