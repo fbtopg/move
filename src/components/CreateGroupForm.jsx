@@ -48,7 +48,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           )}
         </div>
       </div>
-      <div className="mt-auto mb-8 px-6">
+      <div className="mt-auto">
         <Button 
           type="submit" 
           className={`w-full h-12 rounded-full text-lg font-semibold transition-all duration-300 ${
