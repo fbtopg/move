@@ -6,7 +6,10 @@ import { Crown, Users } from 'lucide-react';
 const CommunityGroupCard = ({ group, index }) => {
   const navigate = useNavigate();
   const truncateName = (name) => (name && name.length > 25 ? name.slice(0, 25) + '...' : name || 'Unnamed Group');
-  const truncateDescription = (desc) => desc && desc.length > 40 ? desc.slice(0, 40) + '...' : desc || 'No description available';
+  const truncateDescription = (desc) => {
+    const defaultDesc = 'No description available';
+    return desc ? (desc.length > 40 ? desc.slice(0, 40) + '...' : desc) : defaultDesc;
+  };
 
   const handleClick = () => {
     navigate(`/group/${group.id}`, { state: { group } });
