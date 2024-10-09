@@ -21,7 +21,7 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
       <h2 className="text-3xl font-bold mb-8 text-center libre-baskerville-bold">Create Your Group</h2>
       <div className="mb-8">
         <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2">
-          Group Name
+          What's the name of your new group?
         </label>
         <Input
           id="groupName"
