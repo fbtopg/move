@@ -1,19 +1,20 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
-import { getRandomProfilePicture } from '../utils/profilePictures';
+import { useQuery } from '@tanstack/react-query';
+import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 
 const GroupCard = ({ group }) => {
   return (
     <div className="flex-shrink-0 w-full h-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4">
       <div className="text-center">
         <div className="w-16 h-16 rounded-full overflow-hidden mb-3 mx-auto">
-          <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+          <img src={group.image || 'https://via.placeholder.com/160'} alt={group.name} className="w-full h-full object-cover" />
         </div>
         <h3 className="font-semibold text-sm mb-1 truncate">{group.name}</h3>
-        <p className="text-xs text-gray-400">{group.members} members</p>
+        <p className="text-xs text-gray-400">{group.member_count || 0} members</p>
       </div>
     </div>
   );
@@ -21,20 +22,20 @@ const GroupCard = ({ group }) => {
 
 const MyGroups = () => {
   const navigate = useNavigate();
-  const groupsRef = useRef(null);
 
-  const myGroups = [
-    { id: 1, name: 'Morning chill', members: 5, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767726000373871/KakaoTalk_20240929_105444000.jpg?ex=66fa054c&is=66f8b3cc&hm=e90d37ad3b96dd8bd0e80febba1744f732f4fb0f6e23e9c2b4502f49f446e25b&', created_at: '2024-03-15T10:00:00Z' },
-    { id: 2, name: 'Climbing bros', members: 8, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767726835044392/KakaoTalk_20240929_105444000_01.jpg?ex=66fa054c&is=66f8b3cc&hm=f08aa4c188ead47c135fa4806063a3d91464afec7975387ce7f541ba100e842a&', created_at: '2024-03-10T14:30:00Z' },
-    { id: 3, name: 'Trip', members: 3, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767727749398618/KakaoTalk_20240929_105444000_02.jpg?ex=66fa054d&is=66f8b3cd&hm=c87306c053f5fee8f50fd4acc6363526eba0e50b6547667fd683092e4e032cdc&', created_at: '2024-03-20T09:15:00Z' },
-  ];
+  const { data: groups, isLoading, error } = useQuery({
+    queryKey: ['privateGroups'],
+    queryFn: fetchPrivateGroups,
+  });
 
-  // Sort groups by created_at in descending order (newest first)
-  const sortedGroups = [...myGroups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading groups</div>;
+
+  const sortedGroups = groups ? [...groups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) : [];
 
   return (
     <div className="mb-6">
-      <div className="overflow-x-auto scrollbar-hide -mx-4" ref={groupsRef}>
+      <div className="overflow-x-auto scrollbar-hide -mx-4">
         <div className="flex space-x-4 px-4" style={{ width: `${(sortedGroups.length + 1) * 180}px` }}>
           {sortedGroups.map((group) => (
             <div key={group.id} className="flex-shrink-0 w-40 h-40">

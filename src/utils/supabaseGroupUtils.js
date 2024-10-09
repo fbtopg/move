@@ -22,3 +22,19 @@ export const insertNewGroup = async (groupName) => {
     throw error;
   }
 };
+
+export const fetchPrivateGroups = async () => {
+  try {
+    const { data, error } = await supabase
+      .from('groups')
+      .select('*')
+      .eq('is_private', true)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error fetching private groups:', error);
+    throw error;
+  }
+};
