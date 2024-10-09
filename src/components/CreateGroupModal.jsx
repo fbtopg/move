@@ -1,25 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.setProperty('--status-bar-color', '#FFFFFF');
-      document.body.classList.add('dimmed-status-bar');
-    } else {
-      document.body.style.removeProperty('--status-bar-color');
-      document.body.classList.remove('dimmed-status-bar');
-    }
-
-    return () => {
-      document.body.style.removeProperty('--status-bar-color');
-      document.body.classList.remove('dimmed-status-bar');
-    };
-  }, [isOpen]);
 
   const handleCreateGroup = (groupData) => {
     const newGroupId = Date.now().toString();
