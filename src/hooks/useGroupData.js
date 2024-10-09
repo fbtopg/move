@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
+import { supabase } from '../integrations/supabase/supabase';
 
 export const useGroupData = (groupId, initialState) => {
   const [group, setGroup] = useState({
     id: groupId,
     name: initialState?.name || 'Loading...',
     image: initialState?.image || 'https://example.com/default-group-image.jpg',
-    bannerImage: initialState?.bannerImage || 'linear-gradient(to right, #2193b0, #6dd5ed)',
     description: initialState?.description || 'Loading...',
     isPrivate: initialState?.isPrivate || false,
     members: [],
@@ -23,21 +23,53 @@ export const useGroupData = (groupId, initialState) => {
   });
 
   const [editedGroup, setEditedGroup] = useState({ ...group });
+  const [loading, setLoading] = useState(!initialState);
 
   useEffect(() => {
-    if (initialState) {
-      const updatedGroup = {
-        ...group,
-        ...initialState,
-        members: initialState.members || [],
-        challenges: initialState.challenges || [],
-        activities: initialState.activities || [],
-        isJoined: initialState.isJoined ?? true,
-      };
-      setGroup(updatedGroup);
-      setEditedGroup(updatedGroup);
-    }
-  }, [initialState]);
+    const fetchGroupData = async () => {
+      if (!initialState) {
+        setLoading(true);
+        try {
+          const { data, error } = await supabase
+            .from('Group')
+            .select('*')
+            .eq('id', groupId)
+            .single();
 
-  return { group, setGroup, editedGroup, setEditedGroup };
+          if (error) throw error;
+
+          const updatedGroup = {
+            ...group,
+            ...data,
+            members: data.members || [],
+            challenges: data.challenges || [],
+            activities: data.activities || [],
+            isJoined: data.isJoined ?? true,
+          };
+          setGroup(updatedGroup);
+          setEditedGroup(updatedGroup);
+        } catch (error) {
+          console.error('Error fetching group data:', error);
+          // Handle error (e.g., show error message to user)
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        const updatedGroup = {
+          ...group,
+          ...initialState,
+          members: initialState.members || [],
+          challenges: initialState.challenges || [],
+          activities: initialState.activities || [],
+          isJoined: initialState.isJoined ?? true,
+        };
+        setGroup(updatedGroup);
+        setEditedGroup(updatedGroup);
+      }
+    };
+
+    fetchGroupData();
+  }, [groupId, initialState]);
+
+  return { group, setGroup, editedGroup, setEditedGroup, loading };
 };

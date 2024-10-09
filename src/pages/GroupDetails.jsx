@@ -11,14 +11,8 @@ const GroupDetails = () => {
   const location = useLocation();
   const initialGroupData = location.state?.group;
 
-  const { group, setGroup } = useGroupData(groupId, initialGroupData);
+  const { group, setGroup, loading } = useGroupData(groupId, initialGroupData);
   const { handleJoin } = useGroupActions(group, setGroup, null, null, null, navigate);
-
-  useEffect(() => {
-    if (initialGroupData) {
-      setGroup(initialGroupData);
-    }
-  }, [initialGroupData, setGroup]);
 
   const handleBack = () => navigate(-1);
   const handleShare = () => {
@@ -26,8 +20,12 @@ const GroupDetails = () => {
     // Implement share functionality
   };
 
-  if (!group) {
+  if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (!group) {
+    return <div>Group not found</div>;
   }
 
   return (
@@ -58,7 +56,7 @@ const GroupDetails = () => {
         <h1 className="text-2xl font-bold mb-1">{group.name}</h1>
         <p className="text-sm text-muted-foreground mb-2">
           <Users className="inline-block w-4 h-4 mr-1" />
-          {group.members} Members
+          {group.members?.length || 0} Members
         </p>
         <p className="text-sm text-muted-foreground mb-4">{group.description}</p>
         {group.isPrivate && (
