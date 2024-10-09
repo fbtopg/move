@@ -25,7 +25,12 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (groupName.trim()) {
-      handleCreateGroup({ name: groupName.trim() });
+      handleCreateGroup({
+        name: groupName.trim(),
+        description: null,
+        image: null,
+        isPrivate: true
+      });
     } else {
       toast.error("Please enter a group name");
     }

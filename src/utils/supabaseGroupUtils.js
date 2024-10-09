@@ -6,9 +6,10 @@ export const createGroupInSupabase = async (groupData) => {
     .insert([
       {
         name: groupData.name,
-        image: groupData.image,
         description: groupData.description,
-        is_private: groupData.isPrivate
+        image: groupData.image,
+        is_private: groupData.isPrivate,
+        created_at: new Date().toISOString()
       }
     ])
     .select();
