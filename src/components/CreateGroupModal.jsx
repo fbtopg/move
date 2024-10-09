@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
-import { X } from 'lucide-react'; // Import the X icon
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -78,14 +77,6 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           </div>
           <div className="relative h-full p-6 pb-20 flex flex-col">
-            {/* Add close button */}
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 bg-white text-black p-2 rounded-full hover:bg-gray-200 transition-colors"
-              aria-label="Close"
-            >
-              <X size={24} />
-            </button>
             <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
           </div>
         </motion.div>
