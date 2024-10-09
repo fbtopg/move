@@ -33,7 +33,6 @@ const MyGroups = () => {
 
   // Sort groups by created_at in descending order (newest first)
   const sortedGroups = groups ? [...groups].sort((a, b) => {
-    // Parse the timestamptz strings into Date objects
     const dateA = new Date(a.created_at);
     const dateB = new Date(b.created_at);
     return dateB - dateA;
