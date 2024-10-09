@@ -34,6 +34,9 @@ const MyGroups = () => {
   // Sort groups by created_at in descending order (newest first)
   const sortedGroups = groups ? [...groups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) : [];
 
+  // Add console log to see the sorted groups
+  console.log('Sorted Groups:', sortedGroups);
+
   return (
     <div className="mb-6">
       <div className="overflow-x-auto scrollbar-hide -mx-4">
