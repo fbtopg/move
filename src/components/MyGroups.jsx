@@ -34,13 +34,19 @@ const MyGroups = () => {
   // Sort groups by created_at in descending order (newest first)
   const sortedGroups = groups ? [...groups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) : [];
 
+  console.log('Sorted Groups:', sortedGroups);
+
   return (
     <div className="mb-6">
       <div className="overflow-x-auto scrollbar-hide -mx-4">
         <div className="flex flex-row space-x-4 px-4" style={{ width: `${(sortedGroups.length + 1) * 180}px` }}>
-          {sortedGroups.map((group) => (
+          {sortedGroups.map((group, index) => (
             <div key={group.id} className="flex-shrink-0 w-40 h-40">
               <GroupCard group={group} />
+              {/* Debug information */}
+              <div className="text-xs text-gray-500 mt-1">
+                Index: {index}, Created: {new Date(group.created_at).toLocaleString()}
+              </div>
             </div>
           ))}
           <div className="flex-shrink-0 w-40 flex flex-col items-center justify-center">
