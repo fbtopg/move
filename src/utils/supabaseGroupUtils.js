@@ -8,7 +8,8 @@ export const createGroupInSupabase = async (groupData) => {
         name: groupData.name,
         description: groupData.description,
         image: groupData.image,
-        is_private: groupData.isPrivate
+        is_private: groupData.isPrivate,
+        created_at: new Date().toISOString()
       }
     ])
     .select();
