@@ -18,6 +18,7 @@ import RecentActivity from "./pages/RecentActivity";
 import SplashScreen from "./components/SplashScreen";
 import Settings from "./pages/Settings";
 import Notifications from "./pages/Notifications";
+import GroupDetails from "./pages/GroupDetails"; // Add this import
 
 const queryClient = new QueryClient();
 
@@ -25,10 +26,8 @@ const App = () => {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    // Preload the main app content
     const preloadContent = async () => {
-      // You can add any necessary preloading logic here
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulating content load
+      await new Promise(resolve => setTimeout(resolve, 2000));
     };
 
     preloadContent().then(() => {
@@ -66,6 +65,7 @@ const App = () => {
                 <Route path="/recent-activity" element={<RecentActivity />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/notifications" element={<Notifications />} />
+                <Route path="/group/:groupId" element={<GroupDetails />} /> {/* Add this line */}
               </Routes>
             </BrowserRouter>
           )}

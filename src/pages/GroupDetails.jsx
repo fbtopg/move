@@ -16,7 +16,6 @@ const GroupDetails = () => {
 
   const handleBack = () => navigate(-1);
   const handleShare = () => {
-    // Implement share functionality
     console.log('Share group');
   };
 
