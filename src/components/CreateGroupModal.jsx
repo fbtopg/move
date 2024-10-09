@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
+import { Toaster } from 'sonner';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -84,6 +85,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             <div className="relative h-full p-6 flex flex-col">
               <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
             </div>
+            <Toaster position="top-center" />
           </motion.div>
         </>
       )}
