@@ -54,3 +54,19 @@ export const fetchRecommendedGroups = async () => {
     return [];
   }
 };
+
+export const fetchPrivateGroups = async () => {
+  try {
+    const { data, error } = await supabase
+      .from('groups')
+      .select('*')
+      .eq('is_private', true)
+      .limit(10);
+
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error fetching private groups:', error);
+    return [];
+  }
+};

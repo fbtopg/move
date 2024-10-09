@@ -6,8 +6,8 @@ import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import SwipeableGroupCards from "../components/SwipeableGroupCards";
-import { renderActivitySection, getGreeting, fetchRecommendedGroups } from "../utils/communityUtils.jsx";
-import { myGroups, activities } from "../utils/communityData";
+import { renderActivitySection, getGreeting, fetchRecommendedGroups, fetchPrivateGroups } from "../utils/communityUtils.jsx";
+import { activities } from "../utils/communityData";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 
@@ -20,6 +20,11 @@ const Community = () => {
   const { data: recommendedGroups = [] } = useQuery({
     queryKey: ['recommendedGroups'],
     queryFn: fetchRecommendedGroups,
+  });
+
+  const { data: myGroups = [] } = useQuery({
+    queryKey: ['privateGroups'],
+    queryFn: fetchPrivateGroups,
   });
 
   useEffect(() => {
