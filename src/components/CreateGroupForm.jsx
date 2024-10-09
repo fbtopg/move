@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { X } from 'lucide-react';
+import { toast } from 'sonner';
 
 const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   const [groupName, setGroupName] = useState('');
@@ -15,6 +16,8 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
     e.preventDefault();
     if (groupName.trim()) {
       handleCreateGroup({ name: groupName.trim() });
+    } else {
+      toast.error("Please enter a group name");
     }
   };
 
@@ -23,7 +26,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       <Button
         type="button"
         onClick={onClose}
-        className="absolute top-4 left-0 p-2 bg-transparent rounded-full"
+        className="absolute top-4 left-0 p-2 bg-gray-200 hover:bg-gray-300 rounded-full"
         variant="ghost"
       >
         <X className="h-6 w-6 text-gray-600" />
@@ -53,12 +56,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       <div className="mt-auto pb-6">
         <Button 
           type="submit" 
-          className={`w-full h-12 rounded-full text-lg font-light transition-all duration-300 ${
-            groupName.trim() 
-              ? 'bg-primary text-white hover:bg-primary/90' 
-              : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-          }`}
-          disabled={!groupName.trim()}
+          className="w-full h-12 rounded-full text-lg font-light transition-all duration-300 bg-[#3B72EC] text-white hover:bg-[#3B72EC]/90"
         >
           Create
         </Button>
