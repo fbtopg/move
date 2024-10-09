@@ -43,18 +43,14 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       </Button>
       <h2 className="text-3xl font-semibold mb-8 text-left roboto-medium text-gray-900 mt-16">Enter your group name</h2>
       <div className="mb-6 relative flex-grow">
-        <label htmlFor="groupName" className="block text-sm roboto-thin text-black mb-2">
-          Group name
-        </label>
-        <div className="relative">
-          <Input
-            id="groupName"
-            name="name"
-            value={groupName}
-            onChange={handleInputChange}
-            className="w-full text-lg border border-black rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-300 px-3 py-2 bg-transparent text-gray-900"
-          />
-        </div>
+        <Input
+          id="groupName"
+          name="name"
+          value={groupName}
+          onChange={handleInputChange}
+          className="w-full text-lg border border-black rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-300 px-3 py-2 bg-transparent text-gray-900"
+          placeholder="Group name"
+        />
       </div>
       <div className={`mt-auto border-t border-gray-200 pt-4 ${isKeyboardVisible ? 'fixed bottom-0 left-0 right-0 bg-white p-4' : ''}`}>
         <Button 
