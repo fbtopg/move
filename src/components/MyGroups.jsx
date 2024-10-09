@@ -32,9 +32,19 @@ const MyGroups = () => {
   if (error) return <div>Error loading groups</div>;
 
   // Sort groups by created_at in descending order (newest first)
-  const sortedGroups = groups ? [...groups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) : [];
+  const sortedGroups = groups ? [...groups].sort((a, b) => {
+    // Parse the timestamptz strings into Date objects
+    const dateA = new Date(a.created_at);
+    const dateB = new Date(b.created_at);
+    return dateB - dateA;
+  }) : [];
 
-  console.log('Sorted Groups:', sortedGroups.map(g => ({ id: g.id, name: g.name, created_at: g.created_at })));
+  console.log('Sorted Groups:', sortedGroups.map(g => ({
+    id: g.id,
+    name: g.name,
+    created_at: g.created_at,
+    parsed_date: new Date(g.created_at).toISOString()
+  })));
 
   return (
     <div className="mb-6">
