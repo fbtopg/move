@@ -12,11 +12,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     const newGroupId = Date.now().toString();
     navigate(`/group/${newGroupId}`, { 
       state: { 
-        groupImage: groupData.image,
         groupName: groupData.name,
-        groupDescription: groupData.description,
-        isPrivate: groupData.isPrivate,
-        capacity: groupData.capacity === 'unlimited' ? 'Unlimited' : parseInt(groupData.capacity),
         animateEntry: true
       } 
     });
@@ -60,8 +56,6 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             <Button variant="ghost" onClick={onClose} className="p-0 w-fit">
               <ChevronLeft className="h-6 w-6" />
             </Button>
-            <h2 className="text-2xl font-bold mt-4 mb-6">Create Group</h2>
-
             <CreateGroupForm handleCreateGroup={handleCreateGroup} />
           </div>
         </motion.div>
