@@ -18,7 +18,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col h-full">
-      <h2 className="text-3xl font-bold mb-8 text-center libre-baskerville-bold">Create Your Group</h2>
+      <h2 className="text-3xl font-bold mb-8 text-left libre-baskerville-bold">Create Your Group</h2>
       <div className="mb-8">
         <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2">
           Group Name
