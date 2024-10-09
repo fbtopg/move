@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
-import { createGroupInSupabase, uploadGroupImage } from '../utils/supabaseGroupUtils';
+import { createGroupInSupabase } from '../utils/supabaseGroupUtils';
 import { toast } from 'sonner';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
@@ -25,15 +25,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
 
   const handleCreateGroup = async (groupData) => {
     try {
-      let imageUrl = null;
-      if (groupData.imageFile) {
-        imageUrl = await uploadGroupImage(groupData.imageFile);
-      }
-
-      const newGroup = await createGroupInSupabase({
-        ...groupData,
-        image: imageUrl
-      });
+      const newGroup = await createGroupInSupabase(groupData);
 
       onClose(); // Close the modal before navigation
       navigate(`/group/${newGroup.id}`, { 
