@@ -8,16 +8,13 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.setProperty('--status-bar-color', '#000000');
-      document.body.classList.add('hidden-status-bar');
+      document.body.classList.add('status-bar-hidden');
     } else {
-      document.body.style.removeProperty('--status-bar-color');
-      document.body.classList.remove('hidden-status-bar');
+      document.body.classList.remove('status-bar-hidden');
     }
 
     return () => {
-      document.body.style.removeProperty('--status-bar-color');
-      document.body.classList.remove('hidden-status-bar');
+      document.body.classList.remove('status-bar-hidden');
     };
   }, [isOpen]);
 
