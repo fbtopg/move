@@ -39,16 +39,16 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             placeholder="Enter text"
-            className="w-full text-lg border-0 border-b-2 border-gray-300 rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2 bg-transparent text-gray-900 text-center"
+            className="w-full text-2xl border-0 border-b-2 border-gray-300 rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2 bg-transparent text-gray-900 text-center"
           />
           {isFocused && groupName.length === 0 && (
             <div className="absolute inset-0 pointer-events-none flex justify-center items-center">
-              <div className="w-0.5 h-6 bg-gray-400 animate-pulse"></div>
+              <div className="w-0.5 h-8 bg-gray-400 animate-pulse"></div>
             </div>
           )}
         </div>
       </div>
-      <div className="mt-10 px-6"> {/* Changed mt-6 to mt-10 to move the button slightly downwards */}
+      <div className="mt-10 px-6">
         <Button 
           type="submit" 
           className={`w-full h-12 rounded-full text-lg font-semibold transition-all duration-300 ${
