@@ -17,24 +17,23 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col h-full bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0]">
-      <div className="p-6 flex-grow overflow-y-auto">
-        <h2 className="text-3xl font-bold mb-8 text-left libre-baskerville-bold">Create Your Group</h2>
-        <div className="mb-8">
-          <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2">
-            Group Name
-          </label>
-          <Input
-            id="groupName"
-            name="name"
-            placeholder="Enter a unique name for your group"
-            value={groupName}
-            onChange={handleInputChange}
-            className="w-full text-lg border-0 border-b-2 border-gray-300 rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2 bg-transparent"
-          />
-        </div>
+    <form onSubmit={handleSubmit} className="flex flex-col h-full">
+      <h2 className="text-3xl font-bold mb-8 text-left libre-baskerville-bold">Create Your Group</h2>
+      <div className="mb-8">
+        <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2">
+          Group Name
+        </label>
+        <Input
+          id="groupName"
+          name="name"
+          placeholder="Enter a unique name for your group"
+          value={groupName}
+          onChange={handleInputChange}
+          className="w-full text-lg border-0 border-b-2 border-gray-300 rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2"
+        />
       </div>
-      <div className="p-6 bg-gradient-to-t from-[#F0E7E0] via-[#F0E7E0] to-transparent">
+      <div className="flex-grow" />
+      <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white to-transparent">
         <Button 
           type="submit" 
           className={`w-full h-12 rounded-full text-lg font-semibold transition-all duration-300 mb-4 ${
