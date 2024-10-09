@@ -49,7 +49,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
         </div>
       </div>
       <div className="flex-grow" />
-      <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white to-transparent">
+      <div className="px-6 pb-6 mt-8">
         <Button 
           type="submit" 
           className={`w-full h-12 rounded-full text-lg font-semibold transition-all duration-300 ${
