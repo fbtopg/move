@@ -38,6 +38,7 @@ const MyGroups = () => {
     return dateB - dateA;
   }) : [];
 
+  console.log('Original Groups:', groups);
   console.log('Sorted Groups:', sortedGroups.map(g => ({
     id: g.id,
     name: g.name,
@@ -52,7 +53,6 @@ const MyGroups = () => {
           {sortedGroups.map((group, index) => (
             <div key={group.id} className="flex-shrink-0 w-40 h-40" style={{ order: index }}>
               <GroupCard group={group} />
-              {/* Debug information */}
               <div className="text-xs text-gray-500 mt-1">
                 Index: {index}, Created: {new Date(group.created_at).toLocaleString()}
               </div>
