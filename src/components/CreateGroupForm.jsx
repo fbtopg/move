@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   const [groupName, setGroupName] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = (e) => {
     setGroupName(e.target.value);
@@ -19,18 +20,26 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col h-full">
       <h2 className="text-3xl font-bold mb-12 text-left libre-baskerville-bold text-gray-900 mt-4">Create Your Group</h2>
-      <div className="mb-8">
+      <div className="mb-8 relative">
         <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2">
           Group Name
         </label>
-        <Input
-          id="groupName"
-          name="name"
-          placeholder="Enter a unique name for your group"
-          value={groupName}
-          onChange={handleInputChange}
-          className="w-full text-lg border-0 border-b-2 border-gray-300 rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2 bg-transparent text-gray-900 placeholder-gray-500"
-        />
+        <div className="relative">
+          <Input
+            id="groupName"
+            name="name"
+            value={groupName}
+            onChange={handleInputChange}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            className="w-full text-lg border-0 border-b-2 border-gray-300 rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2 bg-transparent text-gray-900 text-center"
+          />
+          {isFocused && groupName.length === 0 && (
+            <div className="absolute inset-0 pointer-events-none flex justify-center items-center">
+              <div className="w-0.5 h-6 bg-gray-400 animate-pulse"></div>
+            </div>
+          )}
+        </div>
       </div>
       <div className="flex-grow" />
       <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white to-transparent">
