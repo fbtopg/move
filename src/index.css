@@ -92,15 +92,6 @@
   .capacity-scroll > div {
     scroll-snap-align: center;
   }
-
-  .hidden-status-bar::before {
-    background-color: var(--status-bar-color, transparent);
-    height: env(safe-area-inset-top);
-  }
-
-  .status-bar-hidden {
-    padding-top: env(safe-area-inset-top);
-  }
 }
 
 @keyframes marquee {
@@ -118,8 +109,20 @@
 
 /* Hide status bar on mobile devices */
 @media screen and (max-width: 767px) {
-  .status-bar-hidden::before {
-    content: none;
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: env(safe-area-inset-top);
+    background-color: var(--status-bar-color, #000);
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+  }
+
+  .dimmed-status-bar::before {
+    opacity: 0.5;
   }
 }
 
@@ -177,3 +180,4 @@
   font-weight: 900;
   font-style: normal;
 }
+
