@@ -29,7 +29,6 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
         <ArrowLeft className="h-6 w-6" />
       </Button>
       <h2 className="text-2xl font-medium mb-8 text-left roboto-medium text-gray-900 mt-16 px-4">Let's create your group. Please choose a name for your group.</h2>
-      <div className="flex-grow"></div>
       <div className="mb-6 relative">
         <div className="relative">
           <Input
@@ -49,7 +48,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           )}
         </div>
       </div>
-      <div className="mt-10 px-6 mb-8">
+      <div className="mt-10 px-6">
         <Button 
           type="submit" 
           className={`w-full h-12 rounded-full text-lg font-semibold transition-all duration-300 ${
