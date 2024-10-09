@@ -37,7 +37,7 @@ const MyGroups = () => {
   return (
     <div className="mb-6">
       <div className="overflow-x-auto scrollbar-hide -mx-4">
-        <div className="flex space-x-4 px-4" style={{ width: `${(sortedGroups.length + 1) * 180}px` }}>
+        <div className="flex flex-row space-x-4 px-4" style={{ width: `${(sortedGroups.length + 1) * 180}px` }}>
           {sortedGroups.map((group) => (
             <div key={group.id} className="flex-shrink-0 w-40 h-40">
               <GroupCard group={group} />
