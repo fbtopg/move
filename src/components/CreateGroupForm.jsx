@@ -28,9 +28,9 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       >
         <X className="h-6 w-6 text-gray-600" />
       </Button>
-      <h2 className="text-2xl font-semibold mb-8 text-left roboto-medium text-gray-900 mt-16">Enter your group name</h2>
+      <h2 className="text-3xl font-semibold mb-8 text-left roboto-medium text-gray-900 mt-16">Enter your group name</h2>
       <div className="mb-6 relative flex-grow">
-        <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="groupName" className="block text-sm font-light text-gray-400 mb-2">
           Group name
         </label>
         <div className="relative">
@@ -53,14 +53,14 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       <div className="mt-auto pb-6">
         <Button 
           type="submit" 
-          className={`w-full h-12 rounded-full text-lg font-semibold transition-all duration-300 ${
+          className={`w-full h-12 rounded-full text-lg font-light transition-all duration-300 ${
             groupName.trim() 
               ? 'bg-primary text-white hover:bg-primary/90' 
               : 'bg-gray-200 text-gray-400 cursor-not-allowed'
           }`}
           disabled={!groupName.trim()}
         >
-          Create Group
+          Create
         </Button>
       </div>
     </form>
