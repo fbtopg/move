@@ -32,13 +32,8 @@ const MyGroups = () => {
   if (error) return <div>Error loading groups</div>;
 
   // Sort groups by created_at in descending order (newest first)
-  const sortedGroups = groups ? [...groups].sort((a, b) => {
-    const dateA = new Date(a.created_at);
-    const dateB = new Date(b.created_at);
-    return dateB - dateA;
-  }) : [];
+  const sortedGroups = groups ? [...groups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) : [];
 
-  console.log('Original Groups:', groups);
   console.log('Sorted Groups:', sortedGroups);
 
   return (
@@ -46,14 +41,22 @@ const MyGroups = () => {
       <div className="overflow-x-auto scrollbar-hide -mx-4">
         <div className="flex flex-row space-x-4 px-4" style={{ width: `${(sortedGroups.length + 1) * 180}px` }}>
           {sortedGroups.map((group, index) => (
-            <div key={group.id} className="flex-shrink-0 w-40 h-40" style={{ order: index }}>
+            <motion.div
+              key={group.id}
+              className="flex-shrink-0 w-40 h-40"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+            >
               <GroupCard group={group} />
-              <div className="text-xs text-gray-500 mt-1">
-                Index: {index}, Created: {new Date(group.created_at).toLocaleString()}
-              </div>
-            </div>
+            </motion.div>
           ))}
-          <div className="flex-shrink-0 w-40 flex flex-col items-center justify-center" style={{ order: sortedGroups.length }}>
+          <motion.div
+            className="flex-shrink-0 w-40 flex flex-col items-center justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: sortedGroups.length * 0.1 }}
+          >
             <Button
               onClick={() => navigate('/my-groups')}
               className="bg-[#212124] text-white rounded-full w-12 h-12 flex items-center justify-center mb-2"
@@ -61,7 +64,7 @@ const MyGroups = () => {
               <ChevronRight className="w-6 h-6" />
             </Button>
             <span className="text-xs text-gray-400">View all</span>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
