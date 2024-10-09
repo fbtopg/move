@@ -5,8 +5,8 @@ import { Crown, Users } from 'lucide-react';
 
 const CommunityGroupCard = ({ group, index }) => {
   const navigate = useNavigate();
-  const truncateName = (name) => name.length > 25 ? name.slice(0, 25) + '...' : name;
-  const truncateDescription = (desc) => desc.length > 40 ? desc.slice(0, 40) + '...' : desc;
+  const truncateName = (name) => (name && name.length > 25 ? name.slice(0, 25) + '...' : name || 'Unnamed Group');
+  const truncateDescription = (desc) => (desc && desc.length > 40 ? desc.slice(0, 40) + '...' : desc || 'No description available');
 
   const handleClick = () => {
     navigate(`/group/${group.id}`, { state: { group } });
@@ -15,7 +15,7 @@ const CommunityGroupCard = ({ group, index }) => {
   const renderMemberCount = () => {
     return (
       <span className="text-xs text-gray-500">
-        {group.members} members
+        {group.members || 0} members
       </span>
     );
   };
@@ -28,7 +28,7 @@ const CommunityGroupCard = ({ group, index }) => {
       onClick={handleClick}
     >
       <div className="h-[55%] relative">
-        <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+        <img src={group.image || 'https://via.placeholder.com/250x140'} alt={group.name || 'Group'} className="w-full h-full object-cover" />
         {group.isOwner && (
           <div className="absolute top-2 right-2 bg-yellow-400 rounded-full p-1">
             <Crown className="w-4 h-4 text-white" />
