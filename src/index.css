@@ -92,6 +92,11 @@
   .capacity-scroll > div {
     scroll-snap-align: center;
   }
+
+  .hidden-status-bar::before {
+    background-color: var(--status-bar-color, transparent);
+    height: env(safe-area-inset-top);
+  }
 }
 
 @keyframes marquee {

@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.setProperty('--status-bar-color', '#000000');
+      document.body.classList.add('hidden-status-bar');
+    } else {
+      document.body.style.removeProperty('--status-bar-color');
+      document.body.classList.remove('hidden-status-bar');
+    }
+
+    return () => {
+      document.body.style.removeProperty('--status-bar-color');
+      document.body.classList.remove('hidden-status-bar');
+    };
+  }, [isOpen]);
 
   const handleCreateGroup = (groupData) => {
     const newGroupId = Date.now().toString();
@@ -50,21 +65,21 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           variants={modalVariants}
           className="fixed inset-0 bg-background z-50 overflow-hidden"
         >
-          <div className="absolute inset-0 overflow-hidden -top-[env(safe-area-inset-top)]">
+          <div className="absolute inset-0 overflow-hidden">
             <video
               autoPlay
               loop
               muted
               playsInline
               crossOrigin="anonymous"
-              className="w-full h-[calc(100%+env(safe-area-inset-top))] object-cover scale-150 transform-gpu"
+              className="w-full h-full object-cover scale-150 transform-gpu"
             >
               <source src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/178531-859955978_tiny.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzE3ODUzMS04NTk5NTU5NzhfdGlueS5tcDQiLCJpYXQiOjE3Mjg0NDYyNzYsImV4cCI6MTc1OTk4MjI3Nn0.DjT3eU1J4DHMTTO_fxXerRD1aQyV3aOgLC2npH2fTfo&t=2024-10-09T03%3A57%3A55.575Z" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           </div>
-          <div className="relative h-full p-6 pb-20 flex flex-col pt-[calc(env(safe-area-inset-top)+1.5rem)]">
+          <div className="relative h-full p-6 pb-20 flex flex-col">
             <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
           </div>
         </motion.div>
