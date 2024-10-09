@@ -23,13 +23,13 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       <Button
         type="button"
         onClick={onClose}
-        className="absolute top-4 right-4 p-2 bg-gray-200 rounded-full"
+        className="absolute top-4 left-4 p-2 bg-gray-200 rounded-full"
         variant="ghost"
       >
         <X className="h-6 w-6 text-gray-600" />
       </Button>
-      <h2 className="text-xl font-medium mb-8 text-left roboto-medium text-gray-900 mt-16">Enter your group name</h2>
-      <div className="mb-6 relative">
+      <h2 className="text-2xl font-semibold mb-8 text-left roboto-medium text-gray-900 mt-16">Enter your group name</h2>
+      <div className="mb-6 relative flex-grow">
         <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2">
           Group name
         </label>
@@ -41,7 +41,6 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
             onChange={handleInputChange}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder="Enter group name"
             className="w-full text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-300 px-3 py-2 bg-transparent text-gray-900"
           />
           {isFocused && groupName.length === 0 && (
@@ -51,7 +50,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           )}
         </div>
       </div>
-      <div className="mt-10 px-6">
+      <div className="mt-auto pb-6">
         <Button 
           type="submit" 
           className={`w-full h-12 rounded-full text-lg font-semibold transition-all duration-300 ${
