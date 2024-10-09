@@ -12,10 +12,10 @@ const CommunityGroupCard = ({ group, index }) => {
     navigate(`/group/${group.id}`, { state: { ...group } });
   };
 
-  const renderCapacity = () => {
+  const renderMemberCount = () => {
     return (
       <span className="text-xs text-gray-500">
-        {group.members}/1000
+        {group.members} members
       </span>
     );
   };
@@ -43,7 +43,7 @@ const CommunityGroupCard = ({ group, index }) => {
         <div className="flex items-center justify-between mt-2">
           <div className="flex items-center">
             <Users className="w-4 h-4 text-gray-400 mr-1" />
-            {renderCapacity()}
+            {renderMemberCount()}
           </div>
           <div className="text-xs font-medium">
             {group.isOwner ? (
