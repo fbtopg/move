@@ -24,7 +24,7 @@ const CreateGroupForm = ({ handleCreateGroup }) => {
         placeholder="Enter text"
         value={groupName}
         onChange={handleInputChange}
-        className="w-full text-lg"
+        className="w-full text-lg border-0 border-b border-gray-300 rounded-none focus:ring-0 focus:border-black transition-colors duration-300 px-0"
       />
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200">
         <div className="flex justify-end">
