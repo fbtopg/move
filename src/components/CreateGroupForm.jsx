@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from 'lucide-react';
+import { X } from 'lucide-react';
 
 const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   const [groupName, setGroupName] = useState('');
@@ -23,13 +23,16 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       <Button
         type="button"
         onClick={onClose}
-        className="absolute top-0 left-0 p-2"
+        className="absolute top-4 right-4 p-2 bg-gray-200 rounded-full"
         variant="ghost"
       >
-        <ArrowLeft className="h-6 w-6" />
+        <X className="h-6 w-6 text-gray-600" />
       </Button>
-      <h2 className="text-xl font-medium mb-8 text-center roboto-medium text-gray-900 mt-16">Let's create your group. Please choose a name for your group.</h2>
+      <h2 className="text-xl font-medium mb-8 text-left roboto-medium text-gray-900 mt-16">Enter your group name</h2>
       <div className="mb-6 relative">
+        <label htmlFor="groupName" className="block text-sm font-medium text-gray-700 mb-2">
+          Group name
+        </label>
         <div className="relative">
           <Input
             id="groupName"
@@ -38,8 +41,8 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
             onChange={handleInputChange}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder="Enter text"
-            className="w-full text-2xl border-0 border-b-2 border-gray-300 rounded-none focus:ring-0 focus:border-primary transition-colors duration-300 px-0 py-2 bg-transparent text-gray-900 text-center"
+            placeholder="Enter group name"
+            className="w-full text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-primary transition-colors duration-300 px-3 py-2 bg-transparent text-gray-900"
           />
           {isFocused && groupName.length === 0 && (
             <div className="absolute inset-0 pointer-events-none flex justify-center items-center">
