@@ -29,18 +29,13 @@ const MyGroups = () => {
     { id: 3, name: 'Trip', members: 3, image: 'https://cdn.discordapp.com/attachments/1057996608261869689/1289767727749398618/KakaoTalk_20240929_105444000_02.jpg?ex=66fa054d&is=66f8b3cd&hm=c87306c053f5fee8f50fd4acc6363526eba0e50b6547667fd683092e4e032cdc&', created_at: '2024-03-20T09:15:00Z' },
   ];
 
-  // Sort groups by created_at in descending order (newest first)
-  const sortedGroups = [...myGroups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  // Sort groups by created_at in ascending order (oldest first)
+  const sortedGroups = [...myGroups].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
 
   return (
     <div className="mb-6">
       <div className="overflow-x-auto scrollbar-hide -mx-4" ref={groupsRef}>
         <div className="flex space-x-4 px-4" style={{ width: `${(sortedGroups.length + 1) * 180}px` }}>
-          {sortedGroups.map((group) => (
-            <div key={group.id} className="flex-shrink-0 w-40 h-40">
-              <GroupCard group={group} />
-            </div>
-          ))}
           <div className="flex-shrink-0 w-40 flex flex-col items-center justify-center">
             <Button
               onClick={() => navigate('/my-groups')}
@@ -50,6 +45,11 @@ const MyGroups = () => {
             </Button>
             <span className="text-xs text-gray-400">View all</span>
           </div>
+          {sortedGroups.map((group) => (
+            <div key={group.id} className="flex-shrink-0 w-40 h-40">
+              <GroupCard group={group} />
+            </div>
+          ))}
         </div>
       </div>
     </div>
