@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   const [groupName, setGroupName] = useState('');
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,6 +21,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
 
   const handleInputChange = (e) => {
     setGroupName(e.target.value);
+    setError(''); // Clear error when input changes
   };
 
   const handleSubmit = (e) => {
@@ -27,7 +29,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
     if (groupName.trim()) {
       handleCreateGroup({ name: groupName.trim() });
     } else {
-      toast.error("Please enter a group name");
+      setError("Please enter a group name");
     }
   };
 
@@ -42,6 +44,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
         <X className="h-6 w-6 text-gray-600" />
       </Button>
       <h2 className="text-3xl font-semibold mb-8 text-left roboto-medium text-gray-900 mt-16">Enter your group name</h2>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
       <div className="mb-6 relative flex-grow">
         <label htmlFor="groupName" className="block text-sm roboto-thin text-black mb-2">
           Group name
