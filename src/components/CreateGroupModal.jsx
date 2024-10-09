@@ -63,7 +63,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           variants={modalVariants}
           className="fixed inset-0 bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] z-50 overflow-hidden"
         >
-          <div className="h-full">
+          <div className="relative h-full p-6 flex flex-col">
             <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
           </div>
           <Toaster position="top-center" />
