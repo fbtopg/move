@@ -48,7 +48,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           animate="visible"
           exit="exit"
           variants={modalVariants}
-          className="fixed inset-0 bg-background z-50 overflow-hidden"
+          className="fixed inset-0 bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] z-50 overflow-hidden"
         >
           <div className="h-full p-6 pb-20 flex flex-col">
             <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
