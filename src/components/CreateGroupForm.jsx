@@ -23,7 +23,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       <Button
         type="button"
         onClick={onClose}
-        className="absolute top-4 left-4 p-2 bg-gray-200 rounded-full"
+        className="absolute top-4 left-0 p-2 bg-transparent rounded-full"
         variant="ghost"
       >
         <X className="h-6 w-6 text-gray-600" />
