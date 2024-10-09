@@ -25,7 +25,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       <Button
         type="button"
         onClick={onClose}
-        className="absolute top-4 left-0 p-2 bg-gray-200 hover:bg-gray-300 rounded-full"
+        className="absolute top-0 left-0 p-2 bg-gray-200 hover:bg-gray-300 rounded-full"
         variant="ghost"
       >
         <X className="h-6 w-6 text-gray-600" />
