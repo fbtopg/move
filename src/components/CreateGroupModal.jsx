@@ -62,7 +62,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           variants={modalVariants}
           className="fixed inset-0 bg-white z-50 overflow-hidden"
         >
-          <div className="relative h-full p-4 pb-20 flex flex-col">
+          <div className="h-full">
             <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
           </div>
         </motion.div>
