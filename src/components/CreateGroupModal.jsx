@@ -1,22 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
+import { X } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add('status-bar-hidden');
-    } else {
-      document.body.classList.remove('status-bar-hidden');
-    }
-
-    return () => {
-      document.body.classList.remove('status-bar-hidden');
-    };
-  }, [isOpen]);
 
   const handleCreateGroup = (groupData) => {
     const newGroupId = Date.now().toString();
@@ -29,42 +19,31 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
     onClose();
   };
 
-  const modalVariants = {
-    hidden: { x: "100%", opacity: 0 },
-    visible: { 
-      x: 0, 
-      opacity: 1,
-      transition: { 
-        type: "spring",
-        damping: 30,
-        stiffness: 300
-      }
-    },
-    exit: { 
-      x: "100%", 
-      opacity: 0,
-      transition: { 
-        type: "spring",
-        damping: 30,
-        stiffness: 300
-      }
-    }
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          key="modal"
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          variants={modalVariants}
-          className="fixed inset-0 bg-white z-50 overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
         >
-          <div className="relative h-full p-4 pb-20 flex flex-col">
-            <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
-          </div>
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="bg-white rounded-lg p-6 w-full max-w-md relative"
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute top-2 right-2"
+              onClick={onClose}
+            >
+              <X className="h-6 w-6" />
+            </Button>
+            <CreateGroupForm handleCreateGroup={handleCreateGroup} />
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
