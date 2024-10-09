@@ -31,6 +31,7 @@ const MyGroups = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading groups</div>;
 
+  // Sort groups by created_at in descending order (newest first)
   const sortedGroups = groups ? [...groups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) : [];
 
   return (
