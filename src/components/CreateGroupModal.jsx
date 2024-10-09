@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import CreateGroupForm from './CreateGroupForm';
+import { X } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -78,6 +80,13 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
           </div>
           <div className="relative h-full p-6 pb-20 flex flex-col">
             <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
+            <Button
+              onClick={onClose}
+              className="mt-4 bg-white text-black hover:bg-gray-100"
+              variant="outline"
+            >
+              <X className="mr-2 h-4 w-4" /> Close
+            </Button>
           </div>
         </motion.div>
       )}
