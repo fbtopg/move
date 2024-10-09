@@ -62,6 +62,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
               <source src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/178531-859955978_tiny.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjLzE3ODUzMS04NTk5NTU5NzhfdGlueS5tcDQiLCJpYXQiOjE3Mjg0NDYyNzYsImV4cCI6MTc1OTk4MjI3Nn0.DjT3eU1J4DHMTTO_fxXerRD1aQyV3aOgLC2npH2fTfo&t=2024-10-09T03%3A57%3A55.575Z" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           </div>
           <div className="relative h-full p-6 pb-20 flex flex-col">
             <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
