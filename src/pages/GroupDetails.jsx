@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { ArrowLeft, Share, Users } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -11,12 +11,19 @@ const GroupDetails = () => {
   const location = useLocation();
   const initialGroupData = location.state?.group;
 
-  const { group } = useGroupData(groupId, initialGroupData);
-  const { handleJoin } = useGroupActions(group, null, null, null, null, navigate);
+  const { group, setGroup } = useGroupData(groupId, initialGroupData);
+  const { handleJoin } = useGroupActions(group, setGroup, null, null, null, navigate);
+
+  useEffect(() => {
+    if (initialGroupData) {
+      setGroup(initialGroupData);
+    }
+  }, [initialGroupData, setGroup]);
 
   const handleBack = () => navigate(-1);
   const handleShare = () => {
     console.log('Share group');
+    // Implement share functionality
   };
 
   if (!group) {

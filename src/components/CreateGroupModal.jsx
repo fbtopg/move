@@ -25,13 +25,13 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   const handleCreateGroup = async (groupData) => {
     try {
       const newGroup = await createGroupInSupabase(groupData);
+      onClose(); // Close the modal before navigation
       navigate(`/group/${newGroup.id}`, { 
         state: { 
           group: newGroup,
           animateEntry: true
         } 
       });
-      onClose();
     } catch (error) {
       console.error('Error creating group:', error);
       // Handle error (e.g., show error message to user)
