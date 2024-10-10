@@ -1,28 +1,36 @@
 import { supabase } from '../integrations/supabase/supabase';
 
+const BUCKET_NAME = 'groupimages';
+
+const ensureBucketExists = async () => {
+  try {
+    const { data: buckets, error: bucketsError } = await supabase.storage.listBuckets();
+    if (bucketsError) throw bucketsError;
+
+    const bucketExists = buckets.some(b => b.name === BUCKET_NAME);
+    if (!bucketExists) {
+      const { data, error } = await supabase.storage.createBucket(BUCKET_NAME, { public: false });
+      if (error) throw error;
+      console.log(`Bucket ${BUCKET_NAME} created successfully`);
+    }
+  } catch (error) {
+    console.error('Error ensuring bucket exists:', error);
+    throw error;
+  }
+};
+
 export const uploadGroupImage = async (file, groupId) => {
   try {
+    await ensureBucketExists();
+
     const fileExt = file.name.split('.').pop();
     const fileName = `${groupId}.${fileExt}`;
     const filePath = `privategroups/${fileName}`;
 
     console.log('Attempting to upload file:', filePath);
 
-    // Check if the bucket exists
-    const { data: buckets, error: bucketsError } = await supabase.storage.listBuckets();
-    if (bucketsError) {
-      console.error('Error listing buckets:', bucketsError);
-      throw bucketsError;
-    }
-
-    const groupImagesBucket = buckets.find(b => b.name === 'groupimages');
-    if (!groupImagesBucket) {
-      console.error('groupimages bucket not found');
-      throw new Error('groupimages bucket not found');
-    }
-
     const { data, error } = await supabase.storage
-      .from('groupimages')
+      .from(BUCKET_NAME)
       .upload(filePath, file, { upsert: true });
 
     if (error) {
@@ -33,7 +41,7 @@ export const uploadGroupImage = async (file, groupId) => {
     console.log('File uploaded successfully:', data);
 
     const { data: urlData, error: urlError } = supabase.storage
-      .from('groupimages')
+      .from(BUCKET_NAME)
       .getPublicUrl(filePath);
 
     if (urlError) {
