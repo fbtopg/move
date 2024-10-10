@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { ArrowLeft, Share, Users, Camera } from 'lucide-react';
+import { ArrowLeft, Share, Camera } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useGroupData } from '../hooks/useGroupData';
 import { useGroupActions } from '../hooks/useGroupActions';
@@ -97,10 +97,6 @@ const GroupDetails = () => {
       
       <div className="flex-1 p-4 overflow-y-auto pt-safe pb-20">
         <h1 className="text-2xl font-bold mb-1">{group.name}</h1>
-        <p className="text-sm text-muted-foreground mb-2">
-          <Users className="inline-block w-4 h-4 mr-1" />
-          {group.members?.length || 0} Members
-        </p>
         <p className="text-sm text-muted-foreground mb-4">{group.description}</p>
         {group.isPrivate && (
           <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
@@ -109,9 +105,12 @@ const GroupDetails = () => {
         )}
       </div>
 
-      <div className="p-8 border-t pb-safe flex justify-end fixed bottom-0 left-0 right-0 bg-background">
+      <div className="p-8 border-t pb-safe flex justify-between items-center fixed bottom-0 left-0 right-0 bg-background">
+        <span className="text-sm text-muted-foreground">
+          {group.member_count || 0} members joined
+        </span>
         <Button
-          className="bg-black text-white hover:bg-black/90 w-28 -mt-4 mr-0"
+          className="bg-black text-white hover:bg-black/90 w-28"
           onClick={handleJoin}
         >
           Join now
