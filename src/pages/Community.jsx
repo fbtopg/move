@@ -74,7 +74,7 @@ const Community = () => {
           className="mb-8 -mx-4"
         >
           <h2 className="text-lg font-semibold mb-4 px-4 roboto-medium">Discover</h2>
-          <div className="flex overflow-x-auto space-x-4 px-4">
+          <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
             {challenges.map((challenge) => (
               <ChallengeCard key={challenge.id} challenge={challenge} />
             ))}
