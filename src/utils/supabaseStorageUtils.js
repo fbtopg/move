@@ -1,28 +1,38 @@
 import { supabase } from '../integrations/supabase/supabase';
 import { toast } from 'sonner';
 
-const BUCKET_NAME = 'images'; // Update this to match your existing bucket name
+const BUCKET_NAME = 'images';
 
 const checkBucketExists = async () => {
-  const { data, error } = await supabase.storage.getBucket(BUCKET_NAME);
-  if (error) {
+  try {
+    const { data, error } = await supabase.storage.getBucket(BUCKET_NAME);
+    if (error) {
+      console.error('Error checking bucket:', error);
+      return false;
+    }
+    return !!data;
+  } catch (error) {
     console.error('Error checking bucket:', error);
     return false;
   }
-  return !!data;
 };
 
 const createBucket = async () => {
-  const { data, error } = await supabase.storage.createBucket(BUCKET_NAME, {
-    public: false,
-    allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif'],
-    fileSizeLimit: 5 * 1024 * 1024, // 5MB
-  });
-  if (error) {
+  try {
+    const { data, error } = await supabase.storage.createBucket(BUCKET_NAME, {
+      public: true, // Changed to public for easier access
+      allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif'],
+      fileSizeLimit: 5 * 1024 * 1024, // 5MB
+    });
+    if (error) {
+      console.error('Error creating bucket:', error);
+      throw error;
+    }
+    console.log('Bucket created successfully:', data);
+  } catch (error) {
     console.error('Error creating bucket:', error);
     throw error;
   }
-  console.log('Bucket created successfully:', data);
 };
 
 export const uploadGroupImage = async (file, groupId) => {
@@ -48,8 +58,14 @@ export const uploadGroupImage = async (file, groupId) => {
       .upload(filePath, file, { upsert: true });
 
     if (error) {
-      console.error('Error uploading file:', error);
-      throw error;
+      if (error.message.includes('row-level security')) {
+        console.error('Error uploading file (security policy):', error);
+        toast.error('Unable to upload image due to security settings. Please contact support.');
+        throw new Error('Security policy prevents image upload');
+      } else {
+        console.error('Error uploading file:', error);
+        throw error;
+      }
     }
 
     console.log('File uploaded successfully:', data);
