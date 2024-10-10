@@ -22,7 +22,7 @@ export const uploadGroupImage = async (file, groupId) => {
 
     console.log('File uploaded successfully:', data);
 
-    // Construct the public URL manually
+    // Get the public URL using getPublicUrl method
     const { data: publicUrlData } = supabase.storage
       .from(BUCKET_NAME)
       .getPublicUrl(filePath);
