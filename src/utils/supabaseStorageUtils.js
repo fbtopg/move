@@ -74,24 +74,23 @@ export const uploadGroupImage = async (file, groupId) => {
       throw new Error('Failed to get public URL');
     }
 
-    // Get signed URL (valid for 1 hour)
-    const { data: signedUrlData, error: signedUrlError } = await supabase.storage
-      .from(BUCKET_NAME)
-      .createSignedUrl(filePath, 3600);
+    // Log the full public URL for debugging
+    console.log('Full public URL:', publicUrlData.publicUrl);
 
-    if (signedUrlError) {
-      console.error('Error creating signed URL:', signedUrlError);
-      // Fall back to public URL if signed URL fails
-      return publicUrlData.publicUrl;
+    // Test the URL accessibility
+    try {
+      const response = await fetch(publicUrlData.publicUrl);
+      if (!response.ok) {
+        console.error('Error accessing the public URL:', response.status, response.statusText);
+      } else {
+        console.log('Public URL is accessible');
+      }
+    } catch (fetchError) {
+      console.error('Error testing public URL accessibility:', fetchError);
     }
 
-    console.log('Public URL:', publicUrlData.publicUrl);
-    console.log('Signed URL:', signedUrlData.signedUrl);
-
-    // Return an object with both URLs
     return {
-      publicUrl: publicUrlData.publicUrl,
-      signedUrl: signedUrlData.signedUrl
+      publicUrl: publicUrlData.publicUrl
     };
   } catch (error) {
     console.error('Error in uploadGroupImage:', error);
