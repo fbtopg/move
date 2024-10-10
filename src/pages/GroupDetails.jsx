@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useGroupData } from '../hooks/useGroupData';
 import { useGroupActions } from '../hooks/useGroupActions';
 import { uploadGroupImage, updateGroupImageUrl } from '../utils/supabaseStorageUtils';
+import { toast } from 'sonner';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
@@ -29,9 +30,10 @@ const GroupDetails = () => {
         const imageUrl = await uploadGroupImage(file, groupId);
         await updateGroupImageUrl(groupId, imageUrl);
         setGroup(prevGroup => ({ ...prevGroup, image: imageUrl }));
+        toast.success('Group image updated successfully');
       } catch (error) {
         console.error('Error uploading image:', error);
-        // Handle error (e.g., show error message to user)
+        toast.error('Failed to update group image. Please try again.');
       }
     }
   };
