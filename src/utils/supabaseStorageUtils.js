@@ -8,6 +8,19 @@ export const uploadGroupImage = async (file, groupId) => {
 
     console.log('Attempting to upload file:', filePath);
 
+    // Check if the bucket exists
+    const { data: buckets, error: bucketsError } = await supabase.storage.listBuckets();
+    if (bucketsError) {
+      console.error('Error listing buckets:', bucketsError);
+      throw bucketsError;
+    }
+
+    const groupImagesBucket = buckets.find(b => b.name === 'groupimages');
+    if (!groupImagesBucket) {
+      console.error('groupimages bucket not found');
+      throw new Error('groupimages bucket not found');
+    }
+
     const { data, error } = await supabase.storage
       .from('groupimages')
       .upload(filePath, file, { upsert: true });
