@@ -15,7 +15,7 @@ const GroupDetails = () => {
   const fileInputRef = useRef(null);
 
   const { group, setGroup, loading } = useGroupData(groupId, initialGroupData);
-  const { handleJoin } = useGroupActions(group, setGroup, null, null, null, navigate);
+  const { handleJoin } = useGroupActions(group, setGroup, navigate);
 
   const handleBack = () => navigate(-1);
   const handleShare = () => {
