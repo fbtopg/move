@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Plus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
+import CreateGroupModal from './CreateGroupModal';
 
 const GroupCard = ({ group }) => {
   return (
@@ -20,8 +21,21 @@ const GroupCard = ({ group }) => {
   );
 };
 
+const CreateGroupCard = ({ onClick }) => {
+  return (
+    <div 
+      className="flex-shrink-0 w-40 h-40 rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 flex flex-col items-center justify-center cursor-pointer"
+      onClick={onClick}
+    >
+      <Plus className="w-12 h-12 text-gray-400 mb-2" />
+      <span className="text-sm text-gray-400">Create Group</span>
+    </div>
+  );
+};
+
 const MyGroups = () => {
   const navigate = useNavigate();
+  const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
 
   const { data: groups, isLoading, error } = useQuery({
     queryKey: ['privateGroups'],
@@ -34,12 +48,15 @@ const MyGroups = () => {
   // Sort groups by created_at in descending order (newest first)
   const sortedGroups = groups ? [...groups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) : [];
 
-  console.log('Sorted Groups:', sortedGroups);
+  const handleCreateGroup = () => {
+    setIsCreateGroupModalOpen(true);
+  };
 
   return (
     <div className="mb-6">
       <div className="overflow-x-auto scrollbar-hide -mx-4">
-        <div className="flex flex-row space-x-4 px-4" style={{ width: `${(sortedGroups.length + 1) * 180}px` }}>
+        <div className="flex flex-row space-x-4 px-4" style={{ width: `${(sortedGroups.length + 2) * 180}px` }}>
+          <CreateGroupCard onClick={handleCreateGroup} />
           {sortedGroups.map((group, index) => (
             <motion.div
               key={group.id}
@@ -67,6 +84,10 @@ const MyGroups = () => {
           </motion.div>
         </div>
       </div>
+      <CreateGroupModal
+        isOpen={isCreateGroupModalOpen}
+        onClose={() => setIsCreateGroupModalOpen(false)}
+      />
     </div>
   );
 };
