@@ -17,8 +17,8 @@ const Community = () => {
   const [greeting, setGreeting] = useState("");
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
 
-  const { data: recommendedGroups = [] } = useQuery({
-    queryKey: ['recommendedGroups'],
+  const { data: discoverGroups = [] } = useQuery({
+    queryKey: ['discoverGroups'],
     queryFn: fetchRecommendedGroups,
   });
 
@@ -63,8 +63,8 @@ const Community = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mb-8 -mx-4"
         >
-          <h2 className="text-lg font-semibold mb-4 px-4 roboto-medium">Recommended</h2>
-          <SwipeableGroupCards groups={recommendedGroups.map(group => ({ ...group, isJoined: false }))} />
+          <h2 className="text-lg font-semibold mb-4 px-4 roboto-medium">Discover</h2>
+          <SwipeableGroupCards groups={discoverGroups.map(group => ({ ...group, isJoined: false }))} />
         </motion.div>
 
         <motion.div
