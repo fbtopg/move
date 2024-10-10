@@ -5,17 +5,24 @@ const BUCKET_NAME = 'groupimages';
 const ensureBucketExists = async () => {
   try {
     const { data: buckets, error: bucketsError } = await supabase.storage.listBuckets();
-    if (bucketsError) throw bucketsError;
+    if (bucketsError) {
+      console.warn('Unable to list buckets. Proceeding with upload anyway.');
+      return;
+    }
 
     const bucketExists = buckets.some(b => b.name === BUCKET_NAME);
     if (!bucketExists) {
-      const { data, error } = await supabase.storage.createBucket(BUCKET_NAME, { public: false });
-      if (error) throw error;
-      console.log(`Bucket ${BUCKET_NAME} created successfully`);
+      try {
+        const { data, error } = await supabase.storage.createBucket(BUCKET_NAME, { public: false });
+        if (error) throw error;
+        console.log(`Bucket ${BUCKET_NAME} created successfully`);
+      } catch (createError) {
+        console.warn(`Unable to create bucket ${BUCKET_NAME}. Proceeding with upload anyway.`);
+      }
     }
   } catch (error) {
-    console.error('Error ensuring bucket exists:', error);
-    throw error;
+    console.warn('Error ensuring bucket exists:', error);
+    // Proceed with upload even if we can't verify bucket existence
   }
 };
 
