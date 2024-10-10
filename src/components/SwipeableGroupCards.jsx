@@ -18,7 +18,7 @@ const SwipeableGroupCards = ({ groups }) => {
       <div className="flex pl-4">
         {groups.map((group, index) => (
           <motion.div
-            key={group.id}
+            key={group.created_at}
             className="flex-[0_0_70%] min-w-0 pr-4 sm:flex-[0_0_40%]"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
