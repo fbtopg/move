@@ -7,8 +7,13 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 
 const GroupCard = ({ group }) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex-shrink-0 w-full h-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4">
+    <div 
+      className="flex-shrink-0 w-full h-full rounded-lg overflow-hidden relative bg-[#1a1a1d] p-4 cursor-pointer"
+      onClick={() => navigate(`/group/${group.id}`)}
+    >
       <div className="text-center">
         <div className="w-16 h-16 rounded-full overflow-hidden mb-3 mx-auto">
           <img src={group.image || 'https://via.placeholder.com/160'} alt={group.name} className="w-full h-full object-cover" />
@@ -31,7 +36,6 @@ const MyGroups = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading groups</div>;
 
-  // Sort groups by created_at in descending order (newest first)
   const sortedGroups = groups ? [...groups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) : [];
 
   console.log('Sorted Groups:', sortedGroups);

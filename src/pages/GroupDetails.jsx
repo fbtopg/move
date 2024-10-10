@@ -1,79 +1,89 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { ArrowLeft, Share, Users } from 'lucide-react';
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button";
-import { useGroupData } from '../hooks/useGroupData';
-import { useGroupActions } from '../hooks/useGroupActions';
+import { ArrowLeft, Camera } from 'lucide-react';
+import { uploadGroupImage, updateGroupImageUrl } from '../utils/supabaseStorageUtils';
+import { supabase } from '../integrations/supabase/supabase';
 
 const GroupDetails = () => {
-  const navigate = useNavigate();
   const { groupId } = useParams();
-  const location = useLocation();
-  const initialGroupData = location.state?.group;
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [isUploading, setIsUploading] = useState(false);
 
-  const { group, setGroup, loading } = useGroupData(groupId, initialGroupData);
-  const { handleJoin } = useGroupActions(group, setGroup, null, null, null, navigate);
+  const { data: group, isLoading, error } = useQuery({
+    queryKey: ['group', groupId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('groups')
+        .select('*')
+        .eq('id', groupId)
+        .single();
+      if (error) throw error;
+      return data;
+    },
+  });
 
-  const handleBack = () => navigate(-1);
-  const handleShare = () => {
-    console.log('Share group');
-    // Implement share functionality
+  const uploadMutation = useMutation({
+    mutationFn: async (file) => {
+      setIsUploading(true);
+      const imageUrl = await uploadGroupImage(file, groupId);
+      await updateGroupImageUrl(groupId, imageUrl);
+      return imageUrl;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['group', groupId]);
+      setIsUploading(false);
+    },
+    onError: (error) => {
+      console.error('Error uploading image:', error);
+      setIsUploading(false);
+    },
+  });
+
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      uploadMutation.mutate(file);
+    }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!group) {
-    return <div>Group not found</div>;
-  }
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading group details</div>;
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <div className="relative h-48 bg-gray-200">
-        {group.image && (
-          <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
-        )}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-4 left-4 bg-white/80 rounded-full"
-          onClick={handleBack}
-        >
-          <ArrowLeft className="h-6 w-6" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-4 right-4 bg-white/80 rounded-full"
-          onClick={handleShare}
-        >
-          <Share className="h-6 w-6" />
-        </Button>
+    <div className="min-h-screen bg-[#FEF8F3] p-4">
+      <Button
+        variant="ghost"
+        onClick={() => navigate(-1)}
+        className="mb-4"
+      >
+        <ArrowLeft className="mr-2 h-4 w-4" /> Back
+      </Button>
+      <div className="relative mb-4">
+        <img
+          src={group.image || 'https://via.placeholder.com/400x200'}
+          alt={group.name}
+          className="w-full h-48 object-cover rounded-lg"
+        />
+        <label htmlFor="imageUpload" className="absolute bottom-2 right-2 cursor-pointer">
+          <div className="bg-black bg-opacity-50 text-white p-2 rounded-full">
+            <Camera className="h-6 w-6" />
+          </div>
+          <input
+            id="imageUpload"
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleImageUpload}
+            disabled={isUploading}
+          />
+        </label>
       </div>
-      
-      <div className="flex-1 p-4">
-        <h1 className="text-2xl font-bold mb-1">{group.name}</h1>
-        <p className="text-sm text-muted-foreground mb-2">
-          <Users className="inline-block w-4 h-4 mr-1" />
-          {group.members?.length || 0} Members
-        </p>
-        <p className="text-sm text-muted-foreground mb-4">{group.description}</p>
-        {group.isPrivate && (
-          <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-            Private
-          </span>
-        )}
-      </div>
-
-      <div className="p-4 border-t">
-        <Button
-          className="w-full bg-black text-white hover:bg-black/90"
-          onClick={handleJoin}
-        >
-          Join now
-        </Button>
-      </div>
+      <h1 className="text-2xl font-bold mb-2">{group.name}</h1>
+      <p className="text-gray-600 mb-4">{group.description}</p>
+      {/* Add more group details here */}
     </div>
   );
 };
