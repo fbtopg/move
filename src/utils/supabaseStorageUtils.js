@@ -13,7 +13,7 @@ const ensureBucketExists = async () => {
     const bucketExists = buckets.some(b => b.name === BUCKET_NAME);
     if (!bucketExists) {
       try {
-        const { data, error } = await supabase.storage.createBucket(BUCKET_NAME, { public: false });
+        const { data, error } = await supabase.storage.createBucket(BUCKET_NAME, { public: true });
         if (error) throw error;
         console.log(`Bucket ${BUCKET_NAME} created successfully`);
       } catch (createError) {
@@ -41,9 +41,6 @@ export const uploadGroupImage = async (file, groupId) => {
 
     if (error) {
       console.error('Error uploading file:', error);
-      if (error.message.includes('row-level security policy')) {
-        console.error('This appears to be a permissions issue. Please check your Supabase RLS policies.');
-      }
       throw error;
     }
 
@@ -76,9 +73,6 @@ export const updateGroupImageUrl = async (groupId, imageUrl) => {
 
     if (error) {
       console.error('Error updating group image URL:', error);
-      if (error.message.includes('row-level security policy')) {
-        console.error('This appears to be a permissions issue. Please check your Supabase RLS policies.');
-      }
       throw error;
     }
     
