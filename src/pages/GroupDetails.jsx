@@ -106,19 +106,15 @@ const GroupDetails = () => {
       </div>
 
       <div className="px-4 py-8 border-t pb-safe flex justify-between items-center fixed bottom-0 left-0 right-0 bg-background">
-        <div className="flex flex-col justify-center h-full pt-2">
-          <span className="text-sm text-muted-foreground">
-            {group.member_count || 0} members joined
-          </span>
-        </div>
-        <div className="flex items-center h-full pt-2">
-          <Button
-            className="bg-black text-white hover:bg-black/90 w-28"
-            onClick={handleJoin}
-          >
-            Join now
-          </Button>
-        </div>
+        <span className="text-sm text-muted-foreground">
+          {group.member_count || 0} members joined
+        </span>
+        <Button
+          className="bg-black text-white hover:bg-black/90 w-28"
+          onClick={handleJoin}
+        >
+          Join now
+        </Button>
       </div>
     </div>
   );
