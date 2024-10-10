@@ -6,7 +6,7 @@ const ensureBucketExists = async () => {
   try {
     const { data: buckets, error: bucketsError } = await supabase.storage.listBuckets();
     if (bucketsError) {
-      console.warn('Unable to list buckets. Proceeding with upload anyway.');
+      console.warn('Unable to list buckets:', bucketsError);
       return;
     }
 
@@ -17,12 +17,11 @@ const ensureBucketExists = async () => {
         if (error) throw error;
         console.log(`Bucket ${BUCKET_NAME} created successfully`);
       } catch (createError) {
-        console.warn(`Unable to create bucket ${BUCKET_NAME}. Proceeding with upload anyway.`);
+        console.warn(`Unable to create bucket ${BUCKET_NAME}:`, createError);
       }
     }
   } catch (error) {
     console.warn('Error ensuring bucket exists:', error);
-    // Proceed with upload even if we can't verify bucket existence
   }
 };
 
@@ -42,6 +41,9 @@ export const uploadGroupImage = async (file, groupId) => {
 
     if (error) {
       console.error('Error uploading file:', error);
+      if (error.message.includes('row-level security policy')) {
+        console.error('This appears to be a permissions issue. Please check your Supabase RLS policies.');
+      }
       throw error;
     }
 
@@ -74,6 +76,9 @@ export const updateGroupImageUrl = async (groupId, imageUrl) => {
 
     if (error) {
       console.error('Error updating group image URL:', error);
+      if (error.message.includes('row-level security policy')) {
+        console.error('This appears to be a permissions issue. Please check your Supabase RLS policies.');
+      }
       throw error;
     }
     
