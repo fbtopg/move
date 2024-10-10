@@ -1,4 +1,5 @@
 import { supabase } from '../integrations/supabase/supabase';
+import { toast } from 'sonner';
 
 const BUCKET_NAME = 'groupimages';
 
@@ -21,20 +22,21 @@ export const uploadGroupImage = async (file, groupId) => {
 
     console.log('File uploaded successfully:', data);
 
-    const { data: urlData, error: urlError } = supabase.storage
+    // Construct the public URL manually
+    const { data: publicUrlData } = supabase.storage
       .from(BUCKET_NAME)
       .getPublicUrl(filePath);
 
-    if (urlError) {
-      console.error('Error getting public URL:', urlError);
-      throw urlError;
+    if (!publicUrlData || !publicUrlData.publicUrl) {
+      throw new Error('Failed to get public URL');
     }
 
-    console.log('Public URL retrieved:', urlData.publicUrl);
+    console.log('Public URL retrieved:', publicUrlData.publicUrl);
 
-    return urlData.publicUrl;
+    return publicUrlData.publicUrl;
   } catch (error) {
     console.error('Error in uploadGroupImage:', error);
+    toast.error('Failed to upload image. Please try again.');
     throw error;
   }
 };
@@ -44,7 +46,8 @@ export const updateGroupImageUrl = async (groupId, imageUrl) => {
     const { data, error } = await supabase
       .from('groups')
       .update({ image: imageUrl })
-      .eq('id', groupId);
+      .eq('id', groupId)
+      .select();
 
     if (error) {
       console.error('Error updating group image URL:', error);
@@ -55,6 +58,7 @@ export const updateGroupImageUrl = async (groupId, imageUrl) => {
     return data;
   } catch (error) {
     console.error('Error in updateGroupImageUrl:', error);
+    toast.error('Failed to update group image. Please try again.');
     throw error;
   }
 };
