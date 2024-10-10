@@ -111,7 +111,7 @@ const GroupDetails = () => {
 
       <div className="p-4 border-t pb-safe flex justify-end fixed bottom-0 left-0 right-0 bg-background">
         <Button
-          className="bg-black text-white hover:bg-black/90 w-32"
+          className="bg-black text-white hover:bg-black/90 w-28"
           onClick={handleJoin}
         >
           Join now
