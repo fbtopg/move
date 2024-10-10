@@ -44,8 +44,7 @@ export const fetchRecommendedGroups = async () => {
     const { data, error } = await supabase
       .from('groups')
       .select('*')
-      .eq('is_private', false)
-      .limit(10);
+      .eq('is_private', false);
 
     if (error) throw error;
     return data;
@@ -60,8 +59,7 @@ export const fetchPrivateGroups = async () => {
     const { data, error } = await supabase
       .from('groups')
       .select('*')
-      .eq('is_private', true)
-      .limit(10);
+      .eq('is_private', true);
 
     if (error) throw error;
     return data;
