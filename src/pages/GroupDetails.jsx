@@ -6,7 +6,6 @@ import { useGroupData } from '../hooks/useGroupData';
 import { useGroupActions } from '../hooks/useGroupActions';
 import { uploadGroupImage, updateGroupImageUrl } from '../utils/supabaseStorageUtils';
 import { toast } from 'sonner';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const GroupDetails = () => {
   const navigate = useNavigate();
@@ -110,19 +109,7 @@ const GroupDetails = () => {
         )}
       </div>
 
-      <div className="p-4 border-t pb-safe flex justify-between items-center fixed bottom-0 left-0 right-0 bg-background">
-        <div className="flex items-center">
-          <Avatar className="h-8 w-8 mr-2">
-            <AvatarImage src={group.members?.[0]?.avatar} alt="Member" />
-            <AvatarFallback>M</AvatarFallback>
-          </Avatar>
-          <div>
-            <p className="text-sm font-medium">{group.members?.[0]?.name || 'No members'}</p>
-            <p className="text-xs text-muted-foreground">
-              {group.members?.length > 1 ? `+${group.members.length - 1} others` : ''}
-            </p>
-          </div>
-        </div>
+      <div className="p-8 border-t pb-safe flex justify-end fixed bottom-0 left-0 right-0 bg-background">
         <Button
           className="bg-black text-white hover:bg-black/90 w-28 -mt-4 mr-0"
           onClick={handleJoin}
