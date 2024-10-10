@@ -105,18 +105,16 @@ const GroupDetails = () => {
         )}
       </div>
 
-      <div className="px-4 py-4 border-t pb-safe fixed bottom-0 left-0 right-0 bg-background">
-        <div className="flex justify-between items-start">
-          <span className="text-sm text-muted-foreground pt-2">
-            {group.member_count || 0} members joined
-          </span>
-          <Button
-            className="bg-black text-white hover:bg-black/90 w-28"
-            onClick={handleJoin}
-          >
-            Join now
-          </Button>
-        </div>
+      <div className="px-4 py-8 border-t pb-safe flex justify-between items-center fixed bottom-0 left-0 right-0 bg-background">
+        <span className="text-sm text-muted-foreground">
+          {group.member_count || 0} members joined
+        </span>
+        <Button
+          className="bg-black text-white hover:bg-black/90 w-28"
+          onClick={handleJoin}
+        >
+          Join now
+        </Button>
       </div>
     </div>
   );
