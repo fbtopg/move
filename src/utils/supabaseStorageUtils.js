@@ -1,52 +1,10 @@
 import { supabase } from '../integrations/supabase/supabase';
 import { toast } from 'sonner';
 
-const BUCKET_NAME = 'images';
-
-const checkBucketExists = async () => {
-  try {
-    const { data, error } = await supabase.storage.getBucket(BUCKET_NAME);
-    if (error) {
-      console.error('Error checking bucket:', error);
-      return false;
-    }
-    return !!data;
-  } catch (error) {
-    console.error('Error checking bucket:', error);
-    return false;
-  }
-};
-
-const createBucket = async () => {
-  try {
-    const { data, error } = await supabase.storage.createBucket(BUCKET_NAME, {
-      public: true, // Changed to public for easier access
-      allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif'],
-      fileSizeLimit: 5 * 1024 * 1024, // 5MB
-    });
-    if (error) {
-      console.error('Error creating bucket:', error);
-      throw error;
-    }
-    console.log('Bucket created successfully:', data);
-  } catch (error) {
-    console.error('Error creating bucket:', error);
-    throw error;
-  }
-};
+const BUCKET_NAME = 'groupimages';
 
 export const uploadGroupImage = async (file, groupId) => {
   try {
-    let bucketExists = await checkBucketExists();
-    if (!bucketExists) {
-      console.log(`Bucket "${BUCKET_NAME}" does not exist. Creating...`);
-      await createBucket();
-      bucketExists = await checkBucketExists();
-      if (!bucketExists) {
-        throw new Error(`Failed to create bucket "${BUCKET_NAME}"`);
-      }
-    }
-
     const fileExt = file.name.split('.').pop();
     const fileName = `${groupId}.${fileExt}`;
     const filePath = `privategroups/${fileName}`;
@@ -58,18 +16,13 @@ export const uploadGroupImage = async (file, groupId) => {
       .upload(filePath, file, { upsert: true });
 
     if (error) {
-      if (error.message.includes('row-level security')) {
-        console.error('Error uploading file (security policy):', error);
-        toast.error('Unable to upload image due to security settings. Please contact support.');
-        throw new Error('Security policy prevents image upload');
-      } else {
-        console.error('Error uploading file:', error);
-        throw error;
-      }
+      console.error('Error uploading file:', error);
+      throw error;
     }
 
     console.log('File uploaded successfully:', data);
 
+    // Construct the public URL manually
     const { data: publicUrlData } = supabase.storage
       .from(BUCKET_NAME)
       .getPublicUrl(filePath);
