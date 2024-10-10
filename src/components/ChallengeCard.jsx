@@ -2,8 +2,8 @@ import React from 'react';
 
 const ChallengeCard = ({ challenge }) => {
   return (
-    <div className="w-40 flex-shrink-0">
-      <div className="w-40 h-40 bg-gray-200 rounded-lg overflow-hidden">
+    <div className="w-full flex-shrink-0">
+      <div className="w-full aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
         <img
           src={challenge.image || 'https://via.placeholder.com/150'}
           alt={challenge.title}
