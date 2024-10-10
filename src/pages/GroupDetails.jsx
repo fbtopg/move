@@ -53,8 +53,12 @@ const GroupDetails = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <div className="relative h-48 bg-gray-200">
-        {group.image && (
+        {group.image ? (
           <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-gray-400">No image available</span>
+          </div>
         )}
         <Button
           variant="ghost"
@@ -72,14 +76,16 @@ const GroupDetails = () => {
         >
           <Share className="h-6 w-6" />
         </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full"
-          onClick={triggerFileInput}
-        >
-          <Camera className="h-6 w-6" />
-        </Button>
+        {!group.image && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full"
+            onClick={triggerFileInput}
+          >
+            <Camera className="h-6 w-6" />
+          </Button>
+        )}
         <input
           type="file"
           ref={fileInputRef}
