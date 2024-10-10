@@ -6,10 +6,12 @@ import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import SwipeableGroupCards from "../components/SwipeableGroupCards";
-import { renderActivitySection, getGreeting, fetchRecommendedGroups, fetchPrivateGroups } from "../utils/communityUtils.jsx";
+import ChallengeCard from "../components/ChallengeCard";
+import { renderActivitySection, getGreeting, fetchPrivateGroups } from "../utils/communityUtils.jsx";
 import { activities } from "../utils/communityData";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
+import { supabase } from '../integrations/supabase/supabase';
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -17,9 +19,17 @@ const Community = () => {
   const [greeting, setGreeting] = useState("");
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
 
-  const { data: discoverGroups = [] } = useQuery({
-    queryKey: ['discoverGroups'],
-    queryFn: fetchRecommendedGroups,
+  const { data: challenges = [] } = useQuery({
+    queryKey: ['challenges'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('challenges')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(10);
+      if (error) throw error;
+      return data;
+    },
   });
 
   const { data: myGroups = [] } = useQuery({
@@ -64,7 +74,11 @@ const Community = () => {
           className="mb-8 -mx-4"
         >
           <h2 className="text-lg font-semibold mb-4 px-4 roboto-medium">Discover</h2>
-          <SwipeableGroupCards groups={discoverGroups.map(group => ({ ...group, isJoined: false }))} />
+          <div className="flex overflow-x-auto space-x-4 px-4">
+            {challenges.map((challenge) => (
+              <ChallengeCard key={challenge.id} challenge={challenge} />
+            ))}
+          </div>
         </motion.div>
 
         <motion.div
