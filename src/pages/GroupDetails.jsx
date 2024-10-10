@@ -27,9 +27,10 @@ const GroupDetails = () => {
     const file = event.target.files[0];
     if (file) {
       try {
-        const imageUrl = await uploadGroupImage(file, groupId);
-        await updateGroupImageUrl(groupId, imageUrl);
-        setGroup(prevGroup => ({ ...prevGroup, image: imageUrl }));
+        const imageUrls = await uploadGroupImage(file, groupId);
+        // Use the public URL for display, but you can store both URLs if needed
+        await updateGroupImageUrl(groupId, imageUrls.publicUrl);
+        setGroup(prevGroup => ({ ...prevGroup, image: imageUrls.publicUrl }));
         toast.success('Group image updated successfully');
       } catch (error) {
         console.error('Error uploading image:', error);
