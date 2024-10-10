@@ -1,10 +1,42 @@
 import { supabase } from '../integrations/supabase/supabase';
 import { toast } from 'sonner';
 
-const BUCKET_NAME = 'groupimages';
+const BUCKET_NAME = 'images'; // Update this to match your existing bucket name
+
+const checkBucketExists = async () => {
+  const { data, error } = await supabase.storage.getBucket(BUCKET_NAME);
+  if (error) {
+    console.error('Error checking bucket:', error);
+    return false;
+  }
+  return !!data;
+};
+
+const createBucket = async () => {
+  const { data, error } = await supabase.storage.createBucket(BUCKET_NAME, {
+    public: false,
+    allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif'],
+    fileSizeLimit: 5 * 1024 * 1024, // 5MB
+  });
+  if (error) {
+    console.error('Error creating bucket:', error);
+    throw error;
+  }
+  console.log('Bucket created successfully:', data);
+};
 
 export const uploadGroupImage = async (file, groupId) => {
   try {
+    let bucketExists = await checkBucketExists();
+    if (!bucketExists) {
+      console.log(`Bucket "${BUCKET_NAME}" does not exist. Creating...`);
+      await createBucket();
+      bucketExists = await checkBucketExists();
+      if (!bucketExists) {
+        throw new Error(`Failed to create bucket "${BUCKET_NAME}"`);
+      }
+    }
+
     const fileExt = file.name.split('.').pop();
     const fileName = `${groupId}.${fileExt}`;
     const filePath = `privategroups/${fileName}`;
@@ -22,7 +54,6 @@ export const uploadGroupImage = async (file, groupId) => {
 
     console.log('File uploaded successfully:', data);
 
-    // Construct the public URL manually
     const { data: publicUrlData } = supabase.storage
       .from(BUCKET_NAME)
       .getPublicUrl(filePath);
