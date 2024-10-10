@@ -6,6 +6,7 @@ import { useGroupData } from '../hooks/useGroupData';
 import { useGroupActions } from '../hooks/useGroupActions';
 import { uploadGroupImage, updateGroupImageUrl } from '../utils/supabaseStorageUtils';
 import { toast } from 'sonner';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const GroupDetails = () => {
   const navigate = useNavigate();
@@ -99,7 +100,7 @@ const GroupDetails = () => {
         <h1 className="text-2xl font-bold mb-1">{group.name}</h1>
         <p className="text-sm text-muted-foreground mb-2">
           <Users className="inline-block w-4 h-4 mr-1" />
-          {group.member_count || 0} Members
+          {group.members?.length || 0} Members
         </p>
         <p className="text-sm text-muted-foreground mb-4">{group.description}</p>
         {group.isPrivate && (
@@ -111,10 +112,16 @@ const GroupDetails = () => {
 
       <div className="p-4 border-t pb-safe flex justify-between items-center fixed bottom-0 left-0 right-0 bg-background">
         <div className="flex items-center">
-          <Users className="w-4 h-4 mr-2 text-muted-foreground" />
-          <p className="text-sm text-muted-foreground">
-            {group.member_count || 0} members joined
-          </p>
+          <Avatar className="h-8 w-8 mr-2">
+            <AvatarImage src={group.members?.[0]?.avatar} alt="Member" />
+            <AvatarFallback>M</AvatarFallback>
+          </Avatar>
+          <div>
+            <p className="text-sm font-medium">{group.members?.[0]?.name || 'No members'}</p>
+            <p className="text-xs text-muted-foreground">
+              {group.members?.length > 1 ? `+${group.members.length - 1} others` : ''}
+            </p>
+          </div>
         </div>
         <Button
           className="bg-black text-white hover:bg-black/90 w-28 -mt-4 mr-0"
