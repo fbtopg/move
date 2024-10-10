@@ -105,8 +105,8 @@ const GroupDetails = () => {
         )}
       </div>
 
-      <div className="px-4 py-8 border-t pb-safe flex justify-between items-center fixed bottom-0 left-0 right-0 bg-background">
-        <span className="text-sm text-muted-foreground">
+      <div className="px-4 py-4 border-t pb-safe flex justify-between items-start fixed bottom-0 left-0 right-0 bg-background">
+        <span className="text-sm text-muted-foreground pt-1">
           {group.member_count || 0} members joined
         </span>
         <Button
