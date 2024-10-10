@@ -17,6 +17,19 @@ const GroupDetails = () => {
   const { group, setGroup, loading } = useGroupData(groupId, initialGroupData);
   const { handleJoin } = useGroupActions(group, setGroup, navigate);
 
+  useEffect(() => {
+    // Add meta tag to prevent zooming
+    const metaTag = document.createElement('meta');
+    metaTag.name = 'viewport';
+    metaTag.content = 'width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover';
+    document.head.appendChild(metaTag);
+
+    // Remove meta tag when component unmounts
+    return () => {
+      document.head.removeChild(metaTag);
+    };
+  }, []);
+
   const handleBack = () => navigate(-1);
   const handleShare = () => {
     console.log('Share group');
@@ -43,16 +56,16 @@ const GroupDetails = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="full-screen flex items-center justify-center">Loading...</div>;
   }
 
   if (!group) {
-    return <div>Group not found</div>;
+    return <div className="full-screen flex items-center justify-center">Group not found</div>;
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <div className="relative h-48 bg-gray-200">
+    <div className="full-screen flex flex-col bg-background text-foreground">
+      <div className="relative h-48 bg-gray-200 status-bar-hidden">
         {group.image ? (
           <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
         ) : (
@@ -63,7 +76,7 @@ const GroupDetails = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="absolute top-4 left-4 bg-white/80 rounded-full"
+          className="absolute top-safe left-4 bg-white/80 rounded-full"
           onClick={handleBack}
         >
           <ArrowLeft className="h-6 w-6" />
@@ -71,7 +84,7 @@ const GroupDetails = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="absolute top-4 right-4 bg-white/80 rounded-full"
+          className="absolute top-safe right-4 bg-white/80 rounded-full"
           onClick={handleShare}
         >
           <Share className="h-6 w-6" />
@@ -95,7 +108,7 @@ const GroupDetails = () => {
         />
       </div>
       
-      <div className="flex-1 p-4">
+      <div className="flex-1 p-4 overflow-y-auto">
         <h1 className="text-2xl font-bold mb-1">{group.name}</h1>
         <p className="text-sm text-muted-foreground mb-2">
           <Users className="inline-block w-4 h-4 mr-1" />
