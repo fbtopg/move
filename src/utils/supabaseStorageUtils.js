@@ -4,16 +4,16 @@ export const uploadGroupImage = async (file, groupId) => {
   try {
     const fileExt = file.name.split('.').pop();
     const fileName = `${groupId}.${fileExt}`;
-    const filePath = `groupimages/${fileName}`;
+    const filePath = `group/${fileName}`;
 
     const { data, error } = await supabase.storage
-      .from('groupimages')
+      .from('images')
       .upload(filePath, file, { upsert: true });
 
     if (error) throw error;
 
     const { data: urlData } = supabase.storage
-      .from('groupimages')
+      .from('images')
       .getPublicUrl(filePath);
 
     return urlData.publicUrl;
