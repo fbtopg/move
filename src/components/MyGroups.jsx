@@ -52,10 +52,22 @@ const MyGroups = () => {
     setIsCreateGroupModalOpen(true);
   };
 
+  if (sortedGroups.length === 0) {
+    return (
+      <div className="mb-6">
+        <CreateGroupCard onClick={handleCreateGroup} />
+        <CreateGroupModal
+          isOpen={isCreateGroupModalOpen}
+          onClose={() => setIsCreateGroupModalOpen(false)}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="mb-6">
       <div className="overflow-x-auto scrollbar-hide -mx-4">
-        <div className="flex flex-row space-x-4 px-4" style={{ width: `${Math.max((sortedGroups.length + 1) * 180, 360)}px` }}>
+        <div className="flex flex-row space-x-4 px-4" style={{ width: `${Math.max((sortedGroups.length + 2) * 180, 360)}px` }}>
           <CreateGroupCard onClick={handleCreateGroup} />
           {sortedGroups.map((group, index) => (
             <motion.div
@@ -68,22 +80,20 @@ const MyGroups = () => {
               <GroupCard group={group} />
             </motion.div>
           ))}
-          {sortedGroups.length > 0 && (
-            <motion.div
-              className="flex-shrink-0 w-40 flex flex-col items-center justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: sortedGroups.length * 0.1 }}
+          <motion.div
+            className="flex-shrink-0 w-40 flex flex-col items-center justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: (sortedGroups.length + 1) * 0.1 }}
+          >
+            <Button
+              onClick={() => navigate('/my-groups')}
+              className="bg-[#212124] text-white rounded-full w-12 h-12 flex items-center justify-center mb-2"
             >
-              <Button
-                onClick={() => navigate('/my-groups')}
-                className="bg-[#212124] text-white rounded-full w-12 h-12 flex items-center justify-center mb-2"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </Button>
-              <span className="text-xs text-gray-400">View all</span>
-            </motion.div>
-          )}
+              <ChevronRight className="w-6 h-6" />
+            </Button>
+            <span className="text-xs text-gray-400">View all</span>
+          </motion.div>
         </div>
       </div>
       <CreateGroupModal
