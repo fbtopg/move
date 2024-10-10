@@ -90,7 +90,7 @@ const Community = () => {
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {challenges.map((challenge) => (
-                <div key={challenge.id} className="flex-[0_0_45%] min-w-0 pl-4 pr-4">
+                <div key={challenge.id} className="flex-[0_0_45%] min-w-0 pl-4 pr-6">
                   <ChallengeCard challenge={challenge} />
                 </div>
               ))}
