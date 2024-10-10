@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { ArrowLeft, Share, Users } from 'lucide-react';
+import { ArrowLeft, Share, Users, Camera } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useGroupData } from '../hooks/useGroupData';
 import { useGroupActions } from '../hooks/useGroupActions';
+import { uploadGroupImage, updateGroupImageUrl } from '../utils/supabaseStorageUtils';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
   const location = useLocation();
   const initialGroupData = location.state?.group;
+  const fileInputRef = useRef(null);
 
   const { group, setGroup, loading } = useGroupData(groupId, initialGroupData);
   const { handleJoin } = useGroupActions(group, setGroup, null, null, null, navigate);
@@ -18,6 +20,24 @@ const GroupDetails = () => {
   const handleShare = () => {
     console.log('Share group');
     // Implement share functionality
+  };
+
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      try {
+        const imageUrl = await uploadGroupImage(file, groupId);
+        await updateGroupImageUrl(groupId, imageUrl);
+        setGroup(prevGroup => ({ ...prevGroup, image: imageUrl }));
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        // Handle error (e.g., show error message to user)
+      }
+    }
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current.click();
   };
 
   if (loading) {
@@ -50,6 +70,21 @@ const GroupDetails = () => {
         >
           <Share className="h-6 w-6" />
         </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full"
+          onClick={triggerFileInput}
+        >
+          <Camera className="h-6 w-6" />
+        </Button>
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleImageUpload}
+          accept="image/*"
+          className="hidden"
+        />
       </div>
       
       <div className="flex-1 p-4">
