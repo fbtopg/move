@@ -95,7 +95,7 @@ const GroupDetails = () => {
         />
       </div>
       
-      <div className="flex-1 p-4 overflow-y-auto pt-safe">
+      <div className="flex-1 p-4 overflow-y-auto pt-safe pb-20">
         <h1 className="text-2xl font-bold mb-1">{group.name}</h1>
         <p className="text-sm text-muted-foreground mb-2">
           <Users className="inline-block w-4 h-4 mr-1" />
@@ -109,7 +109,7 @@ const GroupDetails = () => {
         )}
       </div>
 
-      <div className="p-4 border-t pb-safe flex justify-end">
+      <div className="p-4 border-t pb-safe flex justify-end fixed bottom-0 left-0 right-0 bg-background">
         <Button
           className="bg-black text-white hover:bg-black/90 w-32"
           onClick={handleJoin}
