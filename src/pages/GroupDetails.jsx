@@ -65,7 +65,7 @@ const GroupDetails = () => {
 
   return (
     <div className="full-screen flex flex-col bg-background text-foreground">
-      <div className="relative h-48 bg-gray-200 status-bar-hidden">
+      <div className="relative h-48 bg-gray-200">
         {group.image ? (
           <img src={group.image} alt={group.name} className="w-full h-full object-cover" />
         ) : (
@@ -108,7 +108,7 @@ const GroupDetails = () => {
         />
       </div>
       
-      <div className="flex-1 p-4 overflow-y-auto">
+      <div className="flex-1 p-4 overflow-y-auto pt-safe">
         <h1 className="text-2xl font-bold mb-1">{group.name}</h1>
         <p className="text-sm text-muted-foreground mb-2">
           <Users className="inline-block w-4 h-4 mr-1" />
@@ -122,7 +122,7 @@ const GroupDetails = () => {
         )}
       </div>
 
-      <div className="p-4 border-t">
+      <div className="p-4 border-t pb-safe">
         <Button
           className="w-full bg-black text-white hover:bg-black/90"
           onClick={handleJoin}
