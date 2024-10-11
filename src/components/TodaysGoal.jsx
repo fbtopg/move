@@ -8,7 +8,7 @@ const TodaysGoal = () => {
         <Circle className="w-10 h-10 text-gray-300 mr-4" />
         <div>
           <h2 className="text-xs font-medium text-gray-500">Today's Goal</h2>
-          <p className="text-xl font-bold text-gray-800">Read 5 minutes</p>
+          <p className="text-xl font-bold text-gray-800">Walk 1,000 steps</p>
         </div>
       </div>
     </div>
