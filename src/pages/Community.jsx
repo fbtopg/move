@@ -54,6 +54,9 @@ const Community = () => {
     });
   };
 
+  // Sort groups by created_at in descending order (newest first)
+  const sortedGroups = [...myGroups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
       <CommunityHeader />
@@ -99,7 +102,7 @@ const Community = () => {
             </Button>
           </div>
           <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
-            {myGroups.map((group) => (
+            {sortedGroups.map((group) => (
               <CommunityGroupCard key={group.id} group={{ ...group, isJoined: true }} />
             ))}
           </div>
