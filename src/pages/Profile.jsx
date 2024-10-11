@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { Settings, Trophy, Medal, Star, Users, Flag, FileText } from "lucide-react";
+import { Settings, Star, Users, Flag, FileText } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
@@ -17,13 +17,11 @@ const Profile = () => {
     { icon: FileText, label: "Summary", route: "/profile/summary" },
     { icon: Users, label: "Groups", route: "/profile/groups" },
     { icon: Flag, label: "Challenges", route: "/profile/challenges" },
-    { icon: Trophy, label: "Achievements", route: "/achievements" },
-    { icon: Medal, label: "Leaderboard", route: "/leaderboard" },
     { icon: Star, label: "Rewards", route: "/rewards" },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FEF8F3] via-[#F0E7E0] to-[#E6D0C5] text-foreground flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-4">
           <div className="flex justify-end mb-4">
