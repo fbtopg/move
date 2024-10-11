@@ -3,7 +3,7 @@ import { Circle } from 'lucide-react';
 
 const TodaysGoal = () => {
   return (
-    <div className="bg-white rounded-xl shadow-md p-4 mb-6">
+    <div className="bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] p-4 mb-6">
       <div className="flex items-center">
         <Circle className="w-12 h-12 text-gray-300 mr-4" />
         <div>
