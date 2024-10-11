@@ -59,10 +59,10 @@ const Community = () => {
 
   const CreateGroupCard = () => (
     <div 
-      className="w-[250px] h-56 flex-shrink-0 rounded-xl overflow-hidden relative bg-white cursor-pointer flex items-center justify-center"
+      className="w-[250px] h-56 flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-200 cursor-pointer flex items-center justify-center"
       onClick={() => setIsCreateGroupModalOpen(true)}
     >
-      <Plus className="h-12 w-12 text-gray-400" />
+      <Plus className="h-12 w-12 text-gray-600" />
     </div>
   );
 
@@ -101,14 +101,16 @@ const Community = () => {
         >
           <div className="flex justify-between items-center px-4 mb-4">
             <h2 className="text-lg font-semibold roboto-medium">My Groups</h2>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="p-0 h-auto w-auto"
-              onClick={() => setIsCreateGroupModalOpen(true)}
-            >
-              <Plus className="h-5 w-5" />
-            </Button>
+            {sortedGroups.length > 0 && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="p-0 h-auto w-auto"
+                onClick={() => setIsCreateGroupModalOpen(true)}
+              >
+                <Plus className="h-5 w-5" />
+              </Button>
+            )}
           </div>
           <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
             {sortedGroups.length > 0 ? (
