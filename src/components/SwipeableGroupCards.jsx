@@ -10,16 +10,15 @@ const SwipeableGroupCards = ({ groups }) => {
     dragFree: true,
     containScroll: 'trimSnaps',
     slidesToScroll: 1,
-    inViewThreshold: 0.7,
   });
 
   return (
     <div className="overflow-hidden" ref={emblaRef}>
-      <div className="flex pl-4">
+      <div className="flex">
         {groups.map((group, index) => (
           <motion.div
             key={group.id}
-            className="flex-[0_0_70%] min-w-0 pr-4 sm:flex-[0_0_40%]"
+            className="flex-[0_0_auto] min-w-0 pl-4 first:pl-0"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
