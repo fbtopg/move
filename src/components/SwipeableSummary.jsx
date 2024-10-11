@@ -37,13 +37,13 @@ const SwipeableSummary = () => {
           <motion.div
             key={currentIndex}
             custom={currentIndex}
-            className="w-full flex-shrink-0"
+            className="w-full flex-shrink-0 px-4"
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '-100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
-            <div className="bg-white shadow-[0_4px_15px_rgba(0,0,0,0.05)] p-4 mb-6">
+            <div className="bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] p-4 mb-6">
               <div className="flex items-center">
                 {React.createElement(goals[currentIndex].icon, { className: "w-10 h-10 text-gray-300 mr-4" })}
                 <div>
