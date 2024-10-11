@@ -18,7 +18,7 @@ const SwipeableSummary = () => {
   };
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden -mx-4">
       <motion.div
         className="flex"
         drag="x"
@@ -43,7 +43,7 @@ const SwipeableSummary = () => {
             exit={{ opacity: 0, x: '-100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
-            <div className="bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] p-4 mb-6">
+            <div className="bg-white shadow-[0_4px_15px_rgba(0,0,0,0.05)] p-4 mb-6">
               <div className="flex items-center">
                 {React.createElement(goals[currentIndex].icon, { className: "w-10 h-10 text-gray-300 mr-4" })}
                 <div>
