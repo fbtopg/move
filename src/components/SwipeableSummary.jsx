@@ -18,35 +18,40 @@ const SwipeableSummary = () => {
   };
 
   return (
-    <div className="relative bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] p-4 mb-6 overflow-hidden">
-      <AnimatePresence initial={false} custom={currentIndex}>
-        <motion.div
-          key={currentIndex}
-          custom={currentIndex}
-          initial={{ opacity: 0, x: 300 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -300 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
-            const swipe = swipePower(offset.x, velocity.x);
-            if (swipe < -swipeConfidenceThreshold) {
-              handleSwipe('left');
-            } else if (swipe > swipeConfidenceThreshold) {
-              handleSwipe('right');
-            }
-          }}
-          className="flex items-center"
-        >
-          {React.createElement(goals[currentIndex].icon, { className: "w-10 h-10 text-gray-300 mr-4" })}
-          <div>
-            <h2 className="text-xs font-medium text-gray-500">{goals[currentIndex].title}</h2>
-            <p className="text-base font-bold text-gray-800">{goals[currentIndex].description}</p>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+    <div className="relative overflow-hidden">
+      <motion.div
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={1}
+        onDragEnd={(e, { offset, velocity }) => {
+          const swipe = swipePower(offset.x, velocity.x);
+          if (swipe < -swipeConfidenceThreshold) {
+            handleSwipe('left');
+          } else if (swipe > swipeConfidenceThreshold) {
+            handleSwipe('right');
+          }
+        }}
+      >
+        <AnimatePresence initial={false} custom={currentIndex}>
+          <motion.div
+            key={currentIndex}
+            custom={currentIndex}
+            initial={{ opacity: 0, x: 300 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -300 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className="bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] p-4 mb-6"
+          >
+            <div className="flex items-center">
+              {React.createElement(goals[currentIndex].icon, { className: "w-10 h-10 text-gray-300 mr-4" })}
+              <div>
+                <h2 className="text-xs font-medium text-gray-500">{goals[currentIndex].title}</h2>
+                <p className="text-base font-bold text-gray-800">{goals[currentIndex].description}</p>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
       <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
         {goals.map((_, index) => (
           <div
