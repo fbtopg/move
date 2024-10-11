@@ -11,6 +11,7 @@ import { activities } from "../utils/communityData";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from '../integrations/supabase/supabase';
+import TodaysGoal from "../components/TodaysGoal";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -59,7 +60,9 @@ const Community = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
-      <div className="px-4 pt-1 pb-20">
+      <div className="px-4 pt-4 pb-20">
+        <TodaysGoal />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
