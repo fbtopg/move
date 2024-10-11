@@ -60,6 +60,7 @@
     "react-easy-crop": "^5.0.8",
     "react-hook-form": "^7.52.0",
     "react-leaflet": "^4.2.1",
+    "react-pull-to-refresh": "^2.0.1",
     "react-resizable-panels": "^2.0.19",
     "react-router-dom": "^6.23.1",
     "recharts": "^2.12.7",
