@@ -59,7 +59,7 @@ const Community = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
+    <div className="min-h-screen bg-[#FEF8F3] text-foreground">
       <div className="px-4 pt-4 pb-20">
         <TodaysGoal />
 
