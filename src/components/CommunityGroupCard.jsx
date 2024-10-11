@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Crown, Users } from 'lucide-react';
 
-const CommunityGroupCard = ({ group, index }) => {
+const CommunityGroupCard = ({ group }) => {
   const navigate = useNavigate();
   const truncateName = (name) => (name && name.length > 25 ? name.slice(0, 25) + '...' : name || 'Unnamed Group');
   const truncateDescription = (desc) => {
@@ -25,7 +25,7 @@ const CommunityGroupCard = ({ group, index }) => {
 
   return (
     <motion.div
-      className="w-full max-w-[250px] h-56 rounded-xl overflow-hidden relative bg-white cursor-pointer"
+      className="w-[250px] h-56 flex-shrink-0 rounded-xl overflow-hidden relative bg-white cursor-pointer"
       whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleClick}

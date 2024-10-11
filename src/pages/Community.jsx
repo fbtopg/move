@@ -5,8 +5,8 @@ import CommunityHeader from "../components/CommunityHeader";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
-import SwipeableGroupCards from "../components/SwipeableGroupCards";
 import ChallengeCard from "../components/ChallengeCard";
+import CommunityGroupCard from "../components/CommunityGroupCard";
 import { renderActivitySection, getGreeting, fetchPrivateGroups } from "../utils/communityUtils.jsx";
 import { activities } from "../utils/communityData";
 import { Button } from "@/components/ui/button";
@@ -98,7 +98,11 @@ const Community = () => {
               <Plus className="h-5 w-5" />
             </Button>
           </div>
-          <SwipeableGroupCards groups={myGroups.map(group => ({ ...group, isJoined: true }))} />
+          <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
+            {myGroups.map((group) => (
+              <CommunityGroupCard key={group.id} group={{ ...group, isJoined: true }} />
+            ))}
+          </div>
         </motion.div>
 
         {renderActivitySection("Recent Activity", activities.today, handleUserClick)}
