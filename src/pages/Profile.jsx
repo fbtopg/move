@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
-import { Settings, Trophy, Medal, Star } from "lucide-react";
+import { Settings, Trophy, Medal, Star, Users, Flag } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -17,6 +18,17 @@ const Profile = () => {
     { icon: Trophy, label: "Achievements", route: "/achievements" },
     { icon: Medal, label: "Leaderboard", route: "/leaderboard" },
     { icon: Star, label: "Rewards", route: "/rewards" },
+  ];
+
+  const groups = [
+    { name: "Morning chill", members: 5 },
+    { name: "Climbing bros", members: 8 },
+    { name: "Trip", members: 3 },
+  ];
+
+  const challenges = [
+    { name: "Daily Walk Challenge", progress: "15/30 days" },
+    { name: "Quiz Master", progress: "Level 5" },
   ];
 
   return (
@@ -43,21 +55,56 @@ const Profile = () => {
             <p className="text-sm text-gray-600 mb-4">Member since {memberSince}</p>
           </div>
           
-          <div className="space-y-4">
-            {profileItems.map((item, index) => (
-              <Button
-                key={index}
-                className="w-full bg-white text-gray-800 hover:bg-gray-100 transition-colors flex items-center justify-between px-4 py-3 rounded-lg shadow-sm"
-                onClick={() => navigate(item.route)}
-              >
-                <span className="flex items-center">
-                  <item.icon className="mr-3 h-5 w-5" />
-                  {item.label}
-                </span>
-                <span className="text-gray-400">→</span>
-              </Button>
-            ))}
-          </div>
+          <Tabs defaultValue="summary" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-4">
+              <TabsTrigger value="summary">Summary</TabsTrigger>
+              <TabsTrigger value="groups">Groups</TabsTrigger>
+              <TabsTrigger value="challenges">Challenges</TabsTrigger>
+            </TabsList>
+            <TabsContent value="summary">
+              <div className="space-y-4">
+                {profileItems.map((item, index) => (
+                  <Button
+                    key={index}
+                    className="w-full bg-white text-gray-800 hover:bg-gray-100 transition-colors flex items-center justify-between px-4 py-3 rounded-lg shadow-sm"
+                    onClick={() => navigate(item.route)}
+                  >
+                    <span className="flex items-center">
+                      <item.icon className="mr-3 h-5 w-5" />
+                      {item.label}
+                    </span>
+                    <span className="text-gray-400">→</span>
+                  </Button>
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="groups">
+              <div className="space-y-4">
+                {groups.map((group, index) => (
+                  <div key={index} className="bg-white p-4 rounded-lg shadow-sm flex justify-between items-center">
+                    <div>
+                      <h3 className="font-semibold">{group.name}</h3>
+                      <p className="text-sm text-gray-600">{group.members} members</p>
+                    </div>
+                    <Users className="h-5 w-5 text-gray-400" />
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="challenges">
+              <div className="space-y-4">
+                {challenges.map((challenge, index) => (
+                  <div key={index} className="bg-white p-4 rounded-lg shadow-sm flex justify-between items-center">
+                    <div>
+                      <h3 className="font-semibold">{challenge.name}</h3>
+                      <p className="text-sm text-gray-600">{challenge.progress}</p>
+                    </div>
+                    <Flag className="h-5 w-5 text-gray-400" />
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
