@@ -6,12 +6,12 @@ import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import ChallengeCard from "../components/ChallengeCard";
 import CommunityGroupCard from "../components/CommunityGroupCard";
-import SwipeableSummary from "../components/SwipeableSummary";
 import { renderActivitySection, fetchPrivateGroups } from "../utils/communityUtils.jsx";
 import { activities } from "../utils/communityData";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from '../integrations/supabase/supabase';
+import SwipeableSummary from "../components/SwipeableSummary";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -59,8 +59,8 @@ const Community = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
-      <div className="px-4 pt-1 pb-20">
+    <div className="min-h-screen bg-[#FEF8F3] text-foreground">
+      <div className="px-4 pt-4 pb-20">
         <SwipeableSummary />
 
         <motion.div
