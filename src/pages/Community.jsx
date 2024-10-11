@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
-import useEmblaCarousel from 'embla-carousel-react';
 import CommunityHeader from "../components/CommunityHeader";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
@@ -19,11 +18,6 @@ const Community = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [greeting, setGreeting] = useState("");
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    dragFree: true,
-    containScroll: 'trimSnaps',
-    slidesToScroll: 1
-  });
 
   const { data: challenges = [] } = useQuery({
     queryKey: ['challenges'],
@@ -60,10 +54,6 @@ const Community = () => {
     });
   };
 
-  const scrollTo = useCallback((index) => {
-    emblaApi && emblaApi.scrollTo(index)
-  }, [emblaApi])
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
       <CommunityHeader />
@@ -84,14 +74,10 @@ const Community = () => {
           className="mb-8 -mx-4"
         >
           <h2 className="text-lg font-semibold mb-4 px-4 roboto-medium">Discover</h2>
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex">
-              {challenges.map((challenge, index) => (
-                <div key={challenge.id} className="flex-[0_0_80%] min-w-0 pr-4">
-                  <ChallengeCard challenge={challenge} />
-                </div>
-              ))}
-            </div>
+          <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
+            {challenges.map((challenge) => (
+              <ChallengeCard key={challenge.id} challenge={challenge} />
+            ))}
           </div>
         </motion.div>
 
