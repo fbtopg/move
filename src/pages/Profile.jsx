@@ -26,12 +26,12 @@ const Profile = () => {
         <div className="max-w-md mx-auto p-4">
           <div className="flex justify-end mb-4">
             <Button 
-              variant="outline" 
+              variant="ghost" 
               size="icon"
               onClick={() => navigate('/settings')}
-              className="bg-white/50 backdrop-blur-sm hover:bg-white/70 transition-all duration-300"
+              className="text-gray-600 hover:text-gray-900 transition-colors duration-300"
             >
-              <Settings className="h-5 w-5" />
+              <Settings className="h-6 w-6" />
             </Button>
           </div>
           
