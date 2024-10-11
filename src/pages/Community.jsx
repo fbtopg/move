@@ -6,6 +6,7 @@ import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import ChallengeCard from "../components/ChallengeCard";
 import CommunityGroupCard from "../components/CommunityGroupCard";
+import SwipeableSummary from "../components/SwipeableSummary";
 import { renderActivitySection, fetchPrivateGroups } from "../utils/communityUtils.jsx";
 import { activities } from "../utils/communityData";
 import { Button } from "@/components/ui/button";
@@ -60,6 +61,8 @@ const Community = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
       <div className="px-4 pt-1 pb-20">
+        <SwipeableSummary />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

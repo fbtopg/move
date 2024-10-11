@@ -5,7 +5,7 @@ import { Circle } from 'lucide-react';
 const SwipeableSummary = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const goals = [
-    { icon: Circle, title: "Today's Goal", description: "Walk 1,000 steps" },
+    { icon: Circle, title: "Today's Goal", description: "Read 5 minutes" },
     { icon: Circle, title: "Traveloka", description: "Walk 100,000 steps" },
     { icon: Circle, title: "Monthly Target", description: "Join 2 group activities" }
   ];
