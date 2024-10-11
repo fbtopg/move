@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Globe, Trophy, Zap } from 'lucide-react';
+import { Globe, User, Zap } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate, useLocation } from 'react-router-dom';
 import QuickstartMenu from './QuickstartMenu';
@@ -12,7 +12,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
   
   const navItems = [
     { id: 'community', icon: Globe, route: '/' },
-    { id: 'challenge', icon: Trophy, route: '/board' },
+    { id: 'profile', icon: User, route: '/profile' }, // Changed from 'challenge' to 'profile'
   ];
 
   useEffect(() => {
