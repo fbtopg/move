@@ -59,10 +59,10 @@ const Community = () => {
 
   const CreateGroupCard = () => (
     <div 
-      className="flex-shrink-0 w-40 h-40 bg-gray-100 rounded-lg flex items-center justify-center cursor-pointer"
+      className="w-[250px] h-56 flex-shrink-0 rounded-xl overflow-hidden relative bg-white cursor-pointer flex items-center justify-center"
       onClick={() => setIsCreateGroupModalOpen(true)}
     >
-      <Plus className="h-8 w-8 text-gray-400" />
+      <Plus className="h-12 w-12 text-gray-400" />
     </div>
   );
 
