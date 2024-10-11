@@ -75,7 +75,6 @@ const Community = () => {
   const RefreshIndicator = () => (
     <div className="flex items-center justify-center py-4">
       <Loader2 className="h-6 w-6 animate-spin text-blue-500" />
-      <span className="ml-2 text-blue-500">Refreshing...</span>
     </div>
   );
 
