@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Plus, Loader2 } from "lucide-react";
 import PullToRefresh from 'react-pull-to-refresh';
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
@@ -18,6 +18,7 @@ const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const queryClient = useQueryClient();
 
   const { data: challenges = [], refetch: refetchChallenges } = useQuery({
@@ -49,11 +50,13 @@ const Community = () => {
   };
 
   const handleRefresh = async () => {
+    setIsRefreshing(true);
     await Promise.all([
       refetchChallenges(),
       refetchGroups(),
       queryClient.invalidateQueries(['activities'])
     ]);
+    setIsRefreshing(false);
     return null;
   };
 
@@ -69,8 +72,21 @@ const Community = () => {
     </div>
   );
 
+  const RefreshIndicator = () => (
+    <div className="flex items-center justify-center py-4">
+      <Loader2 className="h-6 w-6 animate-spin text-blue-500" />
+      <span className="ml-2 text-blue-500">Refreshing...</span>
+    </div>
+  );
+
   return (
-    <PullToRefresh onRefresh={handleRefresh} pullDownThreshold={100} resistance={2}>
+    <PullToRefresh
+      onRefresh={handleRefresh}
+      pullDownThreshold={100}
+      resistance={2}
+      pullingContent={<RefreshIndicator />}
+      refreshingContent={<RefreshIndicator />}
+    >
       <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
         <div className="px-4 pt-4 pb-20">
           <TodaysGoal />
