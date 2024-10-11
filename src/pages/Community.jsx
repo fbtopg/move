@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
-import CommunityHeader from "../components/CommunityHeader";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import ChallengeCard from "../components/ChallengeCard";
 import CommunityGroupCard from "../components/CommunityGroupCard";
-import { renderActivitySection, getGreeting, fetchPrivateGroups } from "../utils/communityUtils.jsx";
+import { renderActivitySection, fetchPrivateGroups } from "../utils/communityUtils.jsx";
 import { activities } from "../utils/communityData";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
@@ -16,7 +15,6 @@ import { supabase } from '../integrations/supabase/supabase';
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [greeting, setGreeting] = useState("");
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
 
   const { data: challenges = [] } = useQuery({
@@ -36,13 +34,6 @@ const Community = () => {
     queryKey: ['privateGroups'],
     queryFn: fetchPrivateGroups,
   });
-
-  useEffect(() => {
-    const updateGreeting = () => setGreeting(getGreeting());
-    updateGreeting();
-    const intervalId = setInterval(updateGreeting, 60000);
-    return () => clearInterval(intervalId);
-  }, []);
 
   const handleUserClick = (user) => {
     setSelectedUser({
@@ -68,17 +59,7 @@ const Community = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] text-foreground">
-      <CommunityHeader />
       <div className="px-4 pt-1 pb-20">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col items-start mb-6"
-        >
-          <h1 className="text-3xl font-bold text-foreground libre-baskerville-bold">{greeting}</h1>
-        </motion.div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
