@@ -32,19 +32,12 @@ const Settings = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center justify-between mb-6"
+          className="flex items-center mb-6"
         >
-          <div className="flex items-center">
-            <Button variant="ghost" size="icon" onClick={() => navigate(-1)} className="mr-2">
-              <ArrowLeft className="h-6 w-6" />
-            </Button>
-            <h1 className="text-2xl font-bold">Settings</h1>
-          </div>
-          <Switch
-            checked={theme === 'dark'}
-            onCheckedChange={toggleTheme}
-            className="ml-4"
-          />
+          <Button variant="ghost" size="icon" onClick={() => navigate(-1)} className="mr-2">
+            <ArrowLeft className="h-6 w-6" />
+          </Button>
+          <h1 className="text-2xl font-bold">Settings</h1>
         </motion.div>
 
         <motion.div
