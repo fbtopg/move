@@ -51,15 +51,15 @@ const Community = () => {
 
   const CreateGroupCard = () => (
     <div 
-      className="w-[250px] h-56 flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-200 cursor-pointer flex items-center justify-center"
+      className="w-[250px] h-56 flex-shrink-0 rounded-xl overflow-hidden relative bg-gray-200 dark:bg-gray-700 cursor-pointer flex items-center justify-center"
       onClick={() => setIsCreateGroupModalOpen(true)}
     >
-      <Plus className="h-12 w-12 text-gray-600" />
+      <Plus className="h-12 w-12 text-gray-600 dark:text-gray-400" />
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-[#FEF8F3] text-foreground">
+    <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
       <div className="px-4 pt-4 pb-20">
         <SwipeableSummary />
 
