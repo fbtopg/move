@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
@@ -7,16 +7,27 @@ import { insertNewGroup } from '../utils/supabaseGroupUtils';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
+  const modalRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      // Adjust modal position when keyboard appears
+      const adjustModalPosition = () => {
+        if (modalRef.current) {
+          const viewportHeight = window.innerHeight;
+          const keyboardHeight = viewportHeight - window.visualViewport.height;
+          modalRef.current.style.bottom = `${keyboardHeight}px`;
+        }
+      };
+      window.visualViewport.addEventListener('resize', adjustModalPosition);
     } else {
       document.body.style.overflow = '';
     }
 
     return () => {
       document.body.style.overflow = '';
+      window.visualViewport.removeEventListener('resize', adjustModalPosition);
     };
   }, [isOpen]);
 
@@ -79,6 +90,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             onClick={onClose}
           />
           <motion.div
+            ref={modalRef}
             key="modal"
             initial="hidden"
             animate="visible"

@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 
 const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   const [groupName, setGroupName] = useState('');
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +28,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
     <form onSubmit={handleSubmit} className="flex flex-col flex-grow">
       <div className="flex-grow relative mt-4 w-full">
         <input
+          ref={inputRef}
           type="text"
           id="groupName"
           value={groupName}
