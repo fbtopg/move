@@ -35,6 +35,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           onChange={(e) => setGroupName(e.target.value)}
           className="block w-full px-4 pb-1 pt-5 text-lg bg-transparent border-2 border-blue-400 rounded-md outline-none focus:border-blue-600 peer"
           placeholder=" "
+          autoComplete="off"
         />
         <label
           htmlFor="groupName"
