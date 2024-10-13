@@ -80,12 +80,11 @@ const Community = () => {
           className="mb-8 -mx-4"
         >
           <div className="flex justify-between items-center px-4 mb-4">
-            <h2 className="text-lg font-semibold roboto-medium">My Groups</h2>
+            <h2 className="text-lg font-semibold roboto-medium">Discover</h2>
           </div>
           <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
-            <CreateGroupCard />
-            {sortedGroups.map((group) => (
-              <CommunityGroupCard key={group.id} group={{ ...group, isJoined: true }} />
+            {challenges.map((challenge) => (
+              <ChallengeCard key={challenge.id} challenge={challenge} />
             ))}
           </div>
         </motion.div>
@@ -105,10 +104,13 @@ const Community = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mb-8 -mx-4"
         >
-          <h2 className="text-lg font-semibold mb-4 px-4 roboto-medium">Discover</h2>
+          <div className="flex justify-between items-center px-4 mb-4">
+            <h2 className="text-lg font-semibold roboto-medium">My Groups</h2>
+          </div>
           <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
-            {challenges.map((challenge) => (
-              <ChallengeCard key={challenge.id} challenge={challenge} />
+            <CreateGroupCard />
+            {sortedGroups.map((group) => (
+              <CommunityGroupCard key={group.id} group={{ ...group, isJoined: true }} />
             ))}
           </div>
         </motion.div>
