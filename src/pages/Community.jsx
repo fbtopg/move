@@ -58,7 +58,7 @@ const Community = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-2xl font-bold mb-6 spectral-semibold-italic"
+          className="text-2xl font-bold mb-6 abril-fatface-regular"
         >
           Welcome, {username}
         </motion.h1>
