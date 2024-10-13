@@ -25,7 +25,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           id="groupName"
           value={groupName}
           onChange={(e) => setGroupName(e.target.value)}
-          className="block w-full px-4 pb-2 pt-6 text-lg bg-transparent border-2 border-blue-400 rounded-md outline-none focus:border-blue-600 peer"
+          className="block w-full px-4 pb-1 pt-5 text-lg bg-transparent border-2 border-blue-400 rounded-md outline-none focus:border-blue-600 peer"
           placeholder=" "
         />
         <label
