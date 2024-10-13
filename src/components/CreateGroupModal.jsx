@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
+import { X } from 'lucide-react';
 import CreateGroupForm from './CreateGroupForm';
 import { insertNewGroup } from '../utils/supabaseGroupUtils';
 
@@ -9,15 +10,12 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen) {
-      document.body.classList.add('status-bar-hidden');
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.classList.remove('status-bar-hidden');
       document.body.style.overflow = '';
     }
 
     return () => {
-      document.body.classList.remove('status-bar-hidden');
       document.body.style.overflow = '';
     };
   }, [isOpen]);
@@ -25,7 +23,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   const handleCreateGroup = async (groupName) => {
     try {
       const newGroup = await insertNewGroup(groupName);
-      onClose(); // Close the modal before navigation
+      onClose();
       navigate(`/group/${newGroup.id}`, { 
         state: { 
           group: newGroup,
@@ -40,9 +38,9 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
   };
 
   const modalVariants = {
-    hidden: { x: "100%", opacity: 0 },
+    hidden: { y: "100%", opacity: 0 },
     visible: { 
-      x: 0, 
+      y: 0, 
       opacity: 1,
       transition: { 
         type: "spring",
@@ -51,7 +49,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
       }
     },
     exit: { 
-      x: "100%", 
+      y: "100%", 
       opacity: 0,
       transition: { 
         type: "spring",
@@ -86,9 +84,17 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             animate="visible"
             exit="exit"
             variants={modalVariants}
-            className="fixed inset-0 bg-gradient-to-b from-[#FEF8F3] to-[#F0E7E0] dark:from-gray-900 dark:to-gray-800 z-50 overflow-hidden"
+            className="fixed inset-x-0 bottom-0 bg-white dark:bg-gray-800 rounded-t-3xl z-50 overflow-hidden"
+            style={{ maxHeight: '90vh' }}
           >
             <div className="relative h-full p-6 flex flex-col">
+              <button
+                onClick={onClose}
+                className="absolute top-6 left-6 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              >
+                <X className="h-6 w-6" />
+              </button>
+              <h2 className="text-2xl font-bold text-center mb-6">Create a new group</h2>
               <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
             </div>
           </motion.div>
