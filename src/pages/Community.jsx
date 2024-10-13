@@ -10,7 +10,6 @@ import { renderActivitySection, fetchPrivateGroups } from "../utils/communityUti
 import { activities } from "../utils/communityData";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from '../integrations/supabase/supabase';
-import SwipeableSummary from "../components/SwipeableSummary";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -74,15 +73,6 @@ const Community = () => {
               <ChallengeCard key={challenge.id} challenge={challenge} />
             ))}
           </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mb-8"
-        >
-          <SwipeableSummary />
         </motion.div>
 
         <motion.div
