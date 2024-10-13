@@ -8,7 +8,6 @@ import ChallengeCard from "../components/ChallengeCard";
 import CommunityGroupCard from "../components/CommunityGroupCard";
 import { renderActivitySection, fetchPrivateGroups } from "../utils/communityUtils.jsx";
 import { activities } from "../utils/communityData";
-import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from '../integrations/supabase/supabase';
 import SwipeableSummary from "../components/SwipeableSummary";
@@ -94,12 +93,10 @@ const Community = () => {
         >
           <div className="flex justify-between items-center px-4 mb-4">
             <h2 className="text-base font-semibold roboto-medium">My Groups</h2>
-            <Button
+            <Plus
+              className="h-5 w-5 text-gray-600 dark:text-gray-400 cursor-pointer"
               onClick={() => setIsCreateGroupModalOpen(true)}
-              className="bg-transparent hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
-            >
-              <Plus className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-            </Button>
+            />
           </div>
           <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
             {sortedGroups.map((group) => (
