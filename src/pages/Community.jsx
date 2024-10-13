@@ -52,15 +52,6 @@ const Community = () => {
   // Sort groups by created_at in descending order (newest first)
   const sortedGroups = [...myGroups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-  const CreateGroupCard = () => (
-    <div 
-      className="w-24 h-24 flex-shrink-0 rounded-full overflow-hidden relative bg-gray-200 dark:bg-gray-700 cursor-pointer flex items-center justify-center"
-      onClick={() => setIsCreateGroupModalOpen(true)}
-    >
-      <Plus className="h-8 w-8 text-gray-600 dark:text-gray-400" />
-    </div>
-  );
-
   return (
     <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
       <div className="px-4 pt-4 pb-20">
@@ -103,9 +94,14 @@ const Community = () => {
         >
           <div className="flex justify-between items-center px-4 mb-4">
             <h2 className="text-base font-semibold roboto-medium">My Groups</h2>
+            <Button
+              onClick={() => setIsCreateGroupModalOpen(true)}
+              className="p-1 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
+            >
+              <Plus className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+            </Button>
           </div>
           <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
-            <CreateGroupCard />
             {sortedGroups.map((group) => (
               <CommunityGroupCard key={group.id} group={{ ...group, isJoined: true }} />
             ))}
