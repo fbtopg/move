@@ -88,13 +88,15 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
             style={{ maxHeight: '90vh' }}
           >
             <div className="relative h-full p-6 flex flex-col">
-              <button
-                onClick={onClose}
-                className="absolute top-6 left-6 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-              >
-                <ArrowLeft className="h-6 w-6" />
-              </button>
-              <h2 className="text-3xl font-bold text-center mb-8">Create a new group</h2>
+              <div className="flex items-center mb-6">
+                <button
+                  onClick={onClose}
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                >
+                  <ArrowLeft className="h-6 w-6" />
+                </button>
+                <h2 className="text-xl font-semibold ml-4">Create a new group</h2>
+              </div>
               <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
             </div>
           </motion.div>
