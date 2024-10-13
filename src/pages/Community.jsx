@@ -18,6 +18,9 @@ const Community = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
 
+  // TODO: Replace this with actual user data fetching
+  const username = "John"; // Placeholder username
+
   const { data: challenges = [] } = useQuery({
     queryKey: ['challenges'],
     queryFn: async () => {
@@ -61,7 +64,30 @@ const Community = () => {
   return (
     <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
       <div className="px-4 pt-4 pb-20">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl font-bold mb-6"
+        >
+          Welcome, {username}
+        </motion.h1>
+
         <SwipeableSummary />
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mb-8 -mx-4"
+        >
+          <h2 className="text-lg font-semibold mb-4 px-4 roboto-medium">Discover</h2>
+          <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
+            {challenges.map((challenge) => (
+              <ChallengeCard key={challenge.id} challenge={challenge} />
+            ))}
+          </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -76,20 +102,6 @@ const Community = () => {
             <CreateGroupCard />
             {sortedGroups.map((group) => (
               <CommunityGroupCard key={group.id} group={{ ...group, isJoined: true }} />
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mb-8 -mx-4"
-        >
-          <h2 className="text-lg font-semibold mb-4 px-4 roboto-medium">Discover</h2>
-          <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
-            {challenges.map((challenge) => (
-              <ChallengeCard key={challenge.id} challenge={challenge} />
             ))}
           </div>
         </motion.div>
