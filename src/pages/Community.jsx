@@ -96,7 +96,7 @@ const Community = () => {
             <h2 className="text-base font-semibold roboto-medium">My Groups</h2>
             <Button
               onClick={() => setIsCreateGroupModalOpen(true)}
-              className="p-1 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
+              className="bg-transparent hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
             >
               <Plus className="h-5 w-5 text-gray-600 dark:text-gray-400" />
             </Button>
