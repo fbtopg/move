@@ -73,8 +73,6 @@ const Community = () => {
           Welcome, {username}
         </motion.h1>
 
-        <SwipeableSummary />
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -90,6 +88,15 @@ const Community = () => {
               <CommunityGroupCard key={group.id} group={{ ...group, isJoined: true }} />
             ))}
           </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mb-8"
+        >
+          <SwipeableSummary />
         </motion.div>
 
         <motion.div
