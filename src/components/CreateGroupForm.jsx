@@ -19,18 +19,18 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col flex-grow">
-      <div className="flex-grow relative">
+      <div className="flex-grow relative mt-8 w-full">
         <input
           type="text"
           id="groupName"
           value={groupName}
           onChange={(e) => setGroupName(e.target.value)}
-          placeholder="Enter group name"
-          className="w-full p-4 text-lg border-2 border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-purple-300 transition-colors pt-7"
+          className="block w-full px-4 pb-2 pt-6 text-lg bg-transparent border-2 border-purple-400 rounded-md outline-none focus:border-purple-600 peer"
+          placeholder=" "
         />
         <label
           htmlFor="groupName"
-          className="absolute text-sm text-gray-500 top-2 left-4"
+          className="absolute left-4 top-1 -translate-y-1/2 bg-white px-1 text-sm text-purple-600 transition-all"
         >
           Group name
         </label>
