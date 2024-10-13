@@ -95,7 +95,7 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
                 >
                   <ArrowLeft className="h-6 w-6" />
                 </button>
-                <h2 className="text-xl font-semibold ml-4">Create a new group</h2>
+                <h2 className="text-xl font-semibold flex-grow text-center mr-6">Create a new group</h2>
               </div>
               <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
             </div>
