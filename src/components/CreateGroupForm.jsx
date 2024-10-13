@@ -25,17 +25,18 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col flex-grow">
+    <form onSubmit={handleSubmit} className="flex flex-col flex-grow" autoComplete="off">
       <div className="flex-grow relative mt-4 w-full">
         <input
           ref={inputRef}
           type="text"
           id="groupName"
+          name="group_name"
           value={groupName}
           onChange={(e) => setGroupName(e.target.value)}
           className="block w-full px-4 pb-1 pt-5 text-lg bg-transparent border-2 border-blue-400 rounded-md outline-none focus:border-blue-600 peer"
           placeholder=" "
-          autoComplete="new-group-name"
+          autoComplete="off"
           autoCorrect="off"
           spellCheck="false"
           autoCapitalize="off"
