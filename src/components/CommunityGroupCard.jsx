@@ -5,11 +5,7 @@ import { Crown, Users } from 'lucide-react';
 
 const CommunityGroupCard = ({ group }) => {
   const navigate = useNavigate();
-  const truncateName = (name) => (name && name.length > 25 ? name.slice(0, 25) + '...' : name || 'Unnamed Group');
-  const truncateDescription = (desc) => {
-    const defaultDesc = 'No description available';
-    return desc ? (desc.length > 40 ? desc.slice(0, 40) + '...' : desc) : defaultDesc;
-  };
+  const truncateName = (name) => (name && name.length > 15 ? name.slice(0, 15) + '...' : name || 'Unnamed Group');
 
   const handleClick = () => {
     navigate(`/group/${group.id}`, { state: { group } });
@@ -25,37 +21,25 @@ const CommunityGroupCard = ({ group }) => {
 
   return (
     <motion.div
-      className="w-[250px] h-56 flex-shrink-0 rounded-xl overflow-hidden relative bg-white cursor-pointer"
-      whileHover={{ scale: 1.03 }}
+      className="w-24 h-24 flex-shrink-0 relative cursor-pointer"
+      whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleClick}
     >
-      <div className="h-[55%] relative">
-        <img src={group.image || 'https://via.placeholder.com/250x140'} alt={group.name || 'Group'} className="w-full h-full object-cover" />
-        {group.isOwner && (
-          <div className="absolute top-2 right-2 bg-yellow-400 rounded-full p-1">
-            <Crown className="w-4 h-4 text-white" />
-          </div>
-        )}
+      <div className="w-full h-full rounded-full overflow-hidden bg-gray-200">
+        <img 
+          src={group.image || 'https://via.placeholder.com/100'} 
+          alt={group.name || 'Group'} 
+          className="w-full h-full object-cover"
+        />
       </div>
-      <div className="p-3 flex flex-col h-[45%] justify-between border-t border-gray-200">
-        <div>
-          <h3 className="font-semibold text-base text-gray-800 truncate mb-1">{truncateName(group.name)}</h3>
-          <p className="text-xs text-gray-600 truncate">{truncateDescription(group.description)}</p>
+      {group.isOwner && (
+        <div className="absolute top-0 right-0 bg-yellow-400 rounded-full p-1">
+          <Crown className="w-3 h-3 text-white" />
         </div>
-        <div className="flex items-center justify-between mt-2">
-          <div className="flex items-center">
-            <Users className="w-4 h-4 text-gray-400 mr-1" />
-            {renderMemberCount()}
-          </div>
-          <div className="text-xs font-medium">
-            {group.isOwner ? (
-              <span className="text-yellow-600">Owner</span>
-            ) : group.isJoined ? (
-              <span className="text-green-600">Member</span>
-            ) : null}
-          </div>
-        </div>
+      )}
+      <div className="absolute bottom-0 left-0 right-0 text-center bg-black bg-opacity-50 py-1">
+        <h3 className="text-xs font-semibold text-white truncate px-1">{truncateName(group.name)}</h3>
       </div>
     </motion.div>
   );
