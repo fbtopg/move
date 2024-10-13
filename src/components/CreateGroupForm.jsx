@@ -31,7 +31,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           ref={inputRef}
           type="text"
           id="groupName"
-          name="group_name"
+          name="groupName_ab12cX"
           value={groupName}
           onChange={(e) => setGroupName(e.target.value)}
           className="block w-full px-4 pb-1 pt-5 text-lg bg-transparent border-2 border-blue-400 rounded-md outline-none focus:border-blue-600 peer"
