@@ -79,9 +79,6 @@ const Community = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mb-8 -mx-4"
         >
-          <div className="flex justify-between items-center px-4 mb-4">
-            <h2 className="text-lg font-semibold roboto-medium">Discover</h2>
-          </div>
           <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
             {challenges.map((challenge) => (
               <ChallengeCard key={challenge.id} challenge={challenge} />
@@ -105,7 +102,7 @@ const Community = () => {
           className="mb-8 -mx-4"
         >
           <div className="flex justify-between items-center px-4 mb-4">
-            <h2 className="text-lg font-semibold roboto-medium">My Groups</h2>
+            <h2 className="text-base font-semibold roboto-medium">My Groups</h2>
           </div>
           <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
             <CreateGroupCard />
