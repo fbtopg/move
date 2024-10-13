@@ -30,14 +30,14 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
         />
         <label
           htmlFor="groupName"
-          className="absolute left-4 top-1 -translate-y-1/2 bg-white px-1 text-sm text-gray-500 transition-all"
+          className="absolute left-4 top-1 -translate-y-1/2 bg-white px-1 text-sm text-gray-500 transition-all leading-none"
         >
           Group name
         </label>
       </div>
       <Button
         type="submit"
-        className="w-full mt-8 bg-black text-white dark:bg-white dark:text-black py-5 rounded-full text-xl font-normal hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+        className="w-full mt-8 bg-black text-white dark:bg-white dark:text-black py-6 rounded-full text-xl font-light hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
       >
         Create
       </Button>
