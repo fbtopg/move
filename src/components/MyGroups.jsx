@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, Plus } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -20,43 +20,21 @@ const MyGroups = () => {
 
   const sortedGroups = groups || [];
 
-  const handleCreateGroup = () => {
-    // TODO: Implement group creation logic
-    console.log("Create new group");
-  };
-
-  const CreateGroupCard = () => (
-    <motion.div
-      className="flex-shrink-0 w-52 h-52 flex items-center justify-center bg-gray-100 rounded-lg cursor-pointer"
-      whileHover={{ scale: 1.05 }}
-      onClick={handleCreateGroup}
-    >
-      <Plus className="w-12 h-12 text-gray-400" />
-    </motion.div>
-  );
-
   return (
     <div className="mb-6">
       <div className="overflow-x-auto scrollbar-hide -mx-4">
-        <div className="flex flex-row space-x-2 px-4" style={{ width: `${(sortedGroups.length + 2) * 220}px` }}>
-          {sortedGroups.length === 0 ? (
-            <CreateGroupCard />
-          ) : (
-            <>
-              {sortedGroups.map((group, index) => (
-                <motion.div
-                  key={group.id}
-                  className="flex-shrink-0 w-52 h-52"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                >
-                  <GroupCard group={group} />
-                </motion.div>
-              ))}
-              <CreateGroupCard />
-            </>
-          )}
+        <div className="flex flex-row space-x-2 px-4" style={{ width: `${(sortedGroups.length + 1) * 220}px` }}>
+          {sortedGroups.map((group, index) => (
+            <motion.div
+              key={group.id}
+              className="flex-shrink-0 w-52 h-52"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+            >
+              <GroupCard group={group} />
+            </motion.div>
+          ))}
           <motion.div
             className="flex-shrink-0 w-52 h-52 flex flex-col items-center justify-center"
             initial={{ opacity: 0, y: 20 }}
