@@ -2,11 +2,13 @@ import React from 'react';
 import { Check, Sparkles } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
-const ChallengeCard = ({ challenge }) => {
+const ChallengeCard = ({ challenge = {} }) => {
+  const { title = 'Challenge', step_one = '', step_two = '', step_three = '' } = challenge;
+
   const steps = [
-    { text: challenge.step_one, completed: true },
-    { text: challenge.step_two, completed: true },
-    { text: challenge.step_three, completed: false },
+    { text: step_one, completed: true },
+    { text: step_two, completed: true },
+    { text: step_three, completed: false },
   ];
 
   return (
@@ -14,7 +16,7 @@ const ChallengeCard = ({ challenge }) => {
       <div className="flex justify-end mb-4">
         <Sparkles className="text-black" size={24} />
       </div>
-      <h3 className="text-2xl font-bold text-black mb-6">{challenge.title}</h3>
+      <h3 className="text-2xl font-bold text-black mb-6">{title}</h3>
       <div className="space-y-4 mb-6">
         {steps.map((step, index) => (
           <div key={index} className="flex items-center">
