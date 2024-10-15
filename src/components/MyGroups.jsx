@@ -19,7 +19,7 @@ const MyGroups = ({ onCreateGroup }) => {
 
   const CreateNewGroupCard = () => (
     <motion.div
-      className="flex-shrink-0 w-52 h-52 bg-white rounded-lg shadow-md flex items-center justify-center cursor-pointer"
+      className="flex-shrink-0 w-52 h-52 bg-white rounded-lg flex items-center justify-center cursor-pointer"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={onCreateGroup}
