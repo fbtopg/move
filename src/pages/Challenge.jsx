@@ -4,7 +4,7 @@ import CommunityHeader from '../components/CommunityHeader';
 import BottomNavBar from '../components/BottomNavBar';
 import ChallengeCard from '../components/ChallengeCard';
 
-const Board = () => {
+const Challenge = () => {
   const sampleChallenge = {
     title: "30-Day Fitness Challenge",
     step_one: "Complete 20 push-ups",
@@ -15,7 +15,7 @@ const Board = () => {
   return (
     <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
       <CommunityHeader />
-      <div className="flex-grow overflow-y-auto">
+      <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-4">
           <motion.h2 
             className="text-2xl font-bold mb-8"
@@ -40,4 +40,4 @@ const Board = () => {
   );
 };
 
-export default Board;
+export default Challenge;
