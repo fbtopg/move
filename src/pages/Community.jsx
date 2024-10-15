@@ -18,13 +18,34 @@ const Community = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const { session } = useSupabaseAuth();
-  const [username, setUsername] = useState("User");
+  const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
-    if (session && session.user) {
-      const { user_metadata } = session.user;
-      setUsername(user_metadata.full_name || user_metadata.name || "User");
-    }
+    const updateGreeting = () => {
+      const currentHour = new Date().getHours();
+      let timeGreeting;
+      if (currentHour < 12) {
+        timeGreeting = "Good Morning";
+      } else if (currentHour < 18) {
+        timeGreeting = "Good Afternoon";
+      } else {
+        timeGreeting = "Good Evening";
+      }
+
+      if (session && session.user) {
+        const { user_metadata } = session.user;
+        const displayName = user_metadata.full_name || user_metadata.name || "User";
+        setGreeting(`Welcome, ${displayName}`);
+      } else {
+        setGreeting(timeGreeting);
+      }
+    };
+
+    updateGreeting();
+    // Update greeting every minute in case the time changes
+    const intervalId = setInterval(updateGreeting, 60000);
+
+    return () => clearInterval(intervalId);
   }, [session]);
 
   const handleUserClick = (user) => {
@@ -61,7 +82,7 @@ const Community = () => {
           transition={{ duration: 0.5 }}
           className="text-2xl font-bold mb-6 spectral-semibold-italic"
         >
-          Welcome, {username}
+          {greeting}
         </motion.h1>
 
         <motion.div
