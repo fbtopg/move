@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight } from 'lucide-react';
+import { Plus, ChevronRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import GroupCard from './GroupCard';
 
-const MyGroups = () => {
+const MyGroups = ({ onCreateGroup }) => {
   const navigate = useNavigate();
 
   const { data: groups, isLoading, error } = useQuery({
@@ -20,26 +20,44 @@ const MyGroups = () => {
 
   const sortedGroups = groups || [];
 
+  const CreateNewGroupCard = () => (
+    <motion.div
+      className="flex-shrink-0 w-52 h-52 bg-[#1a1a1d] rounded-lg shadow-md flex items-center justify-center cursor-pointer"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={onCreateGroup}
+    >
+      <Plus className="w-12 h-12 text-white" />
+    </motion.div>
+  );
+
   return (
     <div className="mb-6">
       <div className="overflow-x-auto scrollbar-hide -mx-4">
-        <div className="flex flex-row space-x-2 px-4" style={{ width: `${(sortedGroups.length + 1) * 220}px` }}>
-          {sortedGroups.map((group, index) => (
-            <motion.div
-              key={group.id}
-              className="flex-shrink-0 w-52 h-52"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-            >
-              <GroupCard group={group} />
-            </motion.div>
-          ))}
+        <div className="flex flex-row space-x-2 px-4" style={{ width: `${(sortedGroups.length + 2) * 220}px` }}>
+          {sortedGroups.length === 0 ? (
+            <CreateNewGroupCard />
+          ) : (
+            <>
+              {sortedGroups.map((group, index) => (
+                <motion.div
+                  key={group.id}
+                  className="flex-shrink-0 w-52 h-52"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
+                  <GroupCard group={group} />
+                </motion.div>
+              ))}
+              <CreateNewGroupCard />
+            </>
+          )}
           <motion.div
             className="flex-shrink-0 w-52 h-52 flex flex-col items-center justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: sortedGroups.length * 0.1 }}
+            transition={{ duration: 0.3, delay: (sortedGroups.length + 1) * 0.1 }}
           >
             <Button
               onClick={() => navigate('/my-groups')}

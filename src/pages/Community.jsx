@@ -9,6 +9,7 @@ import { renderActivitySection, fetchPrivateGroups } from "../utils/communityUti
 import { activities } from "../utils/communityData";
 import { useQuery } from "@tanstack/react-query";
 import ProfileButton from "../components/ProfileButton";
+import MyGroups from "../components/MyGroups";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -31,6 +32,10 @@ const Community = () => {
       followers: Math.floor(Math.random() * 1000),
       following: Math.floor(Math.random() * 1000),
     });
+  };
+
+  const handleCreateGroup = () => {
+    setIsCreateGroupModalOpen(true);
   };
 
   // Sort groups by created_at in descending order (newest first)
@@ -59,12 +64,8 @@ const Community = () => {
         >
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-base font-semibold roboto-medium">My Groups</h2>
-            <Plus
-              className="h-5 w-5 text-gray-600 dark:text-gray-400 cursor-pointer"
-              onClick={() => setIsCreateGroupModalOpen(true)}
-            />
           </div>
-          <SwipeableGroupGrid groups={sortedGroups} />
+          <MyGroups onCreateGroup={handleCreateGroup} />
         </motion.div>
 
         {renderActivitySection("Recent Activity", activities.today, handleUserClick)}
