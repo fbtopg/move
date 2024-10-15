@@ -25,11 +25,22 @@ export const SupabaseAuthProviderInner = ({ children }) => {
       const { data: { session } } = await supabase.auth.getSession();
       setSession(session);
       setLoading(false);
+      if (session) {
+        // Store user information in local storage
+        localStorage.setItem('user', JSON.stringify(session.user));
+      }
     };
 
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       setSession(session);
       queryClient.invalidateQueries('user');
+      if (event === 'SIGNED_IN') {
+        // Store user information in local storage on sign in
+        localStorage.setItem('user', JSON.stringify(session.user));
+      } else if (event === 'SIGNED_OUT') {
+        // Remove user information from local storage on sign out
+        localStorage.removeItem('user');
+      }
     });
 
     getSession();
@@ -45,6 +56,8 @@ export const SupabaseAuthProviderInner = ({ children }) => {
     setSession(null);
     queryClient.invalidateQueries('user');
     setLoading(false);
+    // Remove user information from local storage on logout
+    localStorage.removeItem('user');
   };
 
   const loginWithGoogle = async () => {
