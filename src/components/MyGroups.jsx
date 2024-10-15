@@ -38,11 +38,11 @@ const MyGroups = () => {
   return (
     <div className="mb-6">
       <div className="overflow-x-auto scrollbar-hide -mx-4">
-        <div className="flex flex-row space-x-4 px-4" style={{ width: `${(sortedGroups.length + 1) * 196}px` }}>
+        <div className="flex flex-row space-x-2 px-4" style={{ width: `${(sortedGroups.length + 1) * 204}px` }}>
           {sortedGroups.map((group, index) => (
             <motion.div
               key={group.id}
-              className="flex-shrink-0 w-44 h-44"
+              className="flex-shrink-0 w-48 h-48"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -51,7 +51,7 @@ const MyGroups = () => {
             </motion.div>
           ))}
           <motion.div
-            className="flex-shrink-0 w-44 flex flex-col items-center justify-center"
+            className="flex-shrink-0 w-48 flex flex-col items-center justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: sortedGroups.length * 0.1 }}
