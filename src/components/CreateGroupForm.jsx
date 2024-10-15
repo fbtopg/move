@@ -3,11 +3,13 @@ import { Button } from "@/components/ui/button";
 import { insertNewGroup } from '../utils/supabaseGroupUtils';
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   const [groupName, setGroupName] = useState('');
   const inputRef = useRef(null);
   const { session } = useSupabaseAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (inputRef.current) {
@@ -30,6 +32,8 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           handleCreateGroup(newGroup);
           setGroupName('');
           onClose();
+          // Navigate to the newly created group's detail page
+          navigate(`/group/${newGroup.id}`);
         }
       } catch (error) {
         console.error('Error creating group:', error);
