@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
+import { insertNewGroup } from '../utils/supabaseGroupUtils';
+import { useSupabaseAuth } from '../integrations/supabase/auth';
+import { toast } from 'sonner';
 
 const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
   const [groupName, setGroupName] = useState('');
   const inputRef = useRef(null);
+  const { session } = useSupabaseAuth();
 
   useEffect(() => {
     if (inputRef.current) {
@@ -15,11 +19,21 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
     e.preventDefault();
     if (groupName.trim()) {
       try {
-        await handleCreateGroup(groupName);
-        setGroupName('');
-        onClose();
+        const userId = session?.user?.id;
+        if (!userId) {
+          toast.error('You must be logged in to create a group');
+          return;
+        }
+        const newGroup = await insertNewGroup(groupName, userId);
+        if (newGroup) {
+          toast.success('Group created successfully');
+          handleCreateGroup(newGroup);
+          setGroupName('');
+          onClose();
+        }
       } catch (error) {
         console.error('Error creating group:', error);
+        toast.error('Failed to create group. Please try again.');
       }
     }
   };

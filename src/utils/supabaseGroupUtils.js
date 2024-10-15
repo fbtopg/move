@@ -39,11 +39,12 @@ export const insertNewGroup = async (groupName, userId) => {
       .insert([
         {
           name: groupName,
-          description: null,
+          description: '',
           image: null,
           is_private: true,
           created_at: new Date().toISOString(),
-          created_by: userId
+          created_by: userId,
+          member_count: 1
         }
       ])
       .select();
