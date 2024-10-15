@@ -32,6 +32,30 @@ export const fetchGroupDetails = async (groupId) => {
   }
 };
 
+const updateUserGroups = async (userId, groupId) => {
+  try {
+    const { data, error } = await supabase
+      .from('users')
+      .select('groups')
+      .eq('id', userId)
+      .single();
+
+    if (error) throw error;
+
+    const updatedGroups = [...(data.groups || []), groupId];
+
+    const { error: updateError } = await supabase
+      .from('users')
+      .update({ groups: updatedGroups })
+      .eq('id', userId);
+
+    if (updateError) throw updateError;
+  } catch (error) {
+    console.error('Error updating user groups:', error);
+    throw error;
+  }
+};
+
 export const insertNewGroup = async (groupName, userId) => {
   try {
     const { data, error } = await supabase
@@ -51,6 +75,10 @@ export const insertNewGroup = async (groupName, userId) => {
       .select();
 
     if (error) throw error;
+
+    // Update the user's groups
+    await updateUserGroups(userId, data[0].id);
+
     return data[0];
   } catch (error) {
     console.error('Error inserting new group:', error);
@@ -88,6 +116,10 @@ export const joinGroup = async (groupId, userId) => {
       .select();
 
     if (error) throw error;
+
+    // Update the user's groups
+    await updateUserGroups(userId, groupId);
+
     return data[0];
   } catch (error) {
     console.error('Error joining group:', error);
