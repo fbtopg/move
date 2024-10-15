@@ -2,8 +2,8 @@ import React from 'react';
 import { Check, Sparkles } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
-const ChallengeCard = ({ challenge = {} }) => {
-  const { title = 'Challenge', step_one = '', step_two = '', step_three = '' } = challenge;
+const ChallengeCard = ({ challenge }) => {
+  const { title, step_one, step_two, step_three } = challenge;
 
   const steps = [
     { text: step_one, completed: true },

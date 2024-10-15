@@ -1,16 +1,25 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '../integrations/supabase/supabase';
 import CommunityHeader from '../components/CommunityHeader';
 import BottomNavBar from '../components/BottomNavBar';
 import ChallengeCard from '../components/ChallengeCard';
 
-const Board = () => {
-  const sampleChallenge = {
-    title: "30-Day Fitness Challenge",
-    step_one: "Complete 20 push-ups",
-    step_two: "Run for 15 minutes",
-    step_three: "Do 30 squats"
-  };
+const fetchChallenges = async () => {
+  const { data, error } = await supabase
+    .from('challenges')
+    .select('*')
+    .limit(1);
+  if (error) throw error;
+  return data;
+};
+
+const Challenge = () => {
+  const { data: challenges, isLoading, error } = useQuery({
+    queryKey: ['challenges'],
+    queryFn: fetchChallenges,
+  });
 
   return (
     <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
@@ -26,13 +35,21 @@ const Board = () => {
             Challenges
           </motion.h2>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <ChallengeCard challenge={sampleChallenge} />
-          </motion.div>
+          {isLoading ? (
+            <p>Loading challenges...</p>
+          ) : error ? (
+            <p>Error loading challenges: {error.message}</p>
+          ) : challenges && challenges.length > 0 ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <ChallengeCard challenge={challenges[0]} />
+            </motion.div>
+          ) : (
+            <p>No challenges available.</p>
+          )}
         </div>
       </div>
       <BottomNavBar activeTab="challenge" />
@@ -40,4 +57,4 @@ const Board = () => {
   );
 };
 
-export default Board;
+export default Challenge;
