@@ -40,6 +40,10 @@ const Community = () => {
     }
   };
 
+  const handleLoginRequired = () => {
+    setShowLoginPopup(true);
+  };
+
   return (
     <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
       <div className="px-4 pt-4 pb-20">
@@ -61,7 +65,7 @@ const Community = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mb-8"
         >
-          <MyGroups onCreateGroup={handleCreateGroup} />
+          <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
         </motion.div>
 
         {renderActivitySection("Recent Activity", activities.today, handleUserClick)}
@@ -91,6 +95,7 @@ const Community = () => {
       <CreateGroupModal
         isOpen={isCreateGroupModalOpen}
         onClose={() => setIsCreateGroupModalOpen(false)}
+        onLoginRequired={handleLoginRequired}
       />
 
       <LoginPopup

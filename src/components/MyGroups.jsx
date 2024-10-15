@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
@@ -7,12 +7,10 @@ import GroupCard from './GroupCard';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { useSupabaseAuth } from '../integrations/supabase/auth';
-import LoginPopup from './LoginPopup';
 
-const MyGroups = ({ onCreateGroup }) => {
+const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
   const navigate = useNavigate();
   const { session } = useSupabaseAuth();
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
   const { data: groups, isLoading, error } = useQuery({
     queryKey: ['privateGroups'],
     queryFn: fetchPrivateGroups,
@@ -31,7 +29,7 @@ const MyGroups = ({ onCreateGroup }) => {
     if (session) {
       onCreateGroup();
     } else {
-      setShowLoginPopup(true);
+      onLoginRequired();
     }
   };
 
@@ -84,7 +82,6 @@ const MyGroups = ({ onCreateGroup }) => {
           )}
         </div>
       </div>
-      <LoginPopup isOpen={showLoginPopup} onClose={() => setShowLoginPopup(false)} />
     </div>
   );
 };
