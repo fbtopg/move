@@ -4,6 +4,7 @@ import { Plus } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import GroupCard from './GroupCard';
+import { Button } from "@/components/ui/button";
 
 const MyGroups = ({ onCreateGroup }) => {
   const { data: groups, isLoading, error } = useQuery({
@@ -29,6 +30,19 @@ const MyGroups = ({ onCreateGroup }) => {
 
   return (
     <div className="mb-6">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-base font-semibold roboto-medium">My Groups</h2>
+        {sortedGroups.length > 0 && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onCreateGroup}
+            className="p-0"
+          >
+            <Plus className="h-5 w-5" />
+          </Button>
+        )}
+      </div>
       <div className="overflow-x-auto scrollbar-hide -mx-4">
         <div className="flex flex-row space-x-2 px-4" style={{ width: `${(sortedGroups.length + 1) * 220}px` }}>
           {sortedGroups.length === 0 ? (
