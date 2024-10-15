@@ -9,11 +9,15 @@ import { activities } from "../utils/communityData";
 import { useQuery } from "@tanstack/react-query";
 import ProfileButton from "../components/ProfileButton";
 import MyGroups from "../components/MyGroups";
+import { useSupabaseAuth } from '../integrations/supabase/auth';
+import LoginPopup from '../components/LoginPopup';
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const { session } = useSupabaseAuth();
 
   // TODO: Replace this with actual user data fetching
   const username = "John"; // Placeholder username
@@ -29,7 +33,11 @@ const Community = () => {
   };
 
   const handleCreateGroup = () => {
-    setIsCreateGroupModalOpen(true);
+    if (session) {
+      setIsCreateGroupModalOpen(true);
+    } else {
+      setShowLoginPopup(true);
+    }
   };
 
   return (
@@ -83,6 +91,11 @@ const Community = () => {
       <CreateGroupModal
         isOpen={isCreateGroupModalOpen}
         onClose={() => setIsCreateGroupModalOpen(false)}
+      />
+
+      <LoginPopup
+        isOpen={showLoginPopup}
+        onClose={() => setShowLoginPopup(false)}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
@@ -6,9 +6,13 @@ import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import GroupCard from './GroupCard';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
+import { useSupabaseAuth } from '../integrations/supabase/auth';
+import LoginPopup from './LoginPopup';
 
 const MyGroups = ({ onCreateGroup }) => {
   const navigate = useNavigate();
+  const { session } = useSupabaseAuth();
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
   const { data: groups, isLoading, error } = useQuery({
     queryKey: ['privateGroups'],
     queryFn: fetchPrivateGroups,
@@ -23,12 +27,20 @@ const MyGroups = ({ onCreateGroup }) => {
     navigate(`/group/${groupId}`);
   };
 
+  const handleCreateGroupClick = () => {
+    if (session) {
+      onCreateGroup();
+    } else {
+      setShowLoginPopup(true);
+    }
+  };
+
   const CreateNewGroupCard = () => (
     <motion.div
       className="flex-shrink-0 w-52 h-52 bg-white rounded-lg flex items-center justify-center cursor-pointer"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      onClick={onCreateGroup}
+      onClick={handleCreateGroupClick}
     >
       <Plus className="w-12 h-12 text-gray-400" />
     </motion.div>
@@ -42,7 +54,7 @@ const MyGroups = ({ onCreateGroup }) => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={onCreateGroup}
+            onClick={handleCreateGroupClick}
             className="p-0"
           >
             <Plus className="h-5 w-5" />
@@ -72,6 +84,7 @@ const MyGroups = ({ onCreateGroup }) => {
           )}
         </div>
       </div>
+      <LoginPopup isOpen={showLoginPopup} onClose={() => setShowLoginPopup(false)} />
     </div>
   );
 };
