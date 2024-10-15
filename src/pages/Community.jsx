@@ -66,23 +66,25 @@ const Community = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mb-8 -mx-4"
+          className="mb-8"
         >
-          <div className="flex justify-between items-center px-4 mb-4">
+          <div className="flex justify-between items-center mb-4">
             <h2 className="text-base font-semibold roboto-medium">Challenges</h2>
           </div>
-          <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
-            {challenges.map((challenge, index) => (
-              <motion.div
-                key={challenge.id}
-                className="flex-shrink-0"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <ChallengeCard challenge={challenge} />
-              </motion.div>
-            ))}
+          <div className="w-full overflow-x-auto scrollbar-hide">
+            <div className="flex space-x-4 px-4">
+              {challenges.map((challenge, index) => (
+                <motion.div
+                  key={challenge.id}
+                  className="flex-shrink-0"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <ChallengeCard challenge={challenge} />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
