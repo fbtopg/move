@@ -15,19 +15,14 @@ const ChallengeCard = ({ challenge }) => {
       <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">{title}</h3>
       <p className="text-sm text-gray-600 mb-8 text-center max-w-xs leading-relaxed">{description}</p>
       
-      <div className="flex justify-between items-center mb-8 w-full relative">
+      <div className="flex justify-between items-start mb-8 w-full">
         {steps.map((step, index) => (
-          <React.Fragment key={index}>
-            <div className="flex flex-col items-center flex-1 z-10">
-              <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center text-lg font-bold mb-3">
-                {index + 1}
-              </div>
-              <p className="text-xs text-center mt-2 w-full">{step}</p>
+          <div key={index} className="flex flex-col items-center flex-1 px-2">
+            <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center text-lg font-bold mb-3">
+              {index + 1}
             </div>
-            {index < steps.length - 1 && (
-              <div className="flex-grow h-0.5 bg-gray-300 absolute top-6 -z-10" style={{left: `${(100 / (steps.length - 1)) * index + 8}%`, right: `${(100 / (steps.length - 1)) * (steps.length - index - 1) + 8}%`}} />
-            )}
-          </React.Fragment>
+            <p className="text-xs text-center mt-2 w-full">{step}</p>
+          </div>
         ))}
       </div>
 
