@@ -40,11 +40,6 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
     enabled: !!userId,
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading groups</div>;
-
-  const sortedGroups = groups || [];
-
   const handleGroupClick = (groupId) => {
     navigate(`/group/${groupId}`);
   };
@@ -69,11 +64,22 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
     </motion.div>
   );
 
+  const SkeletonCard = () => (
+    <div className="flex-shrink-0 w-52 h-52 bg-gray-200 rounded-lg animate-pulse">
+      <div className="h-32 bg-gray-300 rounded-t-lg"></div>
+      <div className="p-4">
+        <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
+        <div className="h-3 bg-gray-300 rounded w-1/2 mb-3"></div>
+        <div className="h-8 bg-gray-300 rounded"></div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="mb-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-base font-semibold roboto-medium">My Groups</h2>
-        {sortedGroups.length > 0 && (
+        {!isLoading && groups && groups.length > 0 && (
           <Button
             variant="ghost"
             size="icon"
@@ -85,12 +91,15 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
         )}
       </div>
       <div className="overflow-x-auto scrollbar-hide -mx-4">
-        <div className="flex flex-row space-x-2 px-4" style={{ width: `${(sortedGroups.length + 1) * 220}px` }}>
-          {sortedGroups.length === 0 ? (
-            <CreateNewGroupCard />
-          ) : (
+        <div className="flex flex-row space-x-2 px-4" style={{ width: isLoading ? '440px' : `${((groups?.length || 0) + 1) * 220}px` }}>
+          {isLoading ? (
             <>
-              {sortedGroups.map((group, index) => (
+              <SkeletonCard />
+              <SkeletonCard />
+            </>
+          ) : groups && groups.length > 0 ? (
+            <>
+              {groups.map((group, index) => (
                 <motion.div
                   key={group.id}
                   className="flex-shrink-0 w-52 h-52"
@@ -104,6 +113,8 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
               ))}
               <CreateNewGroupCard />
             </>
+          ) : (
+            <CreateNewGroupCard />
           )}
         </div>
       </div>
