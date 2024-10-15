@@ -12,13 +12,13 @@ const CommunityGroupCard = ({ group }) => {
 
   return (
     <motion.div
-      className="relative w-40 h-40 rounded-lg overflow-hidden cursor-pointer"
+      className="relative w-48 h-48 rounded-lg overflow-hidden cursor-pointer" // Increased from w-40 h-40 to w-48 h-48
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={handleClick}
     >
       <img 
-        src={group.image || 'https://via.placeholder.com/160'} 
+        src={group.image || 'https://via.placeholder.com/192'} // Increased from 160 to 192
         alt={group.name || 'Group'} 
         className="w-full h-full object-cover"
       />
