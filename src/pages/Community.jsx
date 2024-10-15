@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, ChevronLeft, ChevronRight } from "lucide-react";
+import { Plus } from "lucide-react";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
-import ChallengeCard from "../components/ChallengeCard";
 import CommunityGroupCard from "../components/CommunityGroupCard";
 import { renderActivitySection, fetchPrivateGroups } from "../utils/communityUtils.jsx";
 import { activities } from "../utils/communityData";
@@ -15,23 +14,9 @@ const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
-  const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
 
   // TODO: Replace this with actual user data fetching
   const username = "John"; // Placeholder username
-
-  const { data: challenges = [] } = useQuery({
-    queryKey: ['challenges'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('challenges')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(10);
-      if (error) throw error;
-      return data;
-    },
-  });
 
   const { data: myGroups = [] } = useQuery({
     queryKey: ['privateGroups'],
@@ -51,18 +36,6 @@ const Community = () => {
   // Sort groups by created_at in descending order (newest first)
   const sortedGroups = [...myGroups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-  const nextChallenge = () => {
-    setCurrentChallengeIndex((prevIndex) => 
-      prevIndex === challenges.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const prevChallenge = () => {
-    setCurrentChallengeIndex((prevIndex) => 
-      prevIndex === 0 ? challenges.length - 1 : prevIndex - 1
-    );
-  };
-
   return (
     <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
       <div className="px-4 pt-4 pb-20">
@@ -74,41 +47,6 @@ const Community = () => {
         >
           Welcome, {username}
         </motion.h1>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mb-8"
-        >
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-base font-semibold roboto-medium">Challenges</h2>
-            <div className="flex space-x-2">
-              <button onClick={prevChallenge} className="p-1 rounded-full bg-gray-200 dark:bg-gray-700">
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button onClick={nextChallenge} className="p-1 rounded-full bg-gray-200 dark:bg-gray-700">
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-          <div className="w-full overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentChallengeIndex}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.3 }}
-                className="w-full"
-              >
-                {challenges[currentChallengeIndex] && (
-                  <ChallengeCard challenge={challenges[currentChallengeIndex]} />
-                )}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
