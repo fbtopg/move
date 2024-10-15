@@ -1,9 +1,12 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const GroupCard = ({ group }) => {
+const GroupCard = ({ group, currentUserId }) => {
   const truncateName = (name) => name.length > 20 ? name.slice(0, 20) + '...' : name;
   const truncateDescription = (desc) => desc && desc.length > 50 ? desc.slice(0, 50) + '...' : desc;
+
+  const isOwner = group.created_by === currentUserId;
+  const labelText = isOwner ? 'Owner' : 'Member';
 
   return (
     <div 
@@ -31,7 +34,9 @@ const GroupCard = ({ group }) => {
         </p>
         <div className="flex justify-between items-center mt-auto">
           <span className="text-xs text-gray-300">{group.member_count || 0} members</span>
-          <span className="bg-[#3B72EC] text-white px-3 py-1 rounded-full text-xs">View</span>
+          <span className={`${isOwner ? 'bg-green-500' : 'bg-blue-500'} text-white px-3 py-1 rounded-full text-xs`}>
+            {labelText}
+          </span>
         </div>
       </div>
     </div>

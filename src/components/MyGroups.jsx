@@ -109,7 +109,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   onClick={() => handleGroupClick(group.id)}
                 >
-                  <GroupCard group={group} />
+                  <GroupCard group={group} currentUserId={userId} />
                 </motion.div>
               ))}
               <CreateNewGroupCard />
