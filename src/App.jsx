@@ -15,7 +15,7 @@ import Rewards from "./pages/Rewards";
 import Achievements from "./pages/Achievements";
 import Follow from "./pages/Follow";
 import Walk from "./pages/Walk";
-import Challenge from "./pages/Challenge";
+import Board from "./pages/Board";
 import RecentActivity from "./pages/RecentActivity";
 import SplashScreen from "./components/SplashScreen";
 import Settings from "./pages/Settings";
@@ -66,7 +66,7 @@ const App = () => {
                     <Route path="/achievements" element={<Achievements />} />
                     <Route path="/follow" element={<Follow />} />
                     <Route path="/walk" element={<Walk />} />
-                    <Route path="/challenge" element={<Challenge />} />
+                    <Route path="/board" element={<Board />} />
                     <Route path="/recent-activity" element={<RecentActivity />} />
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/notifications" element={<Notifications />} />
