@@ -15,7 +15,6 @@ const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
-  const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
 
   // TODO: Replace this with actual user data fetching
   const username = "John"; // Placeholder username
@@ -51,14 +50,6 @@ const Community = () => {
   // Sort groups by created_at in descending order (newest first)
   const sortedGroups = [...myGroups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-  const handleSwipe = (direction) => {
-    if (direction === 'left' && currentChallengeIndex < challenges.length - 1) {
-      setCurrentChallengeIndex(currentChallengeIndex + 1);
-    } else if (direction === 'right' && currentChallengeIndex > 0) {
-      setCurrentChallengeIndex(currentChallengeIndex - 1);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
       <div className="px-4 pt-4 pb-20">
@@ -77,32 +68,22 @@ const Community = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mb-8 -mx-4"
         >
-          <AnimatePresence initial={false} custom={currentChallengeIndex}>
-            <motion.div
-              key={currentChallengeIndex}
-              custom={currentChallengeIndex}
-              initial={{ opacity: 0, x: 300 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -300 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={1}
-              onDragEnd={(e, { offset, velocity }) => {
-                const swipe = swipePower(offset.x, velocity.x);
-                if (swipe < -swipeConfidenceThreshold) {
-                  handleSwipe('left');
-                } else if (swipe > swipeConfidenceThreshold) {
-                  handleSwipe('right');
-                }
-              }}
-              className="cursor-grab active:cursor-grabbing px-4 w-full"
-            >
-              {challenges[currentChallengeIndex] && (
-                <ChallengeCard challenge={challenges[currentChallengeIndex]} />
-              )}
-            </motion.div>
-          </AnimatePresence>
+          <div className="flex justify-between items-center px-4 mb-4">
+            <h2 className="text-base font-semibold roboto-medium">Challenges</h2>
+          </div>
+          <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
+            {challenges.map((challenge, index) => (
+              <motion.div
+                key={challenge.id}
+                className="flex-shrink-0"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <ChallengeCard challenge={challenge} />
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         <motion.div
@@ -155,11 +136,6 @@ const Community = () => {
       />
     </div>
   );
-};
-
-const swipeConfidenceThreshold = 10000;
-const swipePower = (offset, velocity) => {
-  return Math.abs(offset) * velocity;
 };
 
 export default Community;
