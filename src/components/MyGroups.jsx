@@ -14,7 +14,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
   const userId = session?.user?.id;
 
   const { data: groups, isLoading, error } = useQuery({
-    queryKey: ['privateGroups', userId],
+    queryKey: ['userGroups', userId],
     queryFn: () => fetchPrivateGroups(userId),
     enabled: !!userId,
   });
