@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Plus } from 'lucide-react';
+import { UserPlus } from 'lucide-react'; // Changed from Plus to UserPlus
 import { useQuery } from '@tanstack/react-query';
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import GroupCard from './GroupCard';
@@ -40,7 +40,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
       whileTap={{ scale: 0.95 }}
       onClick={handleCreateGroupClick}
     >
-      <Plus className="w-12 h-12 text-gray-400 mb-2" />
+      <UserPlus className="w-12 h-12 text-gray-400 mb-2" /> {/* Changed from Plus to UserPlus */}
       <p className="text-sm text-gray-600">Create a new group and invite friends</p>
     </motion.div>
   );
@@ -56,7 +56,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
             onClick={handleCreateGroupClick}
             className="p-0"
           >
-            <Plus className="h-5 w-5" />
+            <UserPlus className="h-5 w-5" /> {/* Changed from Plus to UserPlus */}
           </Button>
         )}
       </div>
