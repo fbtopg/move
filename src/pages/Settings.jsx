@@ -6,6 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useTheme } from 'next-themes';
+import { useSupabaseAuth } from '../integrations/supabase/auth';
 
 const SettingItem = ({ icon: Icon, label, children }) => (
   <div className="flex items-center justify-between py-4">
@@ -20,9 +21,15 @@ const SettingItem = ({ icon: Icon, label, children }) => (
 const Settings = () => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
+  const { logout } = useSupabaseAuth();
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login'); // Redirect to login page after logout
   };
 
   return (
@@ -81,7 +88,7 @@ const Settings = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-6"
         >
-          <Button variant="outline" className="w-full">Log Out</Button>
+          <Button variant="outline" className="w-full" onClick={handleLogout}>Log Out</Button>
         </motion.div>
       </div>
     </div>
