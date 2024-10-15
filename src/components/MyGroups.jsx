@@ -2,11 +2,32 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { UserPlus } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
+import { supabase } from '../integrations/supabase/supabase';
 import GroupCard from './GroupCard';
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { useSupabaseAuth } from '../integrations/supabase/auth';
+
+const fetchUserGroups = async (userId) => {
+  const { data, error } = await supabase
+    .from('users')
+    .select('groups')
+    .eq('id', userId)
+    .single();
+
+  if (error) throw error;
+
+  if (!data.groups || data.groups.length === 0) return [];
+
+  const { data: groupsData, error: groupsError } = await supabase
+    .from('groups')
+    .select('*')
+    .in('id', data.groups);
+
+  if (groupsError) throw groupsError;
+
+  return groupsData;
+};
 
 const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
   const navigate = useNavigate();
@@ -15,7 +36,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
 
   const { data: groups, isLoading, error } = useQuery({
     queryKey: ['userGroups', userId],
-    queryFn: () => fetchPrivateGroups(userId),
+    queryFn: () => fetchUserGroups(userId),
     enabled: !!userId,
   });
 
