@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import CommunityGroupCard from './CommunityGroupCard';
 
 const SwipeableGroupGrid = ({ groups }) => {
@@ -8,22 +7,27 @@ const SwipeableGroupGrid = ({ groups }) => {
   const groupsPerPage = 4;
   const pageCount = Math.ceil(groups.length / groupsPerPage);
 
-  const nextPage = () => {
-    setCurrentPage((prev) => (prev + 1) % pageCount);
-  };
-
-  const prevPage = () => {
-    setCurrentPage((prev) => (prev - 1 + pageCount) % pageCount);
+  const handleDragEnd = (event, info) => {
+    if (info.offset.x > 100 && currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    } else if (info.offset.x < -100 && currentPage < pageCount - 1) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   return (
-    <div className="relative">
-      <AnimatePresence mode="wait">
+    <div className="relative overflow-hidden">
+      <AnimatePresence initial={false} custom={currentPage}>
         <motion.div
           key={currentPage}
-          initial={{ opacity: 0, x: 100 }}
+          custom={currentPage}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.5}
+          onDragEnd={handleDragEnd}
+          initial={{ opacity: 0, x: 300 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -100 }}
+          exit={{ opacity: 0, x: -300 }}
           transition={{ duration: 0.3 }}
           className="grid grid-cols-2 gap-4"
         >
@@ -32,22 +36,6 @@ const SwipeableGroupGrid = ({ groups }) => {
           ))}
         </motion.div>
       </AnimatePresence>
-      {pageCount > 1 && (
-        <>
-          <button
-            onClick={prevPage}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <button
-            onClick={nextPage}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-        </>
-      )}
     </div>
   );
 };
