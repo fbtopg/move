@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { UserPlus } from 'lucide-react'; // Changed from Plus to UserPlus
+import { UserPlus } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import GroupCard from './GroupCard';
@@ -11,9 +11,12 @@ import { useSupabaseAuth } from '../integrations/supabase/auth';
 const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
   const navigate = useNavigate();
   const { session } = useSupabaseAuth();
+  const userId = session?.user?.id;
+
   const { data: groups, isLoading, error } = useQuery({
-    queryKey: ['privateGroups'],
-    queryFn: fetchPrivateGroups,
+    queryKey: ['privateGroups', userId],
+    queryFn: () => fetchPrivateGroups(userId),
+    enabled: !!userId,
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -40,7 +43,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
       whileTap={{ scale: 0.95 }}
       onClick={handleCreateGroupClick}
     >
-      <UserPlus className="w-12 h-12 text-gray-400 mb-2" /> {/* Changed from Plus to UserPlus */}
+      <UserPlus className="w-12 h-12 text-gray-400 mb-2" />
       <p className="text-sm text-gray-600">Create a new group and invite friends</p>
     </motion.div>
   );
@@ -56,7 +59,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
             onClick={handleCreateGroupClick}
             className="p-0"
           >
-            <UserPlus className="h-5 w-5" /> {/* Changed from Plus to UserPlus */}
+            <UserPlus className="h-5 w-5" />
           </Button>
         )}
       </div>

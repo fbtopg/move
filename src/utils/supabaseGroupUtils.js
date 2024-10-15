@@ -1,11 +1,11 @@
 import { supabase } from '../integrations/supabase/supabase';
 
-export const fetchPrivateGroups = async () => {
+export const fetchPrivateGroups = async (userId) => {
   try {
     const { data, error } = await supabase
       .from('groups')
       .select('id, name, description, image, member_count, created_at')
-      .eq('is_private', true)
+      .eq('created_by', userId)
       .order('created_at', { ascending: false });
 
     if (error) throw error;
@@ -32,7 +32,7 @@ export const fetchGroupDetails = async (groupId) => {
   }
 };
 
-export const insertNewGroup = async (groupName) => {
+export const insertNewGroup = async (groupName, userId) => {
   try {
     const { data, error } = await supabase
       .from('groups')
@@ -42,7 +42,8 @@ export const insertNewGroup = async (groupName) => {
           description: null,
           image: null,
           is_private: true,
-          created_at: new Date().toISOString()
+          created_at: new Date().toISOString(),
+          created_by: userId
         }
       ])
       .select();
