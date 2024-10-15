@@ -39,17 +39,17 @@ const Community = () => {
   return (
     <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
       <div className="px-4 pt-4 pb-20">
-        <div className="flex justify-between items-center mb-6">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-2xl font-bold spectral-semibold-italic"
-          >
-            Welcome, {username}
-          </motion.h1>
+        <div className="flex justify-end mb-4">
           <ProfileButton />
         </div>
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl font-bold mb-6 spectral-semibold-italic"
+        >
+          Welcome, {username}
+        </motion.h1>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
