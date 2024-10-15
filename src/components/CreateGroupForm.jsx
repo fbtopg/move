@@ -32,7 +32,6 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
           handleCreateGroup(newGroup);
           setGroupName('');
           onClose();
-          // Navigate to the newly created group's detail page
           navigate(`/group/${newGroup.id}`);
         }
       } catch (error) {

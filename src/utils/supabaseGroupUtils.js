@@ -44,7 +44,8 @@ export const insertNewGroup = async (groupName, userId) => {
           is_private: true,
           created_at: new Date().toISOString(),
           created_by: userId,
-          member_count: 1
+          member_count: 1,
+          members: [userId] // Include the creator as the first member
         }
       ])
       .select();
@@ -53,6 +54,43 @@ export const insertNewGroup = async (groupName, userId) => {
     return data[0];
   } catch (error) {
     console.error('Error inserting new group:', error);
+    throw error;
+  }
+};
+
+export const joinGroup = async (groupId, userId) => {
+  try {
+    // First, fetch the current group data
+    const { data: groupData, error: fetchError } = await supabase
+      .from('groups')
+      .select('members, member_count')
+      .eq('id', groupId)
+      .single();
+
+    if (fetchError) throw fetchError;
+
+    // Check if the user is already a member
+    if (groupData.members && groupData.members.includes(userId)) {
+      return { alreadyMember: true };
+    }
+
+    // Update the group with the new member
+    const updatedMembers = [...(groupData.members || []), userId];
+    const updatedMemberCount = (groupData.member_count || 0) + 1;
+
+    const { data, error } = await supabase
+      .from('groups')
+      .update({ 
+        members: updatedMembers,
+        member_count: updatedMemberCount
+      })
+      .eq('id', groupId)
+      .select();
+
+    if (error) throw error;
+    return data[0];
+  } catch (error) {
+    console.error('Error joining group:', error);
     throw error;
   }
 };
