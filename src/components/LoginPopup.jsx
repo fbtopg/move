@@ -10,7 +10,7 @@ const LoginPopup = ({ isOpen, onClose }) => {
       initial={{ y: '100%' }}
       animate={{ y: isOpen ? 0 : '100%' }}
       transition={{ type: 'spring', damping: 25, stiffness: 500 }}
-      className="fixed inset-x-0 bottom-0 bg-white dark:bg-gray-800 rounded-t-3xl shadow-lg z-50 h-3/4" // Changed height to 3/4 of the viewport
+      className="fixed inset-x-0 bottom-0 bg-white dark:bg-gray-800 rounded-t-3xl shadow-lg z-50 h-3/4"
     >
       <div className="p-6 h-full flex flex-col">
         <Button
@@ -23,7 +23,7 @@ const LoginPopup = ({ isOpen, onClose }) => {
         </Button>
         <h2 className="text-2xl font-bold mb-6">Login Required</h2>
         <p className="mb-6">Please log in to access this feature.</p>
-        <div className="flex-grow flex items-center justify-center">
+        <div className="flex-grow flex items-start justify-start">
           <GoogleLoginButton />
         </div>
       </div>
