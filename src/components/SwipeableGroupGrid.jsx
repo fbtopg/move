@@ -3,10 +3,12 @@ import CommunityGroupCard from './CommunityGroupCard';
 
 const SwipeableGroupGrid = ({ groups }) => {
   return (
-    <div className="overflow-x-auto scrollbar-hide">
-      <div className="flex space-x-4" style={{ width: `${groups.length * 200}px` }}>
+    <div className="overflow-x-auto scrollbar-hide -mx-4">
+      <div className="flex px-4" style={{ width: `${groups.length * 200}px` }}>
         {groups.map((group) => (
-          <CommunityGroupCard key={group.id} group={group} />
+          <div key={group.id} className="flex-shrink-0 w-48 mr-4">
+            <CommunityGroupCard group={group} />
+          </div>
         ))}
       </div>
     </div>
