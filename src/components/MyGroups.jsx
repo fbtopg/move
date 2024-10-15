@@ -23,7 +23,7 @@ const MyGroups = () => {
   return (
     <div className="mb-6">
       <div className="overflow-x-auto scrollbar-hide -mx-4">
-        <div className="flex flex-row space-x-4 px-4" style={{ width: `${(sortedGroups.length + 1) * 228}px` }}>
+        <div className="flex flex-row space-x-2 px-4" style={{ width: `${(sortedGroups.length + 1) * 220}px` }}>
           {sortedGroups.map((group, index) => (
             <motion.div
               key={group.id}
