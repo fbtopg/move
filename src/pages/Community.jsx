@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
@@ -18,9 +18,14 @@ const Community = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const { session } = useSupabaseAuth();
+  const [username, setUsername] = useState("User");
 
-  // TODO: Replace this with actual user data fetching
-  const username = "John"; // Placeholder username
+  useEffect(() => {
+    if (session && session.user) {
+      const { user_metadata } = session.user;
+      setUsername(user_metadata.full_name || user_metadata.name || "User");
+    }
+  }, [session]);
 
   const handleUserClick = (user) => {
     setSelectedUser({
