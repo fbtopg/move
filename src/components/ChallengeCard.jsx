@@ -12,7 +12,7 @@ const ChallengeCard = ({ challenge }) => {
       <div className="w-full flex justify-center mb-4">
         <Sparkles className="text-yellow-500" size={28} />
       </div>
-      <h3 className="text-3xl font-bold text-gray-800 mb-4 text-center">{title}</h3>
+      <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">{title}</h3>
       <p className="text-sm text-gray-600 mb-8 text-center max-w-xs leading-relaxed">{description}</p>
       
       <div className="flex justify-between items-start mb-8 w-full">
