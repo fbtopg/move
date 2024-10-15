@@ -52,16 +52,16 @@ const Community = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mb-8 -mx-4"
+          className="mb-8"
         >
-          <div className="flex justify-between items-center px-4 mb-4">
+          <div className="flex justify-between items-center mb-4">
             <h2 className="text-base font-semibold roboto-medium">My Groups</h2>
             <Plus
               className="h-5 w-5 text-gray-600 dark:text-gray-400 cursor-pointer"
               onClick={() => setIsCreateGroupModalOpen(true)}
             />
           </div>
-          <div className="flex overflow-x-auto space-x-4 px-4 scrollbar-hide">
+          <div className="grid grid-cols-2 gap-4">
             {sortedGroups.map((group) => (
               <CommunityGroupCard key={group.id} group={{ ...group, isJoined: true }} />
             ))}
