@@ -9,7 +9,7 @@ const ChallengeCard = ({ challenge }) => {
 
   return (
     <div className="w-full bg-gradient-to-br from-pink-100 to-white rounded-xl p-8 shadow-lg flex flex-col items-center">
-      <div className="w-full flex justify-end mb-4">
+      <div className="w-full flex justify-center mb-4">
         <Sparkles className="text-yellow-500" size={28} />
       </div>
       <h3 className="text-3xl font-bold text-gray-800 mb-4 text-center">{title}</h3>
