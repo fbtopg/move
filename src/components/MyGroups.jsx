@@ -5,8 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import GroupCard from './GroupCard';
 import { Button } from "@/components/ui/button";
+import { useNavigate } from 'react-router-dom';
 
 const MyGroups = ({ onCreateGroup }) => {
+  const navigate = useNavigate();
   const { data: groups, isLoading, error } = useQuery({
     queryKey: ['privateGroups'],
     queryFn: fetchPrivateGroups,
@@ -16,6 +18,10 @@ const MyGroups = ({ onCreateGroup }) => {
   if (error) return <div>Error loading groups</div>;
 
   const sortedGroups = groups || [];
+
+  const handleGroupClick = (groupId) => {
+    navigate(`/group/${groupId}`);
+  };
 
   const CreateNewGroupCard = () => (
     <motion.div
@@ -56,6 +62,7 @@ const MyGroups = ({ onCreateGroup }) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
+                  onClick={() => handleGroupClick(group.id)}
                 >
                   <GroupCard group={group} />
                 </motion.div>

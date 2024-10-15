@@ -19,7 +19,7 @@ const GroupCard = ({ group }) => {
       </p>
       <div className="flex justify-between items-center mt-auto">
         <span className="text-xs text-gray-500">{group.member_count || 0} members</span>
-        <button className="bg-[#3B72EC] text-white px-3 py-1 rounded-full text-xs">View</button>
+        <span className="bg-[#3B72EC] text-white px-3 py-1 rounded-full text-xs">View</span>
       </div>
     </div>
   );
