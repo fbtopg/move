@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Globe, User, Zap } from 'lucide-react';
+import { Globe, Zap } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate, useLocation } from 'react-router-dom';
 import QuickstartMenu from './QuickstartMenu';
+import ChallengeIcon from './icons/ChallengeIcon';
 
 const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab }) => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
   
   const navItems = [
     { id: 'community', icon: Globe, route: '/' },
-    { id: 'profile', icon: User, route: '/profile' }, // Changed from 'challenge' to 'profile'
+    { id: 'challenge', icon: ChallengeIcon, route: '/challenge' }, // Changed from 'profile' to 'challenge'
   ];
 
   useEffect(() => {
