@@ -13,7 +13,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
   
   const navItems = [
     { id: 'community', icon: Globe, route: '/' },
-    { id: 'challenge', icon: ChallengeIcon, route: '/challenge' }, // Changed from 'profile' to 'challenge'
+    { id: 'challenge', icon: ChallengeIcon, route: '/board' }, // Changed route to '/board'
   ];
 
   useEffect(() => {
