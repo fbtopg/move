@@ -8,30 +8,25 @@ const ChallengeCard = ({ challenge }) => {
   const steps = [step_one, step_two, step_three].filter(Boolean);
 
   return (
-    <div className="w-full bg-gradient-to-br from-pink-100 to-white rounded-xl p-6 shadow-md flex flex-col items-center">
-      <div className="w-full flex justify-end mb-2">
-        <Sparkles className="text-black" size={24} />
+    <div className="w-full bg-gradient-to-br from-pink-100 to-white rounded-xl p-8 shadow-lg flex flex-col items-center">
+      <div className="w-full flex justify-end mb-4">
+        <Sparkles className="text-yellow-500" size={28} />
       </div>
-      <h3 className="text-2xl font-bold text-black mb-4 text-center">{title}</h3>
-      <p className="text-sm text-gray-700 mb-6 text-center max-w-xs">{description}</p>
+      <h3 className="text-3xl font-bold text-gray-800 mb-4 text-center">{title}</h3>
+      <p className="text-sm text-gray-600 mb-8 text-center max-w-xs leading-relaxed">{description}</p>
       
-      <div className="flex justify-center items-center mb-8 w-full">
+      <div className="flex justify-between items-start mb-8 w-full">
         {steps.map((step, index) => (
-          <div key={index} className="flex flex-col items-center flex-1">
-            <div className="flex items-center w-full">
-              <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center text-lg font-bold">
-                {index + 1}
-              </div>
-              {index < steps.length - 1 && (
-                <div className="flex-1 h-0.5 bg-black mx-2"></div>
-              )}
+          <div key={index} className="flex flex-col items-center flex-1 px-2">
+            <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center text-lg font-bold mb-3">
+              {index + 1}
             </div>
-            <p className="text-xs text-center mt-2 w-20">{step}</p>
+            <p className="text-xs text-center mt-2 w-full">{step}</p>
           </div>
         ))}
       </div>
 
-      <Button className="w-full max-w-xs bg-black text-white hover:bg-gray-800">
+      <Button className="w-full max-w-xs bg-black text-white hover:bg-gray-800 transition-colors duration-300 py-3 text-lg font-semibold rounded-full">
         Get started
       </Button>
     </div>
