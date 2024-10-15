@@ -4,11 +4,10 @@ import { Plus } from "lucide-react";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
-import CommunityGroupCard from "../components/CommunityGroupCard";
+import SwipeableGroupGrid from "../components/SwipeableGroupGrid";
 import { renderActivitySection, fetchPrivateGroups } from "../utils/communityUtils.jsx";
 import { activities } from "../utils/communityData";
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from '../integrations/supabase/supabase';
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -61,11 +60,7 @@ const Community = () => {
               onClick={() => setIsCreateGroupModalOpen(true)}
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            {sortedGroups.map((group) => (
-              <CommunityGroupCard key={group.id} group={{ ...group, isJoined: true }} />
-            ))}
-          </div>
+          <SwipeableGroupGrid groups={sortedGroups} />
         </motion.div>
 
         {renderActivitySection("Recent Activity", activities.today, handleUserClick)}
