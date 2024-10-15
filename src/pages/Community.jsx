@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus } from "lucide-react";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import SwipeableGroupGrid from "../components/SwipeableGroupGrid";
-import { renderActivitySection, fetchPrivateGroups } from "../utils/communityUtils.jsx";
+import { renderActivitySection } from "../utils/communityUtils.jsx";
 import { activities } from "../utils/communityData";
 import { useQuery } from "@tanstack/react-query";
 import ProfileButton from "../components/ProfileButton";
@@ -18,11 +17,6 @@ const Community = () => {
 
   // TODO: Replace this with actual user data fetching
   const username = "John"; // Placeholder username
-
-  const { data: myGroups = [] } = useQuery({
-    queryKey: ['privateGroups'],
-    queryFn: fetchPrivateGroups,
-  });
 
   const handleUserClick = (user) => {
     setSelectedUser({
@@ -37,9 +31,6 @@ const Community = () => {
   const handleCreateGroup = () => {
     setIsCreateGroupModalOpen(true);
   };
-
-  // Sort groups by created_at in descending order (newest first)
-  const sortedGroups = [...myGroups].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
   return (
     <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
@@ -62,9 +53,6 @@ const Community = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mb-8"
         >
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-base font-semibold roboto-medium">My Groups</h2>
-          </div>
           <MyGroups onCreateGroup={handleCreateGroup} />
         </motion.div>
 
