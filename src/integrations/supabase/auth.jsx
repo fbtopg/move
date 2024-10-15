@@ -3,6 +3,7 @@ import { supabase } from './supabase.js';
 import { useQueryClient } from '@tanstack/react-query';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
+import { insertUserInfo } from '../../utils/supabaseUserUtils';
 
 const SupabaseAuthContext = createContext();
 
@@ -26,19 +27,26 @@ export const SupabaseAuthProviderInner = ({ children }) => {
       setSession(session);
       setLoading(false);
       if (session) {
-        // Store user information in local storage
         localStorage.setItem('user', JSON.stringify(session.user));
       }
     };
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       setSession(session);
       queryClient.invalidateQueries('user');
       if (event === 'SIGNED_IN') {
-        // Store user information in local storage on sign in
         localStorage.setItem('user', JSON.stringify(session.user));
+        // Insert user info into the users table
+        try {
+          await insertUserInfo(
+            session.user.id,
+            session.user.user_metadata.full_name || session.user.email.split('@')[0],
+            session.user.email
+          );
+        } catch (error) {
+          console.error('Error storing user info:', error);
+        }
       } else if (event === 'SIGNED_OUT') {
-        // Remove user information from local storage on sign out
         localStorage.removeItem('user');
       }
     });
