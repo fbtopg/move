@@ -26,6 +26,9 @@ const LoginPopup = ({ isOpen, onClose }) => {
         <div className="flex-grow flex items-start justify-start">
           <GoogleLoginButton />
         </div>
+        <p className="text-sm text-gray-500 mt-auto text-center">
+          By logging in, you agree to our Terms of Service and Privacy Policy.
+        </p>
       </div>
     </motion.div>
   );
