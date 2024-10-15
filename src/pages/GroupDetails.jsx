@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Share, Camera } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { useGroupData } from '../hooks/useGroupData';
+import { useQuery } from '@tanstack/react-query';
+import { fetchGroupDetails } from '../utils/supabaseGroupUtils';
 import { useGroupActions } from '../hooks/useGroupActions';
 import { uploadGroupImage, updateGroupImageUrl } from '../utils/supabaseStorageUtils';
 import { toast } from 'sonner';
@@ -10,12 +11,14 @@ import { toast } from 'sonner';
 const GroupDetails = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
-  const location = useLocation();
-  const initialGroupData = location.state?.group;
-  const fileInputRef = useRef(null);
+  const fileInputRef = React.useRef(null);
 
-  const { group, setGroup, loading } = useGroupData(groupId, initialGroupData);
-  const { handleJoin } = useGroupActions(group, setGroup, navigate);
+  const { data: group, isLoading, error } = useQuery({
+    queryKey: ['groupDetails', groupId],
+    queryFn: () => fetchGroupDetails(groupId),
+  });
+
+  const { handleJoin } = useGroupActions(group, () => {}, navigate);
 
   const handleBack = () => navigate(-1);
   const handleShare = () => {
@@ -29,7 +32,6 @@ const GroupDetails = () => {
       try {
         const imageUrl = await uploadGroupImage(file, groupId);
         await updateGroupImageUrl(groupId, imageUrl);
-        setGroup(prevGroup => ({ ...prevGroup, image: imageUrl }));
         toast.success('Group image updated successfully');
       } catch (error) {
         console.error('Error uploading image:', error);
@@ -42,13 +44,9 @@ const GroupDetails = () => {
     fileInputRef.current.click();
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!group) {
-    return <div>Group not found</div>;
-  }
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading group details</div>;
+  if (!group) return <div>Group not found</div>;
 
   return (
     <div className="full-screen flex flex-col bg-background text-foreground dark:bg-gray-900 dark:text-white">
@@ -98,7 +96,7 @@ const GroupDetails = () => {
       <div className="flex-1 p-4 overflow-y-auto pt-safe pb-20">
         <h1 className="text-2xl font-bold mb-1">{group.name}</h1>
         <p className="text-sm text-muted-foreground mb-4">{group.description}</p>
-        {group.isPrivate && (
+        {group.is_private && (
           <span className="inline-block bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded">
             Private
           </span>
