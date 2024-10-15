@@ -1,21 +1,32 @@
-import { HomeIcon, LogInIcon } from "lucide-react";
-import Index from "./pages/Index.jsx";
-import Login from "./pages/Login.jsx";
+import { Home, Users, Trophy, User } from "lucide-react";
+import Community from "./pages/Community";
+import Group from "./pages/Group";
+import Challenge from "./pages/Challenge";
+import Profile from "./pages/Profile";
 
-/**
- * Central place for defining the navigation items. Used for navigation components and routing.
- */
 export const navItems = [
   {
-    title: "Home",
+    title: "Community",
     to: "/",
-    icon: <HomeIcon className="h-4 w-4" />,
-    page: <Index />,
+    icon: Home,
+    page: <Community />,
   },
   {
-    title: "Login",
-    to: "/login",
-    icon: <LogInIcon className="h-4 w-4" />,
-    page: <Login />,
+    title: "Group",
+    to: "/group",
+    icon: Users,
+    page: <Group />,
+  },
+  {
+    title: "Challenge",
+    to: "/challenge",
+    icon: Trophy,
+    page: <Challenge />,
+  },
+  {
+    title: "Profile",
+    to: "/profile",
+    icon: User,
+    page: <Profile />,
   },
 ];
