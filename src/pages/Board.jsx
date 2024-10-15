@@ -9,7 +9,7 @@ import ChallengeCard from '../components/ChallengeCard';
 const fetchChallenges = async () => {
   const { data, error } = await supabase
     .from('challenges')
-    .select('*');
+    .select('*, title, description, step_one, step_two, step_three');
   if (error) throw error;
   return data;
 };

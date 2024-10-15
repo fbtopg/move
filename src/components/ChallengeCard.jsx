@@ -3,10 +3,9 @@ import { Sparkles } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const ChallengeCard = ({ challenge }) => {
-  const { title, description, steps } = challenge;
+  const { title, description, step_one, step_two, step_three } = challenge;
 
-  // Parse steps from JSON string if necessary
-  const parsedSteps = typeof steps === 'string' ? JSON.parse(steps) : steps;
+  const steps = [step_one, step_two, step_three].filter(Boolean);
 
   return (
     <div className="w-full bg-gradient-to-br from-pink-100 to-white rounded-xl p-6 shadow-md">
@@ -17,13 +16,13 @@ const ChallengeCard = ({ challenge }) => {
       <p className="text-sm text-gray-700 mb-6">{description}</p>
       
       <div className="flex justify-center items-center mb-6">
-        {parsedSteps && parsedSteps.slice(0, 3).map((step, index) => (
+        {steps.map((step, index) => (
           <div key={index} className="flex flex-col items-center">
             <div className="flex items-center">
               <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center text-lg font-bold">
                 {index + 1}
               </div>
-              {index < 2 && (
+              {index < steps.length - 1 && (
                 <div className="w-16 h-0.5 bg-black"></div>
               )}
             </div>
