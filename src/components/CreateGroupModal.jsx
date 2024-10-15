@@ -1,13 +1,17 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import CreateGroupForm from './CreateGroupForm';
 import { insertNewGroup } from '../utils/supabaseGroupUtils';
+import { useSupabaseAuth } from '../integrations/supabase/auth';
+import LoginPopup from './LoginPopup';
 
 const CreateGroupModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const modalRef = useRef(null);
+  const { session } = useSupabaseAuth();
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
 
   const adjustModalPosition = useCallback(() => {
     if (modalRef.current) {
@@ -50,6 +54,12 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
       throw error;
     }
   };
+
+  useEffect(() => {
+    if (isOpen && !session) {
+      setShowLoginPopup(true);
+    }
+  }, [isOpen, session]);
 
   const modalVariants = {
     hidden: { y: "100%", opacity: 0 },
@@ -115,6 +125,10 @@ const CreateGroupModal = ({ isOpen, onClose }) => {
               <CreateGroupForm handleCreateGroup={handleCreateGroup} onClose={onClose} />
             </div>
           </motion.div>
+          <LoginPopup isOpen={showLoginPopup} onClose={() => {
+            setShowLoginPopup(false);
+            onClose();
+          }} />
         </>
       )}
     </AnimatePresence>
