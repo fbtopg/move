@@ -26,7 +26,8 @@ const fetchUserGroups = async (userId) => {
 
   if (groupsError) throw groupsError;
 
-  return groupsData;
+  // Sort groups by created_at in descending order (newest first)
+  return groupsData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 };
 
 const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
