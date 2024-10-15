@@ -37,7 +37,7 @@ const Community = ({ onUserClick }) => {
     {
       id: 2,
       user: { name: 'Bob', avatar: getRandomProfilePicture() },
-      content: 'Quiz time! Who's up for a brain teaser? 🧠🤔 #DailyQuiz',
+      content: "Quiz time! Who's up for a brain teaser? 🧠🤔 #DailyQuiz",
       likes: 8,
       comments: 5,
       timestamp: '3h ago',
