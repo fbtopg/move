@@ -5,8 +5,6 @@ import UserProfilePopup from '../components/UserProfilePopup';
 import { getRandomProfilePicture } from '../utils/profilePictures';
 import { AnimatePresence } from 'framer-motion';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import DailyWalkChallenge from './DailyWalkChallenge';
-import DailyQuizChallenge from './DailyQuizChallenge';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('community');
@@ -30,8 +28,6 @@ const Index = () => {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Community onUserClick={handleUserClick} />} />
-              <Route path="/daily-walk-challenge" element={<DailyWalkChallenge />} />
-              <Route path="/daily-quiz-challenge" element={<DailyQuizChallenge />} />
             </Routes>
           </AnimatePresence>
         </div>
