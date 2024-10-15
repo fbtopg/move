@@ -61,7 +61,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <BottomNavBar activeTab="profile" />
+      <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 };
