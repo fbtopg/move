@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const ChallengeCard = ({ challenge }) => {
@@ -15,16 +15,23 @@ const ChallengeCard = ({ challenge }) => {
       </div>
       <h3 className="text-2xl font-bold text-black mb-6">{title}</h3>
       <p className="text-sm text-gray-700 mb-6">{description}</p>
-      <div className="space-y-4 mb-6">
-        {parsedSteps && parsedSteps.map((step, index) => (
-          <div key={index} className="flex items-center">
-            <div className="w-6 h-6 rounded-full flex items-center justify-center mr-3 border-2 border-gray-300">
-              <span className="text-gray-500">{index + 1}</span>
+      
+      <div className="flex justify-center items-center mb-6">
+        {parsedSteps && parsedSteps.slice(0, 3).map((step, index) => (
+          <div key={index} className="flex flex-col items-center">
+            <div className="flex items-center">
+              <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center text-lg font-bold">
+                {index + 1}
+              </div>
+              {index < 2 && (
+                <div className="w-16 h-0.5 bg-black"></div>
+              )}
             </div>
-            <span className="text-sm text-gray-700">{step}</span>
+            <p className="text-xs text-center mt-2 w-20">{step}</p>
           </div>
         ))}
       </div>
+
       <Button className="w-full bg-black text-white hover:bg-gray-800">
         Get started
       </Button>
