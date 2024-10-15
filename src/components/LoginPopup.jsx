@@ -29,6 +29,9 @@ const LoginPopup = ({ isOpen, onClose }) => {
         <p className="text-sm text-gray-500 mt-auto text-center">
           By logging in, you agree to our Terms of Service and Privacy Policy.
         </p>
+        <p className="text-xs text-gray-400 mt-2 text-center">
+          © {new Date().getFullYear()} Topundred Inc. All rights reserved.
+        </p>
       </div>
     </motion.div>
   );
