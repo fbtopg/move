@@ -8,6 +8,9 @@ const GroupCard = ({ group, currentUserId }) => {
   const isOwner = group.created_by === currentUserId;
   const labelText = isOwner ? 'Owner' : 'Member';
 
+  // Get the first three members' profile pictures
+  const memberProfiles = group.members?.slice(0, 3) || [];
+
   return (
     <div 
       className="relative rounded-lg shadow-md p-4 w-full h-full flex flex-col overflow-hidden"
@@ -33,7 +36,17 @@ const GroupCard = ({ group, currentUserId }) => {
           {truncateDescription(group.description)}
         </p>
         <div className="flex justify-between items-center mt-auto">
-          <span className="text-xs text-gray-300">{group.member_count || 0} members</span>
+          <div className="flex items-center">
+            <div className="flex -space-x-2 overflow-hidden">
+              {memberProfiles.map((member, index) => (
+                <Avatar key={index} className="inline-block h-6 w-6 rounded-full ring-2 ring-black">
+                  <AvatarImage src={member.avatar} alt={member.name} />
+                  <AvatarFallback>{member.name ? member.name.charAt(0) : '?'}</AvatarFallback>
+                </Avatar>
+              ))}
+            </div>
+            <span className="text-xs text-gray-300 ml-2">{group.member_count || 0} members</span>
+          </div>
           <span className={`${isOwner ? 'bg-green-500' : 'bg-blue-500'} text-white px-3 py-1 rounded-full text-xs`}>
             {labelText}
           </span>
