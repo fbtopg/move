@@ -47,8 +47,15 @@ export const SupabaseAuthProviderInner = ({ children }) => {
     setLoading(false);
   };
 
+  const loginWithGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    });
+    if (error) console.error('Error logging in with Google:', error);
+  };
+
   return (
-    <SupabaseAuthContext.Provider value={{ session, loading, logout }}>
+    <SupabaseAuthContext.Provider value={{ session, loading, logout, loginWithGoogle }}>
       {children}
     </SupabaseAuthContext.Provider>
   );
@@ -63,6 +70,6 @@ export const SupabaseAuthUI = () => (
     supabaseClient={supabase}
     appearance={{ theme: ThemeSupa }}
     theme="default"
-    providers={[]}
+    providers={['google']}
   />
 );
