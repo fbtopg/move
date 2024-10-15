@@ -34,14 +34,14 @@ export const SupabaseAuthProviderInner = ({ children }) => {
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       setSession(session);
       queryClient.invalidateQueries('user');
-      if (event === 'SIGNED_IN') {
+      if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
         localStorage.setItem('user', JSON.stringify(session.user));
         // Insert user info into the users table
         try {
           await insertUserInfo(
             session.user.id,
-            session.user.user_metadata.full_name || session.user.email.split('@')[0],
-            session.user.email
+            session.user.email,
+            session.user.user_metadata.full_name || session.user.email.split('@')[0]
           );
         } catch (error) {
           console.error('Error storing user info:', error);
