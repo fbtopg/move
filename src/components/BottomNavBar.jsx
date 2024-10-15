@@ -13,7 +13,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
   
   const navItems = [
     { id: 'community', icon: Globe, route: '/' },
-    { id: 'challenge', icon: ChallengeIcon, route: '/board' }, // Changed route to '/board'
+    { id: 'challenge', icon: ChallengeIcon, route: '/board' },
   ];
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
 
   return (
     <>
-      <nav className="fixed bottom-0 left-0 right-0 text-foreground h-20 bg-white" style={{ borderTop: '1px solid var(--border)' }}>
+      <nav className="fixed bottom-0 left-0 right-0 text-foreground h-20 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.1)]" style={{ borderTop: '1px solid var(--border)' }}>
         <ul className="flex justify-around items-center h-full relative">
           {navItems.map((item, index) => (
             <li key={item.id} className={cn(
