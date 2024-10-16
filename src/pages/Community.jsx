@@ -114,7 +114,7 @@ const Community = () => {
   };
 
   return (
-    <div className="min-h-screen text-foreground dark:text-white flex flex-col">
+    <div className="min-h-screen bg-[#FBFCFC] text-foreground dark:text-white flex flex-col">
       <div className="px-4 pt-4 pb-20 flex-grow flex flex-col">
         {session && (
           <div className="flex justify-between items-center mb-6">
