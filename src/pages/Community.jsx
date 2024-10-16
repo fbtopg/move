@@ -87,12 +87,12 @@ const Community = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-col items-center justify-center mt-12"
+            className="flex flex-col items-center justify-center mt-12 h-[calc(100vh-200px)]"
           >
             <img
               src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/illustration2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2lsbHVzdHJhdGlvbjIucG5nIiwiaWF0IjoxNzI5MDg5MTAzLCJleHAiOjE3NjA2MjUxMDN9.jnvRMKmghK9GY5JX-3tBuEkW0zUV__A4JEA_hLN0ikM&t=2024-10-16T14%3A31%3A44.880Z"
               alt="Welcome illustration"
-              className="w-64 h-64 object-contain mb-4"
+              className="w-48 h-48 object-contain mb-4"
             />
             <p className="text-lg font-bold text-center mb-2">
               Create groups and invite friends
