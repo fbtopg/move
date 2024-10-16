@@ -8,6 +8,7 @@ import ProfileButton from "../components/ProfileButton";
 import MyGroups from "../components/MyGroups";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 import LoginPopup from '../components/LoginPopup';
+import { Button } from "@/components/ui/button";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -39,7 +40,6 @@ const Community = () => {
     };
 
     updateGreeting();
-    // Update greeting every minute in case the time changes
     const intervalId = setInterval(updateGreeting, 60000);
 
     return () => clearInterval(intervalId);
@@ -64,7 +64,11 @@ const Community = () => {
       transition={{ duration: 0.5 }}
       className="text-center py-8"
     >
-      <p className="text-gray-500">No recent activities to display.</p>
+      <img
+        src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/empty-box.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL2VtcHR5LWJveC5wbmciLCJpYXQiOjE3MjkwODQ0ODQsImV4cCI6MTc2MDYyMDQ4NH0.EmOrpMaQ0WHPjd8Jozwua0fdk7qPRtnE0zU6vTnURUY&t=2024-10-16T13%3A14%3A45.426Z"
+        alt="No activities"
+        className="mx-auto w-16 h-16 object-contain"
+      />
     </motion.div>
   );
 
@@ -102,14 +106,20 @@ const Community = () => {
         </motion.h2>
 
         {session ? renderEmptyState() : (
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center py-8 text-gray-500"
+            className="text-center py-8"
           >
-            Please log in to view your activities.
-          </motion.p>
+            {renderEmptyState()}
+            <Button
+              onClick={() => setShowLoginPopup(true)}
+              className="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition-colors"
+            >
+              Log In
+            </Button>
+          </motion.div>
         )}
       </div>
 
