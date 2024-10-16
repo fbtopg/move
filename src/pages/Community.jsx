@@ -104,7 +104,7 @@ const Community = () => {
             </p>
             <button
               className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center"
-              onClick={() => {/* Add your button click handler here */}}
+              onClick={handleLoginRequired}
             >
               <Plus className="text-white" size={24} />
             </button>
