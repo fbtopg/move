@@ -8,6 +8,7 @@ import ProfileButton from "../components/ProfileButton";
 import MyGroups from "../components/MyGroups";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 import LoginPopup from '../components/LoginPopup';
+import { Button } from "@/components/ui/button";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -39,7 +40,6 @@ const Community = () => {
     };
 
     updateGreeting();
-    // Update greeting every minute in case the time changes
     const intervalId = setInterval(updateGreeting, 60000);
 
     return () => clearInterval(intervalId);
@@ -67,6 +67,10 @@ const Community = () => {
       <p className="text-gray-500">No recent activities to display.</p>
     </motion.div>
   );
+
+  const handleLoginClick = () => {
+    setShowLoginPopup(true);
+  };
 
   return (
     <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
@@ -101,15 +105,20 @@ const Community = () => {
           Recent Activity
         </motion.h2>
 
-        {session ? renderEmptyState() : (
-          <motion.p
+        {session ? (
+          renderEmptyState()
+        ) : (
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center py-8 text-gray-500"
+            className="text-center py-8"
           >
-            Please log in to view your activities.
-          </motion.p>
+            <p className="text-gray-500 mb-4">Please log in to view your activities.</p>
+            <Button onClick={handleLoginClick} className="bg-blue-500 hover:bg-blue-600 text-white">
+              Log In
+            </Button>
+          </motion.div>
         )}
       </div>
 
