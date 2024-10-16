@@ -21,7 +21,7 @@ const Board = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#FEF8F3] text-foreground flex flex-col">
+    <div className="min-h-screen bg-[#FBFCFC] text-foreground flex flex-col">
       <CommunityHeader />
       <div className="flex-grow overflow-y-auto">
         <div className="max-w-md mx-auto p-4">
