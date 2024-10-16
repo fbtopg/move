@@ -83,15 +83,6 @@ const Community = () => {
           {greeting}
         </motion.h1>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-2xl font-bold mb-6 spectral-semibold-italic"
-        >
-          My Groups
-        </motion.h2>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -105,7 +96,7 @@ const Community = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-2xl font-bold mb-6 spectral-semibold-italic"
+          className="text-xl font-semibold mb-4"
         >
           Recent Activity
         </motion.h2>
