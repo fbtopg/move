@@ -113,12 +113,6 @@ const Community = () => {
             className="text-center py-8"
           >
             {renderEmptyState()}
-            <Button
-              onClick={() => setShowLoginPopup(true)}
-              className="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition-colors"
-            >
-              Log In
-            </Button>
           </motion.div>
         )}
       </div>
