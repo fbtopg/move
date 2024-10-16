@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
-import SwipeableGroupGrid from "../components/SwipeableGroupGrid";
-import ProfileButton from "../components/ProfileButton";
 import MyGroups from "../components/MyGroups";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 import LoginPopup from '../components/LoginPopup';
-import { Button } from "@/components/ui/button";
+import ProfileButton from "../components/ProfileButton";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -20,21 +18,21 @@ const Community = () => {
 
   useEffect(() => {
     const updateGreeting = () => {
+      const currentHour = new Date().getHours();
+      let timeGreeting;
+      if (currentHour < 12) {
+        timeGreeting = "Good Morning";
+      } else if (currentHour < 18) {
+        timeGreeting = "Good Afternoon";
+      } else {
+        timeGreeting = "Good Evening";
+      }
       if (session && session.user) {
-        const currentHour = new Date().getHours();
-        let timeGreeting;
-        if (currentHour < 12) {
-          timeGreeting = "Good Morning";
-        } else if (currentHour < 18) {
-          timeGreeting = "Good Afternoon";
-        } else {
-          timeGreeting = "Good Evening";
-        }
         const { user_metadata } = session.user;
         const displayName = user_metadata.full_name || user_metadata.name || "User";
         setGreeting(`${timeGreeting}, ${displayName}`);
       } else {
-        setGreeting("");
+        setGreeting(timeGreeting);
       }
     };
 
@@ -75,14 +73,32 @@ const Community = () => {
           <ProfileButton />
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mb-8"
-        >
-          <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
-        </motion.div>
+        {session ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mb-8"
+          >
+            <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="flex flex-col items-center justify-center mt-12"
+          >
+            <img
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/illustration1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2lsbHVzdHJhdGlvbjEucG5nIiwiaWF0IjoxNzI5MDg4Njk2LCJleHAiOjE3NjA2MjQ2OTZ9.Y5uYwvzMnw6wDlLAN863OeL5mn_IBvtaP2tWeGHMQzo&t=2024-10-16T14%3A24%3A58.183Z"
+              alt="Welcome illustration"
+              className="w-64 h-64 object-contain mb-8"
+            />
+            <p className="text-lg text-center">
+              Join our community to connect with others and share experiences!
+            </p>
+          </motion.div>
+        )}
       </div>
 
       <AnimatePresence>
