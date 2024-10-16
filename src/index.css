@@ -75,6 +75,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: "Roboto", sans-serif;
+    background-color: #FBFCFC;
   }
 }
 
@@ -203,3 +204,4 @@
   width: 100%;
   height: 100%;
 }
+
