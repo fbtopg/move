@@ -8,25 +8,25 @@ const ChallengeCard = ({ challenge }) => {
   const steps = [step_one, step_two, step_three].filter(Boolean);
 
   return (
-    <div className="w-full bg-gradient-to-br from-pink-100 to-white rounded-xl p-8 shadow-lg flex flex-col items-center">
+    <div className="w-64 bg-gradient-to-br from-pink-100 to-white rounded-xl p-6 shadow-lg flex flex-col items-center">
       <div className="w-full flex justify-center mb-4">
-        <Sparkles className="text-yellow-500" size={28} />
+        <Sparkles className="text-yellow-500" size={24} />
       </div>
-      <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">{title}</h3>
-      <p className="text-sm text-gray-600 mb-8 text-center max-w-xs leading-relaxed">{description}</p>
+      <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">{title}</h3>
+      <p className="text-xs text-gray-600 mb-6 text-center leading-relaxed">{description}</p>
       
-      <div className="w-full mb-8">
+      <div className="w-full mb-6">
         {steps.map((step, index) => (
-          <div key={index} className="flex items-center mb-4">
-            <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold mr-4">
+          <div key={index} className="flex items-center mb-3">
+            <div className="w-6 h-6 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold mr-3">
               {index + 1}
             </div>
-            <p className="text-sm flex-1">{step}</p>
+            <p className="text-xs flex-1">{step}</p>
           </div>
         ))}
       </div>
 
-      <Button className="w-full max-w-xs bg-black text-white hover:bg-gray-800 transition-colors duration-300 py-3 text-lg font-semibold rounded-full">
+      <Button className="w-full bg-black text-white hover:bg-gray-800 transition-colors duration-300 py-2 text-sm font-semibold rounded-full">
         Get started
       </Button>
     </div>

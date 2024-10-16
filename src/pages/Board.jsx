@@ -23,7 +23,7 @@ const Board = () => {
   return (
     <div className="min-h-screen bg-[#FBFCFC] text-foreground flex flex-col">
       <div className="flex-grow overflow-y-auto">
-        <div className="max-w-md mx-auto p-4">
+        <div className="p-4">
           <motion.h2 
             className="text-2xl font-bold mb-8"
             initial={{ opacity: 0, y: -20 }}
