@@ -92,6 +92,15 @@ const Community = () => {
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
         </motion.div>
 
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-xl font-semibold mb-4"
+        >
+          Recent Activity
+        </motion.h2>
+
         {session ? renderEmptyState() : (
           <motion.p
             initial={{ opacity: 0, y: 20 }}
