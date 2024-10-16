@@ -4,9 +4,6 @@ import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import SwipeableGroupGrid from "../components/SwipeableGroupGrid";
-import { renderActivitySection } from "../utils/communityUtils.jsx";
-import { activities } from "../utils/communityData";
-import { useQuery } from "@tanstack/react-query";
 import ProfileButton from "../components/ProfileButton";
 import MyGroups from "../components/MyGroups";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
@@ -48,16 +45,6 @@ const Community = () => {
     return () => clearInterval(intervalId);
   }, [session]);
 
-  const handleUserClick = (user) => {
-    setSelectedUser({
-      username: user.name,
-      handle: `@${user.name.toLowerCase()}`,
-      avatarUrl: user.profilePicture,
-      followers: Math.floor(Math.random() * 1000),
-      following: Math.floor(Math.random() * 1000),
-    });
-  };
-
   const handleCreateGroup = () => {
     if (session) {
       setIsCreateGroupModalOpen(true);
@@ -69,6 +56,17 @@ const Community = () => {
   const handleLoginRequired = () => {
     setShowLoginPopup(true);
   };
+
+  const renderEmptyState = () => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="text-center py-8"
+    >
+      <p className="text-gray-500">No recent activities to display.</p>
+    </motion.div>
+  );
 
   return (
     <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
@@ -94,9 +92,16 @@ const Community = () => {
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
         </motion.div>
 
-        {renderActivitySection("Recent Activity", activities.today, handleUserClick)}
-        {renderActivitySection("This Month", activities.thisMonth, handleUserClick)}
-        {renderActivitySection("Earlier", activities.earlier, handleUserClick)}
+        {session ? renderEmptyState() : (
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center py-8 text-gray-500"
+          >
+            Please log in to view your activities.
+          </motion.p>
+        )}
       </div>
 
       <AnimatePresence>
