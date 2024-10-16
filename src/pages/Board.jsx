@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '../integrations/supabase/supabase';
-import CommunityHeader from '../components/CommunityHeader';
 import BottomNavBar from '../components/BottomNavBar';
 import ChallengeCard from '../components/ChallengeCard';
 
@@ -22,7 +21,6 @@ const Board = () => {
 
   return (
     <div className="min-h-screen bg-[#FBFCFC] text-foreground flex flex-col">
-      <CommunityHeader />
       <div className="flex-grow overflow-y-auto">
         <div className="max-w-md mx-auto p-4">
           <motion.h2 
