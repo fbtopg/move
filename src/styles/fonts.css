@@ -1,5 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;1,600&display=swap');
+.gabriela-regular {
+  font-family: "Gabriela", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.libre-baskerville-bold {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.space-grotesk-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-black {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
 
 .abril-fatface-regular {
   font-family: "Abril Fatface", serif;
@@ -7,14 +59,9 @@
   font-style: normal;
 }
 
-.spectral-extralight {
-  font-family: "Spectral", serif;
-  font-weight: 200;
-  font-style: normal;
-}
-
-.spectral-semibold-italic {
-  font-family: "Spectral", serif;
-  font-weight: 600;
-  font-style: italic;
+.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }

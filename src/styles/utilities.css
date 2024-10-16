@@ -1,0 +1,33 @@
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .capacity-scroll {
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  .capacity-scroll > div {
+    scroll-snap-align: center;
+  }
+
+  .hidden-status-bar::before {
+    background-color: var(--status-bar-color, transparent);
+    height: env(safe-area-inset-top);
+  }
+
+  .status-bar-hidden {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Hide status bar on mobile devices */
+@media screen and (max-width: 767px) {
+  .status-bar-hidden::before {
+    content: none;
+  }
+}
