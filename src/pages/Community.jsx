@@ -7,6 +7,7 @@ import MyGroups from "../components/MyGroups";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 import LoginPopup from '../components/LoginPopup';
 import ProfileButton from "../components/ProfileButton";
+import { Plus } from "lucide-react"; // Add this import
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -97,9 +98,15 @@ const Community = () => {
             <p className="text-lg font-bold text-center mb-2">
               Create groups and invite friends
             </p>
-            <p className="text-sm font-light text-center">
+            <p className="text-sm font-light text-center mb-6">
               Connect, share, challenge, and more
             </p>
+            <button
+              className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center"
+              onClick={() => {/* Add your button click handler here */}}
+            >
+              <Plus className="text-white" size={24} />
+            </button>
           </motion.div>
         )}
       </div>
