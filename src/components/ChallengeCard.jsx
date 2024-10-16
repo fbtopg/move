@@ -15,13 +15,13 @@ const ChallengeCard = ({ challenge }) => {
       <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">{title}</h3>
       <p className="text-sm text-gray-600 mb-8 text-center max-w-xs leading-relaxed">{description}</p>
       
-      <div className="flex justify-between items-start mb-8 w-full">
+      <div className="w-full mb-8">
         {steps.map((step, index) => (
-          <div key={index} className="flex flex-col items-center flex-1 px-2">
-            <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center text-lg font-bold mb-3">
+          <div key={index} className="flex items-center mb-4">
+            <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-sm font-bold mr-4">
               {index + 1}
             </div>
-            <p className="text-xs text-center mt-2 w-full">{step}</p>
+            <p className="text-sm flex-1">{step}</p>
           </div>
         ))}
       </div>
