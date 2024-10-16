@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from '../integrations/supabase/supabase';
 import BottomNavBar from '../components/BottomNavBar';
 import ChallengeCard from '../components/ChallengeCard';
+import ChallengeCardSkeleton from '../components/ChallengeCardSkeleton';
 
 const fetchChallenges = async () => {
   const { data, error } = await supabase
@@ -33,7 +34,7 @@ const Board = () => {
           </motion.h2>
           
           {isLoading ? (
-            <p>Loading challenges...</p>
+            <ChallengeCardSkeleton />
           ) : error ? (
             <p>Error loading challenges: {error.message}</p>
           ) : challenges && challenges.length > 0 ? (
