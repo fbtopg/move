@@ -90,7 +90,7 @@ const Community = () => {
             className="flex flex-col items-center justify-center mt-12"
           >
             <img
-              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/illustration1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2lsbHVzdHJhdGlvbjEucG5nIiwiaWF0IjoxNzI5MDg4Njk2LCJleHAiOjE3NjA2MjQ2OTZ9.Y5uYwvzMnw6wDlLAN863OeL5mn_IBvtaP2tWeGHMQzo&t=2024-10-16T14%3A24%3A58.183Z"
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/illustration2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2lsbHVzdHJhdGlvbjIucG5nIiwiaWF0IjoxNzI5MDg5MTAzLCJleHAiOjE3NjA2MjUxMDN9.jnvRMKmghK9GY5JX-3tBuEkW0zUV__A4JEA_hLN0ikM&t=2024-10-16T14%3A31%3A44.880Z"
               alt="Welcome illustration"
               className="w-64 h-64 object-contain mb-4"
             />
