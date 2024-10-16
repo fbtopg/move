@@ -8,6 +8,7 @@ import { useSupabaseAuth } from '../integrations/supabase/auth';
 import LoginPopup from '../components/LoginPopup';
 import ProfileButton from "../components/ProfileButton";
 import { Plus } from "lucide-react";
+import ActivitySection from "../components/ActivitySection";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -49,7 +50,7 @@ const Community = () => {
     const fetchUserGroups = async () => {
       if (session && session.user) {
         // Replace this with actual API call to fetch user groups
-        const groups = []; // Simulating empty groups for now
+        const groups = [{ id: 1, name: 'Test Group' }]; // Simulating a group for testing
         setUserGroups(groups);
       } else {
         setUserGroups([]);
@@ -105,9 +106,10 @@ const Community = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mb-8"
+          className="space-y-8"
         >
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
+          <ActivitySection activities={[]} /> {/* Pass actual activities when available */}
         </motion.div>
       );
     }
