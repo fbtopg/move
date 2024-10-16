@@ -2,7 +2,7 @@ import React from 'react';
 
 const ChallengeCardSkeleton = () => {
   return (
-    <div className="w-64 bg-gradient-to-br from-pink-100 to-white rounded-xl p-6 shadow-lg flex flex-col items-center animate-pulse">
+    <div className="w-64 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl p-6 shadow-lg flex flex-col items-center animate-pulse">
       <div className="w-8 h-8 bg-gray-200 rounded-full mb-4"></div>
       <div className="h-5 bg-gray-200 rounded w-3/4 mb-3"></div>
       <div className="h-3 bg-gray-200 rounded w-full mb-6"></div>

@@ -8,7 +8,7 @@ const ChallengeCard = ({ challenge }) => {
   const steps = [step_one, step_two, step_three].filter(Boolean);
 
   return (
-    <div className="w-64 bg-gradient-to-br from-pink-100 to-white rounded-xl p-6 shadow-lg flex flex-col items-center">
+    <div className="w-64 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl p-6 shadow-lg flex flex-col items-center">
       <div className="w-full flex justify-center mb-4">
         <Sparkles className="text-yellow-500" size={24} />
       </div>
