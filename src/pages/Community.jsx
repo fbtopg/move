@@ -92,10 +92,13 @@ const Community = () => {
             <img
               src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/illustration1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2lsbHVzdHJhdGlvbjEucG5nIiwiaWF0IjoxNzI5MDg4Njk2LCJleHAiOjE3NjA2MjQ2OTZ9.Y5uYwvzMnw6wDlLAN863OeL5mn_IBvtaP2tWeGHMQzo&t=2024-10-16T14%3A24%3A58.183Z"
               alt="Welcome illustration"
-              className="w-64 h-64 object-contain mb-8"
+              className="w-64 h-64 object-contain mb-4"
             />
-            <p className="text-lg text-center">
-              Join our community to connect with others and share experiences!
+            <p className="text-lg font-bold text-center mb-2">
+              Create groups and invite friends
+            </p>
+            <p className="text-sm font-light text-center">
+              Connect, share, challenge, and more
             </p>
           </motion.div>
         )}
