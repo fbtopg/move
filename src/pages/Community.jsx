@@ -20,22 +20,21 @@ const Community = () => {
 
   useEffect(() => {
     const updateGreeting = () => {
-      const currentHour = new Date().getHours();
-      let timeGreeting;
-      if (currentHour < 12) {
-        timeGreeting = "Good Morning";
-      } else if (currentHour < 18) {
-        timeGreeting = "Good Afternoon";
-      } else {
-        timeGreeting = "Good Evening";
-      }
-
       if (session && session.user) {
+        const currentHour = new Date().getHours();
+        let timeGreeting;
+        if (currentHour < 12) {
+          timeGreeting = "Good Morning";
+        } else if (currentHour < 18) {
+          timeGreeting = "Good Afternoon";
+        } else {
+          timeGreeting = "Good Evening";
+        }
         const { user_metadata } = session.user;
         const displayName = user_metadata.full_name || user_metadata.name || "User";
-        setGreeting(`Welcome, ${displayName}`);
+        setGreeting(`${timeGreeting}, ${displayName}`);
       } else {
-        setGreeting(timeGreeting);
+        setGreeting("");
       }
     };
 
@@ -76,14 +75,16 @@ const Community = () => {
     <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
       <div className="px-4 pt-4 pb-20">
         <div className="flex justify-between items-center mb-6">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-2xl font-bold spectral-semibold-italic"
-          >
-            {greeting}
-          </motion.h1>
+          {greeting && (
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-2xl font-bold spectral-semibold-italic"
+            >
+              {greeting}
+            </motion.h1>
+          )}
           <ProfileButton />
         </div>
 
@@ -105,16 +106,14 @@ const Community = () => {
           Recent Activity
         </motion.h2>
 
-        {session ? renderEmptyState() : (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center py-8"
-          >
-            {renderEmptyState()}
-          </motion.div>
-        )}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center py-8"
+        >
+          {renderEmptyState()}
+        </motion.div>
       </div>
 
       <AnimatePresence>
