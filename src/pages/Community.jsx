@@ -56,23 +56,8 @@ const Community = () => {
     setShowLoginPopup(true);
   };
 
-  const renderEmptyState = () => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="text-center py-8"
-    >
-      <img
-        src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/etc/empty-box.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXRjL2VtcHR5LWJveC5wbmciLCJpYXQiOjE3MjkwODQ0ODQsImV4cCI6MTc2MDYyMDQ4NH0.EmOrpMaQ0WHPjd8Jozwua0fdk7qPRtnE0zU6vTnURUY&t=2024-10-16T13%3A14%3A45.426Z"
-        alt="No activities"
-        className="mx-auto w-16 h-16 object-contain"
-      />
-    </motion.div>
-  );
-
   return (
-    <div className="min-h-screen bg-[#FEF8F3] dark:bg-gray-900 text-foreground dark:text-white">
+    <div className="min-h-screen bg-[#FBFCFC] dark:bg-gray-900 text-foreground dark:text-white">
       <div className="px-4 pt-4 pb-20">
         <div className="flex justify-between items-center mb-6">
           <div className="flex-grow">
@@ -98,28 +83,6 @@ const Community = () => {
         >
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
         </motion.div>
-
-        {session && (
-          <>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-base font-semibold roboto-medium mb-4"
-            >
-              Recent Activity
-            </motion.h2>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center py-8"
-            >
-              {renderEmptyState()}
-            </motion.div>
-          </>
-        )}
       </div>
 
       <AnimatePresence>
