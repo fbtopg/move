@@ -99,23 +99,27 @@ const Community = () => {
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
         </motion.div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-base font-semibold roboto-medium mb-4"
-        >
-          Recent Activity
-        </motion.h2>
+        {session && (
+          <>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-base font-semibold roboto-medium mb-4"
+            >
+              Recent Activity
+            </motion.h2>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center py-8"
-        >
-          {renderEmptyState()}
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-center py-8"
+            >
+              {renderEmptyState()}
+            </motion.div>
+          </>
+        )}
       </div>
 
       <AnimatePresence>
