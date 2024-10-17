@@ -8,7 +8,7 @@ const ChallengeCard = ({ challenge }) => {
   const steps = [step_one, step_two, step_three].filter(Boolean);
 
   return (
-    <div className="w-full max-w-sm bg-gradient-to-br from-blue-100 via-pink-100 to-blue-200 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <div className="w-full max-w-sm bg-gradient-to-br from-blue-100 via-pink-100 to-blue-200 rounded-xl p-6">
       <div className="mb-4">
         <h3 className="text-xl font-bold text-gray-800">{title}</h3>
       </div>
