@@ -93,7 +93,7 @@ const Community = () => {
             Connect, share, challenge, and more
           </p>
           <button
-            className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center mt-4"
+            className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center mt-12"
             onClick={session ? handleCreateGroup : handleLoginRequired}
           >
             <Plus className="text-white" size={24} />
