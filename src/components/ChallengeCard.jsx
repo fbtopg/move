@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const ChallengeCard = ({ challenge }) => {
@@ -9,9 +9,8 @@ const ChallengeCard = ({ challenge }) => {
 
   return (
     <div className="w-full max-w-sm bg-gradient-to-br from-blue-100 via-pink-100 to-blue-200 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4">
         <h3 className="text-xl font-bold text-gray-800">{title}</h3>
-        <Sparkles className="text-yellow-500" size={24} />
       </div>
       <p className="text-sm text-gray-600 mb-6 leading-relaxed">{description}</p>
       
