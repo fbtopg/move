@@ -25,7 +25,7 @@ const LoginPopup = ({ isOpen, onClose }) => {
         initial={{ y: '100%' }}
         animate={{ y: 0 }}
         exit={{ y: '100%' }}
-        transition={{ type: 'spring', damping: 25, stiffness: 500 }}
+        transition={{ type: 'tween', duration: 0.3 }} // Changed from spring to tween
         className="fixed inset-x-0 bottom-0 bg-white dark:bg-gray-800 rounded-t-3xl shadow-lg z-50 h-3/4"
       >
         <div className="p-6 h-full flex flex-col">
