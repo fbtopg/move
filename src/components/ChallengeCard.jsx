@@ -17,8 +17,8 @@ const ChallengeCard = ({ challenge }) => {
       
       <div className="space-y-4 mb-6">
         {steps.map((step, index) => (
-          <div key={index} className="flex items-start">
-            <div className="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0 mt-1">
+          <div key={index} className="flex items-center">
+            <div className="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0">
               {index + 1}
             </div>
             <p className="text-sm flex-1">{step}</p>
