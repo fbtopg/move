@@ -89,11 +89,11 @@ const Community = () => {
           <p className="text-lg font-bold text-center mb-2">
             Create groups and invite friends
           </p>
-          <p className="text-sm font-light text-center mb-6">
+          <p className="text-sm font-light text-center mb-8">
             Connect, share, challenge, and more
           </p>
           <button
-            className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center"
+            className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center mt-4"
             onClick={session ? handleCreateGroup : handleLoginRequired}
           >
             <Plus className="text-white" size={24} />
@@ -109,7 +109,7 @@ const Community = () => {
           className="space-y-8"
         >
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
-          <ActivitySection activities={[]} /> {/* Pass actual activities when available */}
+          <ActivitySection activities={[]} />
         </motion.div>
       );
     }
