@@ -119,18 +119,18 @@ const Community = () => {
     <div className="min-h-screen bg-[#FBFCFC] text-foreground dark:text-white flex flex-col">
       <div className="px-4 pt-4 pb-20 flex-grow flex flex-col">
         {session && (
-          <div className="flex flex-col items-end mb-6">
-            <ProfileButton />
+          <div className="flex justify-between items-start mb-6">
             {greeting && (
               <motion.h1
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-2xl font-bold spectral-semibold-italic mt-2"
+                className="text-2xl font-bold spectral-semibold-italic"
               >
                 {greeting}
               </motion.h1>
             )}
+            <ProfileButton />
           </div>
         )}
         {renderContent()}
