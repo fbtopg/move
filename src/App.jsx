@@ -19,7 +19,7 @@ const App = () => {
   return (
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <SupabaseAuthProvider>
             <TooltipProvider>
               <Toaster position="top-center" />
