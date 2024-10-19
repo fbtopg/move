@@ -7,7 +7,7 @@ import MyGroups from "../components/MyGroups";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 import LoginPopup from '../components/LoginPopup';
 import ProfileButton from "../components/ProfileButton";
-import { Plus, Wave } from "lucide-react";
+import { Plus, Hand } from "lucide-react";
 import ActivitySection from "../components/ActivitySection";
 import ChallengeCardPreview from "../components/ChallengeCardPreview";
 
@@ -59,18 +59,6 @@ const Community = () => {
     fetchUserGroups();
   }, [session]);
 
-  const handleCreateGroup = () => {
-    if (session) {
-      setIsCreateGroupModalOpen(true);
-    } else {
-      setShowLoginPopup(true);
-    }
-  };
-
-  const handleLoginRequired = () => {
-    setShowLoginPopup(true);
-  };
-
   const renderContent = () => {
     if (!session || (session && userGroups.length === 0)) {
       return (
@@ -82,7 +70,7 @@ const Community = () => {
         >
           {!session && (
             <h1 className="text-2xl font-bold spectral-semibold-italic mb-6 text-left self-start flex items-center">
-              Welcome, <Wave className="ml-2 h-6 w-6" />
+              Welcome, <Hand className="ml-2 h-6 w-6" />
             </h1>
           )}
           <div className="bg-white shadow-lg rounded-lg p-8 flex flex-col items-center w-full max-w-sm mx-auto mb-1">
@@ -122,6 +110,18 @@ const Community = () => {
         </motion.div>
       );
     }
+  };
+
+  const handleCreateGroup = () => {
+    if (session) {
+      setIsCreateGroupModalOpen(true);
+    } else {
+      setShowLoginPopup(true);
+    }
+  };
+
+  const handleLoginRequired = () => {
+    setShowLoginPopup(true);
   };
 
   return (
