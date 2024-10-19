@@ -7,7 +7,7 @@ import MyGroups from "../components/MyGroups";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 import LoginPopup from '../components/LoginPopup';
 import ProfileButton from "../components/ProfileButton";
-import { Plus } from "lucide-react";
+import { Plus, HandWaving } from "lucide-react";
 import ActivitySection from "../components/ActivitySection";
 import ChallengeCardPreview from "../components/ChallengeCardPreview";
 
@@ -81,8 +81,8 @@ const Community = () => {
           className="flex flex-col items-center justify-center flex-grow"
         >
           {!session && (
-            <h1 className="text-2xl font-bold spectral-semibold-italic mb-6 text-left self-start">
-              Welcome to Our Community
+            <h1 className="text-2xl font-bold spectral-semibold-italic mb-6 text-left self-start flex items-center">
+              Welcome, <HandWaving className="ml-2 h-6 w-6" />
             </h1>
           )}
           <div className="bg-white shadow-lg rounded-lg p-8 flex flex-col items-center w-full max-w-sm mx-auto mb-1">
