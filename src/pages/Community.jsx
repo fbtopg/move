@@ -10,6 +10,7 @@ import ProfileButton from "../components/ProfileButton";
 import { Plus } from "lucide-react";
 import ActivitySection from "../components/ActivitySection";
 import ChallengeCardPreview from "../components/ChallengeCardPreview";
+import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -49,9 +50,13 @@ const Community = () => {
   useEffect(() => {
     const fetchUserGroups = async () => {
       if (session && session.user) {
-        // Fetch user groups logic here
-        // For now, we'll use an empty array to simulate a user without groups
-        setUserGroups([]);
+        try {
+          const groups = await fetchPrivateGroups(session.user.id);
+          setUserGroups(groups);
+        } catch (error) {
+          console.error('Error fetching user groups:', error);
+          setUserGroups([]);
+        }
       } else {
         setUserGroups([]);
       }
@@ -61,7 +66,7 @@ const Community = () => {
   }, [session]);
 
   const renderContent = () => {
-    if (!session || (session && userGroups.length === 0)) {
+    if (!session) {
       return (
         <>
           <motion.h1
@@ -70,7 +75,7 @@ const Community = () => {
             transition={{ duration: 0.5 }}
             className="text-2xl font-bold spectral-semibold-italic mb-2 text-left self-start flex items-center"
           >
-            {session ? greeting : "Welcome"} <span className="ml-2 text-2xl">👋</span>
+            Welcome <span className="ml-2 text-2xl">👋</span>
           </motion.h1>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -99,7 +104,52 @@ const Community = () => {
             </p>
             <button
               className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center"
-              onClick={session ? handleCreateGroup : handleLoginRequired}
+              onClick={handleLoginRequired}
+            >
+              <Plus className="text-white" size={24} />
+            </button>
+          </motion.div>
+        </>
+      );
+    } else if (userGroups.length === 0) {
+      return (
+        <>
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-2xl font-bold spectral-semibold-italic mb-2 text-left self-start flex items-center"
+          >
+            {greeting} <span className="ml-2 text-2xl">👋</span>
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="w-full max-w-sm mx-auto mb-4"
+          >
+            <ChallengeCardPreview />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="flex flex-col items-center justify-center flex-grow mb-8"
+          >
+            <img
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/illustration2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2lsbHVzdHJhdGlvbjIucG5nIiwiaWF0IjoxNzI5MDg5MTAzLCJleHAiOjE3NjA2MjUxMDN9.jnvRMKmghK9GY5JX-3tBuEkW0zUV__A4JEA_hLN0ikM&t=2024-10-16T14%3A31%3A44.880Z"
+              alt="Welcome illustration"
+              className="w-48 h-48 object-contain mb-4"
+            />
+            <p className="text-lg font-bold text-center mb-2">
+              Create groups and invite friends
+            </p>
+            <p className="text-sm font-light text-center mb-8">
+              Connect, share, challenge, and more
+            </p>
+            <button
+              className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center"
+              onClick={handleCreateGroup}
             >
               <Plus className="text-white" size={24} />
             </button>
