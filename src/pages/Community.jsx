@@ -20,6 +20,7 @@ const Community = () => {
   const { session } = useSupabaseAuth();
   const [greeting, setGreeting] = useState("");
   const [userGroups, setUserGroups] = useState([]);
+  const [recentActivities, setRecentActivities] = useState([]);
 
   useEffect(() => {
     const updateGreeting = () => {
@@ -53,22 +54,34 @@ const Community = () => {
     fetchUserGroups();
   }, [session]);
 
+  // Placeholder for fetching recent activities
+  useEffect(() => {
+    // TODO: Implement actual fetching of recent activities
+    setRecentActivities([]);
+  }, [session]);
+
   const renderContent = () => {
     if (!session) {
       return (
-        <WelcomeContent
-          greeting="Welcome"
-          onAction={handleLoginRequired}
-          actionLabel="Login"
-        />
+        <>
+          <WelcomeContent
+            greeting="Welcome"
+            onAction={handleLoginRequired}
+            actionLabel="Login"
+          />
+          <ActivitySection activities={recentActivities} />
+        </>
       );
     } else if (userGroups.length === 0) {
       return (
-        <WelcomeContent
-          greeting={greeting}
-          onAction={handleCreateGroup}
-          actionLabel="Create Group"
-        />
+        <>
+          <WelcomeContent
+            greeting={greeting}
+            onAction={handleCreateGroup}
+            actionLabel="Create Group"
+          />
+          <ActivitySection activities={recentActivities} />
+        </>
       );
     } else {
       return (
@@ -80,7 +93,7 @@ const Community = () => {
         >
           <ChallengeCardPreview />
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
-          <ActivitySection activities={[]} />
+          <ActivitySection activities={recentActivities} />
         </motion.div>
       );
     }
