@@ -63,16 +63,14 @@ const Community = () => {
     if (!session || (session && userGroups.length === 0)) {
       return (
         <>
-          {!session && (
-            <motion.h1
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl font-bold spectral-semibold-italic mb-6 text-left self-start flex items-center"
-            >
-              Welcome, <span className="ml-2 text-2xl">👋</span>
-            </motion.h1>
-          )}
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-2xl font-bold spectral-semibold-italic mb-6 text-left self-start flex items-center"
+          >
+            {session ? greeting : "Welcome"} <span className="ml-2 text-2xl">👋</span>
+          </motion.h1>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -140,21 +138,9 @@ const Community = () => {
     <div className="min-h-screen bg-[#FBFCFC] text-foreground dark:text-white flex flex-col">
       <div className="px-4 pt-4 pb-20 flex-grow flex flex-col">
         {session && (
-          <>
-            <div className="flex justify-end mb-2">
-              <ProfileButton />
-            </div>
-            {greeting && (
-              <motion.h1
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="text-2xl font-bold spectral-semibold-italic mb-6 text-left"
-              >
-                {greeting}
-              </motion.h1>
-            )}
-          </>
+          <div className="flex justify-end mb-2">
+            <ProfileButton />
+          </div>
         )}
         {renderContent()}
       </div>
