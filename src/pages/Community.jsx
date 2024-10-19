@@ -82,7 +82,7 @@ const Community = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="flex flex-col items-center justify-center flex-grow"
         >
-          <div className="bg-white shadow-lg rounded-lg p-8 flex flex-col items-center">
+          <div className="bg-white shadow-lg rounded-lg p-8 flex flex-col items-center w-full max-w-sm mx-auto mb-8">
             <img
               src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/illustration2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2lsbHVzdHJhdGlvbjIucG5nIiwiaWF0IjoxNzI5MDg5MTAzLCJleHAiOjE3NjA2MjUxMDN9.jnvRMKmghK9GY5JX-3tBuEkW0zUV__A4JEA_hLN0ikM&t=2024-10-16T14%3A31%3A44.880Z"
               alt="Welcome illustration"
@@ -95,13 +95,15 @@ const Community = () => {
               Connect, share, challenge, and more
             </p>
             <button
-              className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center mb-8"
+              className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center"
               onClick={session ? handleCreateGroup : handleLoginRequired}
             >
               <Plus className="text-white" size={24} />
             </button>
           </div>
-          <ChallengeCardPreview />
+          <div className="w-full max-w-sm mx-auto">
+            <ChallengeCardPreview />
+          </div>
         </motion.div>
       );
     } else {
