@@ -49,8 +49,9 @@ const Community = () => {
   useEffect(() => {
     const fetchUserGroups = async () => {
       if (session && session.user) {
-        const groups = [{ id: 1, name: 'Test Group' }];
-        setUserGroups(groups);
+        // Fetch user groups logic here
+        // For now, we'll use an empty array to simulate a user without groups
+        setUserGroups([]);
       } else {
         setUserGroups([]);
       }
