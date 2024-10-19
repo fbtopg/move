@@ -68,7 +68,7 @@ const Community = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-2xl font-bold spectral-semibold-italic mb-6 text-left self-start flex items-center"
+            className="text-2xl font-bold spectral-semibold-italic mb-2 text-left self-start flex items-center"
           >
             {session ? greeting : "Welcome"} <span className="ml-2 text-2xl">👋</span>
           </motion.h1>
@@ -76,7 +76,7 @@ const Community = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="w-full max-w-sm mx-auto mb-8"
+            className="w-full max-w-sm mx-auto mb-4"
           >
             <ChallengeCardPreview />
           </motion.div>
@@ -84,7 +84,7 @@ const Community = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-col items-center justify-center flex-grow"
+            className="flex flex-col items-center justify-center flex-grow mb-8"
           >
             <div className="bg-white shadow-lg rounded-lg p-8 flex flex-col items-center w-full max-w-sm mx-auto mb-1">
               <img
