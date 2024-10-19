@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
 const getGradientColor = (index) => {
   const colors = [
@@ -16,51 +17,61 @@ const getGradientColor = (index) => {
 
 const ActivityItem = ({ activity, index }) => (
   <motion.div
-    className="bg-white rounded-lg shadow-md p-4 mb-4"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: index * 0.1 }}
   >
-    <div className="flex items-start space-x-3">
-      <Avatar className="w-10 h-10">
-        <AvatarImage src={activity.userAvatar} alt={activity.userName} />
-        <AvatarFallback>{activity.userName[0]}</AvatarFallback>
-      </Avatar>
-      <div className="flex-grow">
-        <p className="text-sm font-semibold">{activity.userName}</p>
-        <p className="text-xs text-gray-500">{activity.time}</p>
-      </div>
-    </div>
-    <p className="mt-2 text-sm">{activity.content}</p>
-    {activity.image && (
-      <img src={activity.image} alt="Activity" className="mt-2 rounded-lg w-full object-cover h-48" />
-    )}
-    <div className="flex justify-between mt-4">
-      <button className="flex items-center text-gray-500 hover:text-red-500 transition-colors">
-        <Heart className="w-4 h-4 mr-1" />
-        <span className="text-xs">{activity.likes}</span>
-      </button>
-      <button className="flex items-center text-gray-500 hover:text-blue-500 transition-colors">
-        <MessageCircle className="w-4 h-4 mr-1" />
-        <span className="text-xs">{activity.comments}</span>
-      </button>
-      <button className="flex items-center text-gray-500 hover:text-green-500 transition-colors">
-        <Share2 className="w-4 h-4 mr-1" />
-        <span className="text-xs">Share</span>
-      </button>
-    </div>
+    <Card className="mb-4 overflow-hidden">
+      <CardHeader className="p-4">
+        <div className="flex items-center space-x-3">
+          <Avatar>
+            <AvatarImage src={activity.userAvatar} alt={activity.userName} />
+            <AvatarFallback>{activity.userName[0]}</AvatarFallback>
+          </Avatar>
+          <div>
+            <p className="text-sm font-semibold">{activity.userName}</p>
+            <p className="text-xs text-gray-500">{activity.time}</p>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="p-4 pt-0">
+        <p className="text-sm">{activity.content}</p>
+        {activity.image && (
+          <img src={activity.image} alt="Activity" className="mt-2 rounded-lg w-full object-cover h-48" />
+        )}
+      </CardContent>
+      <CardFooter className="p-4 flex justify-between border-t">
+        <button className="flex items-center text-gray-500 hover:text-red-500 transition-colors">
+          <Heart className="w-4 h-4 mr-1" />
+          <span className="text-xs">{activity.likes}</span>
+        </button>
+        <button className="flex items-center text-gray-500 hover:text-blue-500 transition-colors">
+          <MessageCircle className="w-4 h-4 mr-1" />
+          <span className="text-xs">{activity.comments}</span>
+        </button>
+        <button className="flex items-center text-gray-500 hover:text-green-500 transition-colors">
+          <Share2 className="w-4 h-4 mr-1" />
+          <span className="text-xs">Share</span>
+        </button>
+      </CardFooter>
+    </Card>
   </motion.div>
 );
 
 const ActivitySection = ({ activities }) => {
   return (
     <div className="space-y-4">
+      <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
       {activities && activities.length > 0 ? (
         activities.map((activity, index) => (
           <ActivityItem key={activity.id} activity={activity} index={index} />
         ))
       ) : (
-        <p className="text-center text-gray-500">No recent activities</p>
+        <Card>
+          <CardContent className="p-6 text-center text-gray-500">
+            No recent activities
+          </CardContent>
+        </Card>
       )}
     </div>
   );
