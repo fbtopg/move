@@ -64,22 +64,26 @@ const Community = () => {
     if (!session) {
       return (
         <>
-          <WelcomeContent
-            greeting="Welcome"
-            onAction={handleLoginRequired}
-            actionLabel="Login"
-          />
+          <div className="mb-8"> {/* Added mb-8 for bottom margin */}
+            <WelcomeContent
+              greeting="Welcome"
+              onAction={handleLoginRequired}
+              actionLabel="Login"
+            />
+          </div>
           <ActivitySection activities={recentActivities} />
         </>
       );
     } else if (userGroups.length === 0) {
       return (
         <>
-          <WelcomeContent
-            greeting={greeting}
-            onAction={handleCreateGroup}
-            actionLabel="Create Group"
-          />
+          <div className="mb-8"> {/* Added mb-8 for bottom margin */}
+            <WelcomeContent
+              greeting={greeting}
+              onAction={handleCreateGroup}
+              actionLabel="Create Group"
+            />
+          </div>
           <ActivitySection activities={recentActivities} />
         </>
       );
@@ -91,7 +95,7 @@ const Community = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="space-y-8"
         >
-          <div className="mb-8"> {/* Added mb-8 for bottom margin */}
+          <div className="mb-8">
             <ChallengeCardPreview />
           </div>
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
