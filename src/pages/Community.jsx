@@ -91,7 +91,9 @@ const Community = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="space-y-8"
         >
-          <ChallengeCardPreview />
+          <div className="mb-8"> {/* Added mb-8 for bottom margin */}
+            <ChallengeCardPreview />
+          </div>
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
           <ActivitySection activities={recentActivities} />
         </motion.div>
@@ -153,6 +155,7 @@ const Community = () => {
       />
     </div>
   );
+
 };
 
 export default Community;
