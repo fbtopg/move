@@ -24,27 +24,15 @@ const Community = () => {
   useEffect(() => {
     const updateGreeting = () => {
       if (session && session.user) {
-        const currentHour = new Date().getHours();
-        let timeGreeting;
-        if (currentHour < 12) {
-          timeGreeting = "Good Morning";
-        } else if (currentHour < 18) {
-          timeGreeting = "Good Afternoon";
-        } else {
-          timeGreeting = "Good Evening";
-        }
         const { user_metadata } = session.user;
         const displayName = user_metadata.full_name || user_metadata.name || "User";
-        setGreeting(`${timeGreeting}, ${displayName}`);
+        setGreeting(`Hi, ${displayName}`);
       } else {
         setGreeting("");
       }
     };
 
     updateGreeting();
-    const intervalId = setInterval(updateGreeting, 60000);
-
-    return () => clearInterval(intervalId);
   }, [session]);
 
   useEffect(() => {
