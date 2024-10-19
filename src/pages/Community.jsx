@@ -9,6 +9,7 @@ import LoginPopup from '../components/LoginPopup';
 import ProfileButton from "../components/ProfileButton";
 import { Plus } from "lucide-react";
 import ActivitySection from "../components/ActivitySection";
+import ChallengeCardPreview from "../components/ChallengeCardPreview";
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -93,11 +94,12 @@ const Community = () => {
             Connect, share, challenge, and more
           </p>
           <button
-            className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center mt-12"
+            className="w-12 h-12 bg-blue-500 rounded-[35%] shadow-lg flex items-center justify-center"
             onClick={session ? handleCreateGroup : handleLoginRequired}
           >
             <Plus className="text-white" size={24} />
           </button>
+          <ChallengeCardPreview />
         </motion.div>
       );
     } else {
