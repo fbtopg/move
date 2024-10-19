@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { UserPlus } from 'lucide-react';
+import { Plus } from "lucide-react";
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '../integrations/supabase/supabase';
 import GroupCard from './GroupCard';
@@ -60,7 +60,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
       whileTap={{ scale: 0.95 }}
       onClick={handleCreateGroupClick}
     >
-      <UserPlus className="w-12 h-12 text-gray-400 mb-2" />
+      <Plus className="w-12 h-12 text-gray-400 mb-2" />
       <p className="text-sm text-gray-600">Create a new group and invite friends</p>
     </motion.div>
   );
@@ -87,7 +87,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
             onClick={handleCreateGroupClick}
             className="p-0"
           >
-            <UserPlus className="h-5 w-5" />
+            <Plus className="h-5 w-5" />
           </Button>
         )}
       </div>
