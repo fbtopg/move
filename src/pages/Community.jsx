@@ -28,7 +28,7 @@ const Community = () => {
         const displayName = user_metadata.full_name || user_metadata.name || "User";
         setGreeting(`Hi, ${displayName}`);
       } else {
-        setGreeting("");
+        setGreeting("Welcome");
       }
     };
 
