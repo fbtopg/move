@@ -9,14 +9,14 @@ const ChallengeCardPreview = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.8 }}
-      className="w-full max-w-sm bg-gradient-to-br from-blue-100 via-pink-100 to-blue-200 rounded-xl p-6 mt-4" // Changed mt-8 to mt-4
+      className="w-full max-w-sm bg-gradient-to-br from-blue-100 via-pink-100 to-blue-200 rounded-xl p-6 mt-4"
     >
       <h3 className="text-xl font-bold text-gray-800 mb-4">Daily Challenge</h3>
       <p className="text-sm text-gray-600 mb-6 leading-relaxed">
         Complete today's challenge to earn points and climb the leaderboard!
       </p>
       <Button className="w-full bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300 py-2 text-sm font-semibold rounded-full flex items-center justify-center group">
-        View Challenge
+        Get Started
         <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={18} />
       </Button>
     </motion.div>
