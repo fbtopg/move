@@ -9,7 +9,11 @@ const ChallengeCardPreview = ({ onLoginRequired }) => {
 
   const handleGetStarted = () => {
     if (!session) {
-      onLoginRequired();
+      if (typeof onLoginRequired === 'function') {
+        onLoginRequired();
+      } else {
+        console.error('onLoginRequired is not a function');
+      }
     } else {
       // TODO: Implement challenge start logic for authenticated users
       console.log('Starting challenge for authenticated user');
