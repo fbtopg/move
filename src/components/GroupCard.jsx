@@ -11,15 +11,15 @@ const GroupCard = ({ group, currentUserId }) => {
 
   const backgroundStyle = group.image
     ? { backgroundImage: `url(${group.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-    : { background: getRandomGradient() };
+    : { };
 
   return (
     <div 
-      className="relative rounded-lg shadow-md p-2 w-full h-full flex flex-col overflow-hidden"
+      className={`relative rounded-lg shadow-md p-2 w-full h-full flex flex-col overflow-hidden ${!group.image ? getRandomGradient() : ''}`}
       style={backgroundStyle}
     >
-      {/* Dimmer overlay - opacity reduced from 60 to 40 */}
-      <div className="absolute inset-0 bg-black opacity-40"></div>
+      {/* Dimmer overlay - only for cards with images */}
+      {group.image && <div className="absolute inset-0 bg-black opacity-40"></div>}
 
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full">
