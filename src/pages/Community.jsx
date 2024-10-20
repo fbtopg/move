@@ -8,7 +8,6 @@ import { useSupabaseAuth } from '../integrations/supabase/auth';
 import LoginPopup from '../components/LoginPopup';
 import ProfileButton from "../components/ProfileButton";
 import ActivitySection from "../components/ActivitySection";
-import ChallengeCardPreview from "../components/ChallengeCardPreview";
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import WelcomeContent from '../components/WelcomeContent';
 
@@ -70,28 +69,19 @@ const Community = () => {
         className="space-y-4"
       >
         {!session && (
-          <>
-            <ChallengeCardPreview />
-            <WelcomeContent
-              onAction={handleLoginRequired}
-              actionLabel="Login"
-            />
-          </>
+          <WelcomeContent
+            onAction={handleLoginRequired}
+            actionLabel="Login"
+          />
         )}
         {session && userGroups.length === 0 && (
-          <>
-            <ChallengeCardPreview />
-            <WelcomeContent
-              onAction={handleCreateGroup}
-              actionLabel="Create Group"
-            />
-          </>
+          <WelcomeContent
+            onAction={handleCreateGroup}
+            actionLabel="Create Group"
+          />
         )}
         {session && userGroups.length > 0 && (
-          <>
-            <ChallengeCardPreview />
-            <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
-          </>
+          <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
         )}
         <ActivitySection activities={recentActivities} />
       </motion.div>
