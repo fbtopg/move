@@ -69,7 +69,7 @@ const Community = () => {
         className="space-y-4"
       >
         {!session && (
-          <div className="mt-8"> {/* Increased top margin */}
+          <div className="mt-8">
             <WelcomeContent
               onAction={handleLoginRequired}
               actionLabel="Login"
@@ -77,7 +77,7 @@ const Community = () => {
           </div>
         )}
         {session && userGroups.length === 0 && (
-          <div className="mt-8"> {/* Increased top margin */}
+          <div className="mt-8">
             <WelcomeContent
               onAction={handleCreateGroup}
               actionLabel="Create Group"
@@ -112,7 +112,9 @@ const Community = () => {
             <ProfileButton />
           </div>
         )}
-        <h1 className="text-2xl font-bold mb-4">{greeting}</h1>
+        <h1 className="text-2xl font-bold mb-2">
+          {greeting}
+        </h1>
         {renderContent()}
       </div>
 
