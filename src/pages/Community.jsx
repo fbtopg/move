@@ -70,19 +70,28 @@ const Community = () => {
         className="space-y-4"
       >
         {!session && (
-          <WelcomeContent
-            onAction={handleLoginRequired}
-            actionLabel="Login"
-          />
+          <>
+            <ChallengeCardPreview />
+            <WelcomeContent
+              onAction={handleLoginRequired}
+              actionLabel="Login"
+            />
+          </>
         )}
         {session && userGroups.length === 0 && (
-          <WelcomeContent
-            onAction={handleCreateGroup}
-            actionLabel="Create Group"
-          />
+          <>
+            <ChallengeCardPreview />
+            <WelcomeContent
+              onAction={handleCreateGroup}
+              actionLabel="Create Group"
+            />
+          </>
         )}
         {session && userGroups.length > 0 && (
-          <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
+          <>
+            <ChallengeCardPreview />
+            <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
+          </>
         )}
         <ActivitySection activities={recentActivities} />
       </motion.div>
@@ -110,9 +119,6 @@ const Community = () => {
           </div>
         )}
         <h1 className="text-2xl font-bold mb-4">{greeting}</h1>
-        <div className="mb-4">
-          <ChallengeCardPreview />
-        </div>
         {renderContent()}
       </div>
 
