@@ -91,7 +91,6 @@ const Community = () => {
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
         )}
         <div className="space-y-4">
-          <h2 className="text-base font-semibold roboto-medium">Recent Activity</h2>
           <ActivitySection activities={recentActivities} />
         </div>
       </motion.div>
