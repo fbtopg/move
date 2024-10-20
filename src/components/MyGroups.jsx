@@ -55,23 +55,23 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
 
   const CreateNewGroupCard = () => (
     <motion.div
-      className="flex-shrink-0 w-52 h-52 bg-white rounded-lg flex flex-col items-center justify-center cursor-pointer p-4 text-center"
+      className="flex-shrink-0 w-40 h-40 bg-white rounded-lg flex flex-col items-center justify-center cursor-pointer p-3 text-center"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={handleCreateGroupClick}
     >
-      <Plus className="w-12 h-12 text-gray-400 mb-2" />
-      <p className="text-sm text-gray-600">Create a new group and invite friends</p>
+      <Plus className="w-8 h-8 text-gray-400 mb-2" />
+      <p className="text-xs text-gray-600">Create a new group</p>
     </motion.div>
   );
 
   const SkeletonCard = () => (
-    <div className="flex-shrink-0 w-52 h-52 bg-gray-200 rounded-lg animate-pulse">
-      <div className="h-32 bg-gray-300 rounded-t-lg"></div>
-      <div className="p-4">
-        <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
-        <div className="h-3 bg-gray-300 rounded w-1/2 mb-3"></div>
-        <div className="h-8 bg-gray-300 rounded"></div>
+    <div className="flex-shrink-0 w-40 h-40 bg-gray-200 rounded-lg animate-pulse">
+      <div className="h-24 bg-gray-300 rounded-t-lg"></div>
+      <div className="p-2">
+        <div className="h-3 bg-gray-300 rounded w-3/4 mb-1"></div>
+        <div className="h-2 bg-gray-300 rounded w-1/2 mb-2"></div>
+        <div className="h-6 bg-gray-300 rounded"></div>
       </div>
     </div>
   );
@@ -92,7 +92,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
         )}
       </div>
       <div className="overflow-x-auto scrollbar-hide -mx-4">
-        <div className="flex flex-row space-x-2 px-4" style={{ width: isLoading ? '440px' : `${((groups?.length || 0) + 1) * 220}px` }}>
+        <div className="flex flex-row space-x-2 px-4" style={{ width: isLoading ? '360px' : `${((groups?.length || 0) + 1) * 180}px` }}>
           {isLoading ? (
             <>
               <SkeletonCard />
@@ -103,7 +103,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
               {groups.map((group, index) => (
                 <motion.div
                   key={group.id}
-                  className="flex-shrink-0 w-52 h-52"
+                  className="flex-shrink-0 w-40 h-40"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
