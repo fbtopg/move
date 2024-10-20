@@ -38,12 +38,10 @@ export const SupabaseAuthProviderInner = ({ children }) => {
         localStorage.setItem('user', JSON.stringify(session.user));
         // Insert user info into the users table
         try {
-          const profilePictureUrl = session.user.user_metadata.avatar_url || null;
           await insertUserInfo(
             session.user.id,
             session.user.email,
-            session.user.user_metadata.full_name || session.user.email.split('@')[0],
-            profilePictureUrl
+            session.user.user_metadata.full_name || session.user.email.split('@')[0]
           );
         } catch (error) {
           console.error('Error storing user info:', error);

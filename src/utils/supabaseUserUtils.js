@@ -1,16 +1,11 @@
 import { supabase } from '../integrations/supabase/supabase';
 
-export const insertUserInfo = async (id, email, username, profilePictureUrl) => {
+export const insertUserInfo = async (id, email, username) => {
   try {
     const { data, error } = await supabase
       .from('users')
       .upsert([
-        { 
-          id, 
-          email, 
-          username,
-          profilepicture: profilePictureUrl // Add the profile picture URL
-        }
+        { id, email, username }
       ], { onConflict: 'id' })
       .select();
 
