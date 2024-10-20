@@ -27,7 +27,7 @@ const Community = () => {
       if (session && session.user) {
         const { user_metadata } = session.user;
         const fullName = user_metadata.full_name || user_metadata.name || "User";
-        const firstName = fullName.split(' ')[0]; // Extract first name
+        const firstName = fullName.split(' ')[0];
         setGreeting(`Hi, ${firstName}`);
       } else {
         setGreeting("Welcome");
@@ -62,49 +62,34 @@ const Community = () => {
   }, [session]);
 
   const renderContent = () => {
-    if (!session) {
-      return (
-        <>
-          {/* Changed from mb-8 to mb-4 */}
-          <div className="mb-4">
-            <WelcomeContent
-              onAction={handleLoginRequired}
-              actionLabel="Login"
-            />
-          </div>
-          <ActivitySection activities={recentActivities} />
-        </>
-      );
-    } else if (userGroups.length === 0) {
-      return (
-        <>
-          {/* Changed from mb-8 to mb-4 */}
-          <div className="mb-4">
-            <WelcomeContent
-              onAction={handleCreateGroup}
-              actionLabel="Create Group"
-            />
-          </div>
-          <ActivitySection activities={recentActivities} />
-        </>
-      );
-    } else {
-      return (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="space-y-4" // Changed from space-y-8 to space-y-4
-        >
-          {/* Changed from mb-8 to mb-4 */}
-          <div className="mb-4">
-            <ChallengeCardPreview />
-          </div>
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
+        className="space-y-4"
+      >
+        <div className="mb-4">
+          <ChallengeCardPreview />
+        </div>
+        {!session && (
+          <WelcomeContent
+            onAction={handleLoginRequired}
+            actionLabel="Login"
+          />
+        )}
+        {session && userGroups.length === 0 && (
+          <WelcomeContent
+            onAction={handleCreateGroup}
+            actionLabel="Create Group"
+          />
+        )}
+        {session && userGroups.length > 0 && (
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
-          <ActivitySection activities={recentActivities} />
-        </motion.div>
-      );
-    }
+        )}
+        <ActivitySection activities={recentActivities} />
+      </motion.div>
+    );
   };
 
   const handleCreateGroup = () => {
