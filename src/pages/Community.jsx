@@ -64,9 +64,8 @@ const Community = () => {
     if (!session) {
       return (
         <>
-          <div className="mb-8"> {/* Added mb-8 for bottom margin */}
+          <div className="mb-8">
             <WelcomeContent
-              greeting="Welcome"
               onAction={handleLoginRequired}
               actionLabel="Login"
             />
@@ -77,9 +76,8 @@ const Community = () => {
     } else if (userGroups.length === 0) {
       return (
         <>
-          <div className="mb-8"> {/* Added mb-8 for bottom margin */}
+          <div className="mb-8">
             <WelcomeContent
-              greeting={greeting}
               onAction={handleCreateGroup}
               actionLabel="Create Group"
             />
@@ -125,6 +123,7 @@ const Community = () => {
             <ProfileButton />
           </div>
         )}
+        <h1 className="text-2xl font-bold mb-4">{greeting}</h1>
         {renderContent()}
       </div>
 
@@ -159,7 +158,6 @@ const Community = () => {
       />
     </div>
   );
-
 };
 
 export default Community;
