@@ -1,5 +1,6 @@
 import React from 'react';
 import { Users } from 'lucide-react';
+import { getRandomGradient } from '../utils/gradientUtils';
 
 const GroupCard = ({ group, currentUserId }) => {
   const truncateName = (name) => name.length > 15 ? name.slice(0, 15) + '...' : name;
@@ -8,14 +9,14 @@ const GroupCard = ({ group, currentUserId }) => {
   const isOwner = group.created_by === currentUserId;
   const labelText = isOwner ? 'Owner' : 'Member';
 
+  const backgroundStyle = group.image
+    ? { backgroundImage: `url(${group.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+    : { background: getRandomGradient() };
+
   return (
     <div 
       className="relative rounded-lg shadow-md p-2 w-full h-full flex flex-col overflow-hidden"
-      style={{
-        backgroundImage: `url(${group.image})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
+      style={backgroundStyle}
     >
       {/* Dimmer overlay - opacity reduced from 60 to 40 */}
       <div className="absolute inset-0 bg-black opacity-40"></div>
