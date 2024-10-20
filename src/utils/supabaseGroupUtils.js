@@ -2,14 +2,33 @@ import { supabase } from '../integrations/supabase/supabase';
 
 export const fetchPrivateGroups = async (userId) => {
   try {
-    const { data, error } = await supabase
+    const { data: groups, error } = await supabase
       .from('groups')
-      .select('id, name, description, image, member_count, created_at')
+      .select('id, name, description, image, member_count, created_at, members')
       .or(`created_by.eq.${userId},members.cs.{${userId}}`)
       .order('created_at', { ascending: false });
 
     if (error) throw error;
-    return data;
+
+    // Fetch profile pictures for members
+    const groupsWithMemberProfiles = await Promise.all(groups.map(async (group) => {
+      const { data: memberProfiles, error: memberError } = await supabase
+        .from('users')
+        .select('id, profilepicture')
+        .in('id', group.members);
+
+      if (memberError) throw memberError;
+
+      return {
+        ...group,
+        memberProfiles: memberProfiles.map(member => ({
+          id: member.id,
+          avatar: member.profilepicture
+        }))
+      };
+    }));
+
+    return groupsWithMemberProfiles;
   } catch (error) {
     console.error('Error fetching private groups:', error);
     throw error;
