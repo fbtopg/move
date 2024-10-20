@@ -9,7 +9,7 @@ const ChallengeCardPreview = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.8 }}
-      className="w-full max-w-sm bg-gradient-to-br from-blue-100 via-pink-100 to-blue-200 rounded-xl p-6 mt-8"
+      className="w-full max-w-sm bg-gradient-to-br from-blue-100 via-pink-100 to-blue-200 rounded-xl p-6 mt-4" // Changed mt-8 to mt-4
     >
       <h3 className="text-xl font-bold text-gray-800 mb-4">Daily Challenge</h3>
       <p className="text-sm text-gray-600 mb-6 leading-relaxed">
