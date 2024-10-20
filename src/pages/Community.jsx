@@ -69,16 +69,20 @@ const Community = () => {
         className="space-y-4"
       >
         {!session && (
-          <WelcomeContent
-            onAction={handleLoginRequired}
-            actionLabel="Login"
-          />
+          <div className="mt-8"> {/* Increased top margin */}
+            <WelcomeContent
+              onAction={handleLoginRequired}
+              actionLabel="Login"
+            />
+          </div>
         )}
         {session && userGroups.length === 0 && (
-          <WelcomeContent
-            onAction={handleCreateGroup}
-            actionLabel="Create Group"
-          />
+          <div className="mt-8"> {/* Increased top margin */}
+            <WelcomeContent
+              onAction={handleCreateGroup}
+              actionLabel="Create Group"
+            />
+          </div>
         )}
         {session && userGroups.length > 0 && (
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
