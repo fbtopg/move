@@ -88,7 +88,7 @@ const Community = () => {
           </div>
         )}
         {session && userGroups.length > 0 && (
-          <div className="mb-10"> {/* Added mb-10 for bottom margin */}
+          <div className="mb-10">
             <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
           </div>
         )}
@@ -114,11 +114,9 @@ const Community = () => {
   return (
     <div className="min-h-screen bg-[#FBFCFC] text-foreground dark:text-white flex flex-col">
       <div className="px-4 pt-4 pb-20 flex-grow flex flex-col">
-        {session && (
-          <div className="flex justify-end mb-2">
-            <ProfileButton />
-          </div>
-        )}
+        <div className="flex justify-end mb-2">
+          <ProfileButton />
+        </div>
         <h1 className="text-2xl font-bold mb-2">
           {greeting}
         </h1>
