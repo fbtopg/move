@@ -12,19 +12,25 @@ export const fetchPrivateGroups = async (userId) => {
 
     // Fetch profile pictures for members
     const groupsWithMemberProfiles = await Promise.all(groups.map(async (group) => {
+      const memberIds = group.members.map(member => member.id || member);
       const { data: memberProfiles, error: memberError } = await supabase
         .from('users')
         .select('id, profilepicture')
-        .in('id', group.members);
+        .in('id', memberIds);
 
       if (memberError) throw memberError;
 
+      const updatedMembers = group.members.map(member => {
+        const profile = memberProfiles.find(p => p.id === (member.id || member));
+        return {
+          id: member.id || member,
+          avatar: profile ? profile.profilepicture : null
+        };
+      });
+
       return {
         ...group,
-        memberProfiles: memberProfiles.map(member => ({
-          id: member.id,
-          avatar: member.profilepicture
-        }))
+        members: updatedMembers
       };
     }));
 

@@ -8,8 +8,8 @@ const GroupCard = ({ group, currentUserId }) => {
   const isOwner = group.created_by === currentUserId;
   const labelText = isOwner ? 'Owner' : 'Member';
 
-  // Get the first two members' profile pictures
-  const memberProfiles = group.memberProfiles?.slice(0, 2) || [];
+  // Get the first three members' profile pictures
+  const memberProfiles = group.members?.slice(0, 3) || [];
 
   return (
     <div 
