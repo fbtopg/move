@@ -17,7 +17,8 @@ const Community = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
-  const { session } = useSupabaseAuth();
+  const auth = useSupabaseAuth();
+  const session = auth?.session;
   const [greeting, setGreeting] = useState("");
   const [userGroups, setUserGroups] = useState([]);
   const [recentActivities, setRecentActivities] = useState([]);
@@ -88,7 +89,7 @@ const Community = () => {
           </div>
         )}
         {session && userGroups.length > 0 && (
-          <div className="mb-10"> {/* Added mb-10 for bottom margin */}
+          <div className="mb-10">
             <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
           </div>
         )}
