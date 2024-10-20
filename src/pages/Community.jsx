@@ -88,7 +88,9 @@ const Community = () => {
           </div>
         )}
         {session && userGroups.length > 0 && (
-          <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
+          <div className="mb-10"> {/* Added mb-10 for bottom margin */}
+            <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
+          </div>
         )}
         <div className="space-y-4">
           <ActivitySection activities={recentActivities} />
