@@ -26,8 +26,9 @@ const Community = () => {
     const updateGreeting = () => {
       if (session && session.user) {
         const { user_metadata } = session.user;
-        const displayName = user_metadata.full_name || user_metadata.name || "User";
-        setGreeting(`Hi, ${displayName}`);
+        const fullName = user_metadata.full_name || user_metadata.name || "User";
+        const firstName = fullName.split(' ')[0]; // Extract first name
+        setGreeting(`Hi, ${firstName}`);
       } else {
         setGreeting("Welcome");
       }
