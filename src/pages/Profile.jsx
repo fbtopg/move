@@ -12,8 +12,8 @@ const Profile = () => {
   const { session } = useSupabaseAuth();
 
   const userAvatarUrl = session?.user?.user_metadata?.avatar_url;
-  const displayName = session?.user?.user_metadata?.full_name || session?.user?.email?.split('@')[0] || "User";
-  const memberSince = new Date(session?.user?.created_at).getFullYear().toString() || "2023";
+  const displayName = session ? (session.user?.user_metadata?.full_name || session.user?.email?.split('@')[0] || "User") : "Guest";
+  const memberSince = session ? (new Date(session.user?.created_at).getFullYear().toString() || "2023") : "";
 
   const profileItems = [
     { icon: FileText, label: "Summary", route: "/profile/summary" },
@@ -44,8 +44,10 @@ const Profile = () => {
                 {displayName[0]}
               </AvatarFallback>
             </Avatar>
-            <h1 className="text-2xl font-bold mb-1">{displayName}</h1>
-            <p className="text-sm text-gray-600 mb-4">Member since {memberSince}</p>
+            <h1 className="text-2xl font-bold mb-1">
+              {session ? displayName : "Welcome guest"}
+            </h1>
+            {session && <p className="text-sm text-gray-600 mb-4">Member since {memberSince}</p>}
           </div>
           
           <div className="space-y-4">
