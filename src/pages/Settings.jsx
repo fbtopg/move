@@ -29,11 +29,11 @@ const Settings = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/login'); // Redirect to login page after logout
+    navigate('/login');
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FEF8F3] via-[#F0E7E0] to-[#E6D0C5] dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 text-foreground">
+    <div className="min-h-screen bg-[#FBFCFC] dark:bg-gray-900 text-foreground">
       <div className="max-w-md mx-auto p-4">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
