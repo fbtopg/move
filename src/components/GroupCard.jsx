@@ -17,8 +17,8 @@ const GroupCard = ({ group, currentUserId }) => {
         backgroundPosition: 'center',
       }}
     >
-      {/* Dimmer overlay */}
-      <div className="absolute inset-0 bg-black opacity-60"></div>
+      {/* Dimmer overlay - opacity reduced from 60 to 40 */}
+      <div className="absolute inset-0 bg-black opacity-40"></div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full">
