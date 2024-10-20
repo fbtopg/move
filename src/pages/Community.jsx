@@ -5,18 +5,16 @@ import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import MyGroups from "../components/MyGroups";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
-import LoginPopup from '../components/LoginPopup';
 import ProfileButton from "../components/ProfileButton";
 import ActivitySection from "../components/ActivitySection";
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import WelcomeContent from '../components/WelcomeContent';
 import ChallengeCardPreview from '../components/ChallengeCardPreview';
 
-const Community = () => {
+const Community = ({ openLoginModal }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
   const { session } = useSupabaseAuth();
   const [greeting, setGreeting] = useState("");
   const [userGroups, setUserGroups] = useState([]);
@@ -62,7 +60,7 @@ const Community = () => {
   }, [session]);
 
   const handleLoginRequired = () => {
-    setShowLoginPopup(true);
+    openLoginModal();
   };
 
   const renderContent = () => {
@@ -107,7 +105,7 @@ const Community = () => {
     if (session) {
       setIsCreateGroupModalOpen(true);
     } else {
-      setShowLoginPopup(true);
+      handleLoginRequired();
     }
   };
 
@@ -115,7 +113,7 @@ const Community = () => {
     <div className="min-h-screen bg-[#FBFCFC] text-foreground dark:text-white flex flex-col">
       <div className="px-4 pt-4 pb-20 flex-grow flex flex-col">
         <div className="flex justify-end mb-2">
-          <ProfileButton />
+          <ProfileButton openLoginModal={openLoginModal} />
         </div>
         <h1 className="text-2xl font-bold mb-2">
           {greeting}
@@ -146,11 +144,6 @@ const Community = () => {
         isOpen={isCreateGroupModalOpen}
         onClose={() => setIsCreateGroupModalOpen(false)}
         onLoginRequired={handleLoginRequired}
-      />
-
-      <LoginPopup
-        isOpen={showLoginPopup}
-        onClose={() => setShowLoginPopup(false)}
       />
     </div>
   );

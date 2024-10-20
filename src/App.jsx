@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -11,11 +11,16 @@ import Board from "./pages/Board";
 import Settings from "./pages/Settings";
 import Notifications from "./pages/Notifications";
 import GroupDetails from "./pages/GroupDetails";
-import Login from "./pages/Login";
+import LoginModal from "./components/LoginModal";
 
 const queryClient = new QueryClient();
 
 const App = () => {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const openLoginModal = () => setIsLoginModalOpen(true);
+  const closeLoginModal = () => setIsLoginModalOpen(false);
+
   return (
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
@@ -26,16 +31,16 @@ const App = () => {
               <BrowserRouter>
                 <Routes>
                   {navItems.map(({ to, page }) => (
-                    <Route key={to} path={to} element={page} />
+                    <Route key={to} path={to} element={React.cloneElement(page, { openLoginModal })} />
                   ))}
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/board" element={<Board />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/group/:groupId" element={<GroupDetails />} />
-                  <Route path="/login" element={<Login />} />
                 </Routes>
               </BrowserRouter>
+              <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
             </TooltipProvider>
           </SupabaseAuthProvider>
         </ThemeProvider>
