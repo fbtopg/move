@@ -60,8 +60,8 @@ const ActivityItem = ({ activity, index }) => (
 
 const ActivitySection = ({ activities }) => {
   return (
-    <div className="space-y-4 mb-8">
-      <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+    <div className="space-y-4 mb-6">
+      <h2 className="text-base font-semibold roboto-medium">Recent Activity</h2>
       {activities && activities.length > 0 ? (
         activities.map((activity, index) => (
           <ActivityItem key={activity.id} activity={activity} index={index} />
