@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Users } from 'lucide-react';
 
 const GroupCard = ({ group, currentUserId }) => {
   const truncateName = (name) => name.length > 15 ? name.slice(0, 15) + '...' : name;
@@ -7,9 +7,6 @@ const GroupCard = ({ group, currentUserId }) => {
 
   const isOwner = group.created_by === currentUserId;
   const labelText = isOwner ? 'Owner' : 'Member';
-
-  // Get the first two members' profile pictures
-  const memberProfiles = group.members?.slice(0, 2) || [];
 
   return (
     <div 
@@ -25,27 +22,14 @@ const GroupCard = ({ group, currentUserId }) => {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full">
-        <div className="flex items-center mb-1">
-          <Avatar className="h-8 w-8 mr-1">
-            <AvatarImage src={group.image} alt={group.name} />
-            <AvatarFallback>{group.name.charAt(0)}</AvatarFallback>
-          </Avatar>
-          <h3 className="text-xs font-semibold truncate flex-1 text-white">{truncateName(group.name)}</h3>
-        </div>
+        <h3 className="text-sm font-semibold truncate text-white mb-1">{truncateName(group.name)}</h3>
         <p className="text-xs text-gray-300 mb-1 flex-grow overflow-hidden">
           {truncateDescription(group.description)}
         </p>
         <div className="flex justify-between items-center mt-auto">
-          <div className="flex items-center">
-            <div className="flex -space-x-1 overflow-hidden">
-              {memberProfiles.map((member, index) => (
-                <Avatar key={index} className="inline-block h-4 w-4 rounded-full ring-1 ring-black">
-                  <AvatarImage src={member.avatar} alt={member.name} />
-                  <AvatarFallback>{member.name ? member.name.charAt(0) : '?'}</AvatarFallback>
-                </Avatar>
-              ))}
-            </div>
-            <span className="text-xs text-gray-300 ml-1">{group.member_count || 0}</span>
+          <div className="flex items-center text-white">
+            <Users className="w-4 h-4 mr-1" />
+            <span className="text-xs">{group.member_count || 0}</span>
           </div>
           <span className={`${isOwner ? 'bg-green-500' : 'bg-blue-500'} text-white px-2 py-0.5 rounded-full text-xs`}>
             {labelText}
