@@ -30,7 +30,7 @@ const Community = ({ openLoginModal }) => {
         const firstName = fullName.split(' ')[0];
         setGreeting(`Hi, ${firstName}`);
       } else {
-        setGreeting("Welcome");
+        setGreeting("Welcome guest");
       }
     };
 
