@@ -77,7 +77,7 @@ const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
   );
 
   return (
-    <div className="mb-6">
+    <div className="mb-10"> {/* Added mb-10 for bottom margin */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-base font-semibold roboto-medium">My Groups</h2>
         {!isLoading && groups && groups.length > 0 && (
