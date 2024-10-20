@@ -90,7 +90,10 @@ const Community = () => {
         {session && userGroups.length > 0 && (
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
         )}
-        <ActivitySection activities={recentActivities} />
+        <div className="space-y-4">
+          <h2 className="text-base font-semibold roboto-medium">Recent Activity</h2>
+          <ActivitySection activities={recentActivities} />
+        </div>
       </motion.div>
     );
   };
