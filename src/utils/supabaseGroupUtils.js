@@ -4,7 +4,7 @@ export const fetchPrivateGroups = async (userId) => {
   try {
     const { data: groups, error } = await supabase
       .from('groups')
-      .select('id, name, description, image, member_count, created_at, members')
+      .select('id, name, description, image, member_count, created_at, members, created_by')
       .or(`created_by.eq.${userId},members.cs.{${userId}}`)
       .order('created_at', { ascending: false });
 

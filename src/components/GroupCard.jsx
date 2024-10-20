@@ -39,9 +39,9 @@ const GroupCard = ({ group, currentUserId }) => {
           <div className="flex items-center">
             <div className="flex -space-x-1 overflow-hidden">
               {memberProfiles.map((member, index) => (
-                <Avatar key={index} className="inline-block h-4 w-4 rounded-full ring-1 ring-black">
+                <Avatar key={member.id} className="inline-block h-4 w-4 rounded-full ring-1 ring-black">
                   <AvatarImage src={member.avatar} alt={`Member ${index + 1}`} />
-                  <AvatarFallback>?</AvatarFallback>
+                  <AvatarFallback>{member.id.charAt(0)}</AvatarFallback>
                 </Avatar>
               ))}
             </div>
