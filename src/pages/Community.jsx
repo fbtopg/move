@@ -61,6 +61,10 @@ const Community = () => {
     setRecentActivities([]);
   }, [session]);
 
+  const handleLoginRequired = () => {
+    setShowLoginPopup(true);
+  };
+
   const renderContent = () => {
     return (
       <motion.div
@@ -69,7 +73,7 @@ const Community = () => {
         transition={{ duration: 0.5, delay: 0.6 }}
         className="space-y-4"
       >
-        {session && userGroups.length > 0 && <ChallengeCardPreview />}
+        {session && userGroups.length > 0 && <ChallengeCardPreview onLoginRequired={handleLoginRequired} />}
         
         {!session && (
           <div className="mt-8">
@@ -105,10 +109,6 @@ const Community = () => {
     } else {
       setShowLoginPopup(true);
     }
-  };
-
-  const handleLoginRequired = () => {
-    setShowLoginPopup(true);
   };
 
   return (
