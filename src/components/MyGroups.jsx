@@ -26,8 +26,25 @@ const fetchUserGroups = async (userId) => {
 
   if (groupsError) throw groupsError;
 
-  // Sort groups by created_at in descending order (newest first)
-  return groupsData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  // Fetch member profiles for each group
+  const groupsWithMembers = await Promise.all(groupsData.map(async (group) => {
+    const { data: membersData, error: membersError } = await supabase
+      .from('users')
+      .select('id, avatar_url')
+      .in('id', group.members);
+
+    if (membersError) throw membersError;
+
+    return {
+      ...group,
+      memberProfiles: membersData.map(member => ({
+        id: member.id,
+        avatar: member.avatar_url
+      }))
+    };
+  }));
+
+  return groupsWithMembers.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 };
 
 const MyGroups = ({ onCreateGroup, onLoginRequired }) => {
