@@ -8,8 +8,8 @@ const GroupCard = ({ group, currentUserId }) => {
   const isOwner = group.created_by === currentUserId;
   const labelText = isOwner ? 'Owner' : 'Member';
 
-  // Get the first three members' avatar URLs
-  const memberAvatars = group.member_avatar ? Object.values(group.member_avatar).slice(0, 3) : [];
+  // Get the first two members' profile pictures
+  const memberProfiles = group.members?.slice(0, 2) || [];
 
   return (
     <div 
@@ -38,10 +38,10 @@ const GroupCard = ({ group, currentUserId }) => {
         <div className="flex justify-between items-center mt-auto">
           <div className="flex items-center">
             <div className="flex -space-x-1 overflow-hidden">
-              {memberAvatars.map((avatarUrl, index) => (
+              {memberProfiles.map((member, index) => (
                 <Avatar key={index} className="inline-block h-4 w-4 rounded-full ring-1 ring-black">
-                  <AvatarImage src={avatarUrl} alt={`Member ${index + 1}`} />
-                  <AvatarFallback>?</AvatarFallback>
+                  <AvatarImage src={member.avatar} alt={member.name} />
+                  <AvatarFallback>{member.name ? member.name.charAt(0) : '?'}</AvatarFallback>
                 </Avatar>
               ))}
             </div>

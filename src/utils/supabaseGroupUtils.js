@@ -91,7 +91,7 @@ export const joinGroup = async (groupId, userId) => {
     // First, fetch the current group data
     const { data: groupData, error: fetchError } = await supabase
       .from('groups')
-      .select('members, member_count, member_avatar')
+      .select('members, member_count')
       .eq('id', groupId)
       .single();
 
@@ -102,26 +102,15 @@ export const joinGroup = async (groupId, userId) => {
       return { alreadyMember: true };
     }
 
-    // Fetch user's avatar URL
-    const { data: userData, error: userError } = await supabase
-      .from('users')
-      .select('avatar_url')
-      .eq('id', userId)
-      .single();
-
-    if (userError) throw userError;
-
-    // Update the group with the new member and their avatar
+    // Update the group with the new member
     const updatedMembers = [...(groupData.members || []), userId];
     const updatedMemberCount = (groupData.member_count || 0) + 1;
-    const updatedMemberAvatar = { ...(groupData.member_avatar || {}), [userId]: userData.avatar_url };
 
     const { data, error } = await supabase
       .from('groups')
       .update({ 
         members: updatedMembers,
-        member_count: updatedMemberCount,
-        member_avatar: updatedMemberAvatar
+        member_count: updatedMemberCount
       })
       .eq('id', groupId)
       .select();
@@ -134,65 +123,6 @@ export const joinGroup = async (groupId, userId) => {
     return data[0];
   } catch (error) {
     console.error('Error joining group:', error);
-    throw error;
-  }
-};
-
-export const leaveGroup = async (groupId, userId) => {
-  try {
-    // First, fetch the current group data
-    const { data: groupData, error: fetchError } = await supabase
-      .from('groups')
-      .select('members, member_count, member_avatar')
-      .eq('id', groupId)
-      .single();
-
-    if (fetchError) throw fetchError;
-
-    // Check if the user is a member
-    if (!groupData.members || !groupData.members.includes(userId)) {
-      return { notMember: true };
-    }
-
-    // Update the group by removing the member and their avatar
-    const updatedMembers = groupData.members.filter(memberId => memberId !== userId);
-    const updatedMemberCount = groupData.member_count - 1;
-    const updatedMemberAvatar = { ...groupData.member_avatar };
-    delete updatedMemberAvatar[userId];
-
-    const { data, error } = await supabase
-      .from('groups')
-      .update({ 
-        members: updatedMembers,
-        member_count: updatedMemberCount,
-        member_avatar: updatedMemberAvatar
-      })
-      .eq('id', groupId)
-      .select();
-
-    if (error) throw error;
-
-    // Update the user's groups (remove this group from their list)
-    const { data: userData, error: userError } = await supabase
-      .from('users')
-      .select('groups')
-      .eq('id', userId)
-      .single();
-
-    if (userError) throw userError;
-
-    const updatedUserGroups = (userData.groups || []).filter(g => g !== groupId);
-
-    const { error: updateUserError } = await supabase
-      .from('users')
-      .update({ groups: updatedUserGroups })
-      .eq('id', userId);
-
-    if (updateUserError) throw updateUserError;
-
-    return data[0];
-  } catch (error) {
-    console.error('Error leaving group:', error);
     throw error;
   }
 };
