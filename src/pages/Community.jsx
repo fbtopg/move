@@ -65,7 +65,7 @@ const Community = () => {
     if (!session) {
       return (
         <>
-          <div className="mb-8">
+          <div className="mb-4"> {/* Changed from mb-8 to mb-4 */}
             <WelcomeContent
               onAction={handleLoginRequired}
               actionLabel="Login"
@@ -77,7 +77,7 @@ const Community = () => {
     } else if (userGroups.length === 0) {
       return (
         <>
-          <div className="mb-8">
+          <div className="mb-4"> {/* Changed from mb-8 to mb-4 */}
             <WelcomeContent
               onAction={handleCreateGroup}
               actionLabel="Create Group"
@@ -92,9 +92,9 @@ const Community = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="space-y-8"
+          className="space-y-4" {/* Changed from space-y-8 to space-y-4 */}
         >
-          <div className="mb-8">
+          <div className="mb-4"> {/* Changed from mb-8 to mb-4 */}
             <ChallengeCardPreview />
           </div>
           <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
