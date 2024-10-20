@@ -17,7 +17,7 @@ const WelcomeContent = ({ onAction, actionLabel }) => (
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.6 }}
-      className="flex flex-col items-center justify-center flex-grow mb-8"
+      className="flex flex-col items-center justify-center flex-grow mb-8 mt-8" // Added mt-8 for top margin
     >
       <img
         src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/illustration2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2lsbHVzdHJhdGlvbjIucG5nIiwiaWF0IjoxNzI5MDg5MTAzLCJleHAiOjE3NjA2MjUxMDN9.jnvRMKmghK9GY5JX-3tBuEkW0zUV__A4JEA_hLN0ikM&t=2024-10-16T14%3A31%3A44.880Z"
