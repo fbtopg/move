@@ -4,14 +4,16 @@ import BottomNavBar from '../components/BottomNavBar';
 import { Button } from "@/components/ui/button";
 import { Settings, Star, Users, Flag, FileText } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
+import { useSupabaseAuth } from '../integrations/supabase/auth';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('profile');
   const navigate = useNavigate();
+  const { session } = useSupabaseAuth();
 
-  const avatarUrl = "https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/pfp/medium.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvcGZwL21lZGl1bS5wbmciLCJpYXQiOjE3MjU2OTIyMDksImV4cCI6MTc1NzIyODIwOX0.cFZt_zQaj6vJZgVMK7kYXDyIStZQtZzFOHzZFhzJdKA&t=2024-09-07T06%3A56%3A48.637Z";
-  const displayName = "GeonuBae";
-  const memberSince = "2023";
+  const userAvatarUrl = session?.user?.user_metadata?.avatar_url;
+  const displayName = session?.user?.user_metadata?.full_name || session?.user?.email?.split('@')[0] || "User";
+  const memberSince = new Date(session?.user?.created_at).getFullYear().toString() || "2023";
 
   const profileItems = [
     { icon: FileText, label: "Summary", route: "/profile/summary" },
@@ -37,8 +39,10 @@ const Profile = () => {
           
           <div className="flex flex-col items-center text-center mb-8">
             <Avatar className="w-32 h-32 mb-3 ring-4 ring-white shadow-lg">
-              <AvatarImage src={avatarUrl} />
-              <AvatarFallback className="text-4xl bg-gradient-to-br from-blue-500 to-purple-500 text-white">{displayName[0]}</AvatarFallback>
+              <AvatarImage src={userAvatarUrl} alt={displayName} className="object-cover" />
+              <AvatarFallback className="text-4xl bg-gradient-to-br from-blue-500 to-purple-500 text-white">
+                {displayName[0]}
+              </AvatarFallback>
             </Avatar>
             <h1 className="text-2xl font-bold mb-1">{displayName}</h1>
             <p className="text-sm text-gray-600 mb-4">Member since {memberSince}</p>
