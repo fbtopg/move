@@ -69,9 +69,6 @@ const Community = () => {
         transition={{ duration: 0.5, delay: 0.6 }}
         className="space-y-4"
       >
-        <div className="mb-4">
-          <ChallengeCardPreview />
-        </div>
         {!session && (
           <WelcomeContent
             onAction={handleLoginRequired}
@@ -113,6 +110,9 @@ const Community = () => {
           </div>
         )}
         <h1 className="text-2xl font-bold mb-4">{greeting}</h1>
+        <div className="mb-4">
+          <ChallengeCardPreview />
+        </div>
         {renderContent()}
       </div>
 
