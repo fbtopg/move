@@ -15,7 +15,7 @@ const GroupCard = ({ group, currentUserId }) => {
 
   return (
     <div 
-      className={`relative rounded-lg shadow-md p-2 w-full h-full flex flex-col overflow-hidden ${!group.image ? getRandomGradient() : ''}`}
+      className={`relative rounded-lg p-2 w-full h-full flex flex-col overflow-hidden ${!group.image ? getRandomGradient() : ''}`}
       style={backgroundStyle}
     >
       {/* Dimmer overlay - only for cards with images */}
