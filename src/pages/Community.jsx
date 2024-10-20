@@ -10,6 +10,7 @@ import ProfileButton from "../components/ProfileButton";
 import ActivitySection from "../components/ActivitySection";
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import WelcomeContent from '../components/WelcomeContent';
+import ChallengeCardPreview from '../components/ChallengeCardPreview';
 
 const Community = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -68,6 +69,8 @@ const Community = () => {
         transition={{ duration: 0.5, delay: 0.6 }}
         className="space-y-4"
       >
+        <ChallengeCardPreview />
+        
         {!session && (
           <div className="mt-8">
             <WelcomeContent
