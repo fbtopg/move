@@ -10,6 +10,7 @@ import ActivitySection from "../components/ActivitySection";
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import WelcomeContent from '../components/WelcomeContent';
 import ChallengeCardPreview from '../components/ChallengeCardPreview';
+import LoginModal from '../components/LoginModal';
 
 const Community = ({ openLoginModal }) => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -19,6 +20,7 @@ const Community = ({ openLoginModal }) => {
   const [greeting, setGreeting] = useState("");
   const [userGroups, setUserGroups] = useState([]);
   const [recentActivities, setRecentActivities] = useState([]);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   useEffect(() => {
     const updateGreeting = () => {
@@ -60,10 +62,14 @@ const Community = ({ openLoginModal }) => {
   }, [session]);
 
   const handleLoginRequired = () => {
-    if (typeof openLoginModal === 'function') {
-      openLoginModal();
+    setIsLoginModalOpen(true);
+  };
+
+  const handleCreateGroup = () => {
+    if (session) {
+      setIsCreateGroupModalOpen(true);
     } else {
-      console.error('openLoginModal is not a function');
+      handleLoginRequired();
     }
   };
 
@@ -105,19 +111,11 @@ const Community = ({ openLoginModal }) => {
     );
   };
 
-  const handleCreateGroup = () => {
-    if (session) {
-      setIsCreateGroupModalOpen(true);
-    } else {
-      handleLoginRequired();
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#FBFCFC] text-foreground dark:text-white flex flex-col">
       <div className="px-4 pt-4 pb-20 flex-grow flex flex-col">
         <div className="flex justify-end mb-2">
-          <ProfileButton openLoginModal={openLoginModal} />
+          <ProfileButton openLoginModal={handleLoginRequired} />
         </div>
         <h1 className="text-2xl font-bold mb-2">
           {greeting}
@@ -148,6 +146,11 @@ const Community = ({ openLoginModal }) => {
         isOpen={isCreateGroupModalOpen}
         onClose={() => setIsCreateGroupModalOpen(false)}
         onLoginRequired={handleLoginRequired}
+      />
+
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
       />
     </div>
   );
