@@ -13,7 +13,11 @@ const ProfileButton = ({ openLoginModal }) => {
     if (session) {
       navigate("/profile");
     } else {
-      openLoginModal();
+      if (typeof openLoginModal === 'function') {
+        openLoginModal();
+      } else {
+        console.error('openLoginModal is not a function');
+      }
     }
   };
 

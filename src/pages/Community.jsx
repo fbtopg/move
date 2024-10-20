@@ -60,7 +60,11 @@ const Community = ({ openLoginModal }) => {
   }, [session]);
 
   const handleLoginRequired = () => {
-    openLoginModal();
+    if (typeof openLoginModal === 'function') {
+      openLoginModal();
+    } else {
+      console.error('openLoginModal is not a function');
+    }
   };
 
   const renderContent = () => {
