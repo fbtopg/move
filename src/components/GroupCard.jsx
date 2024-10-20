@@ -9,7 +9,7 @@ const GroupCard = ({ group, currentUserId }) => {
   const labelText = isOwner ? 'Owner' : 'Member';
 
   // Get the first two members' profile pictures
-  const memberProfiles = group.memberProfiles?.slice(0, 2) || [];
+  const memberProfiles = group.members?.slice(0, 2) || [];
 
   return (
     <div 
@@ -40,8 +40,8 @@ const GroupCard = ({ group, currentUserId }) => {
             <div className="flex -space-x-1 overflow-hidden">
               {memberProfiles.map((member, index) => (
                 <Avatar key={index} className="inline-block h-4 w-4 rounded-full ring-1 ring-black">
-                  <AvatarImage src={member.avatar} alt={`Member ${index + 1}`} />
-                  <AvatarFallback>{member.id.charAt(0)}</AvatarFallback>
+                  <AvatarImage src={member.avatar} alt={member.name} />
+                  <AvatarFallback>{member.name ? member.name.charAt(0) : '?'}</AvatarFallback>
                 </Avatar>
               ))}
             </div>
