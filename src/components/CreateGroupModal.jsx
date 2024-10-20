@@ -9,7 +9,8 @@ import { useSupabaseAuth } from '../integrations/supabase/auth';
 const CreateGroupModal = ({ isOpen, onClose, onLoginRequired }) => {
   const navigate = useNavigate();
   const modalRef = useRef(null);
-  const { session } = useSupabaseAuth();
+  const auth = useSupabaseAuth();
+  const session = auth?.session;
 
   const adjustModalPosition = useCallback(() => {
     if (modalRef.current) {
@@ -48,7 +49,7 @@ const CreateGroupModal = ({ isOpen, onClose, onLoginRequired }) => {
     }
 
     try {
-      const newGroup = await insertNewGroup(groupName);
+      const newGroup = await insertNewGroup(groupName, session.user.id);
       onClose();
       navigate(`/group/${newGroup.id}`, { 
         state: { 
