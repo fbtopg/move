@@ -69,7 +69,7 @@ const Community = () => {
         transition={{ duration: 0.5, delay: 0.6 }}
         className="space-y-4"
       >
-        <ChallengeCardPreview />
+        {session && userGroups.length > 0 && <ChallengeCardPreview />}
         
         {!session && (
           <div className="mt-8">
