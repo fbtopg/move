@@ -19,12 +19,16 @@ const LoginModal = ({ isOpen, onClose }) => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: "100%", opacity: 0 }}
           transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-          className="relative bg-white dark:bg-gray-800 h-full flex flex-col justify-center p-6"
+          className="relative bg-white dark:bg-gray-800 h-full flex flex-col p-6"
         >
-          <DialogHeader>
+          <DialogHeader className="mb-auto">
             <DialogTitle className="text-2xl font-bold text-center">Sign in to your account</DialogTitle>
           </DialogHeader>
-          <div className="flex justify-center mt-6">
+          
+          <div className="flex flex-col items-center justify-end flex-grow">
+            <h1 className="text-xl font-semibold text-center mb-6">
+              Create groups, connect & share with friends.
+            </h1>
             <GoogleLoginButton />
           </div>
         </motion.div>
