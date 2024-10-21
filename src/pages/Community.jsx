@@ -58,7 +58,6 @@ const Community = ({ openLoginModal }) => {
   }, [session]);
 
   useEffect(() => {
-    // TODO: Implement actual fetching of recent activities
     setRecentActivities([]);
   }, [session]);
 
