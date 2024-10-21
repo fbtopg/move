@@ -118,7 +118,7 @@ const Community = ({ openLoginModal }) => {
   return (
     <div className="min-h-screen bg-[#FBFCFC] text-foreground dark:text-white flex flex-col">
       <MainHeader openLoginModal={handleLoginRequired} />
-      <div className="px-4 pt-4 pb-20 flex-grow flex flex-col">
+      <div className="px-4 pt-4 pb-20 flex-grow flex flex-col overflow-y-auto scrollbar-hide">
         <h1 className="text-2xl font-bold mb-2">
           {greeting}
         </h1>
