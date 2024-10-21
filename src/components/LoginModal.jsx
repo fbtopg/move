@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 const LoginModal = ({ isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-screen h-screen max-w-none p-0 m-0 border-t-0"> {/* Added border-t-0 class */}
+      <DialogContent className="w-screen h-screen max-w-none p-0 m-0 border-t-0">
         <motion.div
           initial={{ opacity: 0, y: "100%" }}
           animate={{ opacity: 1, y: 0 }}
@@ -18,6 +18,11 @@ const LoginModal = ({ isOpen, onClose }) => {
             <h1 className="text-2xl font-medium text-center mb-4">
               Create groups, connect & share with friends.
             </h1>
+            <img
+              src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/Group%20289236.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL0dyb3VwIDI4OTIzNi5wbmciLCJpYXQiOjE3Mjk0ODY5NDMsImV4cCI6MTc2MTAyMjk0M30.6YiAn9sddOsNJ9cD1b7YZGl-JfEEAgvC4J1weJHtq_Y&t=2024-10-21T05%3A02%3A22.347Z"
+              alt="Login illustration"
+              className="w-64 h-64 object-contain mx-auto mb-6"
+            />
             <div className="mb-4 w-full">
               <GoogleLoginButton />
             </div>
