@@ -16,7 +16,7 @@ const ProfileButton = ({ openLoginModal }) => {
       if (typeof openLoginModal === 'function') {
         openLoginModal();
       } else {
-        console.error('openLoginModal is not a function');
+        navigate("/login");
       }
     }
   };
