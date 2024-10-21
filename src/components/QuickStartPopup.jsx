@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, Plus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
@@ -48,9 +48,11 @@ const QuickStartPopup = ({ isOpen, onClose, onCreateGroup }) => {
               <div className="absolute left-1/4 transform -translate-x-1/2 -mt-4">
                 <Button 
                   onClick={handleCreateGroup} 
-                  className="bg-secondary text-secondary-foreground rounded-full w-24 h-24 text-sm font-bold flex items-center justify-center"
+                  className="bg-secondary text-secondary-foreground rounded-full w-24 h-24 text-xs font-normal flex flex-col items-center justify-center"
                 >
-                  Create group
+                  <Plus className="h-5 w-5 mb-1" />
+                  <span>Create</span>
+                  <span>group</span>
                 </Button>
               </div>
             </div>
