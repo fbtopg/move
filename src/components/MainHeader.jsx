@@ -5,12 +5,20 @@ import { Bell } from 'lucide-react';
 import ProfileButton from './ProfileButton';
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 
-const CommunityHeader = ({ openLoginModal, onNotificationsClick }) => {
+const MainHeader = ({ openLoginModal, onNotificationsClick }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { session } = useSupabaseAuth();
 
   const isChallengePage = location.pathname === '/board';
+
+  const handleProfileClick = () => {
+    if (session) {
+      navigate("/profile");
+    } else {
+      openLoginModal();
+    }
+  };
 
   return (
     <div className="sticky top-0 z-10 bg-[#FBFCFC] py-2 px-4">
@@ -23,10 +31,10 @@ const CommunityHeader = ({ openLoginModal, onNotificationsClick }) => {
             <Bell className="h-5 w-5 text-gray-600" strokeWidth={1.5} />
           </Button>
         )}
-        <ProfileButton openLoginModal={openLoginModal} />
+        <ProfileButton onClick={handleProfileClick} />
       </div>
     </div>
   );
 };
 
-export default CommunityHeader;
+export default MainHeader;
