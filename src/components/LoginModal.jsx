@@ -18,7 +18,9 @@ const LoginModal = ({ isOpen, onClose }) => {
             <h1 className="text-2xl font-medium text-center mb-4">
               Create groups, connect & share with friends.
             </h1>
-            <GoogleLoginButton />
+            <div className="mb-4"> {/* Added bottom margin here */}
+              <GoogleLoginButton />
+            </div>
             <p className="text-[10px] text-gray-500 mt-2 text-center font-light">
               By continuing, you agree to our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>.
             </p>
