@@ -16,7 +16,7 @@ const ProfileButton = ({ openLoginModal }) => {
       if (typeof openLoginModal === 'function') {
         openLoginModal();
       } else {
-        navigate("/login");
+        console.error('openLoginModal is not provided');
       }
     }
   };

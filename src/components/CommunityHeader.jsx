@@ -5,7 +5,7 @@ import { Bell } from 'lucide-react';
 import ProfileButton from './ProfileButton';
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 
-const CommunityHeader = () => {
+const CommunityHeader = ({ openLoginModal }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { session } = useSupabaseAuth();
@@ -23,7 +23,7 @@ const CommunityHeader = () => {
             <Bell className="h-5 w-5 text-gray-600" strokeWidth={1.5} />
           </Button>
         )}
-        <ProfileButton />
+        <ProfileButton openLoginModal={openLoginModal} />
       </div>
     </div>
   );
