@@ -48,9 +48,9 @@ const QuickStartPopup = ({ isOpen, onClose, onCreateGroup }) => {
               <div className="absolute left-1/4 transform -translate-x-1/2 -mt-4">
                 <Button 
                   onClick={handleCreateGroup} 
-                  className="bg-secondary text-secondary-foreground rounded-full w-24 h-24 text-xs font-normal flex flex-col items-center justify-center"
+                  className="bg-secondary text-secondary-foreground rounded-full w-16 h-16 text-[10px] font-normal flex flex-col items-center justify-center"
                 >
-                  <Plus className="h-5 w-5 mb-1" />
+                  <Plus className="h-4 w-4 mb-0.5" />
                   <span>Create</span>
                   <span>group</span>
                 </Button>
