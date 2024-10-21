@@ -7,7 +7,11 @@ import { Separator } from "@/components/ui/separator";
 const QuickStartPopup = ({ isOpen, onClose, onCreateGroup }) => {
   const handleCreateGroup = () => {
     onClose();
-    onCreateGroup();
+    if (typeof onCreateGroup === 'function') {
+      onCreateGroup();
+    } else {
+      console.warn('onCreateGroup is not a function');
+    }
   };
 
   return (
