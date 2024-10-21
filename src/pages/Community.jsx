@@ -5,7 +5,7 @@ import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
 import MyGroups from "../components/MyGroups";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
-import CommunityHeader from "../components/CommunityHeader";
+import MainHeader from "../components/MainHeader";
 import ActivitySection from "../components/ActivitySection";
 import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import WelcomeContent from '../components/WelcomeContent';
@@ -117,7 +117,7 @@ const Community = ({ openLoginModal }) => {
 
   return (
     <div className="min-h-screen bg-[#FBFCFC] text-foreground dark:text-white flex flex-col">
-      <CommunityHeader openLoginModal={handleLoginRequired} />
+      <MainHeader openLoginModal={handleLoginRequired} />
       <div className="px-4 pt-4 pb-20 flex-grow flex flex-col">
         <h1 className="text-2xl font-bold mb-2">
           {greeting}

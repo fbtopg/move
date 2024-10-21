@@ -5,7 +5,7 @@ import { supabase } from '../integrations/supabase/supabase';
 import BottomNavBar from '../components/BottomNavBar';
 import ChallengeCard from '../components/ChallengeCard';
 import ChallengeCardSkeleton from '../components/ChallengeCardSkeleton';
-import CommunityHeader from '../components/CommunityHeader';
+import MainHeader from '../components/MainHeader';
 import { useNavigate } from 'react-router-dom';
 
 const fetchChallenges = async () => {
@@ -29,7 +29,7 @@ const Board = ({ openLoginModal }) => {
 
   return (
     <div className="min-h-screen bg-[#FBFCFC] text-foreground flex flex-col">
-      <CommunityHeader 
+      <MainHeader 
         openLoginModal={openLoginModal} 
         onNotificationsClick={handleNotificationsClick}
       />
