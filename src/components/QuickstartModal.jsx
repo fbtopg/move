@@ -7,13 +7,14 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 const QuickstartModal = ({ isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-screen h-screen max-w-none p-0 m-0 border-t-0">
+      <DialogContent className="w-screen max-w-none p-0 m-0 border-t-0 fixed bottom-0 rounded-t-xl">
         <motion.div
           initial={{ opacity: 0, y: "100%" }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: "100%" }}
           transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-          className="bg-white dark:bg-gray-800 h-full w-full flex flex-col p-6"
+          className="bg-white dark:bg-gray-800 w-full flex flex-col p-6"
+          style={{ height: '30vh', maxHeight: '250px' }}
         >
           <h2 className="text-2xl font-bold mb-4">Choose activity</h2>
           <Button 
