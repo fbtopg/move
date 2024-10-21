@@ -5,6 +5,7 @@ import { supabase } from '../integrations/supabase/supabase';
 import BottomNavBar from '../components/BottomNavBar';
 import ChallengeCard from '../components/ChallengeCard';
 import ChallengeCardSkeleton from '../components/ChallengeCardSkeleton';
+import CommunityHeader from '../components/CommunityHeader';
 
 const fetchChallenges = async () => {
   const { data, error } = await supabase
@@ -14,7 +15,7 @@ const fetchChallenges = async () => {
   return data;
 };
 
-const Board = () => {
+const Board = ({ openLoginModal }) => {
   const { data: challenges, isLoading, error } = useQuery({
     queryKey: ['challenges'],
     queryFn: fetchChallenges,
@@ -22,6 +23,7 @@ const Board = () => {
 
   return (
     <div className="min-h-screen bg-[#FBFCFC] text-foreground flex flex-col">
+      <CommunityHeader openLoginModal={openLoginModal} />
       <div className="flex-grow overflow-y-auto">
         <div className="p-4">
           <motion.h2 
