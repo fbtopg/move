@@ -6,10 +6,7 @@ import { motion } from 'framer-motion';
 const LoginModal = ({ isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent
-        asChild
-        className="sm:max-w-[425px] p-0 overflow-hidden h-screen"
-      >
+      <DialogContent className="sm:max-w-[425px] p-0 overflow-hidden h-screen">
         <motion.div
           initial={{ opacity: 0, y: "100%" }}
           animate={{ opacity: 1, y: 0 }}
