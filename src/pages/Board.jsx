@@ -6,6 +6,7 @@ import BottomNavBar from '../components/BottomNavBar';
 import ChallengeCard from '../components/ChallengeCard';
 import ChallengeCardSkeleton from '../components/ChallengeCardSkeleton';
 import CommunityHeader from '../components/CommunityHeader';
+import { useNavigate } from 'react-router-dom';
 
 const fetchChallenges = async () => {
   const { data, error } = await supabase
@@ -16,14 +17,22 @@ const fetchChallenges = async () => {
 };
 
 const Board = ({ openLoginModal }) => {
+  const navigate = useNavigate();
   const { data: challenges, isLoading, error } = useQuery({
     queryKey: ['challenges'],
     queryFn: fetchChallenges,
   });
 
+  const handleNotificationsClick = () => {
+    navigate("/notifications");
+  };
+
   return (
     <div className="min-h-screen bg-[#FBFCFC] text-foreground flex flex-col">
-      <CommunityHeader openLoginModal={openLoginModal} />
+      <CommunityHeader 
+        openLoginModal={openLoginModal} 
+        onNotificationsClick={handleNotificationsClick}
+      />
       <div className="flex-grow overflow-y-auto">
         <div className="p-4">
           <motion.h2 
