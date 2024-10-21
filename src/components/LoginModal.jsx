@@ -1,6 +1,5 @@
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { SupabaseAuthUI } from '../integrations/supabase/auth';
 import GoogleLoginButton from './GoogleLoginButton';
 import { motion } from 'framer-motion';
 
@@ -25,11 +24,8 @@ const LoginModal = ({ isOpen, onClose }) => {
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-center">Sign in to your account</DialogTitle>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
+          <div className="flex justify-center mt-6">
             <GoogleLoginButton />
-            <div className="mt-4">
-              <SupabaseAuthUI />
-            </div>
           </div>
         </motion.div>
       </DialogContent>
