@@ -21,6 +21,7 @@ const QuickstartModal = ({ isOpen, onClose }) => {
         exit={{ y: "100%" }}
         transition={{ type: "spring", damping: 25, stiffness: 500 }}
         className="fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-3xl shadow-lg p-6"
+        style={{ height: '30vh', maxHeight: '250px' }}
       >
         <h2 className="text-2xl font-bold mb-4">Choose activity</h2>
         <Button 
