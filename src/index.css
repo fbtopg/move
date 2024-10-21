@@ -86,13 +86,6 @@
   .status-bar-hidden {
     padding-top: env(safe-area-inset-top);
   }
-
-  .overflow-hidden {
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-  }
 }
 
 @keyframes flicker {
@@ -193,4 +186,3 @@
   width: 100%;
   height: 100%;
 }
-

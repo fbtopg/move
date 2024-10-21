@@ -1,21 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const QuickStartPopup = ({ isOpen, onClose }) => {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add('overflow-hidden');
-    } else {
-      document.body.classList.remove('overflow-hidden');
-    }
-
-    return () => {
-      document.body.classList.remove('overflow-hidden');
-    };
-  }, [isOpen]);
-
   return (
     <AnimatePresence>
       {isOpen && (
