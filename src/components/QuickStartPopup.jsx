@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, Zap } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const QuickStartPopup = ({ isOpen, onClose }) => {
@@ -21,7 +21,7 @@ const QuickStartPopup = ({ isOpen, onClose }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-3xl shadow-lg p-6"
-            style={{ maxHeight: '90vh' }} // Increased height
+            style={{ height: '70vh' }} // Increased height
           >
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">Choose activity</h2>
@@ -29,9 +29,14 @@ const QuickStartPopup = ({ isOpen, onClose }) => {
                 <X className="h-6 w-6" />
               </Button>
             </div>
-            <div className="overflow-y-auto">
-              {/* Add your QuickStart content here */}
-              <p>Welcome to QuickStart! This is where you can add your quick start content.</p>
+            <div className="flex items-center justify-center h-full">
+              <Button 
+                onClick={onClose} 
+                className="bg-primary text-white px-8 py-4 rounded-full text-xl font-bold flex items-center space-x-2"
+              >
+                <Zap className="h-6 w-6" />
+                <span>START</span>
+              </Button>
             </div>
           </motion.div>
         </>
