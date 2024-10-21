@@ -2,8 +2,8 @@ import React from 'react';
 import { Globe } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate, useLocation } from 'react-router-dom';
-import QuickstartMenu from './QuickstartMenu';
 import ChallengeIcon from './icons/ChallengeIcon';
+import { Button } from "@/components/ui/button";
 
 const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab }) => {
   const navigate = useNavigate();
@@ -53,7 +53,12 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
           </li>
         ))}
         <li className="absolute left-1/2 transform -translate-x-1/2 -top-6">
-          <QuickstartMenu />
+          <Button
+            onClick={() => console.log('QuickStart button clicked')}
+            className="bg-primary rounded-full w-16 h-16 shadow-lg flex items-center justify-center z-10"
+          >
+            QuickStart
+          </Button>
         </li>
       </ul>
     </nav>
