@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, UserPlus } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
@@ -25,19 +25,27 @@ const QuickStartPopup = ({ isOpen, onClose }) => {
             style={{ height: '40vh' }}
           >
             <div className="flex justify-between items-center mb-2">
-              <h2 className="text-xl font-normal">Choose activity</h2>
+              <h2 className="text-lg font-normal">Choose activity</h2>
               <Button variant="ghost" size="icon" onClick={onClose}>
                 <X className="h-6 w-6" />
               </Button>
             </div>
             <Separator className="mb-4" />
-            <div className="flex-grow flex items-center justify-center">
-              <Button 
-                onClick={onClose} 
-                className="bg-primary text-white rounded-full w-24 h-24 text-lg font-bold flex items-center justify-center"
-              >
-                Walk
-              </Button>
+            <div className="flex-grow flex items-center justify-center relative">
+              <div className="absolute left-1/2 transform -translate-x-1/2 -mt-8 flex items-center space-x-4">
+                <Button 
+                  onClick={onClose} 
+                  className="bg-secondary text-secondary-foreground rounded-full w-16 h-16 text-sm font-bold flex items-center justify-center"
+                >
+                  <UserPlus className="h-6 w-6" />
+                </Button>
+                <Button 
+                  onClick={onClose} 
+                  className="bg-primary text-white rounded-full w-20 h-20 text-lg font-bold flex items-center justify-center"
+                >
+                  Walk
+                </Button>
+              </div>
             </div>
           </motion.div>
         </>
