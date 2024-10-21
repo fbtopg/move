@@ -7,7 +7,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 const QuickstartModal = ({ isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-screen max-w-none p-0 m-0 border-t-0 fixed bottom-0 rounded-t-xl">
+      <DialogContent className="p-0 m-0 border-t-0 fixed inset-x-0 bottom-0 rounded-t-xl overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: "100%" }}
           animate={{ opacity: 1, y: 0 }}
