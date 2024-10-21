@@ -21,10 +21,10 @@ const QuickStartPopup = ({ isOpen, onClose }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-3xl shadow-lg p-6"
-            style={{ maxHeight: '80vh' }}
+            style={{ maxHeight: '90vh' }} // Increased height
           >
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">QuickStart</h2>
+              <h2 className="text-2xl font-bold">Choose activity</h2>
               <Button variant="ghost" size="icon" onClick={onClose}>
                 <X className="h-6 w-6" />
               </Button>
