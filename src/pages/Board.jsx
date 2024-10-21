@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '../integrations/supabase/supabase';
 import BottomNavBar from '../components/BottomNavBar';
-import ChallengeCard from '../components/ChallengeCard';
+import ChallengeCardPreview from '../components/ChallengeCardPreview';
 import ChallengeCardSkeleton from '../components/ChallengeCardSkeleton';
 import MainHeader from '../components/MainHeader';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const fetchChallenges = async () => {
   const { data, error } = await supabase
     .from('challenges')
-    .select('*, title, description, step_one, step_two, step_three');
+    .select('*');
   if (error) throw error;
   return data;
 };
@@ -57,7 +57,7 @@ const Board = ({ openLoginModal }) => {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="mb-4"
               >
-                <ChallengeCard challenge={challenge} />
+                <ChallengeCardPreview onLoginRequired={openLoginModal} />
               </motion.div>
             ))
           ) : (
