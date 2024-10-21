@@ -21,7 +21,7 @@ const QuickStartPopup = ({ isOpen, onClose }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-3xl shadow-lg p-6 flex flex-col"
-            style={{ height: '50vh' }}
+            style={{ height: '40vh' }} // Changed from 50vh to 40vh
           >
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">Choose activity</h2>
