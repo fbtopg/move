@@ -146,6 +146,7 @@ const Community = ({ openLoginModal }) => {
         isOpen={isQuickStartOpen}
         onClose={() => setIsQuickStartOpen(false)}
         onCreateGroup={handleCreateGroup}
+        openLoginModal={handleLoginRequired}
       />
 
       <CreateGroupModal
