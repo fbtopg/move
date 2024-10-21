@@ -72,7 +72,11 @@ const Community = ({ openLoginModal }) => {
   };
 
   const handleCreateGroup = () => {
-    setIsCreateGroupModalOpen(true);
+    if (session) {
+      setIsCreateGroupModalOpen(true);
+    } else {
+      handleLoginRequired();
+    }
   };
 
   const renderContent = () => {

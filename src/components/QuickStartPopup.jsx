@@ -5,24 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 
-const QuickStartPopup = ({ isOpen, onClose, onCreateGroup, openLoginModal }) => {
+const QuickStartPopup = ({ isOpen, onClose, onCreateGroup }) => {
   const { session } = useSupabaseAuth();
 
   const handleCreateGroup = () => {
     onClose();
-    if (session) {
-      if (typeof onCreateGroup === 'function') {
-        onCreateGroup();
-      } else {
-        console.warn('onCreateGroup is not a function');
-      }
-    } else {
-      if (typeof openLoginModal === 'function') {
-        openLoginModal();
-      } else {
-        console.warn('openLoginModal is not a function');
-      }
-    }
+    onCreateGroup();
   };
 
   return (
