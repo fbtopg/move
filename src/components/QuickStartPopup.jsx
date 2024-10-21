@@ -21,10 +21,10 @@ const QuickStartPopup = ({ isOpen, onClose }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-3xl shadow-lg p-6 flex flex-col"
-            style={{ height: '40vh' }} // Changed from 50vh to 40vh
+            style={{ height: '40vh' }}
           >
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">Choose activity</h2>
+              <h2 className="text-xl font-normal">Choose activity</h2>
               <Button variant="ghost" size="icon" onClick={onClose}>
                 <X className="h-6 w-6" />
               </Button>
@@ -32,7 +32,7 @@ const QuickStartPopup = ({ isOpen, onClose }) => {
             <div className="flex-grow flex items-center justify-center">
               <Button 
                 onClick={onClose} 
-                className="bg-primary text-white rounded-full w-32 h-32 text-xl font-bold flex items-center justify-center"
+                className="bg-primary text-white rounded-full w-24 h-24 text-lg font-bold flex items-center justify-center"
               >
                 Walk
               </Button>
