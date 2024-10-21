@@ -26,6 +26,9 @@ const LoginModal = ({ isOpen, onClose }) => {
               Create groups, connect & share with friends.
             </h1>
             <GoogleLoginButton />
+            <p className="text-sm text-gray-500 mt-4 text-center">
+              By continuing, you agree to our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>.
+            </p>
           </div>
         </motion.div>
       </DialogContent>
