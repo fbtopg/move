@@ -1,27 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from '../integrations/supabase/supabase';
 import BottomNavBar from '../components/BottomNavBar';
 import ChallengeCardPreview from '../components/ChallengeCardPreview';
-import ChallengeCardSkeleton from '../components/ChallengeCardSkeleton';
 import MainHeader from '../components/MainHeader';
 import { useNavigate } from 'react-router-dom';
 
-const fetchChallenges = async () => {
-  const { data, error } = await supabase
-    .from('challenges')
-    .select('*');
-  if (error) throw error;
-  return data;
-};
-
 const Board = ({ openLoginModal }) => {
   const navigate = useNavigate();
-  const { data: challenges, isLoading, error } = useQuery({
-    queryKey: ['challenges'],
-    queryFn: fetchChallenges,
-  });
 
   const handleNotificationsClick = () => {
     navigate("/notifications");
@@ -44,25 +29,14 @@ const Board = ({ openLoginModal }) => {
             Challenges
           </motion.h2>
           
-          {isLoading ? (
-            <ChallengeCardSkeleton />
-          ) : error ? (
-            <p>Error loading challenges: {error.message}</p>
-          ) : challenges && challenges.length > 0 ? (
-            challenges.map((challenge) => (
-              <motion.div
-                key={challenge.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="mb-4"
-              >
-                <ChallengeCardPreview onLoginRequired={openLoginModal} />
-              </motion.div>
-            ))
-          ) : (
-            <p>No challenges available.</p>
-          )}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-4"
+          >
+            <ChallengeCardPreview onLoginRequired={openLoginModal} />
+          </motion.div>
         </div>
       </div>
       <BottomNavBar activeTab="challenge" />
