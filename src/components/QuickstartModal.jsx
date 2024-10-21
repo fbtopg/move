@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 const QuickstartModal = ({ isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-screen h-screen max-w-none p-0 m-0 border-t-0 flex flex-col">
+      <DialogContent className="w-screen h-[50vh] max-w-none p-0 m-0 border-t-0 flex flex-col">
         <DialogHeader className="flex flex-row items-center justify-between p-4 border-b">
           <DialogTitle className="text-xl font-bold w-full text-center">Choose activity</DialogTitle>
         </DialogHeader>
