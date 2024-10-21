@@ -21,7 +21,7 @@ const LoginModal = ({ isOpen, onClose }) => {
           transition={{ type: "spring", bounce: 0, duration: 0.4 }}
           className="relative bg-white dark:bg-gray-800 h-full flex flex-col p-6"
         >
-          <div className="flex flex-col items-center justify-center flex-grow">
+          <div className="flex flex-col items-center justify-end flex-grow">
             <h1 className="text-3xl font-medium text-center mb-8">
               Create groups, connect & share with friends.
             </h1>
