@@ -26,7 +26,7 @@ const LoginModal = ({ isOpen, onClose }) => {
           </DialogHeader>
           
           <div className="flex flex-col items-center justify-end flex-grow">
-            <h1 className="text-xl font-semibold text-center mb-6">
+            <h1 className="text-2xl font-semibold text-center mb-6">
               Create groups, connect & share with friends.
             </h1>
             <GoogleLoginButton />
