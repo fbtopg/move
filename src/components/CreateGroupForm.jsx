@@ -68,7 +68,7 @@ const CreateGroupForm = ({ handleCreateGroup, onClose }) => {
       </div>
       <Button
         type="submit"
-        className="w-full mt-8 bg-black text-white dark:bg-white dark:text-black py-6 rounded-full text-lg font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+        className="w-full mt-8 bg-blue-500 text-white dark:bg-blue-600 dark:text-white py-6 rounded-full text-lg font-medium hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors"
       >
         Create
       </Button>
