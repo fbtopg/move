@@ -7,11 +7,11 @@ const QuickstartModal = ({ isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="w-full h-[50vh] max-w-none p-0 m-0 border-t-0 flex flex-col absolute bottom-0 rounded-t-xl">
-        <DialogHeader className="flex flex-row items-center justify-between p-4 border-b">
+        <DialogHeader className="flex flex-row items-center justify-between p-4 border-b w-full">
           <DialogTitle className="text-xl font-bold w-full text-center">Choose activity</DialogTitle>
         </DialogHeader>
-        <div className="bg-white dark:bg-gray-800 flex-grow flex flex-col justify-end p-6">
-          <div className="flex flex-col items-center justify-end mb-8">
+        <div className="bg-white dark:bg-gray-800 flex-grow flex flex-col justify-end p-6 w-full">
+          <div className="flex flex-col items-center justify-end mb-8 w-full">
             <Button 
               onClick={() => console.log('Start button clicked')} 
               className="w-full flex items-center justify-center mb-4"
