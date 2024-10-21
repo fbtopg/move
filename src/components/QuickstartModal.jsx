@@ -12,10 +12,10 @@ const QuickstartModal = ({ isOpen, onClose }) => {
           animate={{ y: 0 }}
           exit={{ y: "100%" }}
           transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-          className="fixed inset-x-0 bottom-0 w-full bg-white dark:bg-gray-800 rounded-t-xl shadow-lg z-50"
-          style={{ maxHeight: '30vh' }}
+          className="fixed inset-x-0 bottom-0 w-screen bg-white dark:bg-gray-800 rounded-t-3xl shadow-lg z-50"
+          style={{ height: '30vh' }}
         >
-          <div className="p-6 flex flex-col h-full w-full">
+          <div className="p-6 flex flex-col h-full">
             <h2 className="text-2xl font-bold mb-4">Choose activity</h2>
             <Button 
               onClick={() => console.log('Walk button clicked')} 
