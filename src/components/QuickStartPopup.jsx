@@ -32,18 +32,20 @@ const QuickStartPopup = ({ isOpen, onClose }) => {
             </div>
             <Separator className="mb-4" />
             <div className="flex-grow flex items-center justify-center relative">
-              <div className="absolute left-1/2 transform -translate-x-1/2 -mt-8 flex items-center space-x-4">
-                <Button 
-                  onClick={onClose} 
-                  className="bg-secondary text-secondary-foreground rounded-full w-16 h-16 text-sm font-bold flex items-center justify-center"
-                >
-                  <UserPlus className="h-6 w-6" />
-                </Button>
+              <div className="absolute left-1/2 transform -translate-x-1/2 -mt-12">
                 <Button 
                   onClick={onClose} 
                   className="bg-primary text-white rounded-full w-20 h-20 text-lg font-bold flex items-center justify-center"
                 >
                   Walk
+                </Button>
+              </div>
+              <div className="absolute left-1/4 transform -translate-x-1/2 -mt-4">
+                <Button 
+                  onClick={onClose} 
+                  className="bg-secondary text-secondary-foreground rounded-full w-16 h-16 text-sm font-bold flex items-center justify-center"
+                >
+                  <UserPlus className="h-6 w-6" />
                 </Button>
               </div>
             </div>
