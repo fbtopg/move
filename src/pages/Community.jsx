@@ -57,7 +57,6 @@ const Community = ({ openLoginModal }) => {
     fetchUserGroups();
   }, [session]);
 
-  // Placeholder for fetching recent activities
   useEffect(() => {
     // TODO: Implement actual fetching of recent activities
     setRecentActivities([]);
@@ -150,7 +149,6 @@ const Community = ({ openLoginModal }) => {
         isOpen={isQuickStartOpen}
         onClose={() => setIsQuickStartOpen(false)}
         onCreateGroup={handleCreateGroup}
-        openLoginModal={handleLoginRequired}
       />
 
       <CreateGroupModal
