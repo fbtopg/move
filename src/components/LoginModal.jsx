@@ -22,11 +22,11 @@ const LoginModal = ({ isOpen, onClose }) => {
           className="relative bg-white dark:bg-gray-800 h-full flex flex-col p-6"
         >
           <div className="flex flex-col items-center justify-end flex-grow">
-            <h1 className="text-3xl font-medium text-center mb-8">
+            <h1 className="text-3xl font-medium text-center mb-4">
               Create groups, connect & share with friends.
             </h1>
             <GoogleLoginButton />
-            <p className="text-sm text-gray-500 mt-4 text-center">
+            <p className="text-xs text-gray-500 mt-2 text-center font-light">
               By continuing, you agree to our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>.
             </p>
           </div>
