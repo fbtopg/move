@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import BottomNavBar from '../components/BottomNavBar';
-import { Button } from "@/components/ui/button";
-import { Settings, Star, Users, Flag, FileText } from "lucide-react";
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Settings, Star, Users, Flag, FileText, LogOut, User } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import BottomNavBar from '../components/BottomNavBar';
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 
+const ProfileItem = ({ icon: Icon, label, onClick }) => (
+  <Button
+    variant="ghost"
+    className="w-full justify-start text-left font-normal"
+    onClick={onClick}
+  >
+    <Icon className="mr-2 h-4 w-4" />
+    <span>{label}</span>
+  </Button>
+);
+
 const Profile = () => {
-  const [activeTab, setActiveTab] = useState('profile');
+  const [activeTab, setActiveTab] = React.useState('profile');
   const navigate = useNavigate();
   const { session } = useSupabaseAuth();
 
@@ -26,7 +39,13 @@ const Profile = () => {
     <div className="min-h-screen bg-[#FBFCFC] text-foreground flex flex-col">
       <div className="flex-grow overflow-y-auto pb-20">
         <div className="max-w-md mx-auto p-4">
-          <div className="flex justify-end mb-4">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex justify-between items-center mb-6"
+          >
+            <h1 className="text-2xl font-bold">Profile</h1>
             <Button 
               variant="ghost" 
               size="icon"
@@ -35,34 +54,56 @@ const Profile = () => {
             >
               <Settings className="h-6 w-6" />
             </Button>
-          </div>
+          </motion.div>
           
-          <div className="flex flex-col items-center text-center mb-8">
-            <Avatar className="w-32 h-32 mb-3 ring-4 ring-white shadow-lg">
-              <AvatarImage src={userAvatarUrl} alt={displayName} className="object-cover" />
-              <AvatarFallback className="text-4xl bg-gradient-to-br from-blue-500 to-purple-500 text-white">
-                {displayName[0]}
-              </AvatarFallback>
-            </Avatar>
-            <h1 className="text-2xl font-bold mb-1">{displayName}</h1>
-            <p className="text-sm text-gray-600 mb-4">Member since {memberSince}</p>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Card className="mb-6">
+              <CardContent className="flex items-center p-6">
+                <Avatar className="w-20 h-20 mr-4">
+                  <AvatarImage src={userAvatarUrl} alt={displayName} />
+                  <AvatarFallback>
+                    <User className="h-10 w-10" />
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <h2 className="text-xl font-semibold">{displayName}</h2>
+                  <p className="text-sm text-gray-500">Member since {memberSince}</p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
           
-          <div className="space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="space-y-2"
+          >
             {profileItems.map((item, index) => (
-              <Button
+              <ProfileItem
                 key={index}
-                className="w-full bg-white text-gray-800 hover:bg-gray-100 transition-colors flex items-center justify-between px-4 py-3 rounded-lg shadow-sm"
+                icon={item.icon}
+                label={item.label}
                 onClick={() => navigate(item.route)}
-              >
-                <span className="flex items-center">
-                  <item.icon className="mr-3 h-5 w-5" />
-                  {item.label}
-                </span>
-                <span className="text-gray-400">→</span>
-              </Button>
+              />
             ))}
-          </div>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-6"
+          >
+            <Button variant="outline" className="w-full" onClick={() => navigate('/login')}>
+              <LogOut className="mr-2 h-4 w-4" />
+              Log Out
+            </Button>
+          </motion.div>
         </div>
       </div>
       <BottomNavBar activeTab={activeTab} setActiveTab={setActiveTab} />
