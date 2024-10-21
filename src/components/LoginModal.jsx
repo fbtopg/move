@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 const LoginModal = ({ isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-screen h-screen max-w-none p-0 m-0">
+      <DialogContent className="w-screen h-screen max-w-none p-0 m-0 border-t-0"> {/* Added border-t-0 class */}
         <motion.div
           initial={{ opacity: 0, y: "100%" }}
           animate={{ opacity: 1, y: 0 }}
@@ -18,7 +18,7 @@ const LoginModal = ({ isOpen, onClose }) => {
             <h1 className="text-2xl font-medium text-center mb-4">
               Create groups, connect & share with friends.
             </h1>
-            <div className="mb-4 w-full"> {/* Added w-full here */}
+            <div className="mb-4 w-full">
               <GoogleLoginButton />
             </div>
             <p className="text-[10px] text-gray-500 mt-2 text-center font-light">
