@@ -23,7 +23,14 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
     }
   };
 
-  const currentActiveTab = propActiveTab || location.pathname === '/' ? 'community' : 'challenge';
+  const getCurrentActiveTab = () => {
+    if (propActiveTab) return propActiveTab;
+    if (location.pathname === '/') return 'community';
+    if (location.pathname === '/board') return 'challenge';
+    return '';
+  };
+
+  const currentActiveTab = getCurrentActiveTab();
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 text-foreground h-20 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.1)]" style={{ borderTop: '1px solid var(--border)' }}>
