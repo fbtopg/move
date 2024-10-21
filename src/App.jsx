@@ -34,7 +34,7 @@ const App = () => {
                     <Route key={to} path={to} element={React.cloneElement(page, { openLoginModal })} />
                   ))}
                   <Route path="/profile" element={<Profile />} />
-                  <Route path="/board" element={<Board />} />
+                  <Route path="/board" element={<Board openLoginModal={openLoginModal} />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/group/:groupId" element={<GroupDetails />} />
