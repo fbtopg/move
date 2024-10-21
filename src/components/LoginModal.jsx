@@ -2,6 +2,8 @@ import React from 'react';
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import GoogleLoginButton from './GoogleLoginButton';
 import { motion } from 'framer-motion';
+import { X } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const LoginModal = ({ isOpen, onClose }) => {
   return (
@@ -24,6 +26,14 @@ const LoginModal = ({ isOpen, onClose }) => {
             backgroundImage: `url('https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/login%20modal%20background2.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2xvZ2luIG1vZGFsIGJhY2tncm91bmQyLnBuZyIsImlhdCI6MTcyOTQ4NDIwNSwiZXhwIjoxNzYxMDIwMjA1fQ.Eu76CGlTM-60c7KxGaJyDk4XMJ4VJ5tumRJjo7vO1AE&t=2024-10-21T04%3A16%3A45.074Z')`
           }}
         >
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            className="absolute top-4 right-4 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors"
+          >
+            <X className="h-6 w-6" />
+          </Button>
           <div className="flex flex-col items-center justify-end flex-grow">
             <h1 className="text-2xl font-medium text-center mb-4">
               Create groups, connect & share with friends.
