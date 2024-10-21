@@ -1,5 +1,4 @@
-import React from 'react';
-import { Globe } from 'lucide-react';
+import { Globe, Zap } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useNavigate, useLocation } from 'react-router-dom';
 import ChallengeIcon from './icons/ChallengeIcon';
@@ -57,7 +56,7 @@ const BottomNavBar = ({ activeTab: propActiveTab, setActiveTab: propSetActiveTab
             onClick={() => console.log('QuickStart button clicked')}
             className="bg-primary rounded-full w-16 h-16 shadow-lg flex items-center justify-center z-10"
           >
-            QuickStart
+            <Zap className="h-8 w-8 text-primary-foreground stroke-2" />
           </Button>
         </li>
       </ul>
