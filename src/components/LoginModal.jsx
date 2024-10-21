@@ -19,7 +19,10 @@ const LoginModal = ({ isOpen, onClose }) => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: "100%", opacity: 0 }}
           transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-          className="relative bg-white dark:bg-gray-800 h-full flex flex-col p-6"
+          className="relative bg-white dark:bg-gray-800 h-full flex flex-col p-6 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/login%20modal%20background1.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL2xvZ2luIG1vZGFsIGJhY2tncm91bmQxLnBuZyIsImlhdCI6MTcyOTQ4Mzk0MiwiZXhwIjoxNzYxMDE5OTQyfQ.SOw78Q-Ia0wik3WXs2eL-udIHUBREn7yq5857uyLN94&t=2024-10-21T04%3A12%3A21.675Z')`
+          }}
         >
           <div className="flex flex-col items-center justify-end flex-grow">
             <h1 className="text-3xl font-medium text-center mb-4">
