@@ -23,7 +23,7 @@ const GroupCard = ({ group, currentUserId }) => {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full">
-        <h3 className="text-base font-semibold truncate text-white mb-1">{truncateName(group.name)}</h3>
+        <h3 className="text-lg font-semibold truncate text-white mb-1">{truncateName(group.name)}</h3>
         <p className="text-xs text-gray-300 mb-1 flex-grow overflow-hidden">
           {truncateDescription(group.description)}
         </p>
