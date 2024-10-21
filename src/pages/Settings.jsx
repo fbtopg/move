@@ -1,12 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Bell, Lock, Eye, Volume2, Moon, Smartphone, Globe, Sun } from 'lucide-react';
+import { ArrowLeft, Bell, Moon, Volume2, Trash2, FileText, Globe, Info, LogOut, UserX } from 'lucide-react';
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useTheme } from 'next-themes';
 import { useSupabaseAuth } from '../integrations/supabase/auth';
+import { toast } from 'sonner';
 
 const SettingItem = ({ icon: Icon, label, children }) => (
   <div className="flex items-center justify-between py-4">
@@ -30,6 +31,21 @@ const Settings = () => {
   const handleLogout = async () => {
     await logout();
     navigate('/login');
+  };
+
+  const handleDeleteActivity = () => {
+    // Implement delete activity logic here
+    toast.success("Activity data deleted successfully");
+  };
+
+  const handleDeleteAccount = () => {
+    // Implement delete account logic here
+    toast.error("Account deletion is not implemented yet");
+  };
+
+  const handleViewDocument = (document) => {
+    // Implement view document logic here
+    toast.info(`Viewing ${document}`);
   };
 
   return (
@@ -57,28 +73,32 @@ const Settings = () => {
             <Switch />
           </SettingItem>
           <Separator />
-          <SettingItem icon={Lock} label="Privacy">
-            <Button variant="ghost" size="sm">Manage</Button>
-          </SettingItem>
-          <Separator />
-          <SettingItem icon={theme === 'dark' ? Sun : Moon} label="Dark Mode">
-            <Switch checked={theme === 'dark'} onCheckedChange={toggleTheme} />
-          </SettingItem>
-          <Separator />
           <SettingItem icon={Volume2} label="Sound">
             <Switch />
           </SettingItem>
           <Separator />
-          <SettingItem icon={Moon} label="Do Not Disturb">
-            <Switch />
+          <SettingItem icon={Moon} label="Dark Mode">
+            <Switch checked={theme === 'dark'} onCheckedChange={toggleTheme} />
           </SettingItem>
           <Separator />
-          <SettingItem icon={Smartphone} label="App Permissions">
-            <Button variant="ghost" size="sm">View</Button>
+          <SettingItem icon={Trash2} label="Delete My Activity Data">
+            <Button variant="ghost" size="sm" onClick={handleDeleteActivity}>Delete</Button>
+          </SettingItem>
+          <Separator />
+          <SettingItem icon={FileText} label="Terms and Conditions">
+            <Button variant="ghost" size="sm" onClick={() => handleViewDocument('Terms and Conditions')}>View</Button>
+          </SettingItem>
+          <Separator />
+          <SettingItem icon={FileText} label="Privacy Policy">
+            <Button variant="ghost" size="sm" onClick={() => handleViewDocument('Privacy Policy')}>View</Button>
           </SettingItem>
           <Separator />
           <SettingItem icon={Globe} label="Language">
             <Button variant="ghost" size="sm">English</Button>
+          </SettingItem>
+          <Separator />
+          <SettingItem icon={Info} label="App Version">
+            <span className="text-sm text-gray-500">v1.0.1</span>
           </SettingItem>
         </motion.div>
 
@@ -86,9 +106,16 @@ const Settings = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-6"
+          className="mt-6 space-y-4"
         >
-          <Button variant="outline" className="w-full" onClick={handleLogout}>Log Out</Button>
+          <Button variant="outline" className="w-full" onClick={handleLogout}>
+            <LogOut className="w-4 h-4 mr-2" />
+            Log Out
+          </Button>
+          <Button variant="destructive" className="w-full" onClick={handleDeleteAccount}>
+            <UserX className="w-4 h-4 mr-2" />
+            Delete Account
+          </Button>
         </motion.div>
       </div>
     </div>
