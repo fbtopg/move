@@ -20,8 +20,8 @@ const QuickStartPopup = ({ isOpen, onClose }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-3xl shadow-lg p-6"
-            style={{ height: '70vh' }}
+            className="fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-3xl shadow-lg p-6 flex flex-col"
+            style={{ height: '50vh' }} // Reduced height
           >
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">Choose activity</h2>
@@ -29,14 +29,15 @@ const QuickStartPopup = ({ isOpen, onClose }) => {
                 <X className="h-6 w-6" />
               </Button>
             </div>
-            <div className="flex flex-col items-center justify-center h-full">
-              <Button 
-                onClick={onClose} 
-                className="bg-primary text-white py-4 rounded-full text-xl font-bold w-full"
-              >
-                START
-              </Button>
+            <div className="flex-grow">
+              {/* Content for choosing activity will go here */}
             </div>
+            <Button 
+              onClick={onClose} 
+              className="bg-primary text-white py-4 rounded-full text-xl font-bold w-full mt-4"
+            >
+              START
+            </Button>
           </motion.div>
         </>
       )}
