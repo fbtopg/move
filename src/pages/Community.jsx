@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { format } from 'date-fns';
 import UserProfilePopup from "../components/UserProfilePopup";
 import SearchPage from "../components/SearchPage";
 import CreateGroupModal from "../components/CreateGroupModal";
@@ -12,8 +11,6 @@ import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import WelcomeContent from '../components/WelcomeContent';
 import ChallengeCardPreview from '../components/ChallengeCardPreview';
 import LoginModal from '../components/LoginModal';
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 
 const Community = ({ openLoginModal }) => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -81,70 +78,48 @@ const Community = ({ openLoginModal }) => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="space-y-6"
+        transition={{ duration: 0.5, delay: 0.6 }}
+        className="space-y-4"
       >
-        {session && userGroups.length > 0 && (
-          <Card>
-            <CardContent className="p-4">
-              <ChallengeCardPreview onLoginRequired={handleLoginRequired} />
-            </CardContent>
-          </Card>
-        )}
+        {session && userGroups.length > 0 && <ChallengeCardPreview onLoginRequired={handleLoginRequired} />}
         
         {!session && (
-          <Card>
-            <CardContent className="p-4">
-              <WelcomeContent
-                onAction={handleLoginRequired}
-                actionLabel="Login"
-              />
-            </CardContent>
-          </Card>
+          <div className="mt-8">
+            <WelcomeContent
+              onAction={handleLoginRequired}
+              actionLabel="Login"
+            />
+          </div>
         )}
         {session && userGroups.length === 0 && (
-          <Card>
-            <CardContent className="p-4">
-              <WelcomeContent
-                onAction={handleCreateGroup}
-                actionLabel="Create Group"
-              />
-            </CardContent>
-          </Card>
+          <div className="mt-8">
+            <WelcomeContent
+              onAction={handleCreateGroup}
+              actionLabel="Create Group"
+            />
+          </div>
         )}
         {session && userGroups.length > 0 && (
-          <Card>
-            <CardContent className="p-4">
-              <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
-            </CardContent>
-          </Card>
+          <div className="mb-10">
+            <MyGroups onCreateGroup={handleCreateGroup} onLoginRequired={handleLoginRequired} />
+          </div>
         )}
-        <Card>
-          <CardContent className="p-4">
-            <ActivitySection activities={recentActivities} />
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          <ActivitySection activities={recentActivities} />
+        </div>
       </motion.div>
     );
   };
 
   return (
     <div className="min-h-screen bg-[#FBFCFC] text-foreground dark:text-white flex flex-col">
-      <div className="px-4 pt-6 pb-20 flex-grow flex flex-col">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-6"
-        >
-          <h1 className="text-3xl font-bold mb-2">
-            {greeting}
-          </h1>
-          <p className="text-sm text-gray-500">
-            {format(new Date(), 'EEEE, MMMM do')}
-          </p>
-        </motion.div>
-        <Separator className="mb-6" />
+      <div className="px-4 pt-4 pb-20 flex-grow flex flex-col">
+        <div className="flex justify-end mb-2">
+          <ProfileButton openLoginModal={handleLoginRequired} />
+        </div>
+        <h1 className="text-2xl font-bold mb-2">
+          {greeting}
+        </h1>
         {renderContent()}
       </div>
 
