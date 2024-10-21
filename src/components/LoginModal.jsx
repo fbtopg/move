@@ -15,14 +15,14 @@ const LoginModal = ({ isOpen, onClose }) => {
           className="bg-white dark:bg-gray-800 h-full w-full flex flex-col p-6"
         >
           <div className="flex flex-col items-center justify-end flex-grow mb-8">
-            <h1 className="text-2xl font-medium text-center mb-4">
-              Create groups, connect & share with friends.
-            </h1>
             <img
               src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/Group%20289236.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL0dyb3VwIDI4OTIzNi5wbmciLCJpYXQiOjE3Mjk0ODY5NDMsImV4cCI6MTc2MTAyMjk0M30.6YiAn9sddOsNJ9cD1b7YZGl-JfEEAgvC4J1weJHtq_Y&t=2024-10-21T05%3A02%3A22.347Z"
               alt="Login illustration"
               className="w-64 h-64 object-contain mx-auto mb-6"
             />
+            <h1 className="text-2xl font-medium text-center mb-4">
+              Create groups, connect & share with friends.
+            </h1>
             <div className="mb-4 w-full">
               <GoogleLoginButton />
             </div>
