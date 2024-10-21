@@ -11,6 +11,7 @@ import { fetchPrivateGroups } from '../utils/supabaseGroupUtils';
 import WelcomeContent from '../components/WelcomeContent';
 import ChallengeCardPreview from '../components/ChallengeCardPreview';
 import LoginModal from '../components/LoginModal';
+import QuickStartPopup from '../components/QuickStartPopup';
 
 const Community = ({ openLoginModal }) => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -21,6 +22,7 @@ const Community = ({ openLoginModal }) => {
   const [userGroups, setUserGroups] = useState([]);
   const [recentActivities, setRecentActivities] = useState([]);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isQuickStartOpen, setIsQuickStartOpen] = useState(false);
 
   useEffect(() => {
     const updateGreeting = () => {
@@ -70,11 +72,7 @@ const Community = ({ openLoginModal }) => {
   };
 
   const handleCreateGroup = () => {
-    if (session) {
-      setIsCreateGroupModalOpen(true);
-    } else {
-      handleLoginRequired();
-    }
+    setIsCreateGroupModalOpen(true);
   };
 
   const renderContent = () => {
@@ -142,6 +140,12 @@ const Community = ({ openLoginModal }) => {
         onClose={() => setIsSearchOpen(false)}
         searchTerm=""
         setSearchTerm={() => {}}
+      />
+
+      <QuickStartPopup
+        isOpen={isQuickStartOpen}
+        onClose={() => setIsQuickStartOpen(false)}
+        onCreateGroup={handleCreateGroup}
       />
 
       <CreateGroupModal

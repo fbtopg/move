@@ -1,10 +1,15 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, UserPlus } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-const QuickStartPopup = ({ isOpen, onClose }) => {
+const QuickStartPopup = ({ isOpen, onClose, onCreateGroup }) => {
+  const handleCreateGroup = () => {
+    onClose();
+    onCreateGroup();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -42,10 +47,10 @@ const QuickStartPopup = ({ isOpen, onClose }) => {
               </div>
               <div className="absolute left-1/4 transform -translate-x-1/2 -mt-4">
                 <Button 
-                  onClick={onClose} 
-                  className="bg-secondary text-secondary-foreground rounded-full w-16 h-16 text-sm font-bold flex items-center justify-center"
+                  onClick={handleCreateGroup} 
+                  className="bg-secondary text-secondary-foreground rounded-full w-24 h-24 text-sm font-bold flex items-center justify-center"
                 >
-                  <UserPlus className="h-6 w-6" />
+                  Create group
                 </Button>
               </div>
             </div>
