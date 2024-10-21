@@ -25,7 +25,7 @@ const LoginModal = ({ isOpen, onClose }) => {
           }}
         >
           <div className="flex flex-col items-center justify-end flex-grow">
-            <h1 className="text-3xl font-medium text-center mb-4">
+            <h1 className="text-2xl font-medium text-center mb-4">
               Create groups, connect & share with friends.
             </h1>
             <GoogleLoginButton />
