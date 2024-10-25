@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import FriendActivity from "./FriendActivity";
+import { useSupabaseAuth } from '../integrations/supabase/auth';
 
 const ActivitySection = ({ activities, onLoginRequired }) => {
   const [activeTab, setActiveTab] = useState('all');
+  const { session } = useSupabaseAuth();
 
   const tabs = [
     { name: 'All', key: 'all' },
@@ -13,8 +15,14 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
 
   const activeIndex = tabs.findIndex((tab) => tab.key === activeTab);
 
+  const handleGetStarted = () => {
+    if (!session && onLoginRequired) {
+      onLoginRequired();
+    }
+  };
+
   const EmptyState = ({ onLoginRequired }) => (
-    <div className="flex flex-col items-center text-center px-4 py-8">
+    <div className="flex flex-col items-center text-center py-8">
       <h3 className="text-lg font-semibold mb-2">Stay in touch with a swipe</h3>
       <p className="text-sm font-light text-center mb-8">
         Discover your friends' latest moments. Swipe right to like their recent activities and make them feel appreciated.
@@ -26,7 +34,7 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
       />
       <button 
         className="bg-blue-500 hover:bg-blue-600 text-white w-48 rounded-full py-2"
-        onClick={onLoginRequired}
+        onClick={handleGetStarted}
       >
         Get Started
       </button>
