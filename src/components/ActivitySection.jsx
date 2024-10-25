@@ -71,7 +71,7 @@ const EmptyState = ({ onLoginRequired }) => {
       />
       <Button 
         variant="default" 
-        className="bg-blue-500 hover:bg-blue-600 text-white"
+        className="bg-blue-500 hover:bg-blue-600 text-white w-full rounded-full"
         onClick={handleGetStarted}
       >
         Get Started
