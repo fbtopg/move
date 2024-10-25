@@ -11,6 +11,9 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
     { name: 'Me', key: 'me', content: 'This is your profile section.' },
   ];
 
+  // Map the active tab to an index to control the underline position
+  const activeIndex = tabs.findIndex((tab) => tab.key === activeTab);
+
   const EmptyState = ({ onLoginRequired }) => (
     <div className="flex flex-col items-center text-center px-4 py-8">
       <h3 className="text-lg font-semibold mb-2">Stay in touch with a swipe</h3>
@@ -34,20 +37,24 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
   return (
     <div className="space-y-4 mb-6">
       {/* Tab Controls */}
-      <div className="flex justify-around border-b border-gray-300">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`pb-2 text-sm font-medium ${
-              activeTab === tab.key
-                ? 'text-black border-b-2 border-black'
-                : 'text-gray-500'
-            } focus:outline-none`}
-          >
-            {tab.name}
-          </button>
-        ))}
+      <div className="w-full">
+        <div className="relative flex justify-between">
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className="w-1/3 pb-2 text-sm font-medium text-center text-gray-500 focus:outline-none"
+            >
+              {tab.name}
+            </button>
+          ))}
+
+          {/* Sliding Black Underline */}
+          <div
+            className="absolute bottom-0 left-0 h-1 bg-black transition-all duration-300"
+            style={{ transform: `translateX(${activeIndex * 100}%)`, width: '33.33%' }}
+          />
+        </div>
       </div>
 
       {/* Tab Content */}
