@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, MessageCircle, Share2, Activity, Star, User } from 'lucide-react';
+import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -85,17 +85,23 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
   return (
     <div className="space-y-4 mb-6">
       <Tabs defaultValue="all" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="all" className="flex items-center gap-2">
-            <Activity className="h-4 w-4" />
+        <TabsList className="w-full flex justify-between border-b border-gray-200 mb-6">
+          <TabsTrigger 
+            value="all" 
+            className="text-lg font-normal data-[state=active]:border-b-2 data-[state=active]:border-black rounded-none pb-2 px-4"
+          >
             All
           </TabsTrigger>
-          <TabsTrigger value="favorite" className="flex items-center gap-2">
-            <Star className="h-4 w-4" />
+          <TabsTrigger 
+            value="favorite" 
+            className="text-lg font-normal data-[state=active]:border-b-2 data-[state=active]:border-black rounded-none pb-2 px-4"
+          >
             Favorite
           </TabsTrigger>
-          <TabsTrigger value="me" className="flex items-center gap-2">
-            <User className="h-4 w-4" />
+          <TabsTrigger 
+            value="me" 
+            className="text-lg font-normal data-[state=active]:border-b-2 data-[state=active]:border-black rounded-none pb-2 px-4"
+          >
             Me
           </TabsTrigger>
         </TabsList>
