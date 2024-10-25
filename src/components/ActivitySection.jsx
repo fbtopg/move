@@ -11,7 +11,6 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
     { name: 'Me', key: 'me', content: 'This is your profile section.' },
   ];
 
-  // Map the active tab to an index to control the underline position
   const activeIndex = tabs.findIndex((tab) => tab.key === activeTab);
 
   const EmptyState = ({ onLoginRequired }) => (
@@ -49,12 +48,12 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
             </button>
           ))}
 
-          {/* Gray Bar */}
+          {/* Thin Gray Bar */}
           <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gray-300"></div>
 
-          {/* Sliding Black Underline with Rounded Corners */}
+          {/* Thin Black Sliding Underline with Rounded Corners */}
           <div
-            className="absolute bottom-0 left-0 h-1 bg-black rounded-full transition-all duration-300"
+            className="absolute bottom-0 left-0 h-0.5 bg-black rounded-full transition-all duration-300"
             style={{ transform: `translateX(${activeIndex * 100}%)`, width: '33.33%' }}
           />
         </div>
