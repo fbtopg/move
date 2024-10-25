@@ -42,14 +42,21 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className="w-1/3 text-center pb-2 text-sm font-medium text-gray-500 focus:outline-none"
+              className={`w-1/3 text-center pb-2 text-sm focus:outline-none ${
+                activeTab === tab.key
+                  ? 'font-medium text-black'
+                  : 'font-light text-gray-500'
+              }`}
             >
               {tab.name}
             </button>
           ))}
 
-          {/* Ultra-Thin Gray Line */}
-          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gray-300"></div>
+          {/* Ultra-Thin 0.5px Gray Line */}
+          <div
+            className="absolute bottom-0 left-0 w-full"
+            style={{ height: '0.5px', backgroundColor: '#D1D5DB' }}
+          ></div>
 
           {/* Sliding Black Underline with Rounded Corners */}
           <div
