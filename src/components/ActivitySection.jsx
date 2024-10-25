@@ -25,7 +25,7 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
         className="w-64 h-auto mb-8"
       />
       <button 
-        className="bg-blue-500 hover:bg-blue-600 text-white w-full max-w-xs rounded-full py-2"
+        className="bg-blue-500 hover:bg-blue-600 text-white w-48 rounded-full py-2"
         onClick={onLoginRequired}
       >
         Get Started
@@ -34,7 +34,7 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
   );
 
   return (
-    <div className="space-y-4 mb-6">
+    <div className="space-y-4 mb-24">
       {/* Tab Controls */}
       <div className="w-full">
         <div className="relative flex justify-between items-center border-b-0">
