@@ -37,7 +37,7 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
     <div className="space-y-4 mb-6">
       {/* Tab Controls */}
       <div className="w-full">
-        <div className="relative flex justify-between items-center border-b border-gray-200">
+        <div className="relative flex justify-between items-center border-b border-gray-300">
           {tabs.map((tab) => (
             <button
               key={tab.key}
@@ -49,11 +49,11 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
           ))}
 
           {/* Thin Gray Bar */}
-          <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gray-200"></div>
+          <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gray-300"></div>
 
-          {/* Sliding Black Underline with Rounded Corners */}
+          {/* Thin Black Sliding Underline with Rounded Corners */}
           <div
-            className="absolute bottom-[2px] left-0 h-0.5 bg-black rounded-full transition-all duration-300"
+            className="absolute bottom-0 left-0 h-0.5 bg-black rounded-full transition-all duration-300"
             style={{ transform: `translateX(${activeIndex * 100}%)`, width: '33.33%' }}
           />
         </div>
