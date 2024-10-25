@@ -6,9 +6,9 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
   const [activeTab, setActiveTab] = useState('all');
 
   const tabs = [
-    { name: 'All', key: 'all' },
-    { name: 'Favorite', key: 'favorite' },
-    { name: 'Me', key: 'me' },
+    { name: 'All', key: 'all', content: 'This is the All tab content.' },
+    { name: 'Favorite', key: 'favorite', content: 'These are your favorite items.' },
+    { name: 'Me', key: 'me', content: 'This is your profile section.' },
   ];
 
   const EmptyState = ({ onLoginRequired }) => (
@@ -31,37 +31,6 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
     </div>
   );
 
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case 'all':
-        return activities && activities.length > 0 ? (
-          activities.map((activity, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-            >
-              <FriendActivity
-                name={activity.name}
-                activity={activity.activity}
-                type={activity.type}
-                profilePicture={activity.profilePicture}
-              />
-            </motion.div>
-          ))
-        ) : (
-          <EmptyState onLoginRequired={onLoginRequired} />
-        );
-      case 'favorite':
-        return <EmptyState onLoginRequired={onLoginRequired} />;
-      case 'me':
-        return <EmptyState onLoginRequired={onLoginRequired} />;
-      default:
-        return null;
-    }
-  };
-
   return (
     <div className="space-y-4 mb-6">
       {/* Tab Controls */}
@@ -82,8 +51,26 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
       </div>
 
       {/* Tab Content */}
-      <div className="mt-4">
-        {renderTabContent()}
+      <div className="p-4">
+        {activeTab === 'all' && activities && activities.length > 0 ? (
+          activities.map((activity, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+            >
+              <FriendActivity
+                name={activity.name}
+                activity={activity.activity}
+                type={activity.type}
+                profilePicture={activity.profilePicture}
+              />
+            </motion.div>
+          ))
+        ) : (
+          <EmptyState onLoginRequired={onLoginRequired} />
+        )}
       </div>
     </div>
   );
