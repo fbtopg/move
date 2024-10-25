@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { useSupabaseAuth } from '../integrations/supabase/auth';
 
 const ActivityItem = ({ activity, index }) => (
   <motion.div
@@ -47,21 +49,38 @@ const ActivityItem = ({ activity, index }) => (
   </motion.div>
 );
 
-const EmptyState = () => (
-  <>
-    <h3 className="text-lg font-semibold mb-2">Stay in touch with a swipe</h3>
-    <p className="text-sm font-light text-center mb-8">
-      Discover your friends' latest moments. Swipe right to like their recent activities and make them feel appreciated.
-    </p>
-    <img 
-      src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/Group%20289236%20(1).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL0dyb3VwIDI4OTIzNiAoMSkucG5nIiwiaWF0IjoxNzI5ODM4NjQxLCJleHAiOjE3NjEzNzQ2NDF9.M1tbMZdFCzKb6phePakvCamR9wifQJSLdNIB95bDXEE&t=2024-10-25T06%3A44%3A04.048Z"
-      alt="No activities"
-      className="w-64 h-auto"
-    />
-  </>
-);
+const EmptyState = ({ onLoginRequired }) => {
+  const { session } = useSupabaseAuth();
 
-const ActivitySection = ({ activities }) => {
+  const handleGetStarted = () => {
+    if (!session && onLoginRequired) {
+      onLoginRequired();
+    }
+  };
+
+  return (
+    <>
+      <h3 className="text-lg font-semibold mb-2">Stay in touch with a swipe</h3>
+      <p className="text-sm font-light text-center mb-8">
+        Discover your friends' latest moments. Swipe right to like their recent activities and make them feel appreciated.
+      </p>
+      <img 
+        src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/Group%20289236%20(1).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL0dyb3VwIDI4OTIzNiAoMSkucG5nIiwiaWF0IjoxNzI5ODM4NjQxLCJleHAiOjE3NjEzNzQ2NDF9.M1tbMZdFCzKb6phePakvCamR9wifQJSLdNIB95bDXEE&t=2024-10-25T06%3A44%3A04.048Z"
+        alt="No activities"
+        className="w-64 h-auto mb-8"
+      />
+      <Button 
+        variant="default" 
+        className="bg-blue-500 hover:bg-blue-600 text-white"
+        onClick={handleGetStarted}
+      >
+        Get Started
+      </Button>
+    </>
+  );
+};
+
+const ActivitySection = ({ activities, onLoginRequired }) => {
   return (
     <div className="space-y-4 mb-6">
       <h2 className="text-base font-semibold roboto-medium">Recent Activity</h2>
@@ -71,7 +90,7 @@ const ActivitySection = ({ activities }) => {
         ))
       ) : (
         <div className="flex flex-col items-center text-center px-4 py-8">
-          <EmptyState />
+          <EmptyState onLoginRequired={onLoginRequired} />
         </div>
       )}
     </div>
