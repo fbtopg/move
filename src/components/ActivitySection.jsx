@@ -86,7 +86,7 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
     <div className="space-y-4 mb-6">
       <Tabs defaultValue="all" className="w-full">
         <div className="border-b border-gray-200">
-          <div className="grid grid-cols-3">
+          <TabsList className="w-full grid grid-cols-3">
             <TabsTrigger 
               value="all" 
               className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2"
@@ -105,7 +105,7 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
             >
               Me
             </TabsTrigger>
-          </div>
+          </TabsList>
         </div>
         
         <TabsContent value="all">
