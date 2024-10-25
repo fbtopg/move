@@ -6,9 +6,9 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
   const [activeTab, setActiveTab] = useState('all');
 
   const tabs = [
-    { name: 'All', key: 'all', content: 'This is the All tab content.' },
-    { name: 'Favorite', key: 'favorite', content: 'These are your favorite items.' },
-    { name: 'Me', key: 'me', content: 'This is your profile section.' },
+    { name: 'All', key: 'all' },
+    { name: 'Favorite', key: 'favorite' },
+    { name: 'Me', key: 'me' },
   ];
 
   const activeIndex = tabs.findIndex((tab) => tab.key === activeTab);
@@ -45,7 +45,7 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
               className={`w-1/3 text-center pb-2 text-sm focus:outline-none ${
                 activeTab === tab.key
                   ? 'font-medium text-black'
-                  : 'font-light text-gray-500'
+                  : 'font-normal text-gray-500'
               }`}
             >
               {tab.name}
