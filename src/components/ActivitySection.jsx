@@ -58,6 +58,20 @@ const ActivityItem = ({ activity, index }) => (
   </motion.div>
 );
 
+const EmptyState = () => (
+  <div className="flex flex-col items-center text-center px-4 py-8">
+    <h3 className="text-lg font-semibold mb-2">Stay in touch with a swipe</h3>
+    <p className="text-sm text-gray-500 mb-6">
+      Discover your friends' latest moments. Swipe right to like their recent activities and make them feel appreciated.
+    </p>
+    <img 
+      src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/Group%20289236%20(1).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL0dyb3VwIDI4OTIzNiAoMSkucG5nIiwiaWF0IjoxNzI5ODM4NjQxLCJleHAiOjE3NjEzNzQ2NDF9.M1tbMZdFCzKb6phePakvCamR9wifQJSLdNIB95bDXEE&t=2024-10-25T06%3A44%3A04.048Z"
+      alt="No activities"
+      className="w-64 h-auto"
+    />
+  </div>
+);
+
 const ActivitySection = ({ activities }) => {
   return (
     <div className="space-y-4 mb-6">
@@ -68,8 +82,8 @@ const ActivitySection = ({ activities }) => {
         ))
       ) : (
         <Card>
-          <CardContent className="p-6 text-center text-gray-500">
-            No recent activities
+          <CardContent className="p-0">
+            <EmptyState />
           </CardContent>
         </Card>
       )}
