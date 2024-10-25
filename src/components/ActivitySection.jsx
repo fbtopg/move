@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, MessageCircle, Share2 } from 'lucide-react';
+import { Heart, MessageCircle, Share2, Activity, Star, User } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 
 const ActivityItem = ({ activity, index }) => (
@@ -83,16 +84,43 @@ const EmptyState = ({ onLoginRequired }) => {
 const ActivitySection = ({ activities, onLoginRequired }) => {
   return (
     <div className="space-y-4 mb-6">
-      <h2 className="text-base font-semibold roboto-medium">Recent Activity</h2>
-      {activities && activities.length > 0 ? (
-        activities.map((activity, index) => (
-          <ActivityItem key={activity.id} activity={activity} index={index} />
-        ))
-      ) : (
-        <div className="flex flex-col items-center text-center px-4 py-8">
-          <EmptyState onLoginRequired={onLoginRequired} />
-        </div>
-      )}
+      <Tabs defaultValue="all" className="w-full">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="all" className="flex items-center gap-2">
+            <Activity className="h-4 w-4" />
+            All
+          </TabsTrigger>
+          <TabsTrigger value="favorite" className="flex items-center gap-2">
+            <Star className="h-4 w-4" />
+            Favorite
+          </TabsTrigger>
+          <TabsTrigger value="me" className="flex items-center gap-2">
+            <User className="h-4 w-4" />
+            Me
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="all">
+          {activities && activities.length > 0 ? (
+            activities.map((activity, index) => (
+              <ActivityItem key={activity.id} activity={activity} index={index} />
+            ))
+          ) : (
+            <div className="flex flex-col items-center text-center px-4 py-8">
+              <EmptyState onLoginRequired={onLoginRequired} />
+            </div>
+          )}
+        </TabsContent>
+        <TabsContent value="favorite">
+          <div className="flex flex-col items-center text-center px-4 py-8">
+            <EmptyState onLoginRequired={onLoginRequired} />
+          </div>
+        </TabsContent>
+        <TabsContent value="me">
+          <div className="flex flex-col items-center text-center px-4 py-8">
+            <EmptyState onLoginRequired={onLoginRequired} />
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
