@@ -85,26 +85,28 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
   return (
     <div className="space-y-4 mb-6">
       <Tabs defaultValue="all" className="w-full">
-        <TabsList className="w-full grid grid-cols-3 border-b border-gray-200 bg-transparent">
-          <TabsTrigger 
-            value="all" 
-            className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2 bg-transparent hover:bg-transparent"
-          >
-            All
-          </TabsTrigger>
-          <TabsTrigger 
-            value="favorite" 
-            className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2 bg-transparent hover:bg-transparent"
-          >
-            Favorite
-          </TabsTrigger>
-          <TabsTrigger 
-            value="me" 
-            className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2 bg-transparent hover:bg-transparent"
-          >
-            Me
-          </TabsTrigger>
-        </TabsList>
+        <div className="border-b border-gray-200">
+          <div className="grid grid-cols-3">
+            <TabsTrigger 
+              value="all" 
+              className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2"
+            >
+              All
+            </TabsTrigger>
+            <TabsTrigger 
+              value="favorite" 
+              className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2"
+            >
+              Favorite
+            </TabsTrigger>
+            <TabsTrigger 
+              value="me" 
+              className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2"
+            >
+              Me
+            </TabsTrigger>
+          </div>
+        </div>
         
         <TabsContent value="all">
           {activities && activities.length > 0 ? (
