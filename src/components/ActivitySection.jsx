@@ -85,22 +85,22 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
   return (
     <div className="space-y-4 mb-6">
       <Tabs defaultValue="all" className="w-full">
-        <TabsList className="w-full flex justify-between border-b border-gray-200">
+        <TabsList className="w-full grid grid-cols-3 border-b border-gray-200">
           <TabsTrigger 
             value="all" 
-            className="flex-1 text-sm font-medium text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black rounded-none pb-2"
+            className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2"
           >
             All
           </TabsTrigger>
           <TabsTrigger 
             value="favorite" 
-            className="flex-1 text-sm font-medium text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black rounded-none pb-2"
+            className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2"
           >
             Favorite
           </TabsTrigger>
           <TabsTrigger 
             value="me" 
-            className="flex-1 text-sm font-medium text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black rounded-none pb-2"
+            className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2"
           >
             Me
           </TabsTrigger>
