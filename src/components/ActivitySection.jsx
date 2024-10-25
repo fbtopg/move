@@ -50,7 +50,7 @@ const ActivityItem = ({ activity, index }) => (
 const EmptyState = () => (
   <>
     <h3 className="text-lg font-semibold mb-2">Stay in touch with a swipe</h3>
-    <p className="text-sm text-gray-500 mb-6">
+    <p className="text-sm font-light text-center mb-8">
       Discover your friends' latest moments. Swipe right to like their recent activities and make them feel appreciated.
     </p>
     <img 
