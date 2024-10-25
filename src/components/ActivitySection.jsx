@@ -59,7 +59,7 @@ const ActivityItem = ({ activity, index }) => (
 );
 
 const EmptyState = () => (
-  <div className="flex flex-col items-center text-center px-4 py-8">
+  <>
     <h3 className="text-lg font-semibold mb-2">Stay in touch with a swipe</h3>
     <p className="text-sm text-gray-500 mb-6">
       Discover your friends' latest moments. Swipe right to like their recent activities and make them feel appreciated.
@@ -69,7 +69,7 @@ const EmptyState = () => (
       alt="No activities"
       className="w-64 h-auto"
     />
-  </div>
+  </>
 );
 
 const ActivitySection = ({ activities }) => {
@@ -82,7 +82,7 @@ const ActivitySection = ({ activities }) => {
         ))
       ) : (
         <Card>
-          <CardContent className="p-0">
+          <CardContent className="p-0 flex flex-col items-center text-center px-4 py-8">
             <EmptyState />
           </CardContent>
         </Card>
