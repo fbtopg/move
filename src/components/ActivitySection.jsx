@@ -4,17 +4,6 @@ import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
-const getGradientColor = (index) => {
-  const colors = [
-    'from-blue-400 to-purple-500',
-    'from-green-400 to-blue-500',
-    'from-yellow-400 to-red-500',
-    'from-pink-400 to-red-500',
-    'from-indigo-400 to-purple-500'
-  ];
-  return colors[index % colors.length];
-};
-
 const ActivityItem = ({ activity, index }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -81,11 +70,9 @@ const ActivitySection = ({ activities }) => {
           <ActivityItem key={activity.id} activity={activity} index={index} />
         ))
       ) : (
-        <Card>
-          <CardContent className="p-0 flex flex-col items-center text-center px-4 py-8">
-            <EmptyState />
-          </CardContent>
-        </Card>
+        <div className="flex flex-col items-center text-center px-4 py-8">
+          <EmptyState />
+        </div>
       )}
     </div>
   );
