@@ -87,24 +87,9 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
       <Tabs defaultValue="all" className="w-full">
         <div className="border-b border-gray-200">
           <TabsList className="w-full grid grid-cols-3">
-            <TabsTrigger 
-              value="all" 
-              className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2"
-            >
-              All
-            </TabsTrigger>
-            <TabsTrigger 
-              value="favorite" 
-              className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2"
-            >
-              Favorite
-            </TabsTrigger>
-            <TabsTrigger 
-              value="me" 
-              className="text-sm text-gray-500 data-[state=active]:text-black data-[state=active]:border-b-2 data-[state=active]:border-black pb-2"
-            >
-              Me
-            </TabsTrigger>
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="favorite">Favorite</TabsTrigger>
+            <TabsTrigger value="me">Me</TabsTrigger>
           </TabsList>
         </div>
         
