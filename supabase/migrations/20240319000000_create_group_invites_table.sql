@@ -13,13 +13,28 @@ create table public.group_invites (
 -- Add RLS policies
 alter table public.group_invites enable row level security;
 
+-- Add foreign key relationships explicitly
+alter table public.group_invites
+    add constraint fk_group_invites_groups
+    foreign key (group_id)
+    references public.groups(id)
+    on delete cascade;
+
+alter table public.group_invites
+    add constraint fk_group_invites_users
+    foreign key (created_by)
+    references auth.users(id)
+    on delete cascade;
+
 -- Group members can view invites for their groups
 create policy "Group members can view group invites"
     on public.group_invites for select
     to authenticated
     using (
-        auth.uid() in (
-            select unnest(members) from public.groups where id = group_id
+        exists (
+            select 1 from public.groups
+            where id = group_invites.group_id
+            and auth.uid() = any(members)
         )
     );
 
@@ -28,8 +43,10 @@ create policy "Only group creators can create invites"
     on public.group_invites for insert
     to authenticated
     with check (
-        auth.uid() = (
-            select created_by from public.groups where id = group_id
+        exists (
+            select 1 from public.groups
+            where id = group_invites.group_id
+            and created_by = auth.uid()
         )
     );
 

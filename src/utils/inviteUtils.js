@@ -31,14 +31,14 @@ export const getInviteDetails = async (inviteCode) => {
       .from('group_invites')
       .select(`
         *,
-        groups:group_id (
+        group:group_id (
           name,
-          description,
-          created_by
+          description
         ),
         creator:created_by (
-          username,
-          full_name
+          id,
+          email,
+          user_metadata
         )
       `)
       .eq('invite_code', inviteCode)
@@ -49,7 +49,7 @@ export const getInviteDetails = async (inviteCode) => {
       throw new Error('Invalid invitation');
     }
 
-    if (!inviteData || !inviteData.groups) {
+    if (!inviteData || !inviteData.group) {
       console.error('No invite data found or group does not exist:', { inviteData });
       throw new Error('Invalid invitation');
     }
@@ -76,15 +76,15 @@ export const getInviteDetails = async (inviteCode) => {
 
     console.log('Valid invite details found:', {
       groupId: inviteData.group_id,
-      groupName: inviteData.groups.name,
-      inviter: inviteData.creator?.username || inviteData.creator?.full_name,
+      groupName: inviteData.group.name,
+      inviter: inviteData.creator?.user_metadata?.full_name || inviteData.creator?.email,
     });
 
     return {
       groupId: inviteData.group_id,
-      groupName: inviteData.groups.name,
-      groupDescription: inviteData.groups.description,
-      inviterName: inviteData.creator?.username || inviteData.creator?.full_name || 'Someone',
+      groupName: inviteData.group.name,
+      groupDescription: inviteData.group.description,
+      inviterName: inviteData.creator?.user_metadata?.full_name || inviteData.creator?.email || 'Someone',
       isValid: true
     };
   } catch (error) {
