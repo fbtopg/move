@@ -1,29 +1,12 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 
 const QuickStartPopup = ({ isOpen, onClose, onCreateGroup, handleLoginRequired }) => {
   const { session } = useSupabaseAuth();
-
-  const handleCreateGroup = () => {
-    onClose();
-    if (session) {
-      if (typeof onCreateGroup === 'function') {
-        onCreateGroup();
-      } else {
-        console.warn('onCreateGroup is not a function');
-      }
-    } else {
-      if (typeof handleLoginRequired === 'function') {
-        handleLoginRequired();
-      } else {
-        console.warn('handleLoginRequired is not a function');
-      }
-    }
-  };
 
   return (
     <AnimatePresence>
@@ -58,16 +41,6 @@ const QuickStartPopup = ({ isOpen, onClose, onCreateGroup, handleLoginRequired }
                   className="bg-primary text-white rounded-full w-20 h-20 text-lg font-bold flex items-center justify-center"
                 >
                   Walk
-                </Button>
-              </div>
-              <div className="absolute left-1/4 transform -translate-x-1/2 -mt-4">
-                <Button 
-                  onClick={handleCreateGroup} 
-                  className="bg-secondary text-secondary-foreground rounded-full w-16 h-16 text-[10px] font-normal flex flex-col items-center justify-center"
-                >
-                  <Plus className="h-4 w-4 mb-0.5" />
-                  <span>Create</span>
-                  <span>group</span>
                 </Button>
               </div>
             </div>
