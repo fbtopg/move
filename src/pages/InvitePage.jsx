@@ -17,7 +17,6 @@ const InvitePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [pendingJoin, setPendingJoin] = useState(false);
 
-  // Fetch invite details
   useEffect(() => {
     const fetchInviteDetails = async () => {
       if (!inviteCode) {
@@ -31,7 +30,6 @@ const InvitePage = () => {
         setInviteDetails(details);
         setShowPopup(true);
 
-        // Store invite details in localStorage when fetched
         localStorage.setItem(PENDING_INVITE_KEY, JSON.stringify({
           inviteCode,
           details
@@ -45,7 +43,6 @@ const InvitePage = () => {
       }
     };
 
-    // Check if there's a pending invite in localStorage
     const storedInvite = localStorage.getItem(PENDING_INVITE_KEY);
     if (storedInvite) {
       const { inviteCode: storedCode, details } = JSON.parse(storedInvite);
@@ -62,32 +59,47 @@ const InvitePage = () => {
     }
   }, [inviteCode, navigate]);
 
-  // Handle automatic join after login
   useEffect(() => {
     const handlePostLoginJoin = async () => {
       const storedInvite = localStorage.getItem(PENDING_INVITE_KEY);
-      if (session?.user?.id && storedInvite) {
-        const { details } = JSON.parse(storedInvite);
+
+      if (!storedInvite) {
+        console.warn('No pending invite found in localStorage.');
+        return;
+      }
+
+      const { details } = JSON.parse(storedInvite);
+
+      if (session?.user?.id && details) {
+        console.log('Attempting post-login join:', { 
+          userId: session.user.id, 
+          groupId: details.groupId 
+        });
+
         try {
-          console.log('Attempting post-login join:', { 
-            userId: session.user.id, 
-            groupId: details.groupId 
-          });
-          
-          await joinGroup(details.groupId, session.user.id);
-          toast.success('Successfully joined the group!');
-          navigate(`/group/${details.groupId}`);
-          
-          // Clear the stored invite after successful join
+          const result = await joinGroup(details.groupId, session.user.id);
+          console.log('Join group result:', result);
+
+          if (result?.alreadyMember) {
+            toast.info('You are already a member of this group.');
+          } else {
+            toast.success('Successfully joined the group!');
+          }
+
+          // Clean up localStorage and navigate to the group page.
           localStorage.removeItem(PENDING_INVITE_KEY);
+          navigate(`/group/${details.groupId}`);
         } catch (error) {
           console.error('Error joining group after login:', error);
-          toast.error('Failed to join the group');
+          toast.error('Failed to join the group.');
           navigate('/');
         }
+      } else {
+        console.warn('User session or invite details not available.');
       }
     };
 
+    // Run the post-login join logic when the session changes.
     handlePostLoginJoin();
   }, [session, navigate]);
 
