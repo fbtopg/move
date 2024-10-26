@@ -25,66 +25,46 @@ export const generateInviteLink = async (groupId, createdBy) => {
 
 export const getInviteDetails = async (inviteCode) => {
   try {
-    console.log('Fetching invite details for code:', inviteCode);
-    
-    // First, get the invite data
+    // Get the invite data with a direct query
     const { data: inviteData, error: inviteError } = await supabase
       .from('group_invites')
-      .select('*, group_id')
+      .select('id, group_id, created_by, uses, max_uses, expires_at, is_active')
       .eq('invite_code', inviteCode)
       .single();
 
-    if (inviteError) {
-      console.error('Database error when fetching invite:', inviteError);
+    if (inviteError || !inviteData) {
+      console.error('Error fetching invite:', inviteError);
       throw new Error('Invalid invitation');
     }
 
-    if (!inviteData) {
-      console.error('No invite data found');
-      throw new Error('Invalid invitation');
-    }
-
-    // Then, get the group details separately
+    // Get group details
     const { data: groupData, error: groupError } = await supabase
       .from('groups')
       .select('name, description, created_by')
       .eq('id', inviteData.group_id)
       .single();
 
-    if (groupError) {
-      console.error('Error fetching group details:', groupError);
+    if (groupError || !groupData) {
+      console.error('Error fetching group:', groupError);
       throw new Error('Invalid invitation');
     }
 
-    // Get creator details
+    // Get creator details from profiles table
     const { data: creatorData, error: creatorError } = await supabase
       .from('profiles')
       .select('full_name, email')
-      .eq('id', groupData.created_by)
+      .eq('id', inviteData.created_by)
       .single();
-
-    if (creatorError) {
-      console.error('Error fetching creator details:', creatorError);
-      // Don't throw here, we can still proceed with limited information
-    }
 
     // Check if invite has expired
     const now = new Date();
     const expiryDate = new Date(inviteData.expires_at);
-    if (now > expiryDate) {
-      console.error('Invite expired:', {
-        now: now.toISOString(),
-        expiryDate: inviteData.expires_at,
-      });
+    if (now > expiryDate || !inviteData.is_active) {
       throw new Error('Invitation has expired');
     }
 
     // Check if max uses reached
     if (inviteData.uses >= inviteData.max_uses) {
-      console.error('Max uses reached:', {
-        currentUses: inviteData.uses,
-        maxUses: inviteData.max_uses,
-      });
       throw new Error('Invitation has reached maximum uses');
     }
 
