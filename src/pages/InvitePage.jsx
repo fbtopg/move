@@ -25,12 +25,7 @@ const InvitePage = () => {
       try {
         const details = await getInviteDetails(inviteCode);
         setInviteDetails(details);
-        
-        if (session) {
-          handleJoinGroup(details.groupId);
-        } else {
-          setShowPopup(true);
-        }
+        setShowPopup(true);
       } catch (error) {
         console.error('Error with invitation:', error);
         toast.error(error.message || 'Invalid or expired invitation');
@@ -41,30 +36,22 @@ const InvitePage = () => {
     };
 
     fetchInviteDetails();
-  }, [inviteCode, session, navigate]);
+  }, [inviteCode, navigate]);
 
-  const handleJoinGroup = async (groupId) => {
+  const handleJoinGroup = async () => {
     if (!session) {
-      setShowPopup(true);
-      return;
+      return; // Let InvitePopup handle the login flow
     }
 
     try {
-      await joinGroup(groupId, session.user.id);
+      await joinGroup(inviteDetails.groupId, session.user.id);
       toast.success('Successfully joined the group!');
-      navigate(`/group/${groupId}`);
+      navigate(`/group/${inviteDetails.groupId}`);
     } catch (error) {
       console.error('Error joining group:', error);
       toast.error('Failed to join the group');
       navigate('/');
     }
-  };
-
-  const handleAccept = async () => {
-    setShowPopup(false);
-    // The user will be redirected to sign in
-    // After signing in, they'll be brought back to this page
-    // and the useEffect will handle joining the group
   };
 
   if (isLoading) {
@@ -86,7 +73,8 @@ const InvitePage = () => {
         inviterName={inviteDetails.inviterName}
         groupName={inviteDetails.groupName}
         groupImage={inviteDetails.groupImage}
-        onAccept={handleAccept}
+        groupId={inviteDetails.groupId}
+        onAccept={handleJoinGroup}
       />
     </div>
   );
