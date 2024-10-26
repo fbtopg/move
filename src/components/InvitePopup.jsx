@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, groupId, onAccept }) => {
   const { session } = useSupabaseAuth();
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [pendingJoin, setPendingJoin] = useState(false);
   const navigate = useNavigate();
 
   const displayName = inviterName?.includes('@') 
@@ -19,7 +20,7 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
 
   useEffect(() => {
     const handlePostAuth = async () => {
-      if (session && showLoginModal) {
+      if (session && (showLoginModal || pendingJoin)) {
         setShowLoginModal(false);
         try {
           await joinGroup(groupId, session.user.id);
@@ -28,17 +29,20 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
         } catch (error) {
           console.error('Error joining group:', error);
           toast.error('Failed to join the group');
+        } finally {
+          setPendingJoin(false);
         }
       }
     };
 
     handlePostAuth();
-  }, [session, showLoginModal, groupId, navigate]);
+  }, [session, showLoginModal, pendingJoin, groupId, navigate]);
 
   const handleAcceptClick = () => {
     if (session) {
       onAccept();
     } else {
+      setPendingJoin(true);
       setShowLoginModal(true);
     }
   };
@@ -89,7 +93,10 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
 
       <LoginModal
         isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
+        onClose={() => {
+          setShowLoginModal(false);
+          setPendingJoin(false);
+        }}
       />
     </div>
   );
