@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -8,7 +8,7 @@ import LoginModal from './LoginModal';
 import { joinGroup } from '../utils/supabaseGroupUtils';
 import { toast } from 'sonner';
 
-const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, groupId }) => {
+const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, groupId, setPendingJoin }) => {
   const { session } = useSupabaseAuth();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const navigate = useNavigate();
@@ -16,28 +16,6 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
   const displayName = inviterName?.includes('@') 
     ? inviterName.split('@')[0] 
     : inviterName || 'Someone';
-
-  useEffect(() => {
-    const handlePostAuth = async () => {
-      if (session && showLoginModal) {
-        setShowLoginModal(false);
-        try {
-          const result = await joinGroup(groupId, session.user.id);
-          if (result?.alreadyMember) {
-            toast.info('You are already a member of this group');
-          } else {
-            toast.success('Successfully joined the group!');
-          }
-          navigate(`/group/${groupId}`);
-        } catch (error) {
-          console.error('Error joining group:', error);
-          toast.error('Failed to join the group');
-        }
-      }
-    };
-
-    handlePostAuth();
-  }, [session, showLoginModal, groupId, navigate]);
 
   const handleAcceptClick = async () => {
     if (session) {
@@ -54,6 +32,7 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
         toast.error('Failed to join the group');
       }
     } else {
+      setPendingJoin(true);
       setShowLoginModal(true);
     }
   };

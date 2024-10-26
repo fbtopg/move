@@ -13,6 +13,7 @@ const InvitePage = () => {
   const [inviteDetails, setInviteDetails] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [pendingJoin, setPendingJoin] = useState(false);
 
   useEffect(() => {
     const fetchInviteDetails = async () => {
@@ -38,6 +39,30 @@ const InvitePage = () => {
     fetchInviteDetails();
   }, [inviteCode, navigate]);
 
+  // Handle automatic group joining after login
+  useEffect(() => {
+    const handlePostLoginJoin = async () => {
+      if (session && pendingJoin && inviteDetails) {
+        try {
+          const result = await joinGroup(inviteDetails.groupId, session.user.id);
+          if (result?.alreadyMember) {
+            toast.info('You are already a member of this group');
+          } else {
+            toast.success('Successfully joined the group!');
+          }
+          navigate(`/group/${inviteDetails.groupId}`);
+        } catch (error) {
+          console.error('Error joining group:', error);
+          toast.error('Failed to join the group');
+        } finally {
+          setPendingJoin(false);
+        }
+      }
+    };
+
+    handlePostLoginJoin();
+  }, [session, pendingJoin, inviteDetails, navigate]);
+
   if (isLoading) {
     return null;
   }
@@ -58,6 +83,7 @@ const InvitePage = () => {
         groupName={inviteDetails.groupName}
         groupImage={inviteDetails.groupImage}
         groupId={inviteDetails.groupId}
+        setPendingJoin={setPendingJoin}
       />
     </div>
   );
