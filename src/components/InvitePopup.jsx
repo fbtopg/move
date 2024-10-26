@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 import { useNavigate } from 'react-router-dom';
 import LoginModal from './LoginModal';
-import { joinGroup } from '../utils/supabaseGroupUtils';
 import { toast } from 'sonner';
 
 const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, groupId, onAccept }) => {
@@ -17,29 +16,19 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
     ? inviterName.split('@')[0] 
     : inviterName || 'Someone';
 
-  useEffect(() => {
-    const handlePostAuth = async () => {
-      if (session && showLoginModal) {
-        setShowLoginModal(false);
-        try {
-          await joinGroup(groupId, session.user.id);
-          toast.success('Successfully joined the group!');
-          navigate(`/group/${groupId}`);
-        } catch (error) {
-          console.error('Error joining group:', error);
-          toast.error('Failed to join the group');
-        }
-      }
-    };
-
-    handlePostAuth();
-  }, [session, showLoginModal, groupId, navigate]);
-
   const handleAcceptClick = () => {
-    if (session) {
-      onAccept();
+    if (session?.user) {
+      onAccept(session.user.id);
     } else {
       setShowLoginModal(true);
+    }
+  };
+
+  // When login modal closes, check if we're now logged in
+  const handleLoginModalClose = () => {
+    setShowLoginModal(false);
+    if (session?.user) {
+      onAccept(session.user.id);
     }
   };
 
@@ -83,7 +72,7 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
 
       <LoginModal
         isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
+        onClose={handleLoginModalClose}
       />
     </div>
   );

@@ -38,13 +38,14 @@ const InvitePage = () => {
     fetchInviteDetails();
   }, [inviteCode, navigate]);
 
-  const handleJoinGroup = async () => {
-    if (!session) {
-      return; // Let InvitePopup handle the login flow
+  const handleJoinGroup = async (userId) => {
+    if (!userId || !inviteDetails) {
+      console.error('Missing user ID or invite details');
+      return;
     }
 
     try {
-      await joinGroup(inviteDetails.groupId, session.user.id);
+      await joinGroup(inviteDetails.groupId, userId);
       toast.success('Successfully joined the group!');
       navigate(`/group/${inviteDetails.groupId}`);
     } catch (error) {
