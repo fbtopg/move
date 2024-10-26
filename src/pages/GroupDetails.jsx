@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Share, Camera } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -9,12 +9,15 @@ import { uploadGroupImage, updateGroupImageUrl } from '../utils/supabaseStorageU
 import { generateInviteLink } from '../utils/inviteUtils';
 import { toast } from 'sonner';
 import { useSupabaseAuth } from '../integrations/supabase/auth';
+import InviteFriends from '../components/InviteFriends';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
   const fileInputRef = React.useRef(null);
   const { session } = useSupabaseAuth();
+  const [isInviteOpen, setIsInviteOpen] = useState(false);
+  const [inviteLink, setInviteLink] = useState('');
 
   const { data: group, isLoading, error } = useQuery({
     queryKey: ['groupDetails', groupId],
@@ -25,9 +28,9 @@ const GroupDetails = () => {
   
   const handleShare = async () => {
     try {
-      const inviteLink = await generateInviteLink(groupId, session.user.id);
-      await navigator.clipboard.writeText(inviteLink);
-      toast.success('Invitation link copied to clipboard!');
+      const link = await generateInviteLink(groupId, session.user.id);
+      setInviteLink(link);
+      setIsInviteOpen(true);
     } catch (error) {
       toast.error('Failed to generate invitation link');
     }
@@ -122,6 +125,12 @@ const GroupDetails = () => {
           Invite friends
         </Button>
       </div>
+
+      <InviteFriends 
+        isOpen={isInviteOpen}
+        onClose={() => setIsInviteOpen(false)}
+        inviteLink={inviteLink}
+      />
     </div>
   );
 };
