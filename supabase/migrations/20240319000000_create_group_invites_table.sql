@@ -32,6 +32,7 @@ select
     gi.*,
     g.name as group_name,
     g.description as group_description,
+    g.image as group_image,
     p.email as inviter_email,
     p.raw_user_meta_data->>'full_name' as inviter_display_name
 from group_invites gi
@@ -50,15 +51,15 @@ create policy "Group members can view group invites"
         )
     );
 
--- Only group creators can create invites
-create policy "Only group creators can create invites"
+-- Both group creators and members can create invites
+create policy "Group members and creators can create invites"
     on public.group_invites for insert
     to authenticated
     with check (
         exists (
             select 1 from public.groups
             where id = group_invites.group_id
-            and created_by = auth.uid()
+            and auth.uid() = any(members)
         )
     );
 
