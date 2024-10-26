@@ -6,7 +6,6 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchGroupDetails } from '../utils/supabaseGroupUtils';
 import { useGroupActions } from '../hooks/useGroupActions';
 import { uploadGroupImage, updateGroupImageUrl } from '../utils/supabaseStorageUtils';
-import { shareInvite } from '../utils/shareUtils';
 import { toast } from 'sonner';
 
 const GroupDetails = () => {
@@ -19,15 +18,12 @@ const GroupDetails = () => {
     queryFn: () => fetchGroupDetails(groupId),
   });
 
+  const { handleJoin } = useGroupActions(group, () => {}, navigate);
+
   const handleBack = () => navigate(-1);
-  
-  const handleShare = async () => {
-    try {
-      await shareInvite(group?.name);
-      toast.success('Invitation link copied to clipboard!');
-    } catch (error) {
-      toast.error('Failed to share group invitation');
-    }
+  const handleShare = () => {
+    console.log('Share group');
+    // Implement share functionality
   };
 
   const handleImageUpload = async (event) => {
@@ -112,11 +108,10 @@ const GroupDetails = () => {
           {group.member_count || 0} members joined
         </span>
         <Button
-          className="bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90 w-36 flex items-center gap-2"
-          onClick={handleShare}
+          className="bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90 w-28"
+          onClick={handleJoin}
         >
-          <Share className="h-4 w-4" />
-          Invite friends
+          Join now
         </Button>
       </div>
     </div>
