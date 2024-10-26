@@ -25,16 +25,35 @@ export const generateInviteLink = async (groupId, createdBy) => {
 
 export const getInviteDetails = async (inviteCode) => {
   try {
-    // First fetch the invite data
+    // First fetch the invite data with explicit foreign key references
     const { data: inviteData, error: inviteError } = await supabase
       .from('group_invites')
-      .select('*, group:group_id(*), creator:created_by(*)')
+      .select(`
+        id,
+        group_id,
+        created_by,
+        uses,
+        max_uses,
+        expires_at,
+        is_active,
+        groups!group_invites_group_id_fkey (
+          name,
+          description
+        ),
+        profiles!group_invites_created_by_fkey (
+          email
+        )
+      `)
       .eq('invite_code', inviteCode)
-      .maybeSingle();
+      .single();
 
-    if (inviteError || !inviteData) {
+    if (inviteError) {
       console.error('Error fetching invite:', inviteError);
       throw new Error('Invalid invitation');
+    }
+
+    if (!inviteData) {
+      throw new Error('Invitation not found');
     }
 
     // Check if invite has expired
@@ -51,9 +70,9 @@ export const getInviteDetails = async (inviteCode) => {
 
     return {
       groupId: inviteData.group_id,
-      groupName: inviteData.group?.name || 'Unknown Group',
-      groupDescription: inviteData.group?.description || '',
-      inviterName: inviteData.creator?.email || 'Someone',
+      groupName: inviteData.groups?.name || 'Unknown Group',
+      groupDescription: inviteData.groups?.description || '',
+      inviterName: inviteData.profiles?.email || 'Someone',
       isValid: true
     };
   } catch (error) {
