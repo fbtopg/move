@@ -39,10 +39,6 @@ const InvitePage = () => {
   }, [inviteCode, navigate]);
 
   const handleJoinGroup = async () => {
-    if (!session) {
-      return; // Let InvitePopup handle the login flow
-    }
-
     try {
       await joinGroup(inviteDetails.groupId, session.user.id);
       toast.success('Successfully joined the group!');

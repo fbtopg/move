@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -18,26 +18,6 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
     ? inviterName.split('@')[0] 
     : inviterName || 'Someone';
 
-  useEffect(() => {
-    const handlePostAuth = async () => {
-      if (session && (showLoginModal || pendingJoin)) {
-        setShowLoginModal(false);
-        try {
-          await joinGroup(groupId, session.user.id);
-          toast.success('Successfully joined the group!');
-          navigate(`/group/${groupId}`);
-        } catch (error) {
-          console.error('Error joining group:', error);
-          toast.error('Failed to join the group');
-        } finally {
-          setPendingJoin(false);
-        }
-      }
-    };
-
-    handlePostAuth();
-  }, [session, showLoginModal, pendingJoin, groupId, navigate]);
-
   const handleAcceptClick = () => {
     if (session) {
       onAccept();
@@ -51,7 +31,6 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
 
   return (
     <div className="fixed inset-0 bg-background z-50 flex flex-col min-h-screen">
-      {/* Close button */}
       <div className="absolute top-4 right-4">
         <Button
           variant="ghost"
@@ -63,7 +42,6 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
         </Button>
       </div>
 
-      {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-4 space-y-6">
         <Avatar className="w-32 h-32 border-4 border-background">
           <AvatarImage src={groupImage} alt={groupName} className="object-cover" />
@@ -77,7 +55,6 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
           </p>
         </div>
 
-        {/* Accept button moved up with more padding */}
         <div className="mt-8">
           <Button 
             onClick={handleAcceptClick}
@@ -88,7 +65,6 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
         </div>
       </div>
 
-      {/* Bottom spacing */}
       <div className="h-16" />
 
       <LoginModal
