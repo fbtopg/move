@@ -1,6 +1,7 @@
 import { supabase } from '../integrations/supabase/supabase';
 
 export const generateInviteLink = async (groupId, createdBy) => {
+  console.log('Generating invite link:', { groupId, createdBy });
   try {
     const { data, error } = await supabase
       .from('group_invites')
@@ -13,8 +14,12 @@ export const generateInviteLink = async (groupId, createdBy) => {
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) {
+      console.error('Error generating invite:', error);
+      throw error;
+    }
 
+    console.log('Invite created successfully:', data);
     const inviteLink = `${window.location.origin}/invite/${data.invite_code}`;
     return inviteLink;
   } catch (error) {
@@ -24,6 +29,7 @@ export const generateInviteLink = async (groupId, createdBy) => {
 };
 
 export const getInviteDetails = async (inviteCode) => {
+  console.log('Fetching invite details for code:', inviteCode);
   try {
     const { data: inviteData, error: inviteError } = await supabase
       .from('group_invites_with_details')
@@ -37,21 +43,27 @@ export const getInviteDetails = async (inviteCode) => {
     }
 
     if (!inviteData) {
+      console.error('No invite found for code:', inviteCode);
       throw new Error('Invitation not found');
     }
+
+    console.log('Invite details retrieved:', inviteData);
 
     // Check if invite has expired
     const now = new Date();
     const expiryDate = new Date(inviteData.expires_at);
     if (now > expiryDate || !inviteData.is_active) {
+      console.error('Invite expired or inactive:', { expiryDate, isActive: inviteData.is_active });
       throw new Error('Invitation has expired');
     }
 
     // Check if max uses reached
     if (inviteData.uses >= inviteData.max_uses) {
+      console.error('Max uses reached:', { uses: inviteData.uses, maxUses: inviteData.max_uses });
       throw new Error('Invitation has reached maximum uses');
     }
 
+    console.log('Invite is valid and active');
     return {
       groupId: inviteData.group_id,
       groupName: inviteData.group_name || 'Unknown Group',

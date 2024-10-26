@@ -87,6 +87,7 @@ export const insertNewGroup = async (groupName, userId) => {
 };
 
 export const joinGroup = async (groupId, userId) => {
+  console.log('Attempting to join group:', { groupId, userId });
   try {
     // First, fetch the current group data
     const { data: groupData, error: fetchError } = await supabase
@@ -95,16 +96,27 @@ export const joinGroup = async (groupId, userId) => {
       .eq('id', groupId)
       .single();
 
-    if (fetchError) throw fetchError;
+    if (fetchError) {
+      console.error('Error fetching group data:', fetchError);
+      throw fetchError;
+    }
+
+    console.log('Current group data:', groupData);
 
     // Check if the user is already a member
     if (groupData.members && groupData.members.includes(userId)) {
+      console.log('User is already a member of the group');
       return { alreadyMember: true };
     }
 
     // Update the group with the new member
     const updatedMembers = [...(groupData.members || []), userId];
     const updatedMemberCount = (groupData.member_count || 0) + 1;
+
+    console.log('Updating group with new member:', {
+      updatedMembers,
+      updatedMemberCount
+    });
 
     const { data, error } = await supabase
       .from('groups')
@@ -115,10 +127,16 @@ export const joinGroup = async (groupId, userId) => {
       .eq('id', groupId)
       .select();
 
-    if (error) throw error;
+    if (error) {
+      console.error('Error updating group:', error);
+      throw error;
+    }
+
+    console.log('Successfully updated group:', data[0]);
 
     // Update the user's groups
     await updateUserGroups(userId, groupId);
+    console.log('Successfully updated user groups');
 
     return data[0];
   } catch (error) {

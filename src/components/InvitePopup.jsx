@@ -13,17 +13,28 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
   const [showLoginModal, setShowLoginModal] = useState(false);
   const navigate = useNavigate();
 
+  console.log('InvitePopup rendered:', { 
+    isOpen, 
+    groupName, 
+    groupId, 
+    isLoggedIn: !!session?.user 
+  });
+
   const displayName = inviterName?.includes('@') 
     ? inviterName.split('@')[0] 
     : inviterName || 'Someone';
 
   const handleAcceptClick = async () => {
+    console.log('Accept button clicked');
     if (session?.user?.id) {
+      console.log('User is logged in, attempting to join group:', groupId);
       try {
         const result = await joinGroup(groupId, session.user.id);
         if (result?.alreadyMember) {
+          console.log('User is already a member of the group');
           toast.info('You are already a member of this group');
         } else {
+          console.log('Successfully joined group:', groupId);
           toast.success('Successfully joined the group!');
         }
         navigate(`/group/${groupId}`);
@@ -32,6 +43,7 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
         toast.error('Failed to join the group');
       }
     } else {
+      console.log('User not logged in, showing login modal');
       setPendingJoin(true);
       setShowLoginModal(true);
     }
