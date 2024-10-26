@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import FriendActivity from "./FriendActivity";
 import { useSupabaseAuth } from '../integrations/supabase/auth';
 
-const ActivitySection = ({ activities, onLoginRequired }) => {
+const ActivitySection = ({ activities }) => {
   const [activeTab, setActiveTab] = useState('all');
   const { session } = useSupabaseAuth();
 
@@ -26,16 +26,6 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
         alt="Sign in to see activities"
         className="w-64 h-auto mb-8"
       />
-      <button 
-        className="bg-blue-500 hover:bg-blue-600 text-white w-48 rounded-full py-2"
-        onClick={() => {
-          if (typeof onLoginRequired === 'function') {
-            onLoginRequired();
-          }
-        }}
-      >
-        Sign In
-      </button>
     </div>
   );
 
