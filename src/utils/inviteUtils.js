@@ -27,20 +27,10 @@ export const getInviteDetails = async (inviteCode) => {
   try {
     console.log('Fetching invite details for code:', inviteCode);
     
+    // First, get the invite data
     const { data: inviteData, error: inviteError } = await supabase
       .from('group_invites')
-      .select(`
-        *,
-        group:group_id (
-          name,
-          description
-        ),
-        creator:created_by (
-          id,
-          email,
-          user_metadata
-        )
-      `)
+      .select('*, group_id')
       .eq('invite_code', inviteCode)
       .single();
 
@@ -49,9 +39,33 @@ export const getInviteDetails = async (inviteCode) => {
       throw new Error('Invalid invitation');
     }
 
-    if (!inviteData || !inviteData.group) {
-      console.error('No invite data found or group does not exist:', { inviteData });
+    if (!inviteData) {
+      console.error('No invite data found');
       throw new Error('Invalid invitation');
+    }
+
+    // Then, get the group details separately
+    const { data: groupData, error: groupError } = await supabase
+      .from('groups')
+      .select('name, description, created_by')
+      .eq('id', inviteData.group_id)
+      .single();
+
+    if (groupError) {
+      console.error('Error fetching group details:', groupError);
+      throw new Error('Invalid invitation');
+    }
+
+    // Get creator details
+    const { data: creatorData, error: creatorError } = await supabase
+      .from('profiles')
+      .select('full_name, email')
+      .eq('id', groupData.created_by)
+      .single();
+
+    if (creatorError) {
+      console.error('Error fetching creator details:', creatorError);
+      // Don't throw here, we can still proceed with limited information
     }
 
     // Check if invite has expired
@@ -74,17 +88,11 @@ export const getInviteDetails = async (inviteCode) => {
       throw new Error('Invitation has reached maximum uses');
     }
 
-    console.log('Valid invite details found:', {
-      groupId: inviteData.group_id,
-      groupName: inviteData.group.name,
-      inviter: inviteData.creator?.user_metadata?.full_name || inviteData.creator?.email,
-    });
-
     return {
       groupId: inviteData.group_id,
-      groupName: inviteData.group.name,
-      groupDescription: inviteData.group.description,
-      inviterName: inviteData.creator?.user_metadata?.full_name || inviteData.creator?.email || 'Someone',
+      groupName: groupData.name,
+      groupDescription: groupData.description,
+      inviterName: creatorData?.full_name || creatorData?.email || 'Someone',
       isValid: true
     };
   } catch (error) {
