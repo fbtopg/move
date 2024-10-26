@@ -6,6 +6,8 @@ import InvitePopup from '../components/InvitePopup';
 import { joinGroup } from '../utils/supabaseGroupUtils';
 import { toast } from 'sonner';
 
+const PENDING_INVITE_KEY = 'pendingInvite';
+
 const InvitePage = () => {
   const { inviteCode } = useParams();
   const navigate = useNavigate();
@@ -28,6 +30,12 @@ const InvitePage = () => {
         const details = await getInviteDetails(inviteCode);
         setInviteDetails(details);
         setShowPopup(true);
+
+        // Store invite details in localStorage when fetched
+        localStorage.setItem(PENDING_INVITE_KEY, JSON.stringify({
+          inviteCode,
+          details
+        }));
       } catch (error) {
         console.error('Error with invitation:', error);
         toast.error(error.message || 'Invalid or expired invitation');
@@ -37,28 +45,51 @@ const InvitePage = () => {
       }
     };
 
-    fetchInviteDetails();
+    // Check if there's a pending invite in localStorage
+    const storedInvite = localStorage.getItem(PENDING_INVITE_KEY);
+    if (storedInvite) {
+      const { inviteCode: storedCode, details } = JSON.parse(storedInvite);
+      if (storedCode === inviteCode) {
+        setInviteDetails(details);
+        setShowPopup(true);
+        setPendingJoin(true);
+        setIsLoading(false);
+      } else {
+        fetchInviteDetails();
+      }
+    } else {
+      fetchInviteDetails();
+    }
   }, [inviteCode, navigate]);
 
   // Handle automatic join after login
   useEffect(() => {
     const handlePostLoginJoin = async () => {
-      if (session?.user?.id && pendingJoin && inviteDetails?.groupId) {
+      const storedInvite = localStorage.getItem(PENDING_INVITE_KEY);
+      if (session?.user?.id && storedInvite) {
+        const { details } = JSON.parse(storedInvite);
         try {
-          await joinGroup(inviteDetails.groupId, session.user.id);
+          console.log('Attempting post-login join:', { 
+            userId: session.user.id, 
+            groupId: details.groupId 
+          });
+          
+          await joinGroup(details.groupId, session.user.id);
           toast.success('Successfully joined the group!');
-          navigate(`/group/${inviteDetails.groupId}`);
+          navigate(`/group/${details.groupId}`);
+          
+          // Clear the stored invite after successful join
+          localStorage.removeItem(PENDING_INVITE_KEY);
         } catch (error) {
-          console.error('Error joining group:', error);
+          console.error('Error joining group after login:', error);
           toast.error('Failed to join the group');
           navigate('/');
         }
-        setPendingJoin(false);
       }
     };
 
     handlePostLoginJoin();
-  }, [session, pendingJoin, inviteDetails, navigate]);
+  }, [session, navigate]);
 
   if (isLoading || !inviteDetails) {
     return null;
@@ -69,6 +100,7 @@ const InvitePage = () => {
       isOpen={showPopup}
       onClose={() => {
         setShowPopup(false);
+        localStorage.removeItem(PENDING_INVITE_KEY);
         navigate('/');
       }}
       inviterName={inviteDetails.inviterName}
