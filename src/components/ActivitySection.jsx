@@ -15,13 +15,7 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
 
   const activeIndex = tabs.findIndex((tab) => tab.key === activeTab);
 
-  const handleGetStarted = () => {
-    if (!session && onLoginRequired) {
-      onLoginRequired();
-    }
-  };
-
-  const EmptyState = ({ onLoginRequired }) => (
+  const EmptyState = () => (
     <div className="flex flex-col items-center text-center py-8">
       <h3 className="text-lg font-semibold mb-2">Stay in touch with a swipe</h3>
       <p className="text-sm font-light text-center mb-8">
@@ -34,7 +28,11 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
       />
       <button 
         className="bg-blue-500 hover:bg-blue-600 text-white w-48 rounded-full py-2"
-        onClick={handleGetStarted}
+        onClick={() => {
+          if (!session && onLoginRequired) {
+            onLoginRequired();
+          }
+        }}
       >
         Get Started
       </button>
@@ -43,7 +41,6 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
 
   return (
     <div className="space-y-4 mb-24">
-      {/* Tab Controls */}
       <div className="w-full">
         <div className="relative flex justify-between items-center border-b-0">
           {tabs.map((tab) => (
@@ -60,13 +57,11 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
             </button>
           ))}
 
-          {/* Ultra-Thin 0.5px Gray Line */}
           <div
             className="absolute bottom-0 left-0 w-full"
             style={{ height: '0.5px', backgroundColor: '#D1D5DB' }}
           ></div>
 
-          {/* Sliding Black Underline with Rounded Corners */}
           <div
             className="absolute bottom-[1px] left-0 h-0.5 bg-black rounded-full transition-all duration-300"
             style={{ transform: `translateX(${activeIndex * 100}%)`, width: '33.33%' }}
@@ -74,7 +69,6 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
         </div>
       </div>
 
-      {/* Tab Content */}
       <div className="p-4">
         {activeTab === 'all' && activities && activities.length > 0 ? (
           activities.map((activity, index) => (
@@ -93,7 +87,7 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
             </motion.div>
           ))
         ) : (
-          <EmptyState onLoginRequired={onLoginRequired} />
+          <EmptyState />
         )}
       </div>
     </div>
