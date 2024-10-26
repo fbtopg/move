@@ -38,24 +38,8 @@ const InvitePage = () => {
     fetchInviteDetails();
   }, [inviteCode, navigate]);
 
-  const handleJoinGroup = async () => {
-    if (!session) {
-      return; // Let InvitePopup handle the login flow
-    }
-
-    try {
-      await joinGroup(inviteDetails.groupId, session.user.id);
-      toast.success('Successfully joined the group!');
-      navigate(`/group/${inviteDetails.groupId}`);
-    } catch (error) {
-      console.error('Error joining group:', error);
-      toast.error('Failed to join the group');
-      navigate('/');
-    }
-  };
-
   if (isLoading) {
-    return null; // or a loading spinner
+    return null;
   }
 
   if (!inviteDetails) {
@@ -74,7 +58,6 @@ const InvitePage = () => {
         groupName={inviteDetails.groupName}
         groupImage={inviteDetails.groupImage}
         groupId={inviteDetails.groupId}
-        onAccept={handleJoinGroup}
       />
     </div>
   );

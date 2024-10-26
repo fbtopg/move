@@ -22,8 +22,12 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
       if (session && showLoginModal) {
         setShowLoginModal(false);
         try {
-          await joinGroup(groupId, session.user.id);
-          toast.success('Successfully joined the group!');
+          const result = await joinGroup(groupId, session.user.id);
+          if (result?.alreadyMember) {
+            toast.info('You are already a member of this group');
+          } else {
+            toast.success('Successfully joined the group!');
+          }
           navigate(`/group/${groupId}`);
         } catch (error) {
           console.error('Error joining group:', error);
@@ -38,8 +42,12 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
   const handleAcceptClick = async () => {
     if (session) {
       try {
-        await joinGroup(groupId, session.user.id);
-        toast.success('Successfully joined the group!');
+        const result = await joinGroup(groupId, session.user.id);
+        if (result?.alreadyMember) {
+          toast.info('You are already a member of this group');
+        } else {
+          toast.success('Successfully joined the group!');
+        }
         navigate(`/group/${groupId}`);
       } catch (error) {
         console.error('Error joining group:', error);
