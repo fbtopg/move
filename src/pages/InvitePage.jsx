@@ -38,39 +38,26 @@ const InvitePage = () => {
     fetchInviteDetails();
   }, [inviteCode, navigate]);
 
-  const handleJoinGroup = async (userId) => {
-    if (!userId || !inviteDetails) {
-      console.error('Missing user ID or invite details');
-      return;
-    }
-
-    try {
-      await joinGroup(inviteDetails.groupId, userId);
-      toast.success('Successfully joined the group!');
-      navigate(`/group/${inviteDetails.groupId}`);
-    } catch (error) {
-      console.error('Error joining group:', error);
-      toast.error('Failed to join the group');
-      navigate('/');
-    }
-  };
-
-  if (isLoading || !inviteDetails) {
-    return null;
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 bg-background flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
   }
 
   return (
-    <div>
+    <div className="min-h-screen bg-background">
       <InvitePopup
         isOpen={showPopup}
         onClose={() => {
           setShowPopup(false);
           navigate('/');
         }}
-        inviterName={inviteDetails.inviterName}
-        groupName={inviteDetails.groupName}
-        groupImage={inviteDetails.groupImage}
-        groupId={inviteDetails.groupId}
+        inviterName={inviteDetails?.inviterName}
+        groupName={inviteDetails?.groupName}
+        groupImage={inviteDetails?.groupImage}
+        groupId={inviteDetails?.groupId}
         onAccept={handleJoinGroup}
       />
     </div>
