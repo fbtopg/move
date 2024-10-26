@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { insertUserInfo } from '../../utils/supabaseUserUtils';
+import { toast } from 'sonner';
 
 const SupabaseAuthContext = createContext();
 
@@ -36,7 +37,6 @@ export const SupabaseAuthProviderInner = ({ children }) => {
       queryClient.invalidateQueries('user');
       if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
         localStorage.setItem('user', JSON.stringify(session.user));
-        // Insert user info into the users table
         try {
           await insertUserInfo(
             session.user.id,
@@ -60,19 +60,38 @@ export const SupabaseAuthProviderInner = ({ children }) => {
   }, [queryClient]);
 
   const logout = async () => {
-    await supabase.auth.signOut();
-    setSession(null);
-    queryClient.invalidateQueries('user');
-    setLoading(false);
-    // Remove user information from local storage on logout
-    localStorage.removeItem('user');
+    try {
+      await supabase.auth.signOut();
+      setSession(null);
+      queryClient.invalidateQueries('user');
+      setLoading(false);
+      localStorage.removeItem('user');
+    } catch (error) {
+      console.error('Error logging out:', error);
+      toast.error('Failed to log out. Please try again.');
+    }
   };
 
   const loginWithGoogle = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-    });
-    if (error) console.error('Error logging in with Google:', error);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin
+        }
+      });
+      if (error) {
+        if (error.message === 'User rejected the request.') {
+          toast.error('Sign in was cancelled');
+        } else {
+          console.error('Error logging in with Google:', error);
+          toast.error('Failed to sign in with Google. Please try again.');
+        }
+      }
+    } catch (error) {
+      console.error('Error logging in with Google:', error);
+      toast.error('Failed to sign in with Google. Please try again.');
+    }
   };
 
   return (
