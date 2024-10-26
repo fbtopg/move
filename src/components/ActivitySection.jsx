@@ -15,6 +15,30 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
 
   const activeIndex = tabs.findIndex((tab) => tab.key === activeTab);
 
+  const UnauthenticatedState = () => (
+    <div className="flex flex-col items-center text-center py-8">
+      <h3 className="text-lg font-semibold mb-2">Join the community</h3>
+      <p className="text-sm font-light text-center mb-8">
+        Sign in to see what your friends are up to and share your own activities.
+      </p>
+      <img 
+        src="https://hviyoqsvhpvddaafusuc.supabase.co/storage/v1/object/sign/images/app/Group%20289236%20(1).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvYXBwL0dyb3VwIDI4OTIzNiAoMSkucG5nIiwiaWF0IjoxNzI5ODM4NjQxLCJleHAiOjE3NjEzNzQ2NDF9.M1tbMZdFCzKb6phePakvCamR9wifQJSLdNIB95bDXEE&t=2024-10-25T06%3A44%3A04.048Z"
+        alt="Sign in to see activities"
+        className="w-64 h-auto mb-8"
+      />
+      <button 
+        className="bg-blue-500 hover:bg-blue-600 text-white w-48 rounded-full py-2"
+        onClick={() => {
+          if (typeof onLoginRequired === 'function') {
+            onLoginRequired();
+          }
+        }}
+      >
+        Sign In
+      </button>
+    </div>
+  );
+
   const EmptyState = () => (
     <div className="flex flex-col items-center text-center py-8">
       <h3 className="text-lg font-semibold mb-2">Stay in touch with a swipe</h3>
@@ -26,16 +50,9 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
         alt="No activities"
         className="w-64 h-auto mb-8"
       />
-      <button 
-        className="bg-blue-500 hover:bg-blue-600 text-white w-48 rounded-full py-2"
-        onClick={() => {
-          if (typeof onLoginRequired === 'function') {
-            onLoginRequired();
-          }
-        }}
-      >
-        Get Started
-      </button>
+      <p className="text-sm text-gray-500">
+        No activities yet. Start interacting with your groups to see updates here!
+      </p>
     </div>
   );
 
@@ -70,7 +87,9 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
       </div>
 
       <div className="p-4">
-        {!session || (activeTab === 'all' && (!activities || activities.length === 0)) ? (
+        {!session ? (
+          <UnauthenticatedState />
+        ) : (!activities || activities.length === 0) ? (
           <EmptyState />
         ) : (
           activities.map((activity, index) => (
