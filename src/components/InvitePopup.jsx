@@ -10,33 +10,33 @@ import { toast } from 'sonner';
 const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, groupId, onAccept }) => {
   const { session } = useSupabaseAuth();
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [previousAuthState, setPreviousAuthState] = useState(false);
   const navigate = useNavigate();
 
   const displayName = inviterName?.includes('@') 
     ? inviterName.split('@')[0] 
     : inviterName || 'Someone';
 
-  // Track auth state changes
   useEffect(() => {
-    const wasLoggedOut = !previousAuthState && session?.user;
-    if (wasLoggedOut && showLoginModal) {
-      handleLoginSuccess();
+    // Check if there's a pending invite after login
+    const pendingInvite = localStorage.getItem('pendingInvite');
+    if (session?.user && pendingInvite) {
+      const inviteData = JSON.parse(pendingInvite);
+      if (inviteData.groupId === groupId) {
+        localStorage.removeItem('pendingInvite');
+        onAccept(session.user.id);
+      }
     }
-    setPreviousAuthState(!!session?.user);
-  }, [session, showLoginModal]);
-
-  const handleLoginSuccess = () => {
-    setShowLoginModal(false);
-    if (session?.user) {
-      onAccept(session.user.id);
-    }
-  };
+  }, [session, groupId, onAccept]);
 
   const handleAcceptClick = () => {
     if (session?.user) {
       onAccept(session.user.id);
     } else {
+      // Store invite info before showing login modal
+      localStorage.setItem('pendingInvite', JSON.stringify({
+        groupId,
+        timestamp: Date.now()
+      }));
       setShowLoginModal(true);
     }
   };
