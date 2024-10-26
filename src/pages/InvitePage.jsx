@@ -12,27 +12,35 @@ const InvitePage = () => {
   const { session } = useSupabaseAuth();
   const [inviteDetails, setInviteDetails] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchInviteDetails = async () => {
+      if (!inviteCode) {
+        navigate('/');
+        return;
+      }
+
+      setIsLoading(true);
       try {
         const details = await getInviteDetails(inviteCode);
         setInviteDetails(details);
-        if (!session) {
-          setShowPopup(true);
-        } else {
+        
+        if (session) {
           handleJoinGroup(details.groupId);
+        } else {
+          setShowPopup(true);
         }
       } catch (error) {
-        console.error('Error fetching invite details:', error);
-        toast.error('Invalid or expired invitation');
+        console.error('Error with invitation:', error);
+        toast.error(error.message || 'Invalid or expired invitation');
         navigate('/');
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    if (inviteCode) {
-      fetchInviteDetails();
-    }
+    fetchInviteDetails();
   }, [inviteCode, session, navigate]);
 
   const handleJoinGroup = async (groupId) => {
@@ -58,6 +66,10 @@ const InvitePage = () => {
     // After signing in, they'll be brought back to this page
     // and the useEffect will handle joining the group
   };
+
+  if (isLoading) {
+    return null; // or a loading spinner
+  }
 
   if (!inviteDetails) {
     return null;

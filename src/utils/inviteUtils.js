@@ -23,19 +23,35 @@ export const generateInviteLink = async (groupId, createdBy) => {
 
 export const getInviteDetails = async (inviteCode) => {
   try {
+    // First check if invite exists and is valid
     const { data: inviteData, error: inviteError } = await supabase
       .from('group_invites')
       .select(`
         *,
         groups:group_id (
           name,
+          description,
           created_by
         )
       `)
       .eq('invite_code', inviteCode)
       .single();
 
-    if (inviteError) throw inviteError;
+    if (inviteError) {
+      console.error('Invite error:', inviteError);
+      throw new Error('Invalid invitation');
+    }
+
+    if (!inviteData || !inviteData.groups) {
+      throw new Error('Invalid invitation');
+    }
+
+    // Check if invite has expired
+    const now = new Date();
+    const expiryDate = new Date(inviteData.expires_at);
+    if (now > expiryDate) {
+      throw new Error('Invitation has expired');
+    }
 
     const { data: userData, error: userError } = await supabase
       .from('users')
@@ -43,12 +59,15 @@ export const getInviteDetails = async (inviteCode) => {
       .eq('id', inviteData.created_by)
       .single();
 
-    if (userError) throw userError;
+    // Even if we can't get the inviter's name, we still want to show the group info
+    const inviterName = userError ? 'Someone' : userData.username;
 
     return {
       groupName: inviteData.groups.name,
-      inviterName: userData.username,
-      groupId: inviteData.group_id
+      groupDescription: inviteData.groups.description,
+      inviterName,
+      groupId: inviteData.group_id,
+      isValid: true
     };
   } catch (error) {
     console.error('Error getting invite details:', error);
