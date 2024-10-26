@@ -40,9 +40,6 @@ const ActivitySection = ({ activities }) => {
         alt="No activities"
         className="w-64 h-auto mb-8"
       />
-      <p className="text-sm text-gray-500">
-        No activities yet. Start interacting with your groups to see updates here!
-      </p>
     </div>
   );
 
