@@ -7,6 +7,8 @@ export const generateInviteLink = async (groupId, createdBy) => {
       .insert([{
         group_id: groupId,
         created_by: createdBy,
+        max_uses: 100,
+        is_active: true
       }])
       .select()
       .single();
@@ -23,7 +25,6 @@ export const generateInviteLink = async (groupId, createdBy) => {
 
 export const getInviteDetails = async (inviteCode) => {
   try {
-    // First check if invite exists and is valid
     const { data: inviteData, error: inviteError } = await supabase
       .from('group_invites')
       .select(`
@@ -32,6 +33,10 @@ export const getInviteDetails = async (inviteCode) => {
           name,
           description,
           created_by
+        ),
+        creator:created_by (
+          username,
+          full_name
         )
       `)
       .eq('invite_code', inviteCode)
@@ -53,20 +58,16 @@ export const getInviteDetails = async (inviteCode) => {
       throw new Error('Invitation has expired');
     }
 
-    const { data: userData, error: userError } = await supabase
-      .from('users')
-      .select('username')
-      .eq('id', inviteData.created_by)
-      .single();
-
-    // Even if we can't get the inviter's name, we still want to show the group info
-    const inviterName = userError ? 'Someone' : userData.username;
+    // Check if max uses reached
+    if (inviteData.uses >= inviteData.max_uses) {
+      throw new Error('Invitation has reached maximum uses');
+    }
 
     return {
+      groupId: inviteData.group_id,
       groupName: inviteData.groups.name,
       groupDescription: inviteData.groups.description,
-      inviterName,
-      groupId: inviteData.group_id,
+      inviterName: inviteData.creator?.username || inviteData.creator?.full_name || 'Someone',
       isValid: true
     };
   } catch (error) {

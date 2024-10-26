@@ -15,6 +15,7 @@ const GroupDetails = () => {
   const { groupId } = useParams();
   const fileInputRef = React.useRef(null);
   const { session } = useSupabaseAuth();
+  const [isSharing, setIsSharing] = useState(false);
 
   const { data: group, isLoading, error } = useQuery({
     queryKey: ['groupDetails', groupId],
@@ -24,12 +25,18 @@ const GroupDetails = () => {
   const handleBack = () => navigate(-1);
   
   const handleShare = async () => {
+    if (!session?.user?.id) {
+      toast.error("You must be logged in to share invites");
+      return;
+    }
+
+    setIsSharing(true);
     try {
       const link = await generateInviteLink(groupId, session.user.id);
       
       if (navigator.share) {
         await navigator.share({
-          title: "Join my group",
+          title: `Join ${group?.name || 'my group'} on Terima`,
           text: "I'd like to invite you to join my group!",
           url: link
         });
@@ -40,7 +47,9 @@ const GroupDetails = () => {
       }
     } catch (error) {
       console.error('Error sharing:', error);
-      toast.error("Failed to share invite link");
+      toast.error("Failed to generate invite link. Please try again.");
+    } finally {
+      setIsSharing(false);
     }
   };
 
@@ -89,6 +98,7 @@ const GroupDetails = () => {
           size="icon"
           className="absolute top-4 right-4 bg-white/80 dark:bg-gray-800/80 rounded-full"
           onClick={handleShare}
+          disabled={isSharing}
         >
           <Share className="h-6 w-6" />
         </Button>
@@ -128,6 +138,7 @@ const GroupDetails = () => {
         <Button
           className="bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90 w-36 flex items-center gap-2"
           onClick={handleShare}
+          disabled={isSharing}
         >
           <Share className="h-4 w-4" />
           Invite friends
