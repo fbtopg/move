@@ -25,36 +25,34 @@ export const generateInviteLink = async (groupId, createdBy) => {
 
 export const getInviteDetails = async (inviteCode) => {
   try {
-    // Get the invite data with a direct query
+    // First, get just the invite data
     const { data: inviteData, error: inviteError } = await supabase
       .from('group_invites')
       .select('id, group_id, created_by, uses, max_uses, expires_at, is_active')
       .eq('invite_code', inviteCode)
-      .single();
+      .maybeSingle();
 
     if (inviteError || !inviteData) {
-      console.error('Error fetching invite:', inviteError);
       throw new Error('Invalid invitation');
     }
 
-    // Get group details
+    // Then get the group details
     const { data: groupData, error: groupError } = await supabase
       .from('groups')
-      .select('name, description, created_by')
+      .select('name, description')
       .eq('id', inviteData.group_id)
-      .single();
+      .maybeSingle();
 
     if (groupError || !groupData) {
-      console.error('Error fetching group:', groupError);
       throw new Error('Invalid invitation');
     }
 
-    // Get creator details from profiles table
-    const { data: creatorData, error: creatorError } = await supabase
-      .from('profiles')
-      .select('full_name, email')
+    // Get creator details
+    const { data: creatorData } = await supabase
+      .from('users')
+      .select('email')
       .eq('id', inviteData.created_by)
-      .single();
+      .maybeSingle();
 
     // Check if invite has expired
     const now = new Date();
@@ -72,7 +70,7 @@ export const getInviteDetails = async (inviteCode) => {
       groupId: inviteData.group_id,
       groupName: groupData.name,
       groupDescription: groupData.description,
-      inviterName: creatorData?.full_name || creatorData?.email || 'Someone',
+      inviterName: creatorData?.email || 'Someone',
       isValid: true
     };
   } catch (error) {
