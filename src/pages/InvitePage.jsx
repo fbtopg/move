@@ -30,7 +30,7 @@ const InvitePage = () => {
         setInviteDetails(details);
         setShowPopup(true);
 
-        localStorage.setItem(PENDING_INVITE_KEY, JSON.stringify({
+        sessionStorage.setItem(PENDING_INVITE_KEY, JSON.stringify({
           inviteCode,
           details
         }));
@@ -43,7 +43,7 @@ const InvitePage = () => {
       }
     };
 
-    const storedInvite = localStorage.getItem(PENDING_INVITE_KEY);
+    const storedInvite = sessionStorage.getItem(PENDING_INVITE_KEY);
     if (storedInvite) {
       const { inviteCode: storedCode, details } = JSON.parse(storedInvite);
       if (storedCode === inviteCode) {
@@ -61,10 +61,10 @@ const InvitePage = () => {
 
   useEffect(() => {
     const handlePostLoginJoin = async () => {
-      const storedInvite = localStorage.getItem(PENDING_INVITE_KEY);
+      const storedInvite = sessionStorage.getItem(PENDING_INVITE_KEY);
 
       if (!storedInvite) {
-        console.warn('No pending invite found in localStorage.');
+        console.warn('No pending invite found in sessionStorage.');
         return;
       }
 
@@ -86,8 +86,7 @@ const InvitePage = () => {
             toast.success('Successfully joined the group!');
           }
 
-          // Clean up localStorage and navigate to the group page.
-          localStorage.removeItem(PENDING_INVITE_KEY);
+          sessionStorage.removeItem(PENDING_INVITE_KEY);
           navigate(`/group/${details.groupId}`);
         } catch (error) {
           console.error('Error joining group after login:', error);
@@ -99,7 +98,6 @@ const InvitePage = () => {
       }
     };
 
-    // Run the post-login join logic when the session changes.
     handlePostLoginJoin();
   }, [session, navigate]);
 
@@ -112,7 +110,7 @@ const InvitePage = () => {
       isOpen={showPopup}
       onClose={() => {
         setShowPopup(false);
-        localStorage.removeItem(PENDING_INVITE_KEY);
+        sessionStorage.removeItem(PENDING_INVITE_KEY);
         navigate('/');
       }}
       inviterName={inviteDetails.inviterName}
