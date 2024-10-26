@@ -5,6 +5,11 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import GoogleLoginButton from './GoogleLoginButton';
 
 const InvitePopup = ({ isOpen, onClose, inviterName, groupName, onAccept }) => {
+  // Format inviter name to handle cases where display name is not available
+  const displayName = inviterName?.includes('@') 
+    ? inviterName.split('@')[0] 
+    : inviterName || 'Someone';
+
   if (!isOpen) return null;
 
   return (
@@ -31,7 +36,7 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, onAccept }) => {
         <div className="text-center space-y-2">
           <h2 className="text-2xl font-semibold">{groupName}</h2>
           <p className="text-muted-foreground">
-            {inviterName} has invited you to join this group
+            {displayName} has invited you to join this group
           </p>
         </div>
       </div>

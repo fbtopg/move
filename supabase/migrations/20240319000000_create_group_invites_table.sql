@@ -32,7 +32,8 @@ select
     gi.*,
     g.name as group_name,
     g.description as group_description,
-    p.email as inviter_email
+    p.email as inviter_email,
+    p.raw_user_meta_data->>'full_name' as inviter_display_name
 from group_invites gi
 left join groups g on gi.group_id = g.id
 left join auth.users p on gi.created_by = p.id;
