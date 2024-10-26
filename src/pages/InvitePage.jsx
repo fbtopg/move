@@ -15,6 +15,7 @@ const InvitePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [pendingJoin, setPendingJoin] = useState(false);
 
+  // Fetch invite details
   useEffect(() => {
     const fetchInviteDetails = async () => {
       if (!inviteCode) {
@@ -39,53 +40,43 @@ const InvitePage = () => {
     fetchInviteDetails();
   }, [inviteCode, navigate]);
 
-  // Handle automatic group joining after login
+  // Handle automatic join after login
   useEffect(() => {
     const handlePostLoginJoin = async () => {
-      if (session && pendingJoin && inviteDetails) {
+      if (session?.user?.id && pendingJoin && inviteDetails?.groupId) {
         try {
-          const result = await joinGroup(inviteDetails.groupId, session.user.id);
-          if (result?.alreadyMember) {
-            toast.info('You are already a member of this group');
-          } else {
-            toast.success('Successfully joined the group!');
-          }
+          await joinGroup(inviteDetails.groupId, session.user.id);
+          toast.success('Successfully joined the group!');
           navigate(`/group/${inviteDetails.groupId}`);
         } catch (error) {
           console.error('Error joining group:', error);
           toast.error('Failed to join the group');
-        } finally {
-          setPendingJoin(false);
+          navigate('/');
         }
+        setPendingJoin(false);
       }
     };
 
     handlePostLoginJoin();
   }, [session, pendingJoin, inviteDetails, navigate]);
 
-  if (isLoading) {
-    return null;
-  }
-
-  if (!inviteDetails) {
+  if (isLoading || !inviteDetails) {
     return null;
   }
 
   return (
-    <div>
-      <InvitePopup
-        isOpen={showPopup}
-        onClose={() => {
-          setShowPopup(false);
-          navigate('/');
-        }}
-        inviterName={inviteDetails.inviterName}
-        groupName={inviteDetails.groupName}
-        groupImage={inviteDetails.groupImage}
-        groupId={inviteDetails.groupId}
-        setPendingJoin={setPendingJoin}
-      />
-    </div>
+    <InvitePopup
+      isOpen={showPopup}
+      onClose={() => {
+        setShowPopup(false);
+        navigate('/');
+      }}
+      inviterName={inviteDetails.inviterName}
+      groupName={inviteDetails.groupName}
+      groupImage={inviteDetails.groupImage}
+      groupId={inviteDetails.groupId}
+      setPendingJoin={setPendingJoin}
+    />
   );
 };
 
