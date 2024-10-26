@@ -6,13 +6,15 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchGroupDetails } from '../utils/supabaseGroupUtils';
 import { useGroupActions } from '../hooks/useGroupActions';
 import { uploadGroupImage, updateGroupImageUrl } from '../utils/supabaseStorageUtils';
-import { shareInvite } from '../utils/shareUtils';
+import { generateInviteLink } from '../utils/inviteUtils';
 import { toast } from 'sonner';
+import { useSupabaseAuth } from '../integrations/supabase/auth';
 
 const GroupDetails = () => {
   const navigate = useNavigate();
   const { groupId } = useParams();
   const fileInputRef = React.useRef(null);
+  const { session } = useSupabaseAuth();
 
   const { data: group, isLoading, error } = useQuery({
     queryKey: ['groupDetails', groupId],
@@ -23,10 +25,11 @@ const GroupDetails = () => {
   
   const handleShare = async () => {
     try {
-      await shareInvite(group?.name);
+      const inviteLink = await generateInviteLink(groupId, session.user.id);
+      await navigator.clipboard.writeText(inviteLink);
       toast.success('Invitation link copied to clipboard!');
     } catch (error) {
-      toast.error('Failed to share group invitation');
+      toast.error('Failed to generate invitation link');
     }
   };
 

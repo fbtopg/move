@@ -12,6 +12,7 @@ import Settings from "./pages/Settings";
 import Notifications from "./pages/Notifications";
 import GroupDetails from "./pages/GroupDetails";
 import LoginModal from "./components/LoginModal";
+import InvitePage from "./pages/InvitePage";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => {
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/group/:groupId" element={<GroupDetails />} />
+                  <Route path="/invite/:inviteCode" element={<InvitePage />} />
                 </Routes>
               </BrowserRouter>
               <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
