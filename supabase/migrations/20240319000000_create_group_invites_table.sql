@@ -13,14 +13,13 @@ create table public.group_invites (
 -- Add RLS policies
 alter table public.group_invites enable row level security;
 
--- Group members can view invites for their groups
-create policy "Group members can view group invites"
+-- Anyone can view active invites
+create policy "Anyone can view active invites"
     on public.group_invites for select
-    to authenticated
     using (
-        auth.uid() in (
-            select unnest(members) from public.groups where id = group_id
-        )
+        is_active = true and
+        expires_at > now() and
+        uses < max_uses
     );
 
 -- Only group creators can create invites
