@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -8,43 +8,37 @@ import LoginModal from './LoginModal';
 import { joinGroup } from '../utils/supabaseGroupUtils';
 import { toast } from 'sonner';
 
-const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, groupId, setPendingJoin }) => {
+const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, groupId, onAccept }) => {
   const { session } = useSupabaseAuth();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const navigate = useNavigate();
-
-  console.log('InvitePopup rendered:', { 
-    isOpen, 
-    groupName, 
-    groupId, 
-    isLoggedIn: !!session?.user 
-  });
 
   const displayName = inviterName?.includes('@') 
     ? inviterName.split('@')[0] 
     : inviterName || 'Someone';
 
-  const handleAcceptClick = async () => {
-    console.log('Accept button clicked');
-    if (session?.user?.id) {
-      console.log('User is logged in, attempting to join group:', groupId);
-      try {
-        const result = await joinGroup(groupId, session.user.id);
-        if (result?.alreadyMember) {
-          console.log('User is already a member of the group');
-          toast.info('You are already a member of this group');
-        } else {
-          console.log('Successfully joined group:', groupId);
+  useEffect(() => {
+    const handlePostAuth = async () => {
+      if (session && showLoginModal) {
+        setShowLoginModal(false);
+        try {
+          await joinGroup(groupId, session.user.id);
           toast.success('Successfully joined the group!');
+          navigate(`/group/${groupId}`);
+        } catch (error) {
+          console.error('Error joining group:', error);
+          toast.error('Failed to join the group');
         }
-        navigate(`/group/${groupId}`);
-      } catch (error) {
-        console.error('Error joining group:', error);
-        toast.error('Failed to join the group');
       }
+    };
+
+    handlePostAuth();
+  }, [session, showLoginModal, groupId, navigate]);
+
+  const handleAcceptClick = () => {
+    if (session) {
+      onAccept();
     } else {
-      console.log('User not logged in, showing login modal');
-      setPendingJoin(true);
       setShowLoginModal(true);
     }
   };
@@ -76,18 +70,16 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
             {displayName} has invited you to join this group
           </p>
         </div>
-
-        <div className="mt-8">
-          <Button 
-            onClick={handleAcceptClick}
-            className="w-[200px] bg-blue-500 hover:bg-blue-600 text-white rounded-full h-12"
-          >
-            Accept
-          </Button>
-        </div>
       </div>
 
-      <div className="h-16" />
+      <div className="p-6 pb-safe">
+        <Button 
+          onClick={handleAcceptClick}
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full h-12"
+        >
+          Accept
+        </Button>
+      </div>
 
       <LoginModal
         isOpen={showLoginModal}
