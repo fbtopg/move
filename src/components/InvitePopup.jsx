@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -10,25 +10,34 @@ import { toast } from 'sonner';
 const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, groupId, onAccept }) => {
   const { session } = useSupabaseAuth();
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [previousAuthState, setPreviousAuthState] = useState(false);
   const navigate = useNavigate();
 
   const displayName = inviterName?.includes('@') 
     ? inviterName.split('@')[0] 
     : inviterName || 'Someone';
 
+  // Track auth state changes
+  useEffect(() => {
+    const wasLoggedOut = !previousAuthState && session?.user;
+    if (wasLoggedOut && showLoginModal) {
+      handleLoginSuccess();
+    }
+    setPreviousAuthState(!!session?.user);
+  }, [session, showLoginModal]);
+
+  const handleLoginSuccess = () => {
+    setShowLoginModal(false);
+    if (session?.user) {
+      onAccept(session.user.id);
+    }
+  };
+
   const handleAcceptClick = () => {
     if (session?.user) {
       onAccept(session.user.id);
     } else {
       setShowLoginModal(true);
-    }
-  };
-
-  // When login modal closes, check if we're now logged in
-  const handleLoginModalClose = () => {
-    setShowLoginModal(false);
-    if (session?.user) {
-      onAccept(session.user.id);
     }
   };
 
@@ -72,7 +81,7 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
 
       <LoginModal
         isOpen={showLoginModal}
-        onClose={handleLoginModalClose}
+        onClose={() => setShowLoginModal(false)}
       />
     </div>
   );
