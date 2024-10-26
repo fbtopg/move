@@ -25,34 +25,36 @@ export const generateInviteLink = async (groupId, createdBy) => {
 
 export const getInviteDetails = async (inviteCode) => {
   try {
-    // First, get just the invite data
+    // First fetch the invite data
     const { data: inviteData, error: inviteError } = await supabase
       .from('group_invites')
-      .select('id, group_id, created_by, uses, max_uses, expires_at, is_active')
+      .select(`
+        id,
+        group_id,
+        created_by,
+        uses,
+        max_uses,
+        expires_at,
+        is_active,
+        groups:group_id (
+          name,
+          description
+        ),
+        users:created_by (
+          email
+        )
+      `)
       .eq('invite_code', inviteCode)
-      .maybeSingle();
+      .single();
 
-    if (inviteError || !inviteData) {
+    if (inviteError) {
+      console.error('Error fetching invite:', inviteError);
       throw new Error('Invalid invitation');
     }
 
-    // Then get the group details
-    const { data: groupData, error: groupError } = await supabase
-      .from('groups')
-      .select('name, description')
-      .eq('id', inviteData.group_id)
-      .maybeSingle();
-
-    if (groupError || !groupData) {
-      throw new Error('Invalid invitation');
+    if (!inviteData) {
+      throw new Error('Invitation not found');
     }
-
-    // Get creator details
-    const { data: creatorData } = await supabase
-      .from('users')
-      .select('email')
-      .eq('id', inviteData.created_by)
-      .maybeSingle();
 
     // Check if invite has expired
     const now = new Date();
@@ -68,9 +70,9 @@ export const getInviteDetails = async (inviteCode) => {
 
     return {
       groupId: inviteData.group_id,
-      groupName: groupData.name,
-      groupDescription: groupData.description,
-      inviterName: creatorData?.email || 'Someone',
+      groupName: inviteData.groups?.name || 'Unknown Group',
+      groupDescription: inviteData.groups?.description || '',
+      inviterName: inviteData.users?.email || 'Someone',
       isValid: true
     };
   } catch (error) {
