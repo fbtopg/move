@@ -3,10 +3,10 @@ import { supabase } from '../integrations/supabase/supabase';
 export const generateInviteLink = async (groupId, createdBy) => {
   try {
     const { data, error } = await supabase
-      .from('group_invites')
+      .from('invitations')
       .insert([{
         group_id: groupId,
-        created_by: createdBy,
+        sender_id: createdBy,
       }])
       .select()
       .single();
@@ -25,7 +25,7 @@ export const getInviteDetails = async (inviteCode) => {
   try {
     // First check if invite exists and is valid
     const { data: inviteData, error: inviteError } = await supabase
-      .from('group_invites')
+      .from('invitations')
       .select(`
         *,
         groups:group_id (
@@ -56,7 +56,7 @@ export const getInviteDetails = async (inviteCode) => {
     const { data: userData, error: userError } = await supabase
       .from('users')
       .select('username')
-      .eq('id', inviteData.created_by)
+      .eq('id', inviteData.sender_id)
       .single();
 
     // Even if we can't get the inviter's name, we still want to show the group info
