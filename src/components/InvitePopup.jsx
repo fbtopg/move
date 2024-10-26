@@ -11,7 +11,6 @@ import { toast } from 'sonner';
 const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, groupId, onAccept }) => {
   const { session } = useSupabaseAuth();
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [pendingJoin, setPendingJoin] = useState(false);
   const navigate = useNavigate();
 
   const displayName = inviterName?.includes('@') 
@@ -20,7 +19,7 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
 
   useEffect(() => {
     const handlePostAuth = async () => {
-      if (session && pendingJoin) {
+      if (session && showLoginModal) {
         setShowLoginModal(false);
         try {
           await joinGroup(groupId, session.user.id);
@@ -29,20 +28,17 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
         } catch (error) {
           console.error('Error joining group:', error);
           toast.error('Failed to join the group');
-        } finally {
-          setPendingJoin(false);
         }
       }
     };
 
     handlePostAuth();
-  }, [session, pendingJoin, groupId, navigate]);
+  }, [session, showLoginModal, groupId, navigate]);
 
   const handleAcceptClick = () => {
     if (session) {
       onAccept();
     } else {
-      setPendingJoin(true);
       setShowLoginModal(true);
     }
   };
@@ -51,6 +47,7 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
 
   return (
     <div className="fixed inset-0 bg-background z-50 flex flex-col min-h-screen">
+      {/* Close button */}
       <div className="absolute top-4 right-4">
         <Button
           variant="ghost"
@@ -62,6 +59,7 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
         </Button>
       </div>
 
+      {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-4 space-y-6">
         <Avatar className="w-32 h-32 border-4 border-background">
           <AvatarImage src={groupImage} alt={groupName} className="object-cover" />
@@ -75,6 +73,7 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
           </p>
         </div>
 
+        {/* Accept button moved up with more padding */}
         <div className="mt-8">
           <Button 
             onClick={handleAcceptClick}
@@ -85,16 +84,12 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
         </div>
       </div>
 
+      {/* Bottom spacing */}
       <div className="h-16" />
 
       <LoginModal
         isOpen={showLoginModal}
-        onClose={() => {
-          setShowLoginModal(false);
-          if (!session) {
-            setPendingJoin(false);
-          }
-        }}
+        onClose={() => setShowLoginModal(false)}
       />
     </div>
   );
