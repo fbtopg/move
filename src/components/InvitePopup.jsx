@@ -2,13 +2,24 @@ import React from 'react';
 import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import GoogleLoginButton from './GoogleLoginButton';
+import { useSupabaseAuth } from '../integrations/supabase/auth';
+import LoginModal from './LoginModal';
 
 const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, onAccept }) => {
-  // Format inviter name to handle cases where display name is not available
+  const { session } = useSupabaseAuth();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
   const displayName = inviterName?.includes('@') 
     ? inviterName.split('@')[0] 
     : inviterName || 'Someone';
+
+  const handleAcceptClick = () => {
+    if (session) {
+      onAccept();
+    } else {
+      setShowLoginModal(true);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -43,11 +54,18 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, onAc
 
       {/* Bottom section */}
       <div className="p-6 pb-safe">
-        <GoogleLoginButton 
-          onClick={onAccept}
-          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-full h-12"
-        />
+        <Button 
+          onClick={handleAcceptClick}
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full h-12"
+        >
+          Accept
+        </Button>
       </div>
+
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+      />
     </div>
   );
 };
