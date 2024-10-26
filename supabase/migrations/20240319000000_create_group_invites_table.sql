@@ -63,6 +63,24 @@ create policy "Group members and creators can create invites"
         )
     );
 
+-- Allow users to join groups through invites
+create policy "Users can join groups through invites"
+    on public.groups for update
+    to authenticated
+    using (
+        exists (
+            select 1 from public.group_invites
+            where group_id = groups.id
+            and is_active = true
+            and uses < max_uses
+            and expires_at > now()
+        )
+    )
+    with check (
+        -- Only allow updating the members array
+        coalesce(auth.uid() = any(members), false)
+    );
+
 -- Create indexes for faster lookups
 create index idx_group_invites_group_id on public.group_invites(group_id);
 create index idx_group_invites_invite_code on public.group_invites(invite_code);
