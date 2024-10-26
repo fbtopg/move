@@ -56,7 +56,8 @@ export const getInviteDetails = async (inviteCode) => {
       groupId: inviteData.group_id,
       groupName: inviteData.group_name || 'Unknown Group',
       groupDescription: inviteData.group_description || '',
-      inviterName: inviteData.inviter_email || 'Someone',
+      groupImage: inviteData.group_image || null,
+      inviterName: inviteData.inviter_display_name || inviteData.inviter_email || 'Someone',
       isValid: true
     };
   } catch (error) {

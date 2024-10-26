@@ -85,6 +85,7 @@ const InvitePage = () => {
         }}
         inviterName={inviteDetails.inviterName}
         groupName={inviteDetails.groupName}
+        groupImage={inviteDetails.groupImage}
         onAccept={handleAccept}
       />
     </div>

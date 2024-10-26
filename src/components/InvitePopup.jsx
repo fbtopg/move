@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import GoogleLoginButton from './GoogleLoginButton';
 
-const InvitePopup = ({ isOpen, onClose, inviterName, groupName, onAccept }) => {
+const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, onAccept }) => {
   // Format inviter name to handle cases where display name is not available
   const displayName = inviterName?.includes('@') 
     ? inviterName.split('@')[0] 
@@ -29,7 +29,7 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, onAccept }) => {
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-4 space-y-6">
         <Avatar className="w-32 h-32 border-4 border-background">
-          <AvatarImage src="https://example.com/placeholder.jpg" alt={groupName} className="object-cover" />
+          <AvatarImage src={groupImage} alt={groupName} className="object-cover" />
           <AvatarFallback>{groupName?.charAt(0)}</AvatarFallback>
         </Avatar>
         
