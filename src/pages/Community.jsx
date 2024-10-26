@@ -12,6 +12,7 @@ import WelcomeContent from '../components/WelcomeContent';
 import ChallengeCardPreview from '../components/ChallengeCardPreview';
 import LoginModal from '../components/LoginModal';
 import QuickStartPopup from '../components/QuickStartPopup';
+import { Button } from "@/components/ui/button";
 
 const Community = ({ openLoginModal }) => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -123,6 +124,17 @@ const Community = ({ openLoginModal }) => {
           {greeting}
         </h1>
         {renderContent()}
+        
+        {!session && (
+          <div className="fixed bottom-24 left-0 right-0 flex justify-center items-center p-4 bg-gradient-to-t from-[#FBFCFC] via-[#FBFCFC] to-transparent pt-16">
+            <Button 
+              onClick={handleLoginRequired}
+              className="w-full max-w-sm bg-primary text-white rounded-full py-6 text-lg font-medium shadow-lg hover:bg-primary/90"
+            >
+              Sign in
+            </Button>
+          </div>
+        )}
       </div>
 
       <AnimatePresence>
