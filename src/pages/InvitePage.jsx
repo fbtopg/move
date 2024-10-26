@@ -24,6 +24,7 @@ const InvitePage = () => {
           handleJoinGroup(details.groupId);
         }
       } catch (error) {
+        console.error('Error fetching invite details:', error);
         toast.error('Invalid or expired invitation');
         navigate('/');
       }
@@ -32,14 +33,20 @@ const InvitePage = () => {
     if (inviteCode) {
       fetchInviteDetails();
     }
-  }, [inviteCode, session]);
+  }, [inviteCode, session, navigate]);
 
   const handleJoinGroup = async (groupId) => {
+    if (!session) {
+      setShowPopup(true);
+      return;
+    }
+
     try {
       await joinGroup(groupId, session.user.id);
       toast.success('Successfully joined the group!');
       navigate(`/group/${groupId}`);
     } catch (error) {
+      console.error('Error joining group:', error);
       toast.error('Failed to join the group');
       navigate('/');
     }
