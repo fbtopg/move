@@ -51,7 +51,7 @@ const InvitePage = () => {
   };
 
   if (isLoading) {
-    return null; // or a loading spinner
+    return null;
   }
 
   if (!inviteDetails) {

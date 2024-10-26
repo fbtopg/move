@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -17,6 +17,26 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
   const displayName = inviterName?.includes('@') 
     ? inviterName.split('@')[0] 
     : inviterName || 'Someone';
+
+  useEffect(() => {
+    const handlePostAuth = async () => {
+      if (session && pendingJoin) {
+        setShowLoginModal(false);
+        try {
+          await joinGroup(groupId, session.user.id);
+          toast.success('Successfully joined the group!');
+          navigate(`/group/${groupId}`);
+        } catch (error) {
+          console.error('Error joining group:', error);
+          toast.error('Failed to join the group');
+        } finally {
+          setPendingJoin(false);
+        }
+      }
+    };
+
+    handlePostAuth();
+  }, [session, pendingJoin, groupId, navigate]);
 
   const handleAcceptClick = () => {
     if (session) {
@@ -71,7 +91,9 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
         isOpen={showLoginModal}
         onClose={() => {
           setShowLoginModal(false);
-          setPendingJoin(false);
+          if (!session) {
+            setPendingJoin(false);
+          }
         }}
       />
     </div>
