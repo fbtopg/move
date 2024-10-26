@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -12,11 +12,22 @@ import Settings from "./pages/Settings";
 import Notifications from "./pages/Notifications";
 import GroupDetails from "./pages/GroupDetails";
 import LoginModal from "./components/LoginModal";
+import SplashScreen from "./components/SplashScreen";
+import { AnimatePresence } from "framer-motion";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const openLoginModal = () => setIsLoginModalOpen(true);
   const closeLoginModal = () => setIsLoginModalOpen(false);
@@ -28,6 +39,9 @@ const App = () => {
           <SupabaseAuthProvider>
             <TooltipProvider>
               <Toaster position="top-center" />
+              <AnimatePresence>
+                {showSplash && <SplashScreen />}
+              </AnimatePresence>
               <BrowserRouter>
                 <Routes>
                   {navItems.map(({ to, page }) => (
