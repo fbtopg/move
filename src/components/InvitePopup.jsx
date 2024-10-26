@@ -72,17 +72,20 @@ const InvitePopup = ({ isOpen, onClose, inviterName, groupName, groupImage, grou
             {displayName} has invited you to join this group
           </p>
         </div>
+
+        {/* Accept button moved up with more padding */}
+        <div className="mt-8">
+          <Button 
+            onClick={handleAcceptClick}
+            className="w-[200px] bg-blue-500 hover:bg-blue-600 text-white rounded-full h-12"
+          >
+            Accept
+          </Button>
+        </div>
       </div>
 
-      {/* Bottom section */}
-      <div className="p-6 pb-safe">
-        <Button 
-          onClick={handleAcceptClick}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full h-12"
-        >
-          Accept
-        </Button>
-      </div>
+      {/* Bottom spacing */}
+      <div className="h-16" />
 
       <LoginModal
         isOpen={showLoginModal}
