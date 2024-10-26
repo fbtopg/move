@@ -25,25 +25,9 @@ export const generateInviteLink = async (groupId, createdBy) => {
 
 export const getInviteDetails = async (inviteCode) => {
   try {
-    // First fetch the invite data with explicit foreign key references
     const { data: inviteData, error: inviteError } = await supabase
-      .from('group_invites')
-      .select(`
-        id,
-        group_id,
-        created_by,
-        uses,
-        max_uses,
-        expires_at,
-        is_active,
-        groups!group_invites_group_id_fkey (
-          name,
-          description
-        ),
-        profiles!group_invites_created_by_fkey (
-          email
-        )
-      `)
+      .from('group_invites_with_details')
+      .select('*')
       .eq('invite_code', inviteCode)
       .single();
 
@@ -70,9 +54,9 @@ export const getInviteDetails = async (inviteCode) => {
 
     return {
       groupId: inviteData.group_id,
-      groupName: inviteData.groups?.name || 'Unknown Group',
-      groupDescription: inviteData.groups?.description || '',
-      inviterName: inviteData.profiles?.email || 'Someone',
+      groupName: inviteData.group_name || 'Unknown Group',
+      groupDescription: inviteData.group_description || '',
+      inviterName: inviteData.inviter_email || 'Someone',
       isValid: true
     };
   } catch (error) {

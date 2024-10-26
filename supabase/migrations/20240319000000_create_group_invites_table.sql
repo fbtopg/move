@@ -26,6 +26,17 @@ alter table public.group_invites
     references auth.users(id)
     on delete cascade;
 
+-- Create view to join with profiles
+create or replace view group_invites_with_details as
+select 
+    gi.*,
+    g.name as group_name,
+    g.description as group_description,
+    p.email as inviter_email
+from group_invites gi
+left join groups g on gi.group_id = g.id
+left join auth.users p on gi.created_by = p.id;
+
 -- Group members can view invites for their groups
 create policy "Group members can view group invites"
     on public.group_invites for select
