@@ -29,7 +29,7 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
       <button 
         className="bg-blue-500 hover:bg-blue-600 text-white w-48 rounded-full py-2"
         onClick={() => {
-          if (!session && onLoginRequired) {
+          if (typeof onLoginRequired === 'function') {
             onLoginRequired();
           }
         }}
@@ -70,7 +70,9 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
       </div>
 
       <div className="p-4">
-        {activeTab === 'all' && activities && activities.length > 0 ? (
+        {!session || (activeTab === 'all' && (!activities || activities.length === 0)) ? (
+          <EmptyState />
+        ) : (
           activities.map((activity, index) => (
             <motion.div
               key={index}
@@ -86,8 +88,6 @@ const ActivitySection = ({ activities, onLoginRequired }) => {
               />
             </motion.div>
           ))
-        ) : (
-          <EmptyState />
         )}
       </div>
     </div>
